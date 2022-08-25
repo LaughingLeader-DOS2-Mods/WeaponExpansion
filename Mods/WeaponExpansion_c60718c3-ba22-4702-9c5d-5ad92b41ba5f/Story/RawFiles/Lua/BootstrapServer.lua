@@ -26,6 +26,8 @@ local defaultPersistentVars = {
         ---@type table<GUID,table<string,{Target:GUID, Source:GUID, Status:string}>>
         RemoveOnTurnEnd = {},
         KatanaCombo = {},
+        ---@type table<GUID,integer>
+        BasilusHauntedTarget = {},
     },
     MasteryMechanics = {
         ---@type table<GUID,integer>

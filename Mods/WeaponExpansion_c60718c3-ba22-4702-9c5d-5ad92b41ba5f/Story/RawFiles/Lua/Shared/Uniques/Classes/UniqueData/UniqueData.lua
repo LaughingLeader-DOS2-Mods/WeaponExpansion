@@ -269,7 +269,7 @@ function UniqueData:PrintPosition()
 			[SharedData.RegionData.Current] = {
 				IsDefault = true,
 				Position = item.WorldPos,
-				Rotation = {item.Stats.Rotation[7],item.Stats.Rotation[8],item.Stats.Rotation[9]}
+				Rotation = {item.Rotation[7],item.ats.Rotation[8],item.Rotation[9]}
 			}
 		}))
 	end

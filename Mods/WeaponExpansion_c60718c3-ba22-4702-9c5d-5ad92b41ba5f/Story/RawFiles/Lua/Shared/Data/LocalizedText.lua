@@ -248,6 +248,7 @@ Text = {
 		StillStanceEnabled = ts:Create("h0f4c3d9fgf39fg49b8gbf42g3fcb4e3543c5", "<font color='#99FF22'>[1] is in a Still Stance ([2]).</font>"),
 		SoulBountyLost = ts:CreateFromKey("LLWEAPONEX_CombatLog_SoulBountyLost", "[1] died and lost their [2] bonus."),
 		VictoryDamageRedirected = ts:CreateFromKey("LLWEAPONEX_CombatLog_VictoryDamageRedirected", "[<font color='#C7A758'>[Key:WPN_UNIQUE_LLWEAPONEX_Sword_1H_SwordofVictory_A_DisplayName]</font>] [1] was redirected from [2] to [3], thanks to superior [Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership] (Reduced Damage: [4])"),
+		BasilusDaggerHauntedDamage = ts:CreateFromKey("LLWEAPONEX_CombatLog_BasilusDaggerHauntedDamage", "<font color='#CC00FF'>[1] was haunted by the <font color='#C5A65A'>[Key:WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_DisplayName:Blade of Basilus]</font>!</font> (Source: [2])", _autoReplace),
 	},
 	StatusText = {
 		Unarmed = {

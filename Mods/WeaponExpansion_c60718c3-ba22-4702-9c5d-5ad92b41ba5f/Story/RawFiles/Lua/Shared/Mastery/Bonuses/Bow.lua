@@ -43,7 +43,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 1, {
 			local maxBonusShots = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_PinDown_BonusShots", 1)
 			if maxBonusShots > 0 then
 				local bonusShots = 0
-				local rot = e.Character.Stats.Rotation
+				local rot = e.Character.Rotation
 				local forwardVector = {
 					-rot[7] * 1.25,
 					0,

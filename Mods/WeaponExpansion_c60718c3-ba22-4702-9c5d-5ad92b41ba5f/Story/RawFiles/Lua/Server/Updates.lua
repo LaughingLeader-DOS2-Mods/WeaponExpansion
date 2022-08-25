@@ -125,5 +125,6 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 		Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_20_ListenForStatusRemoval")
 		Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_60_UniqueManager")
 		Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_69_BlockHealing")
+		Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_10_BasilusDagger")
 	end
 end)
