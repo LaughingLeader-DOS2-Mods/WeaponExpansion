@@ -116,7 +116,7 @@ end)
 ---@param instant boolean
 ---@param e OnSkillStateSkillEventEventArgs
 local function SwapSkills(nextSkill, instant, e)
-	if instant or GameHelpers.Character.IsInCombat(e.Character) then
+	if instant or (GameHelpers.Character.IsInCombat(e.Character) or Mods.LeaderLib.Vars.LeaderDebugMode) then
 		if instant ~= true then
 			Timer.StartOneshot(string.format("LLWEAPONEX_Pistol_SwapSkills_%s%s", e.Skill, e.Character.MyGuid), 500, function()
 				GameHelpers.Skill.Swap(e.Character, e.Skill, nextSkill, true)

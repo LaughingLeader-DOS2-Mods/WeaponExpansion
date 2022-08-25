@@ -12,7 +12,7 @@ else
 	local pickpocketTarget = nil
 
 	Ext.RegisterUITypeInvokeListener(Data.UIType.contextMenu.Object, "updateButtons", function(ui, event)
-		local cursor = Ext.GetPickingState()
+		local cursor = Ext.UI.GetPickingState()
 		if cursor and cursor.HoverCharacter then
 			pickpocketTarget = Ext.GetCharacter(cursor.HoverCharacter)
 		end

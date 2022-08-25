@@ -179,8 +179,11 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 	end)
 
 	SkillManager.Register.MemorizationChanged(SkillConfiguration.Pistols.AllShootSkills, function (e)
-		if e.Data == false then
-			CharacterRemoveSkill(e.CharacterGUID, "Shout_LLWEAPONEX_Pistol_Reload")
+		if GameHelpers.Character.IsPlayer(e.Character) then
+			print(e.Skill, GameHelpers.Character.EquipmentHasSkill(e.Character, SkillConfiguration.Pistols.AllShootSkills))
+			if e.Data == false and not GameHelpers.Character.EquipmentHasSkill(e.Character, e.Skill) then
+				CharacterRemoveSkill(e.CharacterGUID, "Shout_LLWEAPONEX_Pistol_Reload")
+			end
 		end
 	end)
 end, {Priority=999})
