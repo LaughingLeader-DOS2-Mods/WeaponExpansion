@@ -1,7 +1,7 @@
 ---@param character EsvCharacter
 ---@param quiver EsvItem
 ---@param addCharge integer|nil
-local function Quiver_StartRecharge(character, quiver, addCharge)
+local function _StartRecharge(character, quiver, addCharge)
 	local shouldRecharge = false
 	local max = quiver.Stats.MaxCharges
 	if max > 0 then
@@ -40,39 +40,41 @@ SkillManager.Register.Cast("Shout_LLWEAPONEX_Quiver_DrawArrow", function(e)
 		end
 	end
 	if addedArrow then
-		local quiver = GameHelpers.Item.GetItemInSlot(e.Character, "Belt")
-		if quiver and GameHelpers.ItemHasTag(quiver, "LLWEAPONEX_Quiver") then
-			Quiver_StartRecharge(e.Character, quiver)
+		for quiver in GameHelpers.Character.GetTaggedItems(e.Target, "LLWEAPONEX_Quiver", false, true) do
+			_StartRecharge(e.Character, quiver)
 		end
 	end
 end)
 
-StatusManager.Register.Removed("LLWEAPONEX_QUIVER_DRAW_RECHARGE", function(target, status, source, statusType, statusEvent)
-	if GameHelpers.Ext.ObjectIsCharacter(target) and not GameHelpers.Character.IsDeadOrDying(target) then
-		local quiver = GameHelpers.Item.GetItemInSlot(target, "Belt")
-		if quiver and GameHelpers.ItemHasTag(quiver, "LLWEAPONEX_Quiver") then
-			Quiver_StartRecharge(target, quiver, 1)
+StatusManager.Subscribe.Removed("LLWEAPONEX_QUIVER_DRAW_RECHARGE", function(e)
+	if GameHelpers.Ext.ObjectIsCharacter(e.Target) and not GameHelpers.Character.IsDeadOrDying(e.Target) then
+		for quiver in GameHelpers.Character.GetTaggedItems(e.Target, "LLWEAPONEX_Quiver", false, true) do
+			_StartRecharge(e.Target, quiver, 1)
 		end
 	end
 end)
-
-EquipmentManager.Events.EquipmentChanged:Subscribe(function(e)
-	if e.Equipped then
-		Quiver_StartRecharge(e.Character, e.Item)
-	else
-		GameHelpers.Status.Remove(e.Character, "LLWEAPONEX_QUIVER_DRAW_RECHARGE")
-		Quiver_RemoveTempArrows(e.Character)
-	end
-end, {MatchArgs={Tag = "LLWEAPONEX_Quiver"}})
 
 ---@param char CharacterParam
-function Quiver_RemoveTempArrows(char)
+local function _RemoveTempArrows(char)
 	local character = GameHelpers.GetCharacter(char)
-	if character ~= nil then
-		for i,v in pairs(character:GetInventoryItems()) do
-			if IsTagged(v, "LLWEAPONEX_Quiver_TemporaryArrow") == 1 then
-				ItemRemove(v)
-			end
+	if character then
+		for arrow in GameHelpers.Character.GetTaggedItems(character, "LLWEAPONEX_Quiver_TemporaryArrow") do
+			ItemRemove(arrow.MyGuid)
 		end
 	end
 end
+
+EquipmentManager.Events.EquipmentChanged:Subscribe(function(e)
+	if e.Equipped then
+		_StartRecharge(e.Character, e.Item)
+	else
+		GameHelpers.Status.Remove(e.Character, "LLWEAPONEX_QUIVER_DRAW_RECHARGE")
+		_RemoveTempArrows(e.Character)
+	end
+end, {MatchArgs={Tag="LLWEAPONEX_Quiver"}})
+
+Ext.Osiris.RegisterListener("ObjectLeftCombat", 2, "after", function (charGUID, combatID)
+	if IsTagged(charGUID, "LLWEAPONEX_Quiver_Equipped") == 1 then
+		_RemoveTempArrows(charGUID)
+	end
+end)

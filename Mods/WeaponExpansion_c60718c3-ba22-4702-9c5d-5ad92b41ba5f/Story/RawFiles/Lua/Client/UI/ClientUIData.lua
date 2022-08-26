@@ -1,17 +1,3 @@
----@param uuid string
----@param userID integer
----@param profile string
----@param netID integer
----@param isHost boolean
-RegisterListener("ClientCharacterChanged", function(uuid, userID, profile, netID, isHost)
-	if Ext.GetGameState() == "Running" then
-		local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
-		if ui ~= nil then
-			SetCharacterSheetDamageText(ui, netID)
-		end
-	end
-end)
-
 Ext.RegisterNetListener("LLWEAPONEX_FixLizardSkin", function()
 	if Ext.IsModLoaded("db07c22c-8935-3848-2366-7827b70c6030") then
 		GameHelpers.CC.SetColor("Skin", OriginColors.Korvash.LadyC, "Value")
