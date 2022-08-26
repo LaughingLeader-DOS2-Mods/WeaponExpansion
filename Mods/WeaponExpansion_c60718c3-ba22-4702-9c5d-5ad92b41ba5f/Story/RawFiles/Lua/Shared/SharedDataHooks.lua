@@ -1,6 +1,6 @@
 if Ext.IsServer() then
 	function SyncDataToClient(id, profile, uuid, isHost)
-		ArmCannon_SyncData(nil, id)
+		UniqueVars.SyncRunicCannon()
 		local darkFireBallData = {}
 		for savedUUID,count in pairs(PersistentVars.SkillData.DarkFireballCount) do
 			local char = Ext.GetCharacter(savedUUID)
@@ -12,11 +12,9 @@ if Ext.IsServer() then
 		Ext.PostMessageToUser(id, "LLWEAPONEX_SyncData", payload)
 	end
 
-	---@param id integer
-	---@param profile string
-	---@param uuid string
-	---@param isHost boolean
-	RegisterListener("SyncData", SyncDataToClient)
+	Events.SyncData:Subscribe(function (e)
+		SyncDataToClient(e.UserID, e.Profile, e.UUID, e.IsHost)
+	end)
 end
 
 if Ext.IsClient() then

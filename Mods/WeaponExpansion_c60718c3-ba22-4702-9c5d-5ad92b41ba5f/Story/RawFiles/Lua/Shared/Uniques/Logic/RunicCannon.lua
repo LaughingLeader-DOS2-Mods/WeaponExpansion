@@ -19,6 +19,8 @@ if not Vars.IsClient then
 		end
 	end
 
+	UniqueVars.SyncRunicCannon = _SyncData
+
 	---@param character EsvCharacter
 	---@param glove EsvItem
 	---@param doEquip boolean
