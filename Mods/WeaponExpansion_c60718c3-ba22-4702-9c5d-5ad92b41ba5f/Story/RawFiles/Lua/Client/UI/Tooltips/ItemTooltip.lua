@@ -107,6 +107,13 @@ local UniqueWeaponTypeTags = {
 	LLWEAPONEX_UniqueBokken1H = ts:Create("h5264ef62gdc22g401fg8b62g303379cd7693", "Wooden Katana"),
 	LLWEAPONEX_Blunderbuss = ts:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss"),
 	LLWEAPONEX_RunicCannon = ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry"),
+	LLWEAPONEX_UniqueWarchiefHalberdSpear = ts:Create("h45830ff5g54bdg4098g9395gede7110cf8f1", "Spear"),
+	LLWEAPONEX_UniqueWarchiefHalberdAxe = ts:Create("h42439ac8g67ddg48dag810fgf7319b62dc0d", "Axe"),
+}
+
+local UniqueWeaponTypeTagsDisplayTwoHanded = {
+	LLWEAPONEX_UniqueBokken2H = true,
+	LLWEAPONEX_UniqueWarchiefHalberdAxe = true,
 }
 
 UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken2H = UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken1H
@@ -257,10 +264,15 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	end
 end
 
-function GetItemTypeText(item)
+---@param item EclItem
+---@param _TAGS table<string,boolean>|nil
+function GetItemTypeText(item, _TAGS)
+	if not _TAGS then
+		_TAGS = GameHelpers.GetAllTags(item, true)
+	end
 	for tag,t in pairs(UniqueWeaponTypeTags) do
-		if GameHelpers.ItemHasTag(item, tag) then
-			if item.Stats.IsTwoHanded and not Game.Math.IsRangedWeapon(item.Stats) then
+		if _TAGS[tag] then
+			if UniqueWeaponTypeTagsDisplayTwoHanded[tag] and item.Stats.IsTwoHanded then
 				return TwoHandedText.Value .. " " .. t.Value
 			else
 				return t.Value
@@ -270,7 +282,7 @@ function GetItemTypeText(item)
 	local typeText = ""
 	for i=1,#weaponTypePreferenceOrder do
 		local tag = weaponTypePreferenceOrder[i]
-		if GameHelpers.ItemHasTag(item, tag) then
+		if _TAGS[tag] then
 			local renameWeaponType = WeaponTypeNames[tag]
 			if renameWeaponType ~= nil then
 				if item.Stats.IsTwoHanded and renameWeaponType.TwoHandedText ~= nil and not Game.Math.IsRangedWeapon(item.Stats) then
@@ -390,7 +402,7 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 		if not renamedArmorSlotType then
-			local itemTypeText = GetItemTypeText(item)
+			local itemTypeText = GetItemTypeText(item, _TAGS)
 			if not StringHelpers.IsNullOrEmpty(itemTypeText) then
 				local armorSlotType = tooltip:GetElement("ArmorSlotType")
 				if armorSlotType == nil then
