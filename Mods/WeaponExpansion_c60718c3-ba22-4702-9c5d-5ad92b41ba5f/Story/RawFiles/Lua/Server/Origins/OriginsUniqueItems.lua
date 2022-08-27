@@ -231,8 +231,8 @@ function InitOriginsUniques(region)
 			if not data.IsLinkItem then
 				if (ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 0 or Vars.DebugMode) then
 					local owner = GameHelpers.Item.GetOwner(data.UUID)
-					if owner and ObjectIsCharacter(owner) == 1 and GameHelpers.Character.IsPlayer(owner) then
-						ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized")
+					if owner and GameHelpers.Character.IsPlayer(owner) then
+						ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 					else
 						local b,err = xpcall(InitializeUnique, debug.traceback, id, data, region)
 						if not b then
@@ -277,7 +277,7 @@ Ext.RegisterOsirisListener("RegionEnded", 1, "after", function(region)
 				if not owner then
 					ObjectClearFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 					ItemToInventory(data.UUID, NPC.UniqueHoldingChest, 1, 0, 1)
-				elseif ObjectIsGlobal(owner) == 0 then
+				elseif owner.Global then
 					ObjectClearFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 					ItemToInventory(data.UUID, NPC.UniqueHoldingChest, 1, 0, 1)
 				end
