@@ -306,68 +306,74 @@ if not isClient then
 		end
 	end)
 
+	---@param char GUID
+	---@param id string
 	function SwapUnique(char, id)
+		char = StringHelpers.GetUUID(char)
 		local uuid = nil
 		local uniqueData = Uniques[id]
 		if uniqueData ~= nil then
 			uuid = uniqueData:GetUUID(char)
 		end
 		if uuid == nil then
+			fprint(LOGLEVEL.ERROR, "[WeaponExpansion] Found no unique UUID for unique(%s) and character(%s)[%s]", id, GameHelpers.GetDisplayName(char), char)
+			fprint(LOGLEVEL.ERROR, "  DefaultUUID(%s)", uniqueData and uniqueData.DefaultUUID or "nil")
 			return false
 		end
-		local equipped = nil
-		local next = nil
-		local link = LinkedUniques[uuid]
-		if link ~= nil then
-			if GameHelpers.Item.ItemIsEquipped(char, uuid) then
-				next = link
-				equipped = uuid
+		local equippedGUID = nil
+		local nextGUID = nil
+		local linkedGUID = LinkedUniques[uuid]
+		if linkedGUID ~= nil then
+			if GameHelpers.Item.ItemIsEquipped(char, linkedGUID) then
+				nextGUID = uuid
+				equippedGUID = linkedGUID
 			else
-				next = uuid
-				equipped = link
+				nextGUID = linkedGUID
+				equippedGUID = uuid
 			end
 		end
-		if equipped ~= nil and next ~= nil and ObjectExists(equipped) == 1 and ObjectExists(next) == 1 then
-			local stat = NRD_ItemGetStatsId(next)
-			local statType = NRD_StatGetType(stat)
+		local nextItem = ObjectExists(nextGUID) == 1 and GameHelpers.GetItem(nextGUID) or nil
+		local equippedItem = ObjectExists(equippedGUID) == 1 and GameHelpers.GetItem(equippedGUID) or nil
+		if nextItem and equippedItem then
 			local isTwoHanded = false
-			local locked = Ext.GetItem(equipped).UnEquipLocked
-			if statType == "Weapon" then
-				isTwoHanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
+			local locked = equippedItem.UnEquipLocked
+			if nextItem.Stats.ItemType == "Weapon" then
+				isTwoHanded = nextItem.Stats.IsTwoHanded
 			end
-			local slot = GameHelpers.Item.GetEquippedSlot(char,equipped) or GameHelpers.Item.GetEquippedSlot(char,next) or "Weapon"
+			local slot = GameHelpers.Item.GetEquippedSlot(char,equippedItem) or GameHelpers.Item.GetEquippedSlot(char,nextItem) or "Weapon"
 	
-			ItemLockUnEquip(equipped, 0)
-			ItemLockUnEquip(next, 0)
+			ItemLockUnEquip(equippedItem.MyGuid, 0)
+			ItemLockUnEquip(nextItem.MyGuid, 0)
 			--CharacterUnequipItem(char, equipped)
 	
 			if not isTwoHanded then
 				local currentEquipped = StringHelpers.GetUUID(CharacterGetEquippedItem(char, slot))
-				if not StringHelpers.IsNullOrEmpty(currentEquipped) and currentEquipped ~= equipped then
+				if not StringHelpers.IsNullOrEmpty(currentEquipped) and currentEquipped ~= equippedGUID then
 					ItemLockUnEquip(currentEquipped, 0)
 					CharacterUnequipItem(char, currentEquipped)
 				end
-				NRD_CharacterEquipItem(char, next, slot, 0, 0, 1, 1)
+				NRD_CharacterEquipItem(char, nextItem.MyGuid, slot, 0, 0, 1, 1)
 			else
-				local mainhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Weapon"))
-				local offhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Shield"))
-				if not StringHelpers.IsNullOrEmpty(mainhand) and mainhand ~= equipped then
-					ItemLockUnEquip(mainhand, 0)
-					CharacterUnequipItem(char, mainhand)
+				local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(char)
+				if mainhand and mainhand.MyGuid ~= equippedItem.MyGuid then
+					ItemLockUnEquip(mainhand.MyGuid, 0)
+					CharacterUnequipItem(char, mainhand.MyGuid)
 				end
-				if not StringHelpers.IsNullOrEmpty(offhand) and offhand ~= equipped then
-					ItemLockUnEquip(offhand, 0)
-					CharacterUnequipItem(char, offhand)
+				if offhand and offhand.MyGuid ~= equippedItem.MyGuid then
+					ItemLockUnEquip(offhand.MyGuid, 0)
+					CharacterUnequipItem(char, offhand.MyGuid)
 				end
-				NRD_CharacterEquipItem(char, next, "Weapon", 0, 0, 1, 1)
+				NRD_CharacterEquipItem(char, nextItem.MyGuid, "Weapon", 0, 0, 1, 1)
 			end
 	
 			if locked then
-				ItemLockUnEquip(next, 1)
+				ItemLockUnEquip(nextItem.MyGuid, 1)
 			end
 	
 			--S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f
-			Osi.LeaderLib_Timers_StartObjectObjectTimer(equipped, "80976258-a7a5-4430-b102-ba91a604c23f", 50, "Timers_LLWEAPONEX_MoveUniqueToUniqueHolder", "LeaderLib_Commands_ItemToInventory")
+			Osi.LeaderLib_Timers_StartObjectObjectTimer(equippedItem.MyGuid, NPC.UniqueHoldingChest, 50, "Timers_LLWEAPONEX_MoveUniqueToUniqueHolder", "LeaderLib_Commands_ItemToInventory")
+		else
+			fprint(LOGLEVEL.ERROR, "[WeaponExpansion] Found no linked UUID for unique(%s)[%s]. No UUID found for LinkedItem (%s)", id, uuid, uniqueData and uniqueData.LinkedItem and uniqueData.LinkedItem.ID or "")
 		end
 	end
 
@@ -385,7 +391,7 @@ if not isClient then
 			for _,slotid in Data.VisibleEquipmentSlots:Get() do
 				local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
 				if not StringHelpers.IsNullOrEmpty(itemid) then
-					EquipmentManager:OnItemEquipped(player, Ext.GetItem(itemid))
+					EquipmentManager:OnItemEquipped(player, GameHelpers.GetItem(itemid))
 				end
 			end
 		end
