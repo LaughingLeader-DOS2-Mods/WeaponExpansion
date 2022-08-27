@@ -103,24 +103,6 @@ local TwoHandedText = ts:Create("h3fb5cd5ag9ec8g4746g8f9cg03100b26bd3a", "Two-Ha
 ---@field Text TranslatedString
 ---@field TwoHandedText TranslatedString|nil
 
-local UniqueWeaponTypeTags = {
-	LLWEAPONEX_UniqueBokken1H = ts:Create("h5264ef62gdc22g401fg8b62g303379cd7693", "Wooden Katana"),
-	LLWEAPONEX_Blunderbuss = ts:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss"),
-	LLWEAPONEX_RunicCannon = ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry"),
-	LLWEAPONEX_UniqueWarchiefHalberdSpear = ts:Create("h45830ff5g54bdg4098g9395gede7110cf8f1", "Spear"),
-	LLWEAPONEX_UniqueWarchiefHalberdAxe = ts:Create("h42439ac8g67ddg48dag810fgf7319b62dc0d", "Axe"),
-}
-
-local UniqueWeaponTypeTagsDisplayTwoHanded = {
-	LLWEAPONEX_UniqueBokken2H = true,
-	LLWEAPONEX_UniqueWarchiefHalberdAxe = true,
-}
-
-UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken2H = UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken1H
-
-ItemTooltipParams.UniqueWeaponTypeTags = UniqueWeaponTypeTags
-
----@type WeaponTypeNameEntry[]
 local WeaponTypeNames = {
 	--LLWEAPONEX_Bludgeon = {Text=ts:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
 	--LLWEAPONEX_RunicCannon = {Text=ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry")},
@@ -142,6 +124,23 @@ local WeaponTypeNames = {
 --WeaponTypeNames.LLWEAPONEX_CombatShield = WeaponTypeNames.LLWEAPONEX_DualShields
 
 ItemTooltipParams.WeaponTypeNames = WeaponTypeNames
+
+local UniqueWeaponTypeTags = {
+	LLWEAPONEX_UniqueBokken1H = ts:Create("h5264ef62gdc22g401fg8b62g303379cd7693", "Wooden Katana"),
+	LLWEAPONEX_Blunderbuss = ts:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss"),
+	LLWEAPONEX_RunicCannon = ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry"),
+	LLWEAPONEX_UniqueWarchiefHalberdSpear = WeaponTypeNames.LLWEAPONEX_Polearm.Text,
+	LLWEAPONEX_UniqueWarchiefHalberdAxe = ts:Create("h42439ac8g67ddg48dag810fgf7319b62dc0d", "Axe"),
+}
+
+local UniqueWeaponTypeTagsDisplayTwoHanded = {
+	LLWEAPONEX_UniqueBokken2H = true,
+	LLWEAPONEX_UniqueWarchiefHalberdAxe = true,
+}
+
+UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken2H = UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken1H
+
+ItemTooltipParams.UniqueWeaponTypeTags = UniqueWeaponTypeTags
 
 local weaponTypePreferenceOrder = {
 	"LLWEAPONEX_Rapier",
