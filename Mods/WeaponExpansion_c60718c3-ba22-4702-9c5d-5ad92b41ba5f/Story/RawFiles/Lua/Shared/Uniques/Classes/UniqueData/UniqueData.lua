@@ -5,29 +5,21 @@ local isClient = Ext.IsClient()
 ---@class UniqueDataBase
 ---@field ID string A name for this unique.
 ---@field UUID string The current UUID for the unique.
----@field DefaultUUID string The default UUID for the unique (the initial global item).
----@field Owner string
----@field Copies table<string,string> Item UUID to owner object UUID for copies of this unique.
+---@field DefaultUUID GUID|nil The default UUID for the unique (the initial global item).
+---@field Owner GUID|nil
+---@field Copies table<GUID,GUID> Item UUID to owner object UUID for copies of this unique.
+---@field OnEquipped function|nil
+---@field OnOwnerDeath function|nil
+---@field OnGotOwner function|nil
+---@field LinkedItem UniqueData|nil
 local UniqueData = {
 	Type = "UniqueData",
 	LevelData = {},
-	Owner = nil,
-	---@type string|table<string,string>
-	DefaultOwner = nil,
-	CurrentLevel = nil,
 	AutoEquipOnOwner = false,
 	Initialized = false,
-	---@type function
-	OnEquipped = nil,
-	---@type function
-	OnOwnerDeath = nil,
-	---@type function
-	OnGotOwner = nil,
 	LastProgressionLevel = 0,
 	ProgressionData = nil,
 	CanMoveToVendingMachine = true,
-	---@type UniqueData
-	LinkedItem = nil,
 	Tag = "",
 	Events = {
 		ItemAddedToCharacter = {}
@@ -38,8 +30,9 @@ local UniqueData = {
 ---@param k string
 local function UniqueDataGetter(data, k)
 	if k == "UUID" then
-		if data.DefaultUUID and GameHelpers.ObjectExists(data.DefaultUUID) then
-			return data.DefaultUUID
+		local defaultGUID = rawget(data, "DefaultUUID")
+		if not StringHelpers.IsNullOrEmpty(defaultGUID) and GameHelpers.ObjectExists(defaultGUID) then
+			return defaultGUID
 		end
 		if not isClient then
 			for uuid,tag in pairs(PersistentVars.Uniques) do
@@ -48,26 +41,27 @@ local function UniqueDataGetter(data, k)
 				end
 			end
 		end
-		return StringHelpers.NULL_UUID
+		return nil
 	elseif k == "Owner" then
-		if data.DefaultOwner and GameHelpers.ObjectExists(data.DefaultOwner) then
-			return data.DefaultOwner
+		local defaultOwner = rawget(data, "DefaultOwner")
+		if not StringHelpers.IsNullOrEmpty(defaultOwner) and GameHelpers.ObjectExists(defaultOwner) then
+			return defaultOwner
 		end
 		for uuid,tag in pairs(PersistentVars.Uniques) do
 			if tag == data.Tag and GameHelpers.ObjectExists(uuid) then
-				local owner = GameHelpers.Item.GetOwner(uuid, true)
-				if GameHelpers.ObjectExists(owner) then
-					return owner
+				local owner = GameHelpers.Item.GetOwner(uuid)
+				if owner then
+					return owner.MyGuid
 				end
 			end
 		end
-		return StringHelpers.NULL_UUID
+		return nil
 	elseif k == "Copies" then
 		local copies = {}
 		if not isClient then
 			for uuid,tag in pairs(PersistentVars.Uniques) do
 				if tag == data.Tag and GameHelpers.ObjectExists(uuid) then
-					copies[uuid] = GameHelpers.Item.GetOwner(uuid, true)
+					copies[uuid] = GameHelpers.GetUUID(GameHelpers.Item.GetOwner(uuid), true)
 				end
 			end
 		end
@@ -175,8 +169,9 @@ end
 ---@param returnDefault boolean|nil If true, the regular UUID value is returned instead of nil.
 ---@return UUID
 function UniqueData:GetUUID(owner, returnDefault)
-	if self.Owner == owner then
-		return self.UUID
+	local currentDefaultOwner = GameHelpers.Item.GetOwner(self.DefaultUUID)
+	if currentDefaultOwner and currentDefaultOwner.MyGuid == owner then
+		return self.DefaultUUID
 	end
 	local copies = self.Copies
 	for uuid,copyOwner in pairs(copies) do
@@ -184,8 +179,8 @@ function UniqueData:GetUUID(owner, returnDefault)
 			return uuid
 		end
 	end
-	if returnDefault then
-		return self.UUID
+	if returnDefault or currentDefaultOwner == NPC.UniqueHoldingChest then
+		return self.DefaultUUID
 	end
 	return nil
 end
