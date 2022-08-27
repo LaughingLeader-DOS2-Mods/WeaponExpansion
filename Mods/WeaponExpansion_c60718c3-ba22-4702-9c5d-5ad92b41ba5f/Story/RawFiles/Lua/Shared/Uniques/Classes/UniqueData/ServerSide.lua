@@ -29,9 +29,9 @@ function UniqueData:ReleaseFromOwner(uuid, unequip)
 	ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized", 0)
 	if unequip then
 		local owner = GameHelpers.Item.GetOwner(uuid)
-		if unequip == true and type(owner) == "string" and GameHelpers.Item.ItemIsEquipped(owner, uuid) then
+		if unequip == true and GameHelpers.Ext.ObjectIsCharacter(owner) and GameHelpers.Item.ItemIsEquipped(owner, uuid) then
 			ItemLockUnEquip(uuid, 0)
-			CharacterUnequipItem(owner, uuid)
+			CharacterUnequipItem(owner.MyGuid, uuid)
 		end
 	end
 	ItemClearOwner(uuid)
@@ -69,9 +69,18 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 		uuid = self.UUID
 	end
 	if GameHelpers.ObjectExists(uuid) then
-		self.Initialized = ObjectGetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized") == 1
-		if firstLoad == true then
-			self:ApplyProgression(self.ProgressionData, nil, Ext.GetItem(uuid), true)
+		local item = GameHelpers.GetItem(uuid)
+		if item then
+			self.Initialized = ObjectGetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized") == 1
+			if firstLoad == true then
+				self:ApplyProgression(self.ProgressionData, nil, item, true)
+			end
+			if StringHelpers.IsNullOrEmpty(self.DefaultOwner) then
+				local owner = GameHelpers.Item.GetOwner(item)
+				if owner then
+					self.DefaultOwner = owner.MyGuid
+				end
+			end
 		end
 	end
 end
