@@ -47,26 +47,23 @@ if not isClient then
 
 	local lizardHits = {}
 
-	--- @param attacker string
-	--- @param target string
-	--- @param damage integer
-	--- @param handle integer
+	--- @param attacker EsvCharacter
+	--- @param target EsvCharacter|EsvItem
 	--- @param data HitPrepareData
 	--- @param force boolean
-	function UnarmedHelpers.ScaleUnarmedHitDamage(attacker, target, damage, handle, data, force)
-		if force == true or IsUnarmedHit(handle) then
-			local character = Ext.GetCharacter(attacker)
-			local isLizard = character:HasTag("LIZARD")
+	function UnarmedHelpers.ScaleUnarmedHitDamage(attacker, target, data, force)
+		if force == true or IsUnarmedHit(data.Handle) then
+			local isLizard = GameHelpers.Character.GetBaseRace(attacker) == "Lizard"
 			local isCombinedHit = isLizard and not data.ProcWindWalker
-			local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats)
+			local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(attacker.Stats)
 
 			if isCombinedHit then
-				lizardHits[attacker] = nil
+				lizardHits[attacker.MyGuid] = nil
 			elseif isLizard then
-				if lizardHits[attacker] == nil then
-					lizardHits[attacker] = 0
+				if lizardHits[attacker.MyGuid] == nil then
+					lizardHits[attacker.MyGuid] = 0
 				end
-				lizardHits[attacker] = lizardHits[attacker] + 1
+				lizardHits[attacker.MyGuid] = lizardHits[attacker.MyGuid] + 1
 			end
 
 			--FIX to try and preserve the previous damage type
@@ -79,11 +76,11 @@ if not isClient then
 			-- 	end
 			-- end
 
-			local isSecondHit = lizardHits[attacker] == 2
-			local damageList = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, isSecondHit)
+			local isSecondHit = lizardHits[attacker.MyGuid] == 2
+			local damageList = UnarmedHelpers.CalculateWeaponDamage(attacker.Stats, weapon, false, highestAttribute, isLizard, isSecondHit)
 
 			if isCombinedHit then
-				local offhandDamage = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, true)
+				local offhandDamage = UnarmedHelpers.CalculateWeaponDamage(attacker.Stats, weapon, false, highestAttribute, isLizard, true)
 				damageList:Merge(offhandDamage)
 			end
 			-- if not StringHelpers.IsNullOrEmpty(previousDamageType) then
@@ -91,15 +88,17 @@ if not isClient then
 			-- end
 			data:ClearAllDamage()
 			local damages = damageList:ToTable()
+			local total = 0
 			for i,damage in pairs(damages) do
-				data.DamageList[damage.DamageType] = damage.Amount
+				data:AddDamage(damage.DamageType, damage.Amount, true)
+				total = total + damage.Amount
 			end
-			data:Recalculate()
+			data.TotalDamageDone = total
 			if Vars.DebugMode then
 				Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage Weapon(%s) (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", weapon and weapon.Name or "nil", data.TotalDamageDone, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
 			end
-			if lizardHits[attacker] == 2 then
-				lizardHits[attacker] = nil
+			if lizardHits[attacker.MyGuid] == 2 then
+				lizardHits[attacker.MyGuid] = nil
 			end
 		end
 	end

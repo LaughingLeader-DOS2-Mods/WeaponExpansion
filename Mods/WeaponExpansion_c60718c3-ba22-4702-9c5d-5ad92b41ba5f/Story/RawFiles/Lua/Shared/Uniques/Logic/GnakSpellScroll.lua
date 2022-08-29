@@ -551,29 +551,49 @@ if not Vars.IsClient then
 	}
 
 	local TotemSurfaceFlags = {
-		Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Fire = {Flags = { "Lava", "Fire" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Fire_01", Template="84a171b0-c44d-4689-b8fc-25e32676cd76"},
-		Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Water = {Flags = { "Water" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Water_01", Template="bd8d5043-5cf7-427c-8dfc-829b7c6065d2"},
+		{Skill="Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Fire", Flags = { "Lava", "Fire" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Fire_01", Template="84a171b0-c44d-4689-b8fc-25e32676cd76"},
+		{Skill="Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Water", Flags = { "Water" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Water_01", Template="bd8d5043-5cf7-427c-8dfc-829b7c6065d2"},
+		{Skill="Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Air", Flags = { "Electrified" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Lightning_01", Template="dd564396-1c61-44b9-b20a-2e35de986a2c"},
+		{Skill="Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Poison", Flags = { "Poison" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Poison_01", Template="cabefda4-6839-44e7-8e5e-7c1942fc13ca"},
+		{Skill="Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Oil", Flags = { "Oil"}, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Oil_01", Template="c542a8df-8352-4cc5-a839-e5016c1f29a6"},
+		{Skill="Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Blood", Flags = { "Blood" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Blood_01", Template="8921ef15-d694-49c2-9721-95ddf0c6652e"},
+		{Skill="Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Source", Flags = { "Source" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Default_01", Template="f2a4628f-c279-48a5-a243-9db6f903826a"},
 		--RS3_FX_Skills_Totem_Impact_Summon_Ice_01
-		Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Air = {Flags = { "Electrified" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Lightning_01", Template="dd564396-1c61-44b9-b20a-2e35de986a2c"},
-		Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Poison = {Flags = { "Poison" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Poison_01", Template="cabefda4-6839-44e7-8e5e-7c1942fc13ca"},
-		Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Oil = {Flags = { "Oil"}, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Oil_01", Template="c542a8df-8352-4cc5-a839-e5016c1f29a6"},
-		Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Blood = {Flags = { "Blood" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Blood_01", Template="8921ef15-d694-49c2-9721-95ddf0c6652e"},
-		Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface_Source = {Flags = { "Source" }, Effect = "RS3_FX_Skills_Totem_Impact_Summon_Default_01", Template="f2a4628f-c279-48a5-a243-9db6f903826a"},
 	}
 
-	local function FireSpell(source, target)
-		local x,y,z = GetPosition(source)
-		local hitText = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_GnakSpellScroll_BadaBoom", "<font color='#ED9D07'>Bada Boom</font>")
-		if type(target) == "string" then
-			if ObjectIsItem(target) == 1 then
-				DisplayText(target, hitText)
-			else
-				CharacterStatusText(target, hitText)
+	local function _GetTotemLifetime()
+		local skill = Ext.Stats.Get("Summon_TotemFromSurface")
+		if skill then
+			if skill.Lifetime < 0 then
+				return -1
+			elseif skill.Lifetime > 0 then
+				--One turn less than default, but make it a minimum of 1 turn
+				return math.max(6.0, (skill.Lifetime - 1) * 6)
 			end
-			x,y,z = GetPosition(target)
-		elseif type(target) == "table" then
-			x,y,z = table.unpack(target)
-			CharacterStatusText(source, hitText)
+		end
+		return 12
+	end
+
+	---@param source EsvCharacter
+	---@param target EsvCharacter|EsvItem|number
+	local function FireSpell(source, target)
+		local sourceGUID = source.MyGuid
+		local targetGUID = target.MyGuid
+		local pos = source.WorldPos
+		local hitText = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_GnakSpellScroll_BadaBoom", "<font color='#ED9D07'>Bada Boom</font>")
+		local t = type(target)
+		local targetIsItem = false
+		if t == "userdata" then
+			targetIsItem = GameHelpers.Ext.ObjectIsItem(target)
+			if targetIsItem then
+				DisplayText(targetGUID, hitText)
+			else
+				CharacterStatusText(targetGUID, hitText)
+			end
+			pos = target.WorldPos
+		elseif t == "table" then
+			pos = target
+			CharacterStatusText(sourceGUID, hitText)
 		end
 		local spells = BuildDropList()
 		if spells ~= nil then
@@ -585,58 +605,67 @@ if not Vars.IsClient then
 
 			if data.CasterEffects ~= nil then
 				for i,v in pairs(data.CasterEffects) do
-					PlayEffect(source, v.Effect, v.Bone)
+					EffectManager.PlayEffect(v.Effect, source, {Bone=v.Bone})
 				end
 			end
 
 			if data.ExplodeEffects ~= nil then
 				for i,v in pairs(data.ExplodeEffects) do
-					PlayScaledEffectAtPosition(v.Effect, v.Scale, x, y, z)
+					EffectManager.PlayEffectAt(v.Effect, pos, {Scale=v.Scale})
 				end
 			end
 
 			if data.Material ~= nil then
-				PlayEffect(source, "LLWEAPONEX_FX_Status_SpellScroll_ElementShifted_01", "Dummy_FX_02")
-				GameHelpers.Status.Apply(source, data.Material, -1.0, 1, source)
+				EffectManager.PlayEffect("LLWEAPONEX_FX_Status_SpellScroll_ElementShifted_01", source, {Bone="Dummy_FX_02"})
+				GameHelpers.Status.Apply(source, data.Material, -1.0, true, source)
 			end
 
 			if spell == "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_DimensionalBolt" then
 				local surface = Common.GetRandomTableEntry(DimensionBoltSurfaces)
-				Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(source, x, y, z, surface, 1.0, 2)
+				if surface then
+					GameHelpers.Surface.CreateSurface(pos, surface, 1.0, 12, source.Handle, true)
+				end
 			elseif spell == "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface" then
-				--ObjectSetFlag(source, "LLWEAPONEX_GnakSpellScroll_JustSummonedTotem", 0)
-				local foundSurface = false
-				local level = CharacterGetLevel(source)
-				---@type AiGrid
-				local grid = Ext.GetAiGrid()
-				for totemSkill,totemData in pairs(TotemSurfaceFlags) do
-					if grid:SearchForCell(x, z, 2.0, totemData.Flags, -1.0) then
-						local totem = NRD_Summon(source, totemData.Template, x, y, z, 12.0, level, 1, 1)
-						Timer.StartOneshot("Timers_LLWEAPONEX_PlayTotemEffects_"..totem, 500, function()
-							PlayEffect(totem, "RS3_FX_Skills_Totem_Target_Nebula_01", "Dummy_Root")
-							PlayEffect(totem, totemData.Effect, "Dummy_Root")
-						end)
-						GameHelpers.SetScale(totem, 0.5)
-						foundSurface = true
+				fireSpell = false
+				local level = source.Stats.Level
+				local totemLifetime =  _GetTotemLifetime()
+				local grid = Ext.Entity.GetAiGrid()
+				local totemTemplate = "98be4473-a55a-495a-adac-0bda6dc69343"
+				local totemSummonEffect = "RS3_FX_Skills_Totem_Impact_Summon_Default_01"
+
+				---Randomize table, just in case surfaces overlap here
+				local shuffled = TableHelpers.ShuffleTable(TotemSurfaceFlags)
+				for i=1,#shuffled do
+					local data = shuffled[i]
+					if grid:SearchForCell(pos[1], pos[3], 2.0, data.Flags, -1.0) then
+						totemTemplate = data.Template
+						totemSummonEffect = data.Effect
 						break
 					end
 				end
-				fireSpell = false
-				if not foundSurface then
-					local totem = NRD_Summon(source, "98be4473-a55a-495a-adac-0bda6dc69343", x, y, z, 12.0, level, 1, 1)
-					Timer.StartOneshot("Timers_LLWEAPONEX_PlayTotemEffects_"..totem, 500, function()
-						PlayEffect(totem, "RS3_FX_Skills_Totem_Target_Nebula_01", "Dummy_Root")
-						PlayEffect(totem, "RS3_FX_Skills_Totem_Impact_Summon_Default_01", "Dummy_Root")
-					end)
-					GameHelpers.SetScale(totem, 0.5)
+				local sx,sy,sz,b = GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)
+				if not b then
+					--sx,sy,sz,b = GameHelpers.Grid.GetValidPositionAlongLine(source, GameHelpers.Math.GetDirectionalVectorBetweenPositions(source.WorldPos, pos), 1.0)
+					sx,sy,sz,b = GameHelpers.Grid.GetValidPositionInRadius(pos, 12.0)
+				end
+				if b then
+					local totemGUID = NRD_Summon(sourceGUID, totemTemplate, sx,sy,sz, totemLifetime, level, 1, 1)
+					if not StringHelpers.IsNullOrEmpty(totemGUID) then
+						GameHelpers.SetScale(totemGUID, 0.5)
+						Timer.StartOneshot("Timers_LLWEAPONEX_PlayTotemEffects_"..totemGUID, 500, function()
+							local totem = GameHelpers.GetCharacter(totemGUID)
+							EffectManager.PlayEffect("RS3_FX_Skills_Totem_Target_Nebula_01", totem)
+							EffectManager.PlayEffect(totemSummonEffect, totem)
+						end)
+					end
 				end
 			end
 
 			if fireSpell then
 				if data.ShootProjectile then
-					GameHelpers.ShootProjectile(source, target, spell, 0)
+					GameHelpers.Skill.ShootProjectileAt(targetGUID, spell, sourceGUID)
 				else
-					GameHelpers.ExplodeProjectile(source, target, spell)
+					GameHelpers.Skill.Explode(targetGUID, spell, sourceGUID)
 				end
 			end
 
@@ -644,10 +673,10 @@ if not Vars.IsClient then
 			local spellName = GameHelpers.GetStringKeyText(data.DisplayName, "")
 			if spellName ~= "" then
 				text = string.gsub(text, "%[1%]", spellName)
-				CharacterStatusText(source, text)
+				CharacterStatusText(sourceGUID, text)
 			end
 
-			PlayEffectAtPosition("LLWEAPONEX_FX_Status_SpellScroll_Hit_Text_01", x, y, z)
+			EffectManager.PlayEffectAt("LLWEAPONEX_FX_Status_SpellScroll_Hit_Text_01", pos)
 
 			return true
 		end
@@ -666,15 +695,15 @@ if not Vars.IsClient then
 	end
 
 	AttackManager.OnStart.Register(function(attacker, target)
-		if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
+		if GameHelpers.Status.IsActive(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") then
 			ListenForDeath(target, attacker, 3000)
 		end
 	end)
 
 	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_GnakSpellScrollEquipped", function(tag, attacker, target, data, targetIsObject, skill)
-		if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
+		if GameHelpers.Status.IsActive(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") then
 			ListenForDeath(target, attacker, 1500)
-			if FireSpell(attacker.MyGuid, target.MyGuid) then
+			if FireSpell(attacker, target) then
 				GameHelpers.Status.Remove(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
 			end
 		end

@@ -85,36 +85,36 @@ end
 
 --Mods.WeaponExpansion.GenerateTradeTreasure("680d2702-721c-412d-b083-4f5e816b945a", "ST_LLWEAPONEX_VendingMachine_OrderWeapon")
 --GenerateItems(me.MyGuid, "680d2702-721c-412d-b083-4f5e816b945a")
-function GenerateTradeTreasure(uuid, treasure)
-	local object = GameHelpers.TryGetObject(uuid)
-	if ObjectIsCharacter(uuid) == 1 then
-		local x,y,z = GetPosition(uuid)
+function GenerateTradeTreasure(traderGUID, treasure)
+	if ObjectIsCharacter(traderGUID) == 1 then
+		local x,y,z = GetPosition(traderGUID)
 		--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
 		local backpackGUID = CreateItemTemplateAtPosition("98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
 		Timer.StartOneshot("", 50, function ()
-			fprint(LOGLEVEL.TRACE, "[WeaponExpansion:GenerateTradeTreasure] Generating treasure table (%s) for (%s)", treasure, object.DisplayName, uuid)
+			local trader = GameHelpers.GetCharacter(traderGUID)
+			fprint(LOGLEVEL.TRACE, "[WeaponExpansion:GenerateTradeTreasure] Generating treasure table (%s) for (%s)", treasure, trader.DisplayName, traderGUID)
 			local backpack = Ext.GetItem(backpackGUID)
 			if backpack then
-				GenerateTreasure(backpackGUID, treasure, object.Stats.Level, uuid)
+				GenerateTreasure(backpackGUID, treasure, trader.Stats.Level, traderGUID)
 				ContainerIdentifyAll(backpackGUID)
 				for i,v in pairs(backpack:GetInventoryItems()) do
 					local tItem = Ext.GetItem(v)
 					if tItem ~= nil then
 						tItem.UnsoldGenerated = true -- Trade treasure flag
-						ItemToInventory(v, uuid, tItem.Amount, 0, 0)
+						ItemToInventory(v, traderGUID, tItem.Amount, 0, 0)
 					else
-						ItemToInventory(v, uuid, 1, 0, 0)
+						ItemToInventory(v, traderGUID, 1, 0, 0)
 					end
-					ItemSetOwner(v, uuid)
-					ItemSetOriginalOwner(v, uuid)
+					ItemSetOwner(v, traderGUID)
+					ItemSetOriginalOwner(v, traderGUID)
 				end
 				ItemRemove(backpackGUID)
 			else
 				Ext.PrintError("[WeaponExpansion:GenerateTradeTreasure] Failed to create backpack from root template 'LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830'")
-				CharacterGiveReward(uuid, treasure, 1)
+				CharacterGiveReward(traderGUID, treasure, 1)
 			end
 		end)
-	elseif ObjectIsItem(uuid) == 1 then
-		GenerateTreasure(uuid, treasure, Ext.GetItem(uuid).Stats.Level or 1, uuid)
+	elseif ObjectIsItem(traderGUID) == 1 then
+		GenerateTreasure(traderGUID, treasure, GameHelpers.Item.GetItemLevel(traderGUID), traderGUID)
 	end
 end

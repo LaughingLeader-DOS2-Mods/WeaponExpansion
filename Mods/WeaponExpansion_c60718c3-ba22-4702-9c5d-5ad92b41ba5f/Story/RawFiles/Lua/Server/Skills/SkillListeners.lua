@@ -118,14 +118,19 @@ end)
 local function SwapSkills(nextSkill, instant, e)
 	if instant or (GameHelpers.Character.IsInCombat(e.Character) or Mods.LeaderLib.Vars.LeaderDebugMode) then
 		if instant ~= true then
-			Timer.StartOneshot(string.format("LLWEAPONEX_Pistol_SwapSkills_%s%s", e.Skill, e.Character.MyGuid), 500, function()
-				GameHelpers.Skill.Swap(e.Character, e.Skill, nextSkill, true)
+			local characterGUID = e.CharacterGUID
+			local skill = e.Skill
+			Timer.StartOneshot(string.format("LLWEAPONEX_SwapSkills_%s%s", skill, e.CharacterGUID), 500, function()
+				GameHelpers.Skill.Swap(characterGUID, skill, nextSkill, true)
 			end)
 		else
 			GameHelpers.Skill.Swap(e.Character, e.Skill, nextSkill, true)
 		end
 	else
-		NRD_SkillSetCooldown(e.Character.MyGuid, e.Skill, 0.0)
+		local skillData = e.Character:GetSkillInfo(e.Skill)
+		if skillData then
+			skillData.ActiveCooldown = 0
+		end
 		GameHelpers.UI.RefreshSkillBarSkillCooldown(e.Character, e.Skill)
 	end
 end

@@ -330,8 +330,9 @@ local function TransformItem(self, item, template, stat, level, matchStat, match
 	ItemLevelUpTo(item.MyGuid, level)
 
 	if not StringHelpers.IsNullOrEmpty(slot) and not StringHelpers.IsNullOrEmpty(owner) then
+		local itemGUID = item.MyGuid
 		Timer.StartOneshot("Timers_LLWEAPONEX_PostTransformEquip", 250, function()
-			NRD_CharacterEquipItem(owner, item.MyGuid, slot, 0, 0, 1, 1)
+			NRD_CharacterEquipItem(owner, itemGUID, slot, 0, 0, 1, 1)
 		end)
 	end
 	return true
