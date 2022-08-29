@@ -4,62 +4,45 @@ SkillConfiguration.Pistols = {
 		"Projectile_LLWEAPONEX_Pistol_Shoot_Enemy",
 	},
 	RaceToProjectileBone = {
-		DWARF = "Dummy_L_HandFX",
-		HUMAN = "Dummy_L_HandFX",
-		ELF = "Dummy_R_HandFX",
-		LIZARD = "Dummy_R_HandFX",
+		Dwarf = "Dummy_L_HandFX",
+		Human = "Dummy_L_HandFX",
+		Elf = "Dummy_R_HandFX",
+		Lizard = "Dummy_R_HandFX",
 	},
 	PistolEffects = {
-		DWARF = {
+		Dwarf = {
 			[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
 			[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
 		},
-		ELF = {
+		Elf = {
 			[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
 			[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
 		},
-		HUMAN = {
+		Human = {
 			[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
 			[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
 		},
-		LIZARD = {
+		Lizard = {
 			[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
 			[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
 		},
 	},
 	EffectRemoveDelay = {
-		DWARF = 600,
-		HUMAN = 400,
-		ELF = 250,
-		LIZARD = 800,
+		Dwarf = 600,
+		Human = 400,
+		Elf = 250,
+		Lizard = 800,
 	},
 	PlaySheathe = {
-		DWARF = true,
-		ELF = true
+		Dwarf = true,
+		Elf = true
 	}
 }
 
-local raceTags = {
-	"DWARF",
-	"ELF",
-	"HUMAN",
-	"LIZARD",
-}
-
 ---@param character EsvCharacter
-local function GetRaceTag(character)
-	for _,tag in pairs(raceTags) do
-		if character:HasTag(tag) then
-			return tag
-		end
-	end
-	return "HUMAN"
-end
-
----@param char EsvCharacter
-local function GetPistolExplosionEffect(char)
-	local race = GetRaceTag(char)
-	local isFemale = GameHelpers.Character.IsFemale(char) and 1 or 0
+local function _GetPistolExplosionEffect(character)
+	local race = GameHelpers.Character.GetBaseRace(character)
+	local isFemale = GameHelpers.Character.IsFemale(character) and 1 or 0
 	local raceData = SkillConfiguration.Pistols.PistolEffects[race]
 	if raceData then
 		local effect = raceData[isFemale]
@@ -68,9 +51,9 @@ local function GetPistolExplosionEffect(char)
 	return "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT"
 end
 
----@param char EsvCharacter
-local function GetPistolRemoveDelay(char)
-	local race = GetRaceTag(char)
+---@param character EsvCharacter
+local function _GetPistolRemoveDelay(character)
+	local race = GameHelpers.Character.GetBaseRace(character)
 	local delay = SkillConfiguration.Pistols.EffectRemoveDelay[race]
 	if delay then
 		return delay
@@ -78,9 +61,9 @@ local function GetPistolRemoveDelay(char)
 	return 150
 end
 
----@param char EsvCharacter
-local function ShouldPlaySheatheAnimation(char)
-	local race = GetRaceTag(char)
+---@param character EsvCharacter
+local function _ShouldPlaySheatheAnimation(character)
+	local race = GameHelpers.Character.GetBaseRace(character)
 	return SkillConfiguration.Pistols.PlaySheathe[race] == true
 end
 
@@ -107,13 +90,13 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 	-- end)
 
 	SkillManager.Register.ProjectileShoot(SkillConfiguration.Pistols.AllShootSkills, function (e)
-		local raceTag = GetRaceTag(e.Character)
-		local bone = SkillConfiguration.Pistols.RaceToProjectileBone[raceTag]
+		local race = GameHelpers.Character.GetBaseRace(e.Character)
+		local bone = SkillConfiguration.Pistols.RaceToProjectileBone[race]
 		if bone then
 			e.Data.RootTemplate.CastBone = bone
 		end
 
-		local status = GetPistolExplosionEffect(e.Character)
+		local status = _GetPistolExplosionEffect(e.Character)
 		if status then
 			GameHelpers.Status.Apply(e.Character, status, 0.0, false, e.Character)
 		end
@@ -160,18 +143,21 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 	end)
 
 	SkillManager.Register.Used(SkillConfiguration.Pistols.AllShootSkills, function(e)
-		if ShouldPlaySheatheAnimation(e.Character) then
-			local guid = e.CharacterGUID
-			Timer.StartOneshot("", 350, function()
-				GameHelpers.Status.Apply(guid, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, guid)
-			end)
+		if _ShouldPlaySheatheAnimation(e.Character) then
+			Timer.StartObjectTimer("LLWEAPONEX_Pistol_ApplyShootingEffectStatus", e.Character, 350)
 		else
 			GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, e.Character)
 		end
 	end)
+
+	Timer.Subscribe("LLWEAPONEX_Pistol_ApplyShootingEffectStatus", function (e)
+		if e.Data.UUID then
+			GameHelpers.Status.Apply(e.Data.Object, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, e.Data.Object)
+		end
+	end)
 	
 	SkillManager.Register.Cast(SkillConfiguration.Pistols.AllShootSkills, function(e)
-		local delay = GetPistolRemoveDelay(e.Character)
+		local delay = _GetPistolRemoveDelay(e.Character)
 		if delay and delay > 0 then
 			Timer.StartObjectTimer("LLWEAPONEX_RemovePistolEffect", e.Character, delay)
 		else
