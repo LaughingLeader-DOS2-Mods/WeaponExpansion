@@ -161,8 +161,9 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 
 	SkillManager.Register.Used(SkillConfiguration.Pistols.AllShootSkills, function(e)
 		if ShouldPlaySheatheAnimation(e.Character) then
+			local guid = e.CharacterGUID
 			Timer.StartOneshot("", 350, function()
-				GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, e.Character)
+				GameHelpers.Status.Apply(guid, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, guid)
 			end)
 		else
 			GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, e.Character)
