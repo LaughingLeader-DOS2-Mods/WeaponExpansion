@@ -267,73 +267,29 @@ function UniqueData:PrintPosition()
 	end
 end
 
----@param callback BasicAttackOnWeaponTagHitCallback
----@param priority integer Optional priority to assign to this callback.
+---@param callback fun(e:OnWeaponTagHitEventArgs|LeaderLibSubscribableEventArgs, self:UniqueData)
+---@param priority integer|nil Optional priority to assign to this callback.
 function UniqueData:RegisterOnWeaponTagHit(callback, priority)
 	if not isClient then
-		AttackManager.OnWeaponTagHit.Register(self.Tag, function(tag, attacker, target, data, targetIsObject, skill)
-			local b,err = xpcall(callback, debug.traceback, tag, attacker, target, data, targetIsObject, skill, self)
-			if not b then
-				Ext.PrintError(err)
-			end
-		end, priority)
+		Events.OnWeaponTagHit:Subscribe(function (e)
+			callback(e, self)
+		end, {MatchArgs={Tag=self.Tag}, Priority=priority})
 	end
 end
 
----@param callback OnHealCallback
----@param checkTarget boolean If true, the unique tag is checked on the target instead.
+---@param callback fun(e:OnHealEventArgs|LeaderLibSubscribableEventArgs, self:UniqueData)
+---@param checkTarget boolean|nil If true, the unique tag is checked on the target instead.
 function UniqueData:RegisterHealListener(callback, checkTarget)
 	if not isClient then
-		RegisterHealListener(function(target, source, heal, originalAmount, handle, skill, healingSourceStatus)
+		Events.OnHeal:Subscribe(function(e)
 			local runCallback = false
-			if not checkTarget and source ~= nil then
-				runCallback = GameHelpers.CharacterOrEquipmentHasTag(source, self.Tag)
+			if not checkTarget and e.Source then
+				runCallback = GameHelpers.CharacterOrEquipmentHasTag(e.Source, self.Tag)
 			else
-				runCallback = GameHelpers.CharacterOrEquipmentHasTag(target, self.Tag)
+				runCallback = GameHelpers.CharacterOrEquipmentHasTag(e.Target, self.Tag)
 			end
 			if runCallback then
-				local b,err = xpcall(callback, debug.traceback, target, source, heal, originalAmount, handle, skill, healingSourceStatus, self)
-				if not b then
-					Ext.PrintError(err)
-				end
-			end
-		end)
-	end
-end
-
----@param skill string|string[]
----@param callback LeaderLibSkillListenerCallback
-function UniqueData:RegisterSkillListener(skill, callback)
-	if not isClient then
-		RegisterSkillListener(skill, function(skill, char, state, data)
-			if GameHelpers.CharacterOrEquipmentHasTag(char, self.Tag) then
-				local b,err = xpcall(callback, debug.traceback, skill, char, state, data, self)
-				if not b then
-					Ext.PrintError(err)
-				end
-			end
-		end)
-	end
-end
-
----Lazy way of registering a timer listener if we're on the server side.
----@param name string|string[]|fun(e:TimerFinishedEventArgs) Timer name or the callback if a ganeric listener.
----@param callback fun(e:TimerFinishedEventArgs)
-function UniqueData:RegisterTimerListener(name, callback)
-	if not isClient then
-		Timer.Subscribe(name, callback)
-	end
-end
-
----Lazy way of registering a DeathManager listener if we're on the server side.
----@param id string The ID for the death event, specified in ListenForDeath.
----@param callback fun(target:string, attacker:string, success:boolean):void
-function UniqueData:RegisterDeathManagerListener(id, callback)
-	if not isClient then
-		DeathManager.RegisterListener(id, function(target, attacker, success)
-			local b,err = xpcall(callback, debug.traceback, target, attacker, success, self)
-			if not b then
-				Ext.PrintError(err)
+				callback(e, self)
 			end
 		end)
 	end

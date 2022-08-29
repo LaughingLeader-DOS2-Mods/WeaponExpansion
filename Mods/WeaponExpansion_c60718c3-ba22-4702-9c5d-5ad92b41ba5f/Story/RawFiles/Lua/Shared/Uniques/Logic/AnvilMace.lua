@@ -1,53 +1,53 @@
-Uniques.AnvilMace:RegisterOnWeaponTagHit(function(tag, attacker, target, data, targetIsObject, skill)
-	if targetIsObject then
-		--Ding/dizzy on crit
-		if data.Damage > 0 and data:HasHitFlag("CriticalHit", true) then
-			PlaySound(target.MyGuid, "LeaderLib_Impacts_Anvil_01")
-			GameHelpers.Status.Apply(target, "LLWEAPONEX_DIZZY", 6.0, false, attacker)
-		end
-	elseif not skill then
-		if target then
+if not Vars.IsClient then
+	Uniques.AnvilMace:RegisterOnWeaponTagHit(function(e, self)
+		if e.TargetIsObject then
+			--Ding/dizzy on crit
+			if e.Data.Success and e.Data.Damage > 0 and e.Data:HasHitFlag("CriticalHit", true) then
+				PlaySound(e.TargetGUID, "LeaderLib_Impacts_Anvil_01")
+				GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_DIZZY", 6.0, false, e.Attacker)
+			end
+		elseif not e.Skill and e.Target then
 			--Shockwave when attacking the ground
-			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", attacker, {EnemiesOnly = true})
-			PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", table.unpack(target))
-		else
-			Ext.PrintError("target is nil?", tag, attacker, target, data, targetIsObject, skill)
+			GameHelpers.Skill.Explode(e.Target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", e.Attacker, {EnemiesOnly = true})
+			EffectManager.PlayEffectAt("LLWEAPONEX_FX_AnvilMace_Impact_01", e.Target)
 		end
-	end
-end)
+	end)
 
-Uniques.AnvilMace:RegisterSkillListener({"Target_LLWEAPONEX_AnvilMace_GroundSmash", "Rush_LLWEAPONEX_AnvilMace_GroundSmash", "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact"},
-function(skill, char, state, data)
-	if skill == "Target_LLWEAPONEX_AnvilMace_GroundSmash" then
-		if state == SKILL_STATE.CAST then
-			local target = data:GetSkillTargetPosition()
-			if target then
-				GameHelpers.ClearActionQueue(char)
-				local x,y,z = table.unpack(target)
-				CharacterUseSkillAtPosition(char, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", x,y,z, 0, 1)
-			end
+	SkillManager.Register.Cast("Target_LLWEAPONEX_AnvilMace_GroundSmash", function (e)
+		local rushTarget = nil
+		e.Data:ForEach(function (target, targetType, self)
+			rushTarget = GameHelpers.Math.GetPosition(target)
+		end, e.Data.TargetMode.All)
+		if not rushTarget then
+			rushTarget = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, e.Data.SkillData.TargetRadius)
 		end
-	elseif skill == "Rush_LLWEAPONEX_AnvilMace_GroundSmash" then
-		if state == SKILL_STATE.CAST then
-			local maxRange = Ext.StatGetAttribute(skill, "TargetRadius")
-			local target = data:GetSkillTargetPosition()
-			if target then
-				local x,y,z = table.unpack(target)
-				local dist = GetDistanceToPosition(char, x,y,z)
-				local delay = GameHelpers.Math.ScaleToRange(dist, 0, maxRange, 350, 680)
-				Timer.Start("LLWEAPONEX_RushSmashFinished", delay, char)
-			end
+		if rushTarget then
+			GameHelpers.ClearActionQueue(e.Character)
+			local x,y,z,b = GameHelpers.Grid.GetValidPositionInRadius(rushTarget, 1.0)
+			CharacterUseSkillAtPosition(e.CharacterGUID, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", x,y,z, 0, 1)
 		end
-	elseif skill == "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact" then
-		if state == SKILL_STATE.HIT and data.Success and data.Target then
-			if char ~= data.Target and HasActiveStatus(data.Target, "LLWEAPONEX_ANVILMACE_KNOCKUP") == 0 then
-				GameHelpers.Status.Apply(data.Target, "LLWEAPONEX_ANVILMACE_KNOCKUP", 0.0, 0, char)
-			end
-		end
-	end
-end)
+	end)
 
-Uniques.AnvilMace:RegisterTimerListener("LLWEAPONEX_RushSmashFinished", function(_, char)
-	local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(char, 2.0)
-	GameHelpers.Skill.Explode(pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", char, {EnemiesOnly = true})
-end, true)
+	SkillManager.Register.Cast("Rush_LLWEAPONEX_AnvilMace_GroundSmash", function (e)
+		local maxRange = e.Data.SkillData.TargetRadius
+		e.Data:ForEach(function (target, targetType, self)
+			local dist = GameHelpers.Math.GetDistance(e.Character, target)
+			local delay = GameHelpers.Math.ScaleToRange(dist, 0, maxRange, 350, 680)
+			Timer.Cancel("LLWEAPONEX_RushSmashFinished", e.Character)
+			Timer.StartObjectTimer("LLWEAPONEX_RushSmashFinished", e.Character, delay)
+		end, e.Data.TargetMode.All)
+	end)
+
+	SkillManager.Register.Hit("Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", function (e)
+		if e.Data.Success and not GameHelpers.Status.IsActive(e.Data.TargetObject, "LLWEAPONEX_ANVILMACE_KNOCKUP") then
+			GameHelpers.Status.Apply(e.Data.TargetObject, "LLWEAPONEX_ANVILMACE_KNOCKUP", 0.0, false, e.Character)
+		end
+	end)
+	
+	Timer.Subscribe("LLWEAPONEX_RushSmashFinished", function (e)
+		if e.Data.UUID then
+			local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Data.Object, 2.0)
+			GameHelpers.Skill.Explode(pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", e.Data.Object, {EnemiesOnly = true})
+		end
+	end)
+end
