@@ -61,8 +61,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 4, {
 
 if not Vars.IsClient then
 	SkillManager.Register.Hit("Target_LLWEAPONEX_ShieldBash", function(e)
-		if e.Data.Success then
-			GameHelpers.ForceMoveObject(e.Character, e.Data.Target, 1, e.Skill)
+		if e.Data.Success and e.Data.TargetObject then
+			GameHelpers.ForceMoveObject(e.Character, e.Data.TargetObject, 1, e.Skill)
 		end
 	end)
 
@@ -101,6 +101,7 @@ if not Vars.IsClient then
 	---@param blocker GUID
 	---@param attacker GUID
 	local function _CoverCounter(target, blocker, attacker)
+		--TODO add combat log text
 		if blockerTeleporting[blocker] ~= true then
 			GameHelpers.Status.Apply(target, "LLWEAPONEX_COVERED_SHELL", 6.0, 0, blocker)
 			local sx,sy,sz = GetPosition(blocker)
@@ -126,6 +127,7 @@ if not Vars.IsClient then
 	---@param attacker GUID
 	---@param handle integer
 	local function _CoverRedirectDamage(target, blocker, attacker, handle)
+		--TODO add combat log text
 		if CharacterIsDead(blocker) == 0 then
 			local damageSourceType = NRD_StatusGetInt(target, handle, "DamageSourceType")
 			-- Ignore surfaces/statuses/GM
@@ -161,6 +163,7 @@ if not Vars.IsClient then
 	---@param source EsvCharacter|EsvItem|nil
 	---@param data HitData
 	local function _HunkerDownReduceDamage(target, source, data)
+		--TODO add combat log text
 		if data.Damage > 0 and data:HasHitFlag("CriticalHit", true) then
 			local damageReduction = GameHelpers.GetExtraData("LLWEAPONEX_DualShields_HunkerDownCriticalHitReduction", 50)
 			if damageReduction > 0 then
@@ -219,6 +222,7 @@ if not Vars.IsClient then
 	end)
 
 	SkillManager.Register.Hit("Target_LLWEAPONEX_IronMaiden", function (e)
+		--TODO add combat log text
 		if e.Data.Success then
 			if GameHelpers.Status.IsActive(e.Data.Target, "BLEEDING") then
 				--LLWEAPONEX_RUPTURE_INSTANT
