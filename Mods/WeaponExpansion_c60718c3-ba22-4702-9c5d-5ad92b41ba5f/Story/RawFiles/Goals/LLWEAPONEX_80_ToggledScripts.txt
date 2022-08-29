@@ -49,9 +49,6 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_DemolitionBac
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_AnvilMace", "LLWEAPONEX_AnvilMaceEquipped", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_PowerGauntlets", "LLWEAPONEX_PowerGauntletsActive", 0);
 
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_HunkerDown", "LLWEAPONEX_DualShields_HunkeringDown", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_ShieldCover", "LLWEAPONEX_DualShields_Cover_Active", 0);
-
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_UnrelentingRage", "LLWEAPONEX_UnrelentingRage_Active", 0);
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_20_ListenForTurnEnding", "LLWEAPONEX_ListenForTurnEnding", 0, 1);

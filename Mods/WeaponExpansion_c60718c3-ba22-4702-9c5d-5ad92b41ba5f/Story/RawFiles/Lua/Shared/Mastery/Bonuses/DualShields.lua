@@ -3,6 +3,8 @@ local rb = MasteryDataClasses.MasteryBonusData
 
 local _unsubRushProtection = {}
 
+SkillConfiguration.DualShields = {}
+
 MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 1, {
 	rb:Create("DUALSHIELDS_RUSHPROTECTION", {
 		Skills = MasteryBonusManager.Vars.RushSkills,
@@ -63,57 +65,20 @@ if not Vars.IsClient then
 			GameHelpers.ForceMoveObject(e.Character, e.Data.Target, 1, e.Skill)
 		end
 	end)
-	
-	SkillManager.Register.Cast("Shout_LLWEAPONEX_DualShields_HunkerDown", function(e)
-		-- Armor Overhaul Support
-		-- Only restores armor if these statuses still do that.
-		local healStat = Ext.StatGetAttribute("SHIELDED_PHYSICAL", "HealStat")
-		local healType = Ext.StatGetAttribute("SHIELDED_PHYSICAL", "HealType")
-		if healStat == "PhysicalArmor" and healType == "Shield" then
-			GameHelpers.Status.Apply(e.Character, "SHIELDED_PHYSICAL", 0.0, 0, e.Character)
+
+	--#region Cover
+	StatusManager.Subscribe.Applied("LLWEAPONEX_COVERED", function (e)
+		if e.Source and e.TargetGUID ~= e.SourceGUID then
+			PersistentVars.SkillData.ShieldCover.Blocking[e.TargetGUID] = {
+				Blocker = e.SourceGUID,
+				CanCounterAttack = true
+			}
 		end
-		healStat = Ext.StatGetAttribute("SHIELDED_MAGIC", "HealStat")
-		healType = Ext.StatGetAttribute("SHIELDED_MAGIC", "HealType")
-		if healStat == "MagicArmor" and healType == "Shield" then
-			GameHelpers.Status.Apply(e.Character, "SHIELDED_MAGIC", 0.0, 0, e.Character)
-		end
-		--Ext.IsModLoaded(MODID.DivinityUnleashed) or Ext.IsModLoaded(MODID.ArmorMitigation) then
 	end)
 
-	function DualShields_Cover_OnApplied(target, blocker)
-		PersistentVars.SkillData.ShieldCover.Blocking[target] = {
-			Blocker = blocker,
-			CanCounterAttack = true
-		}
-		--GameHelpers.Status.Apply(target, "LLWEAPONEX_COVERED_SHELL", 6.0, 0, blocker)
-	end
-
-	local blockerTeleporting = {}
-
-	function DualShields_Cover_OnCounter(target, blocker, attacker)
-		if blockerTeleporting[blocker] ~= true then
-			GameHelpers.Status.Apply(target, "LLWEAPONEX_COVERED_SHELL", 6.0, 0, blocker)
-			local sx,sy,sz = GetPosition(blocker)
-			local pos = GameHelpers.Math.GetForwardPosition(attacker, 2.0)
-			local x,y,z = table.unpack(pos)
-			PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", sx, sy, sz)
-			PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", x, y, z)
-			PlayEffect(blocker, "LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Overlay_01")
-			Osi.LeaderLib_Behavior_TeleportTo(blocker, x, y, z)
-			blockerTeleporting[blocker] = true
-			Timer.StartOneshot("Timers_LLWEAPONEX_CoverCounter_"..blocker, 50, function()
-				TeleportToRandomPosition(blocker, 1.0, "")
-				CharacterStatusText(attacker, "LLWEAPONEX_StatusText_Countered")
-				GameHelpers.ClearActionQueue(blocker)
-				CharacterUseSkill(blocker, "Target_LLWEAPONEX_ShieldCover_CounterAttack", attacker, 1, 1, 1)
-				blockerTeleporting[blocker] = nil
-			end)
-		end
-	end
-
-	function DualShields_Cover_OnRemoved(target)
+	StatusManager.Subscribe.Removed("LLWEAPONEX_COVERED", function (e)
 		--GameHelpers.Status.Remove(target, "LLWEAPONEX_COVERING")
-		local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target]
+		local coverData = PersistentVars.SkillData.ShieldCover.Blocking[e.TargetGUID]
 		if coverData ~= nil and coverData.Blocker ~= nil then
 			local isBlocking = false
 			for uuid,v in pairs(PersistentVars.SkillData.ShieldCover.Blocking) do
@@ -126,36 +91,142 @@ if not Vars.IsClient then
 				GameHelpers.Status.Remove(coverData.Blocker, "LLWEAPONEX_COVERING")
 			end
 		end
-		PersistentVars.SkillData.ShieldCover.Blocking[target] = nil
-		PersistentVars.SkillData.ShieldCover.BlockedHit[target] = nil
+		PersistentVars.SkillData.ShieldCover.Blocking[e.TargetGUID] = nil
+		PersistentVars.SkillData.ShieldCover.BlockedHit[e.TargetGUID] = nil
+	end)
+
+	local blockerTeleporting = {}
+
+	---@param target GUID
+	---@param blocker GUID
+	---@param attacker GUID
+	local function _CoverCounter(target, blocker, attacker)
+		if blockerTeleporting[blocker] ~= true then
+			GameHelpers.Status.Apply(target, "LLWEAPONEX_COVERED_SHELL", 6.0, 0, blocker)
+			local sx,sy,sz = GetPosition(blocker)
+			local pos = GameHelpers.Math.GetForwardPosition(attacker, 2.0)
+			local x,y,z = table.unpack(pos)
+			EffectManager.PlayEffectAt("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", {sx, sy, sz})
+			EffectManager.PlayEffectAt("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", {x, y, z})
+			EffectManager.PlayEffect("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Overlay_01", blocker)
+			Osi.LeaderLib_Behavior_TeleportTo(blocker, x, y, z)
+			blockerTeleporting[blocker] = true
+			Timer.StartOneshot("Timers_LLWEAPONEX_CoverCounter_"..blocker, 50, function()
+				TeleportToRandomPosition(blocker, 1.0, "")
+				CharacterStatusText(attacker, "LLWEAPONEX_StatusText_Countered")
+				GameHelpers.ClearActionQueue(blocker)
+				CharacterUseSkill(blocker, "Target_LLWEAPONEX_ShieldCover_CounterAttack", attacker, 1, 1, 1)
+				blockerTeleporting[blocker] = nil
+			end)
+		end
 	end
 
-	function DualShields_Cover_RedirectDamage(target, blocker, attacker, handle)
+	---@param target GUID
+	---@param blocker GUID
+	---@param attacker GUID
+	---@param handle integer
+	local function _CoverRedirectDamage(target, blocker, attacker, handle)
 		if CharacterIsDead(blocker) == 0 then
 			local damageSourceType = NRD_StatusGetInt(target, handle, "DamageSourceType")
 			-- Ignore surfaces/statuses/GM
 			if damageSourceType == 0 or damageSourceType == 6 or damageSourceType == 7 then
-				GameHelpers.RedirectDamage(target, blocker, attacker, handle, 0.5, false)
+				GameHelpers.Damage.RedirectDamage(target, blocker, attacker, handle, 0.5, false)
 			end
 		end
 	end
 
-	SkillManager.Register.All("Target_LLWEAPONEX_IronMaiden", function(e)
-		if e.State == SKILL_STATE.USED then
-			e.Data:ForEach(function(v, targetType, skillEventData)
-				if GameHelpers.Status.IsActive(v, "LLWEAPONEX_SHIELD_PRISON") then
-					GameHelpers.Status.Remove(v, "LLWEAPONEX_SHIELD_PRISON")
-					GameHelpers.Status.Apply(v, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX", 3.0, true, e.Character)
-				end
-			end, e.Data.TargetMode.Objects)
-		elseif e.State == SKILL_STATE.HIT and e.Data.Success then
-			if HasActiveStatus(e.Data.Target, "BLEEDING") == 1 then
+	SkillConfiguration.DualShields.CoverCounter = _CoverCounter
+	SkillConfiguration.DualShields.CoverRedirectDamage = _CoverRedirectDamage
+	--#endregion
+
+	--#region Hunker Down
+	SkillManager.Register.Cast("Shout_LLWEAPONEX_DualShields_HunkerDown", function(e)
+		local shieldedPhysical = Ext.Stats.Get("SHIELDED_PHYSICAL", nil, false)
+		-- Armor Overhauls Support
+		-- Only restores armor if these statuses still do that.
+		if shieldedPhysical then
+			if shieldedPhysical.HealStat == "PhysicalArmor" and shieldedPhysical.HealType == "Shield" then
+				GameHelpers.Status.Apply(e.Character, "SHIELDED_PHYSICAL", 0, false, e.Character)
+			end
+		end
+		local shieldedMagic = Ext.Stats.Get("SHIELDED_MAGIC", nil, false)
+		if shieldedMagic then
+			if shieldedMagic.HealStat == "MagicArmor" and shieldedMagic.HealType == "Shield" then
+				GameHelpers.Status.Apply(e.Character, "SHIELDED_MAGIC", 0, false, e.Character)
+			end
+		end
+	end)
+
+	---@param target EsvCharacter
+	---@param source EsvCharacter|EsvItem|nil
+	---@param data HitData
+	local function _HunkerDownReduceDamage(target, source, data)
+		if data.Damage > 0 and data:HasHitFlag("CriticalHit", true) then
+			local damageReduction = GameHelpers.GetExtraData("LLWEAPONEX_DualShields_HunkerDownCriticalHitReduction", 50)
+			if damageReduction > 0 then
+				damageReduction = damageReduction * 0.01
+				data:MultiplyDamage(damageReduction, true)
+			end
+		end
+	end
+
+	SkillConfiguration.DualShields.HunkerDownReduceDamage = _HunkerDownReduceDamage
+
+	StatusManager.Subscribe.Applied("LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", function (e)
+		if not e.Target:HasTag("AI_PREFERRED_TARGET") then
+			SetTag(e.TargetGUID, "AI_PREFERRED_TARGET")
+			ObjectSetFlag(e.TargetGUID, "LLWEAPONEX_DualShields_AddedTag_AI_PREFERRED_TARGET", 0)
+		end
+	end)
+
+	StatusManager.Subscribe.Removed("LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", function (e)
+		if ObjectGetFlag(e.TargetGUID, "LLWEAPONEX_DualShields_AddedTag_AI_PREFERRED_TARGET") == 1 then
+			ClearTag(e.TargetGUID, "AI_PREFERRED_TARGET")
+			ObjectClearFlag(e.TargetGUID, "LLWEAPONEX_DualShields_AddedTag_AI_PREFERRED_TARGET", 0)
+		end
+	end)
+	--#endregion
+
+	--#region Shield Prison
+	StatusManager.Subscribe.Removed("LLWEAPONEX_SHIELD_PRISON", function (e)
+		if e.Target:GetStatus("LLWEAPONEX_SHIELD_PRISON_FX") then
+			Timer.StartObjectTimer("LLWEAPONEX_RemoveShieldPrisonFX", e.Target, 250)
+		end
+	end)
+	
+	Timer.Subscribe("LLWEAPONEX_RemoveShieldPrisonFX", function (e)
+		if e.Data.UUID then
+			GameHelpers.Status.Remove(e.Data.UUID, "LLWEAPONEX_SHIELD_PRISON_FX")
+			Timer.StartObjectTimer("LLWEAPONEX_PlayShieldPrisonEndFX", e.Data.UUID, 250)
+		end
+	end)
+
+	Timer.Subscribe("LLWEAPONEX_PlayShieldPrisonEndFX", function (e)
+		if e.Data.UUID and not e.Data.Object:GetStatus("LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX") then
+			EffectManager.PlayEffect("LLWEAPONEX_FX_Status_ShieldPrison_End_01", e.Data.Object)
+		end
+	end)
+	--#endregion
+
+	--#region Iron Maiden
+	SkillManager.Register.Used("Target_LLWEAPONEX_IronMaiden", function (e)
+		e.Data:ForEach(function(v, targetType, skillEventData)
+			if GameHelpers.Status.IsActive(v, "LLWEAPONEX_SHIELD_PRISON") then
+				GameHelpers.Status.Remove(v, "LLWEAPONEX_SHIELD_PRISON")
+				GameHelpers.Status.Apply(v, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX", 3.0, true, e.Character)
+			end
+		end, e.Data.TargetMode.Objects)
+	end)
+
+	SkillManager.Register.Hit("Target_LLWEAPONEX_IronMaiden", function (e)
+		if e.Data.Success then
+			if GameHelpers.Status.IsActive(e.Data.Target, "BLEEDING") then
 				--LLWEAPONEX_RUPTURE_INSTANT
 				GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.Target, "Projectile_LLWEAPONEX_Status_Rupture_Damage")
 			else
 				GameHelpers.Status.Apply(e.Data.Target, "BLEEDING", 6.0, false, e.Character)
 			end
-			if HasActiveStatus(e.Data.Target, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX") == 1 then
+			if GameHelpers.Status.IsActive(e.Data.Target, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX") then
 				GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.Target, "Projectile_LLWEAPONEX_Status_IronMaiden_BonusHit", {ApplySkillProperties=true})
 				EffectManager.PlayEffect("LLWEAPONEX_FX_Status_IronMaidenHit_01", e.Data.Target)
 				GameHelpers.Status.Remove(e.Data.Target, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX")
@@ -164,4 +235,5 @@ if not Vars.IsClient then
 			GameHelpers.Surface.CreateSurface(e.Data.TargetObject.WorldPos, surface, 1.0, 6.0, e.Character.Handle, true)
 		end
 	end)
+	--#region
 end

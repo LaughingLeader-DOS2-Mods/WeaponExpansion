@@ -12,7 +12,9 @@ local defaultPersistentVars = {
         RunicCannonEnergy = {},
         GnakSpells = {},
         ShieldCover = {
+            ---@type table<GUID,{Blocker:GUID, CanCounterAttack:boolean}>
             Blocking = {},
+            ---@type table<GUID,{Blocker:GUID, Attacker:GUID}>
             BlockedHit = {},
         },
         ThrowWeapon = {},
