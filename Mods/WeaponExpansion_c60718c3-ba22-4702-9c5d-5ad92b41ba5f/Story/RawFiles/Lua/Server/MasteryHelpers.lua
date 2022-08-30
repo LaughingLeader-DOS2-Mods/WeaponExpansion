@@ -116,6 +116,7 @@ function OnMasteryActivated(uuid,mastery)
 		Mastery.Events.MasteryChanged:Invoke({
 			ID = mastery,
 			Character = character,
+			CharacterGUID = character.MyGuid,
 			Enabled = true
 		})
 	end
@@ -132,6 +133,7 @@ function OnMasteryDeactivated(uuid,mastery)
 		Mastery.Events.MasteryChanged:Invoke({
 			ID = mastery,
 			Character = character,
+			CharacterGUID = character.MyGuid,
 			Enabled = false
 		})
 	end

@@ -99,13 +99,9 @@ Events.OnHit:Subscribe(function(e)
 			if coverData ~= nil then
 				SkillConfiguration.DualShields.CoverRedirectDamage(e.TargetGUID, coverData.Blocker, e.SourceGUID, e.Data.HitStatus.StatusHandle)
 			end
-			local canGrantMasteryXP = e.Data.Damage > 0 and MasterySystem.CanGainExperience(e.Source)
-			if not e.Data.SkillData and e.Data:IsFromWeapon() then
+			if e.Data:IsFromWeapon() then -- Is basic attack or weapon skill
+				local canGrantMasteryXP = e.Data.Damage > 0 and MasterySystem.CanGainExperience(e.Source)
 				local xpMastery = nil
-				-- if canGrantMasteryXP then
-				-- 	Ext.PrintError("canGrantMasteryXP", source.DisplayName, e.SourceGUID, Lib.serpent.block(Osi.DB_IsPlayer:Get(nil)))
-				-- end
-				--local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(source)
 				if UnarmedHelpers.HasUnarmedWeaponStats(e.Source.Stats) then
 					local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(e.Source.Stats)
 					if weapon and weapon.ExtraProperties then
@@ -115,10 +111,6 @@ Events.OnHit:Subscribe(function(e)
 				end
 				if canGrantMasteryXP then
 					MasterySystem.GrantBasicAttackExperience(e.Source, e.Target, xpMastery)
-				end
-			elseif skill then
-				if canGrantMasteryXP and IsWeaponSkill(e.Data.SkillData) then
-					MasterySystem.GrantWeaponSkillExperience(e.Source, e.Target)
 				end
 			end
 		end

@@ -27,7 +27,10 @@ local defaultPersistentVars = {
         FutureBarrage = {},
         WandSurfaceBonuses = {},
         ---@type table<GUID,{Hits:integer, Source:GUID}>
-        ScattershotHits = {}
+        ScattershotHits = {},
+        ---Used to count the current total jumps, to ultimately stop jumping when the limit is reached.
+        ---@type table<GUID,integer>
+        FlickerStrikeTotalJumps = {},
     },
     StatusData = {
         ---@type table<GUID,table<string,{Target:GUID, Source:GUID, Status:string}>>

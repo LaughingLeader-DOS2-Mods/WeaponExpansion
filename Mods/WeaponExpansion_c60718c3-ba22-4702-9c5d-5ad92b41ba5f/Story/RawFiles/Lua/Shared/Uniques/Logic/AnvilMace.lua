@@ -50,11 +50,10 @@ if not Vars.IsClient then
 			GameHelpers.Skill.Explode(pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", e.Data.Object, {EnemiesOnly = true})
 		end
 	end)
-	
-	StatusManager.Subscribe.Applied("UNSHEATHED", function (e)
-		if GameHelpers.CharacterOrEquipmentHasTag(e.Target, "LLWEAPONEX_AnvilMace_Equipped") and GameHelpers.Character.GetBaseRace(e.Target) == "Dwarf" then
-			EffectManager.PlayClientEffect("LLWEAPONEX_FX_AnvilMace_Unsheathed_Impact_01", e.Target, {WeaponBones="Dummy_FX_01"})
+	EquipmentManager.Events.UnsheathedChanged:Subscribe(function (e)
+		if GameHelpers.Character.GetBaseRace(e.Character) == "Dwarf" then
+			EffectManager.PlayClientEffect("LLWEAPONEX_FX_AnvilMace_Unsheathed_Impact_01", e.Character, {WeaponBones="Dummy_FX_01"})
 			--GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_ANVIL_UNSHEATHED_FX", 0, true, e.Target)
 		end
-	end)
+	end, {MatchArgs={Tag="LLWEAPONEX_AnvilMace_Equipped", Unsheathed=true}})
 end

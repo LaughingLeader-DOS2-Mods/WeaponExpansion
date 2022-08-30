@@ -7,6 +7,7 @@ local MasteryData = MasteryDataClasses.MasteryData
 ---@field Name TranslatedString
 ---@field Color string
 
+---@enum WeaponExpansionMasteryID
 MasteryID = {
 	Axe = "LLWEAPONEX_Axe",
 	Banner = "LLWEAPONEX_Banner",

@@ -3,8 +3,9 @@ if Mastery.Events == nil then
 end
 
 ---@class MasteryChangedEventArgs
----@field ID string The mastery ID
+---@field ID string|WeaponExpansionMasteryID The mastery ID
 ---@field Character EsvCharacter
+---@field CharacterGUID GUID
 ---@field Enabled boolean
 ---@field IsPlayer boolean
 

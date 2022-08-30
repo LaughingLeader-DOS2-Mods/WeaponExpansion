@@ -117,6 +117,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 	for tag,b in pairs(activatedMasteries) do
 		Mastery.Events.MasteryChanged:Invoke({
 			Character = character,
+			CharacterGUID = character.MyGuid,
 			Enabled = true,
 			ID = tag,
 			IsPlayer = isPlayer

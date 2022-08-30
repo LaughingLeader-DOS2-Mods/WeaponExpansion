@@ -256,43 +256,23 @@ function EquipmentManager:CheckScoundrelTags(character, item, itemTags)
 end
 
 ---@param character EsvCharacter
+---@return boolean
 function HasEmptyHand(character, ignoreShields)
-	local uuid = ""
-	if type(character) == "string" then
-		uuid = character
-		character = Ext.GetCharacter(character)
+	local character = GameHelpers.GetCharacter(character)
+	if not character then
+		return false
 	end
+	local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(character)
 	if type(ignoreShields) == "string" then
 		ignoreShields = string.lower(ignoreShields) == "true"
-	end
-	if character ~= nil and character.Stats ~= nil then
-		if character.Stats.MainWeapon ~= nil then
-			if character.Stats.MainWeapon.IsTwoHanded then
-				return false
-			end
-			if character.Stats.OffHandWeapon ~= nil and (ignoreShields or character.Stats.OffHandWeapon.ItemType == "Shield") then
-				return false
-			end
-		end
-		return true
 	else
-		local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
-		local offhand = CharacterGetEquippedItem(uuid, "Shield")
-		if not StringHelpers.IsNullOrEmpty(mainhand) then
-			local item = Ext.GetItem(mainhand)
-			if item ~= nil and item.Stats.IsTwoHanded then
-				return false
-			end
-			if not StringHelpers.IsNullOrEmpty(offhand) then
-				if ignoreShields == true then
-					item = Ext.GetItem(offhand)
-					if item ~= nil and item.ItemType == "Shield" then
-						return true
-					end
-				end
-			end
-		end
-		return true
+		ignoreShields = ignoreShields == true
 	end
-	return false
+	if mainhand and mainhand.Stats.IsTwoHanded then
+		return false
+	end
+	if offhand and (not ignoreShields or offhand.Stats.ItemType ~= "Shield") then
+		return false
+	end
+	return true
 end

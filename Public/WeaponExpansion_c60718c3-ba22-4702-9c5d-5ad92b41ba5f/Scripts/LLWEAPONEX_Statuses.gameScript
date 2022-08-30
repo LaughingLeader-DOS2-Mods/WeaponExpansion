@@ -2,42 +2,6 @@ INIT
 
 EVENTS
 
-EVENT LLWEAPONEX_Rapier_SuckerCombo1
-VARS
-	CHARACTER:_Character
-	STATUS:_Result
-	LIST<STATUS>:_RemoveList
-	INT:_Turns
-ON
-	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1)
-ACTIONS
-	Set(_Result, null)
-IF "c1"
-	GetStatusTurns(_Character, KNOCKED_DOWN, _Turns)
-THEN
-	Clamp(_Turns, 1, _Turns)
-	Add(_Turns, 1)
-	Set(_Result, LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED)
-ENDIF
-	RETURN(_RemoveList, _Result, _Turns)
-
-
-EVENT LLWEAPONEX_Rapier_DelayedDaze_ApplyDazed
-VARS
-	CHARACTER:_Character
-	CHARACTER:_Source
-ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_Events_DelayDazedReady")
-ACTIONS
-IF "c1"
-	CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED, _Source)
-THEN
-ELSE
-	Set(_Source, _Character)
-ENDIF
-	CharacterRemoveStatus(_Character, LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED, null, 0)
-	CharacterApplyStatus(_Character, LLWEAPONEX_DIZZY, 2, 1, _Source)
-
 EVENT LLWEAPONEX_Tripping_GuaranteedKnockdown
 VARS
 	CHARACTER:_Character
@@ -385,12 +349,10 @@ VARS
 	CHARACTER:_Target
 	LIST<STATUS>:_RemoveList
 	STATUS:_Result
-	INT:_Turns
 ON
 	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_RAPIER_FRENZYCHARGE_APPLY)
 ACTIONS
 	Set(_Result, null)
-	Set(_Turns, 1)
 IF "!c1"
 	CharacterHasStatus(_Target, LLWEAPONEX_RAPIER_FRENZYCHARGE1)
 THEN
@@ -408,7 +370,7 @@ ELIF "!c1"
 THEN
 	Set(_Result, LLWEAPONEX_RAPIER_FRENZYCHARGE4)
 ENDIF
-	RETURN(_RemoveList, _Result, _Turns)
+	RETURN(_RemoveList, _Result, null)
 
 EVENT LLWEAPONEX_RandomElementalAilment_Char
 VARS
@@ -445,42 +407,6 @@ ON
 ACTIONS
 	GetRandom(_Result, POISONED, BURNING, NECROFIRE, HELLFIRE, SLOWED, CHILLED, FROZEN, SHOCKED, STUNNED, PETRIFIED, WARM, WET, ACID, LIVING_BOMB)
 	RETURN(_RemoveList, _Result, 1)
-
-EVENT LLWEAPONEX_RapierMastery_SuckerCombo2_Flying_KnockdownCheck_Characters
-VARS
-	CHARACTER:_Target
-	CHARACTER:_AuraHost
-	CHARACTER:_Source
-	INT:_Turns
-ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_CHECK)
-ACTIONS
-IF "c1&c2&c3"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_CHECK, _AuraHost)
-	CharacterGetStatusSourceCharacter(_AuraHost, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING, _Source)
-	CharacterIsEnemy(_Target, _Source)
-THEN
-	CharacterApplyStatus(_AuraHost, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
-	CharacterApplyStatus(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
-ENDIF
-
-EVENT LLWEAPONEX_RapierMastery_SuckerCombo2_Flying_KnockdownCheck_Items
-VARS
-	ITEM:_Target
-	CHARACTER:_AuraHost
-	CHARACTER:_Source
-	INT:_Turns
-ON
-	OnItemStatus(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_CHECK)
-ACTIONS
-IF "!c1&c2&c3"
-	IsStoryItem(_Target)
-	ItemGetStatusSourceCharacter(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_CHECK, _AuraHost)
-	CharacterGetStatusSourceCharacter(_AuraHost, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING, _Source)
-THEN
-	CharacterApplyStatus(_AuraHost, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
-	ItemApplyStatus(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
-ENDIF
 
 EVENT LLWEAPONEX_WarCharge_LeadershipScaling
 VARS
