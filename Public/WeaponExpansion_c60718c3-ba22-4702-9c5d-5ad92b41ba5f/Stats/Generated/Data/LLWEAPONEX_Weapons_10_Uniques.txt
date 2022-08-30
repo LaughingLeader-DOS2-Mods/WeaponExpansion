@@ -796,7 +796,7 @@ data "Unique" "1"
 data "StrengthBoost" "1"
 data "Skills" "Target_LLWEAPONEX_AnvilMace_GroundSmash"
 data "Flags" "Unbreakable"
-data "Tags" "LLWEAPONEX_Bludgeon;LLWEAPONEX_Bludgeon_Equipped;LLWEAPONEX_UniqueAnvilMace"
+data "Tags" "LLWEAPONEX_Bludgeon;LLWEAPONEX_Bludgeon_Equipped;LLWEAPONEX_AnvilMace_Equipped"
 //data "Weight" "116000" Anvil + Mace
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_Preview"
