@@ -156,23 +156,34 @@ if not Ext.IsClient() then
 	end)
 	--#endregion
 
+	local _lastTime = 0
 	--#region Frenzy
 	SkillManager.Register.Hit({"MultiStrike_LLWEAPONEX_Rapier_FlickerStrike", "MultiStrike_LLWEAPONEX_Rapier_FlickerStrike_Enemy"}, function (e)
-		Timer.Cancel("LLWEAPONEX_Rapier_FlickerStrike_CheckForContinue", e.Character)
+		if _lastTime == 0 then
+			_lastTime = Ext.Utils.MonotonicTime()
+		end
+		local success = false
+		if e.Data:HasHitFlag({"Dodged", "Missed"}, true) then
+			e.Data:SetHitFlag({"Dodged", "Missed"}, false)
+		end
 		if e.Data.Success then
+			local chance = GameHelpers.GetExtraData("LLWEAPONEX_Rapier_FrenzyChargeChancePerHit", 50)
+			if chance > 0 and GameHelpers.Math.Roll(chance) then
+				GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_RAPIER_FRENZYCHARGE_APPLY", 6.0, false, e.Character)
+			end
 			local totalJumps = PersistentVars.SkillData.FlickerStrikeTotalJumps[e.CharacterGUID] or 0
 			totalJumps = totalJumps + 1
 			PersistentVars.SkillData.FlickerStrikeTotalJumps[e.CharacterGUID] = totalJumps
 			local maxJumps = GameHelpers.GetExtraData("LLWEAPONEX_Rapier_FlickerStrikeMaxJumps", 6, true)
 			if totalJumps < maxJumps then
-				Timer.StartObjectTimer("LLWEAPONEX_Rapier_FlickerStrike_CheckForContinue", e.Character, 500)
-			else
-				PersistentVars.SkillData.FlickerStrikeTotalJumps[e.CharacterGUID] = nil
+				success = true
+				Timer.Cancel("LLWEAPONEX_Rapier_FlickerStrike_CheckForContinue", e.Character)
+				Timer.StartObjectTimer("LLWEAPONEX_Rapier_FlickerStrike_CheckForContinue", e.Character, 300, {LastTarget=e.Data.Target})
 			end
-			local chance = GameHelpers.GetExtraData("LLWEAPONEX_Rapier_FrenzyChargeChancePerHit", 50)
-			if chance > 0 and GameHelpers.Math.Roll(chance) then
-				GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_RAPIER_FRENZYCHARGE_APPLY", 6.0, false, e.Character)
-			end
+		end
+		if not success then
+			Timer.Cancel("LLWEAPONEX_Rapier_FlickerStrike_CheckForContinue", e.Character)
+			Timer.StartObjectTimer("LLWEAPONEX_Rapier_FlickerStrike_ClearJumpCount", e.Character, 250)
 		end
 	end)
 
@@ -197,30 +208,54 @@ if not Ext.IsClient() then
 		return false
 	end
 
+	Timer.Subscribe("LLWEAPONEX_Rapier_FlickerStrike_ClearJumpCount", function (e)
+		if e.Data.UUID then
+			PersistentVars.SkillData.FlickerStrikeTotalJumps[e.Data.UUID] = nil
+			EffectManager.PlayEffect("RS3_FX_Skills_Warrior_BlinkStrike_Reappear_01", e.Data.Object)
+			e.Data.Object.AnimationOverride = ""
+		end
+	end)
+
 	Timer.Subscribe("LLWEAPONEX_Rapier_FlickerStrike_CheckForContinue", function (e)
 		if e.Data.UUID then
 			local success = false
 			local character = e.Data.Object
 			---@cast character EsvCharacter
-			if not GameHelpers.ObjectIsDead(character) and _RemoveFrenzyCharge(character) then
+
+			if not GameHelpers.ObjectIsDead(character) and (_RemoveFrenzyCharge(character) or Vars.LeaderDebugMode) then
 				local flickerSkill = Ext.Stats.Get("MultiStrike_LLWEAPONEX_Rapier_FlickerStrike")
 				local radius = flickerSkill.TargetRadius
 				local targets = GameHelpers.Grid.GetNearbyObjects(character,
 				{
-					Relation={Enemy=true},
+					Relation={CanAdd=function (target, source)
+						--No friendly fire, since jumping is unpredictable
+						return GameHelpers.Character.IsEnemy(target, source)
+					end},
 					Radius=radius,
-					Sort="Distance",
+					Sort="Random",
 					Type="Character",
 					AsTable=true
 				})
 				---@cast targets EsvCharacter[]
 				local target = targets[1]
 				if target then
+					if target.MyGuid == e.Data.LastTarget and targets[2] then
+						target = targets[2]
+					end
 					success = true
 					local targetGUID = target.MyGuid
 					local characterGUID = character.MyGuid
-					Osi.LeaderLib_Behavior_TeleportTo(characterGUID, targetGUID)
-					CharacterLookAt(characterGUID, targetGUID, 1)
+					--Osi.LeaderLib_Behavior_TeleportTo(characterGUID, targetGUID)
+					local weaponRange = GameHelpers.Character.GetWeaponRange(character, true) * -1
+					local pos,foundSpot = GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(target, weaponRange), 3.0)
+					if foundSpot then
+						GameHelpers.Utils.SetPosition(character, pos)
+					else
+						Osi.LeaderLib_Behavior_TeleportTo(characterGUID, targetGUID)
+					end
+					local rotation = {table.unpack(target.Rotation)}
+					GameHelpers.Utils.SetRotation(character, rotation)
+					character.AnimationOverride = "attack1"
 					local skillParamOverrides = nil
 					local reduction = GameHelpers.GetExtraData("LLWEAPONEX_Rapier_FlickerStrikeBonusDamageReduction", 20)
 					if reduction > 0 then
@@ -228,13 +263,16 @@ if not Ext.IsClient() then
 						skillParamOverrides = {["Damage Multiplier"] = damageMult}
 					end
 					EffectManager.PlayEffect("RS3_FX_Skills_Warrior_BlinkStrike_Cast_01", character)
-					EffectManager.PlayEffect("RS3_FX_Skills_Warrior_BlinkStrike_Impact_01", target)
-					GameHelpers.Damage.ApplySkillDamage(character, target, "MultiStrike_LLWEAPONEX_Rapier_FlickerStrike", {SkillDataParamModifiers=skillParamOverrides, InvokeSkillHitListeners=true})
+					local effectPos = {table.unpack(target.WorldPos)}
+					effectPos[2] = effectPos[2] + (target.AI.AIBoundsHeight * 0.5) + (0.1 * Ext.Utils.Random(-2,2))
+					EffectManager.PlayEffectAt("RS3_FX_Skills_Warrior_BlinkStrike_Impact_01", effectPos)
+					GameHelpers.Damage.ApplySkillDamage(character, target, "MultiStrike_LLWEAPONEX_Rapier_FlickerStrike", {SkillDataParamModifiers=skillParamOverrides, HitParams=HitFlagPresets.GuaranteedWeaponHit})
 				end
 			end
 			if not success then
-				EffectManager.PlayEffect("RS3_FX_Skills_Warrior_BlinkStrike_Reappear_01", character)
-				PersistentVars.SkillData.FlickerStrikeTotalJumps[character.MyGuid] = nil
+				--CharacterFlushQueue(character.MyGuid)
+				--CharacterLookAt(character.MyGuid, e.Data.LastTarget, 1)
+				Timer.StartObjectTimer("LLWEAPONEX_Rapier_FlickerStrike_ClearJumpCount", character, 50)
 			end
 		end
 	end)
