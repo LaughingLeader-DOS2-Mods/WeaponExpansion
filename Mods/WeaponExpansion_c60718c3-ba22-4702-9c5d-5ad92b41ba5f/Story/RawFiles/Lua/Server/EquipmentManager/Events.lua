@@ -1,39 +1,18 @@
 local self = EquipmentManager
 EquipmentManager.Events = {}
 
-local _listenerTags = {
-	EquipmentChanged = {},
-	UnsheathedChanged = {},
-}
-
-local _listenerTemplates = {
-	EquipmentChanged = {},
-	UnsheathedChanged = {},
-}
-
 ---@class EquipmentChangedEventArgs
 ---@field Character EsvCharacter
 ---@field Item EsvItem
 ---@field CharacterGUID GUID
 ---@field ItemGUID GUID
 ---@field Equipped boolean
----@field Template string|nil
----@field Tag string|nil
----@field AllTags table<string,boolean>
+---@field Template string
+---@field Tag string|"" The specific tag this listener matched with, otherwise it's empty. 
+---@field AllTags table<string,boolean> All the tags on the item. Use this when checking for tags instead of e.Tag.
 
 ---@type LeaderLibSubscribableEvent<EquipmentChangedEventArgs>
-EquipmentManager.Events.EquipmentChanged = Classes.SubscribableEvent:Create("WeaponExpansion.EquipmentChanged", {
-	OnSubscribe = function (callback, opts, matchArgs, matchArgsType)
-		if matchArgsType == "table" then
-			if matchArgs.Tag then
-				_listenerTags.EquipmentChanged[matchArgs.Tag] = true
-			end
-			if matchArgs.Template then
-				_listenerTemplates.EquipmentChanged[matchArgs.Template] = true
-			end
-		end
-	end,
-})
+EquipmentManager.Events.EquipmentChanged = Classes.SubscribableEvent:Create("WeaponExpansion.EquipmentChanged")
 
 ---@class UnsheathedChangedEventArgs
 ---@field Character EsvCharacter
@@ -41,27 +20,58 @@ EquipmentManager.Events.EquipmentChanged = Classes.SubscribableEvent:Create("Wea
 ---@field CharacterGUID GUID
 ---@field ItemGUID GUID
 ---@field Unsheathed boolean
----@field Template string|nil
----@field Tag string|nil
----@field AllTags table<string,boolean>
+---@field Template string
+---@field Tag string|"" The specific tag this listener matched with, otherwise it's empty.
+---@field AllTags table<string,boolean> All the tags on the item. Use this when checking for tags instead of e.Tag.
 ---@type LeaderLibSubscribableEvent<UnsheathedChangedEventArgs>
-EquipmentManager.Events.UnsheathedChanged = Classes.SubscribableEvent:Create("WeaponExpansion.UnsheathedChanged", {
-	OnSubscribe = function (callback, opts, matchArgs, matchArgsType)
-		if matchArgsType == "table" then
-			if matchArgs.Tag then
-				_listenerTags.UnsheathedChanged[matchArgs.Tag] = true
-			end
-			if matchArgs.Template then
-				_listenerTemplates.UnsheathedChanged[matchArgs.Template] = true
+EquipmentManager.Events.UnsheathedChanged = Classes.SubscribableEvent:Create("WeaponExpansion.UnsheathedChanged")
+
+local function _GetTagMatcher(_ITEM_TAGS)
+	return function (self, argKey, matchedValue)
+		--Consider any "Tag" match valid / return the tag if it's in _ITEM_TAGS
+		if argKey == "Tag" then
+			if _ITEM_TAGS[matchedValue] then
+				--For the matched listeners
+				self.Tag = matchedValue
+				return matchedValue
 			end
 		end
-	end,
-})
+	end
+end
+
+local function _InvokeEquipmentChanged(character, item, template, _ITEM_TAGS, equipped)
+	EquipmentManager.Events.EquipmentChanged:Invoke({
+		Character = character,
+		CharacterGUID = character.MyGuid,
+		Item = item,
+		ItemGUID = item.MyGuid,
+		AllTags = _ITEM_TAGS,
+		Template = template,
+		Tag = "",
+		Equipped = equipped,
+	}, nil, _GetTagMatcher(_ITEM_TAGS))
+end
+
+local function _InvokeUnsheathed(enabled, weapon, character, _ITEM_TAGS, template)
+	local _ITEM_TAGS = _ITEM_TAGS or GameHelpers.GetItemTags(weapon, true)
+	local template = template or GameHelpers.GetTemplate(weapon)
+
+	EquipmentManager.Events.UnsheathedChanged:Invoke({
+		Character = character,
+		CharacterGUID = character.MyGuid,
+		Item = weapon,
+		ItemGUID = weapon.MyGuid,
+		AllTags = _ITEM_TAGS,
+		Template = template,
+		Unsheathed = enabled,
+		Tag = ""
+	}, nil, _GetTagMatcher(_ITEM_TAGS))
+end
 
 ---@param character EsvCharacter
 ---@param item EsvItem
 function EquipmentManager:OnItemEquipped(character, item)
-	if not character or not item or GameHelpers.Item.IsObject(item) then
+	if not character or not item or not item.Stats then
 		return
 	end
 	
@@ -147,77 +157,17 @@ function EquipmentManager:OnItemEquipped(character, item)
 		EquipmentManager.CheckFirearmProjectile(character, item)
 	end
 
-	local invokedTemplate = false
-
-	for tag,_ in pairs(_listenerTags.EquipmentChanged) do
-		if _ITEM_TAGS[tag] then
-			EquipmentManager.Events.EquipmentChanged:Invoke({
-				Character = character,
-				Item = item,
-				AllTags = _ITEM_TAGS,
-				Template = template,
-				Tag = tag,
-				Equipped = true,
-				CharacterGUID = character.MyGuid,
-				ItemGUID = item.MyGuid
-			})
-			invokedTemplate = true
-		end
-	end
-
-	if not invokedTemplate then
-		if _listenerTemplates.EquipmentChanged[template] then
-			EquipmentManager.Events.EquipmentChanged:Invoke({
-				Character = character,
-				Item = item,
-				AllTags = _ITEM_TAGS,
-				Template = template,
-				Equipped = true,
-				CharacterGUID = character.MyGuid,
-				ItemGUID = item.MyGuid
-			})
-		end
-	end
-
-	if character.FightMode or character:GetStatus("UNSHEATHED") then
-		invokedTemplate = false
+	_InvokeEquipmentChanged(character, item, template, _ITEM_TAGS, true)
 	
-		for tag,_ in pairs(_listenerTags.UnsheathedChanged) do
-			if _ITEM_TAGS[tag] then
-				EquipmentManager.Events.UnsheathedChanged:Invoke({
-					Character = character,
-					Item = item,
-					AllTags = _ITEM_TAGS,
-					Template = template,
-					Tag = tag,
-					Unsheathed = true,
-					CharacterGUID = character.MyGuid,
-					ItemGUID = item.MyGuid
-				})
-				invokedTemplate = true
-			end
-		end
-
-		if not invokedTemplate then
-			if _listenerTemplates.UnsheathedChanged[template] then
-				EquipmentManager.Events.UnsheathedChanged:Invoke({
-					Character = character,
-					Item = item,
-					AllTags = _ITEM_TAGS,
-					Template = template,
-					Unsheathed = true,
-					CharacterGUID = character.MyGuid,
-					ItemGUID = item.MyGuid
-				})
-			end
-		end
+	if character.FightMode or character:GetStatus("UNSHEATHED") then
+		_InvokeUnsheathed(true, item, character, _ITEM_TAGS, template)
 	end
 end
 
 ---@param character EsvCharacter
 ---@param item EsvItem
 function EquipmentManager:OnItemUnEquipped(character, item)
-	if not character or not item or GameHelpers.Item.IsObject(item) then
+	if not character or not item or not item.Stats then
 		return
 	end
 
@@ -235,104 +185,9 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	end
 	self:CheckForUnarmed(character, isPlayer)
 
-	local invokedTemplate = false
-
-	for tag,_ in pairs(_listenerTags.EquipmentChanged) do
-		if _ITEM_TAGS[tag] then
-			EquipmentManager.Events.EquipmentChanged:Invoke({
-				Character = character,
-				Item = item,
-				AllTags = _ITEM_TAGS,
-				Template = template,
-				Tag = tag,
-				Equipped = false,
-				CharacterGUID = character.MyGuid,
-				ItemGUID = item.MyGuid
-			})
-			invokedTemplate = true
-		end
-	end
-
-	if not invokedTemplate then
-		if _listenerTemplates.EquipmentChanged[template] then
-			EquipmentManager.Events.EquipmentChanged:Invoke({
-				Character = character,
-				Item = item,
-				AllTags = _ITEM_TAGS,
-				Template = template,
-				Equipped = false,
-				CharacterGUID = character.MyGuid,
-				ItemGUID = item.MyGuid
-			})
-		end
-	end
-
-	if character.FightMode or character:GetStatus("UNSHEATHED") then
-		invokedTemplate = false
-		Timer.Cancel("LLWEAPONEX_FireUnsheathedRemoved", character)
-	
-		for tag,_ in pairs(_listenerTags.UnsheathedChanged) do
-			if _ITEM_TAGS[tag] then
-				EquipmentManager.Events.UnsheathedChanged:Invoke({
-					Character = character,
-					Item = item,
-					AllTags = _ITEM_TAGS,
-					Template = template,
-					Tag = tag,
-					Unsheathed = false,
-					CharacterGUID = character.MyGuid,
-					ItemGUID = item.MyGuid
-				})
-				invokedTemplate = true
-			end
-		end
-
-		if not invokedTemplate then
-			if _listenerTemplates.UnsheathedChanged[template] then
-				EquipmentManager.Events.UnsheathedChanged:Invoke({
-					Character = character,
-					Item = item,
-					AllTags = _ITEM_TAGS,
-					Template = template,
-					Unsheathed = false,
-					CharacterGUID = character.MyGuid,
-					ItemGUID = item.MyGuid
-				})
-			end
-		end
-	end
-end
-
-local function _InvokeUnsheathed(enabled, weapon, character)
-	local invokedTemplate = false
-	local _ITEM_TAGS = GameHelpers.GetItemTags(weapon, true)
-	local template = GameHelpers.GetTemplate(weapon)
-
-	for tag,_ in pairs(_listenerTags.UnsheathedChanged) do
-		if _ITEM_TAGS[tag] then
-			EquipmentManager.Events.UnsheathedChanged:Invoke({
-				Character = character,
-				Item = weapon,
-				AllTags = _ITEM_TAGS,
-				Template = template,
-				Tag = tag,
-				Unsheathed = enabled
-			})
-			invokedTemplate = true
-		end
-	end
-
-	if not invokedTemplate then
-		if _listenerTemplates.UnsheathedChanged[template] then
-			EquipmentManager.Events.UnsheathedChanged:Invoke({
-				Character = character,
-				Item = weapon,
-				AllTags = _ITEM_TAGS,
-				Template = template,
-				Unsheathed = false
-			})
-		end
-	end
+	_InvokeEquipmentChanged(character, item, template, _ITEM_TAGS, false)
+	_InvokeUnsheathed(false, item, character, _ITEM_TAGS, template)
+	Timer.Cancel("LLWEAPONEX_FireUnsheathedRemoved", character)
 end
 
 StatusManager.Subscribe.Applied("UNSHEATHED", function (e)
@@ -359,13 +214,13 @@ Timer.Subscribe("LLWEAPONEX_FireUnsheathedRemoved", function (e)
 	if ObjectExists(e.Data.UUID) and e.Data.Object then
 		local character = e.Data.Object
 		---@cast character EsvCharacter
-		if character.FightMode or character:GetStatus("UNSHEATHED") then
+		if not character.FightMode or character:GetStatus("UNSHEATHED") then
 			local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(character)
 			if mainhand then
-				_InvokeUnsheathed(true, mainhand, character)
+				_InvokeUnsheathed(false, mainhand, character)
 			end
 			if offhand then
-				_InvokeUnsheathed(true, offhand, character)
+				_InvokeUnsheathed(false, offhand, character)
 			end
 		end
 	end
@@ -383,19 +238,13 @@ local function Ignore(character, item)
 	return false
 end
 
-RegisterProtectedOsirisListener("ItemEquipped", Data.OsirisEvents.ItemEquipped, "after", function(item,character)
-	if ObjectExists(character) == 0 or ObjectExists(item) == 0 then
-		return
-	end
-	item = StringHelpers.GetUUID(item); character = StringHelpers.GetUUID(character)
-	if not Ignore(character, item) then self:OnItemEquipped(Ext.GetCharacter(character), Ext.GetItem(item)) end
+Ext.Osiris.RegisterListener("ItemEquipped", 2, "after", function(itemGUID,characterGUID)
+	itemGUID = StringHelpers.GetUUID(itemGUID); characterGUID = StringHelpers.GetUUID(characterGUID)
+	if not Ignore(characterGUID, itemGUID) then self:OnItemEquipped(GameHelpers.GetCharacter(characterGUID), GameHelpers.GetItem(itemGUID)) end
 end)
-RegisterProtectedOsirisListener("ItemUnEquipped", Data.OsirisEvents.ItemUnEquipped, "after", function(item,character)
-	if ObjectExists(character) == 0 or ObjectExists(item) == 0 then
-		return
-	end
-	item = StringHelpers.GetUUID(item); character = StringHelpers.GetUUID(character)
-	if not Ignore(character, item) then self:OnItemUnEquipped(Ext.GetCharacter(character), Ext.GetItem(item)) end
+Ext.Osiris.RegisterListener("ItemUnEquipped", 2, "after", function(itemGUID,characterGUID)
+	itemGUID = StringHelpers.GetUUID(itemGUID); characterGUID = StringHelpers.GetUUID(characterGUID)
+	if not Ignore(characterGUID, itemGUID) then self:OnItemUnEquipped(GameHelpers.GetCharacter(characterGUID), GameHelpers.GetItem(itemGUID)) end
 end)
 
 RegisterProtectedOsirisListener("ItemAddedToCharacter", Data.OsirisEvents.ItemAddedToCharacter, "after", function(item, character)
