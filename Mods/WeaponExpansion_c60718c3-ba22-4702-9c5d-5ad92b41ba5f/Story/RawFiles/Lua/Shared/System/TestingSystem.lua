@@ -253,7 +253,7 @@ if not _ISCLIENT then
 	---@return UUID dummy
 	function WeaponExTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
 		local host = Ext.GetCharacter(CharacterGetHostCharacter())
-		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
+		local pos = pos or GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)
 		--LLWEAPONEX_Debug_MasteryDummy_2ac80a2a-8326-4131-a03c-53906927f935
 		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0)
 		NRD_CharacterSetPermanentBoostInt(character, "Accuracy", 200)
@@ -267,7 +267,7 @@ if not _ISCLIENT then
 
 		local dummies = {}
 		for i=1,totalDummies do
-			local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
+			local pos2 = GameHelpers.Grid.GetValidPositionTableInRadius(pos, 6.0, nil)
 
 			local dummy = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0))
 			NRD_CharacterSetPermanentBoostInt(dummy, "Dodge", -100)
@@ -308,9 +308,9 @@ if not _ISCLIENT then
 	---@return UUID dummy
 	function WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy)
 		local host = Ext.GetCharacter(CharacterGetHostCharacter())
-		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
-		local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 7.0)}
-		local pos3 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
+		local pos = pos or GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)
+		local pos2 = GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 7.0)
+		local pos3 = GameHelpers.Grid.GetValidPositionTableInRadius(pos, 6.0)
 		local character = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0))
 		local character2 = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0))
 
