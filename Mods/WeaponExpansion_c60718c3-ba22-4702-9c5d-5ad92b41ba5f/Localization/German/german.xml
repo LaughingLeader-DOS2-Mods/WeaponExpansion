@@ -42,7 +42,7 @@
 	<content contentuid="h027a0666g90c9g48efg90dcgde2bbb110a36">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery I&lt;/font&gt;&lt;br&gt;In a swift display of skill, instantly rend enemies in a line, dealing [1].&lt;br&gt;Consumes all stacks of &lt;font color=&apos;#C9AA58&apos;&gt;Blademaster&apos;s Strike&lt;/font&gt; on targets hit, dealing [2] per stack, and rupturing wounds for [3] every 3 stacks.</content>
 	<content contentuid="h02882207g5e7bg4deaga22eg854b68f8dd29">&lt;font color=&apos;#33FFAA&apos;&gt;Runic Energy [1]/[2]&lt;/font&gt;</content>
 	<content contentuid="h0290a4cdg81aeg4bccg991fg11995cd6da3a">Stalker</content>
-	<content contentuid="h02978a74g0280g48eag9bd7g18b63ff4872c">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery I&lt;/font&gt;&lt;br&gt;Character is taking the stance of a duelist.&lt;br&gt;&lt;font color=&apos;#ff9600&apos; size=&apos;20&apos;&gt;Requires an empty hand.&lt;/font&gt;</content>
+	<content contentuid="h02978a74g0280g48eag9bd7g18b63ff4872c">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery I&lt;/font&gt;&lt;br&gt;Character is taking the stance of a duelist.&lt;br&gt;&lt;font color=&apos;#D040D0&apos;&gt;Critical/Backstab attacks grant +[1] AP once every 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ff9600&apos; size=&apos;20&apos;&gt;Requires an empty hand.&lt;/font&gt;</content>
 	<content contentuid="h029cec56g78f1g42ffgb475gac9b75747b01">*Skip the rock along the top of the sea.*</content>
 	<content contentuid="h02a1873ag1c71g4adfg9a1eg32db0bdd0595">Builds Energy on Hit</content>
 	<content contentuid="h02ba7b23g7cfbg4da1ga5c0g3afc50e54b66">Character has lowered resistance to &lt;font color=&apos;#AE9F95&apos;&gt;physical damage&lt;/font&gt;.</content>

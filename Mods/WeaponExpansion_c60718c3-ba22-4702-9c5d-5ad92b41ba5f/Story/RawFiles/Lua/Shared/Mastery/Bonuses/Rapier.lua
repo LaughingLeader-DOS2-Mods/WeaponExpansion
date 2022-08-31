@@ -75,7 +75,7 @@ if not Ext.IsClient() then
 	end, {MatchArgs={ID=MasteryID.Rapier}})
 
 	EquipmentManager.Events.EquipmentChanged:Subscribe(function (e)
-		if e.Character:GetStatus("LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST") then
+		if e.Character:GetStatus("LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST") or Mastery.IsActive(e.Character, MasteryID.Rapier) then
 			Timer.StartObjectTimer("LLWEAPONEX_Rapier_CheckForEmptyHand", e.Character, 250)
 		end
 	end)
