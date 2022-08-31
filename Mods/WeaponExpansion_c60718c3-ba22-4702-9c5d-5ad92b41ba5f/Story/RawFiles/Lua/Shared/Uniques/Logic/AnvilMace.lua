@@ -52,8 +52,8 @@ if not Vars.IsClient then
 	end)
 	EquipmentManager.Events.UnsheathedChanged:Subscribe(function (e)
 		if GameHelpers.Character.GetBaseRace(e.Character) == "Dwarf" then
-			EffectManager.PlayClientEffect("LLWEAPONEX_FX_AnvilMace_Unsheathed_Impact_01", e.Character, {WeaponBones="Dummy_FX_01"})
-			--GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_ANVIL_UNSHEATHED_FX", 0, true, e.Target)
+			--EffectManager.PlayClientEffect("LLWEAPONEX_FX_AnvilMace_Unsheathed_Impact_01", e.Character, {WeaponBones="Dummy_FX_01"})
+			GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_ANVIL_UNSHEATHED_FX", 0, true, e.Character)
 		end
 	end, {MatchArgs={Tag="LLWEAPONEX_AnvilMace_Equipped", Unsheathed=true}})
 end

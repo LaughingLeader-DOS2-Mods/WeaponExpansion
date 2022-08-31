@@ -222,15 +222,13 @@ if not Ext.IsClient() then
 			local character = e.Data.Object
 			---@cast character EsvCharacter
 
-			if not GameHelpers.ObjectIsDead(character) and (_RemoveFrenzyCharge(character) or Vars.LeaderDebugMode) then
+			if not GameHelpers.ObjectIsDead(character) and _RemoveFrenzyCharge(character) then
 				local flickerSkill = Ext.Stats.Get("MultiStrike_LLWEAPONEX_Rapier_FlickerStrike")
 				local radius = flickerSkill.TargetRadius
 				local targets = GameHelpers.Grid.GetNearbyObjects(character,
 				{
-					Relation={CanAdd=function (target, source)
-						--No friendly fire, since jumping is unpredictable
-						return GameHelpers.Character.IsEnemy(target, source)
-					end},
+					--No friendly fire, since jumping is unpredictable
+					Relation={CanAdd=GameHelpers.Character.IsEnemy},
 					Radius=radius,
 					Sort="Random",
 					Type="Character",
