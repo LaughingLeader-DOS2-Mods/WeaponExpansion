@@ -118,6 +118,8 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Quivers_ArrowTreasure", 2)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Quivers_RechargeStatus", 3)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Rapiers_FrenzyCharge", 1)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Katanas_ComboStatus", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Katanas_ComboFinisher", 2)
 
 	Osi.DB_LeaderLib_Skills_StatusToggleSkills:Delete("Shout_LLWEAPONEX_Rapier_DuelistStance", nil, nil, nil, nil)
 	Osi.LeaderLib_Statuses_Clear_Group("WeaponExpansion")
