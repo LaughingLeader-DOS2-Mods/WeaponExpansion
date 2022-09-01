@@ -3,60 +3,56 @@ if MasterySystem == nil then
 end
 
 --- Callback for when a character's mastery levels up.
---- @param uuid string
+--- @param player EsvCharacter
 --- @param mastery string
 --- @param last integer
 --- @param nextLevel integer
-local function MasteryLeveledUp(uuid,mastery,last,nextLevel)
-	if ObjectExists(uuid) == 0 then
-		return
-	end
+local function MasteryLeveledUp(player, mastery, last, nextLevel)
 	local masteryData = Masteries[mastery]
 	local masteryName = string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
 	local text = string.gsub(Text.MasteryLeveledUp.Value, "%[1%]", masteryName):gsub("%[2%]", nextLevel)
-	CharacterStatusText(uuid, text)
+	CharacterStatusText(player.MyGuid, text)
 
-	TagMasteryRanks(uuid,mastery,nextLevel)
+	TagMasteryRanks(player,mastery,nextLevel)
 
 	-- Set the special rank 1+ unarmed tags.
 	if mastery == "LLWEAPONEX_Unarmed" and nextLevel == 1 then
-		EquipmentManager:CheckWeaponRequirementTags(Ext.GetCharacter(uuid))
+		EquipmentManager:CheckWeaponRequirementTags(player)
 	end
 
-	PrintDebug(string.format("[WeaponExpansion] Mastery [%s] leveled up (%i => %i) on [%s]", mastery, last, nextLevel, uuid))
-	local name = Ext.GetCharacter(uuid).DisplayName
-	local text = Text.CombatLog.MasteryRankUp:ReplacePlaceholders(name, masteryName, nextLevel)
-	GameHelpers.UI.CombatLog(text)
+	local text = Text.CombatLog.MasteryRankUp:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(player), masteryName, nextLevel)
+	CombatLog.AddCombatText(text)
 end
 
 --- Adds mastery experience a specific masteries.
 --- @param player CharacterParam
 --- @param mastery string
---- @param expGain number
---- @param skipFlagCheck boolean
+--- @param expGain number|nil
+--- @param skipFlagCheck boolean|nil
 function AddMasteryExperience(player,mastery,expGain,skipFlagCheck)
 	player = GameHelpers.GetCharacter(player)
-	local uuid = GameHelpers.GetUUID(player)
-	if not uuid then
+	if not player then
 		return false
 	end
-	if skipFlagCheck == true or ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
+	---@cast player EsvCharacter
+	local playerGUID = player.MyGuid
+	if skipFlagCheck == true or ObjectGetFlag(playerGUID, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		expGain = expGain or 0.25
 		local currentLevel = 0
 		local currentExp = 0
 		--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience)
-		local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, mastery, nil, nil)
-		if dbEntry ~= nil then
+		local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(playerGUID, mastery, nil, nil)
+		if dbEntry then
+			---@cast dbEntry table<integer,{[1]:GUID, [2]:string, [3]:integer, [4]:integer}>
 			local playerEntry = dbEntry[1]
-			if playerEntry ~= nil then
+			if playerEntry then
 				currentLevel = playerEntry[3]
 				currentExp = playerEntry[4]
-
-				if currentExp == nil then currentExp = 0 end
+				if currentExp == nil or currentExp < 0 then currentExp = 0 end
 			end
 		end
 
-		if currentLevel < 4 then
+		if currentLevel < Mastery.Variables.MaxRank then
 			local expAmountData = Mastery.Variables.RankVariables[currentLevel]
 			local maxAddExp = expAmountData.Amount
 			local nextLevelExp = Mastery.Variables.RankVariables[currentLevel+1].Required
@@ -74,10 +70,10 @@ function AddMasteryExperience(player,mastery,expGain,skipFlagCheck)
 				fprint(LOGLEVEL.WARNING, "[LLWEAPONEX] Mastery (%s) XP (%s) => (%s) [%s}", mastery, currentExp or 0, nextExp or 0, GameHelpers.GetDisplayName(player))
 			end
 
-			Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(uuid, mastery, nextLevel, nextExp)
+			Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(playerGUID, mastery, nextLevel, nextExp)
 
 			if nextLevel > currentLevel then
-				MasteryLeveledUp(uuid, mastery, currentLevel, nextLevel)
+				MasteryLeveledUp(player, mastery, currentLevel, nextLevel)
 			end
 		end
 	end
@@ -103,18 +99,17 @@ end
 
 Ext.NewCall(AddMasteryExperienceForAllActive, "LLWEAPONEX_Ext_AddMasteryExperienceForAllActive", "(CHARACTERGUID)_Character, (REAL)_ExperienceGain")
 
----@param character CharacterParam
+---@param character ObjectParam
 ---@return boolean
 function MasterySystem.CanGrantXP(character)
-	local character = GameHelpers.TryGetObject(character)
-	if not character or not GameHelpers.Ext.ObjectIsCharacter(character) then
+	if GameHelpers.Ext.ObjectIsItem(character) then
+		return false
+	end
+	local character = GameHelpers.GetCharacter(character)
+	if not character then
 		return false
 	end
 	---@cast character -EsvItem, -EclItem, -EclCharacter
-
-	if character:HasTag("LLDUMMY_TrainingDummy") then
-		return true
-	end
 
 	if not character.Resurrected
 	and not character.OffStage
@@ -130,14 +125,11 @@ function MasterySystem.CanGrantXP(character)
 	return false
 end
 
----@param enemy CharacterParam|nil
+---@param enemy EsvCharacter
 function MasterySystem.GrantDeathExperienceToParty(enemy)
 	local bossMult = 1.0
-	if enemy then
-		enemy = GameHelpers.GetUUID(enemy)
-		if enemy and IsBoss(enemy) == 1 then
-			bossMult = 2.0
-		end
+	if enemy.RootTemplate.CombatComponent.IsBoss then
+		bossMult = 2.0
 	end
 	local mult = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_DeathExperienceMult", 1.0)
 	local expGain = mult * bossMult
@@ -151,7 +143,7 @@ end
 ---@param character CharacterParam
 ---@return boolean
 function MasterySystem.CanGainExperience(character)
-	if GameHelpers.Character.IsPlayer(character) then
+	if GameHelpers.Character.IsPlayer(character) and ObjectGetFlag(character.MyGuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		return true
 	end
 	return false
@@ -162,9 +154,9 @@ end
 ---@param target ObjectParam
 ---@param mastery string
 function MasterySystem.GrantBasicAttackExperience(player, target, mastery)
-	target = GameHelpers.TryGetObject(target)
+	local target = GameHelpers.TryGetObject(target)
 	if target then
-		if target:HasTag("LLDUMMY_TrainingDummy") then
+		if GameHelpers.ObjectHasTag(target, Mastery.Variables.TrainingDummyTags) then
 			local expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_TrainingDummyExperienceMult", 0.1)
 			if mastery then
 				AddMasteryExperience(player, mastery, expGain)
@@ -186,22 +178,29 @@ end
 ---@param target CharacterParam
 ---@param mastery string|nil
 function MasterySystem.GrantWeaponSkillExperience(player, target, mastery)
-	target = GameHelpers.TryGetObject(target)
-	if target and MasterySystem.CanGrantXP(target) then
-		local expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_WeaponSkillExperienceMult", 0.5)
-		if target:HasTag("LLDUMMY_TrainingDummy") then
-			expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_TrainingDummyExperienceMult", 0.1)
-		end
-		if mastery == nil then
-			AddMasteryExperienceForAllActive(player, expGain)
-		else
-			AddMasteryExperience(player, mastery, expGain)
+	local target = GameHelpers.TryGetObject(target)
+	if target then
+		if GameHelpers.ObjectHasTag(target, Mastery.Variables.TrainingDummyTags) then
+			local expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_TrainingDummyExperienceMult", 0.1)
+			if mastery then
+				AddMasteryExperience(player, mastery, expGain)
+			else
+				AddMasteryExperienceForAllActive(player, expGain)
+			end
+		elseif MasterySystem.CanGrantXP(target) then
+			local expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_WeaponSkillExperienceMult", 0.5)
+			if mastery then
+				AddMasteryExperience(player, mastery, expGain)
+			else
+				AddMasteryExperienceForAllActive(player, expGain)
+			end
 		end
 	end
 end
 
 RegisterProtectedOsirisListener("CharacterPrecogDying", 1, "after", function(enemy)
-	if MasterySystem.CanGrantXP(enemy) then
+	local enemy = GameHelpers.GetCharacter(enemy)
+	if enemy and MasterySystem.CanGrantXP(enemy) then
 		MasterySystem.GrantDeathExperienceToParty(enemy)
 	end
 end)
@@ -217,7 +216,7 @@ Events.OnBookRead:Subscribe(function (e)
 	if not bookData[e.ID] then
 		bookData[e.ID] = true
 		--Gain Battle Book experience from reading books
-		AddMasteryExperience(e.Character, "LLWEAPONEX_BattleBook", 0.25, true)
+		AddMasteryExperience(e.Character, "LLWEAPONEX_BattleBook", 0.25)
 	end
 end)
 
@@ -248,7 +247,7 @@ end)
 function GainThrowingMasteryXP(char, target)
 	char = GameHelpers.GetCharacter(char)
 	if MasterySystem.CanGainExperience(char) then
-		target = GameHelpers.TryGetObject(target)
+		target = GameHelpers.GetCharacter(target)
 		if target then
 			MasterySystem.GrantWeaponSkillExperience(char, target, "LLWEAPONEX_ThrowingAbility")
 		end
