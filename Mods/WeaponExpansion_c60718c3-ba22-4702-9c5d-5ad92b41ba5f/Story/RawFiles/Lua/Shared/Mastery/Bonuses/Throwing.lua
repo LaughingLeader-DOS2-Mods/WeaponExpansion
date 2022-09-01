@@ -18,7 +18,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 4, {
 })
 
 if not Vars.IsClient then
-
 	RegisterSkillListener({"Projectile_LLWEAPONEX_Throw_UniqueAxe_A", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand"}, function(skill, char, state, data)
 		if state == SKILL_STATE.HIT and data.Success then
 			GainThrowingMasteryXP(char, data.Target)
@@ -78,4 +77,24 @@ if not Vars.IsClient then
 		end
 	end)
 
+	--Throwing Experience
+	SkillManager.Register.Cast("All", function (e)
+		if e.SourceItem and GameHelpers.ItemHasTag(e.SourceItem, Mastery.Variables.ThrowingMasteryItemTags)
+		and MasterySystem.CanGainExperience(e.Character) then
+			local primaryTarget = nil
+			e.Data:ForEach(function (target, targetType, self)
+				---@cast target GUID
+				---Prioritize setting a boss as the primary target, since they grant more mastery XP
+				if ObjectIsCharacter(target) == 1 and (not primaryTarget or IsBoss(target) == 1) then
+					primaryTarget = target
+				end
+			end, e.Data.TargetMode.Objects)
+			if primaryTarget then
+				MasterySystem.GrantWeaponSkillExperience(e.Character, primaryTarget, MasteryID.Throwing)
+			else
+				--Gain xp just from throwing grenades/etc
+				AddMasteryExperience(e.Character, MasteryID.Throwing, 0.25)
+			end
+		end
+	end)
 end

@@ -33,7 +33,10 @@ Mastery = {
 			[3] = {Amount = 12, Required = 6000},
 			[4] = {Amount = 0, Required = 12000},
 		},
-		MaxRank = 4
+		MaxRank = 4,
+		ThrowingMasteryItemTags = {"GRENADES", "LLWEAPONEX_Throwing"},
+		---Characters/items that grant reduced mastery XP, and can do so outside of combat
+		TrainingDummyTags = {"LLDUMMY_TrainingDummy", "TrainingDummy"},
 	},
 	PermanentMasteries = {
 		LLWEAPONEX_ThrowingAbility = true
