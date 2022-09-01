@@ -275,8 +275,8 @@ local function OnSkillTooltip(character, skill, tooltip)
 
 	if Mastery.HasMinimumMasteryLevel(character, MasteryID.Crossbow, 1)
 	and characterTags["LLWEAPONEX_Crossbow_Equipped"]
-	and Mastery.Variables.Bonuses.IsStillStanceSkill(skill) then
-		local bonus = Mastery.Variables.Bonuses.GetStillStanceBonus(character)
+	and MasteryBonusManager.Vars.IsStillStanceSkill(skill) then
+		local bonus = MasteryBonusManager.Vars.GetStillStanceBonus(character)
 		if bonus > 0 then
 			local rankName = StringHelpers.StripFont(GameHelpers.GetStringKeyText(Masteries.LLWEAPONEX_Crossbow.RankBonuses[1].Tag, "Crossbow I"))
 			table.insert(skillPropsElement.Properties, {
