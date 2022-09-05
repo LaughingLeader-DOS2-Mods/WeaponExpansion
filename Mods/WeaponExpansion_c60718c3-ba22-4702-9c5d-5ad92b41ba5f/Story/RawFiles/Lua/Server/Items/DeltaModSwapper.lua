@@ -1,246 +1,7 @@
-local DeltamodSwap = {}
-
-local runebladeDamageBoosts = {
-	LLWEAPONEX_Runeblade_Air = {
-		Small = "Boost_Weapon_Damage_Air_Small_Sword",
-		Medium = "Boost_Weapon_Damage_Air_Medium_Sword",
-		Large = "Boost_Weapon_Damage_Air_Large_Sword",
-		Default = "Boost_Weapon_Damage_Air_Sword",
-	},
-	LLWEAPONEX_Runeblade_Chaos = {
-		Small = "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Small",
-		Medium = "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Medium",
-		Large = "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Large",
-		Default = "Boost_LLWEAPONEX_Weapon_Damage_Chaos",
-	},
-	LLWEAPONEX_Runeblade_Earth = {
-		Small = "Boost_Weapon_Damage_Earth_Small_Sword",
-		Medium = "Boost_Weapon_Damage_Earth_Medium_Sword",
-		Large = "Boost_Weapon_Damage_Earth_Large_Sword",
-		Default = "Boost_Weapon_Damage_Earth_Sword",
-	},
-	LLWEAPONEX_Runeblade_Fire = {
-		Small = "Boost_Weapon_Damage_Fire_Small_Sword",
-		Medium = "Boost_Weapon_Damage_Fire_Medium_Sword",
-		Large = "Boost_Weapon_Damage_Fire_Large_Sword",
-		Default = "Boost_Weapon_Damage_Fire_Sword",
-	},
-	LLWEAPONEX_Runeblade_Poison = {
-		Small = "Boost_Weapon_Damage_Poison_Small_Sword",
-		Medium = "Boost_Weapon_Damage_Poison_Medium_Sword",
-		Large = "Boost_Weapon_Damage_Poison_Large_Sword",
-		Default = "Boost_Weapon_Damage_Poison_Sword",
-	},
-	LLWEAPONEX_Runeblade_Water = {
-		Small = "Boost_Weapon_Damage_Water_Small_Sword",
-		Medium = "Boost_Weapon_Damage_Water_Medium_Sword",
-		Large = "Boost_Weapon_Damage_Water_Large_Sword",
-		Default = "Boost_Weapon_Damage_Water_Sword",
-	},
-}
-
-local function GetRunebladeDamageBoost(item, deltamod)
-	for tag,boosts in pairs(runebladeDamageBoosts) do
-		if IsTagged(item, tag) == 1 then
-			for boostWord,replacement in pairs(boosts) do
-				if string.find(deltamod,boostWord) then
-					return replacement
-				end
-			end
-			return boosts.Default
-		end
-	end
-end
-DeltamodSwap.LLWEAPONEX_Runeblade = {
-	Boost_Weapon_Primary_Strength = "Boost_Weapon_Primary_Intelligence",
-	Boost_Weapon_Primary_Strength_Medium = "Boost_Weapon_Primary_Intelligence_Medium",
-	Boost_Weapon_Damage_Air_Large_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Air_Medium_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Air_Small_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Air_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_ArmourPiercing_Small_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Earth_Large_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Earth_Medium_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Earth_Small_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Earth_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Fire_Large_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Fire_Medium_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Fire_Small_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Fire_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Poison_Large_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Poison_Medium_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Poison_Small_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Poison_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Water_Large_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Water_Medium_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Water_Small_Sword = GetRunebladeDamageBoost,
-	Boost_Weapon_Damage_Water_Sword = GetRunebladeDamageBoost,
-	--Boost_Weapon_Primary_Strength_PrimaryAsLarge = "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge",
-	--Boost_Weapon_Primary_Strength_Medium_PrimaryAsLarge = "Boost_Weapon_Primary_Intelligence_Medium_PrimaryAsLarge",
-}
-
-local rodDamageBoosts = {
-	Air = {
-		Small = "Boost_Weapon_Damage_Air_Small_Club",
-		Medium = "Boost_Weapon_Damage_Air_Medium_Club",
-		Large = "Boost_Weapon_Damage_Air_Large_Club",
-		Default = "Boost_Weapon_Damage_Air_Club",
-	},
-	Chaos = {
-		Small = "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Small",
-		Medium = "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Medium",
-		Large = "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Large",
-		Default = "Boost_LLWEAPONEX_Weapon_Damage_Chaos",
-	},
-	Earth = {
-		Small = "Boost_Weapon_Damage_Earth_Small_Club",
-		Medium = "Boost_Weapon_Damage_Earth_Medium_Club",
-		Large = "Boost_Weapon_Damage_Earth_Large_Club",
-		Default = "Boost_Weapon_Damage_Earth_Club",
-	},
-	Fire = {
-		Small = "Boost_Weapon_Damage_Fire_Small_Club",
-		Medium = "Boost_Weapon_Damage_Fire_Medium_Club",
-		Large = "Boost_Weapon_Damage_Fire_Large_Club",
-		Default = "Boost_Weapon_Damage_Fire_Club",
-	},
-	Poison = {
-		Small = "Boost_Weapon_Damage_Poison_Small_Club",
-		Medium = "Boost_Weapon_Damage_Poison_Medium_Club",
-		Large = "Boost_Weapon_Damage_Poison_Large_Club",
-		Default = "Boost_Weapon_Damage_Poison_Club",
-	},
-	Water = {
-		Small = "Boost_Weapon_Damage_Water_Small_Club",
-		Medium = "Boost_Weapon_Damage_Water_Medium_Club",
-		Large = "Boost_Weapon_Damage_Water_Large_Club",
-		Default = "Boost_Weapon_Damage_Water_Club",
-	},
-}
-
-local function GetRodDamageBoost(item, deltamod)
-	local stat = NRD_ItemGetStatsId(item)
-	for damageType,boosts in pairs(rodDamageBoosts) do
-		if string.find(stat, damageType) then
-			for boostWord,replacement in pairs(boosts) do
-				if string.find(deltamod,boostWord) then
-					return replacement
-				end
-			end
-			return boosts.Default
-		end
-	end
-end
-DeltamodSwap.LLWEAPONEX_Rod = {
-	Boost_Weapon_Primary_Strength_Club = "Boost_Weapon_Primary_Intelligence",
-	Boost_Weapon_Primary_Strength_Medium_Club = "Boost_Weapon_Primary_Intelligence_Medium",
-	Boost_Weapon_Damage_Air_Large_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Air_Medium_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Air_Small_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Air_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_ArmourPiercing_Small_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Earth_Large_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Earth_Medium_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Earth_Small_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Earth_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Fire_Large_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Fire_Medium_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Fire_Small_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Fire_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Poison_Large_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Poison_Medium_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Poison_Small_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Poison_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Water_Large_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Water_Medium_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Water_Small_Club = GetRodDamageBoost,
-	Boost_Weapon_Damage_Water_Club = GetRodDamageBoost,
-}
-
-local function GetQuarterstaffAttributeBoost(item, deltamod)
-	local stat = NRD_ItemGetStatsId(item)
-	local requirements = Ext.StatGetAttribute(stat, "Requirements")
-	if requirements ~= nil then
-		for i,entry in pairs(requirements) do
-			if entry.Param == "Finesse" then
-				return "Boost_Weapon_Primary_Finesse_Medium"
-			end
-		end
-	end
-	return "Boost_Weapon_Primary_Strength_Medium"
-end
-DeltamodSwap.LLWEAPONEX_Quarterstaff = {
-	Boost_Weapon_Ability_FireSpecialist_Staff = "Boost_Weapon_Ability_WarriorLore_Spear",
-	Boost_Weapon_Ability_WaterSpecialist_Staff = "Boost_Weapon_Ability_WarriorLore_Spear",
-	Boost_Weapon_Ability_AirSpecialist_Staff = "Boost_Weapon_Ability_WarriorLore_Spear",
-	Boost_Weapon_Ability_EarthSpecialist_Staff = "Boost_Weapon_Ability_WarriorLore_Spear",
-	Boost_Weapon_Ability_Necromancy_Staff = "Boost_Weapon_Ability_WarriorLore_Spear",
-	Boost_Weapon_Ability_Summoning_Staff = "Boost_Weapon_Ability_WarriorLore_Spear",
-	Boost_Weapon_Primary_Intelligence_Medium = GetQuarterstaffAttributeBoost,
-}
-DeltamodSwap.LLWEAPONEX_Banner = DeltamodSwap.LLWEAPONEX_Quarterstaff
-
-DeltamodSwap.LLWEAPONEX_Firearm = {
-	-- Larian has this and the crossbow ones reversed on the weapon type value
-	Boost_Weapon_Primary_Finesse_Medium_Bow = "Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium",
-	Boost_Weapon_Primary_Finesse_Medium_Crossbow = "Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium"
-}
-
-local PistolReplacementMediumAbilityBoosts = {
-	"Boost_Armor_Belt_Ability_Hunting",
-	"Boost_Armor_Belt_Ability_Rogues",
-	"Boost_Armor_Belt_Ability_Warfare",
-}
-
-local PistolReplacementLargeAbilityBoosts = {
-	"Boost_Armor_Belt_Ability_Hunting_Large",
-	"Boost_Armor_Belt_Ability_Hunting_Medium",
-	"Boost_Armor_Belt_Ability_Rogues_Large",
-	"Boost_Armor_Belt_Ability_Rogues_Medium",
-	"Boost_Armor_Belt_Ability_Warfare_Large",
-	"Boost_Armor_Belt_Ability_Warfare_Medium",
-}
-
-local PistolReplacementCivilBoosts = {
-	"Boost_Armor_Belt_Ability_Lockpicking_Medium",
-	"Boost_Armor_Belt_Ability_Luck_Medium",
-	"Boost_Armor_Belt_Ability_Sneaking_Medium",
-	"Boost_Armor_Belt_Ability_Telekinesis_Medium"
-}
-
-local PistolReplacementBoosts = {
-	"Boost_Armor_Belt_Secondary_CriticalChance_Medium",
-	"Boost_Armor_Belt_Secondary_CriticalChance_Small",
-}
-
-local function GetRandomPistolAbilityBoost(item, deltamod)
-	return Common.GetRandomTableEntry(PistolReplacementMediumAbilityBoosts)
-end
-
-local function GetRandomPistolLargeAbilityBoost(item, deltamod)
-	return Common.GetRandomTableEntry(PistolReplacementLargeAbilityBoosts)
-end
-
-local function GetRandomPistolCivilBoost(item, deltamod)
-	return Common.GetRandomTableEntry(PistolReplacementCivilBoosts)
-end
-
-DeltamodSwap.LLWEAPONEX_Pistol = {
-	Boost_Armor_Belt_Armour_Physical = "Boost_Armor_Belt_Secondary_CriticalChance_Small",
-	Boost_Armor_Belt_Armour_Physical_Medium = "Boost_Armor_Belt_Secondary_CriticalChance_Medium",
-	Boost_Armor_Belt_Armour_Physical_Large = "Boost_Armor_Belt_Secondary_CriticalChance_Medium",
-	Boost_Armor_Belt_Ability_PainReflection = GetRandomPistolAbilityBoost,
-	Boost_Armor_Belt_Ability_PainReflection_Large = GetRandomPistolLargeAbilityBoost,
-	Boost_Armor_Belt_Ability_Perseverance = GetRandomPistolAbilityBoost,
-	Boost_Armor_Belt_Ability_Perseverance_Large = GetRandomPistolLargeAbilityBoost,
-	Boost_Armor_Belt_Primary_Constitution = GetRandomPistolCivilBoost,
-	Boost_Armor_Belt_Primary_Constitution_Large = GetRandomPistolCivilBoost,
-	Boost_Armor_Belt_Secondary_Vitality = "Boost_Armor_Belt_Secondary_CriticalChance_Small",
-	Boost_Armor_Belt_Secondary_Vitality_Large = "Boost_Armor_Belt_Secondary_CriticalChance_Small",
-}
+local DeltamodSwap = Ext.Require("Server/Data/DeltaModSwapEntries.lua")
 
 ---@param item EsvItem
----@return table<string,boolean>
+---@return table<string,boolean>|nil
 local function GetAllBoosts(item)
 	local finalBoosts = {}
 	local swapped = false
@@ -248,34 +9,36 @@ local function GetAllBoosts(item)
 	local boostType = "DeltaMod"
 
 	for i,v in pairs(item:GetGeneratedBoosts()) do
+		--local deltamod = Ext.GetDeltaMod(v, item.ItemType)
 		for tag,deltamods in pairs(DeltamodSwap) do
 			if item:HasTag(tag) then
 				local replacement = deltamods[v]
 				if replacement ~= nil then
 					if replacement == "" then
-						PrintDebug("Disabled deltamod",v,item)
+						PrintDebug("Disabled deltamod",v,item.StatsId)
+						finalBoosts[v] = false
 						swapped = true
 					elseif type(replacement) == "function" then
 						local b,replacementVal = pcall(replacement, item, v)
 						if b then
-							PrintDebug("Swapped deltamod",v,"for",replacementVal,item)
-							finalBoosts[replacementVal] = boostType
+							PrintDebug("Swapped deltamod",v,"for",replacementVal,item.StatsId)
+							finalBoosts[v] = replacementVal
 							swapped = true
 						end
 					else
-						PrintDebug("Swapped deltamod",v,"for",replacement,item)
-						finalBoosts[replacement] = boostType
+						PrintDebug("Swapped deltamod",v,"for",replacement,item.StatsId)
+						finalBoosts[v] = replacement
 						swapped = true
 					end
 				else
-					finalBoosts[v] = boostType
+					--finalBoosts[v] = boostType
 				end
 			end
 		end
 	end
 
 	for i,deltamodName in pairs(item:GetDeltaMods()) do
-		local deltamodData = Ext.GetDeltaMod(deltamodName, item.ItemType)
+		local deltamodData = Ext.Stats.DeltaMod.GetLegacy(deltamodName, item.Stats.ItemType)
 		if deltamodData ~= nil then
 			for i2,boostEntry in pairs(deltamodData.Boosts) do
 				local v = boostEntry.Boost
@@ -283,25 +46,22 @@ local function GetAllBoosts(item)
 					for tag,deltamods in pairs(DeltamodSwap) do
 						if item:HasTag(tag) then
 							local replacement = deltamods[v]
-							PrintDebug(v, replacement)
 							if replacement ~= nil then
 								if replacement == "" then
-									PrintDebug("Disabled deltamod",v,item)
+									finalBoosts[v] = false
 									swapped = true
 								elseif type(replacement) == "function" then
 									local b,replacementVal = pcall(replacement, item, v)
 									if b then
-										PrintDebug("Swapped deltamod",v,"for",replacementVal,item)
-										finalBoosts[replacementVal] = boostType
+										finalBoosts[v] = replacementVal
 										swapped = true
 									end
 								else
-									PrintDebug("Swapped deltamod",v,"for",replacement,item)
-									finalBoosts[replacement] = boostType
+									finalBoosts[v] = replacement
 									swapped = true
 								end
 							else
-								finalBoosts[v] = boostType
+								--finalBoosts[v] = boostType
 							end
 						end
 					end
@@ -316,264 +76,253 @@ local function GetAllBoosts(item)
 	end
 end
 
-local function CanSwapDeltaMods(uuid)
-	if ObjectExists(uuid) == 0 then
-		return false
-	elseif StringHelpers.IsNullOrEmpty(GetInventoryOwner(uuid)) then
-		-- Quest reward?
-		return false
-	elseif ObjectGetFlag(uuid, "LLWEAPONEX_ProcessedDeltamods") == 1 then
-		return false
+local BaseStatMap = {
+	Durability = "Durability",
+	DurabilityDegradeSpeed = "DurabilityDegradeSpeed",
+	StrengthBoost = "StrengthBoost",
+	FinesseBoost = "FinesseBoost",
+	IntelligenceBoost = "IntelligenceBoost",
+	ConstitutionBoost = "ConstitutionBoost",
+	MemoryBoost = "MemoryBoost",
+	WitsBoost = "WitsBoost",
+	SightBoost = "SightBoost",
+	HearingBoost = "HearingBoost",
+	VitalityBoost = "VitalityBoost",
+	--SourcePointsBoost = "SourcePointsBoost",
+	--MaxAP = "MaxAP",
+	--StartAP = "StartAP",
+	APRecovery = "APRecovery",
+	AccuracyBoost = "AccuracyBoost",
+	DodgeBoost = "DodgeBoost",
+	CriticalChance = "CriticalChance",
+	ChanceToHitBoost = "ChanceToHitBoost",
+	--MovementSpeedBoost = "MovementSpeedBoost",
+	RuneSlots = "RuneSlots",
+	RuneSlots_V1 = "RuneSlots_V1",
+	Movement = "Movement",
+	Initiative = "Initiative",
+	--Willpower = "integer",
+	--Bodybuilding = "integer",
+	MaxSummons = "MaxSummons",
+	Value = "Value",
+	Weight = "Weight",
+	Skills = "Skills",
+	--ItemColor = "string",
+	--ModifierType = "integer",
+	--ObjectInstanceName = "string",
+	--BoostName = "string",
+	--StatsType = "string",
+}
+
+local StatMap = {
+	Weapon = {
+		DamageType = "Damage Type",
+		--MinDamage = "integer",
+		--MaxDamage = "integer",
+		DamageBoost = "DamageBoost",
+		DamageFromBase = "DamageFromBase",
+		CriticalDamage = "CriticalDamage",
+		WeaponRange = "WeaponRange",
+		CleaveAngle = "CleaveAngle",
+		CleavePercentage = "CleavePercentage",
+		AttackAPCost = "AttackAPCost",
+		LifeSteal = "LifeSteal",
+	},
+	Armor = {
+		FireResistance = "Fire",
+		AirResistance = "Air",
+		WaterResistance = "Water",
+		EarthResistance = "Earth",
+		PoisonResistance = "Poison",
+		PiercingResistance = "Piercing",
+		PhysicalResistance = "Physical",
+		ArmorValue = "Armor Defense Value",
+		ArmorBoost = "ArmorBoost",
+		MagicArmorValue = "Magic Armor Value",
+		MagicArmorBoost = "MagicArmorBoost",
+	},
+	Shield = {
+		Blocking = "integer",
+	}
+}
+
+local function CopyTable(orig, target)
+	for orig_key, orig_value in pairs(orig) do
+		target[orig_key] = orig_value
 	end
-	return true
 end
 
----@param item string
-function SwapDeltaMods(item)
-	if CanSwapDeltaMods(item) then
-		---@type EsvItem
-		local itemObject = Ext.GetItem(item)
+CopyTable(BaseStatMap, StatMap.Weapon)
+CopyTable(BaseStatMap, StatMap.Armor)
+CopyTable(StatMap.Armor, StatMap.Shield)
 
-		if GameHelpers.Item.IsObject(itemObject) then
-			ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
-			return
+local Qualifiers = {
+	StrengthBoost = true,
+	FinesseBoost = true,
+	IntelligenceBoost = true,
+	ConstitutionBoost = true,
+	MemoryBoost = true,
+	WitsBoost = true,
+	MagicPointsBoost = true,
+	DurabilityDegradeSpeed = true,
+	SightBoost = true,
+	HearingBoost = true,
+}
+
+local function GetStatValue(stat, attribute)
+	if Qualifiers[attribute] == true then
+		local val = stat[attribute]
+		if val == "None" then
+			val = 0
 		end
+		return val
+	else
+		return stat[attribute]
+	end
+end
 
-		local stat,itemType,rarity,level = nil,nil,nil,nil
-		stat = itemObject.StatsId
-		---@type StatItem
-		local itemStatObject = itemObject.Stats
-		itemType = itemObject.ItemType
-		if itemStatObject ~= nil then
-			rarity = itemStatObject.ItemTypeReal
-			level = itemStatObject.Level
+local function ResetBoostEntry(boostEntryName, boostEntry, itemType, changes)
+	local baseBoost = nil
+	if itemType == "Weapon" then
+		baseBoost = Ext.Stats.Get("_BOOSTS_Weapon", nil, false)
+	elseif itemType == "Armor" then
+		baseBoost = Ext.Stats.Get("_BOOSTS_Armor", nil, false)
+	elseif itemType == "Shield" then
+		baseBoost = Ext.Stats.Get("_BOOSTS_Shield", nil, false)
+	end
+	local changesMade = false
+	for boostAttribute,statAttribute in pairs(StatMap[itemType]) do
+		local current = boostEntry[boostAttribute]
+		local nextValue = GetStatValue(baseBoost, statAttribute)
+		if current ~= nextValue then
+			boostEntry[boostAttribute] = nextValue
+			if changes[boostEntryName] == nil then
+				changes[boostEntryName] = {}
+			end
+			changes[boostEntryName][boostAttribute] = nextValue
+			changesMade = true
 		end
+	end
+	return changesMade
+end
 
-		if StringHelpers.IsNullOrEmpty(rarity) then
-			rarity = GetVarFixedString(item, "LeaderLib_Rarity")
-			if StringHelpers.IsNullOrEmpty(rarity) then
-				SetStoryEvent(item, "LeaderLib_Commands_SetItemVariables")
+--[[
+!questreward LLWEAPONEX_Rewards_NewWeapons_1 3000
+]]
+
+---@param item EsvItem
+local function SwapDeltaMods(item)
+	local level = item.Stats.Level
+	local rarity = item.Stats.ItemTypeReal
+	local itemType = item.Stats.ItemType
+
+	local changes = {}
+	local hasChanges = false
+	local boostMap = {}
+
+	local boosts = GetAllBoosts(item)
+	if boosts ~= nil then
+		for i=2,#item.Stats.DynamicStats do
+			local boost = item.Stats.DynamicStats[i]
+			if not StringHelpers.IsNullOrEmpty(boost.ObjectInstanceName) then
+				PrintLog("[SwapDeltaMods] [%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
+				boostMap[boost.ObjectInstanceName] = boost
 			end
 		end
-		if rarity ~= nil and rarity ~= "Common" and rarity ~= "Unique" then
-			if level == nil then
-				level = NRD_ItemGetInt(item, "LevelOverride")
-				if level == 0 or level == nil then
-					level = CharacterGetLevel(CharacterGetHostCharacter())
-				end
-			end
-
-			local boosts = GetAllBoosts(itemObject)
-			if boosts ~= nil then
-				local template = GetTemplate(item)
-				NRD_ItemConstructBegin(template)
-				--NRD_ItemCloneBegin(item)
-				if itemObject.ItemType == "Weapon" then
-					local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
-					if damageTypeString == nil then damageTypeString = "Physical" end
-					local damageTypeEnum = Data.DamageTypeEnums[damageTypeString]
-					NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
-				end
-
-				NRD_ItemCloneSetString("GenerationStatsId", stat)
-				NRD_ItemCloneSetString("StatsEntryName", stat)
-				NRD_ItemCloneSetString("RootTemplate", template)
-				NRD_ItemCloneSetString("OriginalRootTemplate", template)
-				NRD_ItemCloneSetInt("HasGeneratedStats", 0)
-				NRD_ItemCloneSetInt("GenerationLevel", level)
-				NRD_ItemCloneSetInt("StatsLevel", level)
-				NRD_ItemCloneSetInt("IsIdentified", itemObject.Stats.IsIdentified)
-				NRD_ItemCloneSetString("ItemType", rarity)
-				NRD_ItemCloneSetString("GenerationItemType", rarity)
-
-				for boost,boostType in pairs(boosts) do
-					NRD_ItemCloneAddBoost(boostType, boost)
-					PrintDebug("Adding boost", boostType, boost)
-				end
-
-				local clone = NRD_ItemClone()
-				local inventory = GetInventoryOwner(item) or nil
-				--NRD_ItemSetIdentified(clone, itemObject.Stats.IsIdentified)
-				NRD_ItemSetIdentified(clone, 1)
-				RollForBonusSkill(clone, stat, itemType, rarity)
-				ObjectSetFlag(clone, "LLWEAPONEX_ProcessedDeltamods", 0)
-				SetVarFixedString(clone, "LeaderLib_Rarity", rarity)
-				SetVarInteger(clone, "LeaderLib_Level", level)
-				local cloneItem = Ext.GetItem(clone)
-				cloneItem.TreasureGenerated = itemObject.TreasureGenerated
-				cloneItem.UnsoldGenerated = itemObject.UnsoldGenerated
-
-				local slot = nil
-				if inventory == nil then
-					inventory = CharacterGetHostCharacter()
-				end
-				if inventory ~= nil and ObjectIsCharacter(inventory) == 1 then
-					slot = GameHelpers.Item.GetEquippedSlot(inventory,item)
-				end
-				ItemRemove(item)
-				if inventory ~= nil then
-					if slot ~= nil then
-						GameHelpers.Item.EquipInSlot(inventory, clone, slot)
-					else
-						ItemToInventory(clone, inventory, 1, 0, 0)
-					end
-					if CharacterIsPlayer(inventory) == 1 and CharacterGetReservedUserID(inventory) ~= nil then
-						local id = CharacterGetReservedUserID(inventory)
-						Ext.PostMessageToUser(id, "LeaderLib_AutoSortPlayerInventory", inventory)
+		for replaceDeltaModName,newDeltaModName in pairs(boosts) do
+			local replaceBoosts = Ext.Stats.DeltaMod.GetLegacy(replaceDeltaModName, itemType).Boosts
+			if newDeltaModName ~= false then
+				---@cast newDeltaModName string
+				local newBoosts = Ext.Stats.DeltaMod.GetLegacy(newDeltaModName, itemType).Boosts
+				local newBoost = newBoosts[1].Boost
+	
+				for i,replace in pairs(replaceBoosts) do
+					local replaceBoost = replace.Boost
+					local existingBoostEntry = boostMap[replaceBoost]
+					if existingBoostEntry ~= nil then
+						--existingBoostEntry.ObjectInstanceName = newBoost
+						--existingBoostEntry.BoostName = newBoost
+						--generatedBoostNames[#generatedBoostNames+1] = newBoost
+						local boostStat = Ext.Stats.Get(newBoost, nil, false)
+						local statMap = StatMap[itemType]
+						for boostAttribute,statAttribute in pairs(statMap) do
+							local nextValue = GetStatValue(boostStat, statAttribute)
+							if nextValue ~= nil then
+								local current = existingBoostEntry[boostAttribute]
+								if current ~= nil and current ~= nextValue then
+									if changes[replaceBoost] == nil then
+										changes[replaceBoost] = {}
+									end
+									changes[replaceBoost][boostAttribute] = nextValue
+									hasChanges = true
+									existingBoostEntry[boostAttribute] = nextValue
+								end
+							end
+						end
+						boostMap[newBoost] = existingBoostEntry
+						boostMap[replaceBoost] = nil
 					end
 				end
-				--NRD_ItemIterateDeltaModifiers(clone, "LLWEAPONEX_Debug_PrintDeltamod")
 			else
-				ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
-				if RollForBonusSkill(item, stat, itemType, rarity) then
-					NRD_ItemCloneBegin(item)
-					local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
-					if damageTypeString == nil then damageTypeString = "Physical" end
-					local damageTypeEnum = Data.DamageTypeEnums[damageTypeString]
-					NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
-					local clone = NRD_ItemClone()
-					ItemRemove(item)
-					local inventory = GetInventoryOwner(item)
-					local slot = nil
-					if ObjectIsCharacter(inventory) == 1 then
-						slot = GameHelpers.Item.GetEquippedSlot(inventory,item)
-						if CharacterIsPlayer(inventory) == 1 and CharacterGetReservedUserID(inventory) ~= nil then
-							local id = CharacterGetReservedUserID(inventory)
-							Ext.PostMessageToUser(id, "LeaderLib_AutoSortPlayerInventory", inventory)
-						end
-					end
-					if inventory ~= nil then
-						if slot ~= nil then
-							GameHelpers.Item.EquipInSlot(inventory, clone, slot)
-						else
-							ItemToInventory(clone, inventory, 1, 0, 0)
+				for i,replace in pairs(replaceBoosts) do
+					local replaceBoost = replace.Boost
+					local existingBoostEntry = boostMap[replaceBoost]
+					if existingBoostEntry ~= nil then
+						if ResetBoostEntry(replaceBoost, existingBoostEntry, itemType, changes) then
+							hasChanges = true
+							boostMap[replaceBoost] = nil
 						end
 					end
 				end
 			end
 		end
 	end
+
+	if hasChanges then
+		if item.SetGeneratedBoosts ~= nil then
+			-- Save persistence
+			---@type string[]
+			local generatedBoostNames = {}
+			for name,_ in pairs(boostMap) do
+				generatedBoostNames[#generatedBoostNames+1] = name
+			end
+			if Vars.DebugMode then
+				fprint(LOGLEVEL.TRACE, "[WeaponExpansion:SwapDeltaMods] Setting item MyGuid(%s) StatsId(%s) generated boosts to:\n%s", item.MyGuid, item.StatsId, Ext.DumpExport(generatedBoostNames))
+			end
+			--item:SetGeneratedBoosts(generatedBoostNames)
+		end
+		GameHelpers.Net.Broadcast("LLWEAPONEX_DeltaModSwapper_SyncBoosts", {NetID = item.NetID, Changes = changes})
+	end
 end
+
+local skipRarities = {
+	Common = true,
+	Unique = true
+}
 
 local equipmentTypes = {
 	Armor = true,
 	Weapon = true,
 	Shield = true
 }
+Events.TreasureItemGenerated:Subscribe(function (e)
+	if e.Item then
+		-- 3 = Potion, 0-2 are Weapon/Armor/Shield
+		if e.Item.Stats and equipmentTypes[e.Item.Stats.ItemType] then
+			if skipRarities[e.Item.Stats.ItemTypeReal] ~= true then
+				SwapDeltaMods(e.Item)
+			end
+		end
 
----@param item EsvItem
--- Ext.RegisterListener("TreasureItemGenerated", function(item)
--- 	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
--- 	--PrintLog("[OnTreasureItemGenerated] item(%s) stat(%s) isInInventory(%s) InventoryHandle(%s) TreasureGenerated(%s) OwnerHandle(%s) ParentInventoryHandle(%s)", item.MyGuid, item.StatsId, isInInventory, item.InventoryHandle, item.TreasureGenerated, item.OwnerHandle, item.ParentInventoryHandle)
--- 	if item == nil or item.MyGuid == nil or GameHelpers.Item.IsObject(item) then
--- 		return
--- 	end
--- 	if item.Stats.Unique ~= 1 and equipmentTypes[item.ItemType] == true then
--- 		Osi.LLWEAPONEX_Items_SaveGeneratedItem(item.MyGuid)
--- 		TimerCancel("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
--- 		TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 10)
--- 		--SwapDeltaMods(item.MyGuid)
--- 	end
--- end)
-
--- RegisterProtectedOsirisListener("ItemAddedToCharacter", 2, "after", function(item, character)
--- 	item = StringHelpers.GetUUID(item)
--- 	character = StringHelpers.GetUUID(character)
--- 	if tempQuestRewardItems[item] == true then
--- 		tempQuestRewardItems[item] = nil
--- 		PrintLog("[WeaponExpansion:ItemAddedToCharacter] Checking quest reward item's deltamods. item(%s) character(%s)", item, character)
--- 		SwapDeltaMods(item)
--- 	end
--- end)
-
--- if Vars.DebugMode then
--- 	Ext.RegisterConsoleCommand("swapdeltamods", function(command)
--- 		local host = CharacterGetHostCharacter()
--- 		local weapon = CharacterGetEquippedWeapon(host)
--- 		if weapon ~= nil then
--- 			SwapDeltaMods(weapon)
--- 		end
--- 	end)
--- end
-
--- TODO: More generalized attribute boost swapping?
--- local attributeBoosts = {
--- 	Strength = {
--- 		"Boost_Weapon_Primary_Strength",
--- 		"Boost_Weapon_Primary_Strength_Axe",
--- 		"Boost_Weapon_Primary_Strength_Axe_Legendary",
--- 		"Boost_Weapon_Primary_Strength_Axe_PrimaryAsSmall",
--- 		"Boost_Weapon_Primary_Strength_Club",
--- 		"Boost_Weapon_Primary_Strength_Club_Legendary",
--- 		"Boost_Weapon_Primary_Strength_Club_PrimaryAsSmall",
--- 		"Boost_Weapon_Primary_Strength_Medium",
--- 		"Boost_Weapon_Primary_Strength_Medium_Axe",
--- 		"Boost_Weapon_Primary_Strength_Medium_Club",
--- 		"Boost_Weapon_Primary_Strength_Medium_PrimaryAsLarge",
--- 		"Boost_Weapon_Primary_Strength_PrimaryAsLarge",
--- 		"Boost_Weapon_Primary_Strength_Sword_Legendary",
--- 		"Boost_Weapon_Primary_Strength_Sword_PrimaryAsSmall",
--- 	},
--- 	Finesse = {
--- 		"Boost_Weapon_Primary_Finesse",
--- 		"Boost_Weapon_Primary_Finesse_Bow_Legendary",
--- 		"Boost_Weapon_Primary_Finesse_Bow_PrimaryAsSmall",
--- 		"Boost_Weapon_Primary_Finesse_Crossbow_Legendary",
--- 		"Boost_Weapon_Primary_Finesse_Crossbow_PrimaryAsSmall",
--- 		"Boost_Weapon_Primary_Finesse_Knife_Legendary",
--- 		"Boost_Weapon_Primary_Finesse_Knife_PrimaryAsSmall",
--- 		"Boost_Weapon_Primary_Finesse_Medium",
--- 		"Boost_Weapon_Primary_Finesse_Medium_Bow",
--- 		"Boost_Weapon_Primary_Finesse_Medium_Crossbow",
--- 		"Boost_Weapon_Primary_Finesse_Medium_PrimaryAsLarge",
--- 		"Boost_Weapon_Primary_Finesse_PrimaryAsLarge",
--- 		"Boost_Weapon_Primary_Finesse_Spear_Legendary",
--- 		"Boost_Weapon_Primary_Finesse_Spear_PrimaryAsSmall",
--- 	},
--- 	Intelligence = {
--- 		"Boost_Weapon_Primary_Intelligence",
--- 		"Boost_Weapon_Primary_Intelligence_Medium",
--- 		"Boost_Weapon_Primary_Intelligence_Medium_PrimaryAsLarge",
--- 		"Boost_Weapon_Primary_Intelligence_PrimaryAsLarge",
--- 		"Boost_Weapon_Primary_Intelligence_Staff_Legendary",
--- 		"Boost_Weapon_Primary_Intelligence_Staff_PrimaryAsNormal",
--- 		"Boost_Weapon_Primary_Intelligence_Staff_PrimaryAsSmall",
--- 		"Boost_Weapon_Primary_Intelligence_Wand_Legendary",
--- 		"Boost_Weapon_Primary_Intelligence_Wand_PrimaryAsNormal",
--- 		"Boost_Weapon_Primary_Intelligence_Wand_PrimaryAsSmall",
--- 	},
--- 	Wits = {
--- 		"Boost_LLWEAPONEX_Weapon_Primary_Wits",
--- 		"Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium",
--- 		"Boost_LLWEAPONEX_Weapon_Primary_Wits_Large",
--- 	},
--- }
-
--- local function SwapAttributeBoosts(item, deltamods)
--- 	local stat = NRD_ItemGetStatsId(item)
--- 	local requirements = Ext.StatGetAttribute(stat, "Requirements")
--- 	local primaryAttribute = nil
--- 	if requirements ~= nil then
--- 		local largestRequirement = 0
--- 		for i,requirement in pairs(requirements) do
--- 			local reqName = requirement.Requirement
--- 			if not requirement.Not and requirement.Param > largestRequirement and
--- 				(reqName == "Strength" or reqName == "Finesse" or reqName == "Constitution" or
--- 				reqName == "Memory" or reqName == "Wits") then
--- 				primaryAttribute = reqName
--- 				largestRequirement = requirement.Param
--- 			end
--- 		end
--- 	end
--- 	if primaryAttribute ~= nil then
--- 		for attribute,deltamods in pairs(attributeBoosts) do
--- 			if attribute ~= primaryAttribute then
--- 				for i,entry in pairs(deltamods) do
--- 					if deltamods[entry] == true then
-
--- 					end
--- 				end
--- 			end
--- 		end
--- 	end
--- end
+		local _TAGS = GameHelpers.GetAllTags(e.Item, true, false)
+		if _TAGS.LLWEAPONEX_DualShields and not _TAGS.LLWEAPONEX_CombatShield then
+			local itemGUID = e.Item.MyGuid
+			Timer.StartOneshot("", 250, function (e)
+				local item = GameHelpers.GetItem(itemGUID)
+				if item then
+					ItemProcessor.DualShields.GetCombatShield(item, false)
+				end
+			end)
+		end
+	end
+end)

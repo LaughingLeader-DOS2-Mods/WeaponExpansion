@@ -62,18 +62,19 @@ local function CanAddBonusSkill(stat, tier)
 end
 
 local function LoadBonusSkills()
-    for i,skill in pairs(Ext.GetStatEntries("SkillData")) do
-		local requirement = Ext.StatGetAttribute(skill, "Requirement")
+    for i,id in pairs(Ext.Stats.GetStats("SkillData")) do
+		local stat = Ext.Stats.Get(id)
+		local requirement = stat.Requirement
 		if not StringHelpers.IsNullOrEmpty(requirement) and requirement ~= "None" then 
-			local tier = Ext.StatGetAttribute(skill, "Tier")
+			local tier = stat.Tier
 			if Mods.LeaderLib.PersistentVars["OriginalSkillTiers"] ~= nil then
-				local originalTier = Mods.LeaderLib.PersistentVars["OriginalSkillTiers"][skill]
+				local originalTier = Mods.LeaderLib.PersistentVars["OriginalSkillTiers"][id]
 				if originalTier ~= nil then
 					tier = originalTier
 				end
 			end
-			if CanAddBonusSkill(skill) then
-				table.insert(ItemBonusSkills[requirement], {Skill = skill, Tier = tier})
+			if CanAddBonusSkill(id) then
+				table.insert(ItemBonusSkills[requirement], {Skill = id, Tier = tier})
 			end
 		end
 	end

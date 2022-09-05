@@ -133,7 +133,7 @@ end
 
 ---@param item EsvItem
 ---@param changes table
----@param dynamicIndex integer
+---@param dynamicIndex integer|nil
 function EquipmentManager.SyncItemStatChanges(item, changes, dynamicIndex)
 	if changes.Boosts ~= nil and changes.Boosts["Damage Type"] ~= nil then
 		changes.Boosts["DamageType"] = changes.Boosts["Damage Type"]

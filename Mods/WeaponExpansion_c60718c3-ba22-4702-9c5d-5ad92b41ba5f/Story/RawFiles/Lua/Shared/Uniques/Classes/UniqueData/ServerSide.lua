@@ -543,25 +543,27 @@ local function TryApplyProgression(self, progressionTable, persist, item, level,
 	local statChanged = false
 	local statId = item.Stats.Name
 	if progressionTable ~= nil and statId ~= "" then
-		local stat = Ext.GetStat(statId, level)
-		for i=1,level do
-			local entries = progressionTable[i]
-			if entries ~= nil then
-				if EvaluateEntry(self, progressionTable, persist, item, level, stat, entries, changes, firstLoad) then
-					statChanged = true
+		local stat = Ext.Stats.Get(statId, level, false)
+		if stat then
+			for i=1,level do
+				local entries = progressionTable[i]
+				if entries ~= nil then
+					if EvaluateEntry(self, progressionTable, persist, item, level, stat, entries, changes, firstLoad) then
+						statChanged = true
+					end
 				end
 			end
-		end
-		if firstLoad == true then
-			ResetUnique(item, stat, level, changes)
-		end
-		if statChanged or firstLoad == true then
-			if persist == nil then
-				persist = false
+			if firstLoad == true then
+				ResetUnique(item, stat, level, changes)
 			end
-			Ext.SyncStat(statId, persist)
+			if statChanged or firstLoad == true then
+				if persist == nil then
+					persist = false
+				end
+				Ext.Stats.Sync(statId, persist)
+			end
+			item.Stats.ShouldSyncStats = true
 		end
-		item.Stats.ShouldSyncStats = true
 	end
 	return statChanged or firstLoad == true
 end
