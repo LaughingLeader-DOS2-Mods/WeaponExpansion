@@ -27,7 +27,7 @@ Bow	1	Pin Down	Shoot two arrows instead of one, hitting a random nearby enemy fo
 Bow	2	Assassinate	If the target is Marked, this skill deals a critical hit.	√	√
 Bow	3	Rain of Arrows	20% chance for 1-5 arrows to explode for bonus piercing damage, with a chance to apply Bleeding. 	√	√
 Bow	4	Farsight	While Farsight is active, pre-emptively attack the first enemy that attempts to attack an ally, once per turn.	√	√
-Crossbow	1	Ricochet	If each fork hits, Ricochet is refreshed.	√	❌
+Crossbow	1	Ricochet	If each fork hits, Ricochet is refreshed, one per turn.	√	❌
 Crossbow	2	Sky Shot	If the target is Knocked Down, this skill deals a critical hit.	√	❌
 Crossbow	2	Marksman's Fang	Pin hit targets that are infront of impassable terrain (like a wall) for 1 turn, and deal bonus damage.	√	❌
 Crossbow	3	Placeholder	Placeholder	❌	❌

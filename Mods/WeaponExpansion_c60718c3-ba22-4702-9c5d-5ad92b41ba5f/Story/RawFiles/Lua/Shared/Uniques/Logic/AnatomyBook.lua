@@ -10,14 +10,14 @@ else
 		Vitality = true,
 		All = true
 	}
-	
+
 	Uniques.AnatomyBook:RegisterHealListener(function(e, self)
 		if e.Heal.HealAmount > 0 and affectHealTypes[e.Heal.HealType] then
 			local healMult = GameHelpers.GetExtraData("LLWEAPONEX_AnatomyBook_HealBonusMultiplier", 50, false)
 			if healMult > 0 then
-				healMult = healMult / 100
+				healMult = healMult * 0.01
 				e.Heal.HealAmount = math.ceil(e.Heal.HealAmount + (e.Heal.HealAmount * healMult))
 			end
 		end
-	end)	
+	end)
 end

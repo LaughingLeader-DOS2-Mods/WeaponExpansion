@@ -18,20 +18,19 @@ end
 
 MasteryBonusManager.Vars.GetStillStanceBonus = GetStillStanceBonus
 
-local function IsStillStanceSkill(skill)
-	if skill == "ActionAttackGround" then
+---@param skillID string
+function MasteryBonusManager.Vars.IsStillStanceSkill(skillID)
+	if skillID == "ActionAttackGround" then
 		return true
-	elseif GameHelpers.Skill.IsAction(skill) then
+	elseif GameHelpers.Skill.IsAction(skillID) then
 		return false
 	end
-	local skill = Ext.GetStat(skill)
+	local skill = Ext.Stats.Get(skillID, nil, false)
 	if skill and skill.UseWeaponDamage == "Yes" and (skill.Requirement == "RangedWeapon" or skill.Requirement == "None") then
 		return true
 	end
 	return false
 end
-
-MasteryBonusManager.Vars.IsStillStanceSkill = IsStillStanceSkill
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	rb:Create("CROSSBOW_RICOCHET", {
@@ -40,7 +39,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	}).Register.SkillHit(function(self, e, bonuses)
 		local GUID = e.Character.MyGuid
 		if e.Data.Success and ObjectGetFlag(GUID, "LLWEAPONEX_Crossbow_RicochetRefreshed") == 0 then
-			local maxHits = Ext.StatGetAttribute(e.Skill, "ForkLevels") + 1
+			local maxHits = e.Data.SkillData.ForkLevels + 1
 			local ricoHits = PersistentVars.MasteryMechanics.CrossbowRicochetHits[GUID] or 0
 			ricoHits = ricoHits + 1
 			if ricoHits > maxHits then
@@ -63,20 +62,20 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 			if tooltipType == "skill" then
 				if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_Crossbow_Equipped") then
 					if id == "ActionAttackGround" then
-						return GetStillStanceBonus(character) > 0
+						return MasteryBonusManager.Vars.GetStillStanceBonus(character) > 0
 					elseif GameHelpers.Skill.IsAction(id) then
 						return false
 					end
 					local skill = Ext.GetStat(id)
 					if skill and skill.UseWeaponDamage == "Yes" and (skill.Requirement == "RangedWeapon" or skill.Requirement == "None") then
-						return GetStillStanceBonus(character) > 0
+						return MasteryBonusManager.Vars.GetStillStanceBonus(character) > 0
 					end
 				end
 			end
 			return false
 		end
 	}).Register.SpecialTooltipParam("LLWEAPONEX_Crossbow_SkillStanceDamageBonus", function (param, character)
-		local damageBonus = GetStillStanceBonus(character.Character)
+		local damageBonus = MasteryBonusManager.Vars.GetStillStanceBonus(character.Character)
 		if damageBonus > 0 then
 			return string.format("%i", Ext.Round(damageBonus))
 		end
@@ -87,7 +86,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 			if (lastPos and GameHelpers.Math.GetDistance(e.Attacker.WorldPos, lastPos) <= 0.01)
 			or (Vars.LeaderDebugMode and not GameHelpers.Character.IsInCombat(e.Attacker.MyGuid))
 			then
-				local damageBonus = GetStillStanceBonus(e.Attacker)
+				local damageBonus = MasteryBonusManager.Vars.GetStillStanceBonus(e.Attacker)
 				if damageBonus > 0 then
 					damageBonus = 1 + (damageBonus * 0.01)
 					e.Data:MultiplyDamage(damageBonus)

@@ -3,7 +3,7 @@ LLWEAPONEX_RAPIER_FRENZYCHARGE_Description	Character is in a frenzy, increasing 
 LLWEAPONEX_RAPIER_FRENZYCHARGE_DisplayName	Frenzy Charge	h5e406683g1f15g4998g869cgee124ba8d773
 LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED_Description	Character will be Dizzy upon standing up.	h73b9bec2ge039g4045g88d6g39e3f4ea1d92
 LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED_DisplayName	Delayed Dizzy	h34471e48g19ddg4c10gbe3dg44c37cc651da
-LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery I</font><br>Character is taking the stance of a duelist.<br><font color='#D040D0'>Critical/Backstab attacks grant +[1] AP once every 2 turns.</font><br><font color='#ff9600' size='20'>Requires an empty hand.</font>	h02978a74g0280g48eag9bd7g18b63ff4872c
+LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery I</font><br>Character is taking the stance of a duelist.<br><font color='#D040D0'>Critical/Backstab attacks grant +[Stats:Stats_LLWEAPONEX_RapierMastery_DuelistBonus:ActionPoints] AP once every 2 turns.</font><br><font color='#ff9600' size='20'>Requires an empty hand.</font>	h02978a74g0280g48eag9bd7g18b63ff4872c
 LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_DisplayName	Duelist Stance	hc1a2de10gdc9dg402cg9301g9e65b62e635a
 LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1_DisplayName	Gain Dizzying Smash (Combo 1)	hca8c127egc7e1g401dg8298gb6c204e849a4
 LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_DisplayName	Gain Sweep Kick (Combo 2)	h412d2f7egf56cg43d9g9100gd03e8ffb3184
