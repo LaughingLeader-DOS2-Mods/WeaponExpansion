@@ -128,7 +128,7 @@ Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(uuid)
 		if loneWolfBanner then
 			local level = CharacterGetLevel(uuid)
 			if level > 1 then
-				local stat = Ext.GetStat("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus")
+				local stat = Ext.Stats.Get("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus", nil, false)
 				if stat ~= nil then
 					local newLifeSteal = (math.ceil((5 - 1) / 100.0 * (Ext.ExtraData.AttributeLevelGrowth + Ext.ExtraData.AttributeBoostGrowth) * level) * Ext.ExtraData.AttributeGrowthDamp) + 5
 					PrintDebug("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus", level, newLifeSteal)

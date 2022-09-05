@@ -70,7 +70,7 @@ function IsWeaponSkill(skill)
 		if skill == nil or skill == "" then
 			return false
 		end
-		stat = Ext.GetStat(skill)
+		stat = Ext.Stats.Get(skill, nil, false)
 	end
 
 	if stat then
@@ -93,7 +93,7 @@ function IsMeleeWeaponSkill(skill)
 		if skill == nil or skill == "" then
 			return false
 		end
-		stat = Ext.GetStat(skill)
+		stat = Ext.Stats.Get(skill, nil, false)
 	end
 
 	if stat then

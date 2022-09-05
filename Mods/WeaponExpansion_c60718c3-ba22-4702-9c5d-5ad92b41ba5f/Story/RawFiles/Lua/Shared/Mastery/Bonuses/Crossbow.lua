@@ -66,7 +66,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 					elseif GameHelpers.Skill.IsAction(id) then
 						return false
 					end
-					local skill = Ext.GetStat(id)
+					local skill = Ext.Stats.Get(id, nil, false)
 					if skill and skill.UseWeaponDamage == "Yes" and (skill.Requirement == "RangedWeapon" or skill.Requirement == "None") then
 						return MasteryBonusManager.Vars.GetStillStanceBonus(character) > 0
 					end

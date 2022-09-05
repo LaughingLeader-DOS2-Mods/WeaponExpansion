@@ -119,7 +119,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 		test:AssertGotSignal(self.ID)
 		return true
 	end),
-	
+
 	rb:Create("BOW_FOCUSED_ATTACKING", {
 		Skills = MasteryBonusManager.Vars.BasicAttack,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_FocusedAttacking", "<font color='#72EE34'>Non-critical basic attacks on the same target have a cumulative chance to critical hit ([ExtraData:LLWEAPONEX_MB_Bow_FocusedBasicAttack_CriticalChance:5]% + [ExtraData:LLWEAPONEX_MB_Bow_FocusedBasicAttack_CriticalChanceBonusPerHit:1.5]% per hit), until a critical hit is achieved, you leave combat, or a different target is attacked.</font><br><font color='#33FF99'>This bonus also works with [Key:LLWEAPONEX_Greatbow:Greatbow] type weapons.</font>"),
@@ -374,7 +374,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 			end
 
 			local originalPos = e.Data.Projectile.SourcePosition
-			local skillData = Ext.GetStat(e.Skill)
+			local skillData = Ext.Stats.Get(e.Skill, nil, false)
 			local x,y,z = table.unpack(e.Data.Position)
 			local dist = math.max(1, math.ceil(skillData.TargetRadius / 2))
 			local dir = GameHelpers.Math.GetDirectionVector(originalPos, e.Data.Position)
@@ -461,7 +461,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 		if not TurnCounter.IsActive("LLWEAPONEX_MB_Bow_Farsight") or string.find(e.Skill, "Quest") then
 			return
 		end
-		local skillDamageMult = Ext.GetStat(e.Skill)["Damage Multiplier"] or 0
+		local skillDamageMult = Ext.Stats.Get(e.Skill, nil, false)["Damage Multiplier"] or 0
 		if skillDamageMult <= 0 then
 			return
 		end

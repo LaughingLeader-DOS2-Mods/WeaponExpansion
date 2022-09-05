@@ -364,7 +364,7 @@ function UpdateDarkFireballSkill(char)
 		local nextRadius = math.min(8, math.floor(1 + (radiusBonusMult * killCount)))
 		--local nextDamageMult = math.min(200, math.floor(1 + (damageBonusMult * killCount)))
 	
-		local stat = Ext.GetStat("Projectile_LLWEAPONEX_DarkFireball")
+		local stat = Ext.Stats.Get("Projectile_LLWEAPONEX_DarkFireball", nil, false)
 		stat.TargetRadius = nextRange
 		stat.AreaRadius = nextRadius
 		stat.ExplodeRadius = nextRadius
@@ -376,7 +376,7 @@ function UpdateDarkFireballSkill(char)
 
 		Ext.SyncStat("Projectile_LLWEAPONEX_DarkFireball", true)
 	else
-		local stat = Ext.GetStat("Projectile_LLWEAPONEX_DarkFireball")
+		local stat = Ext.Stats.Get("Projectile_LLWEAPONEX_DarkFireball", nil, false)
 		--stat["Damage Multiplier"] = 10
 		stat.TargetRadius = 6
 		stat.AreaRadius = 1
@@ -416,7 +416,7 @@ end
 function Harken_SetTattoosActive(uuid)
 	local canSetVisualElement = CharacterSetVisualElement ~= nil and HasHarkenVisualSet(uuid)
 	local needsSync = false
-	local stat = Ext.GetStat("LLWEAPONEX_TATTOOS_STRENGTH")
+	local stat = Ext.Stats.Get("LLWEAPONEX_TATTOOS_STRENGTH", nil, false)
 	if CharacterIsInCombat(uuid) == 1 and StringHelpers.IsNullOrEmpty(CharacterGetEquippedItem(uuid, "Breast")) then
 		if stat.StatsId ~= "Stats_LLWEAPONEX_Tattoos_Strength_Active" then
 			needsSync = true

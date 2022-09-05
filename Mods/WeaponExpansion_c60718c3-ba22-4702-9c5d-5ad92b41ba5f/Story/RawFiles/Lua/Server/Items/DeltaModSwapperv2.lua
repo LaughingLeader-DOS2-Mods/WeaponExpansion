@@ -188,11 +188,11 @@ end
 local function ResetBoostEntry(boostEntryName, boostEntry, itemType, changes)
 	local baseBoost = nil
 	if itemType == "Weapon" then
-		baseBoost = Ext.GetStat("_BOOSTS_Weapon")
+		baseBoost = Ext.Stats.Get("_BOOSTS_Weapon", nil, false)
 	elseif itemType == "Armor" then
-		baseBoost = Ext.GetStat("_BOOSTS_Armor")
+		baseBoost = Ext.Stats.Get("_BOOSTS_Armor", nil, false)
 	elseif itemType == "Shield" then
-		baseBoost = Ext.GetStat("_BOOSTS_Shield")
+		baseBoost = Ext.Stats.Get("_BOOSTS_Shield", nil, false)
 	end
 	local changesMade = false
 	for boostAttribute,statAttribute in pairs(StatMap[itemType]) do
@@ -246,7 +246,7 @@ local function SwapDeltaMods(item)
 						--existingBoostEntry.ObjectInstanceName = newBoost
 						--existingBoostEntry.BoostName = newBoost
 						--generatedBoostNames[#generatedBoostNames+1] = newBoost
-						local boostStat = Ext.GetStat(newBoost)
+						local boostStat = Ext.Stats.Get(newBoost, nil, false)
 						local statMap = StatMap[itemType]
 						for boostAttribute,statAttribute in pairs(statMap) do
 							local nextValue = GetStatValue(boostStat, statAttribute)

@@ -236,7 +236,7 @@ if not isClient then
 			local cd = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Fatality_CooldownOverride", 6.0)
 			local sourceSkill = CharacterHasSkill(attacker, "Target_EnemyFatality") == 1 and "Target_EnemyFatality" or "Target_Fatality"
 			GameHelpers.Skill.SetCooldown(attacker, sourceSkill, cd)
-			local skill = Ext.GetStat("Target_Fatality")
+			local skill = Ext.Stats.Get("Target_Fatality", nil, false)
 			if skill["Magic Cost"] > 0 then
 				CharacterAddSourcePoints(attacker, 1)
 			end

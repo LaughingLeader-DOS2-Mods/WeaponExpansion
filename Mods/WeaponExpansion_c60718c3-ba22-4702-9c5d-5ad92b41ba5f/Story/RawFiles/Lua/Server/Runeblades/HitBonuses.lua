@@ -226,7 +226,7 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST", function(st
 			---@type EsvZoneAction
 			local surf = Ext.CreateSurfaceAction("ZoneAction")
 			---@type StatEntrySkillData
-			local skill = Ext.GetStat("Cone_LLWEAPONEX_Runeblade_DustBlast")
+			local skill = Ext.Stats.Get("Cone_LLWEAPONEX_Runeblade_DustBlast", nil, false)
 			surf.SkillId = "Cone_LLWEAPONEX_Runeblade_DustBlast"
 			surf.OwnerHandle = attacker.Handle
 			surf.Duration = 6.0

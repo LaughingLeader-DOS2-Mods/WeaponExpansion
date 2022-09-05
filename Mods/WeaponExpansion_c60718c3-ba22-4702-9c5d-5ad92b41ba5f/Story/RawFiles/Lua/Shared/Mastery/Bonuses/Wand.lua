@@ -226,7 +226,7 @@ if not Ext.IsClient() then
 						PersistentVars.SkillData.WandSurfaceBonuses[GUID] = {}
 					end
 					PersistentVars.SkillData.WandSurfaceBonuses[GUID][e.Skill] = true
-					local stat = Ext.GetStat(e.Skill)
+					local stat = Ext.Stats.Get(e.Skill, nil, false)
 					if stat then
 						local targetAmount = stat.AmountOfTargets or 0
 						if targetAmount > 1 then

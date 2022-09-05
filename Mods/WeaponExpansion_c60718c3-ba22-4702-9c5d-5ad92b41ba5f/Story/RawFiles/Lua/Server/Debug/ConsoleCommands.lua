@@ -63,11 +63,11 @@ if Vars.DebugMode then
 	end
 	Ext.RegisterConsoleCommand("dumpRanks", dumpRanks)
 
-	--Ext.GetStat(Ext.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter())).StatsId).Requirements = {[1]={Requirement="Finesse", Not=false, Param=0}}
+	--Ext.Stats.Get(Ext.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter())).StatsId, nil, false).Requirements = {[1]={Requirement="Finesse", Not=false, Param=0}}
 	--Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify({NetID=Ext.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter())).NetID, Stats={Requirements={[1]={Requirement="Finesse", Not=false, Param=0}}}}), nil)
 	Ext.RegisterConsoleCommand("llweaponex_changereq", function(cmd)
 		local item = Ext.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter()))
-		local stat = Ext.GetStat(item.StatsId)
+		local stat = Ext.Stats.Get(item.StatsId, nil, false)
 		stat.Requirements = {[1]={Requirement="Memory", Not=false, Param=0}}
 		EquipmentManager.SyncItemStatChanges(item, {Requirements=stat.Requirements})
 	end)

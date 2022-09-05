@@ -201,7 +201,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 						end
 						SignalTestComplete(self.ID)
 					end
-					-- local stat = Ext.GetStat("LLWEAPONEX_MASTERYBONUS_BLUDGEON_ARMOR_DAMAGE")
+					-- local stat = Ext.Stats.Get("LLWEAPONEX_MASTERYBONUS_BLUDGEON_ARMOR_DAMAGE", nil, false)
 					-- stat.HealValue = Ext.Round(e.Data.Damage * (armorDamageMult * 0.01))
 					-- print(Ext.MonotonicTime(), "Sync", stat.HealValue)
 					-- Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BLUDGEON_ARMOR_DAMAGE", false)

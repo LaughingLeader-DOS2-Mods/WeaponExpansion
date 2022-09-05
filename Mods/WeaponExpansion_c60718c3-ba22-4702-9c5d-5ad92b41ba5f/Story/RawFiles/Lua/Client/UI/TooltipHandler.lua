@@ -179,7 +179,7 @@ TooltipParams.SpecialParamFunctions = {
 		return GameHelpers.GetStringKeyText(Ext.StatGetAttribute("DISEASED", "DisplayName"), "Diseased")
 	end,
 	LLWEAPONEX_MasteryBonus_FleshSacrifice_Damage = function(param, statCharacter)
-		local potion = Ext.GetStat("Stats_Flesh_Sacrifice")
+		local potion = Ext.Stats.Get("Stats_Flesh_Sacrifice", nil, false)
 		if potion then
 			if tonumber(potion.Constitution) < 0 then
 				--TODO Get actual negative Con from penalty precise qualifier, then translate that into actual vitality

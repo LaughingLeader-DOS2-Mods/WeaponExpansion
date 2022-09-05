@@ -12,7 +12,7 @@ local Qualifiers = {
 local function SetItemStats(target, tbl)
 	for k,v in pairs(tbl) do
 		if k == "Requirements" then
-			local stat = Ext.GetStat(target.Name)
+			local stat = Ext.Stats.Get(target.Name, nil, false)
 			if stat ~= nil then
 				stat.Requirements = v
 			end
@@ -28,7 +28,7 @@ local function SetItemStats(target, tbl)
 			target.MinDamage = minDamage
 			target.MaxDamage = maxDamage
 		elseif k == "Boosts" then
-			local stat = Ext.GetStat(target.Name)
+			local stat = Ext.Stats.Get(target.Name, nil, false)
 			if stat ~= nil then
 				stat.Boosts = v
 			end

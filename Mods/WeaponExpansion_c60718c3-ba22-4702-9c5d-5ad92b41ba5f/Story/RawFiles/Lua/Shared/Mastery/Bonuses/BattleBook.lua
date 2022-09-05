@@ -288,7 +288,7 @@ local _CACHEDSKILLBOOKS = {}
 
 local function GetSkillWithMemorizationRequirements(id)
 	---@type StatEntrySkillData
-	local skill = Ext.GetStat(id)
+	local skill = Ext.Stats.Get(id, nil, false)
 	if skill.MemorizationRequirements and #skill.MemorizationRequirements > 0 then
 		return id
 	end
@@ -363,7 +363,7 @@ local function GetCharacterMajorityMemorizedSkillAbility(character)
 
 	for _,v in pairs(character.SkillManager.Skills) do
 		if _IsSkillMemorized(v) then
-			local skill = Ext.GetStat(v.SkillId)
+			local skill = Ext.Stats.Get(v.SkillId, nil, false)
 			if skill and skill["Memory Cost"] > 0 then
 				totalUsedMemorySlots = totalUsedMemorySlots + skill["Memory Cost"]
 				totalAbilitySkills[skill.Ability] = totalAbilitySkills[skill.Ability] + skill["Memory Cost"]

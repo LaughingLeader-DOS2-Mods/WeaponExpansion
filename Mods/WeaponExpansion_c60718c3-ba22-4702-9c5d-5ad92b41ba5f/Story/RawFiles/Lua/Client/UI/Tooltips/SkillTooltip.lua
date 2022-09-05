@@ -207,7 +207,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 				elseif v.Action == "LLWEAPONEX_ApplyBoltProperties" then
 					local rune,weaponBoostStat = Skills.GetHandCrossbowRuneBoost(character.Stats)
 					if weaponBoostStat ~= nil then
-						local weaponBoost = Ext.GetStat(weaponBoostStat)
+						local weaponBoost = Ext.Stats.Get(weaponBoostStat, nil, false)
 						---@type StatProperty[]
 						local props = weaponBoost.ExtraProperties
 						if props then
