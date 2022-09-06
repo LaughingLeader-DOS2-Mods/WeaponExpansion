@@ -135,11 +135,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 
 			---@type EsvItem[]
 			local objects = {}
+			local totalItems = 0
 
 			for itemGUID,item in pairs(level.EntityManager.ItemConversionHelpers.RegisteredItems) do
 				---@cast item EsvItem
 				if not item.WalkOn and not item.OffStage and not item.CanShootThrough and Ext.Math.Distance(item.WorldPos, startPos) <= 3 then
-					objects[#objects+1] = item
+					totalItems = totalItems + 1
+					objects[totalItems] = item
 				end
 			end
 
@@ -149,10 +151,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 				if not GameHelpers.Grid.IsValidPosition(x, z, grid) then
 					isNextToWall = true
 					break
-				else
+				elseif totalItems > 0 then
 					local checkPos = {x,0,z}
 					--Pin if the position overlaps with a blocking object
-					for _,v in pairs(objects) do
+					for i=1,totalItems do
+						local v = objects[i]
 						checkPos[2] = v.WorldPos[2]
 						if Ext.Math.Distance(v.WorldPos, checkPos) <= (0.1 + v.AI.AIBoundsRadius) then
 							isNextToWall = true
