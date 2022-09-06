@@ -77,7 +77,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	}).Register.SpecialTooltipParam("LLWEAPONEX_Crossbow_SkillStanceDamageBonus", function (param, character)
 		local damageBonus = MasteryBonusManager.Vars.GetStillStanceBonus(character.Character)
 		if damageBonus > 0 then
-			return string.format("%i", Ext.Round(damageBonus))
+			return string.format("%i", Ext.Utils.Round(damageBonus))
 		end
 		return "0"
 	end).WeaponTagHit(MasteryID.Crossbow, function(self, e, bonuses)
@@ -96,10 +96,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	end).Osiris("ObjectTurnStarted", 1, "after", function(char)
 		local character = GameHelpers.GetCharacter(char)
 		if character then
-			local GUID = character.MyGuid
-			PersistentVars.MasteryMechanics.StillStanceLastPosition[GUID] = {table.unpack(character.WorldPos)}
+			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = {table.unpack(character.WorldPos)}
 			local rankName = StringHelpers.StripFont(GameHelpers.GetStringKeyText(Masteries.LLWEAPONEX_Crossbow.RankBonuses[1].Tag, "Crossbow I"))
-			CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.StillStanceEnabled:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(character), rankName))
+			CombatLog.AddCombatText(Text.CombatLog.StillStanceEnabled:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(character), rankName))
 		end
 	end)
 })
@@ -126,7 +125,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 		if e.Data.Success and ObjectIsCharacter(e.Data.Target) == 1 then
 			local startPos = e.Data.TargetObject.WorldPos
 			local directionalVector = GameHelpers.Math.GetDirectionalVectorBetweenObjects(e.Data.TargetObject, e.Character, false)
-			local grid = Ext.GetAiGrid()
+			local level = Ext.Entity.GetCurrentLevel()
+			local grid = level.AiGrid
+			
 
 			local isNextToWall = false
 
@@ -135,9 +136,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 			---@type EsvItem[]
 			local objects = {}
 
-			for i,v in pairs(Ext.GetAllItems()) do
-				if GetDistanceToPosition(v, startPos[1], startPos[2], startPos[3]) <= 3 then
-					objects[#objects+1] = Ext.GetItem(v)
+			for itemGUID,item in pairs(level.EntityManager.ItemConversionHelpers.RegisteredItems) do
+				---@cast item EsvItem
+				if not item.WalkOn and not item.OffStage and not item.CanShootThrough and Ext.Math.Distance(item.WorldPos, startPos) <= 3 then
+					objects[#objects+1] = item
 				end
 			end
 
@@ -148,13 +150,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 					isNextToWall = true
 					break
 				else
+					local checkPos = {x,0,z}
 					--Pin if the position overlaps with a blocking object
-					for i,v in pairs(objects) do
-						if GetDistanceToPosition(v.MyGuid, x, v.WorldPos[2], z) <= (0.1 + v.RootTemplate.AIBoundsRadius) then
-							if not v.WalkOn then
-								isNextToWall = true
-								break
-							end
+					for _,v in pairs(objects) do
+						checkPos[2] = v.WorldPos[2]
+						if Ext.Math.Distance(v.WorldPos, checkPos) <= (0.1 + v.AI.AIBoundsRadius) then
+							isNextToWall = true
+							break
 						end
 					end
 				end
