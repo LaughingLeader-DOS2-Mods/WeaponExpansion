@@ -19,7 +19,7 @@ if not Vars.IsClient then
 		and target.Stats.CurrentArmor > 0 and target.Stats.MaxArmor > 0
 		then
 			if not ArmorSystemIsDisabled() then
-				local damage = Ext.Round(target.Stats.MaxArmor * (perc / 100))
+				local damage = Ext.Utils.Round(target.Stats.MaxArmor * (perc / 100))
 				if damage > 0 then
 					target.Stats.CurrentArmor = math.max(0, target.Stats.CurrentArmor - damage)
 					CharacterStatusText(target.MyGuid, Text.StatusText.ArmorBreak:ReplacePlaceholders(string.format("<font color='%s'>-%i</font>", LocalizedText.DamageTypeNames.Physical.Color, damage)))

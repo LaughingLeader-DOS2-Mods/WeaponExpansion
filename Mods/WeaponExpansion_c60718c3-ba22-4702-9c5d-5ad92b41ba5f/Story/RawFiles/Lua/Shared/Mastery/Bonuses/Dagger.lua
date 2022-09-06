@@ -241,7 +241,7 @@ if not isClient then
 				CharacterAddSourcePoints(attacker, 1)
 			end
 			if skill.ActionPoints > 1 then
-				CharacterAddActionPoints(attacker, Ext.Round(skill.ActionPoints/2))
+				CharacterAddActionPoints(attacker, Ext.Utils.Round(skill.ActionPoints/2))
 			end
 		end
 	end)

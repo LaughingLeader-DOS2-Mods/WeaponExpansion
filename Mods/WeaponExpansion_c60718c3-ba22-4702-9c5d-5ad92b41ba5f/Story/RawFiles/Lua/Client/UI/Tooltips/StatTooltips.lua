@@ -47,8 +47,8 @@ local function OnDamageStatTooltip(character, stat, tooltip)
 		else
 			local _,baseMin,baseMax,totalMin,totalMax = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, true, highestAttribute, true, false)
 			local dualWieldingPenalty = Ext.ExtraData.DualWieldingDamagePenalty
-			local offhandTotalMin = Ext.Round(totalMin * dualWieldingPenalty)
-			local offhandTotalMax = Ext.Round(totalMax * dualWieldingPenalty)
+			local offhandTotalMin = Ext.Utils.Round(totalMin * dualWieldingPenalty)
+			local offhandTotalMax = Ext.Utils.Round(totalMax * dualWieldingPenalty)
 			local mainhand = fromClawMainhandText:ReplacePlaceholders(baseMin,baseMax)
 			local offhand = fromClawOffhandText:ReplacePlaceholders(baseMin,baseMax)
 			local element = tooltip:GetElement("StatsGearBoostNormal")

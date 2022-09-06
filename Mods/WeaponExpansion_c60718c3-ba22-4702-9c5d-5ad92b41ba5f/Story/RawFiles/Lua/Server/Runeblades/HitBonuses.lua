@@ -39,7 +39,7 @@ local function RollForProc(character, chance, skipLogging)
 		roll = Ext.Random(0,999)
 	end
 
-	local chanceTextAmount = Ext.Round((chance/999) * 100)
+	local chanceTextAmount = Ext.Utils.Round((chance/999) * 100)
 	if roll <= chance then
 		local rollTextAmount = 100
 		if not skipLogging then
@@ -47,7 +47,7 @@ local function RollForProc(character, chance, skipLogging)
 		end
 		return true
 	else
-		local rollTextAmount = 100 - Ext.Round((chance/roll) * 100)
+		local rollTextAmount = 100 - Ext.Utils.Round((chance/roll) * 100)
 		CombatLog.AddTextToPlayer(character, "Rolls", string.format("Roll Failed: %s/100 (%s%% Chance)", rollTextAmount, chanceTextAmount))
 		return false
 	end

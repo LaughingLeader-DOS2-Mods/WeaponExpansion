@@ -29,8 +29,8 @@ function GetSkillDamageRangeWithFakeWeapon(character, skill, mainWeapon, offHand
         end
 
         for damageType, range in pairs(mainDamageRange) do
-            local min = Ext.Round(range[1] * damageMultiplier)
-            local max = Ext.Round(range[2] * damageMultiplier)
+            local min = Ext.Utils.Round(range[1] * damageMultiplier)
+            local max = Ext.Utils.Round(range[2] * damageMultiplier)
             range[1] = min + math.ceil(min * Game.Math.GetDamageBoostByType(character, damageType))
             range[2] = max + math.ceil(max * Game.Math.GetDamageBoostByType(character, damageType))
         end
@@ -75,8 +75,8 @@ function GetSkillDamageRangeWithFakeWeapon(character, skill, mainWeapon, offHand
         local damageBoost = 1.0 + (character.DamageBoost / 100.0)
         local damageRanges = {}
         damageRanges[damageType] = {
-            math.ceil(math.ceil(Ext.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost),
-            math.ceil(math.ceil(Ext.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)
+            math.ceil(math.ceil(Ext.Utils.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost),
+            math.ceil(math.ceil(Ext.Utils.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)
         }
         return damageRanges
     end

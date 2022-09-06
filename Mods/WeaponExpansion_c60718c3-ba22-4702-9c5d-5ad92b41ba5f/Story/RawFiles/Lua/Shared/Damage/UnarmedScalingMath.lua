@@ -97,8 +97,8 @@ local function CalculateWeaponDamageWithDamageBoost(weapon)
             damage.Min = math.ceil(damage.Min * boost)
             damage.Max = math.ceil(damage.Max * boost)
         else
-            damage.Min = Ext.Round(damage.Min)
-            damage.Max = Ext.Round(damage.Max)
+            damage.Min = Ext.Utils.Round(damage.Min)
+            damage.Max = Ext.Utils.Round(damage.Max)
         end
     end
 
@@ -170,7 +170,7 @@ local function ApplyDamageBoosts(character, damageList)
     for i, damage in pairs(damageList:ToTable()) do
         local boost = Game.Math.GetDamageBoostByType(character, damage.DamageType)
         if boost > 0.0 then
-            damageList:Add(damage.DamageType, Ext.Round(damage.Amount * boost))
+            damageList:Add(damage.DamageType, Ext.Utils.Round(damage.Amount * boost))
         end
     end
 end
@@ -190,10 +190,10 @@ function UnarmedHelpers.CalculateWeaponDamage(attacker, weapon, noRandomization,
 
     if isOffhand then
         damageList:Multiply(Ext.ExtraData.DualWieldingDamagePenalty)
-		baseMin = Ext.Round(baseMin * Ext.ExtraData.DualWieldingDamagePenalty)
-		baseMax = Ext.Round(baseMax * Ext.ExtraData.DualWieldingDamagePenalty)
-		totalMin = Ext.Round(totalMin * Ext.ExtraData.DualWieldingDamagePenalty)
-		totalMax = Ext.Round(totalMax * Ext.ExtraData.DualWieldingDamagePenalty)
+		baseMin = Ext.Utils.Round(baseMin * Ext.ExtraData.DualWieldingDamagePenalty)
+		baseMax = Ext.Utils.Round(baseMax * Ext.ExtraData.DualWieldingDamagePenalty)
+		totalMin = Ext.Utils.Round(totalMin * Ext.ExtraData.DualWieldingDamagePenalty)
+		totalMax = Ext.Utils.Round(totalMax * Ext.ExtraData.DualWieldingDamagePenalty)
     end
 
     return damageList,baseMin,baseMax,totalMin,totalMax
@@ -205,8 +205,8 @@ function UnarmedHelpers.CalculateBaseWeaponDamageRange(weapon)
     local damages = ComputeBaseWeaponDamage(weapon)
 
     for damageType, damage in pairs(damages) do
-        damage.Min = Ext.Round(damage.Min)
-        damage.Max = Ext.Round(damage.Max)
+        damage.Min = Ext.Utils.Round(damage.Min)
+        damage.Max = Ext.Utils.Round(damage.Max)
     end
 
     return damages

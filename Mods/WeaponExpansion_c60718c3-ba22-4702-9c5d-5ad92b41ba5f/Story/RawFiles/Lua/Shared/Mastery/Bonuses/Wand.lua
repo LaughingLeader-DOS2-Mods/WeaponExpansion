@@ -173,7 +173,7 @@ if not Ext.IsClient() then
 			if projectiles > 0 then
 				for i=0,projectiles do
 					local ran = Ext.Random(0,1000) * 0.001
-					local angle = Ext.Round(360 * ran)
+					local angle = Ext.Utils.Round(360 * ran)
 					local pos = GameHelpers.Math.GetPositionWithAngle(target, angle, Ext.Random(6,9))
 					NRD_ProjectilePrepareLaunch()
 					local sx,sy,sz = table.unpack(target)

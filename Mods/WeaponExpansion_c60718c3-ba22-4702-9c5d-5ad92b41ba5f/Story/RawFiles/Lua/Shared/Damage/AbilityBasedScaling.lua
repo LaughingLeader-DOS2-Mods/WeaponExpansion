@@ -161,8 +161,8 @@ function Math.AbilityScaling.GetSkillDamageRange(character, skill, mainWeapon, o
 
         for damageType, range in pairs(mainDamageRange) do
             --printf("[AbilityScaling.mainDamageRange] damageType(%s) GetDamageBoostByType(%s)", damageType, Game.Math.GetDamageBoostByType(character, damageType))
-            local min = Ext.Round(range.Min * damageMultiplier)
-            local max = Ext.Round(range.Max * damageMultiplier)
+            local min = Ext.Utils.Round(range.Min * damageMultiplier)
+            local max = Ext.Utils.Round(range.Max * damageMultiplier)
             range.Min = min + math.ceil(min * Game.Math.GetDamageBoostByType(character, damageType))
             range.Max = max + math.ceil(max * Game.Math.GetDamageBoostByType(character, damageType))
         end
@@ -208,8 +208,8 @@ function Math.AbilityScaling.GetSkillDamageRange(character, skill, mainWeapon, o
         local damageBoost = 1.0 + (character.DamageBoost / 100.0)
         --print(attrDamageScale, damageMultiplier, Game.Math.CalculateBaseDamage(skill.Damage, character, nil, level), baseDamage, damageTypeBoost, damageBoost)
 
-        local finalMin = math.ceil(math.ceil(Ext.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost)
-        local finalMax = math.ceil(math.ceil(Ext.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)
+        local finalMin = math.ceil(math.ceil(Ext.Utils.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost)
+        local finalMax = math.ceil(math.ceil(Ext.Utils.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)
 
         if finalMin > 0 then
             finalMax = math.max(finalMin + 1.0, finalMax)

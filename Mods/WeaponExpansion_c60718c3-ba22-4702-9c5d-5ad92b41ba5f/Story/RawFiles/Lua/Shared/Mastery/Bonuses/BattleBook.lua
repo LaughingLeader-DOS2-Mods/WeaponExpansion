@@ -544,7 +544,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 					local abilitySlots = totalAbilitySlots[skillAbility]
 					local boostPerSlot = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Scholar_DamageBoostPerTotalSkillSlots", 1)
 					local damageMult = (abilitySlots / totalSlots)
-					local damageBoost = Ext.Round(damageMult * (boostPerSlot * totalSlots))
+					local damageBoost = Ext.Utils.Round(damageMult * (boostPerSlot * totalSlots))
 					local damageBoostText = math.floor(damageMult)
 					if damageBoostText < 1 then
 						damageBoostText = string.format("%.2f", damageMult)
@@ -564,7 +564,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 			if abilities[skillAbility] == true then
 				local abilitySlots = totalAbilitySlots[skillAbility]
 				local boostPerSlot = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Scholar_DamageBoostPerTotalSkillSlots", 1)
-				local damageBoost = Ext.Round((abilitySlots / totalSlots) * (boostPerSlot * totalSlots))
+				local damageBoost = Ext.Utils.Round((abilitySlots / totalSlots) * (boostPerSlot * totalSlots))
 				if damageBoost > 0 then
 					e.Data:MultiplyDamage(1 + (damageBoost * 0.01))
 					SignalTestComplete(self.ID)

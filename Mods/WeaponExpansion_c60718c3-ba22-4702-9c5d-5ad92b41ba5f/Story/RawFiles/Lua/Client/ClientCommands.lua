@@ -23,8 +23,8 @@ local function SetItemStats(target, tbl)
 			local maxDamage = 0
 			local baseDamage = damage * (target.DamageFromBase * 0.01)
 			local range = baseDamage * (v * 0.01)
-			minDamage = Ext.Round(baseDamage - (range/2))
-			maxDamage = Ext.Round(baseDamage + (range/2))
+			minDamage = Ext.Utils.Round(baseDamage - (range/2))
+			maxDamage = Ext.Utils.Round(baseDamage + (range/2))
 			target.MinDamage = minDamage
 			target.MaxDamage = maxDamage
 		elseif k == "Boosts" then

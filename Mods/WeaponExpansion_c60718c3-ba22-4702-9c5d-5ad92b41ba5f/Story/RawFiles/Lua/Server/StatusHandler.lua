@@ -7,14 +7,6 @@ local _listeners = {
     EndTurnStatusRemoved = {},
 }
 
-local function CleanupForceAction(handle, target, x, y, z, timerStartFunc)
-	if GetDistanceToPosition(target, x,y,z) < 1 then
-		NRD_GameActionDestroy(handle)
-		return true
-	end
-	return false
-end
-
 ---@param source EsvCharacter
 ---@param target EsvGameObject|number[]
 ---@param item EsvItem

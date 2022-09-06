@@ -141,7 +141,7 @@ local function GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPo
         end
 		
         local finalDamage = baseDamage * randomMultiplier * attrDamageScale * damageMultipliers
-        finalDamage = math.max(Ext.Round(finalDamage), 1)
+        finalDamage = math.max(Ext.Utils.Round(finalDamage), 1)
         finalDamage = math.ceil(finalDamage * damageBoost)
         damageList:Add(damageType, finalDamage)
 
@@ -203,8 +203,8 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
         for damageType, range in pairs(mainDamageRange) do
             --if range.Min == nil then range.Min = range.Max or 1 end
             --if range.Max == nil then range.Max = range.Min or 1 end
-            local min = Ext.Round(range.Min * damageMultiplier)
-            local max = Ext.Round(range.Max * damageMultiplier)
+            local min = Ext.Utils.Round(range.Min * damageMultiplier)
+            local max = Ext.Utils.Round(range.Max * damageMultiplier)
             range.Min = min + math.ceil(min * Game.Math.GetDamageBoostByType(character, damageType))
             range.Max = max + math.ceil(max * Game.Math.GetDamageBoostByType(character, damageType))
         end
@@ -247,8 +247,8 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
         local damageTypeBoost = 1.0 + Game.Math.GetDamageBoostByType(character, damageType)
         local damageBoost = 1.0 + (character.DamageBoost / 100.0)
 
-        local finalMin = math.ceil(math.ceil(Ext.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost)
-        local finalMax = math.ceil(math.ceil(Ext.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)
+        local finalMin = math.ceil(math.ceil(Ext.Utils.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost)
+        local finalMax = math.ceil(math.ceil(Ext.Utils.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)
 
         if finalMin > 0 then
             finalMax = math.max(finalMin + 1.0, finalMax)
@@ -320,14 +320,14 @@ end
 --     --CalculateWeaponDamageWithDamageBoost
 --     local boost = 1.0 + damageBoost * 0.01
 --     for damageType, damage in pairs(damages) do
---         baseMin = baseMin + Ext.Round(damage.Min * penalty)
---         baseMax = baseMax + Ext.Round(damage.Max * penalty)
+--         baseMin = baseMin + Ext.Utils.Round(damage.Min * penalty)
+--         baseMax = baseMax + Ext.Utils.Round(damage.Max * penalty)
 --         if damageBoost ~= 0 then
 --             damage.Min = math.ceil(damage.Min * boost)
 --             damage.Max = math.ceil(damage.Max * boost)
 --         else
---             damage.Min = Ext.Round(damage.Min)
---             damage.Max = Ext.Round(damage.Max)
+--             damage.Min = Ext.Utils.Round(damage.Min)
+--             damage.Max = Ext.Utils.Round(damage.Max)
 --         end
 --         totalMin = totalMin + damage.Min
 --         totalMax = totalMax + damage.Max

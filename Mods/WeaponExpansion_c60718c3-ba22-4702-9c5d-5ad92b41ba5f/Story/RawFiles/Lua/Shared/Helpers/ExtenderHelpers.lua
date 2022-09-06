@@ -482,8 +482,8 @@ function ExtenderHelpers.CreateWeaponTable(stat,level,attribute, weaponType,dama
 	end
 	local baseDamage = damage * (weaponStat.DamageFromBase * 0.01)
 	local range = baseDamage * (weaponStat["Damage Range"] * 0.01)
-	weaponStat.MinDamage = Ext.Round(baseDamage - (range/2))+1
-	weaponStat.MaxDamage = Ext.Round(baseDamage + (range/2))+1
+	weaponStat.MinDamage = Ext.Utils.Round(baseDamage - (range/2))+1
+	weaponStat.MaxDamage = Ext.Utils.Round(baseDamage + (range/2))+1
 	weaponStat.DamageType = weaponStat["Damage Type"]
 	weaponStat.StatsType = "Weapon"
 	if weaponType ~= nil then

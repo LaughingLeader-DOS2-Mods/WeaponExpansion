@@ -216,8 +216,8 @@ local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad, leve
 		local range = baseDamage * ((baseRange+entry.Value) * 0.01)
 		local baseMinDamage = item.Stats.DynamicStats[1].MinDamage
 		local baseMaxDamage = item.Stats.DynamicStats[1].MaxDamage
-		minDamage = Ext.Round(baseDamage - (range/2))
-		maxDamage = Ext.Round(baseDamage + (range/2))
+		minDamage = Ext.Utils.Round(baseDamage - (range/2))
+		maxDamage = Ext.Utils.Round(baseDamage + (range/2))
 		changes.Boosts["MinDamage"] = (changes.Boosts["MinDamage"] or 0) + math.abs(minDamage - baseMinDamage)
 		changes.Boosts["MaxDamage"] = (changes.Boosts["MaxDamage"] or 0) + math.abs(maxDamage - baseMaxDamage)
 		if Vars.DebugMode then
@@ -515,8 +515,8 @@ local function ResetUnique(item, stat, level, changes)
 				local damage = Game.Math.GetLevelScaledWeaponDamage(level)
 				local baseDamage = damage * (stat.DamageFromBase * 0.01)
 				local range = baseDamage * (stat["Damage Range"] * 0.01)
-				local min = Ext.Round(baseDamage - (range/2))
-				local max = Ext.Round(baseDamage + (range/2))
+				local min = Ext.Utils.Round(baseDamage - (range/2))
+				local max = Ext.Utils.Round(baseDamage + (range/2))
 				changes.Boosts["MinDamage"] = min
 				changes.Boosts["MaxDamage"] = max
 			else
@@ -590,8 +590,8 @@ local function StartApplyingProgression(self, progressionTable, persist, item, f
 				local damage = Game.Math.GetLevelScaledWeaponDamage(level)
 				local baseDamage = damage * (item.Stats.DamageFromBase * 0.01)
 				local range = baseDamage * (item.Stats["Damage Range"] * 0.01)
-				local min = Ext.Round(baseDamage - (range/2))
-				local max = Ext.Round(baseDamage + (range/2))
+				local min = Ext.Utils.Round(baseDamage - (range/2))
+				local max = Ext.Utils.Round(baseDamage + (range/2))
 				changes.Boosts["MinDamage"] = min
 				changes.Boosts["MaxDamage"] = max
 				changes.Stats["Damage Range"] = nil

@@ -202,7 +202,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 						SignalTestComplete(self.ID)
 					end
 					-- local stat = Ext.Stats.Get("LLWEAPONEX_MASTERYBONUS_BLUDGEON_ARMOR_DAMAGE", nil, false)
-					-- stat.HealValue = Ext.Round(e.Data.Damage * (armorDamageMult * 0.01))
+					-- stat.HealValue = Ext.Utils.Round(e.Data.Damage * (armorDamageMult * 0.01))
 					-- print(Ext.MonotonicTime(), "Sync", stat.HealValue)
 					-- Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BLUDGEON_ARMOR_DAMAGE", false)
 					-- GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_MASTERYBONUS_BLUDGEON_ARMOR_DAMAGE", 0, false, e.Attacker)
@@ -316,10 +316,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_Shatter", "<font color='#F19824'>Basic attacking a target with <font color='#7F3D00'>[Key:PETRIFIED_DisplayName]</font> or <font color='#4197E2'>[Key:FROZEN_DisplayName]</font> will shatter the outer shell, dealing a <font color='#FF3333'>Massive [Handle:h0a6c96bcg5d64g4226gb2eegc14f09676f65:Critical Hit]</font> (<font color='#DDCC33'>[Special:LLWEAPONEX_BludgeonShatterMultiplier]% [Handle:h99aa087ag4d93g4bf4gb191g9fc166800711:Critical Damage]</font>) and cleansing the affliction.</font><br><font color='#33FF33'>Allies only take [ExtraData:LLWEAPONEX_MB_Bludgeon_ShatterAllyDamageReduction:25]% of the original damage.</font>"),
 		IsPassive = true,
 	}).Register.SpecialTooltipParam("LLWEAPONEX_BludgeonShatterMultiplier", function (param, statCharacter)
-		local weaponCritMult = Ext.Round(Game.Math.GetCriticalHitMultiplier(statCharacter.MainWeapon, statCharacter, 0.0) * 100)
+		local weaponCritMult = Ext.Utils.Round(Game.Math.GetCriticalHitMultiplier(statCharacter.MainWeapon, statCharacter, 0.0) * 100)
 		--1 + (mult * 0.01), so it always is making the hit deal more damage
 		local critMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_ShatterBonusDamageMultiplier", 100)
-		return string.format("%i", Ext.Round(weaponCritMult + critMult))
+		return string.format("%i", Ext.Utils.Round(weaponCritMult + critMult))
 	end).BasicAttackStart(function (self, e, bonuses)
 		if self.Statuses and e.TargetIsObject and not GameHelpers.ObjectIsDead(e.Target) then
 			local GUID = GameHelpers.GetUUID(e.Target)
@@ -388,7 +388,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 					end
 					e.Data:SetHitFlag("CriticalHit", true)
 					e.Data:MultiplyDamage(critMult, true)
-					local combatLogText = Text.CombatLog.Bludgeon.Shattered:ReplacePlaceholders(sourceName, targetName, statusesText, totalDamage, e.Data.Damage, Ext.Round(critMult * 100))
+					local combatLogText = Text.CombatLog.Bludgeon.Shattered:ReplacePlaceholders(sourceName, targetName, statusesText, totalDamage, e.Data.Damage, Ext.Utils.Round(critMult * 100))
 					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
 					PlaySound(e.Target.MyGuid, "Skill_Rogue_MortalBlow_Impact")
 					--PlaySound(e.Target.MyGuid, "Skill_Warrior_Onslaught_Impact")

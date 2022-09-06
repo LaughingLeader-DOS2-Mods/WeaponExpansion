@@ -63,7 +63,7 @@ if not Vars.IsClient then
 		then
 			local mult = GameHelpers.GetExtraData("LLWEAPONEX_SwordofVictory_EvilSlayerDamageMultiplier", 10)
 			if mult > 0 then
-				data:MultiplyDamage(1 + Ext.Round(mult * 0.01))
+				data:MultiplyDamage(1 + Ext.Utils.Round(mult * 0.01))
 				SignalTestComplete("LLWEAPONEX_Victory_EvilSlayerDamageBonus")
 				EffectManager.PlayEffect("RS3_FX_GP_Status_Firebrand_Subject_Weapon_01", attacker)
 				--local pos = {table.unpack(target.WorldPos)}
