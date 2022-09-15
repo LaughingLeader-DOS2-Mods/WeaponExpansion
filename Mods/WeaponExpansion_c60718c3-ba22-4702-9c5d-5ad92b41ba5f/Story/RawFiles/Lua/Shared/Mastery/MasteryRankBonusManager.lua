@@ -764,25 +764,53 @@ function MasteryBonusManager.GetOrderedMasteryRanks()
 	end
 end
 
+---@param characters {Character:EclCharacter, Tags:table<string,boolean>}[]
+---@param rankTag string
+---@param len integer
+---@return boolean hasRequirement
+---@return EclCharacter|nil characterWithRequirement
+local function _AnyCharacterHasMasteryRequirement(characters, rankTag, len)
+	for i=1,len do
+		local data = characters[i]
+		if Mastery.HasMasteryRequirement(data.Character, rankTag, false, data.Tags) then
+			return true,data.Character
+		end
+	end
+	return false
+end
+
 ---@param character EsvCharacter|EclCharacter
 ---@param skillOrStatus string
 ---@param tooltipType MasteryBonusDataTooltipID
-function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType, ...)
+---@param status EclStatus|nil
+function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType, status, ...)
 	local textEntries = {}
+	local checkCharacters = {}
+	local cLen = 0
 	--Allow clients to view mastery bonuses for statuses affecting other objects
 	local client = Client:GetCharacter()
-	---@type table<string,boolean>
-	local _TAGS = GameHelpers.GetAllTags(character, true, true)
-	if client.MyGuid ~= character.MyGuid then
-		for tag,b in pairs(GameHelpers.GetAllTags(client, true, true)) do
-			_TAGS[tag] = true
+	if client.NetID ~= character.NetID then
+		cLen = cLen + 1
+		checkCharacters[cLen] = {Tags=GameHelpers.GetAllTags(client, true, true), Character=client}
+	end
+	cLen = cLen + 1
+	checkCharacters[cLen] = {Tags=GameHelpers.GetAllTags(character, true, true), Character=character}
+
+	if tooltipType == "status" and status then
+		local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
+		if source and GameHelpers.Ext.ObjectIsCharacter(source) and source.NetID ~= character.NetID then
+			cLen = cLen + 1
+			---@cast source EclCharacter
+			checkCharacters[cLen] = {Tags=GameHelpers.GetAllTags(source, true, true), Character=source}
 		end
 	end
 	for rankTag,tbl in MasteryBonusManager.GetOrderedMasteryRanks() do
-		if Mastery.HasMasteryRequirement(character, rankTag, false, _TAGS) or Mastery.HasMasteryRequirement(client, rankTag, false, _TAGS) then
+		local hasRequirement,masteryCharacter = _AnyCharacterHasMasteryRequirement(checkCharacters, rankTag, cLen)
+		if hasRequirement then
 			local addedRankName = false
-			for _,v in pairs(tbl) do
-				local text = EvaluateEntryForBonusText(v, character, skillOrStatus, tooltipType, ...)
+			for i=1,#tbl do
+				local v = tbl[i]
+				local text = EvaluateEntryForBonusText(v, masteryCharacter, skillOrStatus, tooltipType, status, ...)
 				if text then
 					if not addedRankName then
 						local rankName = GameHelpers.GetStringKeyText(rankTag, "")
