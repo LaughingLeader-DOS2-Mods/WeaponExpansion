@@ -154,10 +154,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 
 	rb:Create("DAGGER_SERRATED_RUPTURE", {
 		Skills = {"Target_SerratedEdge", "Target_EnemySerratedEdge"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SerratedEdgeBonus", "<font color='#F19824'>Deal an additional [SkillDamage:Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage] to targets with [BLEEDING_DisplayName].</font>")
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SerratedEdgeBonus", "<font color='#F19824'>Deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Dagger_RuptureBonusDamage] to targets with [BLEEDING_DisplayName].</font>")
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success and HasActiveStatus(e.Data.Target, "BLEEDING") == 1 then
-			GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.Target, "Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
+			GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.Target, "Projectile_LLWEAPONEX_MasteryBonus_Dagger_RuptureBonusDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
 			if ObjectIsCharacter(e.Data.Target) == 1 then
 				CharacterStatusText(e.Data.Target, GameHelpers.GetStringKeyText("LLWEAPONEX_RUPTURE_DisplayName", "Ruptured"))
 			end
@@ -196,7 +196,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 4, {
 	rb:Create("DAGGER_CRUELTY", {
 		--The corpse explosion can proc the bonus as well
 		Skills = {"Target_TerrifyingCruelty", "Target_EnemyTerrifyingCruelty", "Target_EnemyTerrifyingCruelty_Gheist", 
-		"Projectile_LLWEAPONEX_DaggerMastery_CrueltyCorpseExplosion"},
+		"Projectile_LLWEAPONEX_MasteryBonus_Dagger_CrueltyCorpseExplosion"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_CrueltyBonus")
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success then
@@ -252,7 +252,7 @@ if not isClient then
 			---@type EsvStatusExplode
 			local explode = Ext.PrepareStatus(target, "EXPLODE", 6.0)
 			explode.StatusSourceHandle = source.Handle
-			explode.Projectile = "Projectile_LLWEAPONEX_DaggerMastery_CrueltyCorpseExplosion"
+			explode.Projectile = "Projectile_LLWEAPONEX_MasteryBonus_Dagger_CrueltyCorpseExplosion"
 			Ext.ApplyStatus(explode)
 		end
 	end)

@@ -42,23 +42,14 @@ local defaultPersistentVars = {
     MasteryMechanics = {
         ---@type table<GUID,integer>
         AxeFlurryHits = {},
-        ---A table of active statuses to remove.
-        ---@type table<GUID,table<string,boolean>>
-        BludgeonShattering = {},
-        ---@type table<GUID,integer>
-        CrossbowRicochetHits = {},
-        ---@type table<GUID,number[]>
-        StillStanceLastPosition = {},
-        ---@type table<GUID,integer>
-        SneakingTurnsInCombat = {},
-        ---@type table<GUID,integer>
-        BlinkStrikeTargetsHit = {},
         ---Challenger and the target.
         ---@type table<GUID,GUID>
         BattlebookChallenge = {},
-        ---Protected character to the source (Guardian Angel Banner wielder)
-        ---@type table<GUID,GUID>
-        GuardianAngelResurrect = {},
+        ---@type table<GUID,integer>
+        BlinkStrikeTargetsHit = {},
+        ---A table of active statuses to remove.
+        ---@type table<GUID,table<string,boolean>>
+        BludgeonShattering = {},
         ---@type table<GUID,{Remaining:integer, Total:integer}>
         BowExplosiveRainArrowCount = {},
         ---@type table<GUID,{Hits:integer, Target:GUID}>
@@ -68,6 +59,18 @@ local defaultPersistentVars = {
         BowCastingPiercingSkill = {},
         ---@type table<GUID,integer>
         BowFarsightAttacks = {},
+        ---@type table<GUID,integer>
+        CrossbowRicochetHits = {},
+        ---The last target the source applied MARKED to.
+        ---@type table<GUID,GUID>
+        CrossbowMarkedTarget = {},
+        ---Protected character to the source (Guardian Angel Banner wielder)
+        ---@type table<GUID,GUID>
+        GuardianAngelResurrect = {},
+        ---@type table<GUID,number[]>
+        StillStanceLastPosition = {},
+        ---@type table<GUID,integer>
+        SneakingTurnsInCombat = {},
     },
     Timers = {},
     OnDeath = {},

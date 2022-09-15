@@ -2,6 +2,10 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
 
+local _ISCLIENT = Ext.IsClient()
+
+local _eqSet = "Class_Ranger_Humans"
+
 local function GetStillStanceBonus(character)
 	local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_SkillStanceRankBonus", 5.0)
 	if damageBonus > 0 then
@@ -137,7 +141,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 			local objects = {}
 			local totalItems = 0
 
-			for itemGUID,item in pairs(level.EntityManager.ItemConversionHelpers.RegisteredItems) do
+			for _,item in pairs(level.EntityManager.ItemConversionHelpers.RegisteredItems) do
 				---@cast item EsvItem
 				if not item.WalkOn and not item.OffStage and not item.CanShootThrough and Ext.Math.Distance(item.WorldPos, startPos) <= 3 then
 					totalItems = totalItems + 1
@@ -174,9 +178,174 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
-	
+	rb:Create("CROSSBOW_MARKEDSPRAY", {
+		Skills = {"Projectile_ArrowSpray", "Projectile_EnemyArrowSpray"},
+		Statuses = {"MARKED"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSpray", "<font color='#77FF33'>Each bolt fired will seek your [Key:MARKED_DisplayName] target.<br>If no targets have been [Key:MARKED_DisplayName] by you, the cooldown of [Key:Projectile_Mark_DisplayName:Glitter Dust] is reduced by 1 turn.</font>"),
+		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSprayStatus", "<font color='#77FF33'>Arrows fired from [Key:Projectile_ArrowSpray_DisplayName:Arrow Spray] will seek to this target.</font>"),
+		---@param self MasteryBonusData
+		---@param id string
+		---@param character EclCharacter
+		---@param tooltipType MasteryBonusDataTooltipID
+		---@param extraParam EclItem|EclStatus
+		---@param tags table<string,boolean>|nil
+		GetIsTooltipActive = function(self, id, character, tooltipType, extraParam, tags, itemHasSkill)
+			if tooltipType == "status" then
+				---@cast extraParam EclStatus
+				if GameHelpers.IsValidHandle(extraParam.StatusSourceHandle) then
+					local source = GameHelpers.TryGetObject(extraParam.StatusSourceHandle)
+					if GameHelpers.Ext.ObjectIsCharacter(source) then
+						---@cast source EclCharacter
+						if source and MasteryBonusManager.HasMasteryBonus(source, self.ID, false) then
+							for _,skillId in pairs(self.Skills) do
+								if source.SkillManager.Skills[skillId] then
+									return true
+								end
+							end
+						end
+					end
+				end
+				return false
+			end
+		end
+	}).Register.SkillProjectileShoot(function(self, e, bonuses)
+		local markedTarget = PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID]
+		if markedTarget then
+			local target = GameHelpers.TryGetObject(markedTarget)
+			if target and not GameHelpers.ObjectIsDead(target) then
+				e.Data.TargetObjectHandle = target.Handle
+				e.Data.TargetPosition = target.WorldPos
+				e.Data.ForceTarget = true
+				--e.Data.HitObjectHandle = target.Handle
+			else
+				PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] = nil
+			end
+		end
+	end).SkillCast(function (self, e, bonuses)
+		if PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] == nil then
+			for _,id in pairs(self.Skills) do
+				local skillData = e.Character.SkillManager.Skills[id]
+				if skillData and skillData.ActiveCooldown > 0 and skillData.ActiveCooldown < 60 then
+					local cd = math.max(0, skillData.ActiveCooldown - 6.0)
+					skillData.ActiveCooldown = cd
+				end
+			end
+		end
+	end).StatusApplied(function (self, e, bonuses)
+		PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.SourceGUID] = e.TargetGUID
+	end, "Source").StatusRemoved(function (self, e, bonuses)
+		for source,target in pairs(PersistentVars.MasteryMechanics.CrossbowMarkedTarget) do
+			if target == e.TargetGUID then
+				PersistentVars.MasteryMechanics.CrossbowMarkedTarget[source] = nil
+			end
+		end
+	end, "None").Test(function(test, self)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		CharacterSetFightMode(char, 1, 1)
+		test:Wait(1000)
+		ApplyStatus(dummy, "MARKED", -1, 1, char)
+		test:Wait(1000)
+		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		test:Wait(1000)
+		return true
+	end),
+	rb:Create("CROSSBOW_SHATTERINGSNIPE", {
+		Skills = {"Projectile_Snipe", "Projectile_EnemySnipe"},
+		_ArmorSystemTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_ShatteringSnipe", "<font color='#77FF33'>If attacking a target with no armor, or if the hit would result in no armor, the bolt rupture's the target's insides, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_RuptureDamage] and applying or extending <font color='#FF0000'>[Key:BLEEDING_DisplayName] for 1 turn</font>.</font>"),
+		_NoArmorSystemTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_ShatteringSnipe_NoArmor", "<font color='#77FF33'>If dealing over [ExtraData:LLWEAPONEX_MB_Crossbow_NoArmorSystem_DamageThreshold:25]% of the target's [Handle:h068a4744gf811g42b4ga8b1g29a9c62c13fc:Maximum Vitality], deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_RuptureDamage] and applying or extending <font color='#FF0000'>[Key:BLEEDING_DisplayName] for 1 turn.</font>"),
+		OnGetTooltip = function (self, id, character, tooltipType, ...)
+			if not ArmorSystemIsDisabled() then
+				return self._ArmorSystemTooltip
+			else
+				return self._NoArmorSystemTooltip
+			end
+		end,
+	}).Register.SkillHit(function(self, e, bonuses)
+		local target = e.Data.TargetObject
+		if not ArmorSystemIsDisabled() then
+			local ma = target.Stats.MaxMagicArmor
+			local pa = target.Stats.MaxArmor
+
+			local totalArmorDamage = 0
+			local totalMagicArmorDamage = 0
+
+			for _,v in pairs(e.Data.DamageList:ToTable()) do
+				if v.Amount > 0 then
+					local damageArmorType = Data.DamageTypeToArmorType[v.DamageType]
+					if damageArmorType == "Armor" then
+						totalArmorDamage = totalArmorDamage + v.Amount
+					elseif damageArmorType == "MagicArmor" then
+						totalMagicArmorDamage = totalMagicArmorDamage + v.Amount
+					elseif v.DamageType == "Chaos" then
+						--Count it for both, with a reduced amount, since it could really end up as anything
+						totalArmorDamage = totalArmorDamage + math.floor(v.Amount * 0.5)
+						totalMagicArmorDamage = totalMagicArmorDamage + math.floor(v.Amount * 0.5)
+					end
+				end
+			end
+
+			if totalArmorDamage >= pa or totalMagicArmorDamage >= ma then
+				GameHelpers.Damage.ApplySkillDamage(e.Character, target, "Projectile_LLWEAPONEX_MasteryBonus_Crossbow_RuptureDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
+				GameHelpers.Status.ExtendTurns(target, "BLEEDING", 1, true, true)
+			end
+		else
+			local threshold = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_NoArmorSystem_DamageThreshold", 25)
+			if threshold > 0 then
+				local vitAmount = math.ceil(target.Stats.MaxVitality * (threshold * 0.01))
+				if e.Data.Damage > vitAmount then
+					GameHelpers.Damage.ApplySkillDamage(e.Character, target, "Projectile_LLWEAPONEX_MasteryBonus_Crossbow_RuptureDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
+					GameHelpers.Status.ExtendTurns(target, "BLEEDING", 1, true, true)
+				end
+			end
+		end
+	end).SkillCast(function (self, e, bonuses)
+		if PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] == nil then
+			for _,id in pairs(self.Skills) do
+				local skillData = e.Character.SkillManager.Skills[id]
+				if skillData and skillData.ActiveCooldown > 0 and skillData.ActiveCooldown < 60 then
+					local cd = math.max(0, skillData.ActiveCooldown - 6.0)
+					skillData.ActiveCooldown = cd
+				end
+			end
+		end
+	end).StatusApplied(function (self, e, bonuses)
+		PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.SourceGUID] = e.TargetGUID
+	end, "Source").StatusRemoved(function (self, e, bonuses)
+		for source,target in pairs(PersistentVars.MasteryMechanics.CrossbowMarkedTarget) do
+			if target == e.TargetGUID then
+				PersistentVars.MasteryMechanics.CrossbowMarkedTarget[source] = nil
+			end
+		end
+	end, "None").Test(function(test, self)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		CharacterSetFightMode(char, 1, 1)
+		test:Wait(1000)
+		ApplyStatus(dummy, "MARKED", -1, 1, char)
+		test:Wait(1000)
+		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		test:Wait(1000)
+		return true
+	end),
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 4, {
 	
 })
+
+if not _ISCLIENT then
+	Mastery.Events.MasteryChanged:Subscribe(function (e)
+		if not e.Enabled then
+			PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] = nil
+		end
+	end, {MatchArgs={ID=MasteryID.Crossbow}})
+end
