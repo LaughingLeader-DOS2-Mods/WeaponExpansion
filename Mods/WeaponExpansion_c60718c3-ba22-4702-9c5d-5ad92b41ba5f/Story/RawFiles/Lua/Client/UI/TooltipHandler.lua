@@ -85,7 +85,7 @@ function TooltipParams.GetDescriptionText(character, data, skillOrStatus, toolti
 						if status and result ~= nil then
 							paramText = result
 						elseif not status then
-							Ext.PrintError("Error calling GetParam function for "..tagName..":\n", result)
+							Ext.Utils.PrintError("Error calling GetParam function for "..tagName..":\n", result)
 						end
 					end
 				end
@@ -197,7 +197,7 @@ Events.GetTextPlaceholder:Subscribe(function(e)
 		if b then
 			return result
 		else
-			Ext.PrintError(result)
+			Ext.Utils.PrintError(result)
 		end
 	end
 end)

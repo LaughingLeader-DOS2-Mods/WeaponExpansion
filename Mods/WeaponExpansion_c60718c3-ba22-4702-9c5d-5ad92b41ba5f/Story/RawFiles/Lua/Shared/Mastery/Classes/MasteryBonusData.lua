@@ -470,7 +470,7 @@ function _INTERNALREG.Osiris(self, event, arity, state, callback, skipBonusCheck
 				if hasMasteryBonus then
 					local b,err = xpcall(callback, debug.traceback, ...)
 					if not b then
-						Ext.PrintError(err)
+						Ext.Utils.PrintError(err)
 					end
 				end
 			end
@@ -702,7 +702,7 @@ function MasteryBonusData:RegisterOsirisListener(event, arity, state, callback, 
 				if hasMasteryBonus then
 					local b,err = xpcall(callback, debug.traceback, ...)
 					if not b then
-						Ext.PrintError(err)
+						Ext.Utils.PrintError(err)
 					end
 				end
 			end
@@ -725,7 +725,7 @@ local function FinallyGetTooltipText(this, character, skillOrStatus, tooltipType
 				return result
 			end
 		else
-			Ext.PrintError(result)
+			Ext.Utils.PrintError(result)
 		end
 	end
 	if tooltipType == "status" then
@@ -748,7 +748,7 @@ local function TryGetTooltipText(this, character, skillOrStatus, tooltipType, ..
 				return nil
 			end
 		else
-			Ext.PrintError(result)
+			Ext.Utils.PrintError(result)
 		end
 	end
 
