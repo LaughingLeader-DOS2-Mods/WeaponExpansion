@@ -18,7 +18,7 @@ MasteryBonusManager = {
 		BasicAttack = {"ActionAttackGround"},
 		---Skills to enable piercing projectiles for at Bow rank 4. Should be RangedWeapon projectile skills that don't already pierce or fork.
 		---@type table<string,boolean>
-		BowProjectilePiercingSkills = {},
+		CrossbowProjectilePiercingSkills = {},
 		---Used for the Bow Rank 4 bonus BOW_FARSIGHT, in case a mod changed the status.
 		FarsightAppliedStatuses = {"FARSIGHT"}
 	},

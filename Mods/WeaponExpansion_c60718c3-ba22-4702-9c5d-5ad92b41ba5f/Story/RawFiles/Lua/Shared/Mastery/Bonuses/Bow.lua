@@ -340,8 +340,8 @@ if not _ISCLIENT then
 end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
-	rb:Create("BOW_PIERCING_PROJECTILE", {
-		AllSkills = true,
+	rb:Create("BOW_ARCING_SHOT", {
+		Skills = MasteryBonusManager.Vars.BasicAttack,
 		---@param self MasteryBonusData
 		---@param id string
 		---@param character EclCharacter
@@ -349,59 +349,36 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 		---@param extraParam EclItem|EclStatus
 		---@param tags table<string,boolean>|nil
 		GetIsTooltipActive = function(self, id, character, tooltipType, extraParam, tags, itemHasSkill)
-			if tooltipType == "skill" and MasteryBonusManager.Vars.BowProjectilePiercingSkills[id] then
-				return true
+			if tooltipType == "skill" then
+				if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_Bow_Equipped") then
+					if id == "ActionAttackGround" then
+						return true
+					elseif GameHelpers.Skill.IsAction(id) then
+						return false
+					end
+					local skill = Ext.Stats.Get(id, nil, false)
+					if skill and skill.UseWeaponDamage == "Yes" and (skill.Requirement == "RangedWeapon") then
+						return true
+					end
+				end
 			end
 			return false
 		end,
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_PiercingProjectiles", "<font color='#72EE34'>Non-piercing projectile bow skills will pierce the first target hit.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_ArcingShot", "<font color='#72EE34'>Basic attacks and [Handle:h87b42cabg950ag4e52g802dg9fc6aa755f5e:Ranged Weapon] skills always have a height advantage.</font>"),
 		IsPassive = true,
-	}).Register.SkillCast(function (self, e, bonuses)
-		if MasteryBonusManager.Vars.BowProjectilePiercingSkills[e.Skill] then
-			--This is to ensure the skill is being cast, so we don't make explosions pierce
-			if PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] == nil then
-				PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] = {}
-			end
-			PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill][e.Character.MyGuid] = {table.unpack(e.Character.WorldPos)}
+	}).Register.SkillPrepare(function(self, e, bonuses)
+		if e.Data.UseWeaponDamage == "Yes" and e.Data.Requirement == "RangedWeapon" then
+			SetTag(e.CharacterGUID, "LLWEAPONEX_Bow_HighGroundBonus")
 		end
-	end).SkillProjectileHit(function (self, e, bonuses)
-		local pbdata = PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill]
-		if pbdata and pbdata[e.Character.MyGuid] then
-			--local originalPos = {table.unpack(pbdata[e.Character.MyGuid])}
-			pbdata[e.Character.MyGuid] = nil
-			if not Common.TableHasAnyEntry(pbdata) then
-				PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] = nil
-			end
-
-			local originalPos = e.Data.Projectile.SourcePosition
-			local skillData = Ext.Stats.Get(e.Skill, nil, false)
-			local x,y,z = table.unpack(e.Data.Position)
-			local dist = math.max(1, math.ceil(skillData.TargetRadius / 2))
-			local dir = GameHelpers.Math.GetDirectionVector(originalPos, e.Data.Position)
-			local castPos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, 1.2, x, y, z, dir)
-			local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, dist, x, y, z, dir)
-			pos[2] = y
-			castPos[2] = y + 1
-
-			--Make the piercing projectile prioritize hitting an enemy within a small radius of the end position
-			local nearbyEnemies = GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=2.5, Position=pos, Relation={Enemy=true}, AsTable=true, Type="Character", Sort="Distance"})
-
-			---@cast nearbyEnemies EsvCharacter[]
-			if nearbyEnemies[1] then
-				local obj = nearbyEnemies[1] 
-				pos = GameHelpers.Math.GetPosition(obj)
-				pos[2] = pos[2] + (obj.RootTemplate.AIBoundsHeight * 0.6)
-			end
-
-			GameHelpers.Skill.ShootProjectileAt(pos, e.Skill, e.Character, {
-				EnemiesOnly=true,
-				Caster=e.Character,
-				Target="nil",
-				Source="nil",
-				SourcePosition=castPos,
-			})
-			SignalTestComplete(self.ID)
+	end, "Source", "All").SkillCancel(function (self, e, bonuses)
+		ClearTag(e.CharacterGUID, "LLWEAPONEX_Bow_HighGroundBonus")
+	end, "Source", "All").SkillCast(function(self, e, bonuses)
+		if e.Character:HasTag("LLWEAPONEX_Bow_HighGroundBonus") then
+			Timer.StartObjectTimer("LLWEAPONEX_Bow_HighGroundBonus_ClearTag", e.Character, 3000)
 		end
+	end, "Source", "All").BasicAttackStart(function (self, e, bonuses)
+		SetTag(e.AttackerGUID, "LLWEAPONEX_Bow_HighGroundBonus")
+		Timer.StartObjectTimer("LLWEAPONEX_Bow_HighGroundBonus_ClearTag", e.Attacker, 3000)
 	end).Test(function(test, self)
 		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
@@ -411,8 +388,19 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 		CharacterSetFightMode(char, 1, 1)
 		test:Wait(1000)
 		CharacterUseSkill(char, "Projectile_EnemyBallisticShot", dummy, 1, 1, 1)
+		test:Wait(250)
+		test:AssertEquals(IsTagged(char, "LLWEAPONEX_Bow_HighGroundBonus") == 1, true, "Attacker not tagged with 'LLWEAPONEX_Bow_HighGroundBonus' [Skill].")
 		test:WaitForSignal(self.ID, 10000)
 		test:AssertGotSignal(self.ID)
+		test:Wait(4000)
+		test:AssertEquals(IsTagged(char, "LLWEAPONEX_Bow_HighGroundBonus") == 0, true, "Tag 'LLWEAPONEX_Bow_HighGroundBonus' was not cleared [Skill].")
+		test:Wait(2000)
+		CharacterAttack(char, dummy)
+		test:Wait(250)
+		test:AssertEquals(IsTagged(char, "LLWEAPONEX_Bow_HighGroundBonus") == 1, true, "Attacker not tagged with 'LLWEAPONEX_Bow_HighGroundBonus' [Basic Attack].")
+		test:Wait(4000)
+		test:AssertEquals(IsTagged(char, "LLWEAPONEX_Bow_HighGroundBonus") == 0, true, "Tag 'LLWEAPONEX_Bow_HighGroundBonus' was not cleared [Basic Attack].")
+		test:Wait(2000)
 		return true
 	end),
 
@@ -517,3 +505,32 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 		return true
 	end),
 })
+
+if not _ISCLIENT then
+	Timer.Subscribe("LLWEAPONEX_Bow_HighGroundBonus_ClearTag", function (e)
+		if e.Data.UUID then
+			ClearTag(e.Data.UUID, "LLWEAPONEX_Bow_HighGroundBonus")
+		end
+	end)
+
+	local _IgnoreHitTypes = {
+		Surface = true,
+		DoT = true,
+		Reflected = true,
+	}
+
+	Ext.Events.ComputeCharacterHit:Subscribe(function (e)
+		--Check the HitType just in case some surface damage or something hits before the skill or basic attack does
+		if not _IgnoreHitTypes[e.HitType] and e.Attacker.Character:HasTag("LLWEAPONEX_Bow_HighGroundBonus") then
+			-- MasteryBonusManager.HasMasteryBonus(e.Attacker, "BOW_ARCING_SHOT", false)
+			e.HighGround = "HighGround"
+			SignalTestComplete("BOW_ARCING_SHOT")
+		end
+	end, {Priority=9999})
+	Mastery.Events.MasteryChanged:Subscribe(function (e)
+		if e.Character:HasTag("LLWEAPONEX_Bow_HighGroundBonus") then
+			Timer.Cancel("LLWEAPONEX_Bow_HighGroundBonus_ClearTag", e.Character)
+			ClearTag(e.CharacterGUID, "LLWEAPONEX_Bow_HighGroundBonus")
+		end
+	end, {MatchArgs={ID=MasteryID.Bow}})
+end

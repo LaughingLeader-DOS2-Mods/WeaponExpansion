@@ -56,7 +56,7 @@ local defaultPersistentVars = {
         BowCumulativeCriticalChance = {},
         ---Skill ID, GUID to boolean
         ---@type table<string,table<GUID,number[]>>
-        BowCastingPiercingSkill = {},
+        CrossbowCastingPiercingSkill = {},
         ---@type table<GUID,integer>
         BowFarsightAttacks = {},
         ---@type table<GUID,integer>

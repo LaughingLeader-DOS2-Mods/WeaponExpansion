@@ -181,8 +181,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 	rb:Create("CROSSBOW_MARKEDSPRAY", {
 		Skills = {"Projectile_ArrowSpray", "Projectile_EnemyArrowSpray"},
 		Statuses = {"MARKED"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSpray", "<font color='#77FF33'>Each bolt fired will seek your [Key:MARKED_DisplayName] target.<br>If no targets have been [Key:MARKED_DisplayName] by you, the cooldown of [Key:Projectile_Mark_DisplayName:Glitter Dust] is reduced by 1 turn.</font>"),
-		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSprayStatus", "<font color='#77FF33'>Arrows fired from [Key:Projectile_ArrowSpray_DisplayName:Arrow Spray] will seek to this target.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSpray", "<font color='#77FF33'>Each bolt fired will seek your last [Key:MARKED_DisplayName] target.</font>"),
+		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSprayStatus", "<font color='#77FF33'>Arrows fired from [Key:Projectile_ArrowSpray_DisplayName:Arrow Spray] will seek this target.</font>"),
 		---@param self MasteryBonusData
 		---@param id string
 		---@param character EclCharacter
@@ -277,14 +277,20 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 			for _,v in pairs(e.Data.DamageList:ToTable()) do
 				if v.Amount > 0 then
 					local damageArmorType = Data.DamageTypeToArmorType[v.DamageType]
-					if damageArmorType == "Armor" then
+					if damageArmorType == "CurrentArmor" then
 						totalArmorDamage = totalArmorDamage + v.Amount
-					elseif damageArmorType == "MagicArmor" then
+					elseif damageArmorType == "CurrentMagicArmor" then
 						totalMagicArmorDamage = totalMagicArmorDamage + v.Amount
 					elseif v.DamageType == "Chaos" then
 						--Count it for both, with a reduced amount, since it could really end up as anything
 						totalArmorDamage = totalArmorDamage + math.floor(v.Amount * 0.5)
 						totalMagicArmorDamage = totalMagicArmorDamage + math.floor(v.Amount * 0.5)
+					elseif v.DamageType == "Sulfuric" then
+						if target.Stats.MagicalSulfur then
+							totalMagicArmorDamage = totalMagicArmorDamage + v.Amount
+						else
+							totalArmorDamage = totalArmorDamage + v.Amount
+						end
 					end
 				end
 			end
@@ -303,25 +309,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 				end
 			end
 		end
-	end).SkillCast(function (self, e, bonuses)
-		if PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] == nil then
-			for _,id in pairs(self.Skills) do
-				local skillData = e.Character.SkillManager.Skills[id]
-				if skillData and skillData.ActiveCooldown > 0 and skillData.ActiveCooldown < 60 then
-					local cd = math.max(0, skillData.ActiveCooldown - 6.0)
-					skillData.ActiveCooldown = cd
-				end
-			end
-		end
-	end).StatusApplied(function (self, e, bonuses)
-		PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.SourceGUID] = e.TargetGUID
-	end, "Source").StatusRemoved(function (self, e, bonuses)
-		for source,target in pairs(PersistentVars.MasteryMechanics.CrossbowMarkedTarget) do
-			if target == e.TargetGUID then
-				PersistentVars.MasteryMechanics.CrossbowMarkedTarget[source] = nil
-			end
-		end
-	end, "None").Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -339,7 +327,81 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 4, {
-	
+	rb:Create("CROSSBOW_PIERCING_PROJECTILE", {
+		AllSkills = true,
+		---@param self MasteryBonusData
+		---@param id string
+		---@param character EclCharacter
+		---@param tooltipType MasteryBonusDataTooltipID
+		---@param extraParam EclItem|EclStatus
+		---@param tags table<string,boolean>|nil
+		GetIsTooltipActive = function(self, id, character, tooltipType, extraParam, tags, itemHasSkill)
+			if tooltipType == "skill" and MasteryBonusManager.Vars.CrossbowProjectilePiercingSkills[id] then
+				return true
+			end
+			return false
+		end,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_PiercingProjectiles", "<font color='#77FF33'>Non-piercing [Handle:h87b42cabg950ag4e52g802dg9fc6aa755f5e:Ranged Weapon] skills will pierce the first target hit.</font>"),
+		IsPassive = true,
+	}).Register.SkillCast(function (self, e, bonuses)
+		if MasteryBonusManager.Vars.CrossbowProjectilePiercingSkills[e.Skill] then
+			--This is to ensure the skill is being cast, so we don't make explosions pierce
+			if PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill] == nil then
+				PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill] = {}
+			end
+			PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill][e.Character.MyGuid] = {table.unpack(e.Character.WorldPos)}
+		end
+	end).SkillProjectileHit(function (self, e, bonuses)
+		local pbdata = PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill]
+		if pbdata and pbdata[e.Character.MyGuid] then
+			--local originalPos = {table.unpack(pbdata[e.Character.MyGuid])}
+			pbdata[e.Character.MyGuid] = nil
+			if not Common.TableHasAnyEntry(pbdata) then
+				PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill] = nil
+			end
+
+			local originalPos = e.Data.Projectile.SourcePosition
+			local skillData = Ext.Stats.Get(e.Skill, nil, false)
+			local x,y,z = table.unpack(e.Data.Position)
+			local dist = math.max(1, math.ceil(skillData.TargetRadius / 2))
+			local dir = GameHelpers.Math.GetDirectionVector(originalPos, e.Data.Position)
+			local castPos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, 1.2, x, y, z, dir)
+			local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, dist, x, y, z, dir)
+			pos[2] = y
+			castPos[2] = y + 1
+
+			--Make the piercing projectile prioritize hitting an enemy within a small radius of the end position
+			local nearbyEnemies = GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=2.5, Position=pos, Relation={Enemy=true}, AsTable=true, Type="Character", Sort="Distance"})
+
+			---@cast nearbyEnemies EsvCharacter[]
+			if nearbyEnemies[1] then
+				local obj = nearbyEnemies[1] 
+				pos = GameHelpers.Math.GetPosition(obj)
+				pos[2] = pos[2] + (obj.RootTemplate.AIBoundsHeight * 0.6)
+			end
+
+			GameHelpers.Skill.ShootProjectileAt(pos, e.Skill, e.Character, {
+				EnemiesOnly=true,
+				Caster=e.Character,
+				Target="nil",
+				Source="nil",
+				SourcePosition=castPos,
+			})
+			SignalTestComplete(self.ID)
+		end
+	end).Test(function(test, self)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		local x,y,z = table.unpack(GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, 10.0))
+		TeleportToPosition(char, x,y,z, "", 0, 1)
+		CharacterSetFightMode(char, 1, 1)
+		test:Wait(1000)
+		CharacterUseSkill(char, "Projectile_EnemyBallisticShot", dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end),
 })
 
 if not _ISCLIENT then

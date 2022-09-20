@@ -244,9 +244,9 @@ local function LoadExperienceVariables()
 		end
 		if skill.SkillType == "Projectile" then
 			if skill.Requirement == "RangedWeapon" and skill.ChanceToPierce <= 0
-			and (skill.ForGameMaster == "Yes" or MasteryBonusManager.Vars.BowProjectilePiercingSkills[skill.Using]) --Allow enemy versions of skills / derivatives
+			and (skill.ForGameMaster == "Yes" or MasteryBonusManager.Vars.CrossbowProjectilePiercingSkills[skill.Using]) --Allow enemy versions of skills / derivatives
 			then
-				MasteryBonusManager.Vars.BowProjectilePiercingSkills[skill.Name] = true
+				MasteryBonusManager.Vars.CrossbowProjectilePiercingSkills[skill.Name] = true
 			end
 		end
 		if skill.Name == "Target_Farsight" then
