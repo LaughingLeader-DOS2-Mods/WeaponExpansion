@@ -80,11 +80,18 @@ if not Ext.IsClient() then
 		end
 	end)
 
+	local function _CanActivateDuelistStance(character)
+		if not Mastery.IsActive(character, MasteryID.Rapier) then
+			return false
+		end
+		return HasEmptyHand(character, false)
+	end
+
 	Timer.Subscribe("LLWEAPONEX_Rapier_CheckForEmptyHand", function (e)
 		local character = e.Data.Object
 		if character then
 			---@cast character EsvCharacter
-			if HasEmptyHand(character, false) then
+			if _CanActivateDuelistStance(character) then
 				local wasEnabled = ObjectGetFlag(character.MyGuid, "LLWEAPONEX_DuelistStanceWasEnabled") == 1
 				if wasEnabled then
 					StatusManager.ApplyPermanentStatus(character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", character)
@@ -92,9 +99,11 @@ if not Ext.IsClient() then
 			else
 				if GameHelpers.Status.IsActive(character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST") then
 					ObjectSetFlag(character.MyGuid, "LLWEAPONEX_DuelistStanceWasEnabled", 0)
-					CharacterStatusText(character.MyGuid, "LLWEAPONEX_Status_DuelistStance_Warning")
-					StatusManager.RemovePermanentStatus(character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST")
+					if character.Stats.MainWeapon and character.Stats.OffHandWeapon then
+						CharacterStatusText(character.MyGuid, "LLWEAPONEX_Status_DuelistStance_Warning")
+					end
 				end
+				StatusManager.RemovePermanentStatus(character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST")
 			end
 		end
 	end)
