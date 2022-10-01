@@ -35,6 +35,12 @@ MasteryMenu = Classes.UIObjectExtended:Create({
 	--SetPosition = SetPositionToHotbar,
 })
 
+MasteryMenu._GetIndex = function (_, k)
+	if k == "ToggleButtonInstance" then
+		return MasteryMenu.ToggleButton:GetInstance(true)
+	end
+end
+
 MasteryMenu.IsOpen = false
 MasteryMenu.Variables = {
 	SelectedMastery = {
