@@ -195,22 +195,22 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 					return txt
 				end
 			else
-				Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
+				Ext.Utils.PrintError("Error getting param ("..param..") for skill:\n",txt)
 				return ""
 			end
 		end
 	end
 end
 
----@param e {Character:StatCharacter, Description:string, IsFromItem:boolean, Params:string[], Skill:StatEntrySkillData}
 Ext.Events.SkillGetDescriptionParam:Subscribe(function (e)
 	local b,result = xpcall(SkillGetDescriptionParam, debug.traceback, e.Skill, e.Character, e.IsFromItem, e.Params and table.unpack(e.Params) or "")
 	if not b then
-		Ext.PrintError(result)
+		Ext.Utils.PrintError(result)
 	elseif not StringHelpers.IsNullOrEmpty(result) then
 		e.Description = result
+		e:StopPropagation()
 	end
-end)
+end, {Priority=101})
 
 Events.GetTextPlaceholder:Subscribe(function (e)
 	return GetPistolBulletEffects(nil, e.Character, false, e.ID)
