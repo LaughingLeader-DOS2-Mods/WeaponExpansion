@@ -180,7 +180,7 @@ end
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@param specificSkills string|string[]|nil
 ---@return MasteryBonusData
-function _INTERNALREG.SkillPrepared(self, callback, checkBonusOn, specificSkills)
+function _INTERNALREG.SkillPrepare(self, callback, checkBonusOn, specificSkills)
 	if not _ISCLIENT then
 		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.PREPARE, skills, self, callback, checkBonusOn)
