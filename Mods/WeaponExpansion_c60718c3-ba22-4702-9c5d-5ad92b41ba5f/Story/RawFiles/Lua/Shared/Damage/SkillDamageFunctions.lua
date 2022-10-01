@@ -110,7 +110,7 @@ end
 
 -- from CDivinityStats_Character::CalculateWeaponDamageInner and CDivinityStats_Item::ComputeScaledDamage
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param damageList DamageList
 --- @param noRandomization boolean
 local function CalculateWeaponScaledDamage(character, weapon, damageList, noRandomization, attribute)
@@ -147,7 +147,7 @@ local function CalculateWeaponScaledDamage(character, weapon, damageList, noRand
 end
 
 --- @param attacker StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param noRandomization boolean
 --- @param highestAttribute string
 --- @return DamageList
@@ -159,7 +159,7 @@ local function CalculateWeaponDamage(attacker, weapon, noRandomization, highestA
 end
 
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param highestAttribute string
 --- @return number[]
 local function CalculateWeaponScaledDamageRanges(character, weapon, highestAttribute)
@@ -210,7 +210,7 @@ local function HasParent(stat, statToFind)
 	end
 end
 
----@param item StatItem
+---@param item CDivinityStatsItem
 ---@param tags string[]
 local function HasSharedBaseTags(item, tags)
 	if item == nil then
@@ -227,13 +227,13 @@ local function HasSharedBaseTags(item, tags)
 end
 
 ---@param character StatCharacter
----@param parentStatName string
----@param slots string[]
----@return StatItem
-local function GetItem(character, parentStatName, slots)
-	---@type StatItem
+---@param parentStat StatEntryWeapon
+---@param slots string[]|string
+---@return CDivinityStatsItem|nil
+local function _GetRuneBoostItem(character, parentStat, slots)
+	---@type CDivinityStatsItem
 	local item = nil
-	local tagsStr = Ext.StatGetAttribute(parentStatName, "Tags")
+	local tagsStr = parentStat.Tags
 	local tags = {}
 	if not StringHelpers.IsNullOrEmpty(tagsStr) then
 		tags = StringHelpers.Split(tagsStr, ";")
@@ -241,47 +241,48 @@ local function GetItem(character, parentStatName, slots)
 	local slotsType = type(slots)
 	if slotsType == "string" then
 		item = character:GetItemBySlot(slots)
-		if item ~= nil and HasParent(item.Name, parentStatName) or HasSharedBaseTags(item, tags) then
+		if item ~= nil and HasParent(item.Name, parentStat.Name) or HasSharedBaseTags(item, tags) then
 			return item
 		end
 	elseif slotsType == "table" then
 		for i,slot in pairs(slots) do
 			item = character:GetItemBySlot(slot)
-			if item ~= nil and HasParent(item.Name, parentStatName) or HasSharedBaseTags(item, tags) then
+			if item ~= nil and HasParent(item.Name, parentStat.Name) or HasSharedBaseTags(item, tags) then
 				return item
 			end
 		end
-	elseif slots == nil then
-	
 	end
 	return nil
 end
 
 local ringSlots = {"Ring", "Ring2"}
 ---@param character StatCharacter
----@param runeParentStat string
+---@param runeBoostParentStat string|nil
 ---@param itemParentStat string
----@param slots string[]
----@param currentItem StatItem An existing item (skips trying to find one).
----@return StatItemDynamic,string,StatItem
-local function GetRuneBoost(character, runeParentStat, itemParentStat, slots, currentItem)
-	if slots == nil then
-		local slot = Ext.StatGetAttribute(itemParentStat, "Slot")
+---@param slots string[]|string
+---@param currentItem CDivinityStatsItem An existing item (skips trying to find one).
+---@return CDivinityStatsEquipmentAttributesWeapon|nil dynamicStatsBoost
+---@return string|nil runeBoostStatName
+---@return ItemRarity|string rarity
+local function GetRuneBoost(character, runeBoostParentStat, itemParentStat, slots, currentItem)
+	local parentStat = Ext.Stats.Get(itemParentStat, nil, false)
+	if parentStat and slots == nil then
+		local slot = parentStat.Slot
 		if slot == "Ring" then
 			slots = ringSlots
 		else
 			slots = slot
 		end
 	end
-	local item = currentItem or GetItem(character, itemParentStat, slots)
+	local item = currentItem or _GetRuneBoostItem(character, parentStat, slots)
 	if item ~= nil then
 		for i=3,5,1 do
 			local boost = item.DynamicStats[i]
-			if boost ~= nil and boost.BoostName ~= "" then
-				if HasParent(boost.BoostName, runeParentStat) then
-					local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
-					if boostStat ~= nil then
-						return boost,boostStat,item.ItemTypeReal
+			if boost ~= nil and not StringHelpers.IsNullOrWhitespace(boost.BoostName) then
+				if not runeBoostParentStat or HasParent(boost.BoostName, runeBoostParentStat) then
+					local boostStat = Ext.Stats.Get(boost.BoostName, nil, false)
+					if boostStat and not StringHelpers.IsNullOrWhitespace(boostStat.RuneEffectWeapon) then
+						return boost,boostStat.RuneEffectWeapon,item.ItemTypeReal
 					end
 				end
 			end
@@ -293,27 +294,28 @@ end
 
 ---@param character StatCharacter
 ---@param itemParentStat string
----@param slots string[]
----@param currentItem StatItem An existing item (skips trying to find one).
+---@param slots string[]|string
+---@param currentItem CDivinityStatsItem An existing item (skips trying to find one).
 ---@return boolean
 function Skills.HasTaggedRuneBoost(character, tag, itemParentStat, slots, currentItem)
-	if slots == nil and itemParentStat ~= nil then
-		local slot = Ext.StatGetAttribute(itemParentStat, "Slot")
+	local parentStat = Ext.Stats.Get(itemParentStat, nil, false)
+	if parentStat and slots == nil then
+		local slot = parentStat.Slot
 		if slot == "Ring" then
 			slots = ringSlots
 		else
 			slots = slot
 		end
 	end
-	local item = currentItem or GetItem(character, itemParentStat, slots)
+	local item = currentItem or _GetRuneBoostItem(character, parentStat, slots)
 	if item ~= nil then
 		for i=3,5,1 do
 			local boost = item.DynamicStats[i]
-			if boost ~= nil and boost.BoostName ~= "" then
-				local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
-				if boostStat ~= nil then
-					local tags = Ext.StatGetAttribute(boostStat, "Tags")
-					if not StringHelpers.IsNullOrEmpty(tags) and string.find(tags, tag) then
+			if boost ~= nil and not StringHelpers.IsNullOrWhitespace(boost.BoostName) then
+				local boostStat = Ext.Stats.Get(boost.BoostName, nil, false)
+				if boostStat and not StringHelpers.IsNullOrWhitespace(boostStat.RuneEffectWeapon) then
+					local runeBoostStat = Ext.Stats.Get(boostStat.RuneEffectWeapon, nil, false)
+					if runeBoostStat and not StringHelpers.IsNullOrEmpty(runeBoostStat.Tags) and string.find(runeBoostStat.Tags, tag) then
 						return true
 					end
 				end
@@ -341,7 +343,7 @@ end
 ---@param character StatCharacter
 ---@param isTooltip boolean
 ---@param noRandomization boolean
----@return StatItem
+---@return CDivinityStatsItem
 local function GetPistolWeaponStatTable(character, isTooltip, noRandomization)
 	local masteryBoost = 0
 	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_Pistol")
@@ -365,7 +367,7 @@ end
 ---@param character StatCharacter
 ---@param isTooltip boolean
 ---@param noRandomization boolean
----@param item StatItem
+---@param item CDivinityStatsItem
 ---@return table<string,number[]>|DamageList
 local function GetPistolDamage(character, isTooltip, noRandomization, item)
 	local masteryBoost = 0
@@ -386,7 +388,7 @@ end
 ---@param character EsvCharacter
 ---@param isTooltip boolean
 ---@param noRandomization boolean
----@param item StatItem
+---@param item CDivinityStatsItem
 ---@return table<string,number[]>|DamageList
 local function GetHandCrossbowDamage(character, isTooltip, noRandomization, item)
 	local masteryBoost = 0
@@ -426,7 +428,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 	
 	local highestAttribute = GetHighestAttribute(attacker)
 
-	---@type StatItem
+	---@type CDivinityStatsItem
 	local weapon = nil
 	local skill = baseSkill
 	if not SkillPropsIsTable(baseSkill) then
@@ -785,7 +787,7 @@ local function GetDarkFlamebreathDamage(baseSkill, attacker, isFromItem, stealth
 end
 
 Skills.GetHighestAttribute = GetHighestAttribute
-Skills.GetItem = GetItem
+Skills.GetItem = _GetRuneBoostItem
 Skills.GetRuneBoost = GetRuneBoost
 Skills.GetHandCrossbowRuneBoost = function(stats, ...) return GetRuneBoost(stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", ...) end
 Skills.GetPistolRuneBoost = function(stats, ...) return GetRuneBoost(stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", ...) end
@@ -810,7 +812,7 @@ Skills.Damage.Cone_LLWEAPONEX_DarkFlamebreath = GetDarkFlamebreathDamage
 
 local function GetRunicCannonSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	-- We're making the offhand weapon a rifle here so the functions ignore it for damage calculations.
-	---@type StatItem
+	---@type CDivinityStatsItem
 	local weapon = GameHelpers.Ext.CreateWeaponTable("WPN_UNIQUE_LLWEAPONEX_ArmCannon_A", attacker.Level)
 	if isTooltip ~= true then
 		return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon, {WeaponType="Rifle"})
@@ -825,7 +827,7 @@ Skills.Damage.Zone_LLWEAPONEX_ArmCannon_Disperse = GetRunicCannonSkillDamage
 
 local function BalrinSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	-- We're making the offhand weapon a rifle here so the functions ignore it for damage calculations.
-	---@type StatItem
+	---@type CDivinityStatsItem
 	local weapon = attacker.MainWeapon
 	if attacker.OffHandWeapon ~= nil and string.find(attacker.OffHandWeapon.Tags, "LLWEAPONEX_BalrinAxe_Equipped") then
 		weapon = attacker.OffHandWeapon
@@ -845,7 +847,7 @@ Skills.Damage.Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand = BalrinSkillDamag
 ---@param attacker StatCharacter
 Skills.Damage.Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage = function(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	-- We're making the offhand weapon a rifle here so the functions ignore it for damage calculations.
-	---@type StatItem
+	---@type CDivinityStatsItem
 	local weapon = nil
 	if attacker.MainWeapon ~= nil and string.find(attacker.MainWeapon.Tags, "LLWEAPONEX_BasilusDagger_Equipped") then
 		weapon = attacker.MainWeapon

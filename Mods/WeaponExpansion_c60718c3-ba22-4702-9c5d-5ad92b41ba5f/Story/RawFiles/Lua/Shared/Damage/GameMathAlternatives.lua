@@ -1,6 +1,6 @@
 -- from CDivinityStats_Character::Game.Math.CalculateWeaponDamageInner
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param damageList DamageList
 --- @param noRandomization boolean
 local function CalculateWeaponScaledDamage(character, weapon, damageList, noRandomization)
@@ -25,7 +25,7 @@ local function CalculateWeaponScaledDamage(character, weapon, damageList, noRand
 end
 
 --- @param attacker StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param noRandomization boolean
 local function CalculateWeaponDamage(attacker, weapon, noRandomization)
     local damageList = Ext.NewDamageList()
@@ -60,8 +60,8 @@ end
 --- @param targetPos number[]
 --- @param level integer
 --- @param noRandomization boolean
---- @param weapon StatItem
---- @param offHand StatItem
+--- @param weapon CDivinityStatsItem
+--- @param offHand CDivinityStatsItem
 local function GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon, offHand)
     if attacker ~= nil and level < 0 then
         level = attacker.Level
@@ -169,8 +169,8 @@ end
 
 --- @param character StatCharacter
 --- @param skill StatEntrySkillData
---- @param mainWeapon StatItem
---- @param offHandWeapon StatItem
+--- @param mainWeapon CDivinityStatsItem
+--- @param offHandWeapon CDivinityStatsItem
 local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 
@@ -263,7 +263,7 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
 end
 
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @return table,table
 function Math.GetBaseAndCalculatedWeaponDamageRange(character, weapon)
     local damages, damageBoost = Game.Math.ComputeBaseWeaponDamage(weapon)
@@ -294,7 +294,7 @@ function Math.GetBaseAndCalculatedWeaponDamageRange(character, weapon)
 end
 
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param applyDualWieldingPenalty boolean
 --- @return integer,integer,integer,integer
 function Math.GetTotalBaseAndCalculatedWeaponDamage(character, weapon, applyDualWieldingPenalty)

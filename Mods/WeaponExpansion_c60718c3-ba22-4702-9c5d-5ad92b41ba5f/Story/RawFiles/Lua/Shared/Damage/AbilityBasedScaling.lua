@@ -19,7 +19,7 @@ function Math.AbilityScaling.GetSkillAttributeDamageScale(skill, attacker, abili
 end
 
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 function Math.AbilityScaling.ComputeWeaponRequirementScaledDamage(character, weapon, ability)
     if ability ~= nil then
         return Math.AbilityScaling.ScaledDamageFromPrimaryAbility(character[ability]) * 100.0
@@ -29,7 +29,7 @@ function Math.AbilityScaling.ComputeWeaponRequirementScaledDamage(character, wea
 end
 
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 function Math.AbilityScaling.ComputeWeaponCombatAbilityBoost(character, weapon)
     local abilityType = Game.Math.GetWeaponAbility(character, weapon)
 
@@ -42,7 +42,7 @@ function Math.AbilityScaling.ComputeWeaponCombatAbilityBoost(character, weapon)
 end
 
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param ability string
 function Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, weapon, ability)
     local damages = Game.Math.CalculateWeaponDamageWithDamageBoost(weapon)
@@ -77,7 +77,7 @@ end
 
 -- from CDivinityStats_Character::CalculateWeaponDamageInner and CDivinityStats_Item::ComputeScaledDamage
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param damageList DamageList
 --- @param noRandomization boolean
 --- @param ability string
@@ -99,7 +99,7 @@ function Math.AbilityScaling.CalculateWeaponScaledDamage(character, weapon, dama
 end
 
 --- @param attacker StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param noRandomization boolean
 --- @param ability string
 function Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, offHand, noRandomization, ability)

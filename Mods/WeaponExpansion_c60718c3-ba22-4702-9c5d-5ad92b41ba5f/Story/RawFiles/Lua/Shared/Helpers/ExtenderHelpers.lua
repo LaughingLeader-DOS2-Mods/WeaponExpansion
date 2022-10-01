@@ -447,7 +447,7 @@ local RarityValue = {
 ---@param isBoostStat boolean|nil
 ---@param baseWeaponDamage number|nil
 ---@param rarity string|nil
----@return StatItem
+---@return CDivinityStatsItem
 function ExtenderHelpers.CreateWeaponTable(stat,level,attribute, weaponType,damageFromBaseBoost,isBoostStat,baseWeaponDamage,rarity)
 	local weapon = {}
 	weapon.ItemType = "Weapon"

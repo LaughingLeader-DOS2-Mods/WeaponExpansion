@@ -1,12 +1,12 @@
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 local function ComputeWeaponCombatAbilityBoost(character, weapon, isDualWielding)
     local abilityType = isDualWielding == true and "DualWielding" or "SingleHanded"
 	local abilityLevel = character[abilityType]
 	return abilityLevel * Ext.ExtraData.CombatAbilityDamageBonus
 end
 
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 local function GetWeaponScalingRequirement(weapon, attribute)
     local requirementName
     local largestRequirement = -1
@@ -25,13 +25,13 @@ local function GetWeaponScalingRequirement(weapon, attribute)
 end
 
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 local function ComputeWeaponRequirementScaledDamage(character, weapon, attribute)
     return Game.Math.ScaledDamageFromPrimaryAttribute(character[attribute]) * 100.0
 end
 
 -- from CDivinityStats_Item::ComputeDamage
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 local function ComputeBaseWeaponDamage(weapon)
     local damages = {}
     local stats = weapon.DynamicStats
@@ -87,7 +87,7 @@ local function ComputeBaseWeaponDamage(weapon)
     return damages, damageBoost
 end
 
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 local function CalculateWeaponDamageWithDamageBoost(weapon)
     local damages, damageBoost = ComputeBaseWeaponDamage(weapon)
     local boost = 1.0 + damageBoost * 0.01
@@ -135,7 +135,7 @@ end
 
 -- from CDivinityStats_Character::CalculateWeaponDamageInner
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param damageList DamageList
 --- @param noRandomization boolean
 local function CalculateWeaponScaledDamage(character, weapon, damageList, noRandomization, isDualWielding, attribute)
@@ -176,7 +176,7 @@ local function ApplyDamageBoosts(character, damageList)
 end
 
 --- @param attacker StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param noRandomization boolean
 --- @param attribute string
 --- @param isDualWielding boolean
@@ -199,7 +199,7 @@ function UnarmedHelpers.CalculateWeaponDamage(attacker, weapon, noRandomization,
     return damageList,baseMin,baseMax,totalMin,totalMax
 end
 
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @return table<DamageType, {Min:integer, Max:integer}>
 function UnarmedHelpers.CalculateBaseWeaponDamageRange(weapon)
     local damages = ComputeBaseWeaponDamage(weapon)
@@ -213,7 +213,7 @@ function UnarmedHelpers.CalculateBaseWeaponDamageRange(weapon)
 end
 
 --- @param character StatCharacter
---- @param weapon StatItem
+--- @param weapon CDivinityStatsItem
 --- @param attribute string The scaling attribute.
 --- @param isDualWielding boolean|nil
 --- @return table<DamageType, {Min:integer, Max:integer}>

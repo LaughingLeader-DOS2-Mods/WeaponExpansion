@@ -79,7 +79,7 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 	if data ~= nil then
 		---@type EclItem
 		local item = nil
-		---@type StatItem
+		---@type CDivinityStatsItem
 		local stats = nil
 		if data.UUID ~= nil then
 			item = GameHelpers.GetItem(data.UUID)

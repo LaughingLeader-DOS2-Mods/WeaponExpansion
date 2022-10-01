@@ -62,7 +62,7 @@ local function GetEquippedUnarmedArmor(character)
 	if not isClient and not Ext.OsirisIsCallable() then
 		for slot,b in pairs(_SLOTS) do
 			local statItem = character.Stats:GetItemBySlot(slot)
-			if statItem and GameHelpers.StatItemHasTag(statItem, _UNARMEDTAGS) then
+			if statItem and GameHelpers.CDivinityStatsItemHasTag(statItem, _UNARMEDTAGS) then
 				foundItems[#foundItems+1] = statItem
 			end
 		end
@@ -106,8 +106,8 @@ function UnarmedHelpers.GetUnarmedMasteryRank(character)
 end
 
 ---@param character StatCharacter
----@param statItem StatItem|boolean|nil If set, this stat will be used instead of NoWeapon. Set to false to skip trying to find an equipped unarmed item.
----@return StatItem,number,integer,string,boolean
+---@param statItem CDivinityStatsItem|boolean|nil If set, this stat will be used instead of NoWeapon. Set to false to skip trying to find an equipped unarmed item.
+---@return CDivinityStatsItem,number,integer,string,boolean
 function UnarmedHelpers.GetUnarmedWeapon(character, statItem)
 	local hasUnarmedWeapon = false
 	local weaponStat = "NoWeapon"
@@ -117,7 +117,7 @@ function UnarmedHelpers.GetUnarmedWeapon(character, statItem)
 			local unarmedWeaponStat = nil
 			if GameHelpers.Ext.ObjectIsItem(item) then
 				unarmedWeaponStat = UnarmedHelpers.GetAssociatedStats(item.StatsId)
-			elseif GameHelpers.Ext.ObjectIsStatItem(item) then
+			elseif GameHelpers.Ext.ObjectIsCDivinityStatsItem(item) then
 				unarmedWeaponStat = UnarmedHelpers.GetAssociatedStats(item.Name)
 			end
 			if unarmedWeaponStat ~= nil then
@@ -139,7 +139,7 @@ function UnarmedHelpers.GetUnarmedWeapon(character, statItem)
 	local highestAttribute = Skills.GetHighestAttribute(character, unarmedAttributes)
 	local unarmedMasteryRank = UnarmedHelpers.GetUnarmedMasteryRank(character.Character)
 	local unarmedMasteryBoost = UnarmedHelpers.GetMasteryBoost(unarmedMasteryRank)
-	---@type StatItem
+	---@type CDivinityStatsItem
 	local weapon = GameHelpers.Ext.CreateWeaponTable(weaponStat, level, highestAttribute, "Club", unarmedMasteryBoost)
 	--print("Unarmed weapon:", Common.Dump(weapon), getmetatable(character.Character))
 	--print(getmetatable(character), type(getmetatable(character)))
@@ -147,8 +147,8 @@ function UnarmedHelpers.GetUnarmedWeapon(character, statItem)
 end
 
 ---@param character StatCharacter
----@param statItem StatItem
----@return StatItem Weapon table
+---@param statItem CDivinityStatsItem
+---@return CDivinityStatsItem Weapon table
 ---@return integer Highest attribute
 function UnarmedHelpers.CreateUnarmedWeaponTable(character, statItem)
 	local weaponStat = "NoWeapon"
@@ -210,7 +210,7 @@ end
 
 
 ---@param character StatCharacter
----@param item EclItem|EsvItem|StatItem
+---@param item EclItem|EsvItem|CDivinityStatsItem
 ---@param skipDualWielding boolean|nil Skip calculating dual-wielding damage (Lizards) if true.
 ---@return table<string,number[]>,string
 function UnarmedHelpers.GetUnarmedWeaponDamageRange(character, item, skipDualWielding)
