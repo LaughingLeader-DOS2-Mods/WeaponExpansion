@@ -1235,42 +1235,54 @@ object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_Trader_WeaponRogue"
 CanMerge 1
-new subtable "1,1"
+new subtable "0,2;1,2"
 object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
-new subtable "1,1"
+new subtable "0,2;1,2"
 object category "LLWEAPONEX_Shuriken",1,1,0,0,0,0,0,0
 object category "I_GRN_LLWEAPONEX_Throwing_Dagger",2,1,0,0,0,0,0,0
-new subtable "0,1;1,2"
+new subtable "0,2;1,2"
 object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
-new subtable "0,4;1,1"
+new subtable "0,2;1,2"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
-new subtable "0,4;1,1"
+new subtable "0,2;1,2"
 object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "I_WPN_LLWEAPONEX_Quarterstaff_Wood",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_Trader_WeaponWizard"
 CanMerge 1
 new subtable "0,2;1,2"
 object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_Trader_WeaponArcher"
 CanMerge 1
-new subtable "0,1;1,4"
+new subtable "0,2;1,2"
 object category "T_ST_LLWEAPONEX_GreatbowsNormal",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
 object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
-new subtable "0,2;1,1"
+new subtable "0,2;1,2"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
-new subtable "0,2;1,1"
+new subtable "0,2;1,2"
 object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
-new subtable "0,4;1,1"
+new subtable "0,2;1,2"
 object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_Trader_WeaponWarrior"
 CanMerge 1
-new subtable "0,2;1,1"
-object category "LLWEAPONEX_Polearm_2H",2,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Katanas_2H",2,1,0,0,0,0,0,0
-object category "LLWEAPONEX_DualShields",2,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_Polearm_2H",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
 object category "I_WPN_LLWEAPONEX_Quarterstaff_Metal",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "I_WPN_LLWEAPONEX_Quarterstaff_Wood",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_FTJ_Grenade"
 CanMerge 1
@@ -1279,7 +1291,7 @@ object category "T_ST_LLWEAPONEX_FTJ_ThrowingWeapons",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_Grenades"
 CanMerge 1
-new subtable "0,9;1,1"
+new subtable "0,4;1,1"
 object category "T_ST_LLWEAPONEX_ThrowingWeaponsNormal",1,0,0,0,0,0,0,0
 new subtable "0,2;1,4"
 object category "LLWEAPONEX_Flask_Weakness",1,0,0,0,0,0,0,0
