@@ -43,7 +43,7 @@ end
 
 function CheckCharacterDeathTreasure(char)
 	---@type EsvCharacter
-	local character = Ext.GetCharacter(char)
+	local character = GameHelpers.GetCharacter(char)
 	local items = character:GetInventoryItems()
 	for i,v in pairs(items) do
 		SwapDeltaMods(v)
@@ -51,7 +51,7 @@ function CheckCharacterDeathTreasure(char)
 end
 
 local function GetPlayerDataPreset(char)
-	local character = Ext.GetCharacter(char)
+	local character = GameHelpers.GetCharacter(char)
 	if character ~= nil and character.PlayerCustomData ~= nil then
 		return character.PlayerCustomData.ClassType
 	end
@@ -93,12 +93,12 @@ function GenerateTradeTreasure(traderGUID, treasure)
 		Timer.StartOneshot("", 50, function ()
 			local trader = GameHelpers.GetCharacter(traderGUID)
 			fprint(LOGLEVEL.TRACE, "[WeaponExpansion:GenerateTradeTreasure] Generating treasure table (%s) for (%s)", treasure, trader.DisplayName, traderGUID)
-			local backpack = Ext.GetItem(backpackGUID)
+			local backpack = GameHelpers.GetItem(backpackGUID)
 			if backpack then
 				GenerateTreasure(backpackGUID, treasure, trader.Stats.Level, traderGUID)
 				ContainerIdentifyAll(backpackGUID)
 				for i,v in pairs(backpack:GetInventoryItems()) do
-					local tItem = Ext.GetItem(v)
+					local tItem = GameHelpers.GetItem(v)
 					if tItem ~= nil then
 						tItem.UnsoldGenerated = true -- Trade treasure flag
 						ItemToInventory(v, traderGUID, tItem.Amount, 0, 0)

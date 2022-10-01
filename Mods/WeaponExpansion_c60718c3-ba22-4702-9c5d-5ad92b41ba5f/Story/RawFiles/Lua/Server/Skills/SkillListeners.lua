@@ -55,7 +55,7 @@ SkillManager.Register.Hit("Target_LLWEAPONEX_Steal", function(e)
 				chance = math.tointeger(math.max(chance - (stolenSuccess * stealReduction), 0))
 			end
 
-			local enemy = Ext.GetCharacter(e.Data.Target)
+			local enemy = GameHelpers.GetCharacter(e.Data.Target)
 			local name = e.Character.DisplayName
 			
 			if chance > 0 then
@@ -88,10 +88,10 @@ SkillManager.Register.Hit("Target_LLWEAPONEX_Steal", function(e)
 					-- 	GenerateTreasure(container, treasure, level, char)
 					-- end
 					GenerateTreasure(container, treasure, level, e.Character.MyGuid)
-					local treasureItems = Ext.GetItem(container):GetInventoryItems()
+					local treasureItems = GameHelpers.GetItem(container):GetInventoryItems()
 					if #treasureItems > 0 then
 						local ranItem = Common.GetRandomTableEntry(treasureItems)
-						itemName = Ext.GetItem(ranItem).DisplayName or Ext.GetTranslatedString("h6f1e6e58g9918g4f9bga5f1gae66ef1915d4", "an item")
+						itemName = GameHelpers.GetItem(ranItem).DisplayName or Ext.GetTranslatedString("h6f1e6e58g9918g4f9bga5f1gae66ef1915d4", "an item")
 						ItemSetOriginalOwner(ranItem, targetOwner) -- So it shows up as stolen
 						ItemToInventory(ranItem, e.Character.MyGuid, ItemGetAmount(ranItem), 1, 0)
 					else

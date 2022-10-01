@@ -59,7 +59,7 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 
 		if last < 153157632 then
 			for i,v in pairs(player:GetInventoryItems()) do
-				local item = Ext.GetItem(v)
+				local item = GameHelpers.GetItem(v)
 				if item ~= nil then
 					-- Musketeer firearms were auto-tagged with crossbow previously
 					if item:HasTag("LLWEAPONEX_TaggedWeaponType") and item:HasTag("LLWEAPONEX_Firearm") and item:HasTag("LLWEAPONEX_Crossbow") then

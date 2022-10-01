@@ -48,7 +48,7 @@ StatusManager.Register.Applied("LLWEAPONEX_REMOTEMINE_DETONATE", function(target
 			local totalDetonated = 0
 			local mines = {}
 			for _,uuid in pairs(items) do
-				local item = Ext.GetItem(uuid)
+				local item = GameHelpers.GetItem(uuid)
 				if item ~= nil and item:HasTag("LLWEAPONEX_RemoteMine") and not item:HasTag("LLWEAPONEX_RemoteMine_WorldOnly") then
 					table.insert(mines, item.MyGuid)
 				end
@@ -81,7 +81,7 @@ local function OnDetonationTimer(source, target)
 					local rnd = Ext.Random(1,#minesData.Mines)
 					local mineUUID = minesData.Mines[rnd]
 					if mineUUID ~= nil then
-						local item = Ext.GetItem(mineUUID)
+						local item = GameHelpers.GetItem(mineUUID)
 						if item and item.Amount > 0 then
 							local skill = GetVarFixedString(mineUUID, "LLWEAPONEX_Mine_Skill")
 							if StringHelpers.IsNullOrEmpty(CharacterGetEquippedWeapon(source)) then

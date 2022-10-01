@@ -116,9 +116,9 @@ if not Vars.IsClient then
 		if RecoverBalrinAxe(balrinUser) then
 			GameHelpers.Status.Remove(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A")
 			GameHelpers.Status.Apply(target, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, 1, balrinUser) -- No Aura
-			local character = Ext.GetCharacter(balrinUser)
+			local character = GameHelpers.GetCharacter(balrinUser)
 			if ObjectIsCharacter(target) == 1 then
-				local targetCharacter = Ext.GetCharacter(target)
+				local targetCharacter = GameHelpers.GetCharacter(target)
 				local backStab = Game.Math.CanBackstab(character.Stats, targetCharacter.Stats)
 				GameHelpers.Damage.ApplySkillDamage(character, target, "Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage", {
 					HitParams=HitFlagPresets.GuaranteedWeaponHit:Append({Backstab = backStab}),

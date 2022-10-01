@@ -242,7 +242,7 @@ function UniqueData:Locate(uuid)
 	fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Characters nearby:")
 	if not isClient then
 		for _,v in pairs(item:GetNearbyCharacters(6.0)) do
-			local char = Ext.GetCharacter(v)
+			local char = GameHelpers.GetCharacter(v)
 			fprint(LOGLEVEL.DEFAULT, "%s (%s)", char.DisplayName, Common.Dump(char.WorldPos))
 		end
 	end
@@ -255,7 +255,7 @@ function UniqueData:Locate(uuid)
 end
 
 function UniqueData:PrintPosition()
-	local item = Ext.GetItem(self:GetUUID(nil,true))
+	local item = GameHelpers.GetItem(self:GetUUID(nil,true))
 	if item and item.WorldPos then
 		fprint(LOGLEVEL.WARNING, "[Unique:%s]\n%s", self.ID, Lib.serpent.block({
 			[SharedData.RegionData.Current] = {

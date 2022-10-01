@@ -1,8 +1,8 @@
 if not Vars.IsClient then
 	Ext.RegisterNetListener("LLWEAPONEX_ForcePickpocket", function(cmd, payload)
 		local data = Common.JsonParse(payload)
-		local player = Ext.GetCharacter(data.Player)
-		local target = Ext.GetCharacter(data.Target)
+		local player = GameHelpers.GetCharacter(data.Player)
+		local target = GameHelpers.GetCharacter(data.Target)
 		StartPickpocket(player.MyGuid,target.MyGuid,1)
 	end)
 else
@@ -14,7 +14,7 @@ else
 	Ext.RegisterUITypeInvokeListener(Data.UIType.contextMenu.Object, "updateButtons", function(ui, event)
 		local cursor = Ext.UI.GetPickingState()
 		if cursor and cursor.HoverCharacter then
-			pickpocketTarget = Ext.GetCharacter(cursor.HoverCharacter)
+			pickpocketTarget = GameHelpers.GetCharacter(cursor.HoverCharacter)
 		end
 		--[[ local this = ui:GetRoot()
 		local buttons = {}

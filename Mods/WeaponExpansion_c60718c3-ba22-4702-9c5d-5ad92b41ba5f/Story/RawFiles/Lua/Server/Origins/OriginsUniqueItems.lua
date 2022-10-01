@@ -160,7 +160,7 @@ local function InitializeUnique(id,data,region)
 			and ItemIsEquipable(data.UUID) == 1 
 			and CharacterIsDead(data.Target) == 0 then
 				GameHelpers.Character.EquipItem(data.Target, data.UUID)
-				Ext.GetCharacter(data.Target).RootTemplate.IsEquipmentLootable = true
+				GameHelpers.GetCharacter(data.Target).RootTemplate.IsEquipmentLootable = true
 			end
 		end
 	elseif t == "table" then
@@ -180,7 +180,7 @@ local function InitializeUnique(id,data,region)
 				and ItemIsEquipable(data.UUID) == 1
 				and CharacterIsDead(targetData.UUID) == 0 then
 					GameHelpers.Character.EquipItem(targetData.UUID, data.UUID)
-					Ext.GetCharacter(targetData.UUID).RootTemplate.IsEquipmentLootable = true
+					GameHelpers.GetCharacter(targetData.UUID).RootTemplate.IsEquipmentLootable = true
 				end
 			end
 		else
@@ -272,7 +272,7 @@ Ext.RegisterOsirisListener("RegionEnded", 1, "after", function(region)
 	for id,data in pairs(ORIGINS_UNIQUES) do
 		if not data.IsLinkItem and ObjectExists(data.UUID) == 1 then
 			if (ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1) then
-				local item = Ext.GetItem(data.UUID)
+				local item = GameHelpers.GetItem(data.UUID)
 				local owner = GameHelpers.Item.GetOwner(item)
 				if not owner then
 					ObjectClearFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)

@@ -61,7 +61,7 @@ function EquipmentManager:TagWeapon(item, statType, stat, itemTags)
 	else
 		if StringHelpers.IsNullOrEmpty(statType) or StringHelpers.IsNullOrEmpty(stat) then
 			---@type EsvItem
-			local item = Ext.GetItem(item.MyGuid)
+			local item = GameHelpers.GetItem(item.MyGuid)
 			if not TagFromStats(item.MyGuid, item.Stats.Name) then
 				if item.ItemType == "Weapon" then
 					local tag = Tags.WeaponTypeToTag[item.Stats.WeaponType]
@@ -168,10 +168,10 @@ function EquipmentManager:CheckWeaponRequirementTags(character)
 		refreshRequired = true
 	else
 		if not StringHelpers.IsNullOrEmpty(mainhand) then
-			mainhand = Ext.GetItem(mainhand)
+			mainhand = GameHelpers.GetItem(mainhand)
 		end
 		if not StringHelpers.IsNullOrEmpty(offhand) then
-			offhand = Ext.GetItem(offhand)
+			offhand = GameHelpers.GetItem(offhand)
 		end
 	end
 

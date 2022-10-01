@@ -135,7 +135,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 		CharacterLookAt(dummy, character, 1)
 		--CharacterSetHitpointsPercentage(dummy, 0.1)
 		test:Wait(500)
-		Ext.GetCharacter(dummy).Stats.CurrentVitality = 10
+		GameHelpers.GetCharacter(dummy).Stats.CurrentVitality = 10
 		SetTag(CharacterGetEquippedWeapon(character), "LLWEAPONEX_Axe")
 		GameHelpers.Status.Apply(character, "AOO", 12.0, true, dummy)
 		GameHelpers.Status.Apply(dummy, "AOO", 12.0, true, character)

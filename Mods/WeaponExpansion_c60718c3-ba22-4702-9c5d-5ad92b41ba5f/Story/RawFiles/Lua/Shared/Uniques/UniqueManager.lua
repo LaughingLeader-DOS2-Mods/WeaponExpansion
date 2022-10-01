@@ -96,7 +96,7 @@ end
 function UniqueManager.GetDataByItem(item)
 	local t = type(item)
 	if t == "string" then
-		local tryItem = Ext.GetItem(item)
+		local tryItem = GameHelpers.GetItem(item)
 		if tryItem then
 			item = tryItem
 			t = "userdata"

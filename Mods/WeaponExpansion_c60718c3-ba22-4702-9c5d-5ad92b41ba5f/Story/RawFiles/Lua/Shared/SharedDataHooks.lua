@@ -3,7 +3,7 @@ if Ext.IsServer() then
 		UniqueVars.SyncRunicCannon()
 		local darkFireBallData = {}
 		for savedUUID,count in pairs(PersistentVars.SkillData.DarkFireballCount) do
-			local char = Ext.GetCharacter(savedUUID)
+			local char = GameHelpers.GetCharacter(savedUUID)
 			if char ~= nil then
 				darkFireBallData[char.NetID] = count
 			end

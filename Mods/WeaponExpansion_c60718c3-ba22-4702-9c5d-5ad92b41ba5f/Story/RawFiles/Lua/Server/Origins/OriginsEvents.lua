@@ -18,7 +18,7 @@ end
 function FortJoyEvent(event)
 	fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:FortJoyEvent]", event)
 	if event == "AlexanderDefeated" then
-		--Ext.Print(string.format("[FJ_AlexanderDefeated] Owner(%s) Alex(%s) Pos(%s)", Uniques.DivineBanner.Owner, NPC.BishopAlexander, Common.Dump(Ext.GetCharacter(NPC.BishopAlexander).WorldPos)))
+		--Ext.Print(string.format("[FJ_AlexanderDefeated] Owner(%s) Alex(%s) Pos(%s)", Uniques.DivineBanner.Owner, NPC.BishopAlexander, Common.Dump(GameHelpers.GetCharacter(NPC.BishopAlexander).WorldPos)))
 		local uuid = Uniques.DivineBanner:GetUUID(NPC.BishopAlexander)
 		if uuid then
 			local x,y,z = GetPosition(NPC.BishopAlexander)

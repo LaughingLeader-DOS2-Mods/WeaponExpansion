@@ -125,7 +125,7 @@ end
 function UniqueData:Equip(target, uuid)
 	uuid = uuid or self.UUID
 	if GameHelpers.ObjectExists(uuid) then
-		local item = Ext.GetItem(uuid)
+		local item = GameHelpers.GetItem(uuid)
 		local locked = item.UnEquipLocked
 		if GameHelpers.Character.EquipItem(target, item) then
 			if self.OnEquipped ~= nil then
@@ -302,7 +302,7 @@ local function TransformItem(self, item, template, stat, level, matchStat, match
 	local slot = ""
 	local owner = GetInventoryOwner(item.MyGuid)
 	if not StringHelpers.IsNullOrEmpty(owner) ~= nil and ObjectIsCharacter(owner) then
-		local character = Ext.GetCharacter(owner)
+		local character = GameHelpers.GetCharacter(owner)
 		if character ~= nil then
 			for _,slotid in Data.VisibleEquipmentSlots:Get() do
 				if StringHelpers.GetUUID(CharacterGetEquippedItem(character.MyGuid, slotid)) == item.MyGuid then
@@ -340,7 +340,7 @@ end
 
 if Vars.DebugMode then
 	function UniqueData:TryTransform(template)
-		local item = Ext.GetItem(self.UUID)
+		local item = GameHelpers.GetItem(self.UUID)
 		local level = CharacterGetLevel(CharacterGetHostCharacter())
 		TransformItem(self, item, template, nil, level)
 	end

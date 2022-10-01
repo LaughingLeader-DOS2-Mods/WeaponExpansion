@@ -75,8 +75,8 @@ RegisterProtectedOsirisListener("CanUseItem", 3, "before", function(charUUID, it
 	if ObjectExists(itemUUID) == 0 or ObjectExists(charUUID) == 0 then
 		return
 	end
-	local item = Ext.GetItem(itemUUID)
-	local char = Ext.GetCharacter(charUUID)
+	local item = GameHelpers.GetItem(itemUUID)
+	local char = GameHelpers.GetCharacter(charUUID)
 
 	if item ~= nil and char ~= nil then
 		if ShouldBlockItem(item, char) then
@@ -142,7 +142,7 @@ function EquipmentManager.SyncItemStatChanges(item, changes, dynamicIndex)
 	local slot = nil
 	local owner = nil
 	if item.Slot < 14 and item.OwnerHandle ~= nil then
-		local char = Ext.GetCharacter(item.OwnerHandle)
+		local char = GameHelpers.GetCharacter(item.OwnerHandle)
 		if char ~= nil then
 			slot = GameHelpers.Item.GetEquippedSlot(char.MyGuid, item.MyGuid)
 			owner = char.NetID
@@ -158,7 +158,7 @@ function EquipmentManager.SyncItemStatChanges(item, changes, dynamicIndex)
 			ID = item.StatsId
 		}
 		if EquipmentManager.ItemIsNearPlayers(item) then
-			Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
+			GameHelpers.Net.Broadcast("LLWEAPONEX_SetItemStats", data, nil)
 		else
 			--Ext.PrintWarning(string.format("[WeaponExpansion:EquipmentManager.SyncItemStatChanges] Item[%s] NetID(%s) UUID(%s) is not near any players, and cannot be retrieved by clients.", item.StatsId, item.NetID, item.MyGuid))
 		end
@@ -176,12 +176,14 @@ function EquipmentManager.CheckFirearmProjectile(char, item)
 		local statChanges = {
 			DynamicStats = {}
 		}
+		local itemStat = item.StatsFromName.StatsEntry
+		---@cast itemStat +StatEntryWeapon
 		for i,v in pairs(item.Stats.DynamicStats) do
-			if not StringHelpers.IsNullOrEmpty(v.BoostName) 
-			and not StringHelpers.IsNullOrEmpty(v.Projectile) 
-			and v.Projectile ~= item.Stats.Projectile
+			if not StringHelpers.IsNullOrEmpty(v.BoostName)
+			and not StringHelpers.IsNullOrEmpty(v.Projectile)
+			and v.Projectile ~= itemStat.Projectile
 			and bulletTemplates[v.Projectile] ~= true then
-				v.Projectile = item.Stats.Projectile
+				v.Projectile = itemStat.Projectile
 				changedProjectile = true
 				statChanges.DynamicStats[i] = {
 					Projectile = v.Projectile
@@ -196,25 +198,28 @@ function EquipmentManager.CheckFirearmProjectile(char, item)
 end
 
 RegisterProtectedOsirisListener("RuneInserted", 4, "after", function(charUUID, itemUUID, runeTemplate, slot)
-	local char = Ext.GetCharacter(charUUID)
-	local item = Ext.GetItem(itemUUID)
-	EquipmentManager.CheckFirearmProjectile(char, item)
-
-	--LLWEAPONEX_RunebladeRune
-	if string.find(runeTemplate, "LOOT_Rune_LLWEAPONEX_Runeblade") and not item:HasTag("LLWEAPONEX_Runeblade") then
-		local timerName = string.format("LLWEAPONEX_RemoveRune_%s%s%s", Ext.MonotonicTime(), runeTemplate, itemUUID)
-		Timer.StartOneshot(timerName, 100, function()
-			local rune = ItemRemoveRune(charUUID, itemUUID, slot)
-			if not StringHelpers.IsNullOrEmpty(rune) then
-				local text = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_RunebladeRuneBlocked", "<font color='#FF0000' size='22'>*This rune can only be inserted into a <font color='#40E0D0'>Runeblade</font>.*</font>")
-				CharacterStatusText(charUUID, text)
-			end
-		end)
+	local char = GameHelpers.GetCharacter(charUUID)
+	local item = GameHelpers.GetItem(itemUUID)
+	if char and item then
+		EquipmentManager.CheckFirearmProjectile(char, item)
+		--LLWEAPONEX_RunebladeRune
+		if string.find(runeTemplate, "LOOT_Rune_LLWEAPONEX_Runeblade") and not item:HasTag("LLWEAPONEX_Runeblade") then
+			local timerName = string.format("LLWEAPONEX_RemoveRune_%s%s%s", Ext.Utils.MonotonicTime(), runeTemplate, itemUUID)
+			Timer.StartOneshot(timerName, 100, function()
+				local rune = ItemRemoveRune(charUUID, itemUUID, slot)
+				if not StringHelpers.IsNullOrEmpty(rune) then
+					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_RunebladeRuneBlocked", "<font color='#FF0000' size='22'>*This rune can only be inserted into a <font color='#40E0D0'>Runeblade</font>.*</font>")
+					CharacterStatusText(charUUID, text)
+				end
+			end)
+		end
 	end
 end)
 
 RegisterProtectedOsirisListener("RuneRemoved", 4, "after", function(charUUID, itemUUID, runeUUID, slot)
-	local char = Ext.GetCharacter(charUUID)
-	local item = Ext.GetItem(itemUUID)
-	EquipmentManager.CheckFirearmProjectile(char, item)
+	local char = GameHelpers.GetCharacter(charUUID)
+	local item = GameHelpers.GetItem(itemUUID)
+	if char and item then
+		EquipmentManager.CheckFirearmProjectile(char, item)
+	end
 end)

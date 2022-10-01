@@ -125,7 +125,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 		test:Wait(250)
 		test:AssertEquals(IsTagged(bookcase, "LLWEAPONEX_MB_BattleBook_RolledBookcase") == 1, true, "Bookcase wasn't tagged with 'LLWEAPONEX_MB_BattleBook_RolledBookcase'")
 		local items = {}
-		for _,v in pairs(Ext.GetItem(bookcase):GetInventoryItems()) do
+		for _,v in pairs(GameHelpers.GetItem(bookcase):GetInventoryItems()) do
 			items[#items+1] = GameHelpers.Item.GetItemStat(v)
 		end
 		Ext.Dump(items)
@@ -485,8 +485,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 		test:WaitForSignal("BATTLEBOOK_CHALLENGE_Reward", 10000)
 		test:AssertGotSignal("BATTLEBOOK_CHALLENGE_Reward")
 		test:Wait(500)
-		for _,v in pairs(Ext.GetCharacter(char1):GetInventoryItems()) do
-			local item = Ext.GetItem(v)
+		for _,v in pairs(GameHelpers.GetCharacter(char1):GetInventoryItems()) do
+			local item = GameHelpers.GetItem(v)
 			if not Data.EquipmentSlotNames[item.Slot] then
 				fprint(LOGLEVEL.WARNING, "[BATTLEBOOK_CHALLENGE] Reward(%s)", GameHelpers.GetDisplayName(item))
 			end

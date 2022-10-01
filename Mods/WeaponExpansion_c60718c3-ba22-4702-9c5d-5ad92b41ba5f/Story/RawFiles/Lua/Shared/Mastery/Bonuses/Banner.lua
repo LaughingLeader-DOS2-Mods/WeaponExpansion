@@ -340,7 +340,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 					if addWeaponRange then
 						local banners = GameHelpers.Item.FindTaggedEquipment(e.Character.MyGuid, "LLWEAPONEX_Banner")
 						if #banners > 0 then
-							local banner = Ext.GetItem(banners[1])
+							local banner = GameHelpers.GetItem(banners[1])
 							if banner then
 								skillDist = skillDist + (banner.Stats.WeaponRange/100)
 							end
@@ -496,8 +496,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
 		SetFaction(dummy, "Good NPC")
-		Ext.GetCharacter(char).Stats.CurrentVitality = 1
-		Ext.GetCharacter(dummy).Stats.CurrentVitality = 1
+		GameHelpers.GetCharacter(char).Stats.CurrentVitality = 1
+		GameHelpers.GetCharacter(dummy).Stats.CurrentVitality = 1
 		CharacterSetFightMode(char, 1, 1)
 		test:Wait(1000)
 		CharacterUseSkill(char, "Target_FirstAidEnemy", char, 1, 1, 1)

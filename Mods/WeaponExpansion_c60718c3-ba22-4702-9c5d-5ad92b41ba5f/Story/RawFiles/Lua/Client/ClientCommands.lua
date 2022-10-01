@@ -150,7 +150,7 @@ end
 Ext.RegisterNetListener("LLWEAPONEX_DeltaModSwapper_SyncBoosts", function(cmd, payload)
 	local data = Common.JsonParse(payload)
 	if data ~= nil then
-		local item = Ext.GetItem(data.NetID) or rewardScreenItems[data.NetID]
+		local item = GameHelpers.GetItem(data.NetID) or rewardScreenItems[data.NetID]
 		if item ~= nil then
 			SyncItemBoostChanges(item, data.Changes)
 		else
@@ -171,7 +171,7 @@ local function CaptureRewardScreenItems(ui, method)
 			local handle = main.items_array[i+3]
 			if handle ~= nil then
 				---@type EclItem
-				local item = Ext.GetItem(Ext.DoubleToHandle(handle))
+				local item = GameHelpers.GetItem(Ext.DoubleToHandle(handle))
 				if item ~= nil then
 					if Vars.DebugMode then
 						PrintLog("MyGuid(%s) StatsId(%s) ItemType(%s) NetID(%s) WorldPos(%s)", item.MyGuid, item.StatsId, item.ItemType, item.NetID, Common.Dump(item.WorldPos))
@@ -210,7 +210,7 @@ end)
 
 Ext.RegisterNetListener("LLWEAPONEX_PacifistWrath_UpdateDamage", function(cmd, netid)
 	netid = tonumber(netid)
-	local item = Ext.GetItem(netid)
+	local item = GameHelpers.GetItem(netid)
 	if item then
 		item.Stats.DynamicStats[1].MinDamage = 1
 		item.Stats.DynamicStats[1].MaxDamage = 1

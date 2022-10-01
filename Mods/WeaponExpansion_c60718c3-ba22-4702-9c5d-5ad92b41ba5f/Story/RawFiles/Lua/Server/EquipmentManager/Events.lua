@@ -251,8 +251,8 @@ RegisterProtectedOsirisListener("ItemAddedToCharacter", Data.OsirisEvents.ItemAd
 	if ObjectExists(character) == 0 or ObjectExists(item) == 0 then
 		return
 	end
-	local item = Ext.GetItem(item)
-	local character = Ext.GetCharacter(character)
+	local item = GameHelpers.GetItem(item)
+	local character = GameHelpers.GetCharacter(character)
 	if character and item then
 		if not GameHelpers.Item.IsObject(item) and (item.Stats.Unique == 1 or item.Stats.ItemTypeReal == "Unique") then
 			local unique = UniqueManager.GetDataByItem(item)
@@ -271,7 +271,7 @@ RegisterProtectedOsirisListener("CharacterItemEvent", Data.OsirisEvents.Characte
 	if ObjectExists(character) == 0 or ObjectExists(item) == 0 then
 		return
 	end
-	item = Ext.GetItem(item); character = Ext.GetCharacter(character)
+	item = GameHelpers.GetItem(item); character = GameHelpers.GetCharacter(character)
 	if not GameHelpers.Item.IsObject(item) then
 		if item.Stats.Unique == 1 or item.Stats.ItemTypeReal == "Unique" then
 			local unique = UniqueManager.GetDataByItem(item)

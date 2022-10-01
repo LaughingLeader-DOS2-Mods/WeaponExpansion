@@ -6,7 +6,7 @@ GameHelpers.Skill.CreateSkillProperty("LLWEAPONEX_ApplyRuneProperties", nil,
 			for _,slot in Data.EquipmentSlots:Get() do
 				local uuid = CharacterGetEquippedItem(attacker.MyGuid, slot)
 				if not StringHelpers.IsNullOrEmpty(uuid) then
-					local item = Ext.GetItem(uuid)
+					local item = GameHelpers.GetItem(uuid)
 					if item then
 						items[#items+1] = items
 					end
@@ -24,7 +24,7 @@ GameHelpers.Skill.CreateSkillProperty("LLWEAPONEX_ApplyRuneProperties", nil,
 			for _,slot in Data.EquipmentSlots:Get() do
 				local uuid = CharacterGetEquippedItem(attacker.MyGuid, slot)
 				if not StringHelpers.IsNullOrEmpty(uuid) then
-					local item = Ext.GetItem(uuid)
+					local item = GameHelpers.GetItem(uuid)
 					if item then
 						items[#items+1] = items
 					end

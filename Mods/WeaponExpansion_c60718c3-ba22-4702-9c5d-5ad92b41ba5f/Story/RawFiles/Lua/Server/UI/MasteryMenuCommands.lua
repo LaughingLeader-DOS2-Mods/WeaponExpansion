@@ -60,7 +60,7 @@ local function RequestStatusTooltip(call,datastr)
 	PrintDebug(datastr)
 	local data = MessageData:CreateFromString(datastr)
 	if data ~= nil then
-		local character = Ext.GetCharacter(data.ID)
+		local character = GameHelpers.GetCharacter(data.ID)
 		local status = data.Params.Status
 		if status ~= nil then
 			local handle = NRD_StatusGetHandle(statusDummy, status)
@@ -71,8 +71,8 @@ local function RequestStatusTooltip(call,datastr)
 			---@type EsvStatus
 			local statusObj = Ext.GetStatus(statusDummy, handle)
 			data.Params.StatusHandle = statusObj.StatusHandle
-			data.Params.NetID = Ext.GetCharacter(statusDummy).NetID
-			local statuses = Ext.GetCharacter(statusDummy):GetStatuses()
+			data.Params.NetID = GameHelpers.GetCharacter(statusDummy).NetID
+			local statuses = GameHelpers.GetCharacter(statusDummy):GetStatuses()
 			--CharacterSetForceSynch(statusDummy, 1)
 			--CharacterSetForceUpdate(statusDummy, 1)
 			--CharacterSetForceSynch(statusDummy, 0)

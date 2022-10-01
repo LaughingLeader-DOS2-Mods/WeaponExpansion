@@ -213,7 +213,7 @@ if not _ISCLIENT then
 	---@param equipmentSet string|nil
 	---@return EsvCharacter
 	function WeaponExTesting.CreateTemporaryCharacter(pos, equipmentSet)
-		local host = Ext.GetCharacter(CharacterGetHostCharacter())
+		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or GameHelpers.Math.ExtendPositionWithForwardDirection(host, 10)
 		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], host.RootTemplate.Id, 0)
 		CharacterTransformFromCharacter(character, host.MyGuid, 1, 1, 1, 1, 1, 1, 1)
@@ -221,7 +221,7 @@ if not _ISCLIENT then
 			CharacterTransformAppearanceToWithEquipmentSet(character, host.MyGuid, equipmentSet, false)
 		end
 		SetTag(character, "LeaderLib_TemporaryCharacter")
-		return Ext.GetCharacter(character)
+		return GameHelpers.GetCharacter(character)
 	end
 
 	local function SetupCharacter(character, transformTarget, equipmentSet)
@@ -252,7 +252,7 @@ if not _ISCLIENT then
 	---@return UUID character
 	---@return UUID dummy
 	function WeaponExTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
-		local host = Ext.GetCharacter(CharacterGetHostCharacter())
+		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)
 		--LLWEAPONEX_Debug_MasteryDummy_2ac80a2a-8326-4131-a03c-53906927f935
 		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0)
@@ -307,7 +307,7 @@ if not _ISCLIENT then
 	---@return UUID character2
 	---@return UUID dummy
 	function WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy)
-		local host = Ext.GetCharacter(CharacterGetHostCharacter())
+		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)
 		local pos2 = GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 7.0)
 		local pos3 = GameHelpers.Grid.GetValidPositionTableInRadius(pos, 6.0)

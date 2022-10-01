@@ -15,7 +15,7 @@ end)
 
 local function IncreaseKillCount(char, fromTargetDying)
 	if CharacterHasSkill(char, "Projectile_LLWEAPONEX_DarkFireball") == 1 then
-		local character = Ext.GetCharacter(char)
+		local character = GameHelpers.GetCharacter(char)
 		local maxCount = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_MaxKillCount", 10)
 		local current = PersistentVars.SkillData.DarkFireballCount[character.MyGuid] or 0
 		if current < maxCount then
@@ -66,7 +66,7 @@ function OnCharacterDied(uuid, force)
 			end
 		else
 			local x,y,z = GetPosition(uuid)
-			for i,v in pairs(Ext.GetCharactersAroundPosition(x, y, z, 20.0)) do
+			for i,v in pairs(GameHelpers.GetCharactersAroundPosition(x, y, z, 20.0)) do
 				if not GameHelpers.Character.IsPlayer(v) and GameHelpers.Character.IsEnemy(uuid, v) then
 					SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
 					IncreaseKillCount(v, uuid)
@@ -109,7 +109,7 @@ Ext.RegisterOsirisListener("ObjectLostTag", 2, "after", function(object, tag)
 		return
 	end
 	if tag == "LLWEAPONEX_Unarmed" then
-		EquipmentManager:CheckWeaponRequirementTags(Ext.GetCharacter(object))
+		EquipmentManager:CheckWeaponRequirementTags(GameHelpers.GetCharacter(object))
 	end
 end)
 
@@ -122,7 +122,7 @@ local LoneWolfBannerLifeStealScale = {
 
 Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(uuid)
 	uuid = StringHelpers.GetUUID(uuid)
-	local character = Ext.GetCharacter(uuid)
+	local character = GameHelpers.GetCharacter(uuid)
 	if character and GameHelpers.Character.IsPlayer(character) then
 		local loneWolfBanner = Uniques.LoneWolfBanner:GetUUID(uuid)
 		if loneWolfBanner then
@@ -137,7 +137,7 @@ Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(uuid)
 		end
 		--for _,slotName in Data.VisibleEquipmentSlots:Get() do
 		for i,v in pairs(character:GetInventoryItems()) do
-			local item = Ext.GetItem(v)
+			local item = GameHelpers.GetItem(v)
 			if item ~= nil and item.Stats ~= nil then
 				UniqueManager.LevelUpUnique(character, item)
 			end

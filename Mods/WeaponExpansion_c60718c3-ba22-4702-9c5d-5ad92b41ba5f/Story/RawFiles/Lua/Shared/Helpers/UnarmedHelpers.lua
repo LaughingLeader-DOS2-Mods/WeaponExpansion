@@ -70,7 +70,7 @@ local function GetEquippedUnarmedArmor(character)
 		local items = character:GetInventoryItems()
 		for i=1,math.min(#items, 14) do
 			if items[i] then
-				local item = Ext.GetItem(items[i])
+				local item = GameHelpers.GetItem(items[i])
 				if item and not GameHelpers.Item.IsObject(item) and GameHelpers.ItemHasTag(item, _UNARMEDTAGS) then
 					if isClient then
 						if _SLOTS[item.Stats.ItemSlot] == true  then

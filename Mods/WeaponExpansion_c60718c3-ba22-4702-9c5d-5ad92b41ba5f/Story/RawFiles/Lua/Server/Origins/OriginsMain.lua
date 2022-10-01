@@ -156,7 +156,7 @@ function Origins_InitCharacters(region)
 			CharacterAttachToGroup(Origin.Harken, host)
 			SetOnStage(Origin.Harken, 1)
 			CharacterAssignToUser(user, Origin.Harken)
-			local pdata = Ext.GetCharacter(Origin.Harken).PlayerCustomData
+			local pdata = GameHelpers.GetCharacter(Origin.Harken).PlayerCustomData
 			if pdata ~= nil then
 				pdata.OriginName = "LLWEAPONEX_Harken"
 				pdata.Race = "Dwarf"
@@ -171,7 +171,7 @@ function Origins_InitCharacters(region)
 			CharacterAttachToGroup(Origin.Korvash, host)
 			SetOnStage(Origin.Korvash, 1)
 			CharacterAssignToUser(user, Origin.Korvash)
-			pdata = Ext.GetCharacter(Origin.Korvash).PlayerCustomData
+			pdata = GameHelpers.GetCharacter(Origin.Korvash).PlayerCustomData
 			if pdata ~= nil then
 				pdata.OriginName = "LLWEAPONEX_Korvash"
 				pdata.Race = "Lizard"
@@ -248,7 +248,7 @@ function Origins_FixSkillBar(uuid)
 		slotNum = slotNum + 1
 	end
 	-- local slot = 0
-	-- for i,skill in pairs(Ext.GetCharacter(uuid):GetSkills()) do
+	-- for i,skill in pairs(GameHelpers.GetCharacter(uuid):GetSkills()) do
 	-- 	NRD_SkillBarSetSkill(uuid, slot, skill)
 	-- 	slot = slot + 1
 	-- end
@@ -393,14 +393,14 @@ Ext.RegisterConsoleCommand("llweaponex_darkfireballtest", function(call, amount)
 end)
 
 local function HasHarkenVisualSet(uuid)
-	local character = Ext.GetCharacter(uuid)
+	local character = GameHelpers.GetCharacter(uuid)
 	return character ~= nil and character.RootTemplate ~= nil and character.RootTemplate.VisualTemplate == "b8ddbc75-415f-4894-afc2-2256e11b723d"
 end
 
 function Harken_SwapTattoos(uuid)
 	-- CharacterSetVisualElement doesn't work in the editor
 	if Ext.GameVersion() ~= "v3.6.51.9303" then
-		local character = Ext.GetCharacter(uuid)
+		local character = GameHelpers.GetCharacter(uuid)
 		if character ~= nil and character.RootTemplate ~= nil 
 		and character.RootTemplate.VisualTemplate == "b8ddbc75-415f-4894-afc2-2256e11b723d"
 		then

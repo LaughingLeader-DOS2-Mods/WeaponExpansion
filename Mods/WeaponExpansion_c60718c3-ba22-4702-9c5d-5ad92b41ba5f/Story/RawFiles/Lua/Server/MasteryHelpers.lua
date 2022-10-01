@@ -159,7 +159,7 @@ function HasMasteryLevel(uuid,mastery,minLevel)
 end
 
 function HasMasteryRequirement_QRY(call, uuid, tag)
-	return Mastery.HasMasteryRequirement(Ext.GetCharacter(uuid), tag)
+	return Mastery.HasMasteryRequirement(GameHelpers.GetCharacter(uuid), tag)
 end
 
 ---@param character CharacterParam

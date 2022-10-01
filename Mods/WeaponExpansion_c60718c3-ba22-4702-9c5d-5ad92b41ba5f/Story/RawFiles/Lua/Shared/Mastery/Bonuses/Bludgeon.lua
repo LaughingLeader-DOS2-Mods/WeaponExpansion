@@ -233,7 +233,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 3, {
 		local weapons = GameHelpers.Item.FindTaggedEquipment(e.Character, "LLWEAPONEX_Bludgeon")
 		if #weapons > 0 then
 			for i,v in pairs(weapons) do
-				local range = Ext.GetItem(v).Stats.WeaponRange / 100
+				local range = GameHelpers.GetItem(v).Stats.WeaponRange / 100
 				if range > weaponRange then
 					weaponRange = range + 0.25
 				end

@@ -334,7 +334,7 @@ local function CreateRectSurface(projectile, endPos)
 	---@type EsvRectangleSurfaceAction
 	local surf = Ext.CreateSurfaceAction("RectangleSurfaceAction")
 	surf.Target = endPos
-	surf.Position = GameHelpers.Math.ExtendPositionWithForwardDirection(Ext.GetCharacter(projectile.SourceHandle), 2.0, projectile.SourcePosition[1], projectile.SourcePosition[2], projectile.SourcePosition[3])
+	surf.Position = GameHelpers.Math.ExtendPositionWithForwardDirection(GameHelpers.GetCharacter(projectile.SourceHandle), 2.0, projectile.SourcePosition[1], projectile.SourcePosition[2], projectile.SourcePosition[3])
 	surf.SurfaceType = "Fire"
 	surf.SurfaceArea = 2.0
 	surf.Width = 2.0
@@ -408,7 +408,7 @@ Ext.Math.ExtractEulerAngles({table.unpack(me.Stats.Rotation),0,0,0,0,0,0,0,0,0,0
 --     Ext.RegisterConsoleCommand("debug_rotation", function()
 --         _rotationActive = not _rotationActive
 
---         local item = Ext.GetItem(_targetItem)
+--         local item = GameHelpers.GetItem(_targetItem)
 --         if item then
 --             _targetRotation = GameHelpers.Math.RotationMatrixToEuler(item.Rotation)
 --             _targetRotation[1] = _targetRotation[1] + 45
@@ -420,7 +420,7 @@ Ext.Math.ExtractEulerAngles({table.unpack(me.Stats.Rotation),0,0,0,0,0,0,0,0,0,0
 --     ---@param e GameTime
 --     Ext.Events.Tick:Subscribe(function (e)
 --         if _rotationActive then
---             local item = Ext.GetItem(_targetItem)
+--             local item = GameHelpers.GetItem(_targetItem)
 --             if item then
                 
 --             end
@@ -429,7 +429,7 @@ Ext.Math.ExtractEulerAngles({table.unpack(me.Stats.Rotation),0,0,0,0,0,0,0,0,0,0
 -- else
 --     Ext.RegisterNetListener("MyMod_Debug_SetRotation", function (cmd, payload)
 --         local data = Ext.JsonParse(payload)
---         local item = Ext.GetItem(data.NetID)
+--         local item = GameHelpers.GetItem(data.NetID)
 --         item.Rotation = data.Rotation
 --     end)
 -- end

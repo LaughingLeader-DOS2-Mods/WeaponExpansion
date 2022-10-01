@@ -118,7 +118,7 @@ if not Vars.IsClient then
 		PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid] = {}
 		local targetData = PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid]
 		for target in GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=radius, Relation={Enemy=true}}) do
-			--local character = Ext.GetCharacter(v)
+			--local character = GameHelpers.GetCharacter(v)
 			local b,count = HasComboStatus(target.MyGuid)
 			if b then
 				table.insert(targetData, {UUID=target.MyGuid,Count=count,Valid=true})
@@ -187,7 +187,7 @@ if not Vars.IsClient then
 				local hasTarget = false
 				if targetData.Count ~= nil and targetData.Count > 0 then
 					local applyComboStatus = ComboStatuses[math.min(#ComboStatuses, targetData.Count)]
-					local enemy = Ext.GetCharacter(target)
+					local enemy = GameHelpers.GetCharacter(target)
 					if enemy ~= nil then
 						local enemyPos = enemy.WorldPos
 						for target in GameHelpers.Grid.GetNearbyObjects(attacker, {Radius=6, Position=enemyPos, Relation={Enemy=true}}) do
@@ -355,7 +355,7 @@ if not Vars.IsClient then
 			SetTag(source, "LLWEAPONEX_Blademaster_Target_Available")
 		end
 		if ObjectIsCharacter(target) == 1 then
-			local statusObj = Ext.GetCharacter(target):GetStatus(status)
+			local statusObj = GameHelpers.GetCharacter(target):GetStatus(status)
 			if statusObj ~= nil then
 				statusObj.KeepAlive = true
 			end

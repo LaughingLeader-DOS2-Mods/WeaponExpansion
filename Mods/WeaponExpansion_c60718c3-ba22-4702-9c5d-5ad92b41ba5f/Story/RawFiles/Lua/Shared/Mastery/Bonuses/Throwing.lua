@@ -45,17 +45,17 @@ if not Vars.IsClient then
 				local weaponData = PersistentVars.SkillData.ThrowWeapon[char]
 				if weaponData ~= nil then
 					if not StringHelpers.IsNullOrEmpty(weaponData.Weapon) then
-						mainWeapon = Ext.GetItem(weaponData.Weapon).Stats
+						mainWeapon = GameHelpers.GetItem(weaponData.Weapon).Stats
 					end
 					if not StringHelpers.IsNullOrEmpty(weaponData.Shield) then
-						local item = Ext.GetItem(weaponData.Shield)
+						local item = GameHelpers.GetItem(weaponData.Shield)
 						if item.ItemType == "Weapon" then
 							offhandWeapon = item.Stats
 						end
 					end
 				end
 		
-				GameHelpers.Damage.ApplySkillDamage(Ext.GetCharacter(char), data.Target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true, MainWeapon=mainWeapon, OffhandWeapon=offhandWeapon})
+				GameHelpers.Damage.ApplySkillDamage(GameHelpers.GetCharacter(char), data.Target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true, MainWeapon=mainWeapon, OffhandWeapon=offhandWeapon})
 			else
 				PersistentVars.SkillData.ThrowWeapon[char] = nil
 			end
