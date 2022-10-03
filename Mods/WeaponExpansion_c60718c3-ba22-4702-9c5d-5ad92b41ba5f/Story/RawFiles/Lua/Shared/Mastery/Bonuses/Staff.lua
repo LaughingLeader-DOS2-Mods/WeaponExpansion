@@ -52,10 +52,10 @@ local function GetElementalWeakness(character)
 	local resistanceCount = 0
 	if character.MainWeapon ~= nil then
 		for status,b in pairs(GetElementForWeapon(character.MainWeapon)) do
-			local potion = Ext.StatGetAttribute(status, "StatsId")
+			local potion = GameHelpers.Stats.GetAttribute(status, "StatsId", "")
 			if not StringHelpers.IsNullOrWhitespace(potion) then
 				for i,resistanceStat in pairs(checkResistanceStats) do
-					local resistanceValue = Ext.StatGetAttribute(potion, resistanceStat)
+					local resistanceValue = GameHelpers.Stats.GetAttribute(potion, resistanceStat, 0)
 					if resistanceValue ~= 0 then
 						local resEntry = resistanceReductions[resistanceStat]
 						if resEntry == nil then
@@ -71,10 +71,10 @@ local function GetElementalWeakness(character)
 	end
 	if character.OffHandWeapon ~= nil then
 		for _,status in pairs(GetElementForWeapon(character.OffHandWeapon)) do
-			local potion = Ext.StatGetAttribute(status, "StatsId")
+			local potion = GameHelpers.Stats.GetAttribute(status, "StatsId", "")
 			if not StringHelpers.IsNullOrWhitespace(potion) then
 				for i,resistanceStat in pairs(checkResistanceStats) do
-					local resistanceValue = Ext.StatGetAttribute(potion, resistanceStat)
+					local resistanceValue = GameHelpers.Stats.GetAttribute(potion, resistanceStat, 0)
 					if resistanceValue ~= 0 then
 						local resEntry = resistanceReductions[resistanceStat]
 						if resEntry == nil then

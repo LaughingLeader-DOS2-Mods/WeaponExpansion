@@ -38,7 +38,7 @@ if not isClient then
 	local function IsUnarmedHit(handle)
 		for prop,val in pairs(UnarmedHitMatchProperties) do
 			if NRD_HitGetInt(handle, prop) ~= val then
-				--Ext.PrintError(prop,"does not equal", val)
+				--Ext.Utils.PrintError(prop,"does not equal", val)
 				return false
 			end
 		end
@@ -95,7 +95,7 @@ if not isClient then
 			end
 			data.TotalDamageDone = total
 			if Vars.DebugMode then
-				Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage Weapon(%s) (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", weapon and weapon.Name or "nil", data.TotalDamageDone, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
+				Ext.Utils.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage Weapon(%s) (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", weapon and weapon.Name or "nil", data.TotalDamageDone, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
 			end
 			if lizardHits[attacker.MyGuid] == 2 then
 				lizardHits[attacker.MyGuid] = nil

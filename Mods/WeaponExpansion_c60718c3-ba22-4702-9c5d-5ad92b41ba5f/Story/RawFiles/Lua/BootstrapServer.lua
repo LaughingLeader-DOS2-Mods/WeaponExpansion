@@ -191,7 +191,7 @@ Ext.AddPathOverride("Mods/Kalavinkas_Combat_Enhanced_e844229e-b744-4294-9102-a73
 
 Ext.Events.SessionLoaded:Subscribe(function(e)
     if not Ext.IsModLoaded(MODID.ArmorMitigation) then
-        Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
+        Ext.Utils.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
         Ext.Events.BeforeCharacterApplyDamage:Subscribe(BeforeCharacterApplyDamage)
     end
 
@@ -206,7 +206,7 @@ Ext.Events.SessionLoaded:Subscribe(function(e)
         Mods.SuperEnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
         Mods.SuperEnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end
-    Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
+    Ext.Utils.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
 
     itemBonusSkills.Init()
 end)

@@ -175,7 +175,7 @@ function MasteryMenu:BuildMasteryMenu(this)
 		this.setMaxRank(Mastery.Variables.MaxRank)
 		local xpMax = Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required
 		if xpMax <= 0 then
-			Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] Max mastery XP is (",xpMax,")! Is something configured wrong?")
+			Ext.Utils.PrintError("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] Max mastery XP is (",xpMax,")! Is something configured wrong?")
 			xpMax = 12000
 		end
 		for i=1,Mastery.Variables.MaxRank do
@@ -310,62 +310,9 @@ function MasteryMenu:PrepareTooltip(iconType, id, descriptionId, x, y, width, he
 				if not StringHelpers.IsNullOrWhitespace(stat.DescriptionParams) then
 					local statusParams = StringHelpers.Split(stat.DescriptionParams, ";")
 					if statusParams > 0 then
-						local paramValues = {}
-						for _,vID in pairs(statusParams) do
-							local value = ""
-							local params = StringHelpers.Split(vID, ":")
-							if Ext.Events.StatusGetDescriptionParam then
-								local evt = {
-									Description = "",
-									Owner = character.Stats,
-									Params = params,
-									Status = {
-										AbsorbSurfaceTypes = {},
-										DisplayName = statusName,
-										HasStats = stat.StatsId ~= "",
-										Icon = stat.Icon,
-										StatusId = stat.Name,
-										StatusName = stat.DisplayName
-									},
-									StatusSource = character.Stats,
-									Stopped = false
-								}
-								evt.StopPropagation = function()
-									evt.Stopped = true
-								end
-								Ext.Events.StatusGetDescriptionParam:Throw(evt)
-								if not StringHelpers.IsNullOrEmpty(evt.Description) then
-									value = evt.Description
-								end
-							end
-							if StringHelpers.IsNullOrEmpty(value) then
-								if params[2] then
-									local propType,propID,propAttribute = table.unpack(params)
-								elseif params[1] then
-									local prop = params[1]
-									if prop == "Damage" then
-										if GameHelpers.Stats.Exists(stat.DamageStats, "Weapon") then
-											local fakeWeapon = GameHelpers.Ext.CreateWeaponTable(stat.DamageStats, character.Stats.Level)
-											local damageRanges = UnarmedHelpers.CalculateWeaponDamageRange(character.Stats, fakeWeapon)
-											local damageText = GameHelpers.Tooltip.FormatDamageRange(damageRanges)
-											paramValues[#paramValues+1] = damageText
-										end
-									else
-										local attValue = stat[prop]
-										if attValue ~= nil then
-											paramValues[#paramValues+1] = attValue
-										end
-									end
-								end
-							else
-								paramValues[#paramValues+1] = value
-							end
-						end
+						local paramValues = GameHelpers.Tooltip.GetStatusDescriptionParamValues(stat, character)
 						if #paramValues > 0 then
-							local fakeTS = {
-								Value = statusTooltipText
-							}
-							statusTooltipText = GameHelpers.Tooltip.ReplacePlaceholders(Classes.TranslatedString.ReplacePlaceholders(fakeTS, table.unpack(paramValues)), character)
+							statusTooltipText = GameHelpers.Tooltip.ReplacePlaceholders(StringHelpers.ReplacePlaceholders(statusTooltipText, table.unpack(paramValues)), character)
 							addedParams = true
 						end
 					end
@@ -517,7 +464,7 @@ Input.RegisterListener({"PartyManagement", "ToggleMap"}, function(eventName, pre
 			end
 		else
 			-- CTRL + Shift + M
-			--Ext.Print(eventName, Input.GetKeyState("FlashCtrl"), Input.GetKeyState("SplitItemToggle"))
+			--Ext.Utils.Print(eventName, Input.GetKeyState("FlashCtrl"), Input.GetKeyState("SplitItemToggle"))
 			if eventName == "ToggleMap" and pressed and Input.IsPressed("SplitItemToggle") then
 				MasteryMenu:Open()
 			end

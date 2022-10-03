@@ -470,7 +470,7 @@ local function FindTooltipTypeIndex(ui, enumType)
 			elseif tooltipEntryType == Data.UI.TOOLTIP_TYPE.Splitter then
 
 			else
-				Ext.PrintError("[FindTooltipTypeIndex] No valid enum match ("..tostring(tooltipEntryType)..") at index ", index)
+				Ext.Utils.PrintError("[FindTooltipTypeIndex] No valid enum match ("..tostring(tooltipEntryType)..") at index ", index)
 				totalNil = totalNil + 1
 				index = index + 1
 			end
@@ -962,7 +962,7 @@ local function DumpTooltipArray(ui)
 			elseif tooltipEntryMatch(tooltipEntryType, Data.UI.TOOLTIP_TYPE.Splitter, index) then
 
 			else
-				Ext.PrintError("[DumpTooltipArray] No valid enum match ("..tostring(tooltipEntryType)..") at index ", index)
+				Ext.Utils.PrintError("[DumpTooltipArray] No valid enum match ("..tostring(tooltipEntryType)..") at index ", index)
 				totalNil = totalNil + 1
 				index = index + 1
 			end

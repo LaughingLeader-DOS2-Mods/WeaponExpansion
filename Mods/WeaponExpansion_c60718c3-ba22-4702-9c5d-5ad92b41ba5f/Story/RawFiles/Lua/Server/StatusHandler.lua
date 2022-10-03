@@ -51,7 +51,7 @@ local function InvokeEndTurnStatusRemovedCallbacks(target, status, source)
 		for i,callback in pairs(callbacks) do
 			local s,err = xpcall(callback, debug.traceback, target, status, source)
 			if not s then
-				Ext.PrintError(err)
+				Ext.Utils.PrintError(err)
 			end
 		end
 	end

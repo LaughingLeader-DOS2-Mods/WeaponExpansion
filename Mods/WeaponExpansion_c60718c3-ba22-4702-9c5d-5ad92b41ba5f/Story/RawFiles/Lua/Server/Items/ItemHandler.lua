@@ -110,7 +110,7 @@ function GenerateTradeTreasure(traderGUID, treasure)
 				end
 				ItemRemove(backpackGUID)
 			else
-				Ext.PrintError("[WeaponExpansion:GenerateTradeTreasure] Failed to create backpack from root template 'LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830'")
+				Ext.Utils.PrintError("[WeaponExpansion:GenerateTradeTreasure] Failed to create backpack from root template 'LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830'")
 				CharacterGiveReward(traderGUID, treasure, 1)
 			end
 		end)

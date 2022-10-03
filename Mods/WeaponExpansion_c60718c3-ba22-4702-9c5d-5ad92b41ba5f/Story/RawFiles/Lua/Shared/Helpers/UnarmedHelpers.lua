@@ -247,7 +247,7 @@ function UnarmedHelpers.IsUnarmedWeaponStat(stat)
 		end
 		for _,v in pairs(stat.DynamicStats) do
 			if not StringHelpers.IsNullOrWhitespace(v.ObjectInstanceName) then
-				local tagsString = Ext.StatGetAttribute(v.ObjectInstanceName, "Tags")
+				local tagsString = GameHelpers.Stats.GetAttribute(v.ObjectInstanceName, "Tags", "")
 				if not StringHelpers.IsNullOrWhitespace(tagsString) then
 					local tags = StringHelpers.Split(tagsString, ";")
 					if TableHelpers.HasValue(tags, _UNARMEDTAGS, false) then

@@ -42,23 +42,23 @@ local ignore_skill_names = {
 	NPC = true
 }
 
-local function CanAddBonusSkill(stat, tier)
-	if Ext.StatGetAttribute(stat, "ForGameMaster") == "Yes" then
+local function CanAddBonusSkill(statID, tier)
+	local stat = Ext.Stats.Get(statID, nil, false)
+	if stat and stat.ForGameMaster == "Yes" then
 		if bonusSkillAllowedTiers[tier] ~= true then
 			return false
 		end
-		if Ext.StatGetAttribute(stat, "IsEnemySkill") == "Yes" then
+		if stat.IsEnemySkill == "Yes" then
 			return false
 		end
 		for str,b in pairs(ignore_skill_names) do
-			if string.find(stat, str) then
+			if string.find(statID, str) then
 				return false
 			end
 		end
 		return true
-	else
-		return false
 	end
+	return false
 end
 
 local function LoadBonusSkills()
@@ -80,7 +80,7 @@ local function LoadBonusSkills()
 	end
 	--print("[WeaponExpansion] Item bonus skills:", Ext.JsonStringify(ItemBonusSkills))
 end
-
+--TODO Update
 function RollForBonusSkill(item,stat,itemType,rarity)
 	-- Legendary BoostType deltamods only start showing up at Epic rarity and above.
 	local rarityVal = Data.ItemRarity[rarity]
@@ -88,13 +88,13 @@ function RollForBonusSkill(item,stat,itemType,rarity)
 		local skills = NRD_ItemGetPermanentBoostString(item, "Skills") or ""
 		local nextSkill = nil
 		if itemType == "Weapon" then
-			local requirements = WeapontypeRequirements[Ext.StatGetAttribute(stat, "WeaponType")]
+			local requirements = WeapontypeRequirements[GameHelpers.Stats.GetAttribute(stat, "WeaponType", "None")]
 			if requirements ~= nil then
 				local chance = GameHelpers.GetExtraData("LLWEAPONEX_Loot_BonusSkillChance_Weapon", 20)
 				if rarityVal > Data.ItemRarity.Epic then
 					chance = chance + ((rarityVal - Data.ItemRarity.Epic) * 10)
 				end
-				if GameHelpers.Roll(chance) then
+				if GameHelpers.Math.Roll(chance) then
 					local skillsTable = nil
 					if type(requirements) == "table" then
 						skillsTable = ItemBonusSkills[requirements[1]]
@@ -114,7 +114,7 @@ function RollForBonusSkill(item,stat,itemType,rarity)
 			end
 		elseif itemType == "Shield" then
 			local chance = GameHelpers.GetExtraData("LLWEAPONEX_Loot_BonusSkillChance_Shield", 30)
-			if GameHelpers.Roll(chance) then
+			if GameHelpers.Math.Roll(chance) then
 				local ranSkill = Common.GetRandomTableEntry(ItemBonusSkills.ShieldWeapon)
 				if ranSkill ~= nil and not string.find(skills, nextSkill) then
 					nextSkill = ranSkill

@@ -23,8 +23,8 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 		if b and damageList ~= nil then
 			return damageList,deathType
 		elseif not b then
-			Ext.PrintError("Error getting damage for skill ",skill.Name)
-			Ext.PrintError(damageList)
+			Ext.Utils.PrintError("Error getting damage for skill ",skill.Name)
+			Ext.Utils.PrintError(damageList)
 		end
 	elseif attackerIsCharacter then
 		-- Unarmed weapon damage scaling

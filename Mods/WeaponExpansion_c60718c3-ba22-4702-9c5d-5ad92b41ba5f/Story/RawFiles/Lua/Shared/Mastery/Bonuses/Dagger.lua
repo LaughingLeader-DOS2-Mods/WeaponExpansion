@@ -140,7 +140,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 				GameHelpers.Status.Remove(e.Data.Target, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
 				local sourceSkill = CharacterHasSkill(e.Character, "Projectile_EnemyThrowingKnife") == 1 and "Projectile_EnemyThrowingKnife" or "Projectile_ThrowingKnife"
 				GameHelpers.Skill.SetCooldown(e.Character, sourceSkill, 0.0)
-				local apCost = Ext.StatGetAttribute(sourceSkill, "ActionPoints")
+				local apCost = GameHelpers.Stats.GetAttribute(sourceSkill, "ActionPoints", 0)
 				if apCost > 1 then
 					local refundMult = math.min(100, math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Backlash_APRefundPercentage", 50)))
 					if refundMult > 0 then

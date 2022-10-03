@@ -5,15 +5,17 @@ end
 ---@param source EsvCharacter
 ---@param item EsvItem
 local function RunBreachKnockback(source, item)
-	local radius = Ext.StatGetAttribute("Projectile_LLWEAPONEX_RemoteMine_Breach", "ExplodeRadius")
-	for target in GameHelpers.Grid.GetNearbyObjects(source, {Radius=radius, Position=item.WorldPos}) do
-		local startPos = target.WorldPos
-		local dir = GameHelpers.Math.GetDirectionVector(item.WorldPos, target.WorldPos)
-		dir[1] = dir[1] * -1
-		dir[3] = dir[3] * -1
-		local tx,ty,tz = GameHelpers.Grid.GetValidPositionAlongLine(startPos, dir, 3)
-		if tx ~= nil and tz ~= nil then
-			GameHelpers.ForceMoveObjectToPosition(source, target, {tx,ty,tz})
+	local radius = GameHelpers.Stats.GetAttribute("Projectile_LLWEAPONEX_RemoteMine_Breach", "ExplodeRadius", 0)
+	if radius > 0 then
+		for target in GameHelpers.Grid.GetNearbyObjects(source, {Radius=radius, Position=item.WorldPos}) do
+			local startPos = target.WorldPos
+			local dir = GameHelpers.Math.GetDirectionVector(item.WorldPos, target.WorldPos)
+			dir[1] = dir[1] * -1
+			dir[3] = dir[3] * -1
+			local tx,ty,tz = GameHelpers.Grid.GetValidPositionAlongLine(startPos, dir, 3)
+			if tx ~= nil and tz ~= nil then
+				GameHelpers.ForceMoveObjectToPosition(source, target, {tx,ty,tz})
+			end
 		end
 	end
 end
@@ -124,7 +126,7 @@ Timer.Subscribe("LLWEAPONEX_DetonateMines", function (e)
 end)
 
 -- SkillManager.Register.Cast("Projectile_LLWEAPONEX_RemoteMine_Breach", function(e)
--- 	local radius = Ext.StatGetAttribute(e.Skill, "ExplodeRadius")
+-- 	local radius = GameHelpers.Stats.GetAttribute(e.Skill, "ExplodeRadius")
 -- end)
 
 StatusManager.Register.Applied("LLWEAPONEX_REMOTEMINE_BREACHED", function(target, status, source)

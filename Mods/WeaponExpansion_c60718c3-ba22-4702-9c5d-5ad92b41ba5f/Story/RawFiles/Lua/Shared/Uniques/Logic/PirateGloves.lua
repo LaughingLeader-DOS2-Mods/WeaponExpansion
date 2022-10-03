@@ -36,7 +36,7 @@ else
 				end
 			end
 		end
-		Ext.Print(event,Lib.serpent.block(buttons)) ]]
+		Ext.Utils.Print(event,Lib.serpent.block(buttons)) ]]
 	end)
 	Ext.RegisterUITypeCall(Data.UIType.contextMenu.Object, "setMcSize", function(ui, event)
 		if Vars.DebugMode or GameHelpers.CharacterOrEquipmentHasTag(Client:GetCharacter(), "LLWEAPONEX_InfinitePickpocket") then

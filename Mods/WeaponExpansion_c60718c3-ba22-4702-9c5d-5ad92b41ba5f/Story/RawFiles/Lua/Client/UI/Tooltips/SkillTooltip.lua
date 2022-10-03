@@ -65,7 +65,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 	local descriptionElement = tooltip:GetElement("SkillDescription") or {Type="SkillDescription", Label = ""}
 	if skill == "Target_LLWEAPONEX_RemoteMine_Detonate" then
 		if GetSettings().Global:FlagEquals("LLWEAPONEX_RemoteChargeDetonationCountDisabled", true) then
-			descriptionElement.Label = Text.SkillTooltip.RemoteMineNoRestrictionDescription:ReplacePlaceholders(Ext.StatGetAttribute("Target_LLWEAPONEX_RemoteMine_Detonate", "TargetRadius"))
+			descriptionElement.Label = Text.SkillTooltip.RemoteMineNoRestrictionDescription:ReplacePlaceholders(GameHelpers.Stats.GetAttribute("Target_LLWEAPONEX_RemoteMine_Detonate", "TargetRadius", 1))
 		end
 	end
 
@@ -109,7 +109,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 				end
 			end
 		else
-			Ext.PrintError(text)
+			Ext.Utils.PrintError(text)
 		end
 	end
 
@@ -134,7 +134,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 					end
 				end
 			else
-				Ext.PrintError(text)
+				Ext.Utils.PrintError(text)
 			end
 		end
 	end

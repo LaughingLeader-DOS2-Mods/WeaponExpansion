@@ -19,11 +19,11 @@ local function FireCallbacks(id, target, attacker, success)
 			if callback ~= nil then
 				local b,result = xpcall(callback, debug.traceback, target, attacker, success)
 				if not b then
-					Ext.PrintError("[LLWEAPONEX:DeathManager] Error invoking callback:")
-					Ext.PrintError(result)
+					Ext.Utils.PrintError("[LLWEAPONEX:DeathManager] Error invoking callback:")
+					Ext.Utils.PrintError(result)
 				end
 			else
-				Ext.PrintError("FireCallbacks", i, id, target, attacker, success)
+				Ext.Utils.PrintError("FireCallbacks", i, id, target, attacker, success)
 			end
 		end
 	end

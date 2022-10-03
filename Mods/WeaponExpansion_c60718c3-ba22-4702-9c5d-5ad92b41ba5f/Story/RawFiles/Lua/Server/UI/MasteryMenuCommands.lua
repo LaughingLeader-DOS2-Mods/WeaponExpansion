@@ -91,7 +91,7 @@ local function RequestStatusTooltip(call,datastr)
 			Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_MasteryMenu_StatusHandleRetrieved", resultStr)
 		end
 	else
-		Ext.PrintError("MessageData:CreateFromString failed.")
+		Ext.Utils.PrintError("MessageData:CreateFromString failed.")
 	end
 end
 

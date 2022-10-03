@@ -139,7 +139,7 @@ function UniqueManager.LinkItems(item1, item2, skipSave)
 		end
 	end, debug.traceback)
 	if not b then
-		Ext.PrintError(err)
+		Ext.Utils.PrintError(err)
 	end
 end
 
@@ -176,7 +176,7 @@ function UniqueManager.OnDeath(char)
 				else
 					local b,result = xpcall(unique.OnOwnerDeath, debug.traceback, unique, char)
 					if not b then
-						Ext.PrintError(result)
+						Ext.Utils.PrintError(result)
 					end
 				end
 			end
@@ -302,7 +302,7 @@ if not isClient then
 			local host = CharacterGetHostCharacter()
 			unique:Transfer(host)
 		else
-			Ext.PrintError("[llweaponex_teleportunique]",id,"is not a valid unique item ID!")
+			Ext.Utils.PrintError("[llweaponex_teleportunique]",id,"is not a valid unique item ID!")
 		end
 	end)
 

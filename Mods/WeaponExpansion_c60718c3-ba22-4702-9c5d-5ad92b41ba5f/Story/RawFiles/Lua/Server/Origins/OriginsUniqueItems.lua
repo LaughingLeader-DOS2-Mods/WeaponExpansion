@@ -236,7 +236,7 @@ function InitOriginsUniques(region)
 					else
 						local b,err = xpcall(InitializeUnique, debug.traceback, id, data, region)
 						if not b then
-							Ext.PrintError(err)
+							Ext.Utils.PrintError(err)
 						end
 					end
 				else

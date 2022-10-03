@@ -53,7 +53,7 @@ local function SetItemStats(target, tbl)
 					end
 				end, debug.traceback)
 				if not b then
-					Ext.PrintError(err)
+					Ext.Utils.PrintError(err)
 				end
 			end
 		end
@@ -114,10 +114,10 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 			end
 			--stats.ShouldSyncStats = true
 			if Vars.DebugMode then
-				Ext.Print(string.format("[LLWEAPONEX_SetItemStats] Synced Item [%s]", stats.Name))
+				Ext.Utils.Print(string.format("[LLWEAPONEX_SetItemStats] Synced Item [%s]", stats.Name))
 			end
 		elseif Vars.DebugMode then
-			--Ext.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s) UUID(%s) Slot(%s) Owner(%s)", data.NetID, data.UUID, data.Slot, data.Owner))
+			--Ext.Utils.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s) UUID(%s) Slot(%s) Owner(%s)", data.NetID, data.UUID, data.Slot, data.Owner))
 			fprint(LOGLEVEL.ERROR, "[LLWEAPONEX_SetItemStats] Failed to get item. ID(%s) UUID(%s) NetID(%s)", data.ID, data.UUID, data.NetID)
 		end
 	end
@@ -142,7 +142,7 @@ local function SyncItemBoostChanges(item, changes)
 				boostEntry[k] = v
 			end
 		else
-			Ext.PrintError(string.format("[LLWEAPONEX_DeltaModSwapper_SyncBoosts] No DynamicStats entry for boost (%s)", boostName))
+			Ext.Utils.PrintError(string.format("[LLWEAPONEX_DeltaModSwapper_SyncBoosts] No DynamicStats entry for boost (%s)", boostName))
 		end
 	end
 end
@@ -156,7 +156,7 @@ Ext.RegisterNetListener("LLWEAPONEX_DeltaModSwapper_SyncBoosts", function(cmd, p
 		else
 			syncUpdateScreenItems[data.NetID] = data.Changes
 			if Vars.DebugMode then
-				Ext.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s)", data.NetID))
+				Ext.Utils.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s)", data.NetID))
 			end
 		end
 	end

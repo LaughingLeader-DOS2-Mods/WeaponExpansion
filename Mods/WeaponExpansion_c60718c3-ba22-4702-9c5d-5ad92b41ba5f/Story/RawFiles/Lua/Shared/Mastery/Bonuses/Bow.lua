@@ -49,14 +49,14 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 1, {
 					0,
 					-rot[9] * 1.25,
 				}
-				local radius = (Ext.StatGetAttribute(e.Skill, "TargetRadius") or 6.0) / 2
+				local radius = math.max(e.Data.SkillData.TargetRadius, 1) / 2
 				e.Data:ForEach(function(v, targetType, skillEventData)
 					if bonusShots < maxBonusShots then
 						local b,result = xpcall(OnPinDownTarget, debug.traceback, v, targetType, e.Character, e.Skill, forwardVector, radius)
 						if result then
 							bonusShots = bonusShots + 1
 						elseif not b then
-							Ext.PrintError(result)
+							Ext.Utils.PrintError(result)
 						end
 					end
 				end, e.Data.TargetMode.All)
@@ -192,7 +192,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 			if test.SignalSuccess == self.ID then
 				keepAttacking = false
 				test.SuccessMessage = string.format("[%s] Took (%s) attacks to finally critical hit (%s%% chance).", self.ID, tries, GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttackCriticalChance", 5))
-				Ext.Print(test.SuccessMessage)
+				Ext.Utils.Print(test.SuccessMessage)
 			else
 				local data = PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[char]
 				test:AssertNotEquals(data, nil, "Test character has no PersistentVars.MasteryMechanics.BowCumulativeCriticalChance data.")
@@ -213,7 +213,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
 		if max <= 0 then
 			return "0"
 		end
-		local strikeCount = Ext.StatGetAttribute("ProjectileStrike_RainOfArrows", "StrikeCount")
+		local strikeCount = GameHelpers.Stats.GetAttribute("ProjectileStrike_RainOfArrows", "StrikeCount", 0)
 		if max > strikeCount then
 			max = strikeCount
 		end
@@ -225,12 +225,12 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
 		end
 		return string.format("%i", min)
 	end).SkillUsed(function(self, e, bonuses)
-		local strikeCount = Ext.StatGetAttribute(e.Skill, "StrikeCount")
+		local strikeCount = e.Data.SkillData.StrikeCount
 		local max = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_MaxArrows", 5, true)
 		if strikeCount > 0 and max > 0 then
 			local min = math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_MinArrows", 1, true))
 			if min ~= max then
-				local ran = Ext.Random(min, max)
+				local ran = Ext.Utils.Random(min, max)
 				PersistentVars.MasteryMechanics.BowExplosiveRainArrowCount[e.Character.MyGuid] = {Total = strikeCount, Remaining = ran}
 			else
 				PersistentVars.MasteryMechanics.BowExplosiveRainArrowCount[e.Character.MyGuid] = {Total = strikeCount, Remaining = max}

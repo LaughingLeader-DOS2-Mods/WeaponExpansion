@@ -298,7 +298,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 4, {
 		AllSkills = true,
 		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
 			if tooltipType == "skill" then
-				if Ext.StatGetAttribute(id, "Requirement") == "DaggerWeapon" then
+				if GameHelpers.Stats.GetAttribute(id, "Requirement", "None") == "DaggerWeapon" then
 					return true
 				end
 			end

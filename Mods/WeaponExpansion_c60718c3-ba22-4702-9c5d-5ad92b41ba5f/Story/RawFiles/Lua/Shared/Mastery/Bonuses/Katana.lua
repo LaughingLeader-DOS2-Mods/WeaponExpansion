@@ -114,7 +114,7 @@ if not Vars.IsClient then
 	end
 
 	SkillManager.Register.Cast("Shout_LLWEAPONEX_Katana_VanquishersPath", function(e)
-		local radius = Ext.StatGetAttribute("Shout_LLWEAPONEX_Katana_VanquishersPath", "AreaRadius")
+		local radius = GameHelpers.Stats.GetAttribute("Shout_LLWEAPONEX_Katana_VanquishersPath", "AreaRadius", 1)
 		PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid] = {}
 		local targetData = PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid]
 		for target in GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=radius, Relation={Enemy=true}}) do
@@ -336,7 +336,7 @@ if not Vars.IsClient then
 					end
 					local b,result = xpcall(damageCallback, debug.traceback, i, target, source)
 					if not b then
-						Ext.PrintError(result)
+						Ext.Utils.PrintError(result)
 					end
 				end
 				local hasTarget = false

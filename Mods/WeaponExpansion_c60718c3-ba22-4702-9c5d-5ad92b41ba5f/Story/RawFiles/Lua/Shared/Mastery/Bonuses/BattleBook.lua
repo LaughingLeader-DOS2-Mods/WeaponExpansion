@@ -188,7 +188,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		Skills = {"Cone_GroundSmash", "Cone_EnemyGroundSmash"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BattleStomp", "<font color='#99AACC'>Knowledge of tectonic shifts allow you to create a secondary wave of force from the target, back to you, for double damage.</font>"),
 	}).Register.SkillUsed(function(self, e, bonuses)
-		local range = (Ext.StatGetAttribute(e.Skill, "Range") or 10) + 1
+		local range = GameHelpers.Stats.GetAttribute(e.Skill, "Range", 10) + 1
 		local target = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, range)
 
 		local _,angle,_ = GetRotation(e.Character.MyGuid)
@@ -225,7 +225,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		GetIsTooltipActive = function (self, skillOrStatus, character, tooltipType, item)
 			if tooltipType == "item" then
 				local statsId = GameHelpers.Item.GetItemStat(item)
-				if statsId and Ext.StatGetAttribute(statsId, "UseAPCost") > 0 then
+				if statsId and GameHelpers.Stats.GetAttribute(statsId, "UseAPCost", 0) > 0 then
 					if StringHelpers.Contains({statsId, item.RootTemplate.Name}, "scroll", true) or GameHelpers.Stats.HasParent(statsId, "_Scrolls") then
 						return true
 					end
@@ -524,11 +524,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_Scholar","<font color='#99AACC'>Deal <font color='#22FF33'>[1]% more damage</font> due to [2] being the most memorized ability school.<br>Note: [3]% damage per [4] total slots, multiplied by [5] ([6] ability slots / [4] total).</font>"),
 		GetIsTooltipActive = function(bonus, id, character, tooltipType)
 			if tooltipType == "skill" and not GameHelpers.Skill.IsAction(id) then
-				local damageMult = Ext.StatGetAttribute(id, "Damage Multiplier")
+				local damageMult = GameHelpers.Stats.GetAttribute(id, "Damage Multiplier", 0)
 				if damageMult > 0 then
 					local ability,abilitySlots,totalSlots = GetCharacterMajorityMemorizedSkillAbility(character)
 					--fprint(LOGLEVEL.DEFAULT, "[GetCharacterMajorityMemorizedSkillAbility] ability(%s) abilitySlots(%s) totalSlots(%s)", ability, abilitySlots, totalSlots)
-					local skillAbility = Ext.StatGetAttribute(id, "Ability")
+					local skillAbility = GameHelpers.Stats.GetAttribute(id, "Ability", "None")
 					if ability[skillAbility] == true then
 						return true
 					end
@@ -539,7 +539,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 		OnGetTooltip = function(self, id, character, tooltipType)
 			if tooltipType == "skill" then
 				local ability,totalAbilitySlots,totalSlots = GetCharacterMajorityMemorizedSkillAbility(character)
-				local skillAbility = Ext.StatGetAttribute(id, "Ability")
+				local skillAbility = GameHelpers.Stats.GetAttribute(id, "Ability", "None")
 				if ability[skillAbility] == true then
 					local abilitySlots = totalAbilitySlots[skillAbility]
 					local boostPerSlot = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Scholar_DamageBoostPerTotalSkillSlots", 1)
@@ -551,7 +551,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 					end
 					--fprint(LOGLEVEL.DEFAULT, "[GetCharacterMajorityMemorizedSkillAbility] ability(%s) damageBoost(%s)", skillAbility, damageBoost)
 					local abilityName = string.format("<font color='%s'>%s</font>", Data.Colors.Ability[skillAbility], LocalizedText.SkillAbility[skillAbility])
-					--local baseDamageMult = Ext.StatGetAttribute(id, "Damage Multiplier")
+					--local baseDamageMult = GameHelpers.Stats.GetAttribute(id, "Damage Multiplier")
 					--local damageText = GameHelpers.Tooltip.GetSkillDamageText(id, character, {["Damage Muliplier"] = baseDamageMult + damageBoost})
 					return self.Tooltip:ReplacePlaceholders(damageBoost, abilityName, boostPerSlot, totalSlots, damageBoostText, abilitySlots)
 				end
@@ -622,7 +622,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 4, {
 			local reducedCooldown = false
 			for _,v in pairs(e.Character.SkillManager.Skills) do
 				if v.SkillId ~= e.Skill and _IsSkillMemorized(v, true) then
-					local skillAbility = Ext.StatGetAttribute(v.SkillId, "Ability")
+					local skillAbility = GameHelpers.Stats.GetAttribute(v.SkillId, "Ability", "None")
 					if abilities[skillAbility] then
 						local nextCD = math.max(0, v.ActiveCooldown - turnCooldown)
 						GameHelpers.Skill.SetCooldown(e.Character, v.SkillId, nextCD)

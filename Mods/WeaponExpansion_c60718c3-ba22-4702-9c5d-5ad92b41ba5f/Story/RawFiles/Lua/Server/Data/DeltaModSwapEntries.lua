@@ -160,15 +160,17 @@ DeltamodSwap.LLWEAPONEX_Rod = {
 
 ---@param item EsvItem
 local function GetQuarterstaffAttributeBoost(item, deltamod)
-	local requirements = Ext.StatGetAttribute(item.StatsId, "Requirements")
-	if requirements ~= nil then
-		for i,entry in pairs(requirements) do
+	local b,result = GameHelpers.Stats.TryGetAttribute(item.StatsId, "Requirements", function (stat, attribute, value)
+		for i,entry in pairs(value) do
 			if entry.Param == "Finesse" then
 				return "Boost_Weapon_Primary_Finesse_Medium"
 			end
 		end
+	end)
+	if not b then
+		return "Boost_Weapon_Primary_Strength_Medium"
 	end
-	return "Boost_Weapon_Primary_Strength_Medium"
+	return result
 end
 DeltamodSwap.LLWEAPONEX_Quarterstaff = {
 	Boost_Weapon_Ability_FireSpecialist_Staff = "Boost_Weapon_Ability_WarriorLore_Spear",

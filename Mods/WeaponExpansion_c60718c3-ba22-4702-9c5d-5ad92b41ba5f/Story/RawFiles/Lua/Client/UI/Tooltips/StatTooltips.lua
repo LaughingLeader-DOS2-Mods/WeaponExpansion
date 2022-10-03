@@ -145,7 +145,7 @@ local function OnStatTooltip(character, stat, tooltip)
 	if handler then
 		local b,err = xpcall(handler, debug.traceback, character, stat, tooltip)
 		if not b then
-			Ext.PrintError(err)
+			Ext.Utils.PrintError(err)
 		end
 	end
 end

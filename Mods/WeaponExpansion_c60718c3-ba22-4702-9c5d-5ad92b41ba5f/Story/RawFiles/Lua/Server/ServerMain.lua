@@ -51,10 +51,10 @@ function GetHandedness(weapon)
     local stat = NRD_ItemGetStatsId(weapon)
     local handedness = NRD_StatGetString(stat, "IsTwoHanded")
     if handedness == "Yes" then
-        Ext.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item is two-handed.")
+        Ext.Utils.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item is two-handed.")
         return true
     elseif handedness == "No" then
-        Ext.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item is one-handed.")
+        Ext.Utils.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item is one-handed.")
         return false
     else
         return nil
@@ -77,7 +77,7 @@ function TagHandedness(player)
             end
         end
     end
-    Ext.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item check done.")
+    Ext.Utils.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item check done.")
 end
 
 function TagItemType(player)
@@ -171,7 +171,7 @@ function CanRedirectHit(target, handle, hit_type)
         local missed = NRD_HitGetInt(handle, "Missed")
         local dodged = NRD_HitGetInt(handle, "Dodged")
         local blocked = NRD_HitGetInt(handle, "Blocked")
-        Ext.Print("[LLWEAPONEX_Main.lua:CanRedirectHit] Missed (",missed,"). Dodged (",dodged,") Blocked (",blocked,")")
+        Ext.Utils.Print("[LLWEAPONEX_Main.lua:CanRedirectHit] Missed (",missed,"). Dodged (",dodged,") Blocked (",blocked,")")
         if missed ~= 1 and dodged ~= 1 and blocked ~= 1 then
             return true
         end
@@ -192,7 +192,7 @@ function RedirectDamage(blocker, target, attacker, handlestr, reduction_str)
         --if CanRedirectHit(target, handle, hit_type) then -- Ignore surface, DoT, and reflected damage
         local hit_type_name = NRD_StatusGetString(target, handle, "DamageSourceType")
         --local hit_type = NRD_StatusGetInt(target, handle, "HitType")
-        Ext.Print("[LLWEAPONEX_Main.lua:RedirectDamage] Redirecting damage Handle("..handlestr.."). Blocker(",blocker,") Target(",target,") Attacker(",attacker,")")
+        Ext.Utils.Print("[LLWEAPONEX_Main.lua:RedirectDamage] Redirecting damage Handle("..handlestr.."). Blocker(",blocker,") Target(",target,") Attacker(",attacker,")")
         local redirected_hit = NRD_HitPrepare(blocker, attacker)
         local damageRedirected = false
 
@@ -203,7 +203,7 @@ function RedirectDamage(blocker, target, attacker, handlestr, reduction_str)
                 NRD_HitStatusClearDamage(target, handle, v)
                 NRD_HitStatusAddDamage(target, handle, v, reduced_damage)
                 NRD_HitAddDamage(redirected_hit, v, reduced_damage)
-                Ext.Print("Redirected damage: "..tostring(damage).." => "..tostring(reduced_damage).." for type: "..v)
+                Ext.Utils.Print("Redirected damage: "..tostring(damage).." => "..tostring(reduced_damage).." for type: "..v)
                 damageRedirected = true
             end
         end
@@ -243,7 +243,7 @@ function TwoHandedToOnehanded(char, item)
 
 	NRD_ItemCloneBegin(item)
 	Osi.LeaderLog_Log("DEBUG", "[LLWEAPONEX_Main.lua:TwoHandedToOnehanded] Changing IsTwoHanded for ("..stat..")("..stripped_template..").")
-	Ext.Print("[LLWEAPONEX_Main.lua:TwoHandedToOnehanded] Changing IsTwoHanded for ("..stat..")("..stripped_template..").")
+	Ext.Utils.Print("[LLWEAPONEX_Main.lua:TwoHandedToOnehanded] Changing IsTwoHanded for ("..stat..")("..stripped_template..").")
 	NRD_ItemCloneSetString("RootTemplate", stripped_template)
 	NRD_ItemCloneSetString("OriginalRootTemplate", stripped_template)
 	if stat ~= nil and stat ~= "" then

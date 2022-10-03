@@ -28,68 +28,56 @@ local function TagFromStats(uuid, stat)
 end
 
 ---@param item EsvItem
----@param statType string The item's stat type. Optional.
----@param stat string The item's stat. Optional.
-function EquipmentManager:TagWeapon(item, statType, stat, itemTags)
+---@param statType string|nil The item's stat type. Optional.
+---@param statID string|nil The item's stat. Optional.
+---@param itemTags table<string,boolean>|nil
+function EquipmentManager:TagWeapon(item, statType, statID, itemTags)
+	local item = GameHelpers.GetItem(item)
+	if item == nil then
+		return false
+	end
 	local tagged = false
 	if not item:HasTag("LLWEAPONEX_TaggedWeaponType") then
 		SetTag(item.MyGuid, "LLWEAPONEX_TaggedWeaponType")
 	end
 	-- Has mastery tag but is missing LLWEAPONEX_TaggedWeaponType
-	for tag,data in pairs(Masteries) do
-		if itemTags[tag] or GameHelpers.ItemHasTag(item, tag) then
-			return true
+	if itemTags then
+		for tag,data in pairs(Masteries) do
+			if itemTags[tag] or GameHelpers.ItemHasTag(item, tag) then
+				return true
+			end
 		end
 	end
 
 	local template = GameHelpers.GetTemplate(item.MyGuid)
 	local templateTag = Tags.TemplateToTag[template]
 	if Vars.DebugMode then
-		fprint(LOGLEVEL.WARNING, "[WeaponExpansion:TagWeapon] (%s) Type(%s) Stat(%s) Template(%s) TemplateTag(%s)", item.MyGuid, statType, stat, template, templateTag or "")
+		fprint(LOGLEVEL.WARNING, "[WeaponExpansion:TagWeapon] (%s) Type(%s) Stat(%s) Template(%s) TemplateTag(%s)", item.MyGuid, statType, statID, template, templateTag or "")
 	end
 	if templateTag ~= nil then
 		if type(templateTag) == "table" then
 			for i,tag in pairs(templateTag) do
-				SetTag(item.MyGuid, templateTag)
-				PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..template.."] with ("..templateTag..").")
+				SetTag(item.MyGuid, tag)
 			end
 		else
 			SetTag(item.MyGuid, templateTag)
-			PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..template.."] with ("..templateTag..").")
 		end
 		tagged = true
 	else
-		if StringHelpers.IsNullOrEmpty(statType) or StringHelpers.IsNullOrEmpty(stat) then
-			---@type EsvItem
-			local item = GameHelpers.GetItem(item.MyGuid)
-			if not TagFromStats(item.MyGuid, item.Stats.Name) then
-				if item.ItemType == "Weapon" then
+		if StringHelpers.IsNullOrEmpty(statType) or StringHelpers.IsNullOrEmpty(statID) then
+			statID = item.Stats.Name
+			statType = GameHelpers.Stats.GetStatType(statID)
+		end
+		if not StringHelpers.IsNullOrEmpty(statID) then
+			if not TagFromStats(item.MyGuid, statID) then
+				if statType == "Weapon" then
 					local tag = Tags.WeaponTypeToTag[item.Stats.WeaponType]
 					if tag ~= nil then
 						SetTag(item.MyGuid, tag)
-						PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..item.Stats.Name.."] with ("..tag..").")
-						tagged = true
-					end
-				elseif item.ItemType == "Shield" then
-					SetTag(item.MyGuid, "LLWEAPONEX_Shield")
-					PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..item.Stats.Name.."] with (LLWEAPONEX_Shield).")
-					tagged = true
-				end
-			else
-				tagged = true
-			end
-		elseif not StringHelpers.IsNullOrEmpty(stat) then
-			if not TagFromStats(item.MyGuid, stat) then
-				if statType == "Weapon" then
-					local tag = Tags.WeaponTypeToTag[Ext.StatGetAttribute(stat, "WeaponType")]
-					if tag ~= nil then
-						SetTag(item.MyGuid, tag)
-						PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..stat.."] with ("..tag..").")
 						tagged = true
 					end
 				elseif statType == "Shield" then
 					SetTag(item.MyGuid, "LLWEAPONEX_Shield")
-					PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..stat.."] with (LLWEAPONEX_Shield).")
 					tagged = true
 				end
 			else

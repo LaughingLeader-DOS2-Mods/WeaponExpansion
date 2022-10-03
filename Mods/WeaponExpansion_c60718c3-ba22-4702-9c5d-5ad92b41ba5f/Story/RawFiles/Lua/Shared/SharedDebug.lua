@@ -65,12 +65,12 @@ local dynamicStatsVars = {
 
 function PrintDynamicStats(dynamicStats)
 	for i,v in pairs(dynamicStats) do
-		Ext.Print("["..tostring(i) .. "]{")
+		Ext.Utils.Print("["..tostring(i) .. "]{")
 		if v ~= nil and v.DamageFromBase > 0 then
 			for attribute,attributeType in pairs(dynamicStatsVars) do
-				Ext.Print("    "..attribute..":"..tostring(v[attribute]))
+				Ext.Utils.Print("    "..attribute..":"..tostring(v[attribute]))
 			end
 		end
-		Ext.Print("}")
+		Ext.Utils.Print("}")
 	end
 end

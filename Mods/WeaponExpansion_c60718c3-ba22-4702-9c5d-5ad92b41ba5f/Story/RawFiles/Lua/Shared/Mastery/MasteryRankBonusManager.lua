@@ -39,7 +39,7 @@ if not _ISCLIENT then
 			return PersistentVars.DisabledBonuses[k]
 		end,
 		__newindex = function (_,k,v)
-			Ext.Print(_ISCLIENT and "CLIENT" or "SERVER", "__newindex", k, v)
+			Ext.Utils.Print(_ISCLIENT and "CLIENT" or "SERVER", "__newindex", k, v)
 			PersistentVars.DisabledBonuses[k] = v
 		end
 	})
@@ -64,7 +64,7 @@ Mastery.Bonuses = {}
 setmetatable(Mastery.Bonuses, {
 	__index = _registeredBonuses,
 	__newindex = function (tbl, k, v)
-		Ext.PrintError("Please don't add to WeaponExpansion.Mastery.Bonuses directly. Use Mastery.Register.NewRankBonus or MasteryBonusManager.AddRankBonuses", k)
+		Ext.Utils.PrintError("Please don't add to WeaponExpansion.Mastery.Bonuses directly. Use Mastery.Register.NewRankBonus or MasteryBonusManager.AddRankBonuses", k)
 		local s,e,masteryId,rank = string.find(k, masteryRankBonusPattern)
 		if masteryId and rank then
 			rank = tonumber(rank)
@@ -96,7 +96,7 @@ setmetatable(Mastery.Bonuses, {
 --Deprecation help
 MasteryDataClasses.BonusIDEntry = {
 	Create = function ()
-		Ext.PrintError("WeaponExpansion.MasteryDataClasses.BonusIDEntry is deprecated.")
+		Ext.Utils.PrintError("WeaponExpansion.MasteryDataClasses.BonusIDEntry is deprecated.")
 		return {}
 	end
 }
@@ -460,7 +460,7 @@ local function OnBeforeStatusAttemptCallback(callback, matchBonuses, target, sta
 				if b then
 					return result
 				else
-					Ext.PrintError(result)
+					Ext.Utils.PrintError(result)
 				end
 			end
 		else
@@ -468,7 +468,7 @@ local function OnBeforeStatusAttemptCallback(callback, matchBonuses, target, sta
 			if b then
 				return result
 			else
-				Ext.PrintError(result)
+				Ext.Utils.PrintError(result)
 			end
 		end
 	end
@@ -912,7 +912,7 @@ function MasteryBonusManager.SetBonusDisabled(character, bonusID, disabled)
 		if disabled == nil then
 			b = not targetTable[bonusID] == true
 		end
-		Ext.PrintError("MasteryBonusManager.SetBonusDisabled", bonusID, b, _ISCLIENT and "CLIENT" or "SERVER")
+		Ext.Utils.PrintError("MasteryBonusManager.SetBonusDisabled", bonusID, b, _ISCLIENT and "CLIENT" or "SERVER")
 		if b then
 			targetTable[bonusID] = true
 			return true
@@ -1036,7 +1036,7 @@ else
 									if bonus.Skills and bonus.Skills[1] then
 										local skill = bonus.Skills[1]
 										if not GameHelpers.Skill.IsAction(skill) then
-											local icon_check = Ext.StatGetAttribute(skill, "Icon")
+											local icon_check = GameHelpers.Stats.GetAttribute(skill, "Icon", "")
 											if not StringHelpers.IsNullOrWhitespace(icon_check) then
 												icon = icon_check
 											end
@@ -1057,12 +1057,10 @@ else
 									end
 									if not icon and bonus.Statuses then
 										for _,v in pairs(bonus.Statuses) do
-											if GameHelpers.Stats.Exists(v, "StatusData") then
-												local icon_check = Ext.StatGetAttribute(v, "Icon")
-												if not StringHelpers.IsNullOrWhitespace(icon_check) then
-													icon = icon_check
-													break
-												end
+											local icon_check = GameHelpers.Stats.GetAttribute(v, "Icon", "")
+											if not StringHelpers.IsNullOrWhitespace(icon_check) then
+												icon = icon_check
+												break
 											end
 										end
 									end
@@ -1101,6 +1099,6 @@ Ext.RegisterConsoleCommand("weaponex_dumpbonuses", function (cmd, ...)
 		local name,handle = Ext.GetTranslatedString(v, v)
 		text = text .. string.format("%s\t%s\t%s\n", v, name, handle or "")
 	end
-	Ext.Print("Saved bonus names to 'Dumps/WeaponExpansion_Bonuses.tsv'")
+	Ext.Utils.Print("Saved bonus names to 'Dumps/WeaponExpansion_Bonuses.tsv'")
 	GameHelpers.IO.SaveFile("Dumps/WeaponExpansion_Bonuses.tsv", text)
 end)

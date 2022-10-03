@@ -156,7 +156,7 @@ function LoadUniqueRequirementChanges()
 		end
 	end, debug.traceback)
 	if not b then
-		Ext.PrintError(result)
+		Ext.Utils.PrintError(result)
 	end
 end
 
@@ -369,7 +369,7 @@ local function Run(doSync)
 		end
 	end
 
-	Ext.Print("[WeaponExpansion] Applied stat overrides.")
+	Ext.Utils.Print("[WeaponExpansion] Applied stat overrides.")
 end
 
 Ext.Events.StatsLoaded:Subscribe(function (e)

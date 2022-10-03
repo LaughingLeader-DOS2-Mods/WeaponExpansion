@@ -18,7 +18,7 @@ local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 		if runeNameText ~= nil then
 			return boltAmmoTypeText.Value:gsub("%[1%]", runeNameText)
 		else
-			Ext.PrintError("No text for rune: ", rune.BoostName)
+			Ext.Utils.PrintError("No text for rune: ", rune.BoostName)
 		end
 	end
 	return ""
@@ -49,13 +49,13 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 		if runeNameText ~= nil then
 			return bulletAmmoTypeText.Value:gsub("%[1%]", runeNameText)
 		else
-			Ext.PrintError("No text for rune: ", rune.BoostName)
+			Ext.Utils.PrintError("No text for rune: ", rune.BoostName)
 		end
 	end
-	-- Ext.Print(bullet,bulletRuneStat)
+	-- Ext.Utils.Print(bullet,bulletRuneStat)
 	-- if bulletRuneStat ~= nil then
 	-- 	local boostEffects = bulletRuneBoosts[bulletRuneStat]
-	-- 	Ext.Print(boostEffects.Apply)
+	-- 	Ext.Utils.Print(boostEffects.Apply)
 	-- 	if boostEffects ~= nil and (boostEffects.Apply ~= nil or boostEffects.Transform ~= nil) then
 	-- 		return string.format("<br><font color='#FFBB22'>%s%s</font>", boostEffects.Apply, boostEffects.Transform)
 	-- 	end
@@ -160,7 +160,7 @@ local function GetDamageParamResult(param_func, skill, character, isFromItem)
 			return GameHelpers.Tooltip.FormatDamageRange(damageRange)
 		end
 	else
-		Ext.PrintError("Error getting param for skill ("..skill.Name.."):\n",damageRange)
+		Ext.Utils.PrintError("Error getting param for skill ("..skill.Name.."):\n",damageRange)
 	end
 end
 

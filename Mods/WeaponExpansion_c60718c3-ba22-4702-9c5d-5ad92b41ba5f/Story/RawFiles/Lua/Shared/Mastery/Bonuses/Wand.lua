@@ -250,7 +250,7 @@ if not Ext.IsClient() then
 			if surfaceCallback then
 				local b,err = xpcall(surfaceCallback, debug.traceback, e.Character, e.Data.Position, e.Skill, e.Data, bonuses)
 				if not b then
-					Ext.PrintError(err)
+					Ext.Utils.PrintError(err)
 				end
 			end
 		end

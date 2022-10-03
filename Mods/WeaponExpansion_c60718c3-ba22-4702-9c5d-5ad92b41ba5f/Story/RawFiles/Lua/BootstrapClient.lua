@@ -5,7 +5,6 @@ ClientVars = {
 
 Ext.Require("BootstrapShared.lua")
 Ext.Require("Client/SkillParams.lua")
-Ext.Require("Client/StatusParams.lua")
 Ext.Require("Client/MemorizationWindow.lua")
 Ext.Require("Client/ClientCommands.lua")
 Ext.Require("Client/UI/_InitClientUI.lua")

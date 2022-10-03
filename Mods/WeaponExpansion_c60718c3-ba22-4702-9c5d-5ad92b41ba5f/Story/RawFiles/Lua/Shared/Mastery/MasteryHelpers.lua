@@ -141,7 +141,7 @@ function Mastery.HasMasteryRequirement(char, tag, skipWeaponCheck, tags)
 	local _TAGS = tags or GameHelpers.GetAllTags(character, true, true)
 	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag, skipWeaponCheck, _TAGS)
 	if not status then
-		Ext.PrintError("Error checking mastery requirements:\n", result)
+		Ext.Utils.PrintError("Error checking mastery requirements:\n", result)
 	else
 		return result
 	end

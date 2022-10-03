@@ -221,22 +221,22 @@ function Origins_FixSkillBar(uuid)
 		local val1 = 0
 		local val2 = 0
 
-		local ma1 = Ext.StatGetAttribute(a, "Magic Cost")
+		local ma1 = GameHelpers.Stats.GetAttribute(a, "Magic Cost", 0)
 		if ma1 > 0 then
 			val1 = 9
-		elseif Ext.StatGetAttribute(a, "ForGameMaster") == "No" then
+		elseif GameHelpers.Stats.GetAttribute(a, "ForGameMaster", "No") == "No" then
 			val1 = 6
 		else
-			val1 = tierValue[Ext.StatGetAttribute(a, "Tier")] or -1
+			val1 = tierValue[GameHelpers.Stats.GetAttribute(a, "Tier", "None")] or -1
 		end
 
-		local ma2 = Ext.StatGetAttribute(b, "Magic Cost")
+		local ma2 = GameHelpers.Stats.GetAttribute(b, "Magic Cost", 0)
 		if ma2 > 0 then
 			val2 = 9
-		elseif Ext.StatGetAttribute(b, "ForGameMaster") == "No" then
+		elseif GameHelpers.Stats.GetAttribute(b, "ForGameMaster", "No") == "No" then
 			val2 = 6
 		else
-			val2 = tierValue[Ext.StatGetAttribute(b, "Tier")] or -1
+			val2 = tierValue[GameHelpers.Stats.GetAttribute(b, "Tier", "None")] or -1
 		end
 
 		return val1 < val2

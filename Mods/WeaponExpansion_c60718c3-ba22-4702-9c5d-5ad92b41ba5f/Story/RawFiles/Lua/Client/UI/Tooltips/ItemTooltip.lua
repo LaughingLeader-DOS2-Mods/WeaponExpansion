@@ -178,11 +178,18 @@ ItemTooltipParams.WeaponTypePreferenceOrder = weaponTypePreferenceOrder
 ---@param weaponTypeTag string
 ---@param slotTag string
 local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotTag)
+	local runeEffectWeapon = GameHelpers.Stats.GetAttribute(item.StatsId, "RuneEffectWeapon", "")
+	if StringHelpers.IsNullOrEmpty(runeEffectWeapon) then
+		return
+	end
+	local boost = Ext.Stats.Get(runeEffectWeapon, nil, false)
+	if boost == nil then
+		return
+	end
 	tooltip:RemoveElements("EmptyRuneSlot")
 	tooltip:RemoveElements("RuneSlot")
 	tooltip:RemoveElements("RuneEffect")
-	local boost = Ext.StatGetAttribute(item.StatsId, "RuneEffectWeapon")
-	local damageType = Ext.StatGetAttribute(boost, "Damage Type")
+	local damageType = boost["Damage Type"]
 	local weaponTypeName = GameHelpers.GetStringKeyText(weaponTypeTag, "")
 	if weaponTypeName ~= "" then
 		local text = GameHelpers.Tooltip.ReplacePlaceholders(Text.ItemTooltip.SpecialRuneDamageTypeText:ReplacePlaceholders(weaponTypeName, GameHelpers.GetDamageText(damageType), character))
@@ -218,7 +225,7 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	end
 
 	---@type StatProperty[]
-	local extraProperties = GameHelpers.Stats.GetExtraProperties(boost, "ExtraProperties")
+	local extraProperties = GameHelpers.Stats.GetExtraProperties(runeEffectWeapon, "ExtraProperties")
 	if extraProperties ~= nil and #extraProperties > 0 then
 		for i,v in pairs(extraProperties) do
 			if v.Type == "Status" and not Data.EngineStatus[v.Action] and GameHelpers.Stats.Exists(v.Action) then
@@ -230,18 +237,12 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 					title = string.format("%s %s", title, Text.ItemTooltip.ChanceText:ReplacePlaceholders(math.ceil(v.StatusChance * 100)))
 				end
 				if not StringHelpers.IsNullOrWhitespace(description) then
-					local descParams = Ext.StatGetAttribute(v.Action, "DescriptionParams")
-					if descParams ~= nil and descParams ~= "" then
-						local paramValues = {}
-						local params = StringHelpers.Split(descParams, ";")
-						for i,v in pairs(params) do
-							--local characterStats = ExtenderHelpers.CreateStatCharacterTable(character.Stats.Name)
-							local paramValue = StatusGetDescriptionParam(v.Action, character, character.Stats, table.unpack(StringHelpers.Split(v, ":")))
-							if paramValue ~= nil then
-								table.insert(paramValues, paramValue)
-							end
+					local propStatus = Ext.Stats.Get(v.Action, nil, false)
+					if propStatus and not StringHelpers.IsNullOrEmpty(propStatus.DescriptionParams) then
+						local paramValues = GameHelpers.Tooltip.GetStatusDescriptionParamValues(propStatus, character)
+						if #paramValues > 0 then
+							description = StringHelpers.ReplacePlaceholders(description, paramValues)
 						end
-						description = StringHelpers.ReplacePlaceholders(description, paramValues)
 					end
 				end
 				if description == nil then
@@ -250,7 +251,7 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 				tooltip:AppendElement({
 					Type = "Tags",
 					Label = title,
-					Value = description,
+					Value = GameHelpers.Tooltip.ReplacePlaceholders(description, character),
 					Warning = Text.ItemTooltip.RuneOnHitTagText.Value
 				})
 			else
@@ -356,24 +357,21 @@ local function OnItemTooltip(item, tooltip)
 		if character ~= nil then
 			if _TAGS.LLWEAPONEX_Pistol then
 				local damageRange = Skills.DamageFunctions.PistolDamage(character, true, true, item.Stats)
-				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "ActionPoints")
-				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "TargetRadius"))
+				local apCost = GameHelpers.Stats.GetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "ActionPoints", 1)
+				local weaponRange = string.format("%sm", GameHelpers.Stats.GetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "TargetRadius", 1))
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
 				renamedArmorSlotType = true
 			elseif _TAGS.LLWEAPONEX_HandCrossbow then
 				local damageRange = Skills.DamageFunctions.HandCrossbowDamage(character, true, true, item.Stats)
-				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
-				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
+				local apCost = GameHelpers.Stats.GetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints", 1)
+				local weaponRange = string.format("%sm", GameHelpers.Stats.GetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius", 1))
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
 				renamedArmorSlotType = true
 			elseif item.ItemType ~= "Weapon" and _TAGS.LLWEAPONEX_UnarmedWeaponEquipped then
 				local weapon,highestAttribute = UnarmedHelpers.CreateUnarmedWeaponTable(character.Stats, item.Stats)
 				local damageRange = UnarmedHelpers.CalculateBaseWeaponDamageRange(weapon)
-				--local highestAttribute = "Finesse"
-				--local bonusWeapon = ExtenderHelpers.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
-				--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)
-				local apCost = Ext.StatGetAttribute("NoWeapon", "AttackAPCost")
-				local weaponRange = string.format("%sm", Ext.StatGetAttribute("NoWeapon", "WeaponRange") / 100)
+				local apCost = GameHelpers.Stats.GetAttribute("NoWeapon", "AttackAPCost", 0)
+				local weaponRange = string.format("%sm", GameHelpers.Stats.GetAttribute("NoWeapon", "WeaponRange", 1) / 100)
 				local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LocalizedText.AttributeNames[highestAttribute].Value)
 				local slotInfoText = string.format(" (%s)", LocalizedText.Slots[item.Stats.Slot].Value)
 				local equipped = tooltip:GetElement("Equipped")
@@ -434,7 +432,7 @@ local function OnItemTooltip(item, tooltip)
 				elseif t == "function" then
 					local results = {xpcall(v, debug.traceback, tag, item, tooltip)}
 					if results[1] == false then
-						Ext.PrintError(results[2])
+						Ext.Utils.PrintError(results[2])
 					else
 						text = results[2]
 					end

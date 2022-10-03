@@ -63,13 +63,13 @@ function LLWEAPONEX_Ext_Debug_CleanLevelItem(item)
     if item ~= nil and ObjectExists(item) == 1 then
         local template = GetTemplate(item)
         if template ~= nil and template ~= "" then
-            --Ext.Print("[LLWEAPONEX_Debug.lua] Checking item ("..item..")["..template.."] for cleaning.")
+            --Ext.Utils.Print("[LLWEAPONEX_Debug.lua] Checking item ("..item..")["..template.."] for cleaning.")
             local i = 1
             local count = #debug_templates
             while i < count do
                 local t = debug_templates[i]
                 if t ~= nil and t == template then
-                    --Ext.Print("[LLWEAPONEX_Debug.lua] Removing item ("..item..").")
+                    --Ext.Utils.Print("[LLWEAPONEX_Debug.lua] Removing item ("..item..").")
                     ItemRemove(item)
                     break
                 end

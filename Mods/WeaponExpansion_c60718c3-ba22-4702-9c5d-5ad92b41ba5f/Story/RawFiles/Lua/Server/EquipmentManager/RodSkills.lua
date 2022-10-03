@@ -14,32 +14,37 @@ local uniqueRodSkills = {
 	WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A = { "Projectile_LLWEAPONEX_ShootRod_MagicMissile", "Projectile_LLWEAPONEX_ShootRod_MagicMissile_Offhand" },
 }
 
-function AddRodSkill(char, item)
-	local stat = NRD_ItemGetStatsId(item)
-	if Ext.StatGetAttribute(stat, "WeaponType") ~= "Wand" then
-		local mainhandSkill, offhandSkill = nil, nil
-		local skills = uniqueRodSkills[stat]
-		if skills == nil then
-			local damageType = Ext.StatGetAttribute(stat, "Damage Type")
-			skills = rodSkills[damageType]
-			if skills ~= nil then
+function AddRodSkill(charGUID, itemGUID)
+	local character = GameHelpers.GetCharacter(charGUID)
+	local item = GameHelpers.GetItem(itemGUID)
+	if character and item then
+		local itemStat = item.StatsFromName.StatsEntry
+		---@cast itemStat +StatEntryWeapon,-StatsObject
+		if itemStat.WeaponType ~= "Wand" then
+			local mainhandSkill, offhandSkill = nil, nil
+			local skills = uniqueRodSkills[itemStat.Name]
+			if skills == nil then
+				local damageType = itemStat["Damage Type"]
+				skills = rodSkills[damageType]
+				if skills ~= nil then
+					mainhandSkill,offhandSkill = table.unpack(skills)
+				end
+			else
 				mainhandSkill,offhandSkill = table.unpack(skills)
 			end
-		else
-			mainhandSkill,offhandSkill = table.unpack(skills)
-		end
-
-		if mainhandSkill ~= nil and offhandSkill ~= nil then
-			local slot = GameHelpers.Item.GetEquippedSlot(char,item)
-			if slot == "Weapon" then
-				CharacterAddSkill(char, mainhandSkill, 0)
-				SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", mainhandSkill)
-			elseif slot == "Shield" then
-				CharacterAddSkill(char, offhandSkill, 0)
-				SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", offhandSkill)
-			else
-				CharacterRemoveSkill(char, mainhandSkill)
-				CharacterRemoveSkill(char, offhandSkill)
+	
+			if mainhandSkill ~= nil and offhandSkill ~= nil then
+				local slot = GameHelpers.Item.GetEquippedSlot(character,item)
+				if slot == "Weapon" then
+					CharacterAddSkill(charGUID, mainhandSkill, 0)
+					SetVarFixedString(item.MyGuid, "LLWEAPONEX_Rod_ShootSkill", mainhandSkill)
+				elseif slot == "Shield" then
+					CharacterAddSkill(charGUID, offhandSkill, 0)
+					SetVarFixedString(item.MyGuid, "LLWEAPONEX_Rod_ShootSkill", offhandSkill)
+				else
+					CharacterRemoveSkill(charGUID, mainhandSkill)
+					CharacterRemoveSkill(charGUID, offhandSkill)
+				end
 			end
 		end
 	end
@@ -63,18 +68,21 @@ function RemoveRodSkill(char, item)
 	end
 end
 
-local function GetRodTypeQRY(item)
-	local stat = NRD_ItemGetStatsId(item)
-	local skills = uniqueRodSkills[stat]
-	if skills == nil then
-		local damageType = Ext.StatGetAttribute(stat, "Damage Type")
-		skills = rodSkills[damageType]
-		if skills ~= nil then
+local function GetRodTypeQRY(itemGUID)
+	local item = GameHelpers.GetItem(itemGUID)
+	if item then
+		local stat = item.StatsFromName.StatsEntry
+		local skills = uniqueRodSkills[stat.Name]
+		if skills == nil then
+			local damageType = stat["Damage Type"]
+			skills = rodSkills[damageType]
+			if skills ~= nil then
+				return skills[1], skills[2]
+			end
+		else
 			return skills[1], skills[2]
 		end
-	else
-		return skills[1], skills[2]
 	end
 end
 
-Ext.NewQuery(GetRodTypeQRY, "LLWEAPONEX_Ext_QRY_GetRodSkills", "[in](ITEMGUID)_Rod, [out](STRING)_MainhandSkill, [out](STRING)_OffhandSkill")
+Ext.Osiris.NewQuery(GetRodTypeQRY, "LLWEAPONEX_Ext_QRY_GetRodSkills", "[in](ITEMGUID)_Rod, [out](STRING)_MainhandSkill, [out](STRING)_OffhandSkill")

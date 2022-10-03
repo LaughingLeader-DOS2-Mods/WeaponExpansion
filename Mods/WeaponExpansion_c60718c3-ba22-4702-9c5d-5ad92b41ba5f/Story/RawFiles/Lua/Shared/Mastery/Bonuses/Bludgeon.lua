@@ -60,7 +60,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 				for _,id in pairs(self.Statuses) do
 					local status = e.Data.TargetObject:GetStatus(id)
 					if status and status.CurrentLifeTime > 0 then -- Ignore permanent statuses
-						local statusColor = Ext.StatGetAttribute(id, "FormatColor")
+						local statusColor = GameHelpers.Stats.GetAttribute(id, "FormatColor", "")
 						if StringHelpers.IsNullOrWhitespace(statusColor) or _ignoreFormatColors[statusColor] then
 							statusColor = "Green"
 						end
@@ -341,7 +341,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 			local activeStatuses = PersistentVars.MasteryMechanics.BludgeonShattering[e.Target.MyGuid]
 			for v,b in pairs(activeStatuses) do
 				--GameHelpers.IO.SaveFile("Dumps/" .. v .. ".json", Ext.DumpExport(e.Data.TargetObject:GetStatus(v)))
-				local statusColor = Ext.StatGetAttribute(v, "FormatColor")
+				local statusColor = GameHelpers.Stats.GetAttribute(v, "FormatColor")
 				if StringHelpers.IsNullOrWhitespace(statusColor) or _ignoreFormatColors[statusColor] then
 					statusColor = "Green"
 				end
@@ -351,7 +351,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 			table.sort(statusesRemoved, function(a,b) return a.Name < b.Name end)
 			local statusNamesText = {}
 			for i,v in pairs(statusesRemoved) do
-				local statusColor = Ext.StatGetAttribute(v.ID, "FormatColor")
+				local statusColor = GameHelpers.Stats.GetAttribute(v.ID, "FormatColor")
 				if StringHelpers.IsNullOrWhitespace(statusColor) or _ignoreFormatColors[statusColor] then
 					statusColor = "Green"
 				end

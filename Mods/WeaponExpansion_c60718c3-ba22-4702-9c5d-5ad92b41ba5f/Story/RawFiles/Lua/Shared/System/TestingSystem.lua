@@ -18,7 +18,7 @@ function WeaponExTesting.RegisterBonusTest(bonusId, operation, params)
 	if _tests.Bonuses[bonusId] == nil then
 		_tests.Bonuses[bonusId] = {}
 	end
-	--Ext.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
+	--Ext.Utils.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
 	local test = nil
 	if type(operation) == "table" then
 		test = Classes.LuaTest:Create(bonusId, operation, params)
@@ -35,7 +35,7 @@ function WeaponExTesting.RegisterUniqueTest(id, operation, params)
 	if _tests.Uniques[id] == nil then
 		_tests.Uniques[id] = {}
 	end
-	--Ext.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
+	--Ext.Utils.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
 	local test = nil
 	if type(operation) == "table" then
 		test = Classes.LuaTest:Create(id, operation, params)
@@ -71,7 +71,7 @@ local function SetMasteryTests(cmd, enabledArg)
 			end
 		end
 	else
-		Ext.PrintError("[weaponex_debugtesting] Only the host can enable testing.")
+		Ext.Utils.PrintError("[weaponex_debugtesting] Only the host can enable testing.")
 	end
 end
 

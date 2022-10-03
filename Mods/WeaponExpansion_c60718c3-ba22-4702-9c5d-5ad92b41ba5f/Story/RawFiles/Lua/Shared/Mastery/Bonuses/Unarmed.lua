@@ -62,7 +62,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 2, {
 				local skills = {}
 				for id,skill in pairs(character.SkillManager.Skills) do
 					if skill.ActiveCooldown > 0 then
-						local ability = Ext.StatGetAttribute(skill.SkillId, "Ability")
+						local ability = GameHelpers.Stats.GetAttribute(skill.SkillId, "Ability", "None")
 						if ability == "Warrior" then
 							skills[#skills+1] = skill.SkillId
 						end
@@ -73,7 +73,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 2, {
 					local cdReduction = (targetsHit * 6.0)
 					local nextCooldown = math.max(0, character:GetSkillInfo(skill).ActiveCooldown - cdReduction)
 					GameHelpers.Skill.SetCooldown(char, skill, nextCooldown)
-					local displayNameKey = Ext.StatGetAttribute(skill, "DisplayName")
+					local displayNameKey = GameHelpers.Stats.GetAttribute(skill, "DisplayName")
 					local name = GameHelpers.GetStringKeyText(displayNameKey)
 					CharacterStatusText(char, Text.StatusText.Unarmed.BlinkStrikeBonus:ReplacePlaceholders(name, targetsHit))
 				end

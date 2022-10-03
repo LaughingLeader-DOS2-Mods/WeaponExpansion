@@ -242,48 +242,6 @@ end
 ---@param template string
 ---@param stat string
 ---@param level integer
-local function CloneItem(self, item, template, stat, level)
-	local constructor = Ext.CreateItemConstructor(item)
-	---@type ItemDefinition
-	local props = constructor[1]
-	props.GoldValueOverwrite = math.floor(item.Stats.Value * 0.4)
-
-	if item.ItemType == "Weapon" then
-		-- Damage type fix
-		-- Deltamods with damage boosts may make the weapon's damage type be all of that type, so overwriting the statType
-		-- fixes this issue.
-		local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
-		if damageTypeString == nil then damageTypeString = "Physical" end
-		local damageTypeEnum = Data.DamageTypeEnums[damageTypeString]
-		props.DamageTypeOverwrite = damageTypeEnum
-	end
-
-	props.GenerationStatsId = stat
-	props.StatsEntryName = stat
-	props.IsIdentified = true
-	props.OriginalRootTemplate = template
-	props.RootTemplate = template
-	props.DeltaMods = item.GetDeltaMods()
-	props.GenerationLevel = level
-	props.StatsLevel = level
-
-	local cloned = constructor:Construct()
-	if cloned ~= nil then
-		ItemSetOwner(cloned.MyGuid, self.Owner)
-		ItemToInventory(cloned, self.Owner, 1, 0, 0)
-		self:AddCopy(cloned.MyGuid)
-		PersistentVars.Uniques[item.MyGuid] = nil
-		ItemRemove(item.MyGuid)
-	else
-		Ext.PrintError("Error constructing item?", item.MyGuid)
-	end
-end
-
----@param self UniqueData
----@param item EsvItem
----@param template string
----@param stat string
----@param level integer
 local function TransformItem(self, item, template, stat, level, matchStat, matchTemplate)
 	local currentTemplate = StringHelpers.GetUUID(GetTemplate(item.MyGuid))
 	if currentTemplate == StringHelpers.GetUUID(template) then
@@ -531,7 +489,7 @@ local function ResetUnique(item, stat, level, changes)
 		if Ext.IsModLoaded("de8f15f2-65a2-4ee4-a25f-7a7ab0305a58") then
 			local b,err = xpcall(ApplyStatsConfigurator, debug.traceback, changes, stat)
 			if not b then
-				Ext.PrintError(err)
+				Ext.Utils.PrintError(err)
 			end
 		end
 	end
@@ -582,8 +540,8 @@ local function StartApplyingProgression(self, progressionTable, persist, item, f
 	}
 	local b,result = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level, changes, firstLoad)
 	if not b then
-		Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", item.MyGuid, item.Stats.Name)
-		Ext.PrintError(result)
+		Ext.Utils.PrintError("[LLWEAPONEX] Error applying progression to unique", item.MyGuid, item.Stats.Name)
+		Ext.Utils.PrintError(result)
 	elseif result == true or firstLoad == true then
 		if changes ~= nil and Common.TableHasAnyEntry(changes) then
 			if changes.Stats["Damage Range"] ~= nil then

@@ -87,7 +87,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 			for status,color in pairs(inspireCleanseStatuses) do
 				if GameHelpers.Status.IsActive(e.Target, status) then
 					GameHelpers.Status.Remove(e.Target, status)
-					cleansed[#cleansed+1] = string.format("<font color='%s'>%s</font>", color, GameHelpers.GetStringKeyText(Ext.StatGetAttribute(status, "DisplayName")))
+					cleansed[#cleansed+1] = string.format("<font color='%s'>%s</font>", color, GameHelpers.Stats.GetDisplayName(status))
 				end
 			end
 			if #cleansed > 0 then
@@ -97,8 +97,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 				local text = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_Encourage_Cleansed"):gsub("%[1%]", Common.StringJoin("/", cleansed))
 				CharacterStatusText(e.TargetGUID, text)
 				SignalTestComplete("BANNER_INSPIRE")
-				local stat = Ext.Stats.Get("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", nil, false); stat.BeamEffect = ""; stat.ApplyEffect = "RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX"; Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", false)
-				local stat = Ext.Stats.Get("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", nil, false); stat.BeamEffect = "RS3_FX_Skills_Water_ChainHeal_Beam_01:Dummy_FX_01:Dummy_BodyFX"; stat.ApplyEffect = ""; Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", false)
 			end
 		end
 	end).Test(function(test, self)

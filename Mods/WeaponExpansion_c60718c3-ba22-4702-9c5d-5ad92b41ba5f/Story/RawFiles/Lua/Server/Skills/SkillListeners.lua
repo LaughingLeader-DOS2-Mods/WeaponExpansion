@@ -142,7 +142,7 @@ SkillManager.Register.Cast("Shout_LLWEAPONEX_Pistol_Reload", function(e) SwapSki
 
 SkillManager.Register.Cast("Projectile_LLWEAPONEX_DarkFireball",
 function(e)
-	local radius = math.max(1.0, Ext.StatGetAttribute(e.Skill, "ExplodeRadius") - 1.0)
+	local radius = math.max(1.0, GameHelpers.Stats.GetAttribute(e.Skill, "ExplodeRadius", 1) - 1.0)
 	if radius > 0 then
 		e.Data:ForEach(function (target, targetType, skillData)
 			local pos = GameHelpers.Math.GetPosition(target)
