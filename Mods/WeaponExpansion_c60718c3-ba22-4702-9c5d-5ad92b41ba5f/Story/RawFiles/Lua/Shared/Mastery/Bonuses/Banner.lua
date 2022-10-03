@@ -404,8 +404,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		AllSkills = true,
 		AllStatuses = true,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Cooperation", "<font color='#00FFFF'>When you are healed, nearby allies within a [ExtraData:LLWEAPONEX_MB_Banner_Cooperation_HealingShareRadius]m radius are also healed for [ExtraData:LLWEAPONEX_MB_Banner_Cooperation_HealingSharePercentage]% of the amount.</font>"),
-		TooltipSkill = "Target_FirstAid",
-		TooltipStatus = "HEAL",
+		MasteryMenuSettings = {
+			TooltipSkill = "Target_FirstAid",
+			TooltipStatus = "HEAL",
+		},
 		--self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID):string|TranslatedString
 		---@param self MasteryBonusData
 		---@param id string

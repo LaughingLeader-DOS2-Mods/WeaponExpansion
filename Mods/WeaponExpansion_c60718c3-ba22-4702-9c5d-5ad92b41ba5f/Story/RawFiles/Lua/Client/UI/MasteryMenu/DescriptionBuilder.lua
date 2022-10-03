@@ -161,20 +161,26 @@ local function _FormatFinalText(text, character)
 	return text
 end
 
+---@param bonus MasteryBonusData
+---@param character EclCharacter
 function MasteryMenu:GetPassiveText(bonus, character)
 	local tooltipText = ""
-	if not StringHelpers.IsNullOrEmpty(bonus.TooltipSkill) then
+	if not StringHelpers.IsNullOrEmpty(bonus.MasteryMenuSettings.TooltipSkill) then
 		tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.TooltipSkill, "skill"))
-	elseif not StringHelpers.IsNullOrEmpty(bonus.TooltipStatus) then
+	elseif not StringHelpers.IsNullOrEmpty(bonus.MasteryMenuSettings.TooltipStatus) then
 		tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.TooltipStatus, "status"))
-	elseif bonus.Skills and #bonus.Skills > 0 then
-		tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.Skills[1], "skill"))
-	elseif bonus.Statuses and #bonus.Statuses > 0 then
-		tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.Statuses[1], "status"))
-	elseif bonus.AllSkills then
-		tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, "Target_CripplingBlow", "skill"))
-	elseif bonus.AllStatuses then
-		tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, "HASTED", "status"))
+	elseif bonus.MasteryMenuSettings.OnlyUseTable ~= "Status" then
+		if bonus.Skills and #bonus.Skills > 0 then
+			tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.Skills[1], "skill"))
+		elseif bonus.AllSkills then
+			tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, "Target_CripplingBlow", "skill"))
+		end
+	elseif bonus.MasteryMenuSettings.OnlyUseTable ~= "Skill" then
+		if bonus.Statuses and #bonus.Statuses > 0 then
+			tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.Statuses[1], "status"))
+		elseif bonus.AllStatuses then
+			tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, "HASTED", "status"))
+		end
 	end
 	return _FormatFinalText(tooltipText, character)
 end
@@ -216,7 +222,7 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 		this.masteryMenuMC.descriptionList.addText(rankHeader, false)
 		
 		local rankDescription = ""
-		local hasDescription = true
+		local hasDescription = false
 
 		local masteryRankID = string.format("%s_Mastery%s", mastery, i)
 		local bonuses = Mastery.Bonuses[masteryRankID]
@@ -250,13 +256,14 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 						local usedSkillNames = {}
 						local usedStatusNames = {}
 
-						if bonus.Skills and #bonus.Skills > 0 then
+						if bonus.MasteryMenuSettings.OnlyUseTable ~= "Status" and bonus.Skills and #bonus.Skills > 0 then
 							for _,skillId in ipairs(bonus.Skills) do
 								local icon = Data.ActionSkills[skillId]
 								if not icon then
 									local stat = Ext.Stats.Get(skillId, nil, false)
 									if stat and (not stat.IsEnemySkill or not string.find(skillId, "Enemy"))
 									and not StringHelpers.IsNullOrEmpty(stat.Icon)
+									and stat.Icon ~= "unknown"
 									then
 										icon = stat.Icon
 									end
@@ -284,15 +291,47 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 							skillBonusText = StringHelpers.Join("/", bonusTextSkills, true) .. ": " .. skillBonusText
 						end
 						local addedStatusText = false
-						if bonus.Statuses and #bonus.Statuses > 0 then
+						if bonus.MasteryMenuSettings.OnlyUseTable ~= "Skill" and bonus.Statuses and #bonus.Statuses > 0 then
 							for _,statusId in ipairs(bonus.Statuses) do
-								local stat = Ext.Stats.Get(statusId, nil, false)
-								if stat and not StringHelpers.IsNullOrEmpty(stat.Icon) and not usedIcons[stat.Icon] then
-									usedIcons[stat.Icon] = true
-									iconNames[#iconNames+1] = stat.Icon
-									statIds[#statIds+1] = statusId
-									iconTypes[#iconTypes+1] = self.Params.IconType.Status
+								local icon = nil
 
+								if not Data.EngineStatus[statusId] then
+									local stat = Ext.Stats.Get(statusId, nil, false)
+									if stat and not StringHelpers.IsNullOrEmpty(stat.Icon) and stat.Icon ~= "unknown" and not usedIcons[stat.Icon] then
+										icon = stat.Icon
+										usedIcons[stat.Icon] = true
+										iconNames[#iconNames+1] = stat.Icon
+										statIds[#statIds+1] = statusId
+										iconTypes[#iconTypes+1] = self.Params.IconType.Status
+
+										if not addedStatusText and (bonus.StatusTooltip == nil or bonus.StatusTooltip ~= bonus.Tooltip) then
+											local tooltipText = _FormatFinalText(StringHelpers.StripFont(bonus:GetMenuTooltipText(character, statusId, "status")), character)
+											--Skip this if it's the same text already
+											if not string.find(skillBonusText, tooltipText) then
+												statusBonusText = tooltipText
+												addedStatusText = true
+											end
+										end
+									end
+								else
+									local engineIcon = Data.EngineStatusIcons[statusId]
+									if engineIcon then
+										icon = engineIcon
+										usedIcons[engineIcon] = true
+										iconNames[#iconNames+1] = engineIcon
+										statIds[#statIds+1] = statusId
+										iconTypes[#iconTypes+1] = self.Params.IconType.Status
+	
+										if not addedStatusText and (bonus.StatusTooltip == nil or bonus.StatusTooltip ~= bonus.Tooltip) then
+											local tooltipText = _FormatFinalText(StringHelpers.StripFont(bonus:GetMenuTooltipText(character, statusId, "status")), character)
+											if not string.find(skillBonusText, tooltipText) then
+												statusBonusText = tooltipText
+												addedStatusText = true
+											end
+										end
+									end
+								end
+								if icon ~= nil then
 									local statusName = GameHelpers.Stats.GetDisplayName(statusId, "StatusData")
 									if not StringHelpers.IsNullOrEmpty(statusName) then
 										statusName = StringHelpers.StripFont(statusName)
@@ -304,19 +343,10 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 											bonusTextStatuses[#bonusTextStatuses+1] = statusName
 										end
 									end
-
-									if not addedStatusText and bonus.StatusTooltip then
-										local tooltipText = _FormatFinalText(StringHelpers.StripFont(bonus:GetMenuTooltipText(character, statusId, "status")), character)
-										--Skip this if it's the same text already
-										if not string.find(skillBonusText, tooltipText) then
-											statusBonusText = tooltipText
-											addedStatusText = true
-										end
-									end
 								end
 							end
 						end
-						if #bonusTextStatuses > 0 then
+						if addedStatusText and #bonusTextStatuses > 0 then
 							statusBonusText = StringHelpers.Join("/", bonusTextStatuses, true) .. ": " .. statusBonusText
 						end
 						local len = #iconNames
@@ -334,8 +364,8 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 						local finalText = skillBonusText .. statusBonusText
 						if not StringHelpers.IsNullOrEmpty(finalText) then
 							this.masteryMenuMC.descriptionList.addText(finalText, false)
+							hasDescription = true
 						end
-						hasDescription = true
 					end
 				end
 			end

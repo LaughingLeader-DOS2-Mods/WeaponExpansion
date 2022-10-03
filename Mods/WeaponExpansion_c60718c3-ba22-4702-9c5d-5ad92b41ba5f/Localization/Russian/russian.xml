@@ -2030,7 +2030,7 @@
 	<content contentuid="hc7f8dca2gb752g4627g9351ge185459bc219">Defeating an Enemy in Combat</content>
 	<content contentuid="hc80e9017g9899g4524g83d2ga48f319a1eff">Expert Runekeeper</content>
 	<content contentuid="hc81de6aag392dg4c6fg9168g9c0a3dbdc09e">Special tattoos that grant the bearer tremendous strength.</content>
-	<content contentuid="hc8280bb6gca2eg4cf7ga935g989a32c9d47b">&lt;font color=&apos;#F19824&apos;&gt;Deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Dagger_RuptureBonusDamage] to targets with [BLEEDING_DisplayName].&lt;/font&gt;</content>
+	<content contentuid="hc8280bb6gca2eg4cf7ga935g989a32c9d47b">&lt;font color=&apos;#F19824&apos;&gt;Deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Dagger_RuptureBonusDamage] to targets with [Key:BLEEDING_DisplayName].&lt;/font&gt;</content>
 	<content contentuid="hc82989a4gad80g43e9g9bb9geca7ab4d3b94">Intelligence Conversion</content>
 	<content contentuid="hc87fc4e3g8a3bg4112g946dg5efd106fc16b">Open the mastery menu to check current weapon masteries.</content>
 	<content contentuid="hc8857631g4d14g45e6gbb3cgef8223b17eb5">Bandit&apos;s Quiver</content>

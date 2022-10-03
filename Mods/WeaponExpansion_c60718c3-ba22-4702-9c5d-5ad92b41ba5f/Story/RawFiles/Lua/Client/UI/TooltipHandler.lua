@@ -166,7 +166,7 @@ TooltipParams.SpecialParamFunctions = {
 		local statuses = {}
 		for _,prop in pairs(GameHelpers.Stats.GetSkillProperties("Target_CorruptedBlade")) do
 			if prop.Type == "Status" then
-				local displayName = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(prop.Action, "DisplayName"), "")
+				local displayName = GameHelpers.Stats.GetDisplayName(prop.Action, "StatusData")
 				if not StringHelpers.IsNullOrWhitespace(displayName) then
 					statuses[#statuses+1] = displayName
 				end
@@ -176,7 +176,7 @@ TooltipParams.SpecialParamFunctions = {
 			table.sort(statuses)
 			return StringHelpers.Join(", ", statuses, true)
 		end
-		return GameHelpers.GetStringKeyText(Ext.StatGetAttribute("DISEASED", "DisplayName"), "Diseased")
+		return GameHelpers.GetStringKeyText(GameHelpers.Stats.GetDisplayName("DISEASED", "StatusData"), "Diseased")
 	end,
 	LLWEAPONEX_MasteryBonus_FleshSacrifice_Damage = function(param, statCharacter)
 		local potion = Ext.Stats.Get("Stats_Flesh_Sacrifice", nil, false)

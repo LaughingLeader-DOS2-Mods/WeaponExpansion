@@ -3,6 +3,11 @@ local _type = type
 
 ---@alias MasteryBonusDataGetIsTooltipActiveCallback fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID, data:EsvStatus|StatEntrySkillData):boolean
 
+---@class MasteryBonusDataMasteryMenuSettings
+---@field OnlyUseTable "Skill"|"Status" Make the rank text only show the affected statuses or skills tables.
+---@field TooltipSkill FixedString|nil The skill ID to use for passive bonuses with "AllSkills" to specify a skill's text to display in the mastery menu.
+---@field TooltipStatus FixedString|nil The status ID to use for passive bonuses with "AllSkills" to specify a skill's text to display in the mastery menu.
+
 ---@class MasteryBonusDataParams
 ---@field ID string
 ---@field Mastery string
@@ -12,10 +17,9 @@ local _type = type
 ---@field Statuses string[] Optional statuses associated.
 ---@field Tooltip TranslatedString
 ---@field StatusTooltip TranslatedString If set, statuses will use this for tooltips, instead of Tooltip.
----@field TooltipSkill FixedString|nil The skill ID to use for passive bonuses with "AllSkills" to specify a skill's text to display in the mastery menu.
----@field TooltipStatus FixedString|nil The status ID to use for passive bonuses with "AllSkills" to specify a skill's text to display in the mastery menu.
 ---@field AllStatuses boolean
 ---@field AllSkills boolean
+---@field MasteryMenuSettings MasteryBonusDataMasteryMenuSettings
 ---@field DisableStatusTooltip boolean
 ---@field NamePrefix TranslatedString|string
 ---@field GetIsTooltipActive MasteryBonusDataGetIsTooltipActiveCallback Custom callback to determine if a bonus is "active" when a tooltip occurs.
@@ -75,6 +79,12 @@ setmetatable(MasteryBonusData, {
 	end
 })
 
+local _DefaultMasteryMenuSettings = {
+	OnlyUseTable = "",
+	TooltipSkill = "",
+	TooltipStatus = "",
+}
+
 ---@param id string
 ---@param params MasteryBonusDataParams
 ---@return MasteryBonusData
@@ -82,8 +92,11 @@ function MasteryBonusData:Create(id, params)
 	local this = {
 		ID = id or "",
 		IsPassive = false,
-		TooltipSkill = "",
-		TooltipStatus = "",
+		MasteryMenuSettings = {
+			OnlyUseTable = "",
+			TooltipSkill = "",
+			TooltipStatus = "",
+		}
 	}
 	local _private = {
 		Register = {
@@ -98,9 +111,20 @@ function MasteryBonusData:Create(id, params)
 	end
 	if _type(params) == "table" then
 		for k,v in pairs(params) do
-			this[k] = v
+			if k == "MasteryMenuSettings" then
+				for k2,v2 in pairs(v) do
+					this.MasteryMenuSettings[k2] = v2
+				end
+			else
+				this[k] = v
+			end
 		end
 	end
+	setmetatable(this.MasteryMenuSettings, {
+		__index = function (_,k)
+			return _DefaultMasteryMenuSettings[k]
+		end
+	})
 	if _type(this.Skills) == "table" and Common.TableHasEntry(this.Skills, "All") then
 		this.AllSkills = true
 	end

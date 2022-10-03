@@ -300,13 +300,12 @@ function MasteryMenu:PrepareTooltip(iconType, id, descriptionId, x, y, width, he
 	elseif iconType == self.Params.IconType.Status then
 		self.CurrentTooltip = "Status"
 		local statusTooltipText = ""
-		local statusTooltipName = ""
+		local statusName = GameHelpers.Stats.GetDisplayName(descriptionId, "StatusData") or ""
+		local statusTooltipName = statusName:upper()
 		if not Data.EngineStatus[descriptionId] then
 			local stat = Ext.Stats.Get(descriptionId, nil, false)
 			if stat then
-				local statusName = GameHelpers.GetStringKeyText(stat.DisplayName, stat.DisplayNameRef)
 				local statusDescription = GameHelpers.GetStringKeyText(stat.Description, stat.DescriptionRef)
-				statusTooltipName = statusName:upper()
 				local addedParams = false
 				if not StringHelpers.IsNullOrWhitespace(stat.DescriptionParams) then
 					local statusParams = StringHelpers.Split(stat.DescriptionParams, ";")
@@ -376,6 +375,11 @@ function MasteryMenu:PrepareTooltip(iconType, id, descriptionId, x, y, width, he
 				end
 			else
 				fprint(LOGLEVEL.ERROR, "[WeaponExpansion:MasteryMenu] Stat(%s) does not exist (status tooltip).", id)
+			end
+		else
+			local statusDescription = LocalizedText.StatusDescription[descriptionId]
+			if statusDescription then
+				statusTooltipText = GameHelpers.Tooltip.ReplacePlaceholders(statusDescription.Value, character)
 			end
 		end
 		if bonus then

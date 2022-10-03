@@ -43,6 +43,9 @@ local SneakingPassiveBonus = rb:Create("DAGGER_SNEAKINGBONUS", {
 	Skills = {"ActionSkillSneak"},
 	Statuses = {"SNEAKING", "INVISIBLE"},
 	Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SneakingBonus", "<font color='#F19824'>For every turn spent [Key:INVISIBLE_DisplayName] or [Handle:h6bf7caf0g7756g443bg926dg1ee5975ee133:Sneaking] [Handle:h2c990ecagc680g4c68g88ccgb5358faa4e33:in combat], gain an increasing damage boost for one attack.</font>"),
+	MasteryMenuSettings = {
+		OnlyUseTable = "Status",
+	}
 })
 
 if not isClient then
@@ -154,7 +157,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 
 	rb:Create("DAGGER_SERRATED_RUPTURE", {
 		Skills = {"Target_SerratedEdge", "Target_EnemySerratedEdge"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SerratedEdgeBonus", "<font color='#F19824'>Deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Dagger_RuptureBonusDamage] to targets with [BLEEDING_DisplayName].</font>")
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SerratedEdgeBonus", "<font color='#F19824'>Deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Dagger_RuptureBonusDamage] to targets with [Key:BLEEDING_DisplayName].</font>")
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success and HasActiveStatus(e.Data.Target, "BLEEDING") == 1 then
 			GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.Target, "Projectile_LLWEAPONEX_MasteryBonus_Dagger_RuptureBonusDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
