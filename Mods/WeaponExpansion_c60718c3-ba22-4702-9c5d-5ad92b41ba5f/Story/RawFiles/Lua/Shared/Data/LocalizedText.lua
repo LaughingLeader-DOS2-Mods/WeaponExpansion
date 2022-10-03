@@ -48,6 +48,8 @@ Text = {
 		RankLocked = ts:Create("h4f3937d2gfffbg4e84g922fg608f65fa105e", "<font color='#555555'>Locked</font>"),
 		RankPlaceholder = ts:Create("h1d2c7bf8g249fg4acbg9c0bg47204fb87c9b", "<font color='#FF3333'>Not Yet Implemented</font>"),
 		MasteredTooltip = ts:Create("hc167c125g2e75g402dg99b5gd78ed59e8f22", "<font color='#FFD900'>Mastered</font>"),
+		PassiveDisplayName = ts:CreateFromKey("LLWEAPONEX_MasteryBonus_Passive_DisplayName", "Passive"),
+		PassiveDescription = ts:CreateFromKey("LLWEAPONEX_MasteryBonus_Passive_Description", "<font color='#00FF66'>This is a passive bonus that is always active if conditions apply.</font>"),
 	},
 	Mastery = ts:Create("hd84bd8c4gb25fg46bagbbf9ga3d43b8bfacc","Mastery"),
 	MasteryLeveledUp = ts:Create("hd88b4801g3ec4g4b1eg8272ge2f6dce46f0c", "<font color='#F7BA14'>[1] increased to rank <font color='#00FF00'>[2]</font></font>"),

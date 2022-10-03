@@ -406,7 +406,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 
 	rb:Create("BOW_FARSIGHT", {
 		Skills = {"Target_Farsight", "Target_EnemyFarsight"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_Farsight", "<font color='#72EE34'>While [KEY:FARSIGHT_DisplayName] is active, pre-emptively basic attack the first enemy that attempts to harm an ally, [ExtraData:LLWEAPONEX_MB_Bow_Farsight_AttacksPerTurn:2] time(s) until your turn ends again.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_Farsight", "<font color='#72EE34'>While [Key:FARSIGHT_DisplayName] is active, pre-emptively basic attack the first enemy that attempts to harm an ally, [ExtraData:LLWEAPONEX_MB_Bow_Farsight_AttacksPerTurn:2] time(s) until your turn ends again.</font>"),
 		Statuses = {"FARSIGHT"},
 	}).Register.SkillCast(function (self, e, bonuses)
 		e.Data:ForEach(function (target, targetType, self)
@@ -533,4 +533,6 @@ if not _ISCLIENT then
 			ClearTag(e.CharacterGUID, "LLWEAPONEX_Bow_HighGroundBonus")
 		end
 	end, {MatchArgs={ID=MasteryID.Bow}})
+else
+	
 end

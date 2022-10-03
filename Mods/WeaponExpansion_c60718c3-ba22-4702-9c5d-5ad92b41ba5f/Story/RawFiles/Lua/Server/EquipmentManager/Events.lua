@@ -162,6 +162,11 @@ function EquipmentManager:OnItemEquipped(character, item)
 	if character.FightMode or character:GetStatus("UNSHEATHED") then
 		_InvokeUnsheathed(true, item, character, _ITEM_TAGS, template)
 	end
+
+	if character.MyGuid == Origin.Harken and statType == "Armor" then
+		--Defer tattoo checks in case armor is being shuffled out
+		Timer.StartObjectTimer("LLWEAPONEX_Harken_CheckTattoos", Origin.Harken, 500)
+	end
 end
 
 ---@param character EsvCharacter

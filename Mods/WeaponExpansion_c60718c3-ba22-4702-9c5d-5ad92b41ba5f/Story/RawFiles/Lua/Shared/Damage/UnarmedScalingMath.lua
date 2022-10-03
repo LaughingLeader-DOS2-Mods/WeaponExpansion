@@ -105,6 +105,9 @@ local function CalculateWeaponDamageWithDamageBoost(weapon)
     return damages
 end
 
+---@return table<DamageType, {Min:integer, Max:integer}> damageRanges
+---@return integer baseMin
+---@return integer baseMax
 local function CalculateWeaponScaledDamageRanges(character, weapon, isDualWielding, attribute)
 	local baseMin,baseMax = 0,0
 	local damages = CalculateWeaponDamageWithDamageBoost(weapon)
@@ -114,9 +117,10 @@ local function CalculateWeaponScaledDamageRanges(character, weapon, isDualWieldi
 		baseMax = baseMax + damage.Max
     end
 
-    local boost = character.DamageBoost
-        + ComputeWeaponCombatAbilityBoost(character, weapon, isDualWielding)
-        + ComputeWeaponRequirementScaledDamage(character, weapon, attribute)
+    local boost = character.DamageBoost + ComputeWeaponCombatAbilityBoost(character, weapon, isDualWielding)
+    if attribute ~= nil then
+        boost = boost + ComputeWeaponRequirementScaledDamage(character, weapon, attribute)
+    end
     boost = boost / 100.0
 
     if character.IsSneaking then
@@ -214,9 +218,20 @@ end
 
 --- @param character StatCharacter
 --- @param weapon CDivinityStatsItem
---- @param attribute string The scaling attribute.
+--- @param attribute string|nil The scaling attribute.
 --- @param isDualWielding boolean|nil
 --- @return table<DamageType, {Min:integer, Max:integer}>
 function UnarmedHelpers.CalculateWeaponDamageRange(character, weapon, attribute, isDualWielding)
-    return CalculateWeaponScaledDamageRanges(character, weapon, isDualWielding, attribute)
+    if attribute == nil then
+        if weapon.Requirements then
+            for _,v in ipairs(weapon.Requirements) do
+                if Data.Attribute[v.Requirement] then
+                    attribute = v.Requirement
+                    break
+                end
+            end
+        end
+    end
+    local damageRanges,baseMin,baseMax = CalculateWeaponScaledDamageRanges(character, weapon, isDualWielding, attribute)
+    return damageRanges
 end

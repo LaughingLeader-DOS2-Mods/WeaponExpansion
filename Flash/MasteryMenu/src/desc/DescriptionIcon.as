@@ -10,6 +10,7 @@ package desc
 	public dynamic class DescriptionIcon extends MovieClip
 	{
 		public var id:String;
+		public var bonusID:String;
 		public var icon:String;
 		public var icon_mc:MovieClip;
 		public var iconType:int = 0
@@ -85,7 +86,7 @@ package desc
 			if (!this.hasTooltip)
 			{
 				var pos:Point = this.localToGlobal(new Point(0,0));
-				Registry.call("LLWEAPONEX_MasteryMenu_ShowIconTooltip",iconType,id,pos.x,pos.y,width,height);
+				Registry.call("LLWEAPONEX_MasteryMenu_ShowIconTooltip",this.iconType,this.bonusID,this.id,pos.x,pos.y,this.width,this.height);
 				this.hasTooltip = true;
 			}
 		}

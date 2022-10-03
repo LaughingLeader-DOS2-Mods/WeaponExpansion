@@ -31,6 +31,12 @@ local function OnStatusTooltip(character, status, tooltip)
 			Type="StatusBonus",
 			Label=text
 		})
+	elseif status.StatusId == "LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS" or status.StatusId == "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS" then
+		local immuneText = LocalizedText.Tooltip.ImmuneTo:ReplacePlaceholders(GameHelpers.GetStringKeyText("LeaderLib_Flanking", "Flanking"))
+		tooltip:AppendElement({
+			Type="StatusImmunity",
+			Label=immuneText
+		})
 	end
 	local bonusText = MasteryBonusManager.GetBonusText(character, status.StatusId, "status", status)
 	if bonusText then

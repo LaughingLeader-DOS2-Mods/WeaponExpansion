@@ -42,7 +42,7 @@
 	<content contentuid="h027a0666g90c9g48efg90dcgde2bbb110a36">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery I&lt;/font&gt;&lt;br&gt;In a swift display of skill, instantly rend enemies in a line, dealing [1].&lt;br&gt;Consumes all stacks of &lt;font color=&apos;#C9AA58&apos;&gt;Blademaster&apos;s Strike&lt;/font&gt; on targets hit, dealing [2] per stack, and rupturing wounds for [3] every 3 stacks.</content>
 	<content contentuid="h02882207g5e7bg4deaga22eg854b68f8dd29">&lt;font color=&apos;#33FFAA&apos;&gt;Runic Energy [1]/[2]&lt;/font&gt;</content>
 	<content contentuid="h0290a4cdg81aeg4bccg991fg11995cd6da3a">Stalker</content>
-	<content contentuid="h02978a74g0280g48eag9bd7g18b63ff4872c">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery I&lt;/font&gt;&lt;br&gt;Character is taking the stance of a duelist.&lt;br&gt;&lt;font color=&apos;#D040D0&apos;&gt;Critical/Backstab attacks grant +[1] AP once every 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ff9600&apos; size=&apos;20&apos;&gt;Requires an empty hand.&lt;/font&gt;</content>
+	<content contentuid="h02978a74g0280g48eag9bd7g18b63ff4872c">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery I&lt;/font&gt;&lt;br&gt;Character is taking the stance of a duelist.&lt;br&gt;&lt;font color=&apos;#D040D0&apos;&gt;Critical/Backstab attacks grant +[Stats:Stats_LLWEAPONEX_RapierMastery_DuelistBonus:ActionPoints] AP once every 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ff9600&apos; size=&apos;20&apos;&gt;Requires an empty hand.&lt;/font&gt;</content>
 	<content contentuid="h029cec56g78f1g42ffgb475gac9b75747b01">*Skip the rock along the top of the sea.*</content>
 	<content contentuid="h02a1873ag1c71g4adfg9a1eg32db0bdd0595">Builds Energy on Hit</content>
 	<content contentuid="h02ba7b23g7cfbg4da1ga5c0g3afc50e54b66">Character has lowered resistance to &lt;font color=&apos;#AE9F95&apos;&gt;physical damage&lt;/font&gt;.</content>
@@ -194,6 +194,7 @@
 	<content contentuid="h127abf05gacc8g408bg8691g920502799e46">Placeholder</content>
 	<content contentuid="h127e5de1g2416g419ag855fg61d6aef42272">&lt;font color=&apos;#33FF33&apos;&gt;Damage is increased by [ExtraData:LLWEAPONEX_MB_Banner_Overpower_DamageBoostPerAlly]% per ally within [ExtraData:LLWEAPONEX_MB_Banner_Overpower_AllyRadius]m.&lt;/font&gt;</content>
 	<content contentuid="h12ca0c4cgb1d3g4532gb445g6011879b8bcd">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery II&lt;/font&gt;</content>
+	<content contentuid="h12f14ee4gc1a8g4960g93bag659d74513289">&lt;font color=&apos;#00FF66&apos;&gt;This is a passive bonus that is always active if conditions apply.&lt;/font&gt;</content>
 	<content contentuid="h133cf4degf968g4ebfg9354gec021e928aa2">&lt;font color=&apos;#F7BA14&apos;&gt;Earth Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
 	<content contentuid="h13ac28ceg70feg4617gb124g5cdb198bbcac">Execution</content>
 	<content contentuid="h13bfb4ffg4ae6g4c67g839fg30ac91b2978f">A hardy blow with your shield that deals [1] and has a chance to daze the target.</content>
@@ -203,8 +204,6 @@
 	<content contentuid="h1481e457gb42cg4c8ag9d0cgdb2216832df9">Shuriken (Normal)</content>
 	<content contentuid="h1489c182g77f9g4398g8464g543d5568a8f6">The end of the Runic Cannon glimmers like a dazzling gem, powered by runic magic.&lt;br&gt;&lt;font color=&apos;#FF55C3&apos;&gt;Unequipping this requires detaching the safeties near your arm.&lt;/font&gt;</content>
 	<content contentuid="h1491a4a1g0a11g4214g8a3fgd45134b638f1">Blood Rune</content>
-	<content contentuid="h149a39dfgea19g4b47gacf6g55be81a8678e">Assassin&apos;s Patience</content>
-	<content contentuid="h14dae2eag205cg4a66g9e07g610d9dad918c">Piercing Arrows</content>
 	<content contentuid="h14f3faa8ged7bg4136g89abg354c2c5eca3d">Weapon Expansion - Tools</content>
 	<content contentuid="h1501e78fg73e2g42b3gad8ag5a66dc14757a">Philosopher&apos;s Lesson</content>
 	<content contentuid="h150a0adag7ae7g4c9bg81d0g4a69807ad51a">Weighty Book</content>
@@ -223,7 +222,6 @@
 	<content contentuid="h163157d1g1dd4g4cb9ga879g3a3a7c1a6f3a">Shrapnel Charge</content>
 	<content contentuid="h1633ea65g4df7g4a8bgaef2ga2f2ab74ba59">Character&apos;s quiver is recharging.</content>
 	<content contentuid="h16376b0fg0f4bg47daga654gaeac6b97ee3f">Take a focused shot on a target, dealing &lt;font color=&apos;#00FFAA&apos;&gt;[1]&lt;/font&gt; to &lt;font color=&apos;#00FFAA&apos;&gt;[2]&lt;/font&gt;, depending on distance to the target.&lt;br&gt;&lt;font color=&apos;#33FF11&apos;&gt;If the target is &lt;font color=&apos;#DD3300&apos;&gt;Marked&lt;/font&gt;, deal a critical hit.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFBB22&apos;&gt;Aimed Shot provides an immense accuracy boost to ensure it always hits.&lt;/font&gt;</content>
-	<content contentuid="h167722d6g51c3g429bg8564gcd5310357cb0">Still Stance</content>
 	<content contentuid="h1683f225g0155g4015gab2bgf7563a8f4510">Character has lowered resistances to &lt;font color=&apos;#9A00FF&apos;&gt;every element&lt;/font&gt;.</content>
 	<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8">shadow</content>
 	<content contentuid="h16a53792g6604g4a6ag9f3agcfa5e63ac21d">Night&apos;s Edge</content>
@@ -241,7 +239,7 @@
 	<content contentuid="h17ba62e1g37e8g47a7g968fg9446ccf64370">Metal Pipe</content>
 	<content contentuid="h17c882f8ge9d2g4a53g84a9g5367d8a9eb45">&lt;font color=&apos;#C7A758&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_DisplayName:Omnibolt, Heaven&apos;s Wrath]&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#33FF22&apos;&gt;Summon a lightning strike, dealing an additional [SkillDamage:Projectile_LLWEAPONEX_Greatbow_LightningStrike].&lt;font&gt;</content>
 	<content contentuid="h17e56658gbfa0g46e5ga131gf4ce2d1f425a">Activate the &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; to enemies hit for 1 turn.</content>
-	<content contentuid="h1805b56aga7fbg46d6g9ce5ga663ca6b0128">&lt;font color=&apos;#F19824&apos;&gt;The corpses of targets killed explode for [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_CrueltyCorpseExplosion]. Targets killed by an explosion explode as well.&lt;/font&gt;</content>
+	<content contentuid="h1805b56aga7fbg46d6g9ce5ga663ca6b0128">&lt;font color=&apos;#F19824&apos;&gt;The corpses of targets killed explode for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Dagger_CrueltyCorpseExplosion]. Targets killed by an explosion explode as well.&lt;/font&gt;</content>
 	<content contentuid="h183de597ga842g42c5gac3bgd61680d21c0b">Undead character is taking bonus damage!</content>
 	<content contentuid="h1841b24ag5ceeg4c1dg9378g96f17f969d55">Leadslinger</content>
 	<content contentuid="h1841cca9g9763g4bcdga6c3g461fb52be390">Guardian of the Immortal</content>
@@ -475,7 +473,7 @@
 	<content contentuid="h2b4c15f8g00c6g4a50gbc9aga0f9b29f1116">Throw a bladed weapon at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Internal Damage&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Internal Damage&lt;/font&gt; lowers AP Recovery/Start/Maximum by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, and does [4] per turn.</content>
 	<content contentuid="h2b5342e4g614cg4e5egb5cfg6b2c3dd9d117">Poison Shuriken</content>
 	<content contentuid="h2b7342e8gaaf5g47ebg862bg0cda1ed1efda">Stone Rod</content>
-	<content contentuid="h2b7863d6g2faag4ee8gba71g90f217bf1d52">Rank 1</content>
+	<content contentuid="h2b7863d6g2faag4ee8gba71g90f217bf1d52">Rank I</content>
 	<content contentuid="h2bc0020fg0f82g42bbg9b52g51dfe36411d1">Blunt Force</content>
 	<content contentuid="h2bc57a65g2b75g457ag9b7agb148ad4e60cb">A contract killer who slays their prey with a pair of deadly blades, whether motivated by political, religious, or financial means</content>
 	<content contentuid="h2bd6993fg21f0g4223g8153g07ee4c6787d6">&lt;font color=&apos;#C7A758&apos;&gt;Balrin&apos;s Throwing Axe&lt;/font&gt; (Oil)</content>
@@ -691,7 +689,6 @@
 	<content contentuid="h4190e997g6776g46a5gbff1g711a310c6d38">&lt;font color=&apos;#FFCE58&apos;&gt;Fear, Madness, and Sleep are cleansed from encouraged allies.&lt;/font&gt;</content>
 	<content contentuid="h41f9a490ge372g43c7g989ag81b444fb98c8">&lt;font color=&apos;#FF0000&apos;&gt;*Only the grimoire user can equip that!*&lt;/font&gt;</content>
 	<content contentuid="h41ff62e4g3ae2g4f24ga725g0442f8e936a2">*[ONE-HANDED] Click on the button labeled &apos;One-Handed&apos;.*</content>
-	<content contentuid="h422e8df6gbc43g4189gaa52ga7bf873ce86d">&lt;font color=&apos;#00FF66&apos;&gt;This is a passive bonus that is always active if conditions apply.&lt;/font&gt;</content>
 	<content contentuid="h4230520dgdd57g4384g98cdg326bebd1bbe2">&lt;font color=&apos;#5B40FF&apos;&gt;Dagger Mastery II&lt;/font&gt;</content>
 	<content contentuid="h4231ee0dgf851g419aga741gacf969630fe7">Lone Wolf&apos;s Ace</content>
 	<content contentuid="h42445177g4747g4c91g9218gbc6a4e300981">&lt;font color=&apos;#fe6e27&apos;&gt;Fire Great Arrow&lt;/font&gt;</content>
@@ -781,6 +778,7 @@
 	<content contentuid="h4c67e600gdf54g44f3g9661g8539c8efde7e">[CANCEL] *Hit the button labeled &quot;CANCEL&quot;.*</content>
 	<content contentuid="h4c78a154g8491g472eg9d27gf969a95bfacd">An explosive mine modified for remote detonation.&lt;br.Handle with care!</content>
 	<content contentuid="h4c8feeedg10c0g4767gaf92gd248eace485e">An empty glass flask, perfect for housing liquid you&apos;d like to relocate.</content>
+	<content contentuid="h4caf5d00g5fe6g4590ga79egcce31f1ba8f6">Shattering Snipe</content>
 	<content contentuid="h4cba2525ge1f2g4ee8g8f22ga2cc0d7206ca">Swordmaster</content>
 	<content contentuid="h4ceeae30g7ad1g4d93gae34gc3b4eefedf33">Scripture of the Righteous</content>
 	<content contentuid="h4cfb2f23gdf9fg4904gab5eg212e986b905b">&lt;font color=&apos;#C7A758&apos;&gt;Kevin the Pet Rock&lt;/font&gt; (&lt;font color=&apos;#b823cb&apos;&gt;Exausted&lt;/font&gt;)</content>
@@ -838,6 +836,7 @@
 	<content contentuid="h51a0c668gafc2g4fbcga910g4e8739fd3e17">&lt;font color=&apos;#C7A758&apos;&gt;Prepare Balrin&apos;s Throwing Axe&lt;/font&gt;</content>
 	<content contentuid="h51c04f89g2118g4f25gb2c2ge53e6b1c48ea">Reinforced Glaive</content>
 	<content contentuid="h51c53ccdg8baag4866gb2dbgb3b649049c2d">An explosive mine modified for remote detonation.&lt;br.Handle with care!</content>
+	<content contentuid="h51ec45e3g0c60g4542g8aabgbef62aafd327">Piercing Bolts</content>
 	<content contentuid="h51f8a88dgd660g4f5agbcffge1d80e2494a1">Shield Prison Bonus</content>
 	<content contentuid="h51fd13d2gcfeag418ag83ecg3e32ec98126b">Character has increased armor from a combat shield.</content>
 	<content contentuid="h52408aa9gab17g47c9g91b2g9c130cb33443">&lt;font color=&apos;#FF6624&apos;&gt;Targets hit deal &lt;font color=&apos;#FF0000&apos;&gt;[Stats:Stats_LLWEAPONEX_MB_Sword_BalanceShift:DamageBoost]% less damage&lt;/font&gt; until their turn ends, while you deal &lt;font color=&apos;#33FF00&apos;&gt;[ExtraData:LLWEAPONEX_MB_Sword_BalanceShiftDamageBoost]% more damage to them&lt;/font&gt; until your turn ends.&lt;/font&gt;</content>
@@ -1100,7 +1099,6 @@
 	<content contentuid="h6a30ea9cgec6bg4fb7g847cg6f52783ee045">Ancient Two-handed Bokuto</content>
 	<content contentuid="h6a3d6841g00e8g4d72g8172g071fccfac077">Dragonslayer&apos;s Greatbow</content>
 	<content contentuid="h6a51f8bbg89aeg4b36g90b4g67b9e206522e">&lt;icon id=&apos;Target_CripplingBlow&apos;/&gt;[Key:Target_CripplingBlow_DisplayName] applies Sundered, reducing max Physical and Magic Armor by 25%.</content>
-	<content contentuid="h6a6759eeg5cd0g45b4ga815gdd7bf46d8b1a">Scrollkeeper</content>
 	<content contentuid="h6a8b7584g375bg4aa1g85fdg9178f76d434d">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery II&lt;/font&gt;</content>
 	<content contentuid="h6a8c5394gdba9g45ffg934eg7914a2427553">A magical blade imbued with the power of water. The runes can be invoked to bathe the blade in a dousing layer of water.</content>
 	<content contentuid="h6ab0e2beg916eg4559g9981ga731585aa356">&lt;icon id=&apos;Projectile_Ricochet&apos;/&gt;[Key:Projectile_Ricochet_DisplayName] is refreshed if each fork strikes a target, once per turn.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Crossbow_StillStance_DisplayName,LLWEAPONEX_MB_Crossbow_StillStance&apos; type=&apos;3&apos;/&gt;Deal more damage when attacking without moving.</content>
@@ -1387,7 +1385,7 @@
 	<content contentuid="h86d61c70g2938g4e6egb048g548c4e4950f1">Frenzy Charge</content>
 	<content contentuid="h86e68aebgdd6eg436fg98c8gc34e0a5d0516">&lt;icon id=&apos;Target_LLWEAPONEX_BasicAttack&apos;s element by [Stats:Stats_LLWEAPONEX_Weakness_Water:WaterResistance]% for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).&lt;icon id=&apos;Shout_FleshSacrifice&apos;/&gt;Allies standing on blood surfaces gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus.</content>
 	<content contentuid="h86fdba0bgd3afg43e9gbd3fgcb70e445bff3">Forest&apos;s Wall, Seeker&apos;s Spurn</content>
-	<content contentuid="h8707c330gb581g4563gafaeg925f48105938">&lt;font color=&apos;#77FF33&apos;&gt;If you haven&apos;t moved, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage.&lt;/font&gt;</content>
+	<content contentuid="h8707c330gb581g4563gafaeg925f48105938">&lt;font color=&apos;#77FF33&apos;&gt;If you haven&apos;t moved since your last turn, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage with basic attacks and weapon skills on the first attack.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF6633&apos;&gt;This bonus does not trigger on your first turn in combat.&lt;/font&gt;</content>
 	<content contentuid="h872b22a6ga3b3g409ag8921g26eb2af4a0c5">Blademaster&apos;s Strike Target</content>
 	<content contentuid="h87871f97gb8c0g4df4g8920g157e54180e46">Inspiration</content>
 	<content contentuid="h878ac150g627eg4f82ga7cegbe7f49f2f606">Expert Thrower</content>
@@ -1401,6 +1399,7 @@
 	<content contentuid="h887c83aag37b0g4fd8g8477gc9c54344de7e">Arcane Knowledge - Chance to explode a basic spell on attack</content>
 	<content contentuid="h889b84dfgcd27g41c8g8237g7f6fabdc824b">Reaper</content>
 	<content contentuid="h88c3f760g03b2g43d1g951ag5205a1fab669">Bloodstorm Rune</content>
+	<content contentuid="h88f24be5g3d76g4375g8ddbg2e52749de7bd">&lt;font color=&apos;#77FF33&apos;&gt;Non-piercing [Handle:h87b42cabg950ag4e52g802dg9fc6aa755f5e:Ranged Weapon] skills will pierce the first target hit.&lt;/font&gt;</content>
 	<content contentuid="h890fdfdag3d90g44e5ga74cgf40c514d2bea">Estoc</content>
 	<content contentuid="h891bed49g98e3g4269g9932g33150016921e">Stone</content>
 	<content contentuid="h893512aag4f27g45fdg974fgb0e3300c8bd5">Scales With Scoundrel and Pistol Mastery</content>
@@ -1673,7 +1672,6 @@
 	<content contentuid="ha2711c4bg28d6g42c1gb315g1ebfa564bae0">Boom!</content>
 	<content contentuid="ha2940579g2b42g4b63gbc8fg41f8ba5e358c">An explosive mine modified for remote detonation.&lt;br.Handle with care!</content>
 	<content contentuid="ha294a1bfg2496g4badg9830gc88546c7e7c8">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery IV&lt;/font&gt;</content>
-	<content contentuid="ha2bb0653g0733g468cgb260g9956cd1337c7">Axe Stalker</content>
 	<content contentuid="ha2e642b4ga7a9g4e8dg9602gc99caba74917">[LLWEAPONEX_VendingMachine_OrderOption3_048eaa1b-d937-48bb-ac2c-5759cd64540f]</content>
 	<content contentuid="ha2fbf8c5g3500g42d4ga21bg5e4524eae598">&lt;font color=&apos;#CC33FF&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_DisplayName] twists the recently slain [1], summoning a &lt;font color=&apos;#FFFFFF&apos;&gt;[Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem]&lt;/font&gt;.&lt;/font&gt;</content>
 	<content contentuid="ha334211eg8502g4530ga132g3e96b8ded816">a Shield</content>
@@ -1701,7 +1699,7 @@
 	<content contentuid="ha61a9beeg3dcbg426eg86dfg93adbbe40b56">Worn Glaive</content>
 	<content contentuid="ha62b3311gd53fg466ag833cg4828d2e6abd6">&lt;font color=&apos;#81AB00&apos;&gt;Token of Finesse&lt;/font&gt;</content>
 	<content contentuid="ha6397058g6cd7g4608g81fbg1d8092fc6940">Challenge of Knowledge</content>
-	<content contentuid="ha647239bgf7a4g4142gb7a3g97bf618307b7">Rank 2</content>
+	<content contentuid="ha647239bgf7a4g4142gb7a3g97bf618307b7">Rank II</content>
 	<content contentuid="ha64e30d3ga590g41c0g9447g73496802f497">Immolation Bonus IV</content>
 	<content contentuid="ha689deecgac14g4f08gb908g4618421f0832">A product of technological innovation, this intricate armament is capable of ejecting metal pellets at high velocities.</content>
 	<content contentuid="ha6b77329g873eg458fgad79geca7bf05c066">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery I&lt;/font&gt;</content>
@@ -1851,7 +1849,7 @@
 	<content contentuid="hb545218bgc1f1g4b7cg93c4gaa8a48e04f58">[1] reached &lt;font color=&apos;#F7BA14&apos;&gt;[2]&lt;/font&gt; rank &lt;font color=&apos;#00FF00&apos;&gt;[3]&lt;/font&gt;</content>
 	<content contentuid="hb588f7d2gbbc0g4eafg902bg775046b62405">&lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt;</content>
 	<content contentuid="hb5964089gfd37g4008ga7d7g6737e5648e16">Ancient Bokuto</content>
-	<content contentuid="hb5b69849g6862g4db5gaa63gd4dd69e56a9d">&lt;font color=&apos;#C9AA58&apos;&gt;Immune to Flanking&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#33FF33&apos;&gt;Turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]%.&lt;/font&gt;</content>
+	<content contentuid="hb5b69849g6862g4db5gaa63gd4dd69e56a9d">&lt;font color=&apos;#33FF33&apos;&gt;Turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]%.&lt;/font&gt;</content>
 	<content contentuid="hb5cce093g12e6g4316ga31cga6b31812f70c">Cryoblade</content>
 	<content contentuid="hb5dd260dg2c3bg4befg8439g56d9b5260c11">Assassin&apos;s Tanto</content>
 	<content contentuid="hb5e88a63gf929g47d3g8ed4g68f619d45690">An ethereal blade, flickering ever so slightly. Said to have once belonged to a merciless wraith who eagerly persued its prey.</content>
@@ -1914,6 +1912,7 @@
 	<content contentuid="hbb0037eag8ccfg4d5bgbcafg6074f15ae293">&lt;font color=&apos;#AA11CC&apos;&gt;Scythe Mastery IV&lt;/font&gt;</content>
 	<content contentuid="hbb27d10bgc595g4e1eg8aa9g23859683c324">*Take your leave.*</content>
 	<content contentuid="hbb405cf0gf2e0g4c71gb47cgb7a0cc46044f">Runeblade</content>
+	<content contentuid="hbb43ad1cg7ca0g444dg91dag0f8449991e31">Marked Arrow Spray</content>
 	<content contentuid="hbb775321g9dfeg47ecga672g1e0afc239428">Scholar of Memory </content>
 	<content contentuid="hbb8018a4g2968g49f6g9d4cga8d369b0d9ab">Eternal Spark</content>
 	<content contentuid="hbba36a94g60e4g450bga576gad7c1eb97320">Weapon Expansion - Loot</content>
@@ -1944,7 +1943,7 @@
 	<content contentuid="hbf040bedgcb96g4c92ga4abg510ff2d22b2a">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery II&lt;/font&gt;&lt;br&gt;A follow up blow to &lt;font color=&apos;#9a38ff&apos;&gt;Dizzying Smash&lt;/font&gt; that deals [1] and pushes the target back 3m.&lt;br&gt;If the target is Knocked Down, enemies they collide with have a chance to be knocked down, and both they and the target take [2] per collision.&lt;br&gt;&lt;font color=&apos;#44FF03&apos;&gt;On hit, refreshes the cooldown for Sucker Punch.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FCD203&apos; size=&apos;20&apos;&gt;Single-use skill.&lt;/font&gt;</content>
 	<content contentuid="hbf199083gc108g4e76g9206g62938beeb989">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in a dark, etheral energy that deals shadow damage.</content>
 	<content contentuid="hbf253b8bg47b8g4c03g80a7g230269c0ad4b">Enhanced Demolition</content>
-	<content contentuid="hbf31ff61gafa2g499fgbc58gf8a0defac3e7">Rank 4</content>
+	<content contentuid="hbf31ff61gafa2g499fgbc58gf8a0defac3e7">Rank IV</content>
 	<content contentuid="hbf56f1e1gfe4eg4482g8727g04c85400cd98">Frenzy Charge (2)</content>
 	<content contentuid="hbf5ce1ecge54fg4967g9622gf1105f232154">Expert Crossbowman</content>
 	<content contentuid="hbf6365bdga33fg4332g823dge30a4b8f16ca">Musashi&apos;s Victory</content>
@@ -2031,7 +2030,7 @@
 	<content contentuid="hc7f8dca2gb752g4627g9351ge185459bc219">Defeating an Enemy in Combat</content>
 	<content contentuid="hc80e9017g9899g4524g83d2ga48f319a1eff">Expert Runekeeper</content>
 	<content contentuid="hc81de6aag392dg4c6fg9168g9c0a3dbdc09e">Special tattoos that grant the bearer tremendous strength.</content>
-	<content contentuid="hc8280bb6gca2eg4cf7ga935g989a32c9d47b">&lt;font color=&apos;#F19824&apos;&gt;Deal an additional [SkillDamage:Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage] to targets with [BLEEDING_DisplayName].&lt;/font&gt;</content>
+	<content contentuid="hc8280bb6gca2eg4cf7ga935g989a32c9d47b">&lt;font color=&apos;#F19824&apos;&gt;Deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Dagger_RuptureBonusDamage] to targets with [BLEEDING_DisplayName].&lt;/font&gt;</content>
 	<content contentuid="hc82989a4gad80g43e9g9bb9geca7ab4d3b94">Intelligence Conversion</content>
 	<content contentuid="hc87fc4e3g8a3bg4112g946dg5efd106fc16b">Open the mastery menu to check current weapon masteries.</content>
 	<content contentuid="hc8857631g4d14g45e6gbb3cgef8223b17eb5">Bandit&apos;s Quiver</content>
@@ -2112,7 +2111,6 @@
 	<content contentuid="hd0cbbb71g0431g4007gb8cbg9a3bb5efcfdf">&lt;font color=&apos;#9933FF&apos;&gt;Dark Dragon Fireball&lt;/font&gt;</content>
 	<content contentuid="hd0ea72afgefc5g4008gae85g8f8743270847">Obliterator</content>
 	<content contentuid="hd0ef5c8cg7e6dg4f4dg9ec1g86b169ff0c97">Gladiator&apos;s Victory</content>
-	<content contentuid="hd101a164gca6eg4641gb094g614e6bd0faad">Savage</content>
 	<content contentuid="hd101a6e8g78d1g4af6g9c85g9cf2abb64e5a">Throwing Ability</content>
 	<content contentuid="hd109e1fegef22g493cgb4deg82dc0cd21635">Exquisite Dwarven Shields</content>
 	<content contentuid="hd150d9fcgbe64g4a79g92b9gd0db942b049e">&lt;icon id=&apos;Shout_RecoverArmour&apos;&gt;[ExtraData:LLWEAPONEX_MB_Shield_RecoverArmour_DamageReduction]%&lt;/font&gt;</content>
@@ -2125,7 +2123,7 @@
 	<content contentuid="hd1f993bag9dadg49cbga5edgb92880c38e46">Odachi</content>
 	<content contentuid="hd20a7ff4g2208g4d88ga770gb280b805bcc5">&lt;font color=&apos;#F5785A&apos;&gt;Battle Book Mastery 3:&lt;/font&gt; [1] challenged [2] and won, and was granted gold as a reward (target has no skills).</content>
 	<content contentuid="hd21a6fa4g7a9eg4cc0gb127g1ae07e801c4a">Novice</content>
-	<content contentuid="hd2364fb1g646bg47cagbd53g71411ba6a0ad">Rank 3</content>
+	<content contentuid="hd2364fb1g646bg47cagbd53g71411ba6a0ad">Rank III</content>
 	<content contentuid="hd243200dg8324g483fg95b9g6a1f52922c7c">Throwing Sword? (Large)</content>
 	<content contentuid="hd27567f7g04adg40a3gb780g1fd98acbbc57">*[ROGUE WEAPONS] Click on the button labeled &apos;Rogue Weapons&apos;.*</content>
 	<content contentuid="hd2999285g39cbg455fg92ecgdc52056742c3">Cooperation Heal (Banner Mastery 3)</content>
@@ -2274,7 +2272,7 @@
 	<content contentuid="he0f60351g01b2g4824ga28aga1064daae544">&lt;icon id=&apos;Projectile_Ricochet&apos;/&gt;Each ricochet bounce deals splash damage in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet:ExplodeRadius]m radius.</content>
 	<content contentuid="he1154cb0g4127g43c1gb287gee2314567d43">Unholy Razor</content>
 	<content contentuid="he1253aecg8871g4e7dgb1f8gd19d7dabb9e9">Elemental Bullets</content>
-	<content contentuid="he14a313dg2a94g4084g9d10g3cc18ca4974b">Rank 5</content>
+	<content contentuid="he14a313dg2a94g4084g9d10g3cc18ca4974b">Rank V</content>
 	<content contentuid="he191cfc5g46d4g4344ga01cgccb438cefd04">&lt;font color=&apos;#C7A758&apos;&gt;Attuned to Earth&lt;/font&gt;</content>
 	<content contentuid="he19c8dfag44b8g4041ga558gcc204eeb528f">&lt;font color=&apos;#77FF33&apos;&gt;If the target is affected by [Key:KNOCKED_DOWN_DisplayName], deal a critical hit.&lt;/font&gt;</content>
 	<content contentuid="he1a20b3cgc1a4g4f7agb17dga9d90e173418">Exquisite Quickdraw Quiver</content>
@@ -2321,6 +2319,7 @@
 	<content contentuid="he625016eg2212g4f39g814fg1845dee2edb9">Widowmaker</content>
 	<content contentuid="he650b461g8912g4079gbe94gee4567a513da">Assassin&apos;s Patience</content>
 	<content contentuid="he67e894ag310bg4016g8434gad6327dcde15">Dizzy</content>
+	<content contentuid="he6c4ead0g9c43g4b86g8720g30701569d63c">Passive</content>
 	<content contentuid="he6e1f1bcg70f3g4902g8b42g2971e929b137">[1] died and lost their [2] bonus.</content>
 	<content contentuid="he6efb1d6gbcbbg4a02ga8e0gb54604aa71a8">&lt;font color=&apos;#b823cb&apos;&gt;Imitation, Guide to Mimicry&lt;/font&gt; (Activated)</content>
 	<content contentuid="he6fbf4e4g6053g4d6fgb1e7g25cf597a1f4d">Dual Shields</content>

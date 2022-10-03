@@ -59,7 +59,10 @@ package
 				Registry.call("PlaySound","UI_Game_PauseMenu_Open");
 				Registry.call("focus");
 				Registry.call("inputfocus");
-				this.stage.focus = this.lastFocus;
+				if(this.lastFocus != null)
+				{
+					this.stage.focus = this.lastFocus;
+				}
 				this.active = true;
 			}
 		}

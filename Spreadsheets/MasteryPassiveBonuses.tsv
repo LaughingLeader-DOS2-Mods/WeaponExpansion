@@ -13,83 +13,32 @@ Bludgeon	4	Shatter	Hitting a Petrified or Frozen target with a basic attack or w
 Bow	2	Focused Attacking	Basic attacking the same target has a cumulative chance to deal a critical hit. The bonus is lost upon critical hitting, leaving combat, or attacking a different target. This bonus applies to Greatbows as well.	√	√
 Bow	4	Arcing Shot	Always have a height advantage on basic attacks and ranged weapon skills.	√	❌
 Crossbow	1	Still Stance	When attacking without moving, damage is increased, proportional to Crossbow Mastery rank.	√	❌
-Crossbow	4	Piercing Projectiles	Non-piercing projectile bow skills will pierce the first target hit.	√	❌
+Crossbow	4	Piercing Projectiles	Non-piercing ranged weapon skills will pierce the first target hit.	√	❌
 Dagger	1	Assassin's Patience	For every turn spent invisible or sneaking in combat, gain a stacking damage boost for one attack.  	√	❌
-Dagger	2	Placeholder	Desc	❌	❌
-Dagger	2	Placeholder	Desc	❌	❌
-Dagger	3	Placeholder	Desc	❌	❌
-Dagger	3	Placeholder	Desc	❌	❌
-Dagger	4	Placeholder	Desc	❌	❌
-Dagger	4	Placeholder	Desc	❌	❌
-Dual Shields	1	Placeholder	Desc	❌	❌
-Dual Shields	2	Placeholder	Desc	❌	❌
-Dual Shields	3	Placeholder	Desc	❌	❌
 Dual Shields	4	Placeholder	Desc	❌	❌
-Firearm	1	Placeholder	Desc	❌	❌
-Firearm	2	Placeholder	Desc	❌	❌
-Firearm	3	Placeholder	Desc	❌	❌
 Firearm	4	Placeholder	Desc	❌	❌
-Greatbow	1	Placeholder	Desc	❌	❌
-Greatbow	2	Placeholder	Desc	❌	❌
-Greatbow	3	Placeholder	Desc	❌	❌
 Greatbow	4	Placeholder	Desc	❌	❌
 Hand Crossbow	1	Base Damage	Deal +5% more base damage.	√	√
 Hand Crossbow	2	Base Damage	Deal +10% more base damage.	√	√
 Hand Crossbow	3	Base Damage	Deal +15% more base damage.	√	√
 Hand Crossbow	4	Base Damage	Deal +20% more base damage.	√	√
 Katana	1	Blademaster's Strike	Weapon skills and attacks grant a stacking combo status on targets hit that interact with Katana mastery skills.	√	❌
-Katana	2	Placeholder	Desc	❌	❌
-Katana	3	Placeholder	Desc	❌	❌
-Katana	4	Placeholder	Desc	❌	❌
-Pistol	1	Placeholder	Desc	√	❌
-Pistol	1	Placeholder	Desc	√	❌
-Pistol	2	Placeholder	Desc	√	❌
-Pistol	3	Placeholder	Desc	❌	❌
-Pistol	4	Placeholder	Desc	❌	❌
-Polearm	1	Placeholder	Desc	❌	❌
-Polearm	2	Placeholder	Desc	❌	❌
-Polearm	3	Placeholder	Desc	❌	❌
+Pistol	1	Base Damage	Deal +5% more base damage.	√	√
+Pistol	2	Base Damage	Deal +10% more base damage.	√	√
+Pistol	3	Base Damage	Deal +15% more base damage.	√	√
+Pistol	4	Base Damage	Deal +20% more base damage.	√	√
 Polearm	4	Placeholder	Desc	❌	❌
-Quarterstaff	1	Placeholder	Desc	❌	❌
-Quarterstaff	2	Placeholder	Desc	❌	❌
-Quarterstaff	3	Placeholder	Desc	❌	❌
 Quarterstaff	4	Placeholder	Desc	❌	❌
-Rapier	1	Placeholder	Desc	√	❌
-Rapier	2	Placeholder	Desc	❌	❌
-Rapier	3	Placeholder	Desc	❌	❌
 Rapier	4	Placeholder	Desc	❌	❌
-Runeblade	1	Placeholder	Desc	❌	❌
-Runeblade	2	Placeholder	Desc	❌	❌
-Runeblade	3	Placeholder	Desc	❌	❌
 Runeblade	4	Placeholder	Desc	❌	❌
-Scythe	1	Placeholder	Desc	❌	❌
-Scythe	2	Placeholder	Desc	❌	❌
-Scythe	3	Placeholder	Desc	❌	❌
 Scythe	4	Placeholder	Desc	❌	❌
-Shield	1	Placeholder	Desc	❌	❌
-Shield	2	Placeholder	Desc	❌	❌
-Shield	3	Placeholder	Desc	❌	❌
 Shield	4	Placeholder	Desc	❌	❌
-Staff	1	Placeholder	Desc	❌	❌
-Staff	2	Placeholder	Desc	❌	❌
-Staff	2	Placeholder	Desc	❌	❌
-Staff	3	Placeholder	Desc	❌	❌
 Staff	4	Placeholder	Desc	❌	❌
-Sword	1	Placeholder	Desc	❌	❌
-Sword	2	Placeholder	Desc	❌	❌
-Sword	3	Placeholder	Desc	❌	❌
 Sword	4	Placeholder	Desc	❌	❌
-Throwing	1	Placeholder	Desc	❌	❌
-Throwing	2	Placeholder	Desc	❌	❌
-Throwing	3	Placeholder	Desc	❌	❌
 Throwing	4	Placeholder	Desc	❌	❌
 Unarmed	1	Way of the Fist	Melee weapon requirement skills can now be used while unarmed.	√	√
 Unarmed	1	Unarmed Scaling 1	+30% base damage with unarmed attacks (20 -> 50 total).	√	√
 Unarmed	2	Unarmed Scaling 2	+40% base damage with unarmed attacks (20 base -> 60 total)	√	√
 Unarmed	3	Unarmed Scaling 3	+65% base damage with unarmed attacks (20 base -> 85 total)	√	√
 Unarmed	4	Unarmed Scaling 4	+80% base damage with unarmed attacks (20 base -> 100 total)	√	√
-Wand	1	Placeholder	Desc	√	❌
-Wand	1	Placeholder	Desc	√	❌
-Wand	2	Placeholder	Desc	❌	❌
-Wand	3	Placeholder	Desc	❌	❌
 Wand	4	Placeholder	Desc	❌	❌

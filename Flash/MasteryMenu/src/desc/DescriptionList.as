@@ -34,10 +34,11 @@ package desc
 			this.addElement(entryContent, reposition, false);
 		}
 
-		public function addIcon(id:String, icon:String = "", iconType:int = 1, reposition:Boolean = true) : *
+		public function addIcon(bonusID:String, id:String, icon:String = "", iconType:int = 1, reposition:Boolean = true) : *
 		{
 			var entryContent:DescriptionIcon = new DescriptionIcon();
 			entryContent.id = id;
+			entryContent.bonusID = bonusID;
 			entryContent.iconType = iconType;
 			switch(icon)
 			{
@@ -50,7 +51,8 @@ package desc
 					entryContent.createIcon();
 					break;
 				default:
-					var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
+					//var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
+					var iconIggyName:String = "masteryMenu_" + String(icon);
 					Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, icon, iconType);
 					entryContent.icon = "iggy_" + iconIggyName;
 					entryContent.createIcon();
@@ -93,7 +95,7 @@ package desc
 			return 1;
 		}
 
-		public function addIconGroup(ids:String, icons:String, types:String, reposition:Boolean = true, delimiter:String = ";") : *
+		public function addIconGroup(bonusID:String, ids:String, icons:String, types:String, reposition:Boolean = true, delimiter:String = ";") : *
 		{
 			var entryList:horizontalList = new horizontalList();
 			entryList.m_MaxWidth = this.width - (this.SIDE_SPACING * 2);
@@ -123,7 +125,9 @@ package desc
 				}
 				//trace(iconId, iconName, iconType)
 				var entryContent:DescriptionIcon = new DescriptionIcon();
+				entryContent.iconType = iconType;
 				entryContent.id = iconId;
+				entryContent.bonusID = bonusID;
 				switch(iconName)
 				{
 					case "LLWEAPONEX_UI_PassiveBonus":
@@ -145,7 +149,6 @@ package desc
 						entryContent.createIcon();
 						this.icon_index = this.icon_index + 1;
 				}
-				entryContent.iconType = iconType;
 				entryList.addElement(entryContent, false, false);
 				i++;
 			}

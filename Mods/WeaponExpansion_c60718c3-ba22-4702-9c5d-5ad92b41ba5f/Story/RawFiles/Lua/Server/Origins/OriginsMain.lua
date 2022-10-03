@@ -413,37 +413,49 @@ function Harken_SwapTattoos(uuid)
 	end
 end
 
+---@param uuid CharacterParam
 function Harken_SetTattoosActive(uuid)
-	local canSetVisualElement = CharacterSetVisualElement ~= nil and HasHarkenVisualSet(uuid)
-	local needsSync = false
-	local stat = Ext.Stats.Get("LLWEAPONEX_TATTOOS_STRENGTH", nil, false)
-	if CharacterIsInCombat(uuid) == 1 and StringHelpers.IsNullOrEmpty(CharacterGetEquippedItem(uuid, "Breast")) then
-		if stat.StatsId ~= "Stats_LLWEAPONEX_Tattoos_Strength_Active" then
-			needsSync = true
-			stat.StatsId = "Stats_LLWEAPONEX_Tattoos_Strength_Active"
-			stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_ACTIVE_Description"
-			stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_Magic_A"
+	local character = GameHelpers.GetCharacter(uuid)
+	if character then
+		local canSetVisualElement = CharacterSetVisualElement ~= nil and HasHarkenVisualSet(uuid) and GameHelpers.Item.GetItemInSlot(character, "Breast") == nil
+		local needsSync = false
+		local stat = Ext.Stats.Get("LLWEAPONEX_TATTOOS_STRENGTH", nil, false)
+		
+		if GameHelpers.Character.IsInCombat(character) then
+			if stat.StatsId ~= "Stats_LLWEAPONEX_Tattoos_Strength_Active" then
+				needsSync = true
+				stat.StatsId = "Stats_LLWEAPONEX_Tattoos_Strength_Active"
+				stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_ACTIVE_Description"
+				stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_Magic_A"
+			end
+			if canSetVisualElement then
+				CharacterSetVisualElement(character.MyGuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
+			end
+		else
+			if stat.StatsId ~= "Stats_LLWEAPONEX_Tattoos_Strength" then
+				needsSync = true
+				stat.StatsId = "Stats_LLWEAPONEX_Tattoos_Strength"
+				stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_Description"
+				stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_A"
+			end
+			if canSetVisualElement then
+				CharacterSetVisualElement(character.MyGuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
+			end
 		end
-		if canSetVisualElement then
-			CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
+		if needsSync then
+			Ext.Stats.Sync("Stats_LLWEAPONEX_Tattoos_Strength", true)
+			StatusManager.RemovePermanentStatus(character, "LLWEAPONEX_TATTOOS_STRENGTH")
+			Timer.StartObjectTimer("LLWEAPONEX_Harken_ApplyTattooStatus", character, 250)
 		end
-	else
-		if stat.StatsId ~= "Stats_LLWEAPONEX_Tattoos_Strength" then
-			needsSync = true
-			stat.StatsId = "Stats_LLWEAPONEX_Tattoos_Strength"
-			stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_Description"
-			stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_A"
-		end
-		if canSetVisualElement then
-			CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
-		end
-	end
-	if needsSync then
-		Ext.SyncStat("Stats_LLWEAPONEX_Tattoos_Strength", true)
-		StatusManager.RemovePermanentStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH")
-		Timer.StartObjectTimer("LLWEAPONEX_Harken_ApplyTattooStatus", uuid, 250)
 	end
 end
+
+Ext.RegisterConsoleCommand("harkencrash", function ()
+	local items = {"a4bf443f-5cb3-4271-bd10-b5002792f3fe","c7226c64-4270-4501-b78d-1d8cc31bb769","e8ac87e5-0fce-40f9-b9e2-ddbd742c91d0"}
+	for i,v in pairs(items) do
+		CharacterEquipItem(Origin.Harken, v)
+	end
+end)
 
 Timer.Subscribe("LLWEAPONEX_Harken_ApplyTattooStatus", function (e)
 	if e.Data.UUID then
@@ -451,6 +463,22 @@ Timer.Subscribe("LLWEAPONEX_Harken_ApplyTattooStatus", function (e)
 	end
 end)
 
-RegisterListener("Initialized", function ()
-	StatusManager.ApplyPermanentStatus(Origin.Harken, "LLWEAPONEX_TATTOOS_STRENGTH")
+Timer.Subscribe("LLWEAPONEX_Harken_CheckTattoos", function (e)
+	if e.Data.Object then
+		Harken_SetTattoosActive(e.Data.Object)
+	end
+end)
+
+Events.ObjectEvent:Subscribe(function (e)
+	Harken_SetTattoosActive(e.Objects[1])
+end, {MatchArgs={Event="LLWEAPONEX_Harken_SetTattoosActive", EventType="StoryEvent"}})
+
+Events.Initialized:Subscribe(function(e)
+	if ObjectExists(Origin.Harken) == 1 then
+		local harken = GameHelpers.GetCharacter(Origin.Harken)
+		if harken and not GameHelpers.Status.IsActive(harken, "LLWEAPONEX_TATTOOS_STRENGTH") then
+			StatusManager.ApplyPermanentStatus(harken, "LLWEAPONEX_TATTOOS_STRENGTH")
+			Harken_SetTattoosActive(harken)
+		end
+	end
 end)

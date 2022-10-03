@@ -82,7 +82,7 @@ local TreasureTableOverrides = {
 
 local function ApplyTreasureTableOverrides()
 	for statName,data in pairs(TreasureTableOverrides) do
-		local treasureTable = Ext.GetTreasureTable(statName)
+		local treasureTable = Ext.Stats.TreasureTable.GetLegacy(statName)
 		if treasureTable ~= nil then
 			local sub = treasureTable.SubTables[1]
 			if sub then
@@ -92,7 +92,7 @@ local function ApplyTreasureTableOverrides()
 					--Make the default stuff more common than the new stuff
 					for i,v in pairs(sub.Categories) do
 						local id = v.TreasureCategory or v.TreasureTable
-						if not string.find(id, "LLWEAPONEX") then
+						if id and not string.find(id, "LLWEAPONEX") then
 							if v.Frequency and v.Frequency == 1 then
 								v.Frequency = v.Frequency + 1
 								totalFrequency = totalFrequency + v.Frequency
@@ -122,7 +122,7 @@ local function ApplyTreasureTableOverrides()
 					-- if Vars.DebugMode then
 					-- 	print(Ext.JsonStringify(treasureTable))
 					-- end
-					Ext.UpdateTreasureTable(treasureTable)
+					Ext.Stats.TreasureTable.Update(treasureTable)
 				end
 			end
 		end

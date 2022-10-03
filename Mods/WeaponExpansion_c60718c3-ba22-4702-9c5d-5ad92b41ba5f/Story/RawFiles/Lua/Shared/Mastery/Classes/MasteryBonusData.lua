@@ -6,11 +6,14 @@ local _type = type
 ---@class MasteryBonusDataParams
 ---@field ID string
 ---@field Mastery string
+---@field Rank integer
 ---@field IsPassive boolean
 ---@field Skills string[] Optional skills associated.
 ---@field Statuses string[] Optional statuses associated.
 ---@field Tooltip TranslatedString
 ---@field StatusTooltip TranslatedString If set, statuses will use this for tooltips, instead of Tooltip.
+---@field TooltipSkill FixedString|nil The skill ID to use for passive bonuses with "AllSkills" to specify a skill's text to display in the mastery menu.
+---@field TooltipStatus FixedString|nil The status ID to use for passive bonuses with "AllSkills" to specify a skill's text to display in the mastery menu.
 ---@field AllStatuses boolean
 ---@field AllSkills boolean
 ---@field DisableStatusTooltip boolean
@@ -78,7 +81,9 @@ setmetatable(MasteryBonusData, {
 function MasteryBonusData:Create(id, params)
 	local this = {
 		ID = id or "",
-		IsPassive = false
+		IsPassive = false,
+		TooltipSkill = "",
+		TooltipStatus = "",
 	}
 	local _private = {
 		Register = {
@@ -781,6 +786,28 @@ function MasteryBonusData:GetTooltipText(character, skillOrStatus, tooltipType, 
 		return text
 	end
 	return nil
+end
+
+---@param character EclCharacter
+---@param skillOrStatus string|nil
+---@param tooltipType MasteryBonusDataTooltipID|nil
+---@return string|nil
+function MasteryBonusData:GetMenuTooltipText(character, skillOrStatus, tooltipType, ...)
+	local text = nil
+	if tooltipType == "status" then
+		text = FinallyGetTooltipText(self, character, skillOrStatus, tooltipType, ...)
+	elseif tooltipType == "skill" or tooltipType == "item" then
+		text = FinallyGetTooltipText(self, character, skillOrStatus, tooltipType, ...)
+	end
+	if text then
+		local t = _type(text)
+		if t == "table" and text.Type == "TranslatedString" then
+			---@cast text -TranslatedString
+			text = text.Value
+		end
+		return text
+	end
+	return ""
 end
 
 MasteryDataClasses.MasteryBonusData = MasteryBonusData

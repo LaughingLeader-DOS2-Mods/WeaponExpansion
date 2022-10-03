@@ -265,8 +265,27 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	local bonusText = MasteryBonusManager.GetBonusText(character, skill, "skill", tooltip.IsFromItem == true)
-	if bonusText then
+	local bonusText = nil
+
+	if MasteryMenu.ActiveTooltipBonus then
+		local bonus = MasteryBonusManager.GetBonusByID(MasteryMenu.ActiveTooltipBonus)
+		if bonus then
+			bonusText = ""
+			local rankTag = string.format("%s_Mastery%s", bonus.Mastery, bonus.Rank)
+			local rankName = GameHelpers.GetStringKeyText(rankTag, "")
+			if not StringHelpers.IsNullOrEmpty(rankName) then
+				bonusText = rankName .. "<br>"
+			end
+			local tooltipText = GameHelpers.Tooltip.ReplacePlaceholders(bonus:GetMenuTooltipText(character, skill, "skill", tooltip.IsFromItem == true), character)
+			if not StringHelpers.IsNullOrEmpty(tooltipText) then
+				bonusText = bonusText .. tooltipText
+			end
+		end
+	else
+		bonusText = MasteryBonusManager.GetBonusText(character, skill, "skill", tooltip.IsFromItem == true)
+	end
+
+	if not StringHelpers.IsNullOrEmpty(bonusText) then
 		if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
 			descriptionElement.Label = descriptionElement.Label .. "<br>"
 		end

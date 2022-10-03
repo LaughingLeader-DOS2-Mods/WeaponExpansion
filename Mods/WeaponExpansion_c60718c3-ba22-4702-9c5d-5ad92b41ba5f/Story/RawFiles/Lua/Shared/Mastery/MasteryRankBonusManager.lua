@@ -648,6 +648,7 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 		local bonus = _GetBonus(bonuses)
 		if bonus then
 			bonus.Mastery = mastery
+			bonus.Rank = rank
 			_BONUS_ID_MAP[bonus.ID] = bonus
 			_registeredBonuses[masteryRankID][#_registeredBonuses[masteryRankID]+1] = bonus
 		else
@@ -656,6 +657,7 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 				local bonus = _GetBonus(bonuses[i])
 				if bonus then
 					bonus.Mastery = mastery
+					bonus.Rank = rank
 					_BONUS_ID_MAP[bonus.ID] = bonus
 					_registeredBonuses[masteryRankID][#_registeredBonuses[masteryRankID]+1] = bonus
 				end

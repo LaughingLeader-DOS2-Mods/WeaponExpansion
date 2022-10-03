@@ -6,15 +6,13 @@ local VisibilityMode = {
 }
 
 local function ShouldMasteryMenuBeVisible()
-	if Ext.GetGameState() == "Running" then
-		local cc = Ext.GetUIByType(not Vars.ControllerEnabled and Data.UIType.characterCreation or Data.UIType.characterCreation_c)
-		if not cc then
-			return MasteryMenu.IsOpen == true
-		end
+	if Ext.GetGameState() == "Running" and not Vars.Resetting and Vars.Initialized and not UIExtensions.CharacterCreation.Visible then
+		return MasteryMenu.IsOpen == true
 	end
 	return false
 end
 
+---@class MasteryMenu:UIObjectExtended
 MasteryMenu = Classes.UIObjectExtended:Create({
 	ID = "WeaponExpansionMasteryMenu",
 	Layer = 11,
@@ -248,7 +246,7 @@ local closePanelTypes = {
 ---@private
 function MasteryMenu:CloseOtherPanels()
 	for _,id in pairs(closePanelTypes[Vars.ControllerEnabled]) do
-		local ui = Ext.GetUIByType(id)
+		local ui = Ext.UI.GetByType(id)
 		if ui then
 			--ui:ExternalInterfaceCall("requestCloseUI")
 			ui:ExternalInterfaceCall("hideUI")
@@ -268,7 +266,7 @@ function MasteryMenu:Open(skipRequest)
 	else
 		local character = Client:GetCharacter()
 		if character then
-			Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(character.NetID))
+			Ext.Net.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(character.NetID))
 		end
 	end
 end
@@ -280,45 +278,169 @@ Ext.RegisterNetListener("LLWEAPONEX_OpenMasteryMenu", function(cmd, payload)
 		local characterMasteryData = MasteryDataClasses.CharacterMasteryData:Create(data.UUID, data.Masteries)
 		local character = GameHelpers.GetCharacter(data.NetID)
 		if character then
-			characterMasteryData.Handle = Ext.HandleToDouble(character.Handle)
+			characterMasteryData.Handle = Ext.UI.HandleToDouble(character.Handle)
 		end
 		MasteryMenu.Variables.MasteryData = characterMasteryData
 		MasteryMenu:Open(true)
 	end
 end)
 
-function MasteryMenu:PrepareTooltip(iconType, id, x, y, width, height)
+local statusTooltipFormat = "<p align='center'><font size='24'>%s</font></p><img src='Icon_Line' width='350%%'><br>%s"
+
+function MasteryMenu:PrepareTooltip(iconType, id, descriptionId, x, y, width, height)
+	self.ActiveTooltipBonus = id
+	local bonus = MasteryBonusManager.GetBonusByID(id)
+	local character = Client:GetCharacter()
+	local doubleHandle = Ext.UI.HandleToDouble(character.Handle)
 	local characterMasteryData = self.Variables.MasteryData
 	local ui = self.Instance
 	if iconType == self.Params.IconType.Skill then
-		ui:ExternalInterfaceCall("showSkillTooltip", characterMasteryData.Handle, id, x, y, width, height)
 		self.CurrentTooltip = "Skill"
+		ui:ExternalInterfaceCall("showSkillTooltip", doubleHandle, descriptionId, x, y, width, height)
 	elseif iconType == self.Params.IconType.Status then
-		ui:ExternalInterfaceCall("showTooltip", GetStatusTooltipText(characterMasteryData.UUID, id), x, y, width, height, "right", false)
 		self.CurrentTooltip = "Status"
-	elseif iconType == self.Params.IconType.Passive then
-		local specialVals = StringHelpers.Split(id, ",")
-		if specialVals ~= nil and #specialVals >= 2 then
-			local name,_ = GameHelpers.GetStringKeyText(specialVals[1])
-			local description,_ = GameHelpers.GetStringKeyText(specialVals[2])
-			if name ~= nil then
-				local passiveDesc,_ = GameHelpers.GetStringKeyText("LLWEAPONEX_MasteryBonus_Passive_Description")
-				name = GameHelpers.Tooltip.ReplacePlaceholders(name)
-				if description ~= nil then
-					description = GameHelpers.Tooltip.ReplacePlaceholders(description).."<br>"..passiveDesc
-				else
-					description = passiveDesc
+		local statusTooltipText = ""
+		local statusTooltipName = ""
+		if not Data.EngineStatus[descriptionId] then
+			local stat = Ext.Stats.Get(descriptionId, nil, false)
+			if stat then
+				local statusName = GameHelpers.GetStringKeyText(stat.DisplayName, stat.DisplayNameRef)
+				local statusDescription = GameHelpers.GetStringKeyText(stat.Description, stat.DescriptionRef)
+				statusTooltipName = statusName:upper()
+				local addedParams = false
+				if not StringHelpers.IsNullOrWhitespace(stat.DescriptionParams) then
+					local statusParams = StringHelpers.Split(stat.DescriptionParams, ";")
+					if statusParams > 0 then
+						local paramValues = {}
+						for _,vID in pairs(statusParams) do
+							local value = ""
+							local params = StringHelpers.Split(vID, ":")
+							if Ext.Events.StatusGetDescriptionParam then
+								local evt = {
+									Description = "",
+									Owner = character.Stats,
+									Params = params,
+									Status = {
+										AbsorbSurfaceTypes = {},
+										DisplayName = statusName,
+										HasStats = stat.StatsId ~= "",
+										Icon = stat.Icon,
+										StatusId = stat.Name,
+										StatusName = stat.DisplayName
+									},
+									StatusSource = character.Stats,
+									Stopped = false
+								}
+								evt.StopPropagation = function()
+									evt.Stopped = true
+								end
+								Ext.Events.StatusGetDescriptionParam:Throw(evt)
+								if not StringHelpers.IsNullOrEmpty(evt.Description) then
+									value = evt.Description
+								end
+							end
+							if StringHelpers.IsNullOrEmpty(value) then
+								if params[2] then
+									local propType,propID,propAttribute = table.unpack(params)
+								elseif params[1] then
+									local prop = params[1]
+									if prop == "Damage" then
+										if GameHelpers.Stats.Exists(stat.DamageStats, "Weapon") then
+											local fakeWeapon = GameHelpers.Ext.CreateWeaponTable(stat.DamageStats, character.Stats.Level)
+											local damageRanges = UnarmedHelpers.CalculateWeaponDamageRange(character.Stats, fakeWeapon)
+											local damageText = GameHelpers.Tooltip.FormatDamageRange(damageRanges)
+											paramValues[#paramValues+1] = damageText
+										end
+									else
+										local attValue = stat[prop]
+										if attValue ~= nil then
+											paramValues[#paramValues+1] = attValue
+										end
+									end
+								end
+							else
+								paramValues[#paramValues+1] = value
+							end
+						end
+						if #paramValues > 0 then
+							local fakeTS = {
+								Value = statusTooltipText
+							}
+							statusTooltipText = GameHelpers.Tooltip.ReplacePlaceholders(Classes.TranslatedString.ReplacePlaceholders(fakeTS, table.unpack(paramValues)), character)
+							addedParams = true
+						end
+					end
 				end
-				local text = string.format("<p align='center'><font size='24'>%s</font></p><img src='Icon_Line' width='350%%'><br>%s", name, description)
-				ui:ExternalInterfaceCall("showTooltip", text, x, y, width, height, "right", false)
-				self.CurrentTooltip = "Generic"
+				if not addedParams then
+					statusTooltipText = GameHelpers.Tooltip.ReplacePlaceholders(statusDescription, character)
+				end
+			else
+				fprint(LOGLEVEL.ERROR, "[WeaponExpansion:MasteryMenu] Stat(%s) does not exist (status tooltip).", id)
 			end
+		end
+		if bonus then
+			local rankTag = string.format("%s_Mastery%s", bonus.Mastery, bonus.Rank)
+			local rankName = GameHelpers.GetStringKeyText(rankTag, "")
+			local bonusText = ""
+			if not StringHelpers.IsNullOrWhitespace(rankName) then
+				bonusText = rankName .. "<br>"
+			end
+			local bonusTooltipText = bonus:GetTooltipText(character, descriptionId, "status", true)
+			if not StringHelpers.IsNullOrEmpty(bonusTooltipText) then
+				bonusText = bonusText .. bonusTooltipText
+			end
+			if not StringHelpers.IsNullOrEmpty(bonusText) then
+				if not StringHelpers.IsNullOrEmpty(statusTooltipText) then
+					statusTooltipText = statusTooltipText .."<br>"
+				end
+				statusTooltipText = statusTooltipText .. bonusText
+			end
+		end
+		local finalStatusTooltipText = statusTooltipFormat:format(statusTooltipName, statusTooltipText)
+		if not StringHelpers.IsNullOrEmpty(finalStatusTooltipText) then
+			ui:ExternalInterfaceCall("showTooltip", finalStatusTooltipText, x, y, width, height, "right", false)
+		end
+	elseif iconType == self.Params.IconType.Passive then
+		local passiveTitle = Text.MasteryMenu.PassiveDisplayName.Value
+		local passiveDesc = Text.MasteryMenu.PassiveDescription.Value
+		if string.find(id, ",") then
+			local specialVals = StringHelpers.Split(id, ",")
+			if specialVals ~= nil and #specialVals >= 2 then
+				local name,_ = GameHelpers.GetStringKeyText(specialVals[1])
+				local description,_ = GameHelpers.GetStringKeyText(specialVals[2])
+				if name ~= nil then
+					name = GameHelpers.Tooltip.ReplacePlaceholders(name)
+					if description ~= nil then
+						description = GameHelpers.Tooltip.ReplacePlaceholders(description).."<br>"..passiveDesc
+					else
+						description = passiveDesc
+					end
+					local text = string.format("<p align='center'><font size='24'>%s</font></p><img src='Icon_Line' width='350%%'><br>%s", name, description)
+					self.CurrentTooltip = "Generic"
+					ui:ExternalInterfaceCall("showTooltip", text, x, y, width, height, "right", false)
+				end
+			end
+		elseif bonus then
+			local name = GameHelpers.GetStringKeyText(bonus.ID, "")
+			if StringHelpers.IsNullOrEmpty(name) then
+				name = passiveTitle
+			end
+			local description = MasteryMenu:GetPassiveText(bonus, character)
+			if description ~= nil then
+				description = GameHelpers.Tooltip.ReplacePlaceholders(description, character).."<br>"..passiveDesc
+			else
+				description = passiveDesc
+			end
+			local text = string.format("<p align='center'><font size='24'>%s</font></p><img src='Icon_Line' width='350%%'><br>%s", name, description)
+			self.CurrentTooltip = "Generic"
+			ui:ExternalInterfaceCall("showTooltip", text, x, y, width, height, "right", false)
 		end
 	end
 end
 
 function MasteryMenu:ClearTooltip(iconType)
 	self.CurrentTooltip = nil
+	self.ActiveTooltipBonus = nil
 end
 
 function MasteryMenu:OnButtonPressed(buttonType, buttonState)

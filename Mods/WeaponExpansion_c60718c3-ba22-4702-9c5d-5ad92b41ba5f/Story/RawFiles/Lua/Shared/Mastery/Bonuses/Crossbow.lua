@@ -60,7 +60,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	end, true),
 	rb:Create("CROSSBOW_STILL_STANCE", {
 		Skills = MasteryBonusManager.Vars.BasicAttack,
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_StillStance", "<font color='#77FF33'>If you haven't moved, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage with basic attacks or weapon skills.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_StillStance", "<font color='#77FF33'>If you haven't moved since your last turn, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage with basic attacks and weapon skills on the first attack.</font><br><font color='#FF6633'>This bonus does not trigger on your first turn in combat.</font>"),
 		IsPassive = true,
 		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
 			if tooltipType == "skill" then
@@ -90,6 +90,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 			if (lastPos and GameHelpers.Math.GetDistance(e.Attacker.WorldPos, lastPos) <= 0.01)
 			or (Vars.LeaderDebugMode and not GameHelpers.Character.IsInCombat(e.Attacker.MyGuid))
 			then
+				PersistentVars.MasteryMechanics.StillStanceLastPosition[e.Attacker.MyGuid] = nil
 				local damageBonus = MasteryBonusManager.Vars.GetStillStanceBonus(e.Attacker)
 				if damageBonus > 0 then
 					damageBonus = 1 + (damageBonus * 0.01)
@@ -100,9 +101,21 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	end).Osiris("ObjectTurnStarted", 1, "after", function(char)
 		local character = GameHelpers.GetCharacter(char)
 		if character then
+			local lastPos = PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid]
+			if (lastPos and GameHelpers.Math.GetDistance(character.WorldPos, lastPos) <= 0.01) then
+				local rankName = StringHelpers.StripFont(GameHelpers.GetStringKeyText(Masteries.LLWEAPONEX_Crossbow.RankBonuses[1].Tag, "Crossbow I"))
+				CombatLog.AddCombatText(Text.CombatLog.StillStanceEnabled:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(character), rankName))
+			end
+		end
+	end).Osiris("ObjectTurnEnded", 1, "after", function(char)
+		local character = GameHelpers.GetCharacter(char)
+		if character then
 			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = {table.unpack(character.WorldPos)}
-			local rankName = StringHelpers.StripFont(GameHelpers.GetStringKeyText(Masteries.LLWEAPONEX_Crossbow.RankBonuses[1].Tag, "Crossbow I"))
-			CombatLog.AddCombatText(Text.CombatLog.StillStanceEnabled:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(character), rankName))
+		end
+	end).Osiris("ObjectLeftCombat", 1, "after", function(char)
+		local character = GameHelpers.GetCharacter(char)
+		if character then
+			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = nil
 		end
 	end)
 })
@@ -192,7 +205,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 		GetIsTooltipActive = function(self, id, character, tooltipType, extraParam, tags, itemHasSkill)
 			if tooltipType == "status" then
 				---@cast extraParam EclStatus
-				if GameHelpers.IsValidHandle(extraParam.StatusSourceHandle) then
+				if extraParam and GameHelpers.IsValidHandle(extraParam.StatusSourceHandle) then
 					local source = GameHelpers.TryGetObject(extraParam.StatusSourceHandle)
 					if GameHelpers.Ext.ObjectIsCharacter(source) then
 						---@cast source EclCharacter

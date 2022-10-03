@@ -6,11 +6,11 @@ LLWEAPONEX_UI_MasteryMenu_NoMasteriesTitle	No Masteries Learned	h47c00b1cg79b5g4
 LLWEAPONEX_UI_MasteryMenu_NoMasteriesDescription	Use weapons in battle to automatically gain mastery experience.	h826d023bg5b10g4d79g874agb0f918554f34
 LLWEAPONEX_UI_MasteryMenu_RankDescription	[1]<br>[2]	ha931c2f8ge74fg4e46ga1b8g142846b61b46
 LLWEAPONEX_UI_MasteryMenu_Rank0	Unranked	h3112e038g01abg4e7eg9efcg379e017e328f
-LLWEAPONEX_UI_MasteryMenu_Rank1	Rank 1	h2b7863d6g2faag4ee8gba71g90f217bf1d52
-LLWEAPONEX_UI_MasteryMenu_Rank2	Rank 2	ha647239bgf7a4g4142gb7a3g97bf618307b7
-LLWEAPONEX_UI_MasteryMenu_Rank3	Rank 3	hd2364fb1g646bg47cagbd53g71411ba6a0ad
-LLWEAPONEX_UI_MasteryMenu_Rank4	Rank 4	hbf31ff61gafa2g499fgbc58gf8a0defac3e7
-LLWEAPONEX_UI_MasteryMenu_Rank5	Rank 5	he14a313dg2a94g4084g9d10g3cc18ca4974b
+LLWEAPONEX_UI_MasteryMenu_Rank1	Rank I	h2b7863d6g2faag4ee8gba71g90f217bf1d52
+LLWEAPONEX_UI_MasteryMenu_Rank2	Rank II	ha647239bgf7a4g4142gb7a3g97bf618307b7
+LLWEAPONEX_UI_MasteryMenu_Rank3	Rank III	hd2364fb1g646bg47cagbd53g71411ba6a0ad
+LLWEAPONEX_UI_MasteryMenu_Rank4	Rank IV	hbf31ff61gafa2g499fgbc58gf8a0defac3e7
+LLWEAPONEX_UI_MasteryMenu_Rank5	Rank V	he14a313dg2a94g4084g9d10g3cc18ca4974b
 LLWEAPONEX_UI_MasteryMenu_RankLocked	<font color='#555555'>Locked</font>	h4f3937d2gfffbg4e84g922fg608f65fa105e
 LLWEAPONEX_UI_MasteryMenu_RankPlaceholder	<font color='#FF3333'>Not Yet Implemented</font>	h1d2c7bf8g249fg4acbg9c0bg47204fb87c9b
 LLWEAPONEX_UI_MasteryMenu_MasteredTooltip	<font color='#FFD900'>Mastered</font>	hc167c125g2e75g402dg99b5gd78ed59e8f22
@@ -36,3 +36,5 @@ LLWEAPONEX_UI_EnabledMasteries	<font color='#FFAA00'>Enabled Masteries: [1]</fon
 LLWEAPONEX_UI_AutoLevelText	<font color='#80FFC3' size='18'>Automatically levels up when equipped, gaining bonuses at various levels.</font>	hd5277dddg7b7dg4f95g9216g0e1515f5a461
 LLWEAPONEX_UI_HeavyBoltAPCost	Heavy Bolt (+AP Cost)	hb931f729g9df1g461bg887fgb7eae7662e12
 LLWEAPONEX_UI_CappedBonus	+[1]% [2] ([3]% Max)	h97e7078cg6d42g46edgb7e0g5ec87a48a56d
+LLWEAPONEX_MasteryBonus_Passive_DisplayName	Passive	haa5f8992g1239g4f33g88d5ga3eca42e29bf
+LLWEAPONEX_MasteryBonus_Passive_Description	<font color='#00FF66'>This is a passive bonus that is always active if conditions apply.</font>	h422e8df6gbc43g4189gaa52ga7bf873ce86d

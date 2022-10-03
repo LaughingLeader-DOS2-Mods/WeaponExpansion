@@ -5,9 +5,6 @@ EVENTS
 EVENT LLWEAPONEX_Harken_TattoosUpdate
 ON
 	OnInit()
-	OnItemEquipped(__Me, _)
-	OnItemUnequipped(__Me, _)
-	OnCharacterStatusApplied(__Me, LLWEAPONEX_TATTOOS_STRENGTH)
 	OnEnteredCombat(__Me, _)
 	OnLeftCombat(__Me, _)
 ACTIONS
