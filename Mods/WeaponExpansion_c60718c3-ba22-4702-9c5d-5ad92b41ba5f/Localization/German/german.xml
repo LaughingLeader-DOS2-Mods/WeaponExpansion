@@ -54,7 +54,7 @@
 	<content contentuid="h03451e09g2f0bg410eg89cdg1d80b656605c">*[WIZARD WEAPONS] Click on the button labeled &apos;Wizard Weapons&apos;.*</content>
 	<content contentuid="h03b512b5g0b92g4dbegb56bgb777efa67669">Blood Empower</content>
 	<content contentuid="h03bcab3bgb227g4c71gb14egf3964ebe80e2">&lt;font color=&apos;#CD1F1F&apos;&gt;To unequip the Dragon Bone Claws, unequip your glove armor instead of the weapon.&lt;/font&gt;</content>
-	<content contentuid="h03c0d99fg2431g4950gaf36geaa61cd4678b">BLUDGEON_SUNDER</content>
+	<content contentuid="h03c0d99fg2431g4950gaf36geaa61cd4678b">Sundering Blow</content>
 	<content contentuid="h03c42c40g5520g496bgaf72g150449510bca">Wooden Rod</content>
 	<content contentuid="h03ceee62ga198g4cf1gbc0eg2b54e6beb5a7">Swap between using the &lt;font color=&apos;#C7A758&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_DisplayName]&lt;/font&gt; as a melee scepter or wand.</content>
 	<content contentuid="h03e4cb52g3ae2g4cd3g8a2eg5d4857837938">Ronin&apos;s Odachi</content>
@@ -1018,6 +1018,7 @@
 	<content contentuid="h6312d810g2ceag40efg9b21g2b12ead9814e">Scholar&apos;s Lecture</content>
 	<content contentuid="h63230c69gdc79g4e73g990bg408facf88250">Warchief&apos;s Halberd</content>
 	<content contentuid="h63586ac1g7c6fg4b7cg994bg5921ad89351e">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery I&lt;/font&gt;</content>
+	<content contentuid="h636565c2gf778g4682g9387g367ea971756e">Deal [ExtraData:LLWEAPONEX_MB_BattleBook_Scholar_DamageBoostPerTotalSkillSlots]% more damage for skills of the most memorized ability school.&lt;br&gt;The damage bonus scales with total skill slots, and the highest ability school can be tied between multiple abilities, in order to evenly split the damage bonus.</content>
 	<content contentuid="h63d42801g007eg4ae6g8609g856b214fb5d1">&lt;font color=&apos;#E4CE22&apos; size=&apos;22&apos;&gt;&lt;p align=&apos;center&apos;&gt;Banner Inspiration!&lt;/font&gt;&lt;br&gt;Cleansed [1]&lt;/p&gt;</content>
 	<content contentuid="h63d5e39cg9ef5g4953gbf6ag8e9a9c5821b7">Charged (Runic Cannon)</content>
 	<content contentuid="h63e8ccdbg84b8g411cg9797g605a5449494a">Duelist Stance</content>
@@ -1143,6 +1144,7 @@
 	<content contentuid="h6e8bf4fdgd720g43adg878ag75aff041a469">Magical Arm-Mounted Crossbow</content>
 	<content contentuid="h6ebe1ceegf67eg4baagbd37gec6cc8aee3e7">Debug Menu</content>
 	<content contentuid="h6eec1697g3919g4ff8g8301g3b6b462a83e7">&lt;font color=&apos;#FFAA33&apos;&gt;You are immune to surface damage and harmful statuses while moving.&lt;/font&gt;</content>
+	<content contentuid="h6ef4a5fag1b75g4fe7g87acge4e2fc188a22">&lt;font color=&apos;#99AACC&apos;&gt;Deal &lt;font color=&apos;#22FF33&apos;&gt;[1]% more damage&lt;/font&gt; due to [2] being the most memorized ability school.&lt;br&gt;Note: [3]% damage per [4] total slots, multiplied by [5] ([6] ability slots / [4] total).&lt;/font&gt;</content>
 	<content contentuid="h6f080319gd171g43e3gaa17gc7b1d244ce0c">Captain&apos;s Bicorne</content>
 	<content contentuid="h6f740d4cgf6ebg4a06g9217gbd2bb23a4271">*The labels on the red buttons light up, as you hear a mechanic voice.* &quot;Greetings [VALUED CUSTOMER]! Place an order, and be amazed as our stock of weaponry changes at the next available cycle!&quot;</content>
 	<content contentuid="h6f91bac2g6077g4c5fg8124g8d920cb68604">A small rune that when fitted inside a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, allows the wielder to activate that element within their blade for a limited time.</content>
@@ -1698,7 +1700,7 @@
 	<content contentuid="ha5e7da5cg6dcdg45cegbe67g378a44986204">A special pet rock. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
 	<content contentuid="ha61a9beeg3dcbg426eg86dfg93adbbe40b56">Worn Glaive</content>
 	<content contentuid="ha62b3311gd53fg466ag833cg4828d2e6abd6">&lt;font color=&apos;#81AB00&apos;&gt;Token of Finesse&lt;/font&gt;</content>
-	<content contentuid="ha6397058g6cd7g4608g81fbg1d8092fc6940">Challenge of Knowledge</content>
+	<content contentuid="ha6397058g6cd7g4608g81fbg1d8092fc6940">Challenger of Knowledge</content>
 	<content contentuid="ha647239bgf7a4g4142gb7a3g97bf618307b7">Rank II</content>
 	<content contentuid="ha64e30d3ga590g41c0g9447g73496802f497">Immolation Bonus IV</content>
 	<content contentuid="ha689deecgac14g4f08gb908g4618421f0832">A product of technological innovation, this intricate armament is capable of ejecting metal pellets at high velocities.</content>
