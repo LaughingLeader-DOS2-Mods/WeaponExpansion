@@ -817,12 +817,7 @@ end
 ---@param tooltipType MasteryBonusDataTooltipID|nil
 ---@return string|nil
 function MasteryBonusData:GetMenuTooltipText(character, skillOrStatus, tooltipType, ...)
-	local text = nil
-	if tooltipType == "status" then
-		text = FinallyGetTooltipText(self, character, skillOrStatus, tooltipType, ...)
-	elseif tooltipType == "skill" or tooltipType == "item" then
-		text = FinallyGetTooltipText(self, character, skillOrStatus, tooltipType, ...)
-	end
+	local text = FinallyGetTooltipText(self, character, skillOrStatus, tooltipType, ...)
 	if text then
 		local t = _type(text)
 		if t == "table" and text.Type == "TranslatedString" then

@@ -39,7 +39,6 @@ if not _ISCLIENT then
 			return PersistentVars.DisabledBonuses[k]
 		end,
 		__newindex = function (_,k,v)
-			Ext.Utils.Print(_ISCLIENT and "CLIENT" or "SERVER", "__newindex", k, v)
 			PersistentVars.DisabledBonuses[k] = v
 		end
 	})
@@ -103,7 +102,8 @@ MasteryDataClasses.BonusIDEntry = {
 
 ---@param char CharacterParam
 ---@param skill string|nil Optional skill to filter with.
----@return table<string, boolean>
+---@return table<string, boolean> bonuses
+---@return boolean hasBonus
 function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	---@type EsvCharacter|EclCharacter
 	local character = GameHelpers.GetCharacter(char)
@@ -894,7 +894,7 @@ end
 
 ---@param character CharacterParam
 ---@param bonusID string
----@param disabled boolean
+---@param disabled boolean|nil
 ---@return boolean
 function MasteryBonusManager.SetBonusDisabled(character, bonusID, disabled)
 	local b = disabled
@@ -912,7 +912,6 @@ function MasteryBonusManager.SetBonusDisabled(character, bonusID, disabled)
 		if disabled == nil then
 			b = not targetTable[bonusID] == true
 		end
-		Ext.Utils.PrintError("MasteryBonusManager.SetBonusDisabled", bonusID, b, _ISCLIENT and "CLIENT" or "SERVER")
 		if b then
 			targetTable[bonusID] = true
 			return true
@@ -939,7 +938,6 @@ if not _ISCLIENT then
 		if data and data.NetID then
 			local character = GameHelpers.GetCharacter(data.NetID)
 			MasteryBonusManager.SetBonusDisabled(character, data.Bonus, data.Disabled == true)
-			Ext.Dump(PersistentVars.DisabledBonuses)
 		end
 	end)
 
@@ -985,7 +983,7 @@ else
 							local toggleBonus = function (self, ui, id, actionID, handle, entry)
 								local character = GameHelpers.GetCharacter(netid)
 								local disabled = MasteryBonusManager.SetBonusDisabled(character, handle)
-								Ext.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableBonus", Common.JsonStringify({NetID=netid, Bonus=handle, Disabled=disabled}))
+								Ext.Net.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableBonus", Common.JsonStringify({NetID=netid, Bonus=handle, Disabled=disabled}))
 							end
 							ToggleBonusesCM.Children = {
 								Classes.ContextMenuAction:Create({
@@ -1002,7 +1000,7 @@ else
 											updateData.Bonuses[id] = false
 											MasteryBonusManager.SetBonusDisabled(character, id, false)
 										end
-										Ext.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableMultipleBonuses", Common.JsonStringify(updateData))
+										Ext.Net.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableMultipleBonuses", Common.JsonStringify(updateData))
 									end,
 								}),
 								Classes.ContextMenuAction:Create({
@@ -1019,7 +1017,7 @@ else
 											updateData.Bonuses[id] = true
 											MasteryBonusManager.SetBonusDisabled(character, id, true)
 										end
-										Ext.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableMultipleBonuses", Common.JsonStringify(updateData))
+										Ext.Net.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableMultipleBonuses", Common.JsonStringify(updateData))
 									end,
 								})
 							}

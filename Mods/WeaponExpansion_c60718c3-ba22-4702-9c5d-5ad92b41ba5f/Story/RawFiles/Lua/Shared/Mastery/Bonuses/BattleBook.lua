@@ -95,7 +95,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 	end),
 
 	rb:Create("BATTLEBOOK_LOOT", {
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BookHunter","<font color='#99AACC'>Chance to find a skillbook when opening a repository of books for the first time.</font>")
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BookHunter","<font color='#99AACC'>Chance to find a skillbook when opening a repository of books for the first time.</font>"),
+		IsPassive = true,
 	}).Register.Osiris("CharacterUsedItem", 2, "before", function (character, item)
 		if IsTagged(item, "LLWEAPONEX_MB_BattleBook_RolledBookcase") == 0
 		and ItemIsContainer(item) == 1 
@@ -522,6 +523,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 	rb:Create("BATTLEBOOK_SCHOLAR", {
 		AllSkills = true,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_Scholar","<font color='#99AACC'>Deal <font color='#22FF33'>[1]% more damage</font> due to [2] being the most memorized ability school.<br>Note: [3]% damage per [4] total slots, multiplied by [5] ([6] ability slots / [4] total).</font>"),
+		IsPassive = true,
 		GetIsTooltipActive = function(bonus, id, character, tooltipType)
 			if tooltipType == "skill" and not GameHelpers.Skill.IsAction(id) then
 				local damageMult = GameHelpers.Stats.GetAttribute(id, "Damage Multiplier", 0)
@@ -555,6 +557,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 					--local damageText = GameHelpers.Tooltip.GetSkillDamageText(id, character, {["Damage Muliplier"] = baseDamageMult + damageBoost})
 					return self.Tooltip:ReplacePlaceholders(damageBoost, abilityName, boostPerSlot, totalSlots, damageBoostText, abilitySlots)
 				end
+			elseif tooltipType == "generic" then
+				return GameHelpers.GetStringKeyText("LLWEAPONEX_MB_BattleBook_Scholar_Generic", "For skills of the most memorized ability school, deal [ExtraData:LLWEAPONEX_MB_BattleBook_Scholar_DamageBoostPerTotalSkillSlots]% more damage per skill slot.<br>The highest ability school can be tied between multiple abilities, in order to evenly split the damage bonus.")
 			end
 		end
 	}).Register.SkillHit(function (self, e, bonuses)

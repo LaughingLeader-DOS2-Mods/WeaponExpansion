@@ -3,11 +3,13 @@ package desc
 	import flash.display.MovieClip;
 	import LS_Classes.scrollList;
 	import LS_Classes.horizontalList;
-	import flash.external.ExternalInterface;
+	import flash.events.Event;
+	import events.DescriptionUpdateCompleteEvent;
 	
 	public dynamic class DescriptionList extends scrollList
 	{
 		public var icon_index:int = 0;
+		public var icon_register:Array;
 		
 		public function DescriptionList()
 		{
@@ -15,26 +17,57 @@ package desc
 			addFrameScript(0,this.frame1);
 		}
 
-		internal function frame1() : *
+		internal function frame1():void
 		{
-			stop();
+			this.stop();
 		}
 
 		public function clearIcons() : void
 		{
 			Registry.call("LLWEAPONEX_MasteryMenu_ClearIcons", icon_index);
 			this.icon_index = 0;
+			this.icon_register = new Array();
 		}
 
-		public function addText(text:String, reposition:Boolean = true) : *
+		public function updateComplete():void
+		{
+			this.positionElements();
+			this.icon_register = new Array();
+		}
+
+		public function sendDescriptionUpdateEvent(totalBonuses:uint=0, totalEnabled:uint=0, totalDisabled:uint=0):void
+		{
+			var e:DescriptionUpdateCompleteEvent = new DescriptionUpdateCompleteEvent(true);
+			e.totalMasteryBonuses = totalBonuses;
+			e.totalEnabledBonuses = totalEnabled;
+			e.totalDisabledBonuses = totalDisabled;
+			this.dispatchEvent(e);
+		}
+
+		public function addBonusHeader(id:String, displayName:String, enabled:Boolean = true):void
+		{
+			var bonus:BonusHeader = new BonusHeader();
+			bonus.bonusID = id;
+			bonus.setText(displayName);
+			bonus.setEnabled(enabled, false);
+			//bonus.width = this.width - (this.SIDE_SPACING * 2);
+			this.addElement(bonus, false, false);
+		}
+
+		public function addText(text:String, reposition:Boolean = true, addSeparator:Boolean = false):void
 		{
 			var entryContent:DescriptionText = new DescriptionText();
 			entryContent.setText(text);
 			entryContent.width = this.width - (this.SIDE_SPACING * 2);
 			this.addElement(entryContent, reposition, false);
+			if(addSeparator)
+			{
+				var sep:Separator = new Separator();
+				this.addElement(sep, reposition, false);
+			}
 		}
 
-		public function addIcon(bonusID:String, id:String, icon:String = "", iconType:int = 1, reposition:Boolean = true) : *
+		public function addIcon(bonusID:String, id:String, icon:String = "", iconType:int = 1, reposition:Boolean = true):void
 		{
 			var entryContent:DescriptionIcon = new DescriptionIcon();
 			entryContent.id = id;
@@ -53,12 +86,13 @@ package desc
 				default:
 					//var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
 					var iconIggyName:String = "masteryMenu_" + String(icon);
-					Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, icon, iconType);
+					//Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, icon, iconType);
+					icon_register.push(new IconRegistrationData(iconIggyName, icon, iconType));
 					entryContent.icon = "iggy_" + iconIggyName;
 					entryContent.createIcon();
 					this.icon_index = this.icon_index + 1;
 			}
-			addElement(entryContent, reposition, false);
+			this.addElement(entryContent, reposition, false);
 		}
 
 		private function TryGetIconName(arr:Array, i:int) : String
@@ -95,7 +129,7 @@ package desc
 			return 1;
 		}
 
-		public function addIconGroup(bonusID:String, ids:String, icons:String, types:String, reposition:Boolean = true, delimiter:String = ";") : *
+		public function addIconGroup(bonusID:String, ids:String, icons:String, types:String, reposition:Boolean = true, delimiter:String = ";"):void
 		{
 			var entryList:horizontalList = new horizontalList();
 			entryList.m_MaxWidth = this.width - (this.SIDE_SPACING * 2);
@@ -144,7 +178,8 @@ package desc
 						break;
 					default:
 						var iconIggyName:String = "LLWEAPONEX_MasteryMenu_" + String(this.icon_index);
-						Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, iconName, iconType);
+						//Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, iconName, iconType);
+						icon_register.push(new IconRegistrationData(iconIggyName, iconName, iconType));
 						entryContent.icon = "iggy_" + iconIggyName;
 						entryContent.createIcon();
 						this.icon_index = this.icon_index + 1;
@@ -155,7 +190,7 @@ package desc
 
 			entryList.positionElements();
 
-			addElement(entryList, reposition, false);
+			this.addElement(entryList, reposition, false);
 		}
 	}
 }

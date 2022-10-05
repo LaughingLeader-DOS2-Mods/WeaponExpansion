@@ -166,20 +166,23 @@ end
 function MasteryMenu:GetPassiveText(bonus, character)
 	local tooltipText = ""
 	if not StringHelpers.IsNullOrEmpty(bonus.MasteryMenuSettings.TooltipSkill) then
-		tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.TooltipSkill, "skill"))
+		tooltipText = StringHelpers.StripOuterFont(bonus:GetMenuTooltipText(character, bonus.TooltipSkill, "skill"))
 	elseif not StringHelpers.IsNullOrEmpty(bonus.MasteryMenuSettings.TooltipStatus) then
-		tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.TooltipStatus, "status"))
-	elseif bonus.MasteryMenuSettings.OnlyUseTable ~= "Status" then
-		if bonus.Skills and #bonus.Skills > 0 then
-			tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.Skills[1], "skill"))
-		elseif bonus.AllSkills then
-			tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, "Target_CripplingBlow", "skill"))
+		tooltipText = StringHelpers.StripOuterFont(bonus:GetMenuTooltipText(character, bonus.TooltipStatus, "status"))
+	else
+		if bonus.MasteryMenuSettings.OnlyUseTable ~= "Status" then
+			if bonus.Skills and #bonus.Skills > 0 then
+				tooltipText = StringHelpers.StripOuterFont(bonus:GetMenuTooltipText(character, bonus.Skills[1], "skill"))
+			end
 		end
-	elseif bonus.MasteryMenuSettings.OnlyUseTable ~= "Skill" then
-		if bonus.Statuses and #bonus.Statuses > 0 then
-			tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, bonus.Statuses[1], "status"))
-		elseif bonus.AllStatuses then
-			tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, "HASTED", "status"))
+		if bonus.MasteryMenuSettings.OnlyUseTable ~= "Skill" then
+			if bonus.Statuses and #bonus.Statuses > 0 then
+				tooltipText = StringHelpers.StripOuterFont(bonus:GetMenuTooltipText(character, bonus.Statuses[1], "status"))
+			end
+		end
+		--Generic passive tooltip
+		if tooltipText == "" and not bonus.Skills and not bonus.Statuses and bonus.Tooltip then
+			tooltipText = StringHelpers.StripOuterFont(bonus:GetMenuTooltipText(character, "", "generic"))
 		end
 	end
 	return _FormatFinalText(tooltipText, character)
@@ -197,8 +200,11 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 	if Vars.LeaderDebugMode then
 		rank = Mastery.Variables.MaxRank
 	end
+	local len = Mastery.Variables.MaxRank
 
-	for i=1,Mastery.Variables.MaxRank,1 do
+	local totalBonuses,totalEnabled,totalDisabled = 0,0,0
+
+	for i=1,len,1 do
 		local rankDisplayName = GameHelpers.GetStringKeyText(string.format("LLWEAPONEX_UI_MasteryMenu_Rank%i", i))
 
 		local rankName = data.Ranks[i]
@@ -214,12 +220,12 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 
 		local rankHeader = ""
 		if not StringHelpers.IsNullOrWhitespace(rankName) then
-			rankHeader = string.format("<font size='24'>%s: %s</font>", rankDisplayName, rankName)
+			rankHeader = string.format("<font size='24' color='#004672'>%s: %s</font>", rankDisplayName, rankName)
 		else
-			rankHeader = string.format("<font size='24'>%s</font>", rankDisplayName)
+			rankHeader = string.format("<font size='24' color='#004672'>%s</font>", rankDisplayName)
 		end
 
-		this.masteryMenuMC.descriptionList.addText(rankHeader, false)
+		this.masteryMenuMC.descriptionList.addText(rankHeader, false, true)
 		
 		local rankDescription = ""
 		local hasDescription = false
@@ -233,6 +239,17 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 				hasDescription = false
 			else
 				for _,bonus in ipairs(bonuses) do
+					totalBonuses = totalBonuses + 1
+					local bonusName = GameHelpers.GetStringKeyText(bonus.ID, "")
+					local enabled = bonus:IsEnabled(character)
+					this.masteryMenuMC.descriptionList.addBonusHeader(bonus.ID, bonusName, enabled)
+
+					if enabled then
+						totalEnabled = totalEnabled + 1
+					else
+						totalDisabled = totalDisabled + 1
+					end
+
 					if bonus.IsPassive then
 						local tooltipText = self:GetPassiveText(bonus, character)
 						if not StringHelpers.IsNullOrEmpty(tooltipText) then
@@ -274,10 +291,10 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 									statIds[#statIds+1] = skillId
 									iconTypes[#iconTypes+1] = self.Params.IconType.Skill
 									if StringHelpers.IsNullOrEmpty(skillBonusText) then
-										local tooltipText = StringHelpers.StripFont(bonus:GetMenuTooltipText(character, skillId, "skill"))
+										local tooltipText = StringHelpers.StripOuterFont(bonus:GetMenuTooltipText(character, skillId, "skill"))
 										skillBonusText = _FormatFinalText(tooltipText, character)
 									end
-									local skillName = StringHelpers.StripFont(GameHelpers.Stats.GetDisplayName(skillId, "SkillData"))
+									local skillName = StringHelpers.StripOuterFont(GameHelpers.Stats.GetDisplayName(skillId, "SkillData"))
 									if skillName and not usedSkillNames[skillName] then
 										usedSkillNames[skillName] = true
 										bonusTextSkills[#bonusTextSkills+1] = skillName
@@ -305,7 +322,7 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 										iconTypes[#iconTypes+1] = self.Params.IconType.Status
 
 										if not addedStatusText and (bonus.StatusTooltip == nil or bonus.StatusTooltip ~= bonus.Tooltip) then
-											local tooltipText = _FormatFinalText(StringHelpers.StripFont(bonus:GetMenuTooltipText(character, statusId, "status")), character)
+											local tooltipText = _FormatFinalText(StringHelpers.StripOuterFont(bonus:GetMenuTooltipText(character, statusId, "status")), character)
 											--Skip this if it's the same text already
 											if not string.find(skillBonusText, tooltipText) then
 												statusBonusText = tooltipText
@@ -323,7 +340,7 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 										iconTypes[#iconTypes+1] = self.Params.IconType.Status
 	
 										if not addedStatusText and (bonus.StatusTooltip == nil or bonus.StatusTooltip ~= bonus.Tooltip) then
-											local tooltipText = _FormatFinalText(StringHelpers.StripFont(bonus:GetMenuTooltipText(character, statusId, "status")), character)
+											local tooltipText = _FormatFinalText(StringHelpers.StripOuterFont(bonus:GetMenuTooltipText(character, statusId, "status")), character)
 											if not string.find(skillBonusText, tooltipText) then
 												statusBonusText = tooltipText
 												addedStatusText = true
@@ -334,7 +351,7 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 								if icon ~= nil then
 									local statusName = GameHelpers.Stats.GetDisplayName(statusId, "StatusData")
 									if not StringHelpers.IsNullOrEmpty(statusName) then
-										statusName = StringHelpers.StripFont(statusName)
+										statusName = StringHelpers.StripOuterFont(statusName)
 										if statusName and not usedStatusNames[statusName] then
 											usedStatusNames[statusName] = true
 											if usedSkillNames[statusName] then
@@ -400,5 +417,5 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 			-- end
 		end
 	end
-	this.masteryMenuMC.descriptionList.positionElements()
+	this.masteryMenuMC.descriptionList.sendDescriptionUpdateEvent(totalBonuses, totalEnabled, totalDisabled)
 end

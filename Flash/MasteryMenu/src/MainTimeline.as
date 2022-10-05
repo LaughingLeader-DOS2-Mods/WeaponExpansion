@@ -7,8 +7,9 @@ package
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import menu.MasteryMenuPanel;
+	import desc.BonusHeader;
 	
-	public class MainTimeline extends MovieClip
+	public dynamic class MainTimeline extends MovieClip
 	{
 		public var masteryMenuMC:MasteryMenuPanel;
 
@@ -24,6 +25,8 @@ package
 		public var events:Array;
 
 		public var active:Boolean = false;
+		public var hasTooltip:Boolean = false;
+		public var currentTooltip:String = "";
 
 		private var lastFocus:InteractiveObject;
 
@@ -302,6 +305,12 @@ package
 		public function selectMastery(id:String, instant:Boolean = false) : void
 		{
 			this.masteryMenuMC.selectMastery(id,instant);
+		}
+
+		public function setStaticCheckboxTooltip(enabledText:String, disabledText:String):void
+		{
+			BonusHeader.enabledTooltip = enabledText;
+			BonusHeader.disabledTooltip = disabledText;
 		}
 		
 		internal function frame1() : void

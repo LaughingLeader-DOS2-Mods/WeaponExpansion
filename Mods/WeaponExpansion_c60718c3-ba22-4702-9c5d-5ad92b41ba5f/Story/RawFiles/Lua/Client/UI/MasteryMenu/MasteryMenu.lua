@@ -50,6 +50,7 @@ MasteryMenu.Variables = {
 	MasteryData = nil,
 	RankVisibility = VisibilityMode.Default
 }
+
 MasteryMenu.Params = {
 	IconType = {
 		None = 0,
@@ -59,15 +60,33 @@ MasteryMenu.Params = {
 	}
 }
 
+local function _RegisterIcons()
+	local this = MasteryMenu.Root
+	if this then
+		local arr = this.masteryMenuMC.descriptionList.icon_register
+		local len = arr.length-1
+		for i=0,len do
+			local data = arr[i]
+			if data then
+				MasteryMenu:RegisterIcon(data.iggyIconName, data.iconName, data.iconType)
+			end
+		end
+	end
+end
+
 function MasteryMenu:SetMastery(mastery)
 	self.Variables.SelectedMastery.Last = self.Variables.SelectedMastery.Current
 	self.Variables.SelectedMastery.Current = mastery
-	local character = GameHelpers.GetCharacter(self.Variables.MasteryData.UUID)
 	if not StringHelpers.IsNullOrWhitespace(mastery) then
-		local this = self.Root
-		if this then
-			self:BuildDescription(this, mastery, character)
-		end
+		Ext.OnNextTick(function (e)
+			local this = self.Root
+			if this then
+				local character = Client:GetCharacter()
+				self:BuildDescription(this, mastery, character)
+				_RegisterIcons()
+				this.masteryMenuMC.descriptionList.updateComplete()
+			end
+		end)
 	end
 end
 
@@ -336,7 +355,7 @@ function MasteryMenu:PrepareTooltip(iconType, id, descriptionId, x, y, width, he
 			if not StringHelpers.IsNullOrWhitespace(rankName) then
 				bonusText = rankName .. "<br>"
 			end
-			local bonusTooltipText = bonus:GetTooltipText(character, descriptionId, "status", true)
+			local bonusTooltipText = bonus:GetTooltipText(character, descriptionId, "status")
 			if not StringHelpers.IsNullOrEmpty(bonusTooltipText) then
 				bonusText = bonusText .. bonusTooltipText
 			end
@@ -398,6 +417,36 @@ function MasteryMenu:OnButtonPressed(buttonType, buttonState)
 
 end
 
+function MasteryMenu:OnBonusEnabledChanged(bonusID, enabled)
+	local character = Client:GetCharacter()
+	MasteryBonusManager.SetBonusDisabled(character, bonusID, not enabled)
+	Ext.Net.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableBonus", Common.JsonStringify({NetID=character.NetID, Bonus=bonusID, Disabled=not enabled}))
+end
+
+function MasteryMenu:ToggleAllBonuses(enabled)
+	local character = Client:GetCharacter()
+	local currentMastery = self.Variables.SelectedMastery.Current
+	local mastery = Masteries[currentMastery]
+	local rankData = mastery and mastery.RankBonuses or nil
+	if character and rankData then
+		local updateData = {
+			NetID = character.NetID,
+			Bonuses = {}
+		}
+		for _,data in pairs(rankData) do
+			for _,bonus in pairs(data.Bonuses) do
+				updateData.Bonuses[bonus.ID] = not enabled
+				MasteryBonusManager.SetBonusDisabled(character, bonus.ID, not enabled)
+			end
+		end
+		Ext.Net.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableMultipleBonuses", Common.JsonStringify(updateData))
+		local this = self.Root
+		if this then
+			this.masteryMenuMC.toggleAllHeaders(enabled)
+		end
+	end
+end
+
 local _registeredIcons = {}
 
 function MasteryMenu:RegisterIcon(name, icon, iconType)
@@ -429,20 +478,30 @@ function MasteryMenu:ClearIcons(count)
 	end
 end
 
-local function RegisterNameCall(name, callback)
-	Ext.RegisterUINameCall(name, function (ui, event, ...)
-		local b,err = xpcall(callback, debug.traceback, MasteryMenu, ...)
-	end, "Before")
-end
+local _callToFunction = {
+	LLWEAPONEX_MasteryMenu_RequestCloseUI = MasteryMenu.ForceClose,
+	LLWEAPONEX_MasteryMenu_MasterySelected = MasteryMenu.SetMastery,
+	LLWEAPONEX_MasteryMenu_ShowIconTooltip = MasteryMenu.PrepareTooltip,
+	LLWEAPONEX_MasteryMenu_HideIconTooltip = MasteryMenu.ClearTooltip,
+	LLWEAPONEX_MasteryMenu_RegisterIcon = MasteryMenu.RegisterIcon,
+	LLWEAPONEX_MasteryMenu_ClearIcons = MasteryMenu.ClearIcons,
+	LLWEAPONEX_MasteryMenu_ButtonPressed = MasteryMenu.OnButtonPressed,
+	LLWEAPONEX_MasteryMenu_SetBonusEnabled = MasteryMenu.OnBonusEnabledChanged,
+	LLWEAPONEX_MasteryMenu_ToggleAllBonuses = MasteryMenu.ToggleAllBonuses,
+}
 
-RegisterNameCall("LLWEAPONEX_MasteryMenu_RequestCloseUI", MasteryMenu.ForceClose)
---RegisterNameCall("LLWEAPONEX_MasteryMenu_MasteryHovered", MasteryMenu.OnMasteryHover)
-RegisterNameCall("LLWEAPONEX_MasteryMenu_MasterySelected", MasteryMenu.SetMastery)
-RegisterNameCall("LLWEAPONEX_MasteryMenu_ShowIconTooltip", MasteryMenu.PrepareTooltip)
-RegisterNameCall("LLWEAPONEX_MasteryMenu_HideIconTooltip", MasteryMenu.ClearTooltip)
-RegisterNameCall("LLWEAPONEX_MasteryMenu_RegisterIcon", MasteryMenu.RegisterIcon)
-RegisterNameCall("LLWEAPONEX_MasteryMenu_ClearIcons", MasteryMenu.ClearIcons)
-RegisterNameCall("LLWEAPONEX_MasteryMenu_ButtonPressed", MasteryMenu.OnButtonPressed)
+Ext.Events.UICall:Subscribe(function (e)
+	if e.UI.AnchorObjectName == "masteryMenu" and e.When == "After" then
+		local callback = _callToFunction[e.Function]
+		if callback then
+			print(e.Function, e.Args[1])
+			local b,err = xpcall(callback, debug.traceback, MasteryMenu, table.unpack(e.Args))
+			if not b then
+				Ext.Utils.PrintError(err)
+			end
+		end
+	end
+end)
 
 local function HideMasteryMenu()
 	MasteryMenu:ForceClose()
@@ -471,3 +530,16 @@ Input.RegisterListener({"PartyManagement", "ToggleMap"}, function(eventName, pre
 		end
 	end
 end)
+
+Ext.RegisterConsoleCommand("weaponex_reloadmasterymenu", function (cmd, ...)
+	MasteryMenu:ForceClose()
+	MasteryMenu:Reset()
+end)
+
+-- Ext.Events.UICall:Subscribe(function (e)
+-- 	if e.Function == "LLWEAPONEX_MasteryMenu_MasterySelected" or e.UI.AnchorObjectName == "masteryMenu" then
+-- 		local args = table.unpack(e.Args)
+-- 		local name = e.Function
+-- 		local when = e.When
+-- 	end
+-- end, {Priority=99})

@@ -11,7 +11,7 @@ package menu
 		public var masteryFrame:MovieClip;
 		public var icon_mc:MovieClip;
 		
-		public var id:String;
+		public var masteryID:String = "";
 		public var masteryTitle:String;
 		public var masteryDescriptionTitle:String;
 
@@ -139,7 +139,7 @@ package menu
 		public function onOver(e:MouseEvent) : *
 		{
 			this.masteryFrame.onOver(e);
-			Registry.call("LLWEAPONEX_MasteryMenu_MasteryHovered", this.id);
+			Registry.call("LLWEAPONEX_MasteryMenu_MasteryHovered", this.masteryID);
 		}
 
 		public function onDown(e:MouseEvent) : *

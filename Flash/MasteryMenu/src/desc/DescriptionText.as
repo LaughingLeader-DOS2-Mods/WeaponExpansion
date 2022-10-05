@@ -12,7 +12,7 @@ package desc
 			super();
 		}
 
-		public function setText(text:String):*
+		public function setText(text:String):void
 		{
 			content_txt.htmlText = text;
 			content_txt.height = content_txt.textHeight;

@@ -14,25 +14,22 @@ package menu
 	import desc.DescriptionList;
 	import LS_Symbols.buttonHintBar;
 	import LS_Symbols.redBtn_6;
+	import events.DescriptionUpdateCompleteEvent;
+	import desc.BonusHeader;
 	
 	public dynamic class MasteryMenuPanel extends MovieClip
 	{
 		public var accept_mc:redBtn_6;
 		public var btn_bg:MovieClip;
 		public var windowDragBG:MovieClip;
-		
 		public var buttonHintBar_mc:buttonHintBar;
-		
 		public var close_btn:MovieClip;
-		
 		public var masteryHandle:MovieClip;
 		public var masteryDesc_mc:MovieClip;
-		
 		public var name_txt:TextField;
-		
 		public var title_txt:TextField;
-
 		public var noMasteries_mc:MovieClip;
+		public var bottomButtons_mc:BottomButtons;
 		
 		public var masteryCount:int = 0;
 		
@@ -115,15 +112,43 @@ package menu
 			// this.descriptionList.m_bg_mc.alpha = 0;
 			this.descriptionList.addEventListener(MouseEvent.MOUSE_OVER,this.onDescriptionMouseIn);
 			this.descriptionList.addEventListener(MouseEvent.MOUSE_OUT,this.onDescriptionMouseOut);
+			this.descriptionList.addEventListener(DescriptionUpdateCompleteEvent.ID,this.onDescriptionUpdated);
 			this.buttonHintBar_mc.centerButtons = true;
 		}
 		
-		public function onDescriptionMouseIn(e:MouseEvent) : *
+		public function onDescriptionUpdated(e:DescriptionUpdateCompleteEvent):void
+		{
+			if (e.totalMasteryBonuses > 0)
+			{
+				this.bottomButtons_mc.visible = true;
+				var allEnabled:Boolean = e.totalEnabledBonuses == e.totalMasteryBonuses;
+				this.bottomButtons_mc.enableAll_checkbox.setActive(allEnabled);
+			}
+			else
+			{
+				this.bottomButtons_mc.visible = false;
+			}
+		}
+		
+		public function toggleAllHeaders(b:Boolean):void
+		{
+			var mc:MovieClip = null;
+			for (var i:uint = this.descriptionList.content_array.length; i--;)
+			{
+				mc = this.descriptionList.content_array[i];
+				if(mc is BonusHeader)
+				{
+					mc.setEnabled(b, false);
+				}
+			}
+		}
+		
+		public function onDescriptionMouseIn(e:MouseEvent):void
 		{
 			this.descriptionList.mouseWheelEnabled = true;
 		}
 		
-		public function onDescriptionMouseOut(e:MouseEvent) : *
+		public function onDescriptionMouseOut(e:MouseEvent):void
 		{
 			this.descriptionList.mouseWheelEnabled = false;
 		}
@@ -183,7 +208,7 @@ package menu
 			if(masteryMC == null)
 			{
 				masteryMC = new MasteryEntry();
-				masteryMC.id = mastery;
+				masteryMC.masteryID = mastery;
 				this.masteryList.addElement(masteryMC);
 				this.masteryList.checkScrollBar();
 				this.masteryCount = this.masteryCount + 1;
@@ -233,6 +258,7 @@ package menu
 			this.resetTextScrollbar();
 			this.masteryCount = 0;
 			this.noMasteries_mc.visible = true;
+			this.bottomButtons_mc.visible = false;
 			//textHelpers.setFormattedText(this.name_txt, this.emptyListTitle);
 		}
 
@@ -261,7 +287,7 @@ package menu
 			if (currentMC != null)
 			{
 				this.name_txt.htmlText = currentMC.masteryDescriptionTitle;
-				Registry.call("LLWEAPONEX_MasteryMenu_MasterySelected", currentMC.id);
+				Registry.call("LLWEAPONEX_MasteryMenu_MasterySelected", currentMC.masteryID);
 			}
 		}
 		
@@ -302,7 +328,7 @@ package menu
 		public function selectMastery(mastery:String, instant:Boolean = false) : void
 		{
 			var currentMC:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
-			var nextMC:MasteryEntry = this.masteryList.getElementByString("id", mastery) as MasteryEntry;
+			var nextMC:MasteryEntry = this.masteryList.getElementByString("masteryID", mastery) as MasteryEntry;
 			if(currentMC != null && currentMC != nextMC)
 			{
 				currentMC.deselectElement();
@@ -313,7 +339,7 @@ package menu
 				this.masteryList.selectMC(nextMC);
 				this.masteryList.m_scrollbar_mc.m_animateScrolling = true;
 				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
-				Registry.call("LLWEAPONEX_MasteryMenu_MasterySelected", nextMC.id);
+				Registry.call("LLWEAPONEX_MasteryMenu_MasterySelected", nextMC.masteryID);
 			}
 		}
 
@@ -330,7 +356,7 @@ package menu
 			if (nextMC != null)
 			{
 				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
-				Registry.call("LLWEAPONEX_MasteryMenu_MasterySelected", nextMC.id);
+				Registry.call("LLWEAPONEX_MasteryMenu_MasterySelected", nextMC.masteryID);
 			}
 		}
 		
@@ -339,7 +365,7 @@ package menu
 			return this.masteryList.currentSelection;
 		}
 
-		public function windowUp(e:MouseEvent) : *
+		public function windowUp(e:MouseEvent):void
 		{
 			if(this.isDragging)
 			{
@@ -347,7 +373,7 @@ package menu
 			}
 		}
 
-		public function dragInit(e:MouseEvent) : *
+		public function dragInit(e:MouseEvent):void
 		{
 			Registry.call("UIAssert","[WeaponExpansion] dragInit");
 			this.windowDragStarted = false;
@@ -357,7 +383,7 @@ package menu
 			this.stage.addEventListener(MouseEvent.MOUSE_UP,this.stopDragWindow);
 		}
 
-		public function dragMoveWindow(e:MouseEvent) : *
+		public function dragMoveWindow(e:MouseEvent):void
 		{
 			Registry.call("UIAssert","[WeaponExpansion] dragMoveWindow");
 			if(this.dragStartMP.x + this.startDragDiff > stage.mouseX || this.dragStartMP.y + this.startDragDiff > stage.mouseY || this.dragStartMP.x - this.startDragDiff < stage.mouseX || this.dragStartMP.y - this.startDragDiff < stage.mouseY)
@@ -369,7 +395,7 @@ package menu
 			}
 		}
 
-		public function stopDragWindow(e:MouseEvent) : *
+		public function stopDragWindow(e:MouseEvent):void
 		{
 			Registry.call("UIAssert","[WeaponExpansion] stopDragWindow");
 			if(this.windowDragStarted)
