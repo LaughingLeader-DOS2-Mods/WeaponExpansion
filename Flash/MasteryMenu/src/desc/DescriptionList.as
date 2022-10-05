@@ -67,13 +67,13 @@ package desc
 			}
 		}
 
-		public function addIcon(bonusID:String, id:String, icon:String = "", iconType:int = 1, reposition:Boolean = true):void
+		public function addIcon(bonusID:String, id:String, iconName:String = "", iconType:int = 1, reposition:Boolean = true):void
 		{
 			var entryContent:DescriptionIcon = new DescriptionIcon();
 			entryContent.id = id;
 			entryContent.bonusID = bonusID;
 			entryContent.iconType = iconType;
-			switch(icon)
+			switch(iconName)
 			{
 				case "LLWEAPONEX_UI_PassiveBonus":
 					entryContent.icon = "LLWEAPONEX_UI_PassiveBonus";
@@ -85,9 +85,9 @@ package desc
 					break;
 				default:
 					//var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
-					var iconIggyName:String = "masteryMenu_" + String(icon);
+					var iconIggyName:String = "LLWEAPONEX_MasteryMenu_" + String(iconName);
 					//Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, icon, iconType);
-					icon_register.push(new IconRegistrationData(iconIggyName, icon, iconType));
+					icon_register.push(new IconRegistrationData(iconIggyName, iconName, iconType));
 					entryContent.icon = "iggy_" + iconIggyName;
 					entryContent.createIcon();
 					this.icon_index = this.icon_index + 1;
@@ -177,7 +177,8 @@ package desc
 						entryContent.createIcon();
 						break;
 					default:
-						var iconIggyName:String = "LLWEAPONEX_MasteryMenu_" + String(this.icon_index);
+						//var iconIggyName:String = "LLWEAPONEX_MasteryMenu_" + String(this.icon_index);
+						var iconIggyName:String = "LLWEAPONEX_MasteryMenu_" + String(iconName);
 						//Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, iconName, iconType);
 						icon_register.push(new IconRegistrationData(iconIggyName, iconName, iconType));
 						entryContent.icon = "iggy_" + iconIggyName;

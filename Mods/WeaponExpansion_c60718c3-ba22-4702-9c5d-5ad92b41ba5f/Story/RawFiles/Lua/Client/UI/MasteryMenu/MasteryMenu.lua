@@ -450,31 +450,27 @@ end
 local _registeredIcons = {}
 
 function MasteryMenu:RegisterIcon(name, icon, iconType)
-	local ui = self.Instance
-	local iconSize = 64
-	if iconType >= 2 then
-		iconSize = 40
+	if not _registeredIcons[name] then
+		_registeredIcons[name] = icon
+		local ui = self.Instance
+		local iconSize = 64
+		if iconType >= 2 then
+			iconSize = 40
+		end
+		print("RegisterIcon", name, icon, iconType)
+		ui:ClearCustomIcon(name)
+		ui:SetCustomIcon(name, icon, iconSize, iconSize)
 	end
-	_registeredIcons[#_registeredIcons+1] = name
-	ui:ClearCustomIcon(name)
-	ui:SetCustomIcon(name, icon, iconSize, iconSize)
 end
 
 ---@private
 function MasteryMenu:ClearIcons(count)
 	local ui = self.Instance
 	if ui then
-		local totalRegistered = #_registeredIcons
-		if totalRegistered > 0 then
-			for i=1,totalRegistered do
-				ui:ClearCustomIcon(_registeredIcons[i])
-			end
-			_registeredIcons = {}
-		elseif count >= 0 then
-			for i=0,count-1 do
-				ui:ClearCustomIcon(string.format("LLWEAPONEX_MasteryMenu_%i", i))
-			end
+		for k,v in pairs(_registeredIcons) do
+			ui:ClearCustomIcon(k)
 		end
+		_registeredIcons = {}
 	end
 end
 
