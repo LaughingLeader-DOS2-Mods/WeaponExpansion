@@ -123,6 +123,7 @@ package menu
 				this.bottomButtons_mc.visible = true;
 				var allEnabled:Boolean = e.totalEnabledBonuses == e.totalMasteryBonuses;
 				this.bottomButtons_mc.enableAll_checkbox.setActive(allEnabled);
+				this.bottomButtons_mc.onEnableAllCheckbox(this.bottomButtons_mc.enableAll_checkbox, true);
 			}
 			else
 			{

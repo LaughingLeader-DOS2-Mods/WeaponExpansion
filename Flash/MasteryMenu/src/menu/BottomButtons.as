@@ -34,9 +34,12 @@ package menu
 			this.base = this.root as MovieClip;
 		}
 
-		public function onEnableAllCheckbox():void
+		public function onEnableAllCheckbox(obj:MovieClip, skipExternalCall:Boolean = false):void
 		{
-			Registry.call("LLWEAPONEX_MasteryMenu_ToggleAllBonuses", this.enableAll_checkbox.isActive);
+			if(!skipExternalCall)
+			{
+				Registry.call("LLWEAPONEX_MasteryMenu_ToggleAllBonuses", this.enableAll_checkbox.isActive);
+			}
 			if(this.enableAll_checkbox.isActive)
 			{
 				this.enableAll_checkbox.tooltip = disableAllTooltip;
