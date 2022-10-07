@@ -31,6 +31,9 @@ local defaultPersistentVars = {
         ---Used to count the current total jumps, to ultimately stop jumping when the limit is reached.
         ---@type table<GUID,integer>
         FlickerStrikeTotalJumps = {},
+        ---Used when remote mine skills hit an object, if that object is about to die. This table prevents adding more than one charge per killed enemy.
+        ---@type table<GUID,table<GUID,boolean>>
+        RemoteMineJustHit = {},
     },
     StatusData = {
         ---@type table<GUID,table<string,{Target:GUID, Source:GUID, Status:string}>>

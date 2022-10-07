@@ -21,6 +21,17 @@
 				]
 			}
 		],
+		"Variables": {
+			"NamePrefix": "LLWEAPONEX_Variable_",
+			"Entries": {
+				"DemolitionBackpackRechargeSpeed": {
+					"Value": 24,
+					"Min": 0,
+					"Max": 96,
+					"Increment": 1
+				}
+			}
+		},
 		"Buttons": [
 			{
 				"ID" : "LLWEAPONEX_MoveAllUniquesToVendingMachine",
@@ -44,6 +55,7 @@
 				"LLWEAPONEX_UniqueAutoLevelingDisabled",
 				"LLWEAPONEX_RemoteChargeDetonationCountDisabled",
 				"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
+				"DemolitionBackpackRechargeSpeed",
 				"LLWEAPONEX_ArmCannonRestrictionsDisabled",
 				"LLWEAPONEX_MoveAllUniquesToVendingMachine"
 			]

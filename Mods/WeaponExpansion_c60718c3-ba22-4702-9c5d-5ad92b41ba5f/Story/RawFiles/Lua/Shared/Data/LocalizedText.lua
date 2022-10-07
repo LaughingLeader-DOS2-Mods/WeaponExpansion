@@ -201,7 +201,9 @@ Text = {
 		ChaosRuneAbsorbSurface = ts:Create("h60dc40a5ge603g4d8dg9c6eg1c24acc5f4bb", "Transform Surfaces into Rune Effects"),
 		ChaosRuneAbsorbSurface_Chance = ts:Create("h6cd64a25gf8d0g438cg9a91gb04f030e2f88", "Transform Surfaces into Rune Effects ([1]% chance)"),
 		RemoteMineNoRestrictionDescription = ts:CreateFromKey("Target_LLWEAPONEX_RemoteMine_Detonate_NoRestriction_Description", "Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.</font>"),
-		StillStance = ts:Create("h443a2ac9g8018g43b2gb0b4g1fcb29ad71aa", "[1]% Damage (Still Stance - [2])")
+		StillStance = ts:Create("h443a2ac9g8018g43b2gb0b4g1fcb29ad71aa", "[1]% Damage (Still Stance - [2])"),
+		AddRemoteMine = ts:CreateFromKey("LLWEAPONEX_UI_AddRemoteMine", "Gain [1] Remote Mine(s)"),
+		AddRemoteMineWithChance = ts:CreateFromKey("LLWEAPONEX_UI_AddRemoteMine", "Gain [1] Remote Mine(s) ([2]% Chance)"),
 	},
 	NewAbilitySchools = {
 		Pirate = ts:Create("hc64dff65g17ffg4b44gaf21g896521b144f2", "Piracy"),

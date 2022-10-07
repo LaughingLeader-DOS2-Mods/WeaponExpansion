@@ -17,11 +17,6 @@ THEN
 CharacterItemSetEvent(_Player, _RemoteMine, "LLWEAPONEX_RemoteMine_OnPrePickedUp");
 
 //REGION ADD_MINE
-IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_ADD_REMOTEMINE", _)
-THEN
-CharacterGiveReward(_Character, "S_LLWEAPONEX_RemoteMines_AddRandom", 1);
-
 PROC
 LLWEAPONEX_RemoteMines_SetOwner((CHARACTERGUID)_Character, (ITEMGUID)_RemoteMine)
 AND

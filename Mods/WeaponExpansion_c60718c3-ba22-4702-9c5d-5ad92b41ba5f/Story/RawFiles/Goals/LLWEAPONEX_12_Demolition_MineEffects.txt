@@ -3,20 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-
-IF
-ItemStatusChange(_Grenade, "LLWEAPONEX_REMOTEMINE_DETONATE", (CHARACTERGUID)_Source)
-AND
-_Source != NULL_00000000-0000-0000-0000-000000000000
-AND
-IsTagged(_Grenade, "GRENADES", 1)
-AND
-ItemIsDestructible(_Grenade, 1)
-AND
-ItemIsDestroyed(_Grenade, 0)
-THEN
-CharacterItemSetEvent(_Source, _Grenade, "LLWEAPONEX_Demolition_DetonateGrenade");
-
 IF
 CharacterItemEvent(_Source, _RemoteCharge, "LLWEAPONEX_Demolition_DisplacementTargetFound")
 AND

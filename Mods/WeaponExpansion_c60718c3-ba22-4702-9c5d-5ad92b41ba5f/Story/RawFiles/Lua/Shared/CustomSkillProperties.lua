@@ -1,7 +1,9 @@
+local _ISCLIENT = Ext.IsClient()
+
 GameHelpers.Skill.CreateSkillProperty("LLWEAPONEX_ApplyRuneProperties", nil, 
 	function(prop, attacker, position, areaRadius, isFromItem, skill, hit, skillId)
 		local chance = prop.Arg1
-		if chance >= 1.0 or Ext.Random(0,1) <= chance then
+		if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
 			local items = {}
 			for _,slot in Data.EquipmentSlots:Get() do
 				local uuid = CharacterGetEquippedItem(attacker.MyGuid, slot)
@@ -19,7 +21,7 @@ GameHelpers.Skill.CreateSkillProperty("LLWEAPONEX_ApplyRuneProperties", nil,
 	end,
 	function(prop, attacker, target, position, isFromItem, skill, hit, skillId)
 		local chance = prop.Arg1
-		if chance >= 1.0 or Ext.Random(0,1) <= chance then
+		if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
 			local items = {}
 			for _,slot in Data.EquipmentSlots:Get() do
 				local uuid = CharacterGetEquippedItem(attacker.MyGuid, slot)
@@ -102,27 +104,58 @@ end, function (property, attacker, target, position, isFromItem, skill, hit, ski
 end)
 
 GameHelpers.Skill.CreateSkillProperty("LLWEAPONEX_ChaosRuneAbsorbSurface",
-	function(prop)
-		local chance = prop.Arg1
+function(prop)
+	local chance = prop.Arg1
+	if chance >= 1.0 then
+		return Text.SkillTooltip.ChaosRuneAbsorbSurface.Value
+	else
+		return Text.SkillTooltip.ChaosRuneAbsorbSurface_Chance:ReplacePlaceholders(math.floor(chance * 100))
+	end
+end,
+function(prop, attacker, position, areaRadius, isFromItem, skill, hit, skillId)
+	local chance = prop.Arg1
+	if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
+		local duration = math.max(prop.Arg2 or 6, 6)
+		local radius = math.max(areaRadius, math.max(skill.StatsObject.AreaRadius or 1, skill.StatsObject.ExplodeRadius or 1))
+		RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
+	end
+end,
+function(prop, attacker, target, position, isFromItem, skill, hit, skillId)
+	local chance = prop.Arg1
+	if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
+		local duration = math.max(prop.Arg2 or 6, 6)
+		local radius = math.max(skill.StatsObject.AreaRadius or 1, skill.StatsObject.ExplodeRadius or 1)
+		RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
+	end
+end)
+
+local function _OnRemoteMineProperty(prop, character)
+	local chance = prop.Arg1
+	local amount = math.floor(tonumber(prop.Arg3) or 1)
+	if amount > 0 and chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
+		Timer.StartObjectTimer("LLWEAPONEX_AddRemoteMine", character, 250, {Amount=amount})
+	end
+end
+
+GameHelpers.Skill.CreateSkillProperty("LLWEAPONEX_AddRemoteMine",
+function(prop)
+	local amount = math.floor(tonumber(prop.Arg3) or 1)
+	local chance = prop.Arg1
+	if amount > 0 then
 		if chance >= 1.0 then
-			return Text.SkillTooltip.ChaosRuneAbsorbSurface.Value
+			return Text.SkillTooltip.AddRemoteMine:ReplacePlaceholders(amount)
 		else
-			return Text.SkillTooltip.ChaosRuneAbsorbSurface_Chance:ReplacePlaceholders(math.floor(chance * 100))
+			return Text.SkillTooltip.AddRemoteMineWithChance:ReplacePlaceholders(amount, math.floor(chance * 100))
 		end
-	end,
-	function(prop, attacker, position, areaRadius, isFromItem, skill, hit, skillId)
-		local chance = prop.Arg1
-		if chance >= 1.0 or Ext.Random(0,1) <= chance then
-			local duration = math.max(prop.Arg2 or 6, 6)
-			local radius = math.max(areaRadius, math.max(skill.StatsObject.AreaRadius or 1, skill.StatsObject.ExplodeRadius or 1))
-			RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
-		end
-	end,
-	function(prop, attacker, target, position, isFromItem, skill, hit, skillId)
-		local chance = prop.Arg1
-		if chance >= 1.0 or Ext.Random(0,1) <= chance then
-			local duration = math.max(prop.Arg2 or 6, 6)
-			local radius = math.max(skill.StatsObject.AreaRadius or 1, skill.StatsObject.ExplodeRadius or 1)
-			RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
+	end
+end, _OnRemoteMineProperty, _OnRemoteMineProperty)
+
+if not _ISCLIENT then
+	Timer.Subscribe("LLWEAPONEX_AddRemoteMine", function (e)
+		if e.Data.UUID and e.Data.Amount then
+			for i=1,e.Data.Amount do
+				CharacterGiveReward(e.Data.UUID, "S_LLWEAPONEX_RemoteMines_AddRandom", 1)
+			end
 		end
 	end)
+end

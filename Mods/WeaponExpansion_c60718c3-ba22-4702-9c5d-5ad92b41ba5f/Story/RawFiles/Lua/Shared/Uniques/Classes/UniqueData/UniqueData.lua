@@ -204,6 +204,58 @@ function UniqueData:GetOwner(uuid, returnDefault)
 	return nil
 end
 
+---Gets the owner of the unique UUID.
+---@return fun():EsvCharacter
+function UniqueData:GetAllCharacterOwners()
+	local owners = {}
+	if not StringHelpers.IsNullOrEmpty(self.Owner) then
+		local obj = GameHelpers.TryGetObject(self.Owner)
+		if obj and GameHelpers.Ext.ObjectIsCharacter(obj) then
+			owners[#owners+1] = obj
+		end
+	end
+	if self.Copies then
+		for copyGUID,ownerGUID in pairs(self.Copies) do
+			if not StringHelpers.IsNullOrEmpty(ownerGUID) then
+				local obj = GameHelpers.TryGetObject(ownerGUID)
+				if obj and GameHelpers.Ext.ObjectIsCharacter(obj) then
+					owners[#owners+1] = obj
+				end
+			end
+		end
+	end
+	local i = 0
+	local count = #owners
+	return function ()
+		i = i + 1
+		if i <= count then
+			return owners[i]
+		end
+	end
+end
+
+---Checks if any character have equipped the unique, or copies of the unique.
+---@return boolean
+function UniqueData:IsEquippedByAny()
+	if not StringHelpers.IsNullOrEmpty(self.Owner) then
+		local obj = GameHelpers.TryGetObject(self.Owner)
+		if obj and GameHelpers.Ext.ObjectIsCharacter(obj) and GameHelpers.CharacterOrEquipmentHasTag(obj, self.Tag) then
+			return true
+		end
+	end
+	if self.Copies then
+		for copyGUID,ownerGUID in pairs(self.Copies) do
+			if not StringHelpers.IsNullOrEmpty(ownerGUID) then
+				local obj = GameHelpers.TryGetObject(ownerGUID)
+				if obj and GameHelpers.Ext.ObjectIsCharacter(obj) and GameHelpers.CharacterOrEquipmentHasTag(obj, self.Tag) then
+					return true
+				end
+			end
+		end
+	end
+	return false
+end
+
 ---Checks if a UUID is a valid owner of this unique.
 ---@param owner UUID
 ---@return boolean

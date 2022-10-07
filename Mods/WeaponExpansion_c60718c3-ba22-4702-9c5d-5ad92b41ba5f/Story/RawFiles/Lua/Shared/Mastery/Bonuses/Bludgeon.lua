@@ -172,7 +172,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 				return self.Tooltip
 			end
 		end,
-		IsPassive = true,
+		--IsPassive = true,
 	}).Register.WeaponTagHit(MasteryID.Bludgeon, function(self, e, bonuses)
 		if e.TargetIsObject and not e.SkillData and e.Data.Damage > 0
 		and GameHelpers.Character.CanAttackTarget(e.Target, e.Attacker, false) then
@@ -314,7 +314,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 		Skills = MasteryBonusManager.Vars.BasicAttack,
 		Statuses = {"PETRIFIED", "FROZEN"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_Shatter", "<font color='#F19824'>Basic attacking a target with <font color='#7F3D00'>[Key:PETRIFIED_DisplayName]</font> or <font color='#4197E2'>[Key:FROZEN_DisplayName]</font> will shatter the outer shell, dealing a <font color='#FF3333'>Massive [Handle:h0a6c96bcg5d64g4226gb2eegc14f09676f65:Critical Hit]</font> (<font color='#DDCC33'>[Special:LLWEAPONEX_BludgeonShatterMultiplier]% [Handle:h99aa087ag4d93g4bf4gb191g9fc166800711:Critical Damage]</font>) and cleansing the affliction.</font><br><font color='#33FF33'>Allies only take [ExtraData:LLWEAPONEX_MB_Bludgeon_ShatterAllyDamageReduction:25]% of the original damage.</font>"),
-		IsPassive = true,
+		--IsPassive = true,
 	}).Register.SpecialTooltipParam("LLWEAPONEX_BludgeonShatterMultiplier", function (param, statCharacter)
 		local weaponCritMult = Ext.Utils.Round(Game.Math.GetCriticalHitMultiplier(statCharacter.MainWeapon, statCharacter, 0.0) * 100)
 		--1 + (mult * 0.01), so it always is making the hit deal more damage
