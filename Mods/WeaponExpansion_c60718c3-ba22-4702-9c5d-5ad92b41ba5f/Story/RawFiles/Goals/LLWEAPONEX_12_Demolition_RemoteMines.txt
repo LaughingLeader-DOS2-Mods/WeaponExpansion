@@ -1,13 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-LLWEAPONEX_RemoteMines_InitSettings();
 KBSECTION
-
-PROC
-LLWEAPONEX_RemoteMines_InitSettings()
-THEN
-SysClear("DB_LLWEAPONEX_RemoteMines_Templates", 1);
 
 IF
 CanPickupItem(_Player, _RemoteMine, _)
@@ -80,23 +74,6 @@ AND
 GetInventoryOwner(_RemoteMine, (ITEMGUID)_Container)
 THEN
 SetTag(_Container, "LLWEAPONEX_HoldingRemoteMine");
-//END_REGION
-
-//REGION DELAYED_DETONATION
-IF
-CharacterStatusApplied(_Item, "LLWEAPONEX_REMOTEMINE_DETONATE_DELAYED", _Source)
-THEN
-LeaderLib_Timers_StartObjectObjectTimer(_Item, _Source, 1000, "LLWEAPONEX_Timers_RemoteMine_DelayedDetonation", "LLWEAPONEX_RemoteMine_ApplyDetonation");
-
-IF
-ItemStatusChange(_Item, "LLWEAPONEX_REMOTEMINE_DETONATE_DELAYED", _Source)
-THEN
-LeaderLib_Timers_StartObjectObjectTimer(_Item, _Source, 1000, "LLWEAPONEX_Timers_RemoteMine_DelayedDetonation", "LLWEAPONEX_RemoteMine_ApplyDetonation");
-
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished(_Target, _Source, "LLWEAPONEX_RemoteMine_ApplyDetonation")
-THEN
-ApplyStatus(_Target, "LLWEAPONEX_REMOTEMINE_DETONATE", 0.0, 0, _Source);
 //END_REGION
 
 //REGION THROWING

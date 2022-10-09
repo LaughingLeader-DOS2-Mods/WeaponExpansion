@@ -2,7 +2,7 @@ INIT
 	ITEM:__Me
 	//External settings
 	EXTERN SKILL:%LLWEAPONEX_Mine_Skill = Projectile_LLWEAPONEX_RemoteMine_Explosive
-	EXTERN SKILL:%LLWEAPONEX_Mine_Skill_NoWeapon = Projectile_LLWEAPONEX_RemoteMine_Explosive_NoWeapon
+	EXTERN SKILL:%LLWEAPONEX_Mine_Skill_NoWeapon = Projectile_LLWEAPONEX_RemoteMine_Explosive
 	EXTERN STRING:%LLWEAPONEX_Mine_ActiveLoopEffect = null
 	EXTERN INT:%LLWEAPONEX_Mine_UseSelfAsSource = 0
 	
@@ -19,140 +19,16 @@ INIT
 	FLOAT3:%LLWEAPONEX_Mine_ExplodePos = null
 EVENTS
 
-EVENT LLWEAPONEX_RemoteMine_Detonate_FromSkill
-VARS
-	CHARACTER:_Character
-ON
-	//OnCharacterUsedSkillOnMe(_Character, Target_LLWEAPONEX_RemoteMine_Detonate)
-	//OnItemStatus(__Me, LLWEAPONEX_REMOTEMINE_DETONATE)
-	OnCharacterItemEvent(_Character, __Me, "LLWEAPONEX_RemoteMine_DetonationStatus")
-ACTIONS
-	IF "c1"
-		IsEqual(%LLWEAPONEX_Mine_Owner, null)
-	THEN
-		Set(%LLWEAPONEX_Mine_Owner, _Character)
-	ENDIF
-	CallFunction("LLWEAPONEX_RemoteMine_Detonate")
-/*
-IF "c1"
-	ItemGet(_Target, __Me, 12.0, Random, Distance, "WPN_LLWEAPONEX_RemoteMine_A_Displacement_0dc36b1c-278d-4c88-9b24-8d4d5dd685fc", "LLWEAPONEX_RemoteMine_Ready")
-THEN
-	CharacterItemEvent(%LLWEAPONEX_Mine_Owner, _Target, "LLWEAPONEX_Demolition_DisplacementTargetFound")
-ELSE
-	CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_Demolition_DisplacementTargetFound")
-ENDIF
-*/
-
-EVENT LLWEAPONEX_RemoteMine_Detonate_Self
-VARS
-	FLOAT3:_Pos
-ON
-	OnItemEvent(__Me, "LLWEAPONEX_RemoteMine_Detonate")
-ACTIONS
-IF "c1"
-	GetPosition(__Me, _Pos)
-THEN
-	Set(%LLWEAPONEX_Mine_ExplodePos, _Pos)
-ENDIF
-	CallFunction("LLWEAPONEX_RemoteMine_Detonate")
-
-/*	
-EVENT LLWEAPONEX_RemoteMine_Detonate_Container
-VARS
-	FLOAT3:_Pos
-	CHARACTER:_Source
-ON
-	OnCharacterItemEvent(_Source, __Me, "LLWEAPONEX_RemoteMine_StartDetonation_Container")
-ACTIONS
-IF "!c1&c2"
-	IsEqual(%LLWEAPONEX_Mine_Inventory, null)
-	GetPosition(%LLWEAPONEX_Mine_Inventory, _Pos)
-THEN
-	Set(%LLWEAPONEX_Mine_ExplodePos, _Pos)
-ELIF "c1"
-	GetPosition(__Me, _Pos)
-THEN
-	Set(%LLWEAPONEX_Mine_ExplodePos, _Pos)
-ENDIF
-	StatusText(%LLWEAPONEX_Mine_Inventory, "Detonating, baby2!")
-	//CallFunction("LLWEAPONEX_RemoteMine_Detonate")
-	CharacterItemEvent(_Target, __Me, "LLWEAPONEX_RemoteMine_Detonate")
-*/
-
-EVENT LLWEAPONEX_RemoteMine_Detonate
-VARS
-	INT:_Level
-	FLOAT:_LevelF
-	SKILL:_Skill
-	CHARACTER:_Target
-ON
-	OnFunction("LLWEAPONEX_RemoteMine_Detonate")
-	OnCharacterItemEvent(_Target, __Me, "LLWEAPONEX_RemoteMine_Detonate")
-ACTIONS
-	Set(%LLWEAPONEX_Mine_Exploding, 1)
-	Set(_Level, 1)
-	IF "!c1&c2"
-		IsEqual(%LLWEAPONEX_Mine_Owner, null)
-		CharacterGetStat(_LevelF, %LLWEAPONEX_Mine_Owner, Level)
-	THEN
-		Cast(_Level, _LevelF)
-		//StatusText(%LLWEAPONEX_Mine_Owner, "We detonatin'!")
-	ENDIF
-	IF "!c1"
-		IsTagged(%LLWEAPONEX_Mine_Owner, "LLWEAPONEX_AnyWeaponEquipped")
-	THEN
-		Set(_Skill, %LLWEAPONEX_Mine_Skill_NoWeapon)
-	ELSE
-		Set(_Skill, %LLWEAPONEX_Mine_Skill)
-	ENDIF
-	
-	IF "c1&c2"
-		IsEqual(%LLWEAPONEX_Mine_ExplodePos, null)
-		GetPosition(__Me, %LLWEAPONEX_Mine_ExplodePos)
-	THEN
-		
-	ENDIF
-	
-	IF "c1"
-		IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Displacement)
-	THEN
-		CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_RemoteMine_PrepareDisplacement")
-	ENDIF
-	
-	IF "!c1"
-		IsEqual(%LLWEAPONEX_Mine_UseSelfAsSource, 1)
-	THEN
-		ExplodeAt(%LLWEAPONEX_Mine_ExplodePos, _Skill, _Level, %LLWEAPONEX_Mine_Owner)		
-	ELSE
-		ExplodeAt(%LLWEAPONEX_Mine_ExplodePos, _Skill, _Level, __Me)
-	ENDIF
-	IF "c1"
-		IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Breach)
-	THEN
-		SetVar(__Me, "LLWEAPONEX_Demolition_BreachPosition", %LLWEAPONEX_Mine_ExplodePos)
-		CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_Demolition_StartBreach")
-	ENDIF
-	//ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
-	CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_RemoteMine_DetonationDone")
-
 EVENT LLWEAPONEX_RemoteMine_Destroying
-VARS
-	FLOAT3:_Pos
 ON
 	OnItemDestroying(__Me)
 ACTIONS
-IF "!c1"
+IF "!c1&!c2&!c3"
 	ItemIsInInventory(__Me)
+	HasFlag(__Me, "LLWEAPONEX_RemoteMine_Detonated")
+	IsEqual(%LLWEAPONEX_Mine_Exploding, 1)
 THEN
-	IF "!c1"
-		HasFlag(__Me, "LLWEAPONEX_RemoteMine_Detonated")
-	THEN
-		CallFunction("LLWEAPONEX_RemoteMine_Detonate")
-	ELIF "c1"
-		GetPosition(__Me, _Pos)
-	THEN
-		//ExplodeAt(_Pos, Projectile_LLWEAPONEX_Status_RemoteMine_DetonateNear, 1, %LLWEAPONEX_Mine_Owner)
-	ENDIF
+	ItemApplyStatus(__Me, LLWEAPONEX_REMOTEMINE_DETONATE, 0)
 ENDIF
 
 EVENT LLWEAPONEX_RemoteMine_OnPickup
@@ -169,14 +45,6 @@ THEN
 	StopLoopEffect(%LLWEAPONEX_Mine_LoopFXHandle)
 	Set(%LLWEAPONEX_Mine_LoopFXHandle, INT64:null)
 ENDIF
-
-/*
-EVENT LLWEAPONEX_RemoteMine_OnDropped
-ON
-	OnItemEvent(__Me, "LLWEAPONEX_RemoteMine_Thrown")
-ACTIONS
-	SetPriority("LLWEAPONEX_RemoteMine_InWorld", 999)
-*/
 
 BEHAVIOUR
 

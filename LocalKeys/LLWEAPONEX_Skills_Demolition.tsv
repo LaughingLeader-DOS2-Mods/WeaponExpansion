@@ -1,8 +1,8 @@
 Key	Content	Handle
 Projectile_LLWEAPONEX_RemoteMine_Explosion_DisplayName	Detonated Remote Charge	h1ca9680dg1c14g41b4ga6efg14cb9e8cd106
-Projectile_LLWEAPONEX_RemoteMine_Throw_Breach_Description	Throw the breach charge at a target position.<br><font color='#ff5a11'>Detonating this charge breaks locks up to level 10 in a [1] radius, and knocking back objects within [2].</font>	hc40e13abge322g44d1g9fc4gf13b7ea652d2
+Projectile_LLWEAPONEX_RemoteMine_Throw_Breach_Description	Throw the breach charge at a target position.<br><font color='#ff5a11'>Detonating this charge will break locks up to level [ExtraData:LLWEAPONEX_RemoteMine_BreachLockMaxLevel:10] in a [1] radius, and knock objects back [ExtraData:LLWEAPONEX_RemoteMine_BreachKnockbackDistance:3]m.</font>	hc40e13abge322g44d1g9fc4gf13b7ea652d2
 Projectile_LLWEAPONEX_RemoteMine_Throw_Breach_DisplayName	Throw Breach Charge	h68318a8fgde5dg4055gabb8g3b0c8df8c202
-Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_Description	Throw the displacement charge at a target position.<br><font color='#ff5a11'>Detonating this charge randomly teleports characters and barrels within [1] to another displacement charge within 12m.</font>	h1d58a9e2gf439g4e3eg8f25g8e849ea7a6d5
+Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_Description	Throw the displacement charge at a target position.<br><font color='#ff5a11'>Detonating this charge randomly teleports characters and barrels within [1] to another displacement charge within [ExtraData:LLWEAPONEX_RemoteMine_DisplacementTeleportRadius:12]m.</font>	h1d58a9e2gf439g4e3eg8f25g8e849ea7a6d5
 Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_DisplayName	Throw Displacement Charge	h10f14d81ga145g468ag892fg8392908c6a4f
 Projectile_LLWEAPONEX_RemoteMine_Throw_DisplayName	Throw Remote Charge	h512652d3gde9fg4c21ga542g84ba504ac1ba
 Projectile_LLWEAPONEX_RemoteMine_Throw_Explosive_Description	Throw the remote charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius.</font>	h9ecc7cdbgfeebg4500g8e0bgcbbf39653af4

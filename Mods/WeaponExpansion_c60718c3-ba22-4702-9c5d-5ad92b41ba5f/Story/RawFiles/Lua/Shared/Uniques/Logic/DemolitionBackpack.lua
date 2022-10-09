@@ -1,14 +1,10 @@
 UniqueVars.DemolitionBackpack = {
 	RemoteMineSkills = {
 		"Projectile_LLWEAPONEX_RemoteMine_Explosive",
-		"Projectile_LLWEAPONEX_RemoteMine_Explosive_NoWeapon",
 		"Projectile_LLWEAPONEX_RemoteMine_Breach",
 		"Projectile_LLWEAPONEX_RemoteMine_Shrapnel",
-		"Projectile_LLWEAPONEX_RemoteMine_Shrapnel_NoWeapon",
 		"Projectile_LLWEAPONEX_RemoteMine_Tar",
-		"Projectile_LLWEAPONEX_RemoteMine_Tar_NoWeapon",
 		"Projectile_LLWEAPONEX_RemoteMine_PoisonGas",
-		"Projectile_LLWEAPONEX_RemoteMine_PoisonGas_NoWeapon",
 		"Projectile_LLWEAPONEX_RemoteMine_Displacement",
 	},
 	NonDamagingGrenadeSkillToDamageSkill = {
@@ -30,8 +26,9 @@ if not Vars.IsClient then
 
 	---@param character EsvCharacter
 	local function _StartRecharge(character)
-		if Settings.Global:FlagEquals("LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled", true) then
-			local rechargeSpeed = Settings.Global:GetVariable("DemolitionBackpackRechargeSpeed", 24)
+		local settings = GetSettings()
+		if settings.Global:FlagEquals("LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled", true) then
+			local rechargeSpeed = settings.Global:GetVariable("DemolitionBackpackRechargeSpeed", 24)
 			for slot,item in pairs(GameHelpers.Item.FindTaggedEquipment(character, Uniques.DemoBackpack.Tag)) do
 				---@cast item EsvItem
 				local currentCharges = item.Stats.Charges
@@ -53,7 +50,7 @@ if not Vars.IsClient then
 	---@param character EsvCharacter
 	---@param startRecharge boolean
 	local function _AddCharge(character, startRecharge)
-		local rechargeSpeed = Settings.Global:GetVariable("DemolitionBackpackRechargeSpeed", 24)
+		local rechargeSpeed = GetSettings().Global:GetVariable("DemolitionBackpackRechargeSpeed", 24)
 		local rechargeDuration = 12.0
 		for slot,item in pairs(GameHelpers.Item.FindTaggedEquipment(character, Uniques.DemoBackpack.Tag)) do
 			---@cast item EsvItem
@@ -75,7 +72,7 @@ if not Vars.IsClient then
 			end
 		end
 		if startRecharge then
-			if Settings.Global:FlagEquals("LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled", true) then
+			if GetSettings().Global:FlagEquals("LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled", true) then
 				GameHelpers.Status.Apply(character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE", rechargeDuration, true, character)
 			end
 		end
@@ -86,18 +83,6 @@ if not Vars.IsClient then
 			_AddCharge(e.Target, true)
 		end
 		ObjectClearFlag(e.TargetGUID, "LLWEAPONEX_DemolitionBackpack_SkipNextRecharge", 0)
-	end)
-
-	Settings.Global.Flags.LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled:Subscribe(function (e)
-		local enabled = e.Value
-		for character in Uniques.DemoBackpack:GetAllCharacterOwners() do
-			if enabled then
-				_StartRecharge(e.Character)
-			else
-				ObjectSetFlag(character.MyGuid, "LLWEAPONEX_DemolitionBackpack_SkipNextRecharge", 0)
-				GameHelpers.Status.Remove(character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE")
-			end
-		end
 	end)
 
 	--#endregion
@@ -117,6 +102,17 @@ if not Vars.IsClient then
 				justHit[e.Data.Target] = true
 				PersistentVars.SkillData.RemoteMineJustHit[e.CharacterGUID] = justHit
 				Timer.RestartObjectTimer("LLWEAPONEX_RemoteMines_ResetJustDetonated", e.Character, 700)
+			end
+		end)
+		GetSettings().Global.Flags.LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled:Subscribe(function (e)
+			local enabled = e.Value
+			for character in Uniques.DemoBackpack:GetAllCharacterOwners() do
+				if enabled then
+					_StartRecharge(e.Character)
+				else
+					ObjectSetFlag(character.MyGuid, "LLWEAPONEX_DemolitionBackpack_SkipNextRecharge", 0)
+					GameHelpers.Status.Remove(character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE")
+				end
 			end
 		end)
 	end, {Priority=0})
@@ -205,7 +201,7 @@ if not Vars.IsClient then
 	Uniques.DemoBackpack:RegisterEquippedListener(function (e)
 		if e.Equipped then
 			Timer.Cancel("LLWEAPONEX_DisableDemolitionBackpackListeners")
-			if Settings.Global:FlagEquals("LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled", true) then
+			if GetSettings().Global:FlagEquals("LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled", true) then
 				_StartRecharge(e.Character)
 			end
 			if hitListener == nil then
@@ -213,7 +209,7 @@ if not Vars.IsClient then
 			end
 		else
 			GameHelpers.Status.Remove(e.Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE")
-			Timer.StartOneshot("LLWEAPONEX_DisableDemolitionBackpackListeners", 1000, function (e)
+			Timer.StartOneshot("LLWEAPONEX_DisableDemolitionBackpackListeners", 1000, function (e2)
 				if not Uniques.DemoBackpack:IsEquippedByAny() then
 					if hitListener then
 						Events.OnSkillState:Unsubscribe(hitListener)

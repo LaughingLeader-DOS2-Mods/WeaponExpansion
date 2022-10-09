@@ -132,15 +132,12 @@ MODID.ArmorDisablingMods = {
 
 function ArmorSystemIsDisabled()
 	for _,v in pairs(MODID.ArmorDisablingMods) do
-		if Ext.IsModLoaded(v) then
+		if Ext.Mod.IsModLoaded(v) then
 			return true
 		end
 	end
 	return false
 end
-
----@type ModSettings
-Settings = {}
 
 Mods.LeaderLib.Import(Mods.WeaponExpansion)
 

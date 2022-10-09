@@ -2,173 +2,18 @@ INIT
 	CHARACTER:%LLWEAPONEX_Demolition_DisplacementIteratorOwner = null
 EVENTS
 	
-EVENT LLWEAPONEX_RemoteMines_Breached_OpenDoor
+EVENT LLWEAPONEX_RemoteMines_Breached_Open
 VARS
-	ITEM:_Object
+	ITEM:_Item
 ON
-	OnItemStatus(_Object, LLWEAPONEX_REMOTEMINE_BREACHED)
+	OnItemStatus(_Item, LLWEAPONEX_REMOTEMINE_BREACHED)
 ACTIONS
-IF "c1&!c2&!c3"
-	ItemHasStatus(_Object, UNLOCK)
-	ItemIsOpen(_Object)
-	ItemIsOpening(_Object)
+IF "!c2&!c3"
+	ItemIsOpen(_Item)
+	ItemIsOpening(_Item)
 THEN
-	ItemOpen(_Object)
-ENDIF
-
-EVENT LLWEAPONEX_RemoteMines_DisplacedFX
-VARS
-	CHARACTER:_Character
-	ITEM:_RemoteMine
-ON
-	OnCharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_DisplacementSuccess")
-	OnCharacterEvent(_Character, "LLWEAPONEX_RemoteMines_DisplacementSuccess")
-ACTIONS
-	CharacterPlayEffect(_Character, "RS3_FX_Skills_Void_Netherswap_Reappear_01")
-
-EVENT LLWEAPONEX_RemoteMine_Detonate_Character
-VARS
-	FLOAT3:_Pos
-	CHARACTER:_Target
-	ITEM:_RemoteMine
-ON
-	OnCharacterItemEvent(_Target, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Character")
-ACTIONS
-IF "c1"
-	GetPosition(_Target, _Pos)
-THEN
-	SetVar(_RemoteMine, "LLWEAPONEX_Mine_ExplodePos", _Pos)
-ELIF "c1"
-	GetPosition(_RemoteMine, _Pos)
-THEN
-	SetVar(_RemoteMine, "LLWEAPONEX_Mine_ExplodePos", _Pos)
-ENDIF
-	//CharacterItemEvent(_Target, _RemoteMine, "LLWEAPONEX_RemoteMine_Detonate")
-	CharacterItemEvent(_Target, _RemoteMine, "LLWEAPONEX_RemoteMine_DetonateFromInventory")
-
-EVENT LLWEAPONEX_RemoteMine_Detonate_Container
-VARS
-	FLOAT3:_Pos
-	CHARACTER:_Source
-	ITEM:_RemoteMine
-	ITEM:_Inventory
-ON
-	OnCharacterItemEvent(_Source, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Container")
-ACTIONS
-IF "c1&!c2&c3"
-	GetVar(_Inventory, _RemoteMine, "LLWEAPONEX_Mine_Inventory")
-	IsEqual(_Inventory, null)
-	GetPosition(_Inventory, _Pos)
-THEN
-	SetVar(_RemoteMine, "LLWEAPONEX_Mine_ExplodePos", _Pos)
-ELIF "c1"
-	GetPosition(_RemoteMine, _Pos)
-THEN
-	SetVar(_RemoteMine, "LLWEAPONEX_Mine_ExplodePos", _Pos)
-ENDIF
-	CharacterItemEvent(_Source, _RemoteMine, "LLWEAPONEX_RemoteMine_DetonateFromInventory")
-
-EVENT LLWEAPONEX_RemoteMine_Detonate_FromInventory
-VARS
-	INT:_Level
-	FLOAT:_LevelF
-	SKILL:_CheckSkill
-	SKILL:_Skill
-	ITEM:_RemoteMine
-	CHARACTER:_Source
-	CHARACTER:_Owner
-	INT:_UseSelfAsSource
-	FLOAT3:_Pos
-ON
-	OnCharacterItemEvent(_Source, _RemoteMine, "LLWEAPONEX_RemoteMine_DetonateFromInventory")
-ACTIONS
-	SetVar(_RemoteMine, "LLWEAPONEX_Mine_Exploding", INT:1)
-	Set(_Level, 1)
-
-	IF "!c1|(c1&c2)"
-		GetVar(_Owner, _RemoteMine, "LLWEAPONEX_Mine_Owner")
-		IsEqual(_Owner, null)
-	THEN
-		Set(_Owner, _Source)
-	ENDIF
-	IF "c1"
-		CharacterGetStat(_LevelF, _Owner, Level)
-	THEN
-		Cast(_Level, _LevelF)
-	ENDIF
-	
-	IF "!c1&c2"
-		IsTagged(_Owner, "LLWEAPONEX_AnyWeaponEquipped")
-		GetVar(_CheckSkill, _RemoteMine, "LLWEAPONEX_Mine_Skill_NoWeapon")
-	THEN
-		Set(_Skill, _CheckSkill)
-	ELIF "c1"
-		GetVar(_CheckSkill, _RemoteMine, "LLWEAPONEX_Mine_Skill")
-	THEN
-		Set(_Skill, _CheckSkill)
-	ELSE
-	
-	ENDIF
-	
-	IF "!c1|(c1&c2)"
-		GetVar(_Pos, _RemoteMine, "LLWEAPONEX_Mine_ExplodePos")
-		IsEqual(_Pos, null)
-	THEN
-		GetPosition(_RemoteMine, _Pos)
-	ENDIF
-
-	IF "!c1"
-		IsEqual(_Skill, null)
-	THEN
-		IF "c1"
-			IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Displacement)
-		THEN
-			CharacterItemEvent(_Owner, _RemoteMine, "LLWEAPONEX_RemoteMine_PrepareDisplacement")
-		ENDIF
-		
-		IF "c1&c2"
-			GetVar(_UseSelfAsSource, _RemoteMine, "LLWEAPONEX_Mine_UseSelfAsSource")
-			IsEqual(_UseSelfAsSource, 1)
-		THEN
-			ExplodeAt(_Pos, _Skill, _Level, _Owner)		
-		ELSE
-			ExplodeAt(_Pos, _Skill, _Level, _RemoteMine)
-		ENDIF
-	ELSE
-
-	ENDIF
-	IF "c1"
-		IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Breach)
-	THEN
-		SetVar(_RemoteMine, "LLWEAPONEX_Demolition_BreachPosition", _Pos)
-		CharacterItemEvent(_Owner, _RemoteMine, "LLWEAPONEX_Demolition_StartBreach")
-	ENDIF
-	CharacterItemEvent(_Owner, _RemoteMine, "LLWEAPONEX_RemoteMine_DetonationDone")
-	
-EVENT LLWEAPONEX_RemoteMine_Prepare_Displacement
-VARS
-	CHARACTER:_Source
-	ITEM:_RemoteMine
-ON
-	OnCharacterItemEvent(_Source, _RemoteMine, "LLWEAPONEX_RemoteMine_PrepareDisplacement")
-ACTIONS
-	//StatusText(_RemoteMine, "Finding targets")
-	Set(%LLWEAPONEX_Demolition_DisplacementIteratorOwner, _Source)
-	ClearTag(_RemoteMine, "LLWEAPONEX_RemoteMine_Ready")
-	IterateItemsNear(_RemoteMine, 12.0, "LLWEAPONEX_RemoteMine_FindDisplacementTargets", "LLWEAPONEX_RemoteMine_Displacer")
-
-EVENT LLWEAPONEX_RemoteMine_Displacement_FoundTarget
-VARS
-	ITEM:_Target
-	CHARACTER:_Owner
-ON
-	OnIterateItem(_Target, "LLWEAPONEX_RemoteMine_FindDisplacementTargets")
-ACTIONS
-IF "c1&!c2"
-	IsTagged(_Target, "LLWEAPONEX_RemoteMine_Ready")
-	ItemIsInInventory(_Target)
-THEN
-	CharacterItemEvent(%LLWEAPONEX_Demolition_DisplacementIteratorOwner, _Target, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+	ItemUnlock(_Item)
+	ItemOpen(_Item)
 ENDIF
 
 EVENT LLWEAPONEX_RemoteMine_OnDetonated
@@ -196,8 +41,6 @@ THEN
 			SetFlag(_RemoteMine, "LLWEAPONEX_RemoteMine_Detonated")
 			ItemDestroy(_RemoteMine)
 		ENDIF
-	ELSE
-		ItemEvent(_RemoteMine, "LLWEAPONEX_SetItemAmount")
 	ENDIF
 	SetVar(_RemoteMine, "LLWEAPONEX_Mine_Animating", INT:0)
 	SetVar(_RemoteMine, "LLWEAPONEX_Mine_Exploding", INT:0)

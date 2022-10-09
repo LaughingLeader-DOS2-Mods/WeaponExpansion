@@ -889,3 +889,40 @@ Skills.DamageFunctions.UnarmedSkillDamage = function(baseSkill, attacker, isFrom
 		return damageRange
 	end
 end
+
+--- @param baseSkill StatEntrySkillData
+--- @param attacker StatCharacter
+--- @param isFromItem boolean
+--- @param stealthed boolean
+--- @param attackerPos number[]
+--- @param targetPos number[]
+--- @param level integer
+--- @param noRandomization boolean
+--- @param isTooltip boolean
+local function _GetRemoteMineDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	if baseSkill.UseWeaponDamage == "Yes" then
+		--Make remote mine skills use average level damage if the attacker has no weapon equipped
+		local skillData = GameHelpers.Ext.CreateSkillTable(baseSkill.Name)
+		if attacker.MainWeapon == nil and attacker.OffHandWeapon == nil then
+			skillData.UseWeaponDamage = "No"
+			skillData.UseCharacterStats = "No"
+			skillData.UseWeaponProperties = "No"
+			skillData.Damage = "AverageLevelDamge"
+			local damageMult = skillData["Damage Multiplier"]
+			damageMult = damageMult + 5
+			skillData["Damage Multiplier"] = damageMult
+		end
+		if isTooltip ~= true then
+			local damageList,deathType = Math.GetSkillDamage(skillData, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+			return damageList,deathType
+		else
+			local damageRange = Math.GetSkillDamageRange(attacker, skillData)
+			return damageRange
+		end
+	end
+end
+
+Skills.DamageFunctions.Projectile_LLWEAPONEX_RemoteMine_Explosive = _GetRemoteMineDamage
+Skills.DamageFunctions.Projectile_LLWEAPONEX_RemoteMine_Shrapnel = _GetRemoteMineDamage
+Skills.DamageFunctions.Projectile_LLWEAPONEX_RemoteMine_Tar = _GetRemoteMineDamage
+Skills.DamageFunctions.Projectile_LLWEAPONEX_RemoteMine_PoisonGas = _GetRemoteMineDamage

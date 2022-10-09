@@ -60,8 +60,8 @@ end
 --- @param targetPos number[]
 --- @param level integer
 --- @param noRandomization boolean
---- @param weapon CDivinityStatsItem
---- @param offHand CDivinityStatsItem
+--- @param weapon CDivinityStatsItem|nil
+--- @param offHand CDivinityStatsItem|nil
 local function GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon, offHand)
     if attacker ~= nil and level < 0 then
         level = attacker.Level
@@ -169,8 +169,8 @@ end
 
 --- @param character StatCharacter
 --- @param skill StatEntrySkillData
---- @param mainWeapon CDivinityStatsItem
---- @param offHandWeapon CDivinityStatsItem
+--- @param mainWeapon CDivinityStatsItem|nil
+--- @param offHandWeapon CDivinityStatsItem|nil
 local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 

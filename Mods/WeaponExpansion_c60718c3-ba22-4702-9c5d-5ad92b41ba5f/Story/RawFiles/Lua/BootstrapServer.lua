@@ -23,6 +23,12 @@ local defaultPersistentVars = {
         VanquishersPath = {},
         ---@type table<string, table<string, {Mines:string[], Remaining:integer}>>
         RemoteMineDetonation = {},
+        ---Used when remote mine skills hit an object, if that object is about to die. This table prevents adding more than one charge per killed enemy.
+        ---@type table<GUID,table<GUID,boolean>>
+        RemoteMineJustHit = {},
+        ---Remote mine -> All targets affected
+        ---@type table<GUID,{Position:vec3, Targets:table<GUID,boolean>}>
+        RemoteMineDisplacement = {},
         ---@type table<GUID,number[]>
         FutureBarrage = {},
         WandSurfaceBonuses = {},
@@ -31,9 +37,6 @@ local defaultPersistentVars = {
         ---Used to count the current total jumps, to ultimately stop jumping when the limit is reached.
         ---@type table<GUID,integer>
         FlickerStrikeTotalJumps = {},
-        ---Used when remote mine skills hit an object, if that object is about to die. This table prevents adding more than one charge per killed enemy.
-        ---@type table<GUID,table<GUID,boolean>>
-        RemoteMineJustHit = {},
     },
     StatusData = {
         ---@type table<GUID,table<string,{Target:GUID, Source:GUID, Status:string}>>
