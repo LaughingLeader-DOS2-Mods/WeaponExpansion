@@ -733,7 +733,7 @@ new treasuretable "ST_LLWEAPONEX_RemoteMines_Displacement_Free"
 new subtable "2,1"
 object category "I_WPN_LLWEAPONEX_RemoteMine_Displacement_Free",1,1,0,0,0,0,0,0
 
-new treasuretable "ST_LLWEAPONEX_RemoteMines_Regular"
+new treasuretable "ST_LLWEAPONEX_RemoteMines_Free"
 new subtable "1,1"
 StartLevel "1"
 EndLevel "4"
@@ -754,7 +754,11 @@ new treasuretable "S_LLWEAPONEX_RemoteMines_AddRandom"
 new subtable "0,20;1,1"
 object category "I_WPN_LLWEAPONEX_RemoteMine_Breach_Free",1,1,0,0,0,0,0,0
 new subtable "1,1"
-object category "T_ST_LLWEAPONEX_RemoteMines_Regular",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_RemoteMines_Free",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_RemoteMines_Regular"
+new subtable "10,1"
+object category "LLWEAPONEX_RemoteMines",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_FreeGrenades"
 new subtable "1,1"
@@ -1385,6 +1389,8 @@ object category "T_ST_LLWEAPONEX_FirearmsNormal",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,0,0,0
 object category "T_ST_LLWEAPONEX_RunebladesNormal",1,0,0,0,0,0,0,0
+new subtable "0,3;1,1"
+object category "LLWEAPONEX_Pistols",1,8,2,1,0,0,0,0
 
 //Butter
 new treasuretable "FTJ_GhettoGuard"
@@ -1403,6 +1409,30 @@ new subtable "1,1"
 object category "T_ST_LLWEAPONEX_AllWeapons",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_Accessories",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_HandCrossbows",1,8,2,1,0,0,0,0
+
+//Reapers Coast
+
+//Papa Thrash
+new treasuretable "S_RC_DW_TavernBouncer"
+CanMerge 1
+new subtable "1,1"
+object category "LLWEAPONEX_HandCrossbows",1,8,2,1,0,0,0,0
+
+//Elixir Mixer
+new treasuretable "RC_MIL_DwarfWolfM"
+CanMerge 1
+new subtable "4,1;2,2"
+object category "LLWEAPONEX_Flask_Weakness",1,0,0,0,0,0,0,0
+
+//Zanisima the Scientist
+new treasuretable "RC_WC_BombScientist"
+CanMerge 1
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_FirearmsNormal",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RemoteMines_Regular",1,0,0,0,0,0,0,0
 
 //END_REGION
 
