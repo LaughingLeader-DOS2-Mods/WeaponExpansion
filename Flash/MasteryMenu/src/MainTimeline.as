@@ -24,7 +24,7 @@ package
 		
 		public var events:Array;
 
-		public var active:Boolean = false;
+		public var isOpen:Boolean = false;
 		public var hasTooltip:Boolean = false;
 		public var currentTooltip:String = "";
 
@@ -57,7 +57,7 @@ package
 
 		public function OpenMenu() : void
 		{
-			if (!this.active)
+			if (!this.isOpen)
 			{
 				Registry.call("PlaySound","UI_Game_PauseMenu_Open");
 				Registry.call("focus");
@@ -66,31 +66,30 @@ package
 				{
 					this.stage.focus = this.lastFocus;
 				}
-				this.active = true;
+				this.isOpen = true;
 			}
 		}
 
 		public function CloseMenu(skipRequest:Boolean = false) : void
 		{
-			if (this.active)
+			if (this.isOpen)
 			{
 				Registry.call("PlaySound","UI_Game_PauseMenu_Close");
 				//Registry.call("PlaySound","UI_Game_Inventory_Close");
-				if(!skipRequest) {
-					Registry.call("LLWEAPONEX_MasteryMenu_RequestCloseUI");
-				}
 				Registry.call("inputFocusLost");
 				Registry.call("focusLost");
 				lastFocus = stage.focus;
 				stage.focus = null;
-
-				active = false;
+				isOpen = false;
+			}
+			if(skipRequest != true) {
+				Registry.call("LLWEAPONEX_MasteryMenu_RequestCloseUI");
 			}
 		}
 
 		public function toggleMenu() : void
 		{
-			if (this.active)
+			if (this.isOpen)
 			{
 				this.CloseMenu();
 			}
@@ -108,7 +107,7 @@ package
 		{
 			var eventName:String = this.events[eventIndex];
 			var handled:Boolean = false;
-			if (active)
+			if (this.isOpen)
 			{
 				//Registry.call("UIAssert","[WeaponExpansion] onEventUp ", this.events[eventIndex], eventIndex, param2, param3);
 				switch(eventName)
@@ -153,7 +152,7 @@ package
 			var handled:Boolean = false;
 			//Registry.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
 			var eventName:String = this.events[eventIndex];
-			if (active)
+			if (isOpen)
 			{
 				switch(eventName)
 				{
@@ -215,7 +214,7 @@ package
 					if (!this.controllerEnabled && shiftDown)
 					{
 						handled = true;
-						if(this.active)
+						if(this.isOpen)
 						{
 							Registry.call("LLWEAPONEX_MasteryMenu_RequestCloseUI");
 						}

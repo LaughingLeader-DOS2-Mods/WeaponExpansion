@@ -28,6 +28,10 @@ MasteryMenu = Classes.UIObjectExtended:Create({
 		local this = instance:GetRoot()
 		if this then
 			self:BuildMasteryMenu(this)
+			if self.IsOpen then
+				this.OpenMenu()
+				self:CloseOtherPanels()
+			end
 		end
 	end,
 	--SetPosition = SetPositionToHotbar,
@@ -174,7 +178,6 @@ function MasteryMenu:BuildMasteryEntries(this)
 			
 			for k=1,Mastery.Variables.MaxRank,1 do
 				this.setRankTooltipText(i, k, GetRankTooltip(data, k))
-				--print("Set rank tooltip: ", i, k)
 			end
 			i = i + 1
 		end
@@ -221,21 +224,17 @@ function MasteryMenu:BuildMasteryMenu(this)
 	end
 end
 
----@param skipRequest boolean
-function MasteryMenu:Close(skipRequest)
-	if not self.IsOpen and not skipRequest then
-		return true
-	end
-	if skipRequest == nil then
-		skipRequest = false
-	end
+---@param skipFlash boolean
+function MasteryMenu:Close(skipFlash)
 	self.Variables.CurrentTooltip = nil
 	self.Variables.SelectedMastery.Last = self.Variables.SelectedMastery.Current
 	self.Variables.SelectedMastery.Current = ""
 	self.Variables.MasteryData = nil
-	local this = self.Root
-	if this then
-		this.CloseMenu(skipRequest)
+	if not skipFlash then
+		local this = self.Root
+		if this then
+			this.CloseMenu(true)
+		end
 	end
 	self.IsOpen = false
 end
@@ -273,7 +272,9 @@ function MasteryMenu:CloseOtherPanels()
 	end
 end
 
-function MasteryMenu:Open(skipRequest)
+---@param skipRequest boolean|nil
+---@param targetCharacter EclCharacter|nil
+function MasteryMenu:Open(skipRequest, targetCharacter)
 	if skipRequest then
 		self.IsOpen = true
 		local this = self.Root
@@ -283,7 +284,12 @@ function MasteryMenu:Open(skipRequest)
 			self:CloseOtherPanels()
 		end
 	else
-		local character = Client:GetCharacter()
+		local character = nil
+		if targetCharacter then
+			character = targetCharacter
+		else
+			character = Client:GetCharacter()
+		end
 		if character then
 			Ext.Net.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(character.NetID))
 		end
@@ -457,7 +463,6 @@ function MasteryMenu:RegisterIcon(name, icon, iconType)
 		if iconType >= 2 then
 			iconSize = 40
 		end
-		print("RegisterIcon", name, icon, iconType)
 		ui:ClearCustomIcon(name)
 		ui:SetCustomIcon(name, icon, iconSize, iconSize)
 	end
@@ -490,7 +495,6 @@ Ext.Events.UICall:Subscribe(function (e)
 	if e.UI.AnchorObjectName == "masteryMenu" and e.When == "After" then
 		local callback = _callToFunction[e.Function]
 		if callback then
-			print(e.Function, e.Args[1])
 			local b,err = xpcall(callback, debug.traceback, MasteryMenu, table.unpack(e.Args))
 			if not b then
 				Ext.Utils.PrintError(err)
@@ -509,13 +513,84 @@ Ext.RegisterUITypeCall(Data.UIType.characterSheet, "showUI", HideMasteryMenu)
 Ext.RegisterUITypeCall(Data.UIType.playerInfo, "charSel", HideMasteryMenu)
 Ext.RegisterUITypeCall(Data.UIType.hotBar, "hotbarBtnPressed", HideMasteryMenu)
 
----@type InputEventCallback
+--[[ Ext.Events.RawInput:Subscribe(function (e)
+	if MasteryMenu.IsOpen then
+		return
+	end
+	local device = e.Input.Input
+	local inputID = device.InputId
+	if device.DeviceId == "Key" then
+		-- CTRL + Shift + M
+		if inputID == "m" and Input.Ctrl and Input.Shift then
+			MasteryMenu:Open()
+		end
+	elseif (device.DeviceId == "Unknown" or device.DeviceId == "C") and inputID ~= nil then
+		--Ext.IO.SaveFile("Dumps/RawInput_Controller.json", Ext.DumpExport(e.Input))
+		--Ext.IO.SaveFile("Dumps/RawInput_InputManager_InputStates.json", Ext.DumpExport(inputManager))
+		if inputID == "righttrigger" or inputID == "lefttrigger" then
+			-- Ext.OnNextTick(function (e)
+			-- 	local inputManager = Ext.Input.GetInputManager()
+			-- 	local doDump = false
+			-- 	for _,v in pairs(inputManager.InputStates) do
+			-- 		if v and v.Initialized then
+			-- 			for _,v2 in pairs(v.Inputs) do
+			-- 				if v2.State == "Pressed" then
+			-- 					doDump = true
+			-- 					break
+			-- 				end
+			-- 			end
+			-- 		end
+			-- 	end
+			-- 	if doDump then Ext.IO.SaveFile("Dumps/RawInput_InputManager_InputStates.json", Ext.DumpExport(inputManager)) end
+			-- end)
+			-- Right Trigger + Left Trigger 
+local inputManager = Ext.Input.GetInputManager()
+--local righttrigger_id = Ext.Stats.EnumLabelToIndex("InputRawType", "righttrigger")
+--local lefttrigger_id = Ext.Stats.EnumLabelToIndex("InputRawType", "lefttrigger")
+local righttrigger_id = Data.RawInput.righttrigger
+local lefttrigger_id = Data.RawInput.lefttrigger
+local p1,p2 = table.unpack(GameHelpers.Client.GetLocalPlayers())
+if p2 and inputManager.PlayerDeviceIDs[2] ~= -1 then
+	---@cast p2 EclCharacter
+	local p2Device = inputManager.PlayerDeviceIDs[2]
+	local state = inputManager.InputStates[p2Device]
+	print(p2Device, state, state and state.Inputs[righttrigger_id])
+	if state then
+		if state.Inputs[righttrigger_id].State == "Pressed" and state.Inputs[lefttrigger_id].State == "Pressed" then
+			MasteryMenu:Open(nil, p2)
+			return
+		end
+	end
+end
+if p1 and inputManager.PlayerDeviceIDs[1] ~= -1 then
+	local p1Device = inputManager.PlayerDeviceIDs[1]
+	local state = inputManager.InputStates[p1Device]
+	if state and state.Initialized and state.Inputs[righttrigger_id].State == "Pressed" and state.Inputs[lefttrigger_id].State == "Pressed" then
+		MasteryMenu:Open(nil, p1)
+		return
+	end
+end
+		end
+	end
+end) ]]
+
 Input.RegisterListener({"PartyManagement", "ToggleMap"}, function(eventName, pressed, id, inputMap, controllerEnabled)
 	if not MasteryMenu.IsOpen and Ext.GetGameState() == "Running" then
 		if controllerEnabled then
 			-- Right Trigger + Left Trigger 
 			if eventName == "PartyManagement" and Input.IsPressed("PanelSelect") then
-				MasteryMenu:Open()
+				local inputManager = Ext.Input.GetInputManager()
+				local p1,p2 = table.unpack(GameHelpers.Client.GetLocalPlayers())
+				--PlayerDeviceIDs is the player's device ID if they just pressed a button, otherwise it's -1
+				if p2 and inputManager.PlayerDeviceIDs[2] ~= -1 then
+					---@cast p2 EclCharacter
+					MasteryMenu:Open(nil, p2)
+					return
+				end
+				if p1 and inputManager.PlayerDeviceIDs[1] ~= -1 then
+					MasteryMenu:Open(nil, p1)
+					return
+				end
 			end
 		else
 			-- CTRL + Shift + M
