@@ -791,6 +791,9 @@ function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType,
 	local cLen = 0
 	--Allow clients to view mastery bonuses for statuses affecting other objects
 	local client = Client:GetCharacter()
+	if not client then
+		Ext.Utils.PrintError("[WeaponExpansion] Client character is nil!")
+	end
 	if client.NetID ~= character.NetID then
 		cLen = cLen + 1
 		checkCharacters[cLen] = {Tags=GameHelpers.GetAllTags(client, true, true), Character=client}

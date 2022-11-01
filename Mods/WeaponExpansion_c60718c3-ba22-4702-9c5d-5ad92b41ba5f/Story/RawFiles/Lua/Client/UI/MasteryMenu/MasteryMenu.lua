@@ -574,11 +574,28 @@ end
 	end
 end) ]]
 
-Input.RegisterListener({"PartyManagement", "ToggleMap"}, function(eventName, pressed, id, inputMap, controllerEnabled)
-	if not MasteryMenu.IsOpen and Ext.GetGameState() == "Running" then
-		if controllerEnabled then
+local _isTyping = false
+
+Ext.RegisterUINameCall("inputFocus", function (ui, event, ...)
+	_isTyping = true
+end)
+
+Ext.RegisterUINameCall("inputFocusLost", function (ui, event, ...)
+	_isTyping = false
+end)
+
+Ext.Events.SessionLoaded:Subscribe(function ()
+	if not Vars.ControllerEnabled then
+		Input.Subscribe.RawInput("m", function (e)
+			if not _isTyping and not MasteryMenu.IsOpen and Ext.Client.GetGameState() == "Running" and Input.Ctrl and Input.Shift then
+				MasteryMenu:Open()
+				e:StopPropagation()
+			end
+		end)
+	else
+		Input.RegisterListener("PartyManagement", function(eventName, pressed, id, inputMap, controllerEnabled)
 			-- Right Trigger + Left Trigger 
-			if eventName == "PartyManagement" and Input.IsPressed("PanelSelect") then
+			if not MasteryMenu.IsOpen and Ext.GetGameState() == "Running" and Input.IsPressed("PanelSelect") then
 				local inputManager = Ext.Input.GetInputManager()
 				local p1,p2 = table.unpack(GameHelpers.Client.GetLocalPlayers())
 				--PlayerDeviceIDs is the player's device ID if they just pressed a button, otherwise it's -1
@@ -592,13 +609,7 @@ Input.RegisterListener({"PartyManagement", "ToggleMap"}, function(eventName, pre
 					return
 				end
 			end
-		else
-			-- CTRL + Shift + M
-			--Ext.Utils.Print(eventName, Input.GetKeyState("FlashCtrl"), Input.GetKeyState("SplitItemToggle"))
-			if eventName == "ToggleMap" and pressed and Input.IsPressed("SplitItemToggle") then
-				MasteryMenu:Open()
-			end
-		end
+		end)
 	end
 end)
 
@@ -606,11 +617,3 @@ Ext.RegisterConsoleCommand("weaponex_reloadmasterymenu", function (cmd, ...)
 	MasteryMenu:ForceClose()
 	MasteryMenu:Reset()
 end)
-
--- Ext.Events.UICall:Subscribe(function (e)
--- 	if e.Function == "LLWEAPONEX_MasteryMenu_MasterySelected" or e.UI.AnchorObjectName == "masteryMenu" then
--- 		local args = table.unpack(e.Args)
--- 		local name = e.Function
--- 		local when = e.When
--- 	end
--- end, {Priority=99})
