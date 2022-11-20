@@ -104,7 +104,7 @@ Events.OnHit:Subscribe(function(e)
 				local xpMastery = nil
 				if UnarmedHelpers.HasUnarmedWeaponStats(e.Source.Stats) then
 					local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(e.Source.Stats)
-					if weapon and weapon.ExtraProperties then
+					if weapon and weapon.ExtraProperties and GameHelpers.Ext.ObjectIsCharacter(e.Target) then
 						Ext.PropertyList.ExecuteExtraPropertiesOnTarget(weapon.Name, "ExtraProperties", e.Source, e.Target, e.Target.WorldPos, "Target", false, nil)
 					end
 					xpMastery = "LLWEAPONEX_Unarmed"
