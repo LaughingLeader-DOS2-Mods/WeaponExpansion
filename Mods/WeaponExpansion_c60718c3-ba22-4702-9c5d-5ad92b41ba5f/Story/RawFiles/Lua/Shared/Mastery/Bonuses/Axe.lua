@@ -221,27 +221,29 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 		return true
 	end),
 
-	rb:Create("AXE_DW_FLURRY", {
+	rb:Create("AXE_DW_AP", {
 		Skills = {"Target_DualWieldingAttack"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_FlurryCleave", "Each hit cleaves up to [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Range]m away in a [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Angle] degree cone, dealing [SkillDamage:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave]."),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_DualWieldAP", "If each hit strikes the target, restore [ExtraData:LLWEAPONEX_MB_Axe_FlurryBonusAP] Action Point(s)."),
 	}).Register.SkillHit(function(self, e, bonuses)
-		if PersistentVars.MasteryMechanics.AxeFlurryHits[e.Character.MyGuid] == nil then
-			PersistentVars.MasteryMechanics.AxeFlurryHits[e.Character.MyGuid] = 0
+		if PersistentVars.MasteryMechanics.AxeFlurryHits[e.CharacterGUID] == nil then
+			PersistentVars.MasteryMechanics.AxeFlurryHits[e.CharacterGUID] = 0
 		end
 		if e.Data.Success then
-			PersistentVars.MasteryMechanics.AxeFlurryHits[e.Character.MyGuid] = PersistentVars.MasteryMechanics.AxeFlurryHits[e.Character.MyGuid] + 1
+			PersistentVars.MasteryMechanics.AxeFlurryHits[e.CharacterGUID] = PersistentVars.MasteryMechanics.AxeFlurryHits[e.CharacterGUID] + 1
 		end
-		Timer.Cancel("LLWEAPONEX_Axe_CheckFlurryCounter", e.Character.MyGuid)
-		Timer.StartObjectTimer("LLWEAPONEX_Axe_CheckFlurryCounter", e.Character.MyGuid, 1000)
+		Timer.Cancel("LLWEAPONEX_Axe_CheckFlurryCounter", e.Character)
+		Timer.StartObjectTimer("LLWEAPONEX_Axe_CheckFlurryCounter", e.Character, 1000)
 	end).TimerFinished("LLWEAPONEX_Axe_CheckFlurryCounter", function (self, e, bonuses)
 		if e.Data.UUID then
 			if PersistentVars.MasteryMechanics.AxeFlurryHits[e.Data.UUID] >= 3 then
-				local ap = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_FlurryBonusAP", 1)
-				if ap > 0 then
-					CharacterAddActionPoints(e.Data.UUID, ap)
-					CharacterStatusText(e.Data.UUID, "LLWEAPONEX_StatusText_FlurryAxeCombo")
+				if not GameHelpers.ObjectIsDead(e.Data.Object) then
+					local ap = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_FlurryBonusAP", 1)
+					if ap > 0 then
+						CharacterAddActionPoints(e.Data.UUID, ap)
+						CharacterStatusText(e.Data.UUID, "LLWEAPONEX_StatusText_FlurryAxeCombo")
+					end
 				end
-				SignalTestComplete("AXE_DW_FLURRY")
+				SignalTestComplete("AXE_DW_AP")
 			end
 			PersistentVars.MasteryMechanics.AxeFlurryHits[e.Data.UUID] = nil
 		end

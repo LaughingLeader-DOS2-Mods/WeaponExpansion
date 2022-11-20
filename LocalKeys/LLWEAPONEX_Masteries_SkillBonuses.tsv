@@ -4,6 +4,7 @@ LLWEAPONEX_MB_Axe_BlitzAttack	Each target hit becomes <font color='#F13324'>[Key
 LLWEAPONEX_MB_Axe_CripplingBlow	<font color='#F19824'>If the target is disabled, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage].</font>	h46875020ge016g4eccg94ecgc9f5233c07fd
 LLWEAPONEX_MB_Axe_Executioner	Axes deal [ExtraData:LLWEAPONEX_MB_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName].	h32749b80g4544g449egb4e5g1e4bd9ce04c3
 LLWEAPONEX_MB_Axe_FlurryCleave	Each hit cleaves up to [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Range]m away in a [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Angle] degree cone, dealing [SkillDamage:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave].	he478deedg980eg4c61gaacdga2cfc8b63b8a
+LLWEAPONEX_MB_Axe_DualWieldAP	If each hit strikes the target, restore [ExtraData:LLWEAPONEX_MB_Axe_FlurryBonusAP] Action Point(s).	he478deedg980eg4c61gaacdga2cfc8b63b8a
 LLWEAPONEX_MB_Axe_Savage	Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AttackOfOpportunityMaxDamageBonus]% more damage, in proportion to the target's missing vitality.	h29991fbcg6968g4feeg9a60gcc8c04fdbd73
 LLWEAPONEX_MB_Axe_Stalker	Axes can now be used with skills that require a [Handle:hd6d18316gbc8bg400bga46eg18cd9f4185ee:Dagger].	he084a3c3g481eg4984g9726g02d0239f752d
 LLWEAPONEX_MB_Axe_Whirlwind	Spin an additional 1-3 times, dealing reduced damage each spin.	h0f83aa9ag475bg4ddfgb546gbb83d237b44e
