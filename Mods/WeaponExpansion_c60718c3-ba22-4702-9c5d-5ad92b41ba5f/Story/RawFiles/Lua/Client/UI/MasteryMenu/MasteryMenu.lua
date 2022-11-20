@@ -589,7 +589,7 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 		Input.Subscribe.RawInput("m", function (e)
 			if not _isTyping and not MasteryMenu.IsOpen and Ext.Client.GetGameState() == "Running" and Input.Ctrl and Input.Shift then
 				MasteryMenu:Open()
-				e:StopPropagation()
+				e.Handled = true
 			end
 		end)
 	else
