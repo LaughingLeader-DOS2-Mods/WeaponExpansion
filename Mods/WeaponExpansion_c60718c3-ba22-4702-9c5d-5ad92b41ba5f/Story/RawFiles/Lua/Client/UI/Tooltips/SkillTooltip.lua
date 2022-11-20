@@ -85,6 +85,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 			end
 		end
 	end
+	
 	if AbilitySchool[skill] ~= nil then
 		local element = tooltip:GetElement("SkillSchool")
 		if element ~= nil then

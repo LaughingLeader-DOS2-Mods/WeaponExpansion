@@ -139,7 +139,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 		Skills = {"Projectile_PiercingShot", "Projectile_EnemyPiercingShot"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarksmansFang", "<font color='#77FF33'>If a target is in front of impassable terrain (like a wall), pin them for 1 turn and deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage].</font>"),
 	}).Register.SkillHit(function(self, e, bonuses)
-		if e.Data.Success and ObjectIsCharacter(e.Data.Target) == 1 then
+		if e.Data.Success and GameHelpers.Ext.ObjectIsCharacter(e.Data.TargetObject) then
 			local startPos = e.Data.TargetObject.WorldPos
 			local directionalVector = GameHelpers.Math.GetDirectionalVectorBetweenObjects(e.Data.TargetObject, e.Character, false)
 			local level = Ext.Entity.GetCurrentLevel()
@@ -377,7 +377,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 4, {
 			local skillData = Ext.Stats.Get(e.Skill, nil, false)
 			local x,y,z = table.unpack(e.Data.Position)
 			local dist = math.max(1, math.ceil(skillData.TargetRadius / 2))
-			local dir = GameHelpers.Math.GetDirectionVector(originalPos, e.Data.Position)
+			local dir = GameHelpers.Math.GetDirectionalVector(originalPos, e.Data.Position)
 			local castPos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, 1.2, x, y, z, dir)
 			local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, dist, x, y, z, dir)
 			pos[2] = y

@@ -629,9 +629,11 @@ local function _GetBonus(tbl)
 	return nil
 end
 
+---@alias AddRankBonusesBonusType MasteryBonusData|MasteryBonusDataRegistrationFunctions
+
 ---@param mastery string
 ---@param rank integer
----@param bonuses MasteryBonusData|MasteryBonusData[]
+---@param bonuses AddRankBonusesBonusType|AddRankBonusesBonusType[]
 function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 	local masteryRankID = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, rank)
 	if not _registeredBonuses[masteryRankID] then
@@ -793,6 +795,7 @@ function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType,
 	local client = Client:GetCharacter()
 	if not client then
 		Ext.Utils.PrintError("[WeaponExpansion] Client character is nil!")
+		return nil
 	end
 	if client.NetID ~= character.NetID then
 		cLen = cLen + 1

@@ -520,11 +520,13 @@ if not _ISCLIENT then
 	}
 
 	Ext.Events.ComputeCharacterHit:Subscribe(function (e)
-		--Check the HitType just in case some surface damage or something hits before the skill or basic attack does
-		if not _IgnoreHitTypes[e.HitType] and e.Attacker.Character:HasTag("LLWEAPONEX_Bow_HighGroundBonus") then
-			-- MasteryBonusManager.HasMasteryBonus(e.Attacker, "BOW_ARCING_SHOT", false)
-			e.HighGround = "HighGround"
-			SignalTestComplete("BOW_ARCING_SHOT")
+		if e.Attacker then
+			--Check the HitType just in case some surface damage or something hits before the skill or basic attack does
+			if not _IgnoreHitTypes[e.HitType] and e.Attacker.Character:HasTag("LLWEAPONEX_Bow_HighGroundBonus") then
+				-- MasteryBonusManager.HasMasteryBonus(e.Attacker, "BOW_ARCING_SHOT", false)
+				e.HighGround = "HighGround"
+				SignalTestComplete("BOW_ARCING_SHOT")
+			end
 		end
 	end, {Priority=9999})
 	Mastery.Events.MasteryChanged:Subscribe(function (e)
