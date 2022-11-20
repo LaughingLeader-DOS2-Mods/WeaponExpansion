@@ -12,7 +12,7 @@ local function RunBreachKnockback(source, item)
 	if radius > 0 and knockbackDistance ~= 0 then
 		for target in GameHelpers.Grid.GetNearbyObjects(source, {Radius=radius, Position=item.WorldPos}) do
 			local startPos = target.WorldPos
-			local dir = GameHelpers.Math.GetDirectionVector(item.WorldPos, target.WorldPos)
+			local dir = GameHelpers.Math.GetDirectionalVector(item.WorldPos, target.WorldPos)
 			dir[1] = dir[1] * -1
 			dir[3] = dir[3] * -1
 			local tx,ty,tz = GameHelpers.Grid.GetValidPositionAlongLine(startPos, dir, knockbackDistance)
