@@ -299,7 +299,7 @@ if not Vars.IsClient then
 		end
 	end)
 
-	Ext.RegisterOsirisListener("ObjectTurnStarted", 1, "after", function(char)
+	Ext.Osiris.RegisterListener("ObjectTurnStarted", 1, "after", function(char)
 		local char = StringHelpers.GetUUID(char)
 		if HasActiveStatus(char, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION") == 1 then
 			GameHelpers.Status.Remove(char, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION")
