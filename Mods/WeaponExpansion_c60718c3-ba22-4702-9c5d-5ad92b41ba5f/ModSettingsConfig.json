@@ -11,7 +11,8 @@
 					"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
 					"LLWEAPONEX_ThrowObjectLimitDisabled",
 					"LLWEAPONEX_AllowUnarmedShields",
-					"LLWEAPONEX_AllowAnySkillForBattleBookChallengeReward"
+					"LLWEAPONEX_AllowAnySkillForBattleBookChallengeReward",
+					"LLWEAPONEX_AllowUnlimitedCrossbowArrowSprayRange"
 				]
 			},
 			{
@@ -40,12 +41,19 @@
 			}
 		]
 	},
-	"MenuOrder": [{
+	"MenuOrder": [
+		{
 			"Name": "LLWEAPONEX_SettingsMenu_Section_General",
 			"Entries": [
-				"LLWEAPONEX_AutoUnlockRecipesDisabled",
+				"LLWEAPONEX_AutoUnlockRecipesDisabled"
+			]
+		},
+		{
+			"Name": "LLWEAPONEX_SettingsMenu_Section_Balance",
+			"Entries": [
 				"LLWEAPONEX_ThrowObjectLimitDisabled",
 				"LLWEAPONEX_AllowUnarmedShields",
+				"LLWEAPONEX_AllowUnlimitedCrossbowArrowSprayRange",
 				"LLWEAPONEX_AllowAnySkillForBattleBookChallengeReward"
 			]
 		},

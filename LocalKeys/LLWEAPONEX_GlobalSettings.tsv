@@ -15,9 +15,12 @@ LLWEAPONEX_AllowUnarmedShields	Allow Shields When Unarmed	hb66a3335g5aebg430cga6
 LLWEAPONEX_AllowUnarmedShields_Description	If enabled, characters can still gain unarmed mastery experience and scaling damage when using a shield in the offhand, as long as their primary slot is empty.	hfff96657g68d2g4540ga889g032c15d16b27
 LLWEAPONEX_SettingsMenu_Section_General	General	h6145e729g4cb0g4018gafe9gd89175b8943d
 LLWEAPONEX_SettingsMenu_Section_Uniques	<font color='#C7A758'>Unique Items</font>	h903efedcge7b3g485ag87bfgc121d0ecad7f
+LLWEAPONEX_SettingsMenu_Section_Balance	Balance	h595da1a6g01c5g46adga61bg683835a97962
 LLWEAPONEX_MoveAllUniquesToVendingMachine	Move All Uniques	h4865a4a5ga3adg4634g950eg806a9ee574ba
 LLWEAPONEX_MoveAllUniquesToVendingMachine_Description	All unobtained Weapon Expansion uniques will be moved to the Strange Machine, instead of being in specific places or on specific characters. <font color='#FF0000'>This cannot be undone.</font>	h2591654bg9c7cg4e07g9ba1g5f377f069f0b
 LLWEAPONEX_AllowAnySkillForBattleBookChallengeReward	Battle Book Challenge: Allow Any Skill	h5c7044b0g5ed9g41fcg9bddg6cbdc6a50c6c
 LLWEAPONEX_AllowAnySkillForBattleBookChallengeReward_Description	Allows gaining any skill from the Battle Book rank 3 mastery bonus for Challenge, including enemy versions of skills, or skills intended for quest events. <font color='#FF0000'>Enabling this could possibly result in gaining a skill players weren't meant to have.</font>	h880deddfgad89g4e07gb3a5g286310f5a8ee
 LLWEAPONEX_Variable_DemolitionBackpackRechargeSpeed	[Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName:Demolitionist's Backpack] Recharge Speed	h24eb5f4bgab83g4373g8a51g21bd7b01259d
 LLWEAPONEX_Variable_DemolitionBackpackRechargeSpeed_Description	Set the base recharge speed of the [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName:Demolitionist's Backpack], if the '[Key:LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled]' setting is enabled.<br>The default value of 24 is 4 turns in combat, or 24 seconds out of combat.	hfa7e981bg9108g47b3g8117g7afa8df6b924
+LLWEAPONEX_AllowUnlimitedCrossbowArrowSprayRange	Allow Unlimited [Key:CROSSBOW_MARKEDSPRAY:Marked Arrow Spray] Range	h178df86dge77cg481eg8ccag495ae71d9aa8
+LLWEAPONEX_AllowUnlimitedCrossbowArrowSprayRange_Description	Allow the [Key:CROSSBOW_MARKEDSPRAY:Marked Arrow Spray] bonus (Rank 3 Crossbow Mastery) to have unlimited range, allowing you to hit Marked targets from across the map.	h47481f4fgce2eg4740g9d39gb3e344543999
