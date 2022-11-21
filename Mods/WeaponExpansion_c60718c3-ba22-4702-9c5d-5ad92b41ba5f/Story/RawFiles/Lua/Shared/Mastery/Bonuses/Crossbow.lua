@@ -4,7 +4,7 @@ local rb = MasteryDataClasses.MasteryBonusData
 
 local _ISCLIENT = Ext.IsClient()
 
-local _eqSet = "Class_Ranger_Humans"
+local _eqSet = "Class_Wayfarer_Lizards"
 
 local function GetStillStanceBonus(character)
 	local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_SkillStanceRankBonus", 5.0)
@@ -194,7 +194,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 	rb:Create("CROSSBOW_MARKEDSPRAY", {
 		Skills = {"Projectile_ArrowSpray", "Projectile_EnemyArrowSpray"},
 		Statuses = {"MARKED"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSpray", "<font color='#77FF33'>Each bolt fired will seek your last [Key:MARKED_DisplayName] target.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSpray", "<font color='#77FF33'>Each bolt fired will seek your last [Key:MARKED_DisplayName:Marked] target.</font>"),
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSprayStatus", "<font color='#77FF33'>Arrows fired from [Key:Projectile_ArrowSpray_DisplayName:Arrow Spray] will seek this target.</font>"),
 		---@param self MasteryBonusData
 		---@param id string
@@ -226,22 +226,26 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 		if markedTarget then
 			local target = GameHelpers.TryGetObject(markedTarget)
 			if target and not GameHelpers.ObjectIsDead(target) then
-				e.Data.TargetObjectHandle = target.Handle
-				e.Data.TargetPosition = target.WorldPos
-				e.Data.ForceTarget = true
-				--e.Data.HitObjectHandle = target.Handle
+				local pos = {table.unpack(target.WorldPos)}
+				pos[2] = pos[2] + (target.AI.AIBoundsHeight / 2)
+				--local sourcePos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, 2.0, nil, nil, nil, GameHelpers.Math.GetDirectionalVector(e.Character.WorldPos, pos))
+				--sourcePos[2] = sourcePos[2] + 10
+				--e.Data.TargetObjectHandle = target.Handle -- Read-only?
+				--e.Data.ForceTarget = true
+				e.Data.TargetPosition = pos
+				e.Data.IgnoreRoof = true
+				--e.Data.Rotation = {0,0,0,0,0,0,0,0,0}
+				--e.Data.RootTemplate.RotateImpact = false
 			else
 				PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] = nil
 			end
-		end
-	end).SkillCast(function (self, e, bonuses)
-		if PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] == nil then
-			for _,id in pairs(self.Skills) do
-				local skillData = e.Character.SkillManager.Skills[id]
-				if skillData and skillData.ActiveCooldown > 0 and skillData.ActiveCooldown < 60 then
-					local cd = math.max(0, skillData.ActiveCooldown - 6.0)
-					skillData.ActiveCooldown = cd
-				end
+			if Vars.DebugMode then
+				Timer.Cancel("CROSSBOW_MARKEDSPRAY_SignalComplete")
+				Timer.StartOneshot("CROSSBOW_MARKEDSPRAY_SignalComplete", 250, function (e)
+					SignalTestComplete("CROSSBOW_MARKEDSPRAY")
+				end)
+			else
+				SignalTestComplete(self.ID)
 			end
 		end
 	end).StatusApplied(function (self, e, bonuses)
@@ -254,9 +258,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 		end
 	end, "None").Test(function(test, self)
 		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
-		test.Cleanup = cleanup
+		test.Cleanup = function()
+			cleanup()
+			PersistentVars.MasteryMechanics.CrossbowMarkedTarget[char] = nil
+		end
 		test:Wait(250)
-		TeleportTo(char, dummy, "", 0, 1, 1)
+		local x,y,z = table.unpack(GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, Ext.Stats.Get(self.Skills[1]).TargetRadius - 0.5))
+		TeleportToPosition(char, x,y,z, "", 0, 1)
 		CharacterSetFightMode(char, 1, 1)
 		test:Wait(1000)
 		ApplyStatus(dummy, "MARKED", -1, 1, char)
@@ -322,6 +330,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 				end
 			end
 		end
+		SignalTestComplete(self.ID)
 	end).Test(function(test, self)
 		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
@@ -413,6 +422,54 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 4, {
 		CharacterUseSkill(char, "Projectile_EnemyBallisticShot", dummy, 1, 1, 1)
 		test:WaitForSignal(self.ID, 10000)
 		test:AssertGotSignal(self.ID)
+		return true
+	end),
+	rb:Create("CROSSBOW_REACTIVE_TRAPPER", {
+		Skills = {"Target_ReactionShot", "Target_EnemyReactionShot"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_ReactiveShot", "<font color='#77FF33'>After casting, automatically apply [Key:INVISIBLE_DisplayName:Invisible] for [ExtraData:LLWEAPONEX_MB_Crossbow_ReactiveShot_InvisibleTurns:1] turn(s), and throw a <font color='#CE7964'>[Handle:hc8d093e1g6201g4b5dgb199gca172eaedb7d:Tar Trap]</font> at the target location.<br>When exploded, the <font color='#CE7964'>[Handle:hc8d093e1g6201g4b5dgb199gca172eaedb7d:Tar Trap]</font> slows movement in a [Stats:Projectile_LLWEAPONEX_Crossbow_ReactiveShotTrap:ExplodeRadius]m radius, dealing [SkillDamage:Projectile_LLWEAPONEX_Crossbow_ReactiveShotTrap_Damage]."),
+	}).Register.SkillCast(function(self, e, bonuses)
+		local pos = GameHelpers.Grid.GetValidPositionTableInRadius(e.Data:GetSkillTargetPosition(), 10.0)
+		--Make Source "nil" so it doesn't rotate to the player's facing direction, which can mess with the projectile path
+		GameHelpers.Skill.ShootProjectileAt(pos, "Projectile_LLWEAPONEX_Crossbow_ReactiveShotTrap", e.Character, {SourceOffset={0,2,0}, Source="nil"})
+		local turns = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_ReactiveShot_InvisibleTurns", 1, true)
+		if turns > 0 then
+			GameHelpers.Status.Apply(e.Character, "INVISIBLE", turns * 6, false, e.Character)
+		end
+		SignalTestComplete(self.ID)
+	end).Test(function(test, self)
+		local summonChangedEventIndex = nil
+		local trap = nil
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = function()
+			cleanup()
+			if summonChangedEventIndex ~= nil then
+				Events.SummonChanged:Unsubscribe(summonChangedEventIndex)
+			end
+			if trap ~= nil and ObjectExists(trap) == 1 then
+				ItemRemove(trap)
+			end
+		end
+		test:Wait(250)
+		local x,y,z = table.unpack(GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, 10.0))
+		TeleportToPosition(char, x,y,z, "", 0, 1)
+		CharacterSetFightMode(char, 1, 1)
+		test:Wait(1000)
+		summonChangedEventIndex = Events.SummonChanged:Subscribe(function (e)
+			if e.IsItem and e.Owner.MyGuid == char then
+				trap = e.Summon.MyGuid
+			end
+		end)
+		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		local turns = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_ReactiveShot_InvisibleTurns", 1, true)
+		if turns > 0 then
+			test:Wait(500)
+			test:AssertEquals(HasActiveStatus(char, "INVISIBLE") == 1, true, "INVISIBLE not applied to caster")
+		end
+		test:Wait(500)
+		test:AssertEquals(trap ~= nil, true, "Tar Trap was not created.")
+		test:Wait(5000)
 		return true
 	end),
 })

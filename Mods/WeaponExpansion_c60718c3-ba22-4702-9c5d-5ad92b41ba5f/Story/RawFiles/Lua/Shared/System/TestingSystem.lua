@@ -8,7 +8,7 @@ local _tests = {
 }
 WeaponExTesting = {}
 
----@alias _LLWEAPONEX_BonusTestTaskCallback fun(test:LuaTest, bonus:MasteryBonusData)
+---@alias _LLWEAPONEX_BonusTestTaskCallback fun(test:LuaTest, bonus:MasteryBonusData):boolean
 ---@alias _LLWEAPONEX_RegularTestTaskCallback fun(test:LuaTest)
 
 ---@param bonusId string
@@ -215,7 +215,7 @@ if not _ISCLIENT then
 	function WeaponExTesting.CreateTemporaryCharacter(pos, equipmentSet)
 		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or GameHelpers.Math.ExtendPositionWithForwardDirection(host, 10)
-		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], host.RootTemplate.Id, 0)
+		local character = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], host.RootTemplate.Id, 0))
 		CharacterTransformFromCharacter(character, host.MyGuid, 1, 1, 1, 1, 1, 1, 1)
 		if equipmentSet then
 			CharacterTransformAppearanceToWithEquipmentSet(character, host.MyGuid, equipmentSet, false)
@@ -255,7 +255,7 @@ if not _ISCLIENT then
 		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)
 		--LLWEAPONEX_Debug_MasteryDummy_2ac80a2a-8326-4131-a03c-53906927f935
-		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0)
+		local character = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0))
 		NRD_CharacterSetPermanentBoostInt(character, "Accuracy", 200)
 		
 		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
