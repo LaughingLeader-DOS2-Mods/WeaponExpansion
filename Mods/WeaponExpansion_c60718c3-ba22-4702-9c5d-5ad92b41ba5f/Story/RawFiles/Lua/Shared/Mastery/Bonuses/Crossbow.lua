@@ -194,7 +194,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 	rb:Create("CROSSBOW_MARKEDSPRAY", {
 		Skills = {"Projectile_ArrowSpray", "Projectile_EnemyArrowSpray"},
 		Statuses = {"MARKED"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSpray", "<font color='#77FF33'>Each bolt fired will seek your last [Key:MARKED_DisplayName:Marked] target.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSpray", "<font color='#77FF33'>Each arrow fired will seek your most recent [Key:MARKED_DisplayName:Marked] target with <font color='#FCD203'>uncanny accuracy</font>.<br>After casting, [Key:MARKED_DisplayName:Marked] will be cleansed.</font>"),
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarkedSprayStatus", "<font color='#77FF33'>Arrows fired from [Key:Projectile_ArrowSpray_DisplayName:Arrow Spray] will seek this target.</font>"),
 		---@param self MasteryBonusData
 		---@param id string
@@ -221,21 +221,31 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 				return false
 			end
 		end
-	}).Register.SkillProjectileShoot(function(self, e, bonuses)
+	}).Register.SkillProjectileBeforeShoot(function(self, e, bonuses)
 		local markedTarget = PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID]
 		if markedTarget then
 			local target = GameHelpers.TryGetObject(markedTarget)
 			if target and not GameHelpers.ObjectIsDead(target) then
+				local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_ArrowSpray_DistanceLimit", 0)
+				if maxDistance > 0 and GameHelpers.Math.GetDistance(target, e.Character) > maxDistance then
+					return
+				end
+				e.Data.IgnoreObjects = true
+				e.Data.Target = target.Handle
 				local pos = {table.unpack(target.WorldPos)}
 				pos[2] = pos[2] + (target.AI.AIBoundsHeight / 2)
-				--local sourcePos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, 2.0, nil, nil, nil, GameHelpers.Math.GetDirectionalVector(e.Character.WorldPos, pos))
-				--sourcePos[2] = sourcePos[2] + 10
-				--e.Data.TargetObjectHandle = target.Handle -- Read-only?
-				--e.Data.ForceTarget = true
-				e.Data.TargetPosition = pos
-				e.Data.IgnoreRoof = true
-				--e.Data.Rotation = {0,0,0,0,0,0,0,0,0}
-				--e.Data.RootTemplate.RotateImpact = false
+				e.Data.EndPosition = pos
+
+				local angle = GameHelpers.Math.GetRelativeAngle(e.Character, target)
+				--Target is behind the caster
+				if e.Data.HitObject and ((angle >= 120 and angle <= 210) or CharacterCanSee(e.CharacterGUID, target.MyGuid) == 0) then
+					e.Data.HitObject.Target = target.Handle
+					e.Data.HitObject.Position = pos
+					local spos = e.Data.StartPosition
+					spos[2] = spos[2] + 20
+					e.Data.StartPosition = spos
+					--e.Data.HitObject.HitInterpolation = 30
+				end
 			else
 				PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] = nil
 			end
@@ -248,7 +258,25 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 				SignalTestComplete(self.ID)
 			end
 		end
-	end).StatusApplied(function (self, e, bonuses)
+	end).SkillProjectileShoot(function (self, e, bonuses)
+		if PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] then
+			e.Data.IgnoreRoof = true
+			e.Data.ForceTarget = true
+		end
+	end).SkillCast(function (self, e, bonuses)
+		local markedTarget = PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID]
+		if markedTarget then
+			Timer.StartObjectTimer("LLWEAPONEX_MarkedSpray_Cleanse", e.Character, 2000, {Target=markedTarget})
+		end
+	end).TimerFinished("LLWEAPONEX_MarkedSpray_Cleanse", function(self, e, bonuses)
+		local markedTarget = PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.Data.UUID]
+		if markedTarget == e.Data.Target then
+			PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.Data.UUID] = nil
+			if GameHelpers.ObjectExists(markedTarget) then
+				GameHelpers.Status.Remove(markedTarget, "MARKED")
+			end
+		end
+	end, "None").StatusApplied(function (self, e, bonuses)
 		PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.SourceGUID] = e.TargetGUID
 	end, "Source").StatusRemoved(function (self, e, bonuses)
 		for source,target in pairs(PersistentVars.MasteryMechanics.CrossbowMarkedTarget) do
@@ -263,8 +291,15 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 			PersistentVars.MasteryMechanics.CrossbowMarkedTarget[char] = nil
 		end
 		test:Wait(250)
-		local x,y,z = table.unpack(GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, Ext.Stats.Get(self.Skills[1]).TargetRadius - 0.5))
-		TeleportToPosition(char, x,y,z, "", 0, 1)
+		if SharedData.RegionData.Current == "FJ_FortJoy_Main" then
+			GameHelpers.Utils.SetPosition(dummy, {217.97674560546875,-1.75,195.25508117675781})
+			GameHelpers.Utils.SetPosition(char, {166.34489440917969,4.75,203.94488525390625})
+		else
+			--local dist = Ext.Stats.Get(self.Skills[1]).TargetRadius - 0.5)
+			local x,y,z = table.unpack(GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, 50))
+			TeleportToPosition(char, x,y,z, "", 0, 1)
+		end
+
 		CharacterSetFightMode(char, 1, 1)
 		test:Wait(1000)
 		ApplyStatus(dummy, "MARKED", -1, 1, char)

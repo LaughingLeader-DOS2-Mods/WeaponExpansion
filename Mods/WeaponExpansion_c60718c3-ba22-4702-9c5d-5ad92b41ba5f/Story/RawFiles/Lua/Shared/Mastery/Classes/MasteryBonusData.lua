@@ -40,6 +40,7 @@ local _type = type
 ---@field SkillHit fun(callback:MasteryBonusEventWrapper<OnSkillStateHitEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
 ---@field SkillProjectileHit fun(callback:MasteryBonusEventWrapper<OnSkillStateProjectileHitEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
 ---@field SkillProjectileShoot fun(callback:MasteryBonusEventWrapper<OnSkillStateProjectileShootEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
+---@field SkillProjectileBeforeShoot fun(callback:MasteryBonusEventWrapper<OnSkillStateBeforeProjectileShootEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
 ---@field StatusBeforeAttempt fun(callback:MasteryBonusEventWrapper<OnStatusBeforeAttemptEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificStatuses:string|string[]|nil, isStatusType:boolean|nil):MasteryBonusDataRegistrationFunctions
 ---@field StatusAttempt fun(callback:MasteryBonusEventWrapper<OnStatusAttemptEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificStatuses:string|string[]|nil, isStatusType:boolean|nil):MasteryBonusDataRegistrationFunctions
 ---@field StatusApplied fun(callback:MasteryBonusEventWrapper<OnStatusAppliedEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificStatuses:string|string[]|nil, isStatusType:boolean|nil):MasteryBonusDataRegistrationFunctions
@@ -290,6 +291,20 @@ function _INTERNALREG.SkillProjectileShoot(self, callback, checkBonusOn, specifi
 	if not _ISCLIENT then
 		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.SHOOTPROJECTILE, skills, self, callback, checkBonusOn)
+	end
+	return self
+end
+
+
+---@param self MasteryBonusData
+---@param callback function
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificSkills string|string[]|nil
+---@return MasteryBonusData
+function _INTERNALREG.SkillProjectileBeforeShoot(self, callback, checkBonusOn, specificSkills)
+	if not _ISCLIENT then
+		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
+		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.BEFORESHOOT, skills, self, callback, checkBonusOn)
 	end
 	return self
 end
