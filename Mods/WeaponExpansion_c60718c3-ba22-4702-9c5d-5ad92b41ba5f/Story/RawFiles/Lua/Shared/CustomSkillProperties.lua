@@ -103,6 +103,7 @@ end, function (property, attacker, target, position, isFromItem, skill, hit, ski
 	end
 end)
 
+--TODO Check if this triggers 4 times
 GameHelpers.Skill.CreateSkillProperty("LLWEAPONEX_ChaosRuneAbsorbSurface",
 function(prop)
 	local chance = prop.Arg1

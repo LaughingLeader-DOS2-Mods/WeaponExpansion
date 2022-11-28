@@ -225,3 +225,28 @@ RegisterListener("DebugCommand", "uiext", function (cmd, isClient, data)
 		}
 	end
 end)
+
+Events.Initialized:Subscribe(function(e)
+	Timer.StartOneshot("", 250, function (e)
+		local harkenBroken = false
+		local korvashBroken = false
+
+		local harken = GameHelpers.GetCharacter(Origin.Harken)
+		if harken and harken.PlayerCustomData and harken.PlayerCustomData.OriginName ~= "LLWEAPONEX_Harken" then
+			harkenBroken = true
+		end
+		
+		local korvash = GameHelpers.GetCharacter(Origin.Korvash)
+		if korvash and korvash.PlayerCustomData and korvash.PlayerCustomData.OriginName ~= "LLWEAPONEX_Korvash" then
+			korvashBroken = true
+		end
+
+		if harkenBroken and korvashBroken then
+			GameHelpers.Net.PostMessageToServer("LLWEAPONEX_FixPlayerCustomData", "All")
+		elseif harkenBroken then
+			GameHelpers.Net.PostMessageToServer("LLWEAPONEX_FixPlayerCustomData", Origin.Harken)
+		elseif korvashBroken then
+			GameHelpers.Net.PostMessageToServer("LLWEAPONEX_FixPlayerCustomData", Origin.Korvash)
+		end
+	end)
+end)

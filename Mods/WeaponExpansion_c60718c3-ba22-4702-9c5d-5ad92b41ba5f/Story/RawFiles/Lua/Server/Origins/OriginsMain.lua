@@ -15,6 +15,65 @@ local function SetupOriginSkills(char, skillset)
 	end
 end
 
+local function FixPlayerCustomData()
+	local harken = Ext.Entity.GetCharacter(Origin.Harken)
+	local pdata = harken.PlayerCustomData
+	GameHelpers.Utils.SetPlayerCustomData(harken, {
+		OriginName = "LLWEAPONEX_Harken",
+		Race = pdata.Race,
+		IsMale = pdata.IsMale or harken:HasTag("MALE"),
+		SkinColor = pdata.SkinColor,
+		HairColor = pdata.HairColor,
+		ClothColor1 = pdata.ClothColor1,
+		ClothColor2 = pdata.ClothColor2,
+		ClothColor3 = pdata.ClothColor3,
+	})
+
+	local korvash = Ext.Entity.GetCharacter(Origin.Korvash)
+	local pdata = korvash.PlayerCustomData
+	GameHelpers.Utils.SetPlayerCustomData(korvash, {
+		OriginName = "LLWEAPONEX_Korvash",
+		Race = "Lizard",
+		IsMale = pdata.IsMale or korvash:HasTag("MALE"),
+		SkinColor = pdata.SkinColor,
+		HairColor = pdata.HairColor,
+		ClothColor1 = pdata.ClothColor1,
+		ClothColor2 = pdata.ClothColor2,
+		ClothColor3 = pdata.ClothColor3,
+	})
+end
+
+Ext.RegisterNetListener("LLWEAPONEX_FixPlayerCustomData", function (channel, payload, user)
+	if payload == Origin.Harken or payload == "All" then
+		local harken = Ext.Entity.GetCharacter(Origin.Harken)
+		local pdata = harken.PlayerCustomData
+		GameHelpers.Utils.SetPlayerCustomData(harken, {
+			OriginName = "LLWEAPONEX_Harken",
+			Race = pdata.Race,
+			IsMale = pdata.IsMale or harken:HasTag("MALE"),
+			SkinColor = pdata.SkinColor,
+			HairColor = pdata.HairColor,
+			ClothColor1 = pdata.ClothColor1,
+			ClothColor2 = pdata.ClothColor2,
+			ClothColor3 = pdata.ClothColor3,
+		})
+	end
+	if payload == Origin.Korvash or payload == "All" then
+		local korvash = Ext.Entity.GetCharacter(Origin.Korvash)
+		local pdata = korvash.PlayerCustomData
+		GameHelpers.Utils.SetPlayerCustomData(korvash, {
+			OriginName = "LLWEAPONEX_Korvash",
+			Race = "Lizard",
+			IsMale = pdata.IsMale or korvash:HasTag("MALE"),
+			SkinColor = pdata.SkinColor,
+			HairColor = pdata.HairColor,
+			ClothColor1 = pdata.ClothColor1,
+			ClothColor2 = pdata.ClothColor2,
+			ClothColor3 = pdata.ClothColor3,
+		})
+	end
+end)
+
 local function AddToParty(uuid, host)
 	--Osi.PROC_GLO_PartyMembers_Add(uuid, host)
 	CharacterRecruitCharacter(uuid,host)
@@ -38,8 +97,14 @@ end
 
 Events.RegionChanged:Subscribe(function (e)
 	if e.State == REGIONSTATE.GAME and e.LevelType == LEVELTYPE.GAME then
-		Origins_InitCharacters(e.Region)
+		Origins_InitCharacters(SharedData.RegionData.Current)
+		-- Timer.StartOneshot("", 3000, function (_)
+		-- end)
 	end
+end)
+
+Ext.RegisterConsoleCommand("llweaponex_initorigins", function (cmd)
+	Origins_InitCharacters(SharedData.RegionData.Current)
 end)
 
 function Origins_InitCharacters(region)
@@ -47,89 +112,7 @@ function Origins_InitCharacters(region)
 		return
 	end
 
-	local isInitialized = true
-
-	local harken = GameHelpers.GetCharacter(Origin.Harken)
-	if harken and (not harken.Stats.TALENT_Dwarf_Sturdy or not harken.Stats.TALENT_Dwarf_Sneaking) then
-		NRD_PlayerSetBaseTalent(Origin.Harken, "Dwarf_Sturdy", 1)
-		NRD_PlayerSetBaseTalent(Origin.Harken, "Dwarf_Sneaking", 1)
-		CharacterAddCivilAbilityPoint(Origin.Harken, 0)
-	end
-
-	--IsCharacterCreationLevel(region) == 0
-	if CharacterIsPlayer(Origin.Harken) == 0 and ObjectGetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete") == 0 then
-		if isInitialized then
-			isInitialized = ObjectGetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete") == 1
-		end
-		pcall(SetupOriginSkills, Origin.Harken, "Avatar_LLWEAPONEX_Harken")
-
-		--CharacterApplyPreset(Origin.Harken, "LLWEAPONEX_Harken")
-		NRD_PlayerSetBaseAttribute(Origin.Harken, "Strength", 3)
-		NRD_PlayerSetBaseAbility(Origin.Harken, "WarriorLore", 1)
-		NRD_PlayerSetBaseAbility(Origin.Harken, "TwoHanded", 1)
-		NRD_PlayerSetBaseAbility(Origin.Harken, "Barter", 1)
-		NRD_PlayerSetBaseTalent(Origin.Harken, "Opportunist", 1)
-
-		CharacterAddCivilAbilityPoint(Origin.Harken, 0)
-
-		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
-			Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-			--Mods.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-			if Vars.DebugMode then
-				Timer.StartOneshot("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
-					Uniques.AnvilMace:Transfer(Origin.Harken, Uniques.AnvilMace.DefaultUUID, true)
-					Uniques.HarkenPowerGloves:Transfer(Origin.Harken, Uniques.HarkenPowerGloves.DefaultUUID, true)
-				end)
-			end
-		end
-
-		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_FixSkillBar", 0)
-		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete", 0)
-		--CharacterAddSkill(Origin.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
-	end
-
-	local korvash = GameHelpers.GetCharacter(Origin.Korvash)
-	if korvash and (not korvash.Stats.TALENT_Lizard_Resistance or not korvash.Stats.TALENT_Lizard_Persuasion) then
-		NRD_PlayerSetBaseTalent(Origin.Korvash, "Lizard_Resistance", 1)
-		NRD_PlayerSetBaseTalent(Origin.Korvash, "Lizard_Persuasion", 1)
-		CharacterAddCivilAbilityPoint(Origin.Korvash, 0)
-	end
-	
-	if CharacterIsPlayer(Origin.Korvash) == 0 and ObjectGetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 0 then
-		if isInitialized then
-			isInitialized = ObjectGetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 1
-		end
-		pcall(SetupOriginSkills, Origin.Korvash, "Avatar_LLWEAPONEX_Korvash")
-	
-		CharacterRemoveSkill(Origin.Korvash, "Cone_Flamebreath")
-		CharacterAddSkill(Origin.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
-		--CharacterApplyPreset(Origin.Korvash, "LLWEAPONEX_Korvash")
-		NRD_PlayerSetBaseAbility(Origin.Korvash, "WarriorLore", 1)
-		NRD_PlayerSetBaseAbility(Origin.Korvash, "Necromancy", 1)
-		NRD_PlayerSetBaseAbility(Origin.Korvash, "Telekinesis", 1)
-		NRD_PlayerSetBaseAttribute(Origin.Korvash, "Strength", 2)
-		NRD_PlayerSetBaseAttribute(Origin.Korvash, "Wits", 1)
-		NRD_PlayerSetBaseTalent(Origin.Korvash, "Executioner", 1)
-		CharacterAddCivilAbilityPoint(Origin.Korvash, 0)
-
-		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
-			Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
-			--Mods.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
-			--CharacterAddSkill(Origin.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
-			--Mods.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
-			--Mods.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
-			--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
-			if Vars.DebugMode then
-				Timer.StartOneshot("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
-					Uniques.DeathEdge:Transfer(Origin.Korvash, Uniques.DeathEdge.DefaultUUID, true)
-					Uniques.DemonGauntlet:Transfer(Origin.Korvash, Uniques.DemonGauntlet.DefaultUUID, true)
-				end)
-			end
-		end
-
-		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_FixSkillBar", 0)
-		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete", 0)
-	end
+	local isInitialized = ObjectGetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete") == 1 and ObjectGetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 1
 
 	if not isInitialized then
 		if not Vars.DebugMode then
@@ -156,12 +139,8 @@ function Origins_InitCharacters(region)
 			CharacterAttachToGroup(Origin.Harken, host)
 			SetOnStage(Origin.Harken, 1)
 			CharacterAssignToUser(user, Origin.Harken)
-			local pdata = GameHelpers.GetCharacter(Origin.Harken).PlayerCustomData
-			if pdata ~= nil then
-				pdata.OriginName = "LLWEAPONEX_Harken"
-				pdata.Race = "Dwarf"
-				pdata.IsMale = true
-			end
+
+			--local pdata = Ext.Entity.GetCharacter(Mods.WeaponExpansion.Origin.Harken).PlayerCustomData; pdata.OriginName = "LLWEAPONEX_Harken"; pdata.Race = "Dwarf"; pdata.IsMale = true;
 			
 			if CharacterIsInPartyWith(host, Origin.Korvash) == 0 then
 				AddToParty(Origin.Korvash, host)
@@ -171,21 +150,97 @@ function Origins_InitCharacters(region)
 			CharacterAttachToGroup(Origin.Korvash, host)
 			SetOnStage(Origin.Korvash, 1)
 			CharacterAssignToUser(user, Origin.Korvash)
-			pdata = GameHelpers.GetCharacter(Origin.Korvash).PlayerCustomData
-			if pdata ~= nil then
-				pdata.OriginName = "LLWEAPONEX_Korvash"
-				pdata.Race = "Lizard"
-				pdata.IsMale = true
-			end
+
 			local frozenCount = Osi.DB_GlobalCounter:Get("FTJ_PlayersWokenUp", nil)
 			if frozenCount ~= nil and #frozenCount > 0 then
 				local count = frozenCount[1][2]
 				Osi.DB_GlobalCounter:Delete("FTJ_PlayersWokenUp", count)
 				Osi.DB_GlobalCounter("FTJ_PlayersWokenUp", count + totalAdded)
 			end
+
+			FixPlayerCustomData()
 		end
 	end
+
+	local harken = GameHelpers.GetCharacter(Origin.Harken)
+	if harken and (not harken.Stats.TALENT_Dwarf_Sturdy or not harken.Stats.TALENT_Dwarf_Sneaking) then
+		NRD_PlayerSetBaseTalent(Origin.Harken, "Dwarf_Sturdy", 1)
+		NRD_PlayerSetBaseTalent(Origin.Harken, "Dwarf_Sneaking", 1)
+		CharacterAddCivilAbilityPoint(Origin.Harken, 0)
+	end
+	local baseAttribute = GameHelpers.GetExtraData("AttributeBaseValue", 10)
+
+	--IsCharacterCreationLevel(region) == 0
+	if ObjectGetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete") == 0 then
+		pcall(SetupOriginSkills, Origin.Harken, "Avatar_LLWEAPONEX_Harken")
+
+		--CharacterApplyPreset(Origin.Harken, "LLWEAPONEX_Harken")
+		NRD_PlayerSetBaseAttribute(Origin.Harken, "Strength", baseAttribute+3)
+		NRD_PlayerSetBaseAbility(Origin.Harken, "WarriorLore", 1)
+		NRD_PlayerSetBaseAbility(Origin.Harken, "TwoHanded", 1)
+		NRD_PlayerSetBaseAbility(Origin.Harken, "Barter", 1)
+		NRD_PlayerSetBaseTalent(Origin.Harken, "AttackOfOpportunity", 1)
+
+		CharacterAddCivilAbilityPoint(Origin.Harken, 0)
+
+		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
+			Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+			--Mods.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+			if Vars.DebugMode then
+				Timer.StartOneshot("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
+					Uniques.AnvilMace:Transfer(Origin.Harken, Uniques.AnvilMace.DefaultUUID, true)
+					Uniques.HarkenPowerGloves:Transfer(Origin.Harken, Uniques.HarkenPowerGloves.DefaultUUID, true)
+				end)
+			end
+		end
+
+		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_FixSkillBar", 0)
+		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete", 0)
+		--CharacterAddSkill(Origin.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
+	end
+
+	local korvash = GameHelpers.GetCharacter(Origin.Korvash)
+	if korvash and (not korvash.Stats.TALENT_Lizard_Resistance or not korvash.Stats.TALENT_Lizard_Persuasion) then
+		NRD_PlayerSetBaseTalent(Origin.Korvash, "Lizard_Resistance", 1)
+		NRD_PlayerSetBaseTalent(Origin.Korvash, "Lizard_Persuasion", 1)
+		CharacterAddCivilAbilityPoint(Origin.Korvash, 0)
+	end
+	
+	if ObjectGetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 0 then
+		pcall(SetupOriginSkills, Origin.Korvash, "Avatar_LLWEAPONEX_Korvash")
+	
+		CharacterRemoveSkill(Origin.Korvash, "Cone_Flamebreath")
+		CharacterAddSkill(Origin.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
+		--CharacterApplyPreset(Origin.Korvash, "LLWEAPONEX_Korvash")
+		NRD_PlayerSetBaseAbility(Origin.Korvash, "WarriorLore", 1)
+		NRD_PlayerSetBaseAbility(Origin.Korvash, "Necromancy", 1)
+		NRD_PlayerSetBaseAbility(Origin.Korvash, "Telekinesis", 1)
+		NRD_PlayerSetBaseAttribute(Origin.Korvash, "Strength", baseAttribute+2)
+		NRD_PlayerSetBaseAttribute(Origin.Korvash, "Wits", baseAttribute+1)
+		NRD_PlayerSetBaseTalent(Origin.Korvash, "Executioner", 1)
+		CharacterAddCivilAbilityPoint(Origin.Korvash, 0)
+
+		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
+			Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+			--Mods.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+			--CharacterAddSkill(Origin.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
+			--Mods.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+			--Mods.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+			--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
+			if Vars.DebugMode then
+				Timer.StartOneshot("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
+					Uniques.DeathEdge:Transfer(Origin.Korvash, Uniques.DeathEdge.DefaultUUID, true)
+					Uniques.DemonGauntlet:Transfer(Origin.Korvash, Uniques.DemonGauntlet.DefaultUUID, true)
+				end)
+			end
+		end
+
+		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_FixSkillBar", 0)
+		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete", 0)
+	end
 end
+
+
 
 local tierValue = {
     None = 0,

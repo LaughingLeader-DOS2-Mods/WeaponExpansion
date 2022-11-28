@@ -254,7 +254,7 @@ function InitOriginsUniques(region)
 	end
 end
 
-Ext.RegisterOsirisListener("CharacterDied", 1, "after", function(character)
+Ext.Osiris.RegisterListener("CharacterDied", 1, "after", function(character)
 	local uuid = GameHelpers.GetUUID(character)
 	if listenForDeath[uuid] then
 		if GameHelpers.Item.ItemIsEquipped(uuid, listenForDeath[uuid]) then

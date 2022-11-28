@@ -5,9 +5,9 @@ end
 Events.RegionChanged:Subscribe(function (e)
 	if e.LevelType == LEVELTYPE.CHARACTER_CREATION then
 		if e.State == REGIONSTATE.GAME then
-			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
+			GameHelpers.Net.Broadcast("LLWEAPONEX_OnCharacterCreationStarted")
 		elseif e.State == REGIONSTATE.ENDED then
-			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationFinished", "", nil)
+			GameHelpers.Net.Broadcast("LLWEAPONEX_OnCharacterCreationFinished")
 			GameHelpers.SetScale(Origin.Korvash, 1.1, true)
 		end
 	end

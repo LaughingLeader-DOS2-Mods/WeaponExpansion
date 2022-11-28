@@ -226,9 +226,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 		if markedTarget then
 			local target = GameHelpers.TryGetObject(markedTarget)
 			if target and not GameHelpers.ObjectIsDead(target) then
+				local dist = GameHelpers.Math.GetDistance(target, e.Character)
 				if GetSettings().Global:FlagEquals("LLWEAPONEX_AllowUnlimitedCrossbowArrowSprayRange", false) then
 					local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_ArrowSpray_DistanceLimit", 0)
-					if maxDistance > 0 and GameHelpers.Math.GetDistance(target, e.Character) > maxDistance then
+					if maxDistance > 0 and dist > maxDistance then
 						return
 					end
 				end
@@ -239,8 +240,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 				e.Data.EndPosition = pos
 
 				local angle = GameHelpers.Math.GetRelativeAngle(e.Character, target)
-				--Target is behind the caster
-				if e.Data.HitObject and ((angle >= 120 and angle <= 210) or CharacterCanSee(e.CharacterGUID, target.MyGuid) == 0) then
+				local forceHit = dist >= 30 or ((angle >= 120 and angle <= 210) or CharacterCanSee(e.CharacterGUID, target.MyGuid) == 0)
+				--Target is behind the caster or can't see them
+				if e.Data.HitObject and forceHit then
 					e.Data.HitObject.Target = target.Handle
 					e.Data.HitObject.Position = pos
 					local spos = e.Data.StartPosition
@@ -261,13 +263,29 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 			end
 		end
 	end).SkillProjectileShoot(function (self, e, bonuses)
-		if PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] then
+		local markedTarget = PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID]
+		if markedTarget then
 			e.Data.IgnoreRoof = true
 			e.Data.ForceTarget = true
+
+			local followCameraCharacter = nil
+			if Vars.DebugMode and e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
+				followCameraCharacter = GameHelpers.Character.GetHost()
+			elseif GameHelpers.Character.IsPlayer(e.Character) and GameHelpers.Math.GetDistance(e.Character, markedTarget) >= 25 then
+				followCameraCharacter = e.Character
+			end
+			if followCameraCharacter then
+				local user = GameHelpers.GetUserID(followCameraCharacter)
+				local projectile = e.Data.NetID
+				Ext.OnNextTick(function (e)
+					GameHelpers.Net.PostToUser(user, "LLWEAPONEX_Crossbow_MarkedSpray_FollowProjectile", tostring(projectile))
+				end)
+			end
 		end
 	end).SkillCast(function (self, e, bonuses)
 		local markedTarget = PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID]
 		if markedTarget then
+			CharacterSetForceSynch(markedTarget, 1)
 			Timer.StartObjectTimer("LLWEAPONEX_MarkedSpray_Cleanse", e.Character, 2000, {Target=markedTarget})
 		end
 	end).TimerFinished("LLWEAPONEX_MarkedSpray_Cleanse", function(self, e, bonuses)
@@ -276,6 +294,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 			PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.Data.UUID] = nil
 			if GameHelpers.ObjectExists(markedTarget) then
 				GameHelpers.Status.Remove(markedTarget, "MARKED")
+				CharacterSetForceSynch(markedTarget, 0)
 			end
 		end
 	end, "None").StatusApplied(function (self, e, bonuses)
@@ -517,4 +536,65 @@ if not _ISCLIENT then
 			PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] = nil
 		end
 	end, {MatchArgs={ID=MasteryID.Crossbow}})
+else
+	---@type ComponentHandle|nil
+	local _trackingProjectileHandle = nil
+	local _tickListenerIndex = nil
+
+	local function _GetProjectile()
+		local projectile = Ext.Entity.GetProjectile(_trackingProjectileHandle)
+		if projectile then
+			return projectile
+		end
+		local level = Ext.ClientEntity.GetCurrentLevel()
+		for id,v in pairs(level.EntityManager.ProjectileConversionHelpers.RegisteredProjectiles[level.LevelDesc.LevelName]) do
+			if v.Handle == _trackingProjectileHandle then
+				return v
+			end
+		end
+		return nil
+	end
+
+	---@param e LuaTickEvent
+	local function _FollowProjectile(e)
+		if Ext.Client.GetGameState() ~= "Running" then
+			return
+		end
+		local projectile = _GetProjectile()
+		if projectile then
+			GameHelpers.Utils.SetPlayerCameraPosition(Client:GetCharacter(), {CurrentLookAt=projectile.Translate, TargetLookAt=projectile.Translate})
+		else
+			Ext.Events.Tick:Unsubscribe(_tickListenerIndex)
+			_trackingProjectileHandle = nil
+			Timer.StartOneshot("", 3000, function (_)
+				_tickListenerIndex = nil
+			end)
+		end
+	end
+
+	--local level = Ext.ClientEntity.GetCurrentLevel(); Ext.IO.SaveFile("Dumps/Projectiles_Client.json", Ext.DumpExport(level.EntityManager.ProjectileConversionHelpers.RegisteredProjectiles[level.LevelDesc.LevelName]))
+
+	Ext.RegisterNetListener("LLWEAPONEX_Crossbow_MarkedSpray_FollowProjectile", function (channel, payload, user)
+		if _tickListenerIndex == nil then
+			local netid = tonumber(payload)
+			local projectile = Ext.Entity.GetProjectile(netid)
+			if not projectile then
+				Ext.Utils.PrintError("Failed to get projectile for NetID", netid)
+				local level = Ext.ClientEntity.GetCurrentLevel()
+				for id,v in pairs(level.EntityManager.ProjectileConversionHelpers.RegisteredProjectiles[level.LevelDesc.LevelName]) do
+					if v.NetID == netid then
+						projectile = v
+						break
+					end
+				end
+			end
+			if projectile then
+				Ext.Utils.Print("Found projectile", projectile.NetID)
+				_trackingProjectileHandle = projectile.Handle
+				_tickListenerIndex = Ext.Events.Tick:Subscribe(_FollowProjectile)
+			end
+		end
+	end)
 end
+
+--Ext.IO.SaveFile("Dumps/Projectiles_Client.json", Ext.DumpExport(level.EntityManager.ProjectileConversionHelpers.RegisteredProjectiles[level.LevelDesc.LevelName]))
