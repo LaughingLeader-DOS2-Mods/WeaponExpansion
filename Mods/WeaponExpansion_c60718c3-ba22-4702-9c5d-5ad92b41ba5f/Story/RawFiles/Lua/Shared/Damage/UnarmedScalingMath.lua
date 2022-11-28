@@ -186,7 +186,7 @@ end
 --- @param isDualWielding boolean
 --- @param isOffhand boolean
 function UnarmedHelpers.CalculateWeaponDamage(attacker, weapon, noRandomization, attribute, isDualWielding, isOffhand)
-    local damageList = Ext.Stats.NewDamageList()()
+    local damageList = Ext.Stats.NewDamageList()
 
     local baseMin,baseMax,totalMin,totalMax = CalculateWeaponScaledDamage(attacker, weapon, damageList, noRandomization, isDualWielding, attribute)
 
