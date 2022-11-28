@@ -152,7 +152,7 @@ end
 --- @param highestAttribute string
 --- @return DamageList
 local function CalculateWeaponDamage(attacker, weapon, noRandomization, highestAttribute)
-    local damageList = Ext.NewDamageList()
+    local damageList = Ext.Stats.NewDamageList()()
     CalculateWeaponScaledDamage(attacker, weapon, damageList, noRandomization, highestAttribute)
     Game.Math.ApplyDamageBoosts(attacker, damageList)
     return damageList
@@ -464,7 +464,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
 	local skillDamageType = skill["DamageType"]
 	if isTooltip ~= true then
-		local damageList = Ext.NewDamageList()
+		local damageList = Ext.Stats.NewDamageList()()
 		local mainDmgs = Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, nil, noRandomization, "RogueLore")
 		mainDmgs:Multiply(damageMultipliers)
 		if skillDamageType ~= nil then
@@ -564,7 +564,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 	-- Ext.Utils.Print("================================")
 
 	if isTooltip ~= true then
-		local damageList = Ext.NewDamageList()
+		local damageList = Ext.Stats.NewDamageList()()
 		local mainDmgs = Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, nil, noRandomization, "RogueLore")
 		mainDmgs:Multiply(damageMultipliers)
 		if skillDamageType ~= nil then

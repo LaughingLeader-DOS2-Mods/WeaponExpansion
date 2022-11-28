@@ -13,7 +13,7 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 	if skill.UseWeaponDamage == "Yes"
 	and attackerIsCharacter
 	and attacker.Character:HasTag("LLWEAPONEX_PacifistsWrath_Equipped") then
-		local damageList = Ext.NewDamageList()
+		local damageList = Ext.Stats.NewDamageList()()
 		damageList:Add("Physical", 1)
 		return damageList,"Physical"
 	end

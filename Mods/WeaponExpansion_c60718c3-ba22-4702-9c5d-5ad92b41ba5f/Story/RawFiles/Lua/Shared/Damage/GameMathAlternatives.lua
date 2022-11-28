@@ -28,7 +28,7 @@ end
 --- @param weapon CDivinityStatsItem
 --- @param noRandomization boolean
 local function CalculateWeaponDamage(attacker, weapon, noRandomization)
-    local damageList = Ext.NewDamageList()
+    local damageList = Ext.Stats.NewDamageList()()
 
     CalculateWeaponScaledDamage(attacker, weapon, damageList, noRandomization)
 
@@ -78,7 +78,7 @@ local function GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPo
         end
     end
 
-    local damageList = Ext.NewDamageList()
+    local damageList = Ext.Stats.NewDamageList()()
 
     if damageMultiplier <= 0 then
         return

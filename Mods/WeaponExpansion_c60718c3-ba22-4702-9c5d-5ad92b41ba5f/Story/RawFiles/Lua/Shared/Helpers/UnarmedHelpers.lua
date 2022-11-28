@@ -59,10 +59,10 @@ local function GetEquippedUnarmedArmor(character)
 	-- 		end
 	-- 	end
 	-- end
-	if not isClient and not Ext.OsirisIsCallable() then
+	if not isClient and not Ext.Osiris.IsCallable() then
 		for slot,b in pairs(_SLOTS) do
 			local statItem = character.Stats:GetItemBySlot(slot)
-			if statItem and GameHelpers.CDivinityStatsItemHasTag(statItem, _UNARMEDTAGS) then
+			if statItem and GameHelpers.StatItemHasTag(statItem, _UNARMEDTAGS) then
 				foundItems[#foundItems+1] = statItem
 			end
 		end
