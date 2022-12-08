@@ -213,5 +213,7 @@ Ext.Events.SkillGetDescriptionParam:Subscribe(function (e)
 end, {Priority=101})
 
 Events.GetTextPlaceholder:Subscribe(function (e)
-	return GetPistolBulletEffects(nil, e.Character, false, e.ID)
-end, {ID="LLWEAPONEX_PistolRuneEffects"})
+	if e.Character then
+		e.Result = GetPistolBulletEffects(nil, e.Character, false, e.ID)
+	end
+end, {MatchArgs={ID="LLWEAPONEX_PistolRuneEffects"}})

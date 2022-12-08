@@ -259,8 +259,8 @@ local ringSlots = {"Ring", "Ring2"}
 ---@param character StatCharacter
 ---@param runeBoostParentStat string|nil
 ---@param itemParentStat string
----@param slots string[]|string
----@param currentItem CDivinityStatsItem An existing item (skips trying to find one).
+---@param slots string[]|string|nil
+---@param currentItem CDivinityStatsItem|nil An existing item (skips trying to find one).
 ---@return CDivinityStatsEquipmentAttributesWeapon|nil dynamicStatsBoost
 ---@return string|nil runeBoostStatName
 ---@return ItemRarity|string rarity

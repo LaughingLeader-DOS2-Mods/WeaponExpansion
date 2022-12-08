@@ -103,7 +103,7 @@ end
 --- @param noRandomization boolean
 --- @param ability string
 function Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, offHand, noRandomization, ability)
-    local damageList = Ext.NewDamageList()
+    local damageList = Ext.Stats.NewDamageList()
 
     Math.AbilityScaling.CalculateWeaponScaledDamage(attacker, weapon, damageList, noRandomization, ability)
 

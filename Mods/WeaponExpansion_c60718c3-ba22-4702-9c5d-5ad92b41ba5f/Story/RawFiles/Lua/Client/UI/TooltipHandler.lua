@@ -4,24 +4,17 @@ local function sortTagParams(a,b)
 	return a:upper() < b:upper()
 end
 
----@param skill SkillEventData
----@param character StatCharacter
----@return string
-RegisterListener("GetTooltipSkillDamage", function(skill, character)
-	local paramText = SkillGetDescriptionParam(skill, character, false, "Damage")
+Events.GetTooltipSkillDamage:Subscribe(function (e)
+	local paramText = SkillGetDescriptionParam(e.SkillData, e.Character, false, "Damage")
 	if paramText ~= nil then
-		return paramText
+		e.Result = paramText
 	end
 end)
 
----@param skill SkillEventData
----@param character StatCharacter
----@param param string
----@return string
-RegisterListener("GetTooltipSkillParam", function(skill, character, param)
-	local paramText = SkillGetDescriptionParam(skill, character, false, param)
+Events.GetTooltipSkillParam:Subscribe(function (e)
+	local paramText = SkillGetDescriptionParam(e.SkillData, e.Character, false, e.Param)
 	if paramText ~= nil then
-		return paramText
+		e.Result = paramText
 	end
 end)
 
