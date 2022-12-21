@@ -262,7 +262,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		SetFaction(dummy, "PVP_2")
 		CharacterAddPreferredAiTargetTag(char, "LLWEAPONEX_Test_Target")
 		SetTag(dummy, "LLWEAPONEX_Test_Target")
-		--Try to make the AI priotize using the scroll in combat
+		--Try to make the AI prioritize using the scroll in combat
 		CharacterSetReactionPriority(char, "Combat_AI_MoveSkill", 0)
 		CharacterSetReactionPriority(char, "Combat_AI_Attack", 0)
 		CharacterSetReactionPriority(char, "Combat_AI_CastSkill", 100)

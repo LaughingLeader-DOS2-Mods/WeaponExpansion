@@ -31,7 +31,7 @@ Crossbow	1	Ricochet	If each fork hits, Ricochet is refreshed, one per turn.	√	
 Crossbow	2	Sky Shot	If the target is Knocked Down, this skill deals a critical hit.	√	√
 Crossbow	2	Marksman's Fang	Pin hit targets that are infront of impassable terrain (like a wall) for 1 turn, and deal bonus damage.	√	√
 Crossbow	3	Arrow Spray	If you have Marked a target, each bolt fired will seek that target.	√	√
-Crossbow	4	Reactive Shot	Go invisible after casting this skill, getting a guaranteed backstab on the first target hit.	√	√
+Crossbow	4	Reactive Shot	Go invisible after casting this skill, throwing a tar trap at the target position.	√	√
 Dagger	1	Throwing Knife	The knife thrown has a 25% chance to be coated in poison or explosive oil, dealing bonus damage on hit.	√	❌
 Dagger	2	Backlash	Backlashing to a target you previously hit with Throwing Knife will partially refund the AP cost and refresh the cooldown of Throwing Knife.	√	❌
 Dagger	2	Sawtooth Knife	If the target is already Bleeding, Rupture the wound for bonus damage.	√	❌

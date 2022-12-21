@@ -262,23 +262,3 @@ ENDIF
 	SetVar(_Char, "LeaderLog_Message", _Str)
 	CharacterEvent(_Char, "LeaderLog_Commands_Log")
 	*/
-
-EVENT LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus
-VARS
-	CHARACTER:_Char
-	FLOAT3:_Target
-	FLOAT:_LevelF
-	INT:_Level
-	SKILL:_Skill
-ON
-	OnCharacterEvent(_Char, "LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus")
-ACTIONS
-	Set(_Level, 1)
-IF "c1&c2"
-	CharacterGetStat(_LevelF, _Char, Level)
-	GetVar(_Target, _Char, "LLWEAPONEX_ThrowingKnife_ExplodePosition")
-THEN
-	GetRandom(_Skill, Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison, Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive)
-	Cast(_Level, _LevelF)
-	ExplodeAt(_Target, _Skill, _Level, _Char)
-ENDIF

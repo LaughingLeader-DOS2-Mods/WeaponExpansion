@@ -50,6 +50,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 				PersistentVars.MasteryMechanics.CrossbowRicochetHits[GUID] = nil
 				GameHelpers.Skill.Refresh(e.Character, e.Skill)
 				ObjectSetFlag(GUID, "LLWEAPONEX_Crossbow_RicochetRefreshed", 0)
+				SignalTestComplete(self.ID)
 			else
 				PersistentVars.MasteryMechanics.CrossbowRicochetHits[GUID] = ricoHits
 			end
@@ -57,7 +58,22 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 		end
 	end).TurnEnded("LLWEAPONEX_Crossbow_RicochetRefreshed", function(self, e, bonuses)
 		ObjectClearFlag(e.Object.MyGuid, "LLWEAPONEX_Crossbow_RicochetRefreshed", 0)
-	end, true),
+	end, true).Test(function (test, self)
+		local characters,dummies,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet, TotalDummies=3, TotalCharacters=1,})
+		local character = characters[1]
+		test.Cleanup = function()
+			cleanup()
+			TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakingBonus", character)
+			PersistentVars.MasteryMechanics.CrossbowRicochetHits[character] = nil
+		end
+		test:Wait(250)
+		TeleportTo(character, dummies[1], "", 0, 1, 1)
+		test:Wait(1000)
+		CharacterUseSkill(character, self.Skills[1], dummies[1], 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end),
 	rb:Create("CROSSBOW_STILL_STANCE", {
 		Skills = MasteryBonusManager.Vars.BasicAttack,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_StillStance", "<font color='#77FF33'>If you haven't moved since your last turn, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage with basic attacks and weapon skills on the first attack.</font><br><font color='#FF6633'>This bonus does not trigger on your first turn in combat.</font>"),
@@ -96,6 +112,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 					damageBonus = 1 + (damageBonus * 0.01)
 					e.Data:MultiplyDamage(damageBonus)
 				end
+				SignalTestComplete(self.ID)
 			end
 		end
 	end).Osiris("ObjectTurnStarted", 1, "after", function(char)
@@ -111,13 +128,49 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 		local character = GameHelpers.GetCharacter(char)
 		if character then
 			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = {table.unpack(character.WorldPos)}
+			SignalTestComplete("CROSSBOW_STILL_STANCE_PositionSaved")
 		end
 	end).Osiris("ObjectLeftCombat", 1, "after", function(char)
 		local character = GameHelpers.GetCharacter(char)
 		if character then
 			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = nil
 		end
-	end)
+	end).Test(function (test, self)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		test.Cleanup = function()
+			cleanup()
+			PersistentVars.MasteryMechanics.StillStanceLastPosition[character] = nil
+		end
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		SetFaction(char, "PVP_1")
+		SetFaction(dummy, "PVP_2")
+		CharacterAddPreferredAiTargetTag(char, "LLWEAPONEX_Test_Target")
+		SetTag(dummy, "LLWEAPONEX_Test_Target")
+		--Try to make the AI prioritize skipping their turn
+		CharacterSetReactionPriority(char, "Combat_AI_MoveSkill", 0)
+		CharacterSetReactionPriority(char, "Combat_AI_Attack", 0)
+		CharacterSetReactionPriority(char, "Combat_AI_CastSkill", 0)
+		CharacterSetReactionPriority(char, "Combat_AI_Fallback", 0)
+		GameHelpers.Skill.RemoveAllSkills(char)
+		test:Wait(1000)
+		CharacterSetTemporaryHostileRelation(char, dummy)
+		ApplyStatus(dummy, "PERMAFROST", -1, 1, dummy)
+		test:Wait(1000)
+		ItemTemplateAddTo("06283763-23e8-4ffd-a7c0-3f99d6a45094", char, 6, 0)
+		test:Wait(500)
+		SetCanJoinCombat(char, 1)
+		SetCanFight(char, 1)
+		SetCanJoinCombat(dummy, 1)
+		SetCanFight(dummy, 1)
+		EnterCombat(char, dummy)
+		test:WaitForSignal("CROSSBOW_STILL_STANCE_PositionSaved", 30000)
+		RemoveStatus(dummy, "PERMAFROST")
+		CharacterSetReactionPriority(char, "Combat_AI_Attack", 1000)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end),
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
@@ -131,8 +184,21 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 				local critMultiplier = Game.Math.GetCriticalHitMultiplier(attackerStats.MainWeapon or attackerStats.OffHandWeapon)
 				e.Data:SetHitFlag("CriticalHit", true)
 				e.Data:MultiplyDamage(1 + critMultiplier)
+				SignalTestComplete(self.ID)
 			end
 		end
+	end).Test(function(test, self)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		CharacterSetFightMode(char, 1, 1)
+		ApplyStatus(dummy, "KNOCKED_DOWN", -1, 1, char)
+		test:Wait(1000)
+		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 30000)
+		test:AssertGotSignal(self.ID)
+		return true
 	end),
 
 	rb:Create("CROSSBOW_PINFANG", {
@@ -141,7 +207,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success and GameHelpers.Ext.ObjectIsCharacter(e.Data.TargetObject) then
 			local startPos = e.Data.TargetObject.WorldPos
-			local directionalVector = GameHelpers.Math.GetDirectionalVectorBetweenObjects(e.Data.TargetObject, e.Character, false)
+			local directionalVector = GameHelpers.Math.GetDirectionalVector(e.Data.TargetObject, e.Character)
 			local level = Ext.Entity.GetCurrentLevel()
 			local grid = level.AiGrid
 			
@@ -182,11 +248,24 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 				end
 			end
 
-			if isNextToWall then
+			if isNextToWall or (e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter") and e.Data.TargetObject:HasTag("LLWEAPONEX_MasteryTestCharacter")) then
 				GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.TargetObject, "Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
 				GameHelpers.Status.Apply(e.Data.TargetObject, "LLWEAPONEX_MB_CROSSOW_PINNED", 6.0, false, e.Character)
+				SignalTestComplete(self.ID)
 			end
 		end
+	end).Test(function(test, self)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		CharacterSetFightMode(char, 1, 1)
+		test:Wait(1000)
+		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 30000)
+		test:AssertGotSignal(self.ID)
+		test:AssertEquals(GameHelpers.Status.IsActive(dummy, "LLWEAPONEX_MB_CROSSOW_PINNED"), true, "Failed to apply LLWEAPONEX_MB_CROSSOW_PINNED")
+		return true
 	end),
 })
 
@@ -276,10 +355,12 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 			end
 			if followCameraCharacter then
 				local user = GameHelpers.GetUserID(followCameraCharacter)
-				local projectile = e.Data.NetID
-				Ext.OnNextTick(function (e)
-					GameHelpers.Net.PostToUser(user, "LLWEAPONEX_Crossbow_MarkedSpray_FollowProjectile", tostring(projectile))
-				end)
+				if user then
+					local projectile = e.Data.NetID
+					Ext.OnNextTick(function (e)
+						GameHelpers.Net.PostToUser(user, "LLWEAPONEX_Crossbow_MarkedSpray_FollowProjectile", tostring(projectile))
+					end)
+				end
 			end
 		end
 	end).SkillCast(function (self, e, bonuses)
