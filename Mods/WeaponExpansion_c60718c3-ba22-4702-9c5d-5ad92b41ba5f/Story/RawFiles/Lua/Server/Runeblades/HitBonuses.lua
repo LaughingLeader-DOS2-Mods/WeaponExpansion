@@ -7,36 +7,34 @@ function RunebladeManager.RegisterBonus(statusName, callback)
 	table.insert(RunebladeManager.Bonuses[statusName], callback)
 end
 
-AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_Runeblade", function(tag, attacker, target, data, targetIsObject, skill)
+Events.OnWeaponTagHit:Subscribe(function (e)
 	local statusMap = {}
-	for i,v in pairs(attacker:GetStatusObjects()) do
+	for i,v in pairs(e.Attacker:GetStatusObjects()) do
 		statusMap[v.StatusId] = v
 	end
 	local targetStatusMap = {}
-	if targetIsObject then
-		for i,v in pairs(target:GetStatusObjects()) do
+	if e.TargetIsObject then
+		for i,v in pairs(e.Target:GetStatusObjects()) do
 			targetStatusMap[v.StatusId] = v
 		end
-		GameHelpers.Status.Apply(target, "LLWEAPONEX_PREVENT_DOUBLE_HITS", 6.0, false, attacker)
+		GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_PREVENT_DOUBLE_HITS", 6.0, false, e.Attacker)
 	end
 	for k,v in pairs(RunebladeManager.Bonuses) do
 		if statusMap[k] then
-			InvokeListenerCallbacks(v, k, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
+			InvokeListenerCallbacks(v, k, e.Attacker, e.Target, e.Data, e.TargetIsObject, statusMap, targetStatusMap)
 		end
 	end
-end, false)
+end, {MatchArgs={Tag="LLWEAPONEX_Runeblade"}})
 
-local function CanApplyStatus(target, attacker)
-	if GameHelpers.Character.IsEnemy(target, attacker) or IsTagged(target, "LeaderLib_FriendlyFireEnabled") == 1 then
-		return true
-	end
-	return false
+local function _CanApplyStatus(target, attacker)
+	return GameHelpers.Character.CanAttackTarget(target, attacker, true)
 end
 
 local function RollForProc(character, chance, skipLogging)
-	local roll = Ext.Random(0,999)
+	local roll = Ext.Utils.Random(0,999)
+	--Roll with advantage
 	if roll > chance then
-		roll = Ext.Random(0,999)
+		roll = Ext.Utils.Random(0,999)
 	end
 
 	local chanceTextAmount = Ext.Utils.Round((chance/999) * 100)
@@ -54,7 +52,7 @@ local function RollForProc(character, chance, skipLogging)
 end
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
-	GameHelpers.Status.Apply(target, "BURNING", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+	GameHelpers.Status.Apply(target, "BURNING", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
@@ -64,11 +62,11 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST", functi
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
-	GameHelpers.Status.Apply(target, "WET", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+	GameHelpers.Status.Apply(target, "WET", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
-	GameHelpers.Status.Apply(target, "POISONED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+	GameHelpers.Status.Apply(target, "POISONED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
@@ -77,12 +75,13 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING", function
 		GameHelpers.Status.Apply(target, "LLWEAPONEX_EVAPORATE_FIRE", 0.0, false, attacker)
 	end
 	if RollForProc(attacker, GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_Searing_Chance", 401, true)) then
-		GameHelpers.Status.Apply(target, "LLWEAPONEX_WATER_BURN", 12.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "LLWEAPONEX_WATER_BURN", 12.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_DEATH", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
-	if targetIsObject and GameHelpers.Character.IsEnemy(attacker, target) then
+	---@cast target EsvCharacter
+	if targetIsObject and GameHelpers.Ext.ObjectIsCharacter(target) and GameHelpers.Character.IsEnemy(attacker, target) then
 		if not targetStatusMap.LLWEAPONEX_REVENANT
 		and IsBoss(target.MyGuid) == 0 
 		and not targetStatusMap.LLWEAPONEX_DEATH_SENTENCE
@@ -125,7 +124,7 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION", funct
 			GameHelpers.Status.Apply(target, "WET", 6.0, false, attacker)
 		end
 	else
-		GameHelpers.Status.Apply(target, "WET", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "WET", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
@@ -146,10 +145,10 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_INFERNO", function
 			status.CurrentLifeTime = math.min(Ext.ExtraData.LLWEAPONEX_Runeblade_Inferno_MaxStacks*6.0, nextDuration)
 			status.RequestClientSync = true
 		else
-			GameHelpers.Status.Apply(target, "BURNING", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+			GameHelpers.Status.Apply(target, "BURNING", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 		end
 	else
-		GameHelpers.Status.Apply(target, "BURNING", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "BURNING", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
@@ -164,10 +163,10 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM", function(s
 			status.CurrentLifeTime = math.min(Ext.ExtraData.LLWEAPONEX_Runeblade_Venom_MaxStacks*6.0, nextDuration)
 			status.RequestClientSync = true
 		else
-			GameHelpers.Status.Apply(target, "POISONED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+			GameHelpers.Status.Apply(target, "POISONED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 		end
 	else
-		GameHelpers.Status.Apply(target, "POISONED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "POISONED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
@@ -175,17 +174,17 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR", functi
 	if targetIsObject and targetStatusMap.LLWEAPONEX_PREVENT_DOUBLE_HITS then
 		return
 	end
-	GameHelpers.Status.Apply(attacker, "LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+	GameHelpers.Status.Apply(attacker, "LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
-	GameHelpers.Status.Apply(target, "LLWEAPONEX_SOUL_BURN_PROC", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+	GameHelpers.Status.Apply(target, "LLWEAPONEX_SOUL_BURN_PROC", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
 	local chance = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_Blood_Chance", 201, true)
 	if RollForProc(attacker, chance) then
-		GameHelpers.Status.Apply(target, "LLWEAPONEX_MAGIC_BLEEDING_CHECK", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "LLWEAPONEX_MAGIC_BLEEDING_CHECK", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
@@ -199,21 +198,21 @@ end)
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
 	local chance = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_Avalanche_Chance", 401, true)
 	if RollForProc(attacker, chance) then
-		GameHelpers.Status.Apply(target, "LLWEAPONEX_RUNEBLADE_AVALANCHE_SNOW", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "LLWEAPONEX_RUNEBLADE_AVALANCHE_SNOW", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
 	local chance = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_Earth_Chance", 201, true)
 	if RollForProc(attacker, chance) then
-		GameHelpers.Status.Apply(target, "SLOWED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "SLOWED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_QUAKE", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
 	local chance = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_Quake_Chance", 201, true)
 	if RollForProc(attacker, chance) then
-		GameHelpers.Status.Apply(target, "LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
@@ -278,14 +277,14 @@ end)
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
 	local chance = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_Tar_Chance", 401, true)
 	if RollForProc(attacker, chance) then
-		GameHelpers.Status.Apply(target, "LLWEAPONEX_TARRED", 12.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "LLWEAPONEX_TARRED", 12.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
 	local chance = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_BloodDisease_Chance", 401, true)
 	if RollForProc(attacker, chance) then
-		GameHelpers.Status.Apply(target, "INFECTIOUS_DISEASED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+		GameHelpers.Status.Apply(target, "INFECTIOUS_DISEASED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 	end
 end)
 
@@ -315,7 +314,7 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS", function(sta
 	if not statusMap.LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN then
 		local chance = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_Gas_Chance", 501, true)
 		if RollForProc(attacker, chance) then
-			local pos = GameHelpers.Math.GetPosition(target, false, attacker.WorldPos)
+			local pos = GameHelpers.Math.GetPosition(target, false, attacker.WorldPos) --[[@as vec3]]
 			local x,y,z = table.unpack(pos)
 			local step = 2
 			if GameHelpers.Surface.HasSurface(x,z,"Poison", 3.0, true, 1) then
@@ -324,8 +323,7 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS", function(sta
 			else
 				CharacterStatusText(attacker.MyGuid, "LLWEAPONEX_StatusText_GasCreation")
 			end
-			---@type EsvCreatePuddleAction
-			local surf = Ext.CreateSurfaceAction("CreatePuddleAction")
+			local surf = Ext.CreateSurfaceAction("CreatePuddleAction") --[[@as EsvCreatePuddleAction]]
 			surf.OwnerHandle = attacker.Handle
 			surf.Duration = 18.0
 			surf.StatusChance = 1.0
@@ -356,7 +354,7 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE", function(sta
 		if targetIsObject and targetStatusMap.CHILLED then
 			GameHelpers.Status.Apply(target, "FROZEN", 6.0, false, attacker)
 		else
-			GameHelpers.Status.Apply(target, "CHILLED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+			GameHelpers.Status.Apply(target, "CHILLED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 		end
 	end
 end)
@@ -374,7 +372,7 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH", func
 	else
 		local chance = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_BloodEarth_Chance", 101, true)
 		if RollForProc(attacker, chance) then
-			GameHelpers.Status.Apply(target, "ENTANGLED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)
+			GameHelpers.Status.Apply(target, "ENTANGLED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, _CanApplyStatus)
 		end
 	end
 end)

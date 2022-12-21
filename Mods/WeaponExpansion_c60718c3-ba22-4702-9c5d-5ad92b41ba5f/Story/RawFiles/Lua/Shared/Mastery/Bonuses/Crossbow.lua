@@ -228,7 +228,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 			if target and not GameHelpers.ObjectIsDead(target) then
 				local dist = GameHelpers.Math.GetDistance(target, e.Character)
 				if GetSettings().Global:FlagEquals("LLWEAPONEX_AllowUnlimitedCrossbowArrowSprayRange", false) then
-					local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_ArrowSpray_DistanceLimit", 0)
+					local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_ArrowSpray_DistanceLimit", 20)
 					if maxDistance > 0 and dist > maxDistance then
 						return
 					end
