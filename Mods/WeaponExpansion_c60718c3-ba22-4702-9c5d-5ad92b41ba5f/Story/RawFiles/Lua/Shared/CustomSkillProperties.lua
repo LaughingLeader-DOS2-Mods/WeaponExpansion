@@ -118,7 +118,7 @@ function(prop, attacker, position, areaRadius, isFromItem, skill, hit, skillId)
 	if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
 		local duration = math.max(prop.Arg2 or 6, 6)
 		local radius = math.max(areaRadius, math.max(skill.StatsObject.AreaRadius or 1, skill.StatsObject.ExplodeRadius or 1))
-		RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
+		RunebladeManager.AbsorbSurface.Run(attacker, position, radius, duration)
 	end
 end,
 function(prop, attacker, target, position, isFromItem, skill, hit, skillId)
@@ -126,7 +126,7 @@ function(prop, attacker, target, position, isFromItem, skill, hit, skillId)
 	if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
 		local duration = math.max(prop.Arg2 or 6, 6)
 		local radius = math.max(skill.StatsObject.AreaRadius or 1, skill.StatsObject.ExplodeRadius or 1)
-		RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
+		RunebladeManager.AbsorbSurface.Run(attacker, position, radius, duration)
 	end
 end)
 

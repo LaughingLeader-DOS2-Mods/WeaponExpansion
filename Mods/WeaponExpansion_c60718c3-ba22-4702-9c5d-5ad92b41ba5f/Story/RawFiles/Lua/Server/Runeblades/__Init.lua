@@ -22,11 +22,10 @@ StatusManager.Subscribe.Applied("LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK",
 end)
 
 Timer.Subscribe("LLWEAPONEX_ShockedResistanceCheck", function (e)
-	if ObjectExists(e.Data.UUID) == 1 and e.Data.Object then
-		local target = e.Data.Object
-		---@cast target EsvCharacter
+	if e.Data.Object then
+		local target = e.Data.Object --[[@as EsvCharacter]]
 		if not target:GetStatus("LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE") and target:GetStatus("STUNNED") then
-			GameHelpers.Status.Apply(target, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE", e.Data.Duration, false, e.Data.SourceGUID or target)
+			GameHelpers.Status.Apply(target, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE", e.Data.Duration or 6.0, false, e.Data.SourceGUID or target)
 		end
 		GameHelpers.Status.Remove(target, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK")
 	end
