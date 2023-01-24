@@ -84,7 +84,7 @@ if not Ext.IsClient() then
 		if not Mastery.IsActive(character, MasteryID.Rapier) then
 			return false
 		end
-		return HasEmptyHand(character, false)
+		return HasEmptyHands(character, false)
 	end
 
 	Timer.Subscribe("LLWEAPONEX_Rapier_CheckForEmptyHand", function (e)

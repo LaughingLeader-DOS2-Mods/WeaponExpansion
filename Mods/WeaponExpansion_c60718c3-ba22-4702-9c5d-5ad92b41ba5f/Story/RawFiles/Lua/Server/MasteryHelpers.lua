@@ -1,45 +1,30 @@
-
-
-local function HasMinimumMasteryLevel(uuid,mastery,minLevel)
-	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience)
-	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, mastery, nil, nil)
-	if dbEntry ~= nil then
-		local masteryLevel = dbEntry[1][3]
-		if masteryLevel ~= nil and masteryLevel >= minLevel then
-			return masteryLevel
-		end
-	end
-end
-
-Ext.NewQuery(HasMinimumMasteryLevel, "LLWEAPONEX_Ext_QRY_HasMinimumMasteryLevel", "[in](CHARACTERGUID)_Character, [in](STRING)_Mastery, [in](INTEGER)_MinLevel, [out](INTEGER)_Level")
-
----@param uuid CharacterParam
+---@param guid CharacterParam
 ---@param mastery string
 ---@param level integer
-function TagMasteryRanks(uuid,mastery,level)
-	uuid = GameHelpers.GetUUID(uuid)
+function TagMasteryRanks(guid,mastery,level)
+	local guid = GameHelpers.GetUUID(guid)
 	if level > 0 then
 		for i=1,level do
 			local tag = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, i)
-			SetTag(uuid, tag)
+			SetTag(guid, tag)
 		end
 	end
 end
 
----@param uuid CharacterParam
+---@param guid CharacterParam
 ---@param mastery string
-function ClearAllMasteryRankTags(uuid,mastery)
+function ClearAllMasteryRankTags(guid,mastery)
 	local maxRank = Mastery.Variables.MaxRank
 	if mastery then
 		for i=0,maxRank do
 			local tag = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, i)
-			ClearTag(uuid, tag)
+			ClearTag(guid, tag)
 		end
 	else
 		for mastery,_ in pairs(Masteries) do
 			for i=0,maxRank do
 				local tag = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, i)
-				ClearTag(uuid, tag)
+				ClearTag(guid, tag)
 			end
 		end
 	end
@@ -106,47 +91,14 @@ function IsMeleeWeaponSkill(skill)
 	return false
 end
 
---- @param uuid string
---- @param mastery string
-function OnMasteryActivated(uuid,mastery)
-	uuid = StringHelpers.GetUUID(uuid)
-	PrintDebug("[WeaponExpansion] Activated mastery ["..mastery.."] on ["..uuid.."].")
-	local character = GameHelpers.GetCharacter(uuid)
-	if character then
-		Mastery.Events.MasteryChanged:Invoke({
-			ID = mastery,
-			Character = character,
-			CharacterGUID = character.MyGuid,
-			Enabled = true
-		})
-	end
-	MasterySystem.TagMasteryRanks(uuid, mastery)
-end
-
---- @param uuid string
---- @param mastery string
-function OnMasteryDeactivated(uuid,mastery)
-	ClearTag(uuid,mastery)
-	PrintDebug("[WeaponExpansion] Cleared mastery tag ["..mastery.."] on ["..uuid.."].")
-	local character = GameHelpers.GetCharacter(uuid)
-	if character then
-		Mastery.Events.MasteryChanged:Invoke({
-			ID = mastery,
-			Character = character,
-			CharacterGUID = character.MyGuid,
-			Enabled = false
-		})
-	end
-end
-
---- @param uuid string
+--- @param guid string
 --- @param mastery string
 --- @param minLevel integer
-function HasMasteryLevel(uuid,mastery,minLevel)
-	if type(uuid) == "userdata" then
-		uuid = uuid.MyGuid
+function HasMasteryLevel(guid,mastery,minLevel)
+	if type(guid) == "userdata" then
+		guid = guid.MyGuid
 	end
-	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, mastery, nil, nil)
+	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(guid, mastery, nil, nil)
 	if dbEntry ~= nil then
 		local playerEntry = dbEntry[1]
 		if playerEntry ~= nil then
@@ -158,8 +110,8 @@ function HasMasteryLevel(uuid,mastery,minLevel)
 	return false
 end
 
-function HasMasteryRequirement_QRY(call, uuid, tag)
-	return Mastery.HasMasteryRequirement(GameHelpers.GetCharacter(uuid), tag)
+function HasMasteryRequirement_QRY(call, guid, tag)
+	return Mastery.HasMasteryRequirement(GameHelpers.GetCharacter(guid), tag)
 end
 
 ---@param character CharacterParam

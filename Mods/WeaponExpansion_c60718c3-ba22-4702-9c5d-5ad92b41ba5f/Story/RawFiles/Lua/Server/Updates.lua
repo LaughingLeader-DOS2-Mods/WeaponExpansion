@@ -5,15 +5,46 @@ local removeSkills = {
 	Shout_LLWEAPONEX_Prepare_BalrinsAxe = true,
 }
 
+function MasterySystem.MigrateMasteryExperience()
+	local migratedData = false
+	for _,db in pairs(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(nil,nil,nil,nil)) do
+		local guid,mastery,level,experience = table.unpack(db)
+		---@cast guid string
+		---@cast mastery string
+		---@cast level integer
+		---@cast experience integer
+		guid = StringHelpers.GetUUID(guid)
+		local player = GameHelpers.GetCharacter(guid)
+		if player then
+			if PersistentVars.MasteryExperience[guid] == nil then
+				PersistentVars.MasteryExperience[guid] = {}
+			end
+			local masteryData = PersistentVars.MasteryExperience[guid] --[[@as MasteryExperienceData]]
+			if masteryData[mastery] == nil or level > masteryData.Level then
+				masteryData[mastery] = {
+					Experience = experience,
+					Level = level
+				}
+				migratedData = true
+			end
+		end
+	end
+	Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Delete(nil,nil,nil,nil)
+	if migratedData then
+		fprint(LOGLEVEL.TRACE, "[WeaponExpansion] Migrated mastery experience to lua:")
+		fprint(LOGLEVEL.TRACE, Ext.DumpExport(PersistentVars.MasteryExperience))
+	end
+end
+
 ---@param last integer
 ---@param next integer
 RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	print("[LLWEAPONEX:Loaded]", last, "=>", next)
 	if last < 152764417 then
 		ItemLockUnEquip("40039552-3aae-4beb-8cca-981809f82988", 0)
-		ItemToInventory("40039552-3aae-4beb-8cca-981809f82988", "80976258-a7a5-4430-b102-ba91a604c23f")
+		ItemToInventory("40039552-3aae-4beb-8cca-981809f82988", "80976258-a7a5-4430-b102-ba91a604c23f", 1, 0, 0)
 		ItemLockUnEquip("927669c3-b885-4b88-a0c2-6825fbf11af2", 0)
-		ItemToInventory("927669c3-b885-4b88-a0c2-6825fbf11af2", "80976258-a7a5-4430-b102-ba91a604c23f")
+		ItemToInventory("927669c3-b885-4b88-a0c2-6825fbf11af2", "80976258-a7a5-4430-b102-ba91a604c23f", 1, 0, 0)
 	end
 
 	if last < 268435456 then
@@ -39,21 +70,25 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 		end)
 	end
 
+	if last < 268435456 or Vars.LeaderDebugMode then
+		MasterySystem.MigrateMasteryExperience()
+	end
+
 	for player in GameHelpers.Character.GetPlayers() do
-		EquipmentManager.CheckWeaponRequirementTags(player)
+		---@cast player EsvCharacter
+		EquipmentManager:CheckWeaponRequirementTags(player)
 		if HasActiveStatus(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then
 			GameHelpers.Status.Remove(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
 		end
 
 		Osi.PROC_StopLoopEffect(player.MyGuid, "LLWEAPONEX.FX.Quiver")
 
-		if IsTagged(player.MyGuid, "LLWEAPONEX_Quiver_Equipped") == 1 and last < 153026560 then
-			local quiver = CharacterGetEquippedItem(player.MyGuid, "Belt")
-			if quiver ~= nil then
-				ItemResetChargesToMax(quiver)
+		if player:HasTag("LLWEAPONEX_Quiver_Equipped") and last < 153026560 then
+			for quiver in GameHelpers.Character.GetTaggedItems(player, "LLWEAPONEX_Quiver_Equipped") do
+				ItemResetChargesToMax(quiver.MyGuid)
 			end
-			if CharacterIsInCombat(player.MyGuid) == 0 then
-				Quiver_RemoveTempArrows(player.MyGuid)
+			if not GameHelpers.Character.IsInCombat(player) then
+				SkillConfiguration.Quivers.RemoveTempArrows(player)
 			end
 		end
 
@@ -134,6 +169,13 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_RemoteMines_Templates", 1)
 	Osi.LeaderLib_Array_ClearArray("LLWEAPONEX_Demolition_BonusSkillListQueue")
 
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponMastery_MasteryVariables", 4)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponMastery_MasteryLevelTags", 3)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponMastery_MasteryCap", 1)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponMastery_Progression", 4)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponMastery_Flags", 4)
+
 	Osi.DB_LeaderLib_Skills_StatusToggleSkills:Delete("Shout_LLWEAPONEX_Rapier_DuelistStance", nil, nil, nil, nil)
 	Osi.LeaderLib_Statuses_Clear_Group("WeaponExpansion")
 
@@ -159,4 +201,6 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_10_BasilusDagger")
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_11_Blunderbuss")
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_10_DemolitionBackpack")
+	
+	Osi.LeaderLib_GameScripts_ClearScriptsForGroup("WeaponExpansion")
 end)

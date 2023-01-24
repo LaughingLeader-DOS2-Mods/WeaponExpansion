@@ -3,13 +3,9 @@ local function IgnoreCharacter(uuid)
 end
 
 Events.RegionChanged:Subscribe(function (e)
-	if e.LevelType == LEVELTYPE.CHARACTER_CREATION then
-		if e.State == REGIONSTATE.GAME then
-			GameHelpers.Net.Broadcast("LLWEAPONEX_OnCharacterCreationStarted")
-		elseif e.State == REGIONSTATE.ENDED then
-			GameHelpers.Net.Broadcast("LLWEAPONEX_OnCharacterCreationFinished")
-			GameHelpers.SetScale(Origin.Korvash, 1.1, true)
-		end
+	if e.LevelType == LEVELTYPE.CHARACTER_CREATION and e.State == REGIONSTATE.ENDED then
+		GameHelpers.Net.Broadcast("LLWEAPONEX_OnCharacterCreationFinished")
+		GameHelpers.SetScale(Origin.Korvash, 1.1, true)
 	end
 end)
 
@@ -164,9 +160,6 @@ Events.Initialized:Subscribe(function(e)
 	if not StringHelpers.IsNullOrEmpty(region) then
 		if IsGameLevel(region) == 1 then
 			Timer.Start("LLWEAPONEX_InitUniques", 500)
-		end
-		if IsCharacterCreationLevel(region) == 1 then
-			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
 		end
 	end
 	if PersistentVars.AttributeRequirementChanges then

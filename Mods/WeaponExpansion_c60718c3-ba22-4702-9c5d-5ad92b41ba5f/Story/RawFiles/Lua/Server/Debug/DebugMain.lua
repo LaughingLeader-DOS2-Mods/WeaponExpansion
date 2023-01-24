@@ -193,8 +193,8 @@ if Ext.IsDeveloperMode() then
     Ext.RegisterConsoleCommand("weaponex_masterall", function(call)
         local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
         for mastery,masterData in pairs(Masteries) do
-            --local rank = Ext.Random(1,4)
-            local rank = 4--Ext.Random(1,4)
+            --local rank = Ext.Utils.Random(1,4)
+            local rank = 4--Ext.Utils.Random(1,4)
             local xp = 0
             if rank > 0 then
                 if rank >= 4 then
@@ -203,18 +203,18 @@ if Ext.IsDeveloperMode() then
                     local rankData = Mastery.Variables.RankVariables[rank]
                     local nextRankData = Mastery.Variables.RankVariables[rank+1]
                     if rankData.Amount > 0 then
-                        xp = Ext.Random(rankData.Required, nextRankData.Required - 1)
+                        xp = Ext.Utils.Random(rankData.Required, nextRankData.Required - 1)
                     else
                         xp = rankData.Required
                     end
                 end
             else
-                xp = Ext.Random(0, Mastery.Variables.RankVariables[1].Required)
+                xp = Ext.Utils.Random(0, Mastery.Variables.RankVariables[1].Required)
             end
-            Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,rank,xp)
+            MasterySystem.SetMasteryExperience(host,mastery,rank,xp)
             TagMasteryRanks(host, mastery, rank)
         end
-        Ext.Dump(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(host,nil,nil,nil))
+        Ext.Dump(PersistentVars.MasteryExperience)
     end)
 
     local function Debug_TradeTest(command, effect, bone, target)

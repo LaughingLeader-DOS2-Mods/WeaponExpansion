@@ -267,11 +267,6 @@ IsTagged(_OffhandRuneblade, _Tag, 1)
 THEN
 DB_NOOP(1);
 
-PROC
-LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Char, "LLWEAPONEX_Runeblade")
-THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_Runeblade_RuneActive", 0);
-
 IF
 ItemUnEquipped(_Runeblade, _Char)
 AND

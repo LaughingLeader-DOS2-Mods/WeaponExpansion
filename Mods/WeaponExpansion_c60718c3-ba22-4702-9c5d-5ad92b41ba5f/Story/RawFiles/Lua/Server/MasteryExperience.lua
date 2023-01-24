@@ -2,6 +2,23 @@ if MasterySystem == nil then
 	MasterySystem = {}
 end
 
+---@param player CharacterParam
+---@param mastery string
+---@param level integer
+---@param totalExperience integer
+function MasterySystem.SetMasteryExperience(player, mastery, level, totalExperience)
+	local guid = GameHelpers.GetUUID(player)
+	if guid then
+		if PersistentVars.MasteryExperience[guid] == nil then
+			PersistentVars.MasteryExperience[guid] = {}
+		end
+		PersistentVars.MasteryExperience[guid][mastery] = {
+			Level = level,
+			Experience = totalExperience
+		}
+	end
+end
+
 --- Callback for when a character's mastery levels up.
 --- @param player EsvCharacter
 --- @param mastery string
@@ -70,7 +87,7 @@ function AddMasteryExperience(player,mastery,expGain,skipFlagCheck)
 				fprint(LOGLEVEL.WARNING, "[LLWEAPONEX] Mastery (%s) XP (%s) => (%s) [%s}", mastery, currentExp or 0, nextExp or 0, GameHelpers.GetDisplayName(player))
 			end
 
-			Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(playerGUID, mastery, nextLevel, nextExp)
+			MasterySystem.SetMasteryExperience(playerGUID, mastery, nextLevel, nextExp)
 
 			if nextLevel > currentLevel then
 				MasteryLeveledUp(player, mastery, currentLevel, nextLevel)

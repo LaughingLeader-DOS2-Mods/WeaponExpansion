@@ -2,74 +2,8 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 KBSECTION
-//REGION UPDATES
-PROC
-LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
-AND
-_LastVersion < 152567808
-THEN
-SysClear("DB_LLWEAPONEX_Equipment_TrackedItems", 2);
-SysClear("DB_LLWEAPONEX_Equipment_ActiveTags", 3);
-//END_REGION
 
-//REGION TRACK_UNARMED
-PROC
-LLWEAPONEX_Equipment_TrackUnarmed((CHARACTERGUID)_Char)
-THEN
-DB_LLWEAPONEX_Equipment_ActiveTags(_Char, "LLWEAPONEX_Unarmed", NULL_00000000-0000-0000-0000-000000000000);
-LLWEAPONEX_WeaponMastery_TrackMastery(_Char, NULL_00000000-0000-0000-0000-000000000000, "LLWEAPONEX_Unarmed");
-SetTag(_Char, "LLWEAPONEX_Unarmed");
-//END_REGION
-
-//REGION BOOST_SWAP_TIMER
-PROC
-LLWEAPONEX_Items_SaveGeneratedItem((ITEMGUID)_Item)
-THEN
-DB_LLWEAPONEX_Items_Temp_Generated(_Item);
-
-IF
-TimerFinished("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
-AND
-DB_LLWEAPONEX_Items_Temp_Generated(_Item)
-AND
-GetUUID(_Item, _UUID)
-THEN
-NOT DB_LLWEAPONEX_Items_Temp_Generated(_Item);
-NRD_ModCall("WeaponExpansion", "SwapDeltaMods", _UUID);
-//END_REGION
-
-//REGION TRACK_EQUIPMENT
-PROC
-LLWEAPONEX_Equipment_TrackItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (STRING)_EquippedTag, (INTEGER)_IsPlayer)
-THEN
-DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType);
-DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _EquippedTag, _Item);
-
-PROC
-LLWEAPONEX_Equipment_ClearItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_IsPlayer)
-AND
-DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType)
-THEN
-NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType);
-LLWEAPONEX_Equipment_OnTaggedItemUnEquipped(_Char, _Item, _WeaponType, _IsPlayer);
-
-PROC
-LLWEAPONEX_Equipment_ClearItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_IsPlayer)
-AND
-DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item)
-THEN
-NOT DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item);
-LLWEAPONEX_Equipment_Internal_CheckTags(_Char, _Tag);
-
-PROC
-LLWEAPONEX_Equipment_Internal_CheckTags((CHARACTERGUID)_Char, (STRING)_Tag)
-AND
-NOT DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _)
-THEN
-ClearTag(_Char, _Tag);
-//END_REGION
-
-//REGION TAG_EQUIPPED_EVENTS
+//REGION PROC_EVENTS
 PROC
 LLWEAPONEX_Equipment_OnTaggedItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (INTEGER)_IsPlayer)
 THEN
@@ -81,59 +15,11 @@ AND
 DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, "LLWEAPONEX_Override1", _Tag)
 THEN
 LLWEAPONEX_AnimationSetOverride_Clear(_Char);
-//END_REGION
 
-//REGION TEMPLATE_EVENTS
 PROC
 LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 THEN
 DB_NOOP(1);
-//END_REGION
-
-//REGION CLEANUP
-PROC
-LLWEAPONEX_Equipment_Internal_CleanupEntry((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1, 1)
-AND
-GetTemplate(_Item, _Template)
-THEN
-LLWEAPONEX_OnItemTemplateUnEquipped(_Char, _Item, _Template);
-
-PROC
-LLWEAPONEX_Equipment_Internal_CleanupEntry((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1, (INTEGER)_ItemExists)
-AND
-CharacterIsPlayer(_Char, _A)
-AND
-CharacterGameMaster(_Char, _B)
-AND
-IntegerMax(_A, _B, 1)
-THEN
-LLWEAPONEX_Equipment_ClearItem(_Char, _Item, 1);
-
-PROC
-LLWEAPONEX_Equipment_Internal_CleanupEntry((CHARACTERGUID)_Char, (ITEMGUID)_Item, 0, (INTEGER)_ItemExists)
-THEN
-LLWEAPONEX_Equipment_ClearItem(_Char, _Item, 1);
-
-PROC
-LLWEAPONEX_Equipment_Internal_ClearEntries((CHARACTERGUID)_Char, (ITEMGUID)_Item)
-AND
-DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType)
-THEN
-NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType);
-
-PROC
-LLWEAPONEX_Equipment_Internal_ClearEntries((CHARACTERGUID)_Char, (ITEMGUID)_Item)
-AND
-DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item)
-THEN
-NOT DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item);
-
-PROC
-LLWEAPONEX_Equipment_Internal_ClearEntries((CHARACTERGUID)_Char, (ITEMGUID)_Item)
-AND
-DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _Override, _Tag)
-THEN
-NOT DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _Override, _Tag);
 //END_REGION
 EXITSECTION
 ENDEXITSECTION

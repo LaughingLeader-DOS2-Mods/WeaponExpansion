@@ -57,31 +57,6 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_20_ListenForStat
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_60_UniqueManager", "LLWEAPONEX_UniqueManagerActive");
 
 //END_REGION
-
-//REGION UPDATES
-PROC
-LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
-AND
-_LastVersion < 153157632
-THEN
-LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_01_WM_Firearms");
-
-PROC
-LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
-THEN
-LLWEAPONEX_ToggleSettings_RegisterScripts();
-
-PROC
-LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
-AND
-DB_IsPlayer(_Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery)
-AND
-DB_LeaderLib_ToggleScripts_Registered(_GoalTitle, _Mastery, _IsTag)
-THEN
-LeaderLib_ToggleScripts_EnableScriptForObject(_Player, _Mastery, "WeaponExpansion");
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

@@ -1,5 +1,9 @@
 Ext.Require("BootstrapShared.lua")
 
+---@class MasteryExperienceData
+---@field Level integer
+---@field Experience integer
+
 ---@class WeaponExpansionVars
 local defaultPersistentVars = {
     SkillData = {
@@ -95,6 +99,9 @@ local defaultPersistentVars = {
     ---Character GUID to Mastery ID -> Bool
     ---@type table<GUID,table<string, boolean>>
     ActiveMasteries = {},
+    ---Character GUID to Mastery ID -> MasteryExperienceData
+    ---@type table<GUID,table<string, MasteryExperienceData>>
+    MasteryExperience = {},
 }
 
 ---@type WeaponExpansionVars
@@ -121,10 +128,6 @@ BonusSkills = {}
 
 if SkillConfiguration == nil then SkillConfiguration = {} end
 SkillConfiguration.TempData = {RecalculatedUnarmedSkillDamage = {}}
-
-if MasterySystem == nil then
-	MasterySystem = {}
-end
 
 ItemProcessor = {}
 
@@ -166,7 +169,7 @@ Ext.Require("Server/Origins/Uniques.lua")
 Ext.Require("Shared/Mastery/_Init.lua")
 Ext.Require("Server/Debug/ConsoleCommands.lua")
 Ext.Require("Server/Updates.lua")
-if Ext.IsDeveloperMode() then
+if Ext.Debug.IsDeveloperMode() then
     Ext.Require("Server/Debug/DebugMain.lua")
 end
 
@@ -176,7 +179,7 @@ Timer.Subscribe("LLWEAPONEX_ClearDisableArmorDamageConversion", function (e)
     end
 end)
 
----@param e EsvLuaBeforeCharacterApplyDamageEventParams
+---@param e EsvLuaBeforeCharacterApplyDamageEvent
 local function BeforeCharacterApplyDamage(e)
     if not e.Target:HasTag("LLWEAPONEX_DisableArmorDamageConversion") then
         local magicDamage = e.Hit.DamageList:GetByType("Magic")
@@ -193,22 +196,22 @@ local function BeforeCharacterApplyDamage(e)
 end
 
 --Make Magic/Corrosive damage get reduced like regular damage
-Ext.AddPathOverride("Mods/Kalavinkas_Combat_Enhanced_e844229e-b744-4294-9102-a7362a926f71/Story/RawFiles/Goals/KCE_CoreRules_Story.txt", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/KCE_CoreRules_Story.txt")
+Ext.IO.AddPathOverride("Mods/Kalavinkas_Combat_Enhanced_e844229e-b744-4294-9102-a7362a926f71/Story/RawFiles/Goals/KCE_CoreRules_Story.txt", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/KCE_CoreRules_Story.txt")
 
 Ext.Events.SessionLoaded:Subscribe(function(e)
-    if not Ext.IsModLoaded(MODID.ArmorMitigation) then
+    if not Ext.Mod.IsModLoaded(MODID.ArmorMitigation) then
         Ext.Utils.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
         Ext.Events.BeforeCharacterApplyDamage:Subscribe(BeforeCharacterApplyDamage)
     end
 
     -- Enemy Upgrade Overhaul
-    if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
+    if Ext.Mod.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
         Mods.EnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
         Mods.EnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end
 
     -- Super Enemy Upgrade Overhaul
-    if Ext.IsModLoaded("e21fcd37-daec-490d-baec-f6f3e83f1ac9") then
+    if Ext.Mod.IsModLoaded("e21fcd37-daec-490d-baec-f6f3e83f1ac9") then
         Mods.SuperEnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
         Mods.SuperEnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end

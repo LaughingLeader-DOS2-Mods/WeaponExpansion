@@ -111,13 +111,11 @@ local function CheckRequirementTags(character, item, otherHand)
 			if self:CheckScoundrelTags(character, item) or (otherHand and self:CheckScoundrelTags(character, otherHand)) then
 				if character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
 					ClearTag(character.MyGuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-					PrintDebug("ClearTag LLWEAPONEX_CannotUseScoundrelSkills", character.MyGuid)
 					return true
 				end
 			else
 				if not character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
 					SetTag(character.MyGuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-					PrintDebug("SetTag LLWEAPONEX_CannotUseScoundrelSkills", character.MyGuid)
 					return true
 				end
 			end
@@ -141,8 +139,6 @@ function EquipmentManager:CheckWeaponRequirementTags(character)
 	local mainhand = CharacterGetEquippedItem(character.MyGuid, "Weapon")
 	local offhand = CharacterGetEquippedItem(character.MyGuid, "Shield")
 	if StringHelpers.IsNullOrEmpty(mainhand) and StringHelpers.IsNullOrEmpty(offhand) then
-		Osi.LLWEAPONEX_Equipment_TrackUnarmed(character.MyGuid)
-
 		if Mastery.HasMasteryRequirement(character, "LLWEAPONEX_Unarmed_Mastery1") then
 			ClearTag(character.MyGuid, "LLWEAPONEX_AnyWeaponEquipped")
 			ClearTag(character.MyGuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
@@ -185,13 +181,38 @@ function EquipmentManager:CheckWeaponRequirementTags(character)
 	end ]]
 end
 
+
+---@param character EsvCharacter
+---@param ignoreShields boolean|nil
+---@return boolean
+function HasEmptyHands(character, ignoreShields)
+	local character = GameHelpers.GetCharacter(character)
+	if not character then
+		return false
+	end
+	local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(character)
+	local ignoreShields = ignoreShields == true or ignoreShields == "true"
+	if mainhand and mainhand.Stats.IsTwoHanded then
+		return false
+	end
+	if offhand and offhand.StatsFromName and (not ignoreShields or offhand.StatsFromName.ModifierListIndex ~= 2) then
+		return false
+	end
+	return true
+end
+
 ---@param character EsvCharacter
 ---@param isPlayer boolean
----@param newlyEquipped EsvItem
+---@param newlyEquipped EsvItem|nil
 function EquipmentManager:CheckForUnarmed(character, isPlayer, newlyEquipped)
-	local hasEmptyHands = HasEmptyHand(character, false)
+	local hasEmptyHands = HasEmptyHands(character, false)
 	if newlyEquipped ~= nil and newlyEquipped.Stats ~= nil and newlyEquipped.Stats.IsTwoHanded then
 		hasEmptyHands = false
+	end
+	if hasEmptyHands then
+		SetTag(character.MyGuid, "LLWEAPONEX_Unarmed")
+	else
+		ClearTag(character.MyGuid, "LLWEAPONEX_Unarmed")
 	end
 	if hasEmptyHands and CharacterHasSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack") == 1 then
 		GameHelpers.Skill.Swap(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack", "Target_SingleHandedAttack", true, false)
@@ -241,26 +262,4 @@ function EquipmentManager:CheckScoundrelTags(character, item, itemTags)
 		return true
 	end
 	return false
-end
-
----@param character EsvCharacter
----@return boolean
-function HasEmptyHand(character, ignoreShields)
-	local character = GameHelpers.GetCharacter(character)
-	if not character then
-		return false
-	end
-	local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(character)
-	if type(ignoreShields) == "string" then
-		ignoreShields = string.lower(ignoreShields) == "true"
-	else
-		ignoreShields = ignoreShields == true
-	end
-	if mainhand and mainhand.Stats.IsTwoHanded then
-		return false
-	end
-	if offhand and (not ignoreShields or offhand.Stats.ItemType ~= "Shield") then
-		return false
-	end
-	return true
 end

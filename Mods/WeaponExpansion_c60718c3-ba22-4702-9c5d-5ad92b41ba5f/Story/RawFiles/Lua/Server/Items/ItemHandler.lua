@@ -1,87 +1,39 @@
-function OnItemTemplateAddedToCharacter(char, item, template)
-
-end
-
-local containerItems = {}
-
-function CanParseContainerTreasure(item)
-	return ItemIsContainer(item) == 1 and ObjectGetFlag(item, "LLWEAPONEX_ParsedGeneratedItems") == 0
-end
-
-local function storeContainerItem(item, container)
-	if containerItems[container] == nil then
-		containerItems[container] = {}
-	end
-	table.insert(containerItems[container], item)
-end
-
-function SaveContainerItem(item)
-	local container = GetInventoryOwner(item)
-	if container ~= nil then
-		container = GetUUID(container)
-		storeContainerItem(item, container)
-	end
-end
-
-function OnItemTemplateOpening(char, item, template)
-	containerItems[item] = {}
-	InventoryLaunchIterator(item, "LLWEAPONEX_Iterator_StoreFoundItem", "")
-	FireOsirisEvents()
-	for i,v in pairs(containerItems[item]) do
-		SwapDeltaMods(v)
-	end
-
-	containerItems[item] = nil
-end
-
-function CanParseCorpseTreasure(char)
-	return CharacterIsPlayer(char) == 0 
-		and CharacterIsSummon(char) == 0
-		and NRD_CharacterGetInt(char, "Resurrected") == 0
-		and ObjectGetFlag(char, "LLWEAPONEX_ParsedGeneratedItems") == 0
-end
-
-function CheckCharacterDeathTreasure(char)
-	---@type EsvCharacter
-	local character = GameHelpers.GetCharacter(char)
-	local items = character:GetInventoryItems()
-	for i,v in pairs(items) do
-		SwapDeltaMods(v)
-	end
-end
-
-local function GetPlayerDataPreset(char)
-	local character = GameHelpers.GetCharacter(char)
-	if character ~= nil and character.PlayerCustomData ~= nil then
-		return character.PlayerCustomData.ClassType
-	end
-	return nil
-end
-
-function OnSmugglersBagOpened(char, item)
-	local owner = ItemGetOriginalOwner(item)
-	local preset =  GetVarFixedString(owner, "LeaderLib_CurrentPreset") or GetVarString(owner, "LeaderLib_CurrentPreset")
-	if StringHelpers.IsNullOrEmpty(preset) then
-		preset = GetPlayerDataPreset(char)
-		if StringHelpers.IsNullOrEmpty(preset) then
-			preset = GetVarFixedString(owner, "LeaderLib_CharacterCreationPreset")
-		end
-	end
-	if not StringHelpers.IsNullOrEmpty(preset) then
-		if preset == "LLWEAPONEX_Assassin" then
-			CharacterGiveReward(char, "ST_LLWEAPONEX_SmugglersBag_AssassinLoot", 1)
-		elseif preset == "LLWEAPONEX_Pirate" then
-			CharacterGiveReward(char, "ST_LLWEAPONEX_SmugglersBag_PirateLoot", 1)
-		elseif "LLWEAPONEX_Helaene_Marauder" then
-			CharacterGiveReward(char, "ST_LLWEAPONEX_SmugglersBag_MarauderLoot", 1)
-		else
-			CharacterGiveReward(char, "ST_LLWEAPONEX_SmugglersBag_Random", 1)
-		end
+local function _GetPreset(character)
+	local preset = nil
+	if character.PlayerCustomData then
+		preset = character.PlayerCustomData.ClassType
 	else
-		CharacterGiveReward(char, "ST_LLWEAPONEX_SmugglersBag_Random", 1)
+		preset = GetVarFixedString(character.MyGuid, "LeaderLib_CurrentPreset") or GetVarString(character.MyGuid, "LeaderLib_CurrentPreset") or GetVarFixedString(character.MyGuid, "LeaderLib_CharacterCreationPreset")
 	end
-	ItemDestroy(item)
+	return preset
 end
+
+ItemProcessor.SmugglersBagPresetToTreasure = {
+	LLWEAPONEX_Assassin = "ST_LLWEAPONEX_SmugglersBag_AssassinLoot",
+	LLWEAPONEX_Pirate = "ST_LLWEAPONEX_SmugglersBag_PirateLoot",
+	LLWEAPONEX_Helaene_Marauder = "ST_LLWEAPONEX_SmugglersBag_MarauderLoot",
+	Default = "ST_LLWEAPONEX_SmugglersBag_Random",
+}
+
+Events.ObjectEvent:Subscribe(function (e)
+	local character,item = table.unpack(e.Objects)
+	---@cast character EsvCharacter
+	---@cast item EsvItem
+
+	local owner = GameHelpers.Item.GetOwner(item)
+	local preset = _GetPreset(character)
+	local treasure = ItemProcessor.SmugglersBagTreasure[preset]
+	if not treasure and owner then
+		preset = _GetPreset(owner)
+		treasure = ItemProcessor.SmugglersBagTreasure[preset]
+	end
+
+	if not treasure then
+		treasure = ItemProcessor.SmugglersBagTreasure.Default
+	end
+	CharacterGiveReward(character.MyGuid, treasure, 1)
+	ItemDestroy(item.MyGuid)
+end, {MatchArgs={Event="LLWEAPONEX_OpenSmugglersBag", EventType="CharacterItemEvent"}})
 
 --Mods.WeaponExpansion.GenerateTradeTreasure("680d2702-721c-412d-b083-4f5e816b945a", "ST_LLWEAPONEX_VendingMachine_OrderWeapon")
 --GenerateItems(me.MyGuid, "680d2702-721c-412d-b083-4f5e816b945a")

@@ -67,22 +67,3 @@ function RemoveRodSkill(char, item)
 		end
 	end
 end
-
-local function GetRodTypeQRY(itemGUID)
-	local item = GameHelpers.GetItem(itemGUID)
-	if item then
-		local stat = item.StatsFromName.StatsEntry
-		local skills = uniqueRodSkills[stat.Name]
-		if skills == nil then
-			local damageType = stat["Damage Type"]
-			skills = rodSkills[damageType]
-			if skills ~= nil then
-				return skills[1], skills[2]
-			end
-		else
-			return skills[1], skills[2]
-		end
-	end
-end
-
-Ext.Osiris.NewQuery(GetRodTypeQRY, "LLWEAPONEX_Ext_QRY_GetRodSkills", "[in](ITEMGUID)_Rod, [out](STRING)_MainhandSkill, [out](STRING)_OffhandSkill")

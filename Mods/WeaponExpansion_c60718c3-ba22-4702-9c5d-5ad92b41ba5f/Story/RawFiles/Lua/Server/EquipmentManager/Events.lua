@@ -74,14 +74,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 	if not character or not item or not item.Stats then
 		return
 	end
-	
-	local db = Osi.DB_LLWEAPONEX_Equipment_ActiveTags:Get(character.MyGuid, "LLWEAPONEX_Unarmed", "NULL_00000000-0000-0000-0000-000000000000")
-	if db and #db > 0 then
-		Osi.DB_LLWEAPONEX_Equipment_ActiveTags:Delete(character.MyGuid, "LLWEAPONEX_Unarmed", "NULL_00000000-0000-0000-0000-000000000000")
-		Osi.DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries:Delete(character.MyGuid, "NULL_00000000-0000-0000-0000-000000000000", "LLWEAPONEX_Unarmed")
-		Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(character.MyGuid, "LLWEAPONEX_Unarmed")
-	end
-	
+
 	local isPlayer = GameHelpers.Character.IsPlayer(character)
 
 	local _CHARACTER_TAGS = GameHelpers.GetAllTags(character, true, false)
@@ -124,7 +117,14 @@ function EquipmentManager:OnItemEquipped(character, item)
 
 	self:CheckWeaponAnimation(character, item, _ITEM_TAGS)
 
+	if PersistentVars.ActiveMasteries[character.MyGuid] == nil then
+		PersistentVars.ActiveMasteries[character.MyGuid] = {}
+	end
+
+	local persistentActivatedMasteries = PersistentVars.ActiveMasteries[character.MyGuid]
+
 	for tag,b in pairs(activatedMasteries) do
+		persistentActivatedMasteries[tag] = true
 		Mastery.Events.MasteryChanged:Invoke({
 			Character = character,
 			CharacterGUID = character.MyGuid,
@@ -132,6 +132,10 @@ function EquipmentManager:OnItemEquipped(character, item)
 			ID = tag,
 			IsPlayer = isPlayer
 		})
+	end
+
+	if Timer.IsObjectTimerActive("LLWEAPONEX_UpdateActiveMasteries", character) then
+		Timer.RestartObjectTimer("LLWEAPONEX_UpdateActiveMasteries", character, 250)
 	end
 
 	Osi.LLWEAPONEX_OnItemTemplateEquipped(character.MyGuid, item.MyGuid, template)
@@ -170,9 +174,66 @@ function EquipmentManager:OnItemEquipped(character, item)
 end
 
 ---@param character EsvCharacter
+local function _UpdateActiveMasteries(character)
+	local data = PersistentVars.ActiveMasteries[character.MyGuid]
+	if data then
+		local activeMasteries = 0
+		local nextData = {}
+		local _CHARACTER_TAGS = GameHelpers.GetAllTags(character, true, true)
+		local isPlayer = GameHelpers.Character.IsPlayer(character)
+
+		for tag,_ in pairs(Masteries) do
+			if _CHARACTER_TAGS[tag] then
+				activeMasteries = activeMasteries + 1
+				nextData[tag] = true
+				if not data[tag] then
+					Mastery.Events.MasteryChanged:Invoke({
+						Character = character,
+						CharacterGUID = character.MyGuid,
+						Enabled = true,
+						ID = tag,
+						IsPlayer = isPlayer
+					})
+				end
+			end
+		end
+
+		for tag,_ in pairs(data) do
+			if not nextData[tag] then
+				Mastery.Events.MasteryChanged:Invoke({
+					Character = character,
+					CharacterGUID = character.MyGuid,
+					Enabled = false,
+					ID = tag,
+					IsPlayer = isPlayer
+				})
+			end
+		end
+
+		if activeMasteries > 0 then
+			PersistentVars.ActiveMasteries[character.MyGuid] = nextData
+		else
+			PersistentVars.ActiveMasteries[character.MyGuid] = nil
+		end
+	end
+end
+
+Timer.Subscribe("LLWEAPONEX_UpdateActiveMasteries", function (e)
+	if e.Data.Object then
+		_UpdateActiveMasteries(e.Data.Object)
+	end
+end)
+
+---@param character EsvCharacter
 ---@param item EsvItem
 function EquipmentManager:OnItemUnEquipped(character, item)
-	if not character or not item or not item.Stats then
+	if not character then
+		return
+	end
+
+	Timer.StartObjectTimer("LLWEAPONEX_UpdateActiveMasteries", character, 250)
+
+	if not item or not item.Stats then
 		return
 	end
 
@@ -180,10 +241,7 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	local template = GameHelpers.GetTemplate(item)
 	local _ITEM_TAGS = GameHelpers.GetItemTags(item, true, false)
 
-	--TODO Refactor to Lua stuff
 	Osi.LLWEAPONEX_OnItemTemplateUnEquipped(character.MyGuid, item.MyGuid, template)
-	Osi.LLWEAPONEX_Equipment_ClearItem(character.MyGuid, item.MyGuid, isPlayer)
-	Osi.LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(character.MyGuid, item.MyGuid)
 
 	if isPlayer then
 		self:CheckWeaponRequirementTags(character)
