@@ -118,48 +118,6 @@ LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Char, 14);
 //END_REGION
 
 //REGION DEMON_GAUNTLET
-PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
-THEN
-LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
-
-PROC
-LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
-THEN
-LLWEAPONEX_Uniques_OnDemonGauntletUnequipped(_Char);
-LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
-
-PROC
-LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Char)
-AND
-LeaderLib_Helper_QRY_HasStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_DEFENSE")
-THEN
-RemoveStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_DEFENSE");
-
-PROC
-LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Char)
-AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target)
-THEN
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_DEMON_GAUNTLET_EQUIPPED", _)
-AND
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ActiveDefense(_Char, _)
-AND
-NRD_ApplyActiveDefense(_Char, "LLWEAPONEX_DEMON_GAUNTLET_DEFENSE", -1.0, _Handle)
-THEN
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ActiveDefense(_Char, _Handle);
-
-IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_DEMON_GAUNTLET_EQUIPPED", _)
-AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ActiveDefense(_Char, _Handle)
-THEN
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ActiveDefense(_Char, _Handle);
-RemoveStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_DEFENSE");
-
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_DEMON_GAUNTLET_HIT", (CHARACTERGUID)_Char)
 THEN

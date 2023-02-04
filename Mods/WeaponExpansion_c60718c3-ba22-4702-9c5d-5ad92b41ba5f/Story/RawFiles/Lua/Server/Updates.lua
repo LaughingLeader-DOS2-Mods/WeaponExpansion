@@ -182,8 +182,14 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_UniqueManager_Temp_ResolvedMove", 2)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner", 2)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem", 2)
-	
+
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_TagRequirements", 3)
+
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponFX_UnsheathedStatus", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus", 3)
+
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_DemonGauntlet_ActiveDefense", 2)
 
 	Osi.DB_LeaderLib_Skills_StatusToggleSkills:Delete("Shout_LLWEAPONEX_Rapier_DuelistStance", nil, nil, nil, nil)
 	Osi.LeaderLib_Statuses_Clear_Group("WeaponExpansion")
@@ -212,6 +218,7 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_10_DemolitionBackpack")
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_60_UniqueManager")
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_00_ExtenderSkillRefreshing")
+	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_03_WeaponFX")
 	
 	Osi.LeaderLib_GameScripts_ClearScriptsForGroup("WeaponExpansion")
 end)

@@ -683,12 +683,9 @@ if not Vars.IsClient then
 		return false
 	end
 
-	DeathManager.RegisterListener("GnakSpellScroll", function(target, attacker, targetDied)
-		if targetDied and CharacterHasSkill(attacker, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic") == 1 then
-			NRD_SkillSetCooldown(attacker, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic", 0.0)
-			GameHelpers.UI.RefreshSkillBarSkillCooldown(attacker, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic")
-		end
-	end)
+	DeathManager.OnDeath:Subscribe(function (e)
+		GameHelpers.Skill.SetCooldown(e.Source, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic", 0)
+	end, {MatchArgs={ID="GnakSpellScroll", Success=true}})
 
 	local function ListenForDeath(target, attacker, delay)
 		DeathManager.ListenForDeath("GnakSpellScroll", GameHelpers.GetUUID(target), GameHelpers.GetUUID(attacker), delay)

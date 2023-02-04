@@ -61,21 +61,21 @@ if not Vars.IsClient then
 			end
 		end
 	end)
-	
-	DeathManager.RegisterListener("ThrowWeapon", function(target, attacker, targetDied)
-		local data = PersistentVars.SkillData.ThrowWeapon[attacker]
+
+	DeathManager.OnDeath:Subscribe(function (e)
+		local data = PersistentVars.SkillData.ThrowWeapon[e.SourceGUID]
 		if data ~= nil then
-			if targetDied then
+			if e.Success then
 				if not StringHelpers.IsNullOrEmpty(data.Weapon) then
-					NRD_CharacterEquipItem(attacker, data.Weapon, "Weapon", 0, 0, 1, 1)
+					NRD_CharacterEquipItem(e.SourceGUID, data.Weapon, "Weapon", 0, 0, 1, 1)
 				end
 				if not StringHelpers.IsNullOrEmpty(data.Shield) then
-					NRD_CharacterEquipItem(attacker, data.Shield, "Shield", 0, 0, 1, 1)
+					NRD_CharacterEquipItem(e.SourceGUID, data.Shield, "Shield", 0, 0, 1, 1)
 				end
 			end
-			PersistentVars.SkillData.ThrowWeapon[attacker] = nil
+			PersistentVars.SkillData.ThrowWeapon[e.SourceGUID] = nil
 		end
-	end)
+	end, {MatchArgs={ID="ThrowWeapon"}})
 
 	--Throwing Experience
 	SkillManager.Register.Cast("All", function (e)

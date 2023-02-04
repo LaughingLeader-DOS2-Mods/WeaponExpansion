@@ -1,32 +1,25 @@
-DeathManager = {
-	Listeners = {}
-}
+DeathManager = {}
 
----@param id string The ID for the death event, specified in ListenForDeath.
----@param callback fun(target:string, attacker:string, success:boolean):void
-function DeathManager.RegisterListener(id, callback)
-	if DeathManager.Listeners[id] == nil then
-		DeathManager.Listeners[id] = {}
-	end
-	table.insert(DeathManager.Listeners[id], callback)
-end
+---@class DeathManagerOnDeathEventArgs
+---@field ID string
+---@field Target EsvCharacter
+---@field Source EsvCharacter
+---@field TargetGUID GUID
+---@field SourceGUID GUID
+---@field Success boolean Whether the target died. False if the timer finished before they died.
 
-local function FireCallbacks(id, target, attacker, success)
-	local callbacks = DeathManager.Listeners[id]
-	if callbacks ~= nil then
-		for i=1,#callbacks do
-			local callback = callbacks[i]
-			if callback ~= nil then
-				local b,result = xpcall(callback, debug.traceback, target, attacker, success)
-				if not b then
-					Ext.Utils.PrintError("[LLWEAPONEX:DeathManager] Error invoking callback:")
-					Ext.Utils.PrintError(result)
-				end
-			else
-				Ext.Utils.PrintError("FireCallbacks", i, id, target, attacker, success)
-			end
-		end
-	end
+---@type LeaderLibSubscribableEvent<DeathManagerOnDeathEventArgs>
+DeathManager.OnDeath = Classes.SubscribableEvent:Create("WeaponExpansion.DeathManager.OnDeath")
+
+local function FireCallbacks(id, target, source, success)
+	DeathManager.Events.OnDeath:Invoke({
+		ID = id,
+		TargetGUID = target,
+		SourceGUID = source,
+		Target = GameHelpers.GetCharacter(target),
+		Source = GameHelpers.GetCharacter(source),
+		Success = success
+	})
 end
 
 function DeathManager.RemoveAllDataForTarget(target)
@@ -37,8 +30,8 @@ function DeathManager.RemoveAllDataForTarget(target)
 end
 
 ---@param id string
----@param target CharacterParam
----@param attacker CharacterParam
+---@param target ServerObject|GUID
+---@param attacker ServerObject|GUID
 ---@param listenDelay integer
 function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 	local targetGUID = GameHelpers.GetUUID(target)
@@ -110,7 +103,7 @@ RegisterProtectedOsirisListener("CharacterDying", 1, "after", function(char)
 	DeathManager.OnDeath(StringHelpers.GetUUID(char))
 end)
 
-RegisterListener("Initialized", function(region)
+Events.Initialized:Subscribe(function (e)
 	for uuid,data in pairs(PersistentVars.OnDeath) do
 		if ObjectExists(uuid) == 0 then
 			PersistentVars.OnDeath[uuid] = nil

@@ -32,12 +32,10 @@ if not Vars.IsClient then
 		end
 	end)
 
-	DeathManager.RegisterListener("SoulHarvestReaping", function(target, source, targetDied)
-		if targetDied then
-			SignalTestComplete("LLWEAPONEX_SoulHarvest_TargetDied")
-			_ApplyDamageBonus(GameHelpers.GetCharacter(source), target)
-		end
-	end)
+	DeathManager.OnDeath:Subscribe(function (e)
+		SignalTestComplete("LLWEAPONEX_SoulHarvest_TargetDied")
+		_ApplyDamageBonus(e.Source, e.Target)
+	end, {MatchArgs={ID="SoulHarvestReaping", Success=true}})
 
 	---Expire the damage bonus if the character dies, but otherwise prevent its removal
 	Events.CharacterDied:Subscribe(function(e)
@@ -98,4 +96,12 @@ if not Vars.IsClient then
 		test:AssertGotSignal("LLWEAPONEX_SoulHarvest_RemovedPermanentStatusOnDeath")
 		return true
 	end)
+
+	EquipmentManager.Events.UnsheathedChanged:Subscribe(function (e)
+		if e.Unsheathed then
+			GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_SOULHARVEST_UNSHEATHED_FX", -1, true, e.Character)
+		else
+			GameHelpers.Status.Remove(e.Character, "LLWEAPONEX_SOULHARVEST_UNSHEATHED_FX")
+		end
+	end, {MatchArgs={Tag="LLWEAPONEX_SoulHarvest_Equipped"}})
 end

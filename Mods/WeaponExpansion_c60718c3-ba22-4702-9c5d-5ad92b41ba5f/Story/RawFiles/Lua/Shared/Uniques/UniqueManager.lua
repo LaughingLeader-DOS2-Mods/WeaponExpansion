@@ -10,7 +10,7 @@ UniqueManager = {
 	SyncItemChanges = false,
 }
 
-local isClient = Ext.IsClient()
+local _ISCLIENT = Ext.IsClient()
 
 Ext.Require("Shared/Uniques/Classes/UniqueData/UniqueData.lua")
 
@@ -49,15 +49,15 @@ Uniques = {
 	PacifistsWrath = UniqueData:Create(ProgressionData.PacifistsWrath, {Tag="LLWEAPONEX_UniqueBokken2H"}),
 	ChaosEdge = UniqueData:Create(ProgressionData.ChaosEdge, {Tag="LLWEAPONEX_UniqueRunebladeChaosGreatsword"}),
 	BasilusDagger = UniqueData:Create(ProgressionData.BasilusDagger, {Tag="LLWEAPONEX_UniqueBasilusDagger"}),
-	DeathEdge = UniqueData:Create(ProgressionData.DeathEdge, {Tag="LLWEAPONEX_UniqueDeathEdge"}),
+	DeathEdge = UniqueData:Create(ProgressionData.DeathEdge, {Tag="LLWEAPONEX_DeathEdge_Equipped"}),
 	DemoBackpack = UniqueData:Create(ProgressionData.DemoBackpack, {Tag="LLWEAPONEX_DemolitionBackpack"}),
-	DemonGauntlet = UniqueData:Create(ProgressionData.DemonGauntlet, {Tag="LLWEAPONEX_DemonGauntlet"}),
+	DemonGauntlet = UniqueData:Create(ProgressionData.DemonGauntlet, {Tag="LLWEAPONEX_DemonHand_Equipped"}),
 	DivineBanner = UniqueData:Create(ProgressionData.DivineBanner, {Tag="LLWEAPONEX_UniqueDivineBanner"}),
 	FireRunebladeKatana = UniqueData:Create(ProgressionData.FireRunebladeKatana, {Tag="LLWEAPONEX_UniqueRunebladeFireKatana"}),
 	Frostdyne = UniqueData:Create(ProgressionData.Frostdyne, {Tag="LLWEAPONEX_UniqueRunebladeRapier"}),
 	HarkenPowerGloves = UniqueData:Create(ProgressionData.HarkenPowerGloves, {OnEquipped=CheckForAnvilWeightChange, Tag="LLWEAPONEX_UniquePowerGauntlets"}),
 	HarkenTattoos = UniqueData:Create(ProgressionData.HarkenTattoos, {Tag="LLWEAPONEX_UniqueStrengthTattoos", OnEquipped=OnTattoosEquipped}),
-	Harvest = UniqueData:Create(ProgressionData.Harvest, {Tag="LLWEAPONEX_UniqueHarvestScythe"}),
+	Harvest = UniqueData:Create(ProgressionData.Harvest, {Tag="LLWEAPONEX_SoulHarvest_Equipped"}),
 	LoneWolfBanner = UniqueData:Create(ProgressionData.LoneWolfBanner, {Tag="LLWEAPONEX_UniqueLoneWolfBanner"}),
 	MagicMissileWand = UniqueData:Create(ProgressionData.MagicMissileWand, {Tag="LLWEAPONEX_UniqueMagicMissileWand"}),
 	MonkBlindfold = UniqueData:Create(ProgressionData.MonkBlindfold, {Tag="LLWEAPONEX_UniqueBlindfold"}),
@@ -295,7 +295,7 @@ function UniqueManager.EnableAllEvents()
 	end
 end
 
-if not isClient then
+if not _ISCLIENT then
 	Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
 		local unique = Uniques[id]
 		if unique ~= nil then
@@ -430,6 +430,7 @@ local UniqueScripts = {
 	"BasilusDagger",
 	"Blunderbuss",
 	"DeathEdge",
+	"DemonHand",
 	"DemolitionBackpack",
 	"GnakSpellScroll",
 	"MagicMissileWand",

@@ -180,32 +180,30 @@ if not Vars.IsClient then
 		return targetData,index
 	end
 
-	DeathManager.RegisterListener("VanquishersPath", function(target, attacker, success)
-		local targetData,index = GetVanquishersPathTargetData(attacker, target)
+	DeathManager.OnDeath:Subscribe(function (e)
+		local targetData,index = GetVanquishersPathTargetData(e.SourceGUID, e.TargetGUID)
 		if targetData ~= nil then
-			if success then
+			if e.Success then
 				local hasTarget = false
 				if targetData.Count ~= nil and targetData.Count > 0 then
 					local applyComboStatus = ComboStatuses[math.min(#ComboStatuses, targetData.Count)]
-					local enemy = GameHelpers.GetCharacter(target)
-					if enemy ~= nil then
-						local enemyPos = enemy.WorldPos
-						for target in GameHelpers.Grid.GetNearbyObjects(attacker, {Radius=6, Position=enemyPos, Relation={Enemy=true}}) do
-							GameHelpers.Status.Apply(target, applyComboStatus, 6.0, false, attacker)
+					if e.Source then
+						for target in GameHelpers.Grid.GetNearbyObjects(e.Target, {Radius=6, Position=e.Source.WorldPos, Relation={Enemy=true}}) do
+							GameHelpers.Status.Apply(target, applyComboStatus, 6.0, false, e.Source)
 							hasTarget = true
 						end
 					end
 				end
 				if hasTarget then
-					SetBlademasterComboTag(attacker)
+					SetBlademasterComboTag(e.SourceGUID)
 				end
 			end
-			table.remove(PersistentVars.SkillData.VanquishersPath[attacker], index)
-			if #PersistentVars.SkillData.VanquishersPath[attacker] == 0 then
-				PersistentVars.SkillData.VanquishersPath[attacker] = nil
+			table.remove(PersistentVars.SkillData.VanquishersPath[e.SourceGUID], index)
+			if #PersistentVars.SkillData.VanquishersPath[e.SourceGUID] == 0 then
+				PersistentVars.SkillData.VanquishersPath[e.SourceGUID] = nil
 			end
 		end
-	end)
+	end, {MatchArgs={ID="VanquishersPath"}})
 
 	SkillManager.Register.Hit("Target_LLWEAPONEX_Katana_VanquishersPath_Hit", function(e)
 		local targetData,index = GetVanquishersPathTargetData(e.Character, e.Data.Target)

@@ -71,11 +71,11 @@ if not Vars.IsClient then
 		end
 	end)
 
-	DeathManager.RegisterListener("ThrowBalrinAxe", function(target, attacker, targetDied)
-		if targetDied or HasActiveStatus(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A") == 0 then
-			EquipBalrinAxe(attacker, true)
+	DeathManager.OnDeath:Subscribe(function (e)
+		if e.Success or GameHelpers.Status.IsActive(e.Target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A") then
+			EquipBalrinAxe(e.Source, true)
 		end
-	end)
+	end, {MatchArgs={ID="ThrowBalrinAxe"}})
 
 	EquipmentManager.Events.EquipmentChanged:Subscribe(function(e)
 		if e.Equipped then

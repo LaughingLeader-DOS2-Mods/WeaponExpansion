@@ -274,53 +274,41 @@ if not _ISCLIENT then
 		return GameHelpers.Character.CanAttackTarget(t, source, false)
 	end
 
-	DeathManager.RegisterListener("CorruptedBladeDiseaseSpread", function(target, attacker, success)
-		if success then
-			local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_CorruptedBlade_SpreadRadius", 12.0)
-			local pos = GameHelpers.Math.GetPosition(target, false, GameHelpers.Math.GetPosition(attacker))
-			local props = GameHelpers.Stats.GetSkillProperties("Target_CorruptedBlade")
-			if not props or #props == 0 then
-				--If Corrupted Blade applies no statuses, apply Diseased.
-				GameHelpers.Status.Apply(pos, "DISEASED", 12.0, true, attacker, radius, false, 
-				TargetIsEnemy)
-			else
-				--Ext.ExecuteSkillPropertiesOnPosition("Target_CorruptedBlade", attacker, pos, radius, "Target", false)
-				for _,prop in pairs(props) do
-					if prop.Type == "Status" and prop.Duration ~= 0 then
-						GameHelpers.Status.Apply(pos, prop.Action, prop.Duration, false, attacker, radius, false, 
-						TargetIsEnemy)
-					end
+	DeathManager.OnDeath:Subscribe(function (e)
+		local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_CorruptedBlade_SpreadRadius", 12.0)
+		local pos = GameHelpers.Math.GetPosition(e.Target, false, GameHelpers.Math.GetPosition(e.Source))
+		local props = GameHelpers.Stats.GetSkillProperties("Target_CorruptedBlade")
+		if not props or #props == 0 then
+			--If Corrupted Blade applies no statuses, apply Diseased.
+			GameHelpers.Status.Apply(pos, "DISEASED", 12.0, true, e.Source, radius, false, 
+			TargetIsEnemy)
+		else
+			for _,prop in pairs(props) do
+				if prop.Type == "Status" and prop.Duration ~= 0 then
+					GameHelpers.Status.Apply(pos, prop.Action, prop.Duration, false, e.Source, radius, false, 
+					TargetIsEnemy)
 				end
 			end
-			SignalTestComplete("DAGGER_CORRUPTED_BLADE")
 		end
-	end)
+		SignalTestComplete("DAGGER_CORRUPTED_BLADE")
+	end, {MatchArgs={ID="CorruptedBladeDiseaseSpread", Success=true}})
 
-	DeathManager.RegisterListener("FatalityRefundBonus", function(target, attacker, success)
-		if success then
-			local cd = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Fatality_CooldownOverride", 6.0)
-			local sourceSkill = CharacterHasSkill(attacker, "Target_EnemyFatality") == 1 and "Target_EnemyFatality" or "Target_Fatality"
-			GameHelpers.Skill.SetCooldown(attacker, sourceSkill, cd)
-			local skill = Ext.Stats.Get("Target_Fatality", nil, false)
-			if skill["Magic Cost"] > 0 then
-				CharacterAddSourcePoints(attacker, 1)
-			end
-			if skill.ActionPoints > 1 then
-				CharacterAddActionPoints(attacker, Ext.Utils.Round(skill.ActionPoints/2))
-			end
+	DeathManager.OnDeath:Subscribe(function (e)
+		local cd = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Fatality_CooldownOverride", 6.0)
+		local sourceSkill = e.Source.SkillManager.Skills.Target_EnemyFatality and "Target_EnemyFatality" or "Target_Fatality"
+		GameHelpers.Skill.SetCooldown(e.SourceGUID, sourceSkill, cd)
+		local skill = Ext.Stats.Get("Target_Fatality", nil, false)
+		if skill["Magic Cost"] > 0 then
+			CharacterAddSourcePoints(e.SourceGUID, 1)
 		end
-	end)
-	
-	DeathManager.RegisterListener("TerrifyingCrueltyBonus", function(target, attacker, success)
-		if success then
-			local source = GameHelpers.TryGetObject(attacker)
-			---@type EsvStatusExplode
-			local explode = Ext.PrepareStatus(target, "EXPLODE", 6.0)
-			explode.StatusSourceHandle = source.Handle
-			explode.Projectile = "Projectile_LLWEAPONEX_MasteryBonus_Dagger_CrueltyCorpseExplosion"
-			Ext.ApplyStatus(explode)
+		if skill.ActionPoints > 1 then
+			CharacterAddActionPoints(e.SourceGUID, Ext.Utils.Round(skill.ActionPoints/2))
 		end
-	end)
+	end, {MatchArgs={ID="FatalityRefundBonus", Success=true}})
+
+	DeathManager.OnDeath:Subscribe(function (e)
+		GameHelpers.Skill.Explode(e.Target, "Projectile_LLWEAPONEX_MasteryBonus_Dagger_CrueltyCorpseExplosion", e.Source)
+	end, {MatchArgs={ID="TerrifyingCrueltyBonus", Success=true}})
 else
 
 end
