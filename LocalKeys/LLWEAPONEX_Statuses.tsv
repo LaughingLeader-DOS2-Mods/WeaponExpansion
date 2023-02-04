@@ -32,9 +32,10 @@ LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Dam
 LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status	h31246356gaf34g40e6g97bdg4809255e71f0
 LLWEAPONEX_DEFLECT_PROJECTILES_Description	Character is deflecting projectiles.	hfb2ca138gad5fg44a2gbfccge0367ad3140d
 LLWEAPONEX_DEFLECT_PROJECTILES_DisplayName	Deflect Projectiles	h64a393ccg4ec7g4978gbb35g7bd51b2f8013
-LLWEAPONEX_DEMON_GAUNTLET_DEFENSE_APPLY_DisplayName	<font color='#FFCE58'>Devil Hand Aura (3m)</font>	hc23cbf18gaa51g4cdcgb329g38c8aa247f7b
-LLWEAPONEX_DEMON_GAUNTLET_EQUIPPED_Description	<font color='#C7A758'>A demon watches over you.</font><br><font color='#ee3f70'>Approaching enemies have a 30% chance to take <font color='#9358ff'>Shadow Damage</font>, and may be afflicted with <font color='#3feeaa'>Soul Burn</font> for 1 turn.</font>	h93acd4bdgd53dg4fb2g9de4g3b5945aaae17
-LLWEAPONEX_DEMON_GAUNTLET_EQUIPPED_DisplayName	Demonic Protection	h6061f14dgad52g4b0dg8933g7cd1337a8da0
+LLWEAPONEX_DEVIL_HAND_BONUS_Description	The <font color='#C7A758'>[Key:ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A_DisplayName:Devil Hand]</font> has slain an enemy, granting you a boon.<font color='#ee3f70'>Bonus [Handle:h1b6a1120gb023g4df1gb463gc317e509ee2c:Critical Chance] for your next basic attack or skill.</font>	h6c92eed4gc126g4df2g9e97ga84935509e69
+LLWEAPONEX_DEVIL_HAND_BONUS_DisplayName	Demonic Surge	hc3555965gf4d8g4c55gb566gfd2952f74b8f
+LLWEAPONEX_DEVIL_HAND_DEFENSE_Description	<font color='#C7A758'>A demon watches over you.</font><br><font color='#ee3f70'>Approaching enemies have a [ExtraData:LLWEAPONEX_DevilHand_DemonicProtection_HitChance:30]% chance to take <font color='#9358ff'>Shadow Damage</font>, and may be afflicted with <font color='#3feeaa'>Soul Burn</font> for 1 turn.</font>	h93acd4bdgd53dg4fb2g9de4g3b5945aaae17
+LLWEAPONEX_DEVIL_HAND_DEFENSE_DisplayName	Demonic Protection	h6061f14dgad52g4b0dg8933g7cd1337a8da0
 LLWEAPONEX_DIZZY_Description	Character is suffering from extreme dizziness.<br>Actions cost [1] additional AP.	h91b96813g6bedg44acg8d15g5ae092afb051
 LLWEAPONEX_DIZZY_DisplayName	Dizzy	h8db77e32g315ag4744gbaa6g883f6a73c659
 LLWEAPONEX_DOUSED_DisplayName	Doused	h65f38720g1522g4819ga662g1b97e0a9af31

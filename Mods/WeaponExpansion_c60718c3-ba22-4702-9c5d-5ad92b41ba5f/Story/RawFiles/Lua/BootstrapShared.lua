@@ -89,6 +89,7 @@ Tags = {
 			return Text.ItemTooltip.RunicCannonEnergy:ReplacePlaceholders(energy, max)
 		end,
 		LLWEAPONEX_RunicCannonWeapon_Equipped = true,
+		LLWEAPONEX_DevilHand_Equipped = true,
 	}
 }
 

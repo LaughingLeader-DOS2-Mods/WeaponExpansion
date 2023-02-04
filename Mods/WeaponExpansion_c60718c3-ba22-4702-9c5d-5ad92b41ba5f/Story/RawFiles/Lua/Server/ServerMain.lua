@@ -2,6 +2,8 @@
 local HitFlagPreset = {}
 HitFlagPreset.__index = HitFlagPreset
 
+---@param params HitRequest
+---@return HitFlagPreset
 function HitFlagPreset:Create(params)
     local this = {}
     for k,v in pairs(params) do
@@ -11,6 +13,8 @@ function HitFlagPreset:Create(params)
     return this
 end
 
+---@param params HitRequest
+---@return HitFlagPreset
 function HitFlagPreset:Append(params)
     local this = {}
     for k,v in pairs(self) do
@@ -23,7 +27,6 @@ function HitFlagPreset:Append(params)
     return this
 end
 
----@type table<string, HitFlagPreset>
 HitFlagPresets = {
     GuaranteedWeaponHit = HitFlagPreset:Create({
         SimulateHit = true,
@@ -41,6 +44,15 @@ HitFlagPresets = {
         HitWithWeapon = false,
         NoEvents = true,
         DontCreateBloodSurface = true,
+    }),
+    DevilHandActiveDefense = HitFlagPreset:Create({
+        SimulateHit = false,
+        NoHitRoll = true,
+        HitType = "DoT",
+        HitWithWeapon = false,
+        NoEvents = true,
+        DontCreateBloodSurface = true,
+        CounterAttack = true,
     }),
 }
 

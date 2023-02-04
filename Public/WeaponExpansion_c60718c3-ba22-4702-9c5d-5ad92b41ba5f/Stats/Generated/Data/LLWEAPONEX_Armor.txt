@@ -134,7 +134,7 @@ data "Flags" "Unbreakable"
 data "Unique" "1"
 data "Telekinesis" "1"
 data "Thievery" "1"
-data "Tags" "LLWEAPONEX_DemonHand_Equipped"
+data "Tags" "LLWEAPONEX_DevilHand_Equipped"
 
 new entry "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A_Preview"
 type "Armor"

@@ -117,48 +117,6 @@ LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Char, 14);
 */
 //END_REGION
 
-//REGION DEMON_GAUNTLET
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_DEMON_GAUNTLET_HIT", (CHARACTERGUID)_Char)
-THEN
-LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
-
-PROC
-LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath((CHARACTERGUID)_Char, (CHARACTERGUID)_Target)
-AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _OtherTarget)
-THEN
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _OtherTarget);
-
-PROC
-LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath((CHARACTERGUID)_Char, (CHARACTERGUID)_Target)
-THEN
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
-
-PROC
-LLWEAPONEX_Uniques_DemonGauntlet_OnDemonKilledTarget((CHARACTERGUID)_Target)
-AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target)
-THEN
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
-PlayEffect(_Char, "LLWEAPONEX_FX_Status_DemonGauntletDefense_Impact_Back_01", "Dummy_BackFX_R");
-ApplyStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_BONUS_CRIT", -1.0, 0, _Char);
-
-IF
-CharacterStatusRemoved(_Target, "LLWEAPONEX_DEMON_GAUNTLET_HIT", _)
-AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target)
-THEN
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_DemonGauntlet_RemoveCritBonus")
-AND
-HasActiveStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_BONUS_CRIT", 1)
-THEN
-RemoveStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_BONUS_CRIT");
-//END_REGION
-
 //REGION MAGIC_MISSILE_SWAP
 IF
 CharacterUsedSkill(_Char, "Shout_LLWEAPONEX_Rods_MagicMissile_ToggleMode", _, _)

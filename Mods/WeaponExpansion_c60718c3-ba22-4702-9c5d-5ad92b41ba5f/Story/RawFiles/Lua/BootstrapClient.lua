@@ -12,5 +12,5 @@ Ext.Require("Shared/Uniques/UniqueManager.lua")
 Ext.Require("Shared/Mastery/_Init.lua")
 
 function LLWEAPONEX_Settings_MoveAllUniquesToVendingMachine()
-	Ext.PostMessageToServer("LLWEAPONEX_Settings_MoveAllUniquesToVendingMachine", "")
+	Ext.Net.PostMessageToServer("LLWEAPONEX_Settings_MoveAllUniquesToVendingMachine", "")
 end
