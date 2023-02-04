@@ -4,8 +4,7 @@ local function SetupOriginSkills(char, skillset)
 		CharacterRemoveSkill(char, "Dome_CircleOfProtection")
 	end
 
-	---@type StatSkillSet
-	local skillSet = Ext.GetSkillSet(skillset)
+	local skillSet = Ext.Stats.SkillSet.GetLegacy(skillset)
 	if skillSet ~= nil then
 		for i,skill in pairs(skillSet.Skills) do
 			if CharacterHasSkill(char, skill) == 0 then
@@ -240,8 +239,6 @@ function Origins_InitCharacters(region)
 	end
 end
 
-
-
 local tierValue = {
     None = 0,
     Starter = 1,
@@ -258,40 +255,48 @@ local ignoredSkillsForFixing = {
 }
 
 function Origins_FixSkillBar(uuid)
+	local character = GameHelpers.GetCharacter(uuid, "EsvCharacter")
+	if not character then
+		return
+	end
+	---@type StatEntrySkillData[]
 	local slotEntries = {}
+	local totalSlotEntries = 0
 	for i=0,28,1 do
-		local slot = NRD_SkillBarGetItem(uuid, i)
-		if not StringHelpers.IsNullOrEmpty(slot) then
-			NRD_SkillBarClear(uuid, i)
-			--slotEntries[i] = slot
-		else
-			slot = NRD_SkillBarGetSkill(uuid, i)
-			if not StringHelpers.IsNullOrEmpty(slot) and ignoredSkillsForFixing[slot] ~= true then
-				NRD_SkillBarClear(uuid, i)
-				table.insert(slotEntries, slot)
+		local slot = character.PlayerData.SkillBar[i]
+		if slot then
+			if slot.Type == "Skill" and not StringHelpers.IsNullOrEmpty(slot.SkillOrStatId) then
+				local skill = Ext.Stats.Get(slot.SkillOrStatId, nil, false) --[[@as StatEntrySkillData]]
+				if skill then
+					totalSlotEntries = totalSlotEntries + 1
+					slotEntries[totalSlotEntries] = skill
+				end
 			end
+			slot.ItemHandle = Ext.Entity.NullHandle()
+			slot.Type = "None"
+			slot.SkillOrStatId = ""
 		end
 	end
 	table.sort(slotEntries, function(a,b)
 		local val1 = 0
 		local val2 = 0
 
-		local ma1 = GameHelpers.Stats.GetAttribute(a, "Magic Cost", 0)
+		local ma1 = a["Magic Cost"]
 		if ma1 > 0 then
 			val1 = 9
-		elseif GameHelpers.Stats.GetAttribute(a, "ForGameMaster", "No") == "No" then
+		elseif a.ForGameMaster == "No" then
 			val1 = 6
 		else
-			val1 = tierValue[GameHelpers.Stats.GetAttribute(a, "Tier", "None")] or -1
+			val1 = tierValue[a.Tier] or -1
 		end
 
-		local ma2 = GameHelpers.Stats.GetAttribute(b, "Magic Cost", 0)
+		local ma2 = b["Magic Cost"]
 		if ma2 > 0 then
 			val2 = 9
-		elseif GameHelpers.Stats.GetAttribute(b, "ForGameMaster", "No") == "No" then
+		elseif b.ForGameMaster == "No" then
 			val2 = 6
 		else
-			val2 = tierValue[GameHelpers.Stats.GetAttribute(b, "Tier", "None")] or -1
+			val2 = tierValue[b.Tier] or -1
 		end
 
 		return val1 < val2
@@ -299,23 +304,26 @@ function Origins_FixSkillBar(uuid)
 
 	local slotNum = 0
 	for i,v in pairs(slotEntries) do
-		NRD_SkillBarSetSkill(uuid, slotNum, v)
+		local slot = character.PlayerData.SkillBar[slotNum]
+		slot.Type = "Skill"
+		slot.ItemHandle = Ext.Entity.NullHandle()
+		slot.SkillOrStatId = v.Name
 		slotNum = slotNum + 1
 	end
-	-- local slot = 0
-	-- for i,skill in pairs(GameHelpers.GetCharacter(uuid):GetSkills()) do
-	-- 	NRD_SkillBarSetSkill(uuid, slot, skill)
-	-- 	slot = slot + 1
-	-- end
 end
 
 RegisterProtectedOsirisListener("CharacterJoinedParty", 1, "after", function(partyMember)
 	if ObjectGetFlag(partyMember, "LLWEAPONEX_FixSkillBar") == 1 then
 		ObjectClearFlag(partyMember, "LLWEAPONEX_FixSkillBar", 0)
-		Osi.LeaderLib_Timers_StartObjectTimer(partyMember, 500, "Timers_LLWEAPONEX_FixSkillbar", "LLWEAPONEX_FixSkillbar")
+		Timer.StartObjectTimer("LLWEAPONEX_FixSkillbar", partyMember, 500)
 	end
 end)
 
+Timer.Subscribe("LLWEAPONEX_FixSkillbar", function (e)
+	if e.Data.UUID then
+		Origins_FixSkillBar(e.Data.Object)
+	end
+end)
 
 local anvilSwapPresets = {
 	Knight = true,
@@ -324,14 +332,15 @@ local anvilSwapPresets = {
 	Barbarian = true,
 }
 
+local LadyCMoreColors = "db07c22c-8935-3848-2366-7827b70c6030"
+
 function CC_CheckKorvashColor(characterId)
 	local character = GameHelpers.GetCharacter(characterId)
-	print(character, characterId)
 	if character then
 		local id = GameHelpers.GetUserID(character)
 		if id ~= nil and character.PlayerCustomData ~= nil then
 			local nextColor = OriginColors.Korvash.Default
-			if Ext.IsModLoaded("db07c22c-8935-3848-2366-7827b70c6030") then
+			if Ext.Mod.IsModLoaded(LadyCMoreColors) then
 				nextColor = OriginColors.Korvash.LadyC
 			end
 			if character.PlayerCustomData.SkinColor ~= nextColor then
@@ -352,7 +361,7 @@ function CC_HideStoryButton(uuid)
 		local id = GameHelpers.GetUserID(uuid)
 		if id ~= nil then
 			hiddenStoryButtons[id] = true
-			Ext.PostMessageToUser(id, "LLWEAPONEX_CC_HideStoryButton", uuid)
+			GameHelpers.Net.PostToUser(id, "LLWEAPONEX_CC_HideStoryButton", uuid)
 		end
 	end
 end
@@ -362,7 +371,7 @@ function CC_EnableStoryButton(uuid)
 		local id = GameHelpers.GetUserID(uuid)
 		if id ~= nil and hiddenStoryButtons[id] ~= nil then
 			hiddenStoryButtons[id] = nil
-			Ext.PostMessageToUser(id, "LLWEAPONEX_CC_EnableStoryButton", uuid)
+			GameHelpers.Net.PostToUser(id, "LLWEAPONEX_CC_EnableStoryButton", uuid)
 		end
 	end
 end
@@ -394,22 +403,19 @@ function CC_OnPresetSelected(uuid, preset)
 	end
 end
 
-RegisterSkillListener("Shout_LLWEAPONEX_UnrelentingRage", function(skill, char, state, data)
-	if state == SKILL_STATE.CAST then
-		ClearTag(char, "LLWEAPONEX_EnemyDiedInCombat")
-	end
+SkillManager.Register.Cast("Shout_LLWEAPONEX_UnrelentingRage", function (e)
+	ClearTag(e.CharacterGUID, "LLWEAPONEX_EnemyDiedInCombat")
 end)
 
-RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, skillData)
-	if state == SKILL_STATE.CAST then
-		PersistentVars.SkillData.DarkFireballCount[char] = 0
-		UpdateDarkFireballSkill(char)
-		GameHelpers.Data.SyncSharedData(nil,nil,true)
-	end
+SkillManager.Register.Cast("Projectile_LLWEAPONEX_DarkFireball", function (e)
+	PersistentVars.SkillData.DarkFireballCount[e.CharacterGUID] = 0
+	UpdateDarkFireballSkill(e.CharacterGUID)
+	GameHelpers.Data.SyncSharedData(nil,nil,true)
 end)
 
-function UpdateDarkFireballSkill(char)
-	local killCount = PersistentVars.SkillData.DarkFireballCount[char] or 0
+---@param charGUID GUID
+function UpdateDarkFireballSkill(charGUID)
+	local killCount = PersistentVars.SkillData.DarkFireballCount[charGUID] or 0
 	if killCount >= 1 then
 		local rangeBonusMult = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_RangePerCount", 1.0)
 		local radiusBonusMult = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount", 0.4)
@@ -429,7 +435,7 @@ function UpdateDarkFireballSkill(char)
 			stat.Template = "9bdb7e9c-02ce-4f2f-9e7b-463e3771af9c"
 		end
 
-		Ext.SyncStat("Projectile_LLWEAPONEX_DarkFireball", true)
+		Ext.Stats.Sync("Projectile_LLWEAPONEX_DarkFireball", true)
 	else
 		local stat = Ext.Stats.Get("Projectile_LLWEAPONEX_DarkFireball", nil, false)
 		--stat["Damage Multiplier"] = 10
@@ -437,7 +443,7 @@ function UpdateDarkFireballSkill(char)
 		stat.AreaRadius = 1
 		stat.ExplodeRadius = 1
 		stat.Template = "f3af4ac9-567c-4ac8-8976-ec9c7bc8260d"
-		Ext.SyncStat("Projectile_LLWEAPONEX_DarkFireball", true)
+		Ext.Stats.Sync("Projectile_LLWEAPONEX_DarkFireball", true)
 	end
 end
 
@@ -454,7 +460,7 @@ end
 
 function Harken_SwapTattoos(uuid)
 	-- CharacterSetVisualElement doesn't work in the editor
-	if Ext.GameVersion() ~= "v3.6.51.9303" then
+	if Ext.Utils.GameVersion() ~= "v3.6.51.9303" then
 		local character = GameHelpers.GetCharacter(uuid)
 		if character ~= nil and character.RootTemplate ~= nil 
 		and character.RootTemplate.VisualTemplate == "b8ddbc75-415f-4894-afc2-2256e11b723d"

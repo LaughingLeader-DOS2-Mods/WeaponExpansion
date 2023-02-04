@@ -55,7 +55,7 @@ AND
 DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _Node, _Enemy, _UniqueTemplate)
 THEN
 NOT DB_LLWEAPONEX_Nodes_Temp_Activated(_Node, _Char);
-LLWEAPONEX_UniqueManager_Register_Owner(_Enemy, _UniqueTemplate, _Region);
+//LLWEAPONEX_UniqueManager_Register_Owner(_Enemy, _UniqueTemplate, _Region);
 SetCanJoinCombat(_Enemy, 0);
 PlayEffect(_Enemy, "RS3_FX_GP_ScriptedEvent_HannagPortal_01_Void_Summon");
 TeleportTo(_Enemy, _Node, "LLWEAPONEX_Node_TeleportedEnemy", 1, 0, 1);

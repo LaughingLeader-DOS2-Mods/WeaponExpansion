@@ -155,7 +155,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 	end
 
 	if isPlayer then
-		if item.Stats.Unique == 1 or item.Stats.ItemTypeReal == "Unique" then
+		if item.Stats.StatsEntry.Unique == 1 or item.Stats.ItemTypeReal == "Unique" then
 			UniqueManager.LevelUpUnique(character, item)
 		end
 		EquipmentManager.CheckFirearmProjectile(character, item)

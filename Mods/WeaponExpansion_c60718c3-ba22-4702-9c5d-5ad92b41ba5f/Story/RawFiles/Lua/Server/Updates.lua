@@ -176,6 +176,15 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponMastery_Progression", 4)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponMastery_Flags", 4)
 
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_CampaignRegions", 3)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_UniqueManager_RegisteredOwner", 3)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_UniqueManager_RegisteredPosition", 6)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_UniqueManager_Temp_ResolvedMove", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem", 2)
+	
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_TagRequirements", 3)
+
 	Osi.DB_LeaderLib_Skills_StatusToggleSkills:Delete("Shout_LLWEAPONEX_Rapier_DuelistStance", nil, nil, nil, nil)
 	Osi.LeaderLib_Statuses_Clear_Group("WeaponExpansion")
 
@@ -201,6 +210,8 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_10_BasilusDagger")
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_11_Blunderbuss")
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_10_DemolitionBackpack")
+	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_60_UniqueManager")
+	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_00_ExtenderSkillRefreshing")
 	
 	Osi.LeaderLib_GameScripts_ClearScriptsForGroup("WeaponExpansion")
 end)
