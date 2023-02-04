@@ -85,3 +85,50 @@ end)
 	CharacterStatusText(e.Target, "LLWEAPONEX_StatusText_BlockedHealing")
 	EffectManager.PlayEffect("LLWEAPONEX_FX_Status_BlockHealing_Hit_01", e.Target, {Bone="Dummy_FrontFX"})
 end) ]]
+
+--#region Unrelenting Rage
+
+Events.GetHitResistanceBonus:Subscribe(function (e)
+	if e.DamageType == "Physical" then
+		-- Unrelenting Rage grants up to a max of 20% Physical Resistance, but anything over that isn't increased.
+		local maxResBonus = GameHelpers.GetExtraData("LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus", 20)
+		if e.CurrentResistanceAmount < maxResBonus and GameHelpers.Status.IsActive(e.Target.Character, "LLWEAPONEX_UNRELENTING_RAGE") then
+			e.CurrentResistanceAmount = math.min(20, e.CurrentResistanceAmount + maxResBonus)
+		end
+	end
+end)
+
+Ext.Osiris.RegisterListener("CharacterKilledBy", 3, "after", function (targetGUID, attackerOwnerGUID, attackerGUID)
+	if HasActiveStatus(attackerGUID, "LLWEAPONEX_UNRELENTING_RAGE") == 1 and GameHelpers.Character.CanAttackTarget(targetGUID, attackerGUID, false) then
+		GameHelpers.Status.Apply(attackerGUID, "LLWEAPONEX_UNRELENTING_RAGE_BONUS_APPLY", 0, false, attackerGUID)
+	end
+end)
+
+Ext.Osiris.RegisterListener("ObjectTurnStarted", 1, "after", function (guid)
+	if HasActiveStatus(guid, "LLWEAPONEX_UNRELENTING_RAGE") == 1 then
+		ObjectSetFlag(guid, "LLWEAPONEX_UnrelentingRageAttackPending", 0)
+	end
+end)
+
+Ext.Osiris.RegisterListener("ObjectTurnEnded", 1, "after", function (guid)
+	if ObjectGetFlag(guid, "LLWEAPONEX_UnrelentingRageAttackPending") == 1 then
+		ObjectClearFlag(guid, "LLWEAPONEX_UnrelentingRageAttackPending", 0)
+		GameHelpers.Status.Remove(guid, "LLWEAPONEX_UNRELENTING_RAGE")
+	end
+end)
+
+StatusManager.Subscribe.Removed("LLWEAPONEX_UNRELENTING_RAGE", function (e)
+	if e.Target then
+		for _,v in pairs(e.Target:GetStatuses()) do
+			if string.find(v, "LLWEAPONEX_UNRELENTING_RAGE_BONUS") then
+				GameHelpers.Status.Remove(e.Target, v)
+			end
+		end
+	end
+end)
+
+StatusManager.Subscribe.AppliedType("DISABLE", function (e)
+	GameHelpers.Status.Remove(e.Target, "LLWEAPONEX_UNRELENTING_RAGE")
+end)
+
+--#endregion

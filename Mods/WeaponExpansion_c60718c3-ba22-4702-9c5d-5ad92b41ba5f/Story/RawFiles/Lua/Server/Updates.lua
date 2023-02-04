@@ -191,6 +191,8 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath", 2)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_DemonGauntlet_ActiveDefense", 2)
 
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Statuses_Temp_Rage_ListenForAttacked", 1)
+
 	Osi.DB_LeaderLib_Skills_StatusToggleSkills:Delete("Shout_LLWEAPONEX_Rapier_DuelistStance", nil, nil, nil, nil)
 	Osi.LeaderLib_Statuses_Clear_Group("WeaponExpansion")
 

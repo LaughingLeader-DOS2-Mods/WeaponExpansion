@@ -19,6 +19,15 @@ Events.OnPrepareHit:Subscribe(function(e)
 			end
 			return
 		end
+
+		if e.Data.CriticalHit and e.Data:Succeeded() and e.Data:IsDirect() and GameHelpers.Status.IsActive(e.Source, "LLWEAPONEX_UNRELENTING_RAGE") then
+			local critBonus = GameHelpers.GetExtraData("LLWEAPONEX_UnrelentingRage_CriticalDamageBonus", 50)
+			if critBonus ~= 0 then
+				local mult = 1 + (critBonus * 0.01)
+				e.Data:MultiplyDamage(mult)
+			end
+		end
+
 		if not StringHelpers.IsNullOrEmpty(e.SourceGUID) and GameHelpers.Ext.ObjectIsCharacter(e.Source) then
 			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[e.TargetGUID]
 			if coverData ~= nil and coverData.CanCounterAttack == true then
@@ -94,6 +103,10 @@ Events.OnHit:Subscribe(function(e)
 
 	if hitSucceeded and e.Target then
 		if GameHelpers.Ext.ObjectIsCharacter(e.Source) then
+			if ObjectGetFlag(e.SourceGUID, "LLWEAPONEX_UnrelentingRageAttackPending") == 1 then
+				ObjectClearFlag(e.SourceGUID, "LLWEAPONEX_UnrelentingRageAttackPending", 0)
+			end
+
 			SwordofVictory_OnHit(e.Target, e.Source, e.Data)
 			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[e.TargetGUID]
 			if coverData ~= nil then

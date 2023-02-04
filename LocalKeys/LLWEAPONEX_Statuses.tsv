@@ -83,7 +83,7 @@ LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description	Undead character is taking bonus dama
 LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName	Undead Bonus Damage	hb1e7d05ag15e5g4b62gbf4eg837bf4b2fd4c
 LLWEAPONEX_UNRELENTING_RAGE_BONUS_Description	Character is empowered from slaying enemies.	hf043482ege1efg49a5gbaf2gbac0ecb56e43
 LLWEAPONEX_UNRELENTING_RAGE_BONUS_DisplayName	Fury's Reward	h6f9c6b3fgfbddg4682gbdebgf5c3f04903d6
-LLWEAPONEX_UNRELENTING_RAGE_Description	Character is unleashing an unrelenting fury.<br><font color='#65C900'>Critical Damage +50%</font>	h4c2dc36bg924eg4a71gb211gc8d70743fdc9
+LLWEAPONEX_UNRELENTING_RAGE_Description	Character is unleashing an unrelenting fury.<br><font color='#65C900'>Critical Damage +[ExtraData:LLWEAPONEX_UnrelentingRage_CriticalDamageBonus:50]%</font>	h4c2dc36bg924eg4a71gb211gc8d70743fdc9
 LLWEAPONEX_UNRELENTING_RAGE_DisplayName	Raging	h82443abeg98f3g4977gba22ga9a785091dbe
 LLWEAPONEX_VICTORYCRY_Description	Inspired to fight for total victory, combat and defensive stats are increased.	h51414f0bgbadcg47ffgbe31ga4518859c47d
 LLWEAPONEX_VICTORYCRY_DisplayName	Victory Cry	hfcbeef9cg9b8cg457fg9cdcg53567fe8198a
