@@ -224,7 +224,7 @@ function MasteryMenu:BuildMasteryMenu(this)
 	end
 end
 
----@param skipFlash boolean
+---@param skipFlash boolean|nil
 function MasteryMenu:Close(skipFlash)
 	self.Variables.CurrentTooltip = nil
 	self.Variables.SelectedMastery.Last = self.Variables.SelectedMastery.Current

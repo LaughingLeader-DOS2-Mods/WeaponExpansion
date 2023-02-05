@@ -8,8 +8,8 @@ local _tests = {
 }
 WeaponExTesting = {}
 
----@alias _LLWEAPONEX_BonusTestTaskCallback fun(test:LuaTest, bonus:MasteryBonusData):boolean
----@alias _LLWEAPONEX_RegularTestTaskCallback fun(test:LuaTest)
+---@alias _LLWEAPONEX_BonusTestTaskCallback fun(test:LuaTest, bonus:MasteryBonusData):boolean|nil
+---@alias _LLWEAPONEX_RegularTestTaskCallback fun(test:LuaTest):boolean|nil
 
 ---@param bonusId string
 ---@param operation _LLWEAPONEX_BonusTestTaskCallback|_LLWEAPONEX_BonusTestTaskCallback[]
@@ -65,7 +65,7 @@ local function SetMasteryTests(cmd, enabledArg)
 			Debug.MasteryTests = enabled
 			fprint(LOGLEVEL.DEFAULT, "[weaponex_debugtesting] Testing is now (%s)", enabled and "enabled" or "disabled")
 			if _ISCLIENT then
-				Ext.PostMessageToServer("LLWEAPONEX_SetMasteryTests", "true")
+				Ext.Net.PostMessageToServer("LLWEAPONEX_SetMasteryTests", "true")
 			else
 				GameHelpers.Net.Broadcast("LLWEAPONEX_SetMasteryTests", "true")
 			end
@@ -213,20 +213,20 @@ if not _ISCLIENT then
 	---@param equipmentSet string|nil
 	---@return EsvCharacter
 	function WeaponExTesting.CreateTemporaryCharacter(pos, equipmentSet)
-		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter())
+		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter(), "EsvCharacter")
 		local pos = pos or GameHelpers.Math.ExtendPositionWithForwardDirection(host, 10)
 		local character = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], host.RootTemplate.Id, 0))
 		CharacterTransformFromCharacter(character, host.MyGuid, 1, 1, 1, 1, 1, 1, 1)
 		if equipmentSet then
-			CharacterTransformAppearanceToWithEquipmentSet(character, host.MyGuid, equipmentSet, false)
+			CharacterTransformAppearanceToWithEquipmentSet(character, host.MyGuid, equipmentSet, 0)
 		end
 		SetTag(character, "LeaderLib_TemporaryCharacter")
-		return GameHelpers.GetCharacter(character)
+		return GameHelpers.GetCharacter(character, "EsvCharacter")
 	end
 
 	local function SetupCharacter(character, transformTarget, equipmentSet)
 		if equipmentSet then
-			CharacterTransformAppearanceToWithEquipmentSet(character, transformTarget, equipmentSet, false)
+			CharacterTransformAppearanceToWithEquipmentSet(character, transformTarget, equipmentSet, 0)
 		else
 			CharacterTransformAppearanceTo(character, transformTarget, 1, 1)
 		end
@@ -251,8 +251,10 @@ if not _ISCLIENT then
 	---@param totalDummies integer|nil
 	---@return UUID character
 	---@return UUID dummy
+	---@return function cleanup
+	---@return GUID[] dummies
 	function WeaponExTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
-		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter())
+		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter(), "EsvCharacter")
 		local pos = pos or GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)
 		--LLWEAPONEX_Debug_MasteryDummy_2ac80a2a-8326-4131-a03c-53906927f935
 		local character = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0))
@@ -306,8 +308,9 @@ if not _ISCLIENT then
 	---@return UUID character1
 	---@return UUID character2
 	---@return UUID dummy
+	---@return function cleanup
 	function WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy)
-		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter())
+		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter(), "EsvCharacter")
 		local pos = pos or GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)
 		local pos2 = GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 7.0)
 		local pos3 = GameHelpers.Grid.GetValidPositionTableInRadius(pos, 6.0)
@@ -323,7 +326,7 @@ if not _ISCLIENT then
 
 		local dummy = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos3[1], pos3[2], pos3[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0))
 
-		PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01")
+		PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01", "")
 		SetTag(dummy, "LeaderLib_TemporaryCharacter")
 		SetTag(dummy, "NO_ARMOR_REGEN")
 		SetVarObject(dummy, "LLDUMMY_Owner", character)

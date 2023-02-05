@@ -1,6 +1,7 @@
 local _sfont = StringHelpers.StripFont
 local iconElementPattern = "(<icon.-/>)"
 
+---@diagnostic disable
 ---@deprecated
 local function SplitDescriptionByPattern(str, pattern, includeMatch)
 	local list = {};
@@ -89,7 +90,7 @@ local function ParseDescription(this, text, character)
 		if v.Icon ~= "" then
 			local iconId = GetStringValue(v.Icon, "id='(.-)'")
 			local iconName = GetStringValue(v.Icon, "icon='(.-)'")
-			local iconType = GetStringValue(v.Icon, "type='(.-)'")
+			local iconType = tonumber(GetStringValue(v.Icon, "type='(.-)'")) or 1
 			if not StringHelpers.IsNullOrWhitespace(iconId) then
 				if string.find(iconId, ";") then
 					if StringHelpers.IsNullOrWhitespace(iconName) and iconType ~= "3" then
@@ -150,6 +151,8 @@ local function GetAdditionalMasteryRankText(mastery, rank)
 	return nil
 end
 
+---@diagnostic enable
+
 local _ReplaceColors = {
 	[LocalizedText.DamageTypeNames.Physical.Color] = "#756255",
 }
@@ -167,9 +170,9 @@ end
 function MasteryMenu:GetPassiveText(bonus, character)
 	local tooltipText = ""
 	if not StringHelpers.IsNullOrEmpty(bonus.MasteryMenuSettings.TooltipSkill) then
-		tooltipText = _sfont(bonus:GetMenuTooltipText(character, bonus.TooltipSkill, "skill"))
+		tooltipText = _sfont(bonus:GetMenuTooltipText(character, bonus.MasteryMenuSettings.TooltipSkill, "skill"))
 	elseif not StringHelpers.IsNullOrEmpty(bonus.MasteryMenuSettings.TooltipStatus) then
-		tooltipText = _sfont(bonus:GetMenuTooltipText(character, bonus.TooltipStatus, "status"))
+		tooltipText = _sfont(bonus:GetMenuTooltipText(character, bonus.MasteryMenuSettings.TooltipStatus, "status"))
 	else
 		if bonus.MasteryMenuSettings.OnlyUseTable ~= "Status" then
 			if bonus.Skills and #bonus.Skills > 0 then
@@ -207,17 +210,16 @@ function MasteryMenu:BuildDescription(this, mastery, character)
 
 	for i=1,len,1 do
 		local rankDisplayName = GameHelpers.GetStringKeyText(string.format("LLWEAPONEX_UI_MasteryMenu_Rank%i", i))
+		local rankName = ""
 
-		local rankName = data.Ranks[i]
-		if type(rankName) == "table" then
-			if rankName.Type == "TranslatedString" then
-				rankName = rankName.Value
-			elseif rankName.Name then
-				rankName = rankName.Name.Value
+		local rankNameData = data.Ranks[i]
+		if type(rankNameData) == "table" then
+			if rankNameData.Type == "TranslatedString" then
+				rankName = rankNameData.Value
+			elseif rankNameData.Name then
+				rankName = rankNameData.Name.Value
 			end
 		end
-
-		---@cast rankName +string,-MasteryRankNameData,-table
 
 		local rankHeader = ""
 		if not StringHelpers.IsNullOrWhitespace(rankName) then

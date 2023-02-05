@@ -161,17 +161,6 @@ local weaponTypePreferenceOrder = {
 
 ItemTooltipParams.WeaponTypePreferenceOrder = weaponTypePreferenceOrder
 
----@class StatProperty
----@field Type string Status|Action
----@field Action string LLWEAPONEX_UNARMED_NOWEAPON_HIT etc
----@field Context string[] Target|Self
----@field Duration number
----@field StatusChance number
----@field Arg3 string
----@field Arg4 number
----@field Arg5 number
----@field SurfaceBoost boolean
-
 ---@param item EclItem
 ---@param tooltip TooltipData
 ---@param character EclCharacter
@@ -211,20 +200,14 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	if text ~= "" then
 		armorSlotType.Label = text
 	end
-	local equipped = tooltip:GetElement("Equipped")
-	if equipped == nil then
-		equipped = {
-			Type = "Equipped",
-			Label = "",
-			EquippedBy = character.DisplayName,
-			Slot = Text.ItemTooltip.RuneSlot.Value
-		}
-		tooltip:AppendElement(equipped)
-	else
-		equipped.Slot = Text.ItemTooltip.RuneSlot.Value
-	end
-
-	---@type StatProperty[]
+	local equipped = tooltip:GetElement("Equipped", {
+		Type = "Equipped",
+		Label = "",
+		EquippedBy = character.DisplayName,
+		Slot = Text.ItemTooltip.RuneSlot.Value
+	})
+	equipped.Slot = Text.ItemTooltip.RuneSlot.Value
+	---@type AnyStatProperty[]
 	local extraProperties = GameHelpers.Stats.GetExtraProperties(runeEffectWeapon, "ExtraProperties")
 	if extraProperties ~= nil and #extraProperties > 0 then
 		for i,v in pairs(extraProperties) do

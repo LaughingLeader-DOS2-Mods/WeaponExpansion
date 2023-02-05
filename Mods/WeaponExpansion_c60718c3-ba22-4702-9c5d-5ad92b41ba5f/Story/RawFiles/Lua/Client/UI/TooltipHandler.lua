@@ -142,7 +142,7 @@ end
 TooltipParams.SpecialParamFunctions = {
 	---@param statCharacter StatCharacter
 	LLWEAPONEX_MB_BacklashAPBonus = function(param, statCharacter)
-		GameHelpers.Stats.TryGetAttribute("MultiStrike_Vault", "ActionPoints", function (stat, attribute, apCost)
+		local b,result = GameHelpers.Stats.TryGetAttribute("MultiStrike_Vault", "ActionPoints", function (stat, attribute, apCost)
 			if apCost > 1 then
 				local refundMult = math.min(100, math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Backlash_APRefundPercentage", 50)))
 				if refundMult > 0 then
@@ -154,6 +154,9 @@ TooltipParams.SpecialParamFunctions = {
 				end
 			end
 		end)
+		if b then
+			return result
+		end
 		return "0"
 	end,
 	LLWEAPONEX_MB_Dagger_CorruptedStatuses = function (param, statCharacter)

@@ -36,14 +36,13 @@ local function ScatterOnDeath(data, owner)
 	ItemScatterAt(data.UUID, x, y, z)
 end
 
----@type table<string, UniqueData>
 Uniques = {
 	AnatomyBook = UniqueData:Create(ProgressionData.AnatomyBook, {Tag="LLWEAPONEX_UniqueAnatomyBook"}),
 	AnvilMace = UniqueData:Create(ProgressionData.AnvilMace, {Tag="LLWEAPONEX_AnvilMace_Equipped"}),
 	ArmCannon = UniqueData:Create(ProgressionData.ArmCannon, {Tag="LLWEAPONEX_RunicCannon_Equipped"}),
 	AssassinHandCrossbow = UniqueData:Create(ProgressionData.AssassinHandCrossbow, {Tag="LLWEAPONEX_AssassinHandCrossbow_Equipped"}),
 	BalrinAxe = UniqueData:Create(ProgressionData.BalrinAxe, {Tag="LLWEAPONEX_UniqueThrowingAxeA"}),
-	BeholderSword = UniqueData:Create(ProgressionData.BeholderSword, {Tag="LLWEAPONEX_UniqueBeholderGreatsword"}),
+	BeholderSword = UniqueData:Create(ProgressionData.BeholderSword, {Tag="LLWEAPONEX_BeholderSword_Equipped"}),
 	Bible = UniqueData:Create(ProgressionData.Bible, {Tag="LLWEAPONEX_UniqueBible"}),
 	Blunderbuss = UniqueData:Create(ProgressionData.Blunderbuss, {Tag="LLWEAPONEX_UniqueBlunderbuss"}),
 	PacifistsWrath = UniqueData:Create(ProgressionData.PacifistsWrath, {Tag="LLWEAPONEX_UniqueBokken2H"}),
@@ -65,7 +64,7 @@ Uniques = {
 	OgreScroll = UniqueData:Create(ProgressionData.OgreScroll, {Tag="LLWEAPONEX_UniqueOgreScroll"}),
 	Omnibolt = UniqueData:Create(ProgressionData.Omnibolt, {Tag="LLWEAPONEX_UniqueOmniboltGreatbow"}),
 	PowerPole = UniqueData:Create(ProgressionData.PowerPole, {Tag="LLWEAPONEX_UniquePowerPole"}),
-	WarchiefHalberd = UniqueData:Create(ProgressionData.WarchiefHalberd, {Tag="LLWEAPONEX_UniqueWarchiefHalberdSpear"}),
+	WarchiefHalberd = UniqueData:Create(ProgressionData.WarchiefHalberd, {Tag="LLWEAPONEX_UniqueWarchiefHalberdSpear"}), -- LLWEAPONEX_WarchiefHalberd_Equipped
 	Wraithblade = UniqueData:Create(ProgressionData.Wraithblade, {Tag="LLWEAPONEX_UniqueWraithblade"}),
 	Victory = UniqueData:Create(ProgressionData.Victory, {Tag="LLWEAPONEX_UniqueSwordofVictory"}),
 }
@@ -81,7 +80,7 @@ for id,v in pairs(Uniques) do
 end
 
 ---@param tag string
----@return UniqueData
+---@return UniqueData|nil
 function UniqueManager.GetDataByTag(tag)
 	for k,v in pairs(Uniques) do
 		if v.Tag == tag then
@@ -92,11 +91,11 @@ function UniqueManager.GetDataByTag(tag)
 end
 
 ---@param item EsvItem|string
----@return UniqueData
+---@return UniqueData|nil
 function UniqueManager.GetDataByItem(item)
 	local t = type(item)
 	if t == "string" then
-		local tryItem = GameHelpers.GetItem(item)
+		local tryItem = GameHelpers.GetItem(item, "EsvItem")
 		if tryItem then
 			item = tryItem
 			t = "userdata"
@@ -109,6 +108,7 @@ function UniqueManager.GetDataByItem(item)
 		end
 	end
 	if t == "userdata" then
+		---@cast item EsvItem
 		for k,v in pairs(Uniques) do
 			if v.UUID == item.MyGuid or v.Copies[item.MyGuid] then
 				return v
@@ -166,17 +166,20 @@ end
 
 -- CharacterSetVisualElement(Mods.WeaponExpansion.Origin.Harken, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
 
-function UniqueManager.OnDeath(char)
-	if not GameHelpers.Character.IsPlayer(char) then
-		local char = GameHelpers.GetUUID(char)
-		for key,unique in pairs(Uniques) do
-			if unique.Owner == char then
-				if unique.OnOwnerDeath == nil then
-					ItemToInventory(unique.UUID, char, 1, 0, 1)
-				else
-					local b,result = xpcall(unique.OnOwnerDeath, debug.traceback, unique, char)
-					if not b then
-						Ext.Utils.PrintError(result)
+---@param character CharacterParam
+function UniqueManager.OnDeath(character)
+	if not GameHelpers.Character.IsPlayer(character) then
+		local charGUID = GameHelpers.GetUUID(character)
+		if charGUID then
+			for key,unique in pairs(Uniques) do
+				if unique.Owner == charGUID then
+					if unique.OnOwnerDeath == nil then
+						ItemToInventory(unique.UUID, charGUID, 1, 0, 1)
+					else
+						local b,result = xpcall(unique.OnOwnerDeath, debug.traceback, unique, charGUID)
+						if not b then
+							Ext.Utils.PrintError(result)
+						end
 					end
 				end
 			end
@@ -387,11 +390,11 @@ if not _ISCLIENT then
 			unique:Initialize(region, UniqueManager.FirstLoad)
 		end
 		-- in case equipment events have changed and need to fire again
-		for player in GameHelpers.Character.GetPlayers(false) do
+		for player in GameHelpers.Character.GetPlayers(false, false, "EsvCharacter") do
 			for _,slotid in Data.VisibleEquipmentSlots:Get() do
 				local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
 				if not StringHelpers.IsNullOrEmpty(itemid) then
-					EquipmentManager:OnItemEquipped(player, GameHelpers.GetItem(itemid))
+					EquipmentManager:OnItemEquipped(player, GameHelpers.GetItem(itemid, "EsvItem"))
 				end
 			end
 		end
@@ -428,6 +431,7 @@ local UniqueScripts = {
 	"AnvilMace",
 	"BalrinThrowingAxe",
 	"BasilusDagger",
+	"Beholder",
 	"Blunderbuss",
 	"DeathEdge",
 	"DevilHand",
@@ -442,6 +446,7 @@ local UniqueScripts = {
 	"RunicCannon",
 	"SoulHarvest",
 	"Victory",
+	"WarchiefsHalberd",
 }
 
 for _,v in pairs(UniqueScripts) do

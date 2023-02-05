@@ -2,7 +2,7 @@ if not Vars.IsClient then
 	StatusManager.Subscribe.Applied("LLWEAPONEX_BASILUS_HIT", function(e)
 		local minTurns = GameHelpers.GetExtraData("LLWEAPONEX_BasilusDagger_MinTurns", 2, true)
 		local maxTurns = GameHelpers.GetExtraData("LLWEAPONEX_BasilusDagger_MaxTurns", 3, true)
-		local duration = Ext.Random(minTurns,maxTurns) * 6.0
+		local duration = Ext.Utils.Random(minTurns,maxTurns) * 6.0
 		if not GameHelpers.Status.IsActive(e.Target, "LLWEAPONEX_BASILUS_HAUNTED") then
 			GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_BASILUS_HAUNTED", duration, false, e.Source)
 		else
@@ -24,7 +24,7 @@ if not Vars.IsClient then
 		PersistentVars.BasilusHauntedTarget[attacker.MyGuid] = 0
 		local hauntedStatus = attacker:GetStatus("LLWEAPONEX_BASILUS_HAUNTED")
 		if hauntedStatus and GameHelpers.IsValidHandle(hauntedStatus.StatusSourceHandle) then
-			local source = GameHelpers.TryGetObject(hauntedStatus.StatusSourceHandle)
+			local source = GameHelpers.TryGetObject(hauntedStatus.StatusSourceHandle, "EsvCharacter")
 			if source then
 				local backstab = false
 				local chance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_BasilusDagger_BackstabChance", 40))
@@ -56,13 +56,14 @@ if not Vars.IsClient then
 		if not _registeredListeners then
 			Ext.Osiris.RegisterListener("CharacterStartAttackObject", 3, "before", function (target, owner, attacker)
 				if PersistentVars.BasilusHauntedTarget[StringHelpers.GetUUID(attacker)] == 1 then
-					Basilus_OnTargetActionTaken(GameHelpers.TryGetObject(attacker))
+					Basilus_OnTargetActionTaken(GameHelpers.TryGetObject(attacker, "EsvCharacter"))
 				end
 			end)
 		
 			Ext.Osiris.RegisterListener("CharacterUsedSkill", 4, "before", function (attacker)
+				---@cast attacker GUID
 				if PersistentVars.BasilusHauntedTarget[StringHelpers.GetUUID(attacker)] == 1 then
-					Basilus_OnTargetActionTaken(GameHelpers.TryGetObject(attacker))
+					Basilus_OnTargetActionTaken(GameHelpers.TryGetObject(attacker, "EsvCharacter"))
 				end
 			end)
 
@@ -95,7 +96,7 @@ if not Vars.IsClient then
 			cleanup(...)
 		end
 		test:Wait(250)
-		local weapon = GameHelpers.Item.CreateItemByStat("WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A")
+		local weapon = GameHelpers.Item.CreateItemByStat("WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A") --[[@as GUID]]
 		test:Wait(250)
 		SetTag(weapon, "LLWEAPONEX_Testing")
 		NRD_CharacterEquipItem(char1, weapon, "Weapon", 0, 0, 1, 1)

@@ -29,6 +29,19 @@ function DeathManager.RemoveAllDataForTarget(target)
 	end
 end
 
+local function _OnDeath(uuid)
+	local data = PersistentVars.OnDeath[uuid]
+	if data ~= nil then
+		--fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] %s died. Firing callbacks.", uuid)
+		for attacker,attackerData in pairs(data.Attackers) do
+			for id,b in pairs(attackerData) do
+				FireCallbacks(id, uuid, attacker, true)
+			end
+		end
+		PersistentVars.OnDeath[uuid] = nil
+	end
+end
+
 ---@param id string
 ---@param target ServerObject|GUID
 ---@param attacker ServerObject|GUID
@@ -70,11 +83,11 @@ function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 			local tDebugName = string.format("Timers_LLWEAPONEX_Debug_FakeDeathEvent_%s_%s", id, Ext.Random(0,999))
 			Timer.StartOneshot(tDebugName, listenDelay/2, function()
 				fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer %s", tDebugName)
-				DeathManager.OnDeath(targetGUID)
+				_OnDeath(targetGUID)
 			end)
 		else
 			fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing.")
-			DeathManager.OnDeath(targetGUID)
+			_OnDeath(targetGUID)
 		end
 	end
 end
@@ -86,22 +99,9 @@ Timer.Subscribe("LLWEAPONEX_DeathManager_ClearListener", function (e)
 	end
 end)
 
-function DeathManager.OnDeath(uuid)
-	local data = PersistentVars.OnDeath[uuid]
-	if data ~= nil then
-		--fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] %s died. Firing callbacks.", uuid)
-		for attacker,attackerData in pairs(data.Attackers) do
-			for id,b in pairs(attackerData) do
-				FireCallbacks(id, uuid, attacker, true)
-			end
-		end
-		PersistentVars.OnDeath[uuid] = nil
-	end
-end
-
-RegisterProtectedOsirisListener("CharacterDying", 1, "after", function(char)
-	DeathManager.OnDeath(StringHelpers.GetUUID(char))
-end)
+Events.CharacterDied:Subscribe(function (e)
+	_OnDeath(e.CharacterGUID)
+end, {MatchArgs={State="Dying"}})
 
 Events.Initialized:Subscribe(function (e)
 	for uuid,data in pairs(PersistentVars.OnDeath) do

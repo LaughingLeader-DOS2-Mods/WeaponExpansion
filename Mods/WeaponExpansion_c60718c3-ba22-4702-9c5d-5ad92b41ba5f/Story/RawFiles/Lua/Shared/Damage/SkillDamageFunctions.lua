@@ -92,7 +92,7 @@ local attributes = {
 }
 
 ---@param character StatCharacter
----@param validAttributes string[]
+---@param validAttributes string[]|nil
 local function GetHighestAttribute(character, validAttributes)
 	if validAttributes == nil then validAttributes = attributes end
 	local attribute = "Strength"

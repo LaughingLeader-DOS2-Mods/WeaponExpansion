@@ -41,6 +41,9 @@ local defaultPersistentVars = {
         ---Used to count the current total jumps, to ultimately stop jumping when the limit is reached.
         ---@type table<GUID,integer>
         FlickerStrikeTotalJumps = {},
+        ---Used to limit targets hit (either when rushed through or after the movement ends).
+        ---@type table<GUID,{Ready:boolean, Targets:table<GUID,boolean>}>
+        WarchiefWhirlwindTargets = {},
     },
     StatusData = {
         ---@type table<GUID,table<string,{Target:GUID, Source:GUID, Status:string}>>
@@ -120,7 +123,7 @@ if Vars.DebugMode then
     end)
 end
 
----@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean):void
+---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean)
 ---@alias EquipmentChangedIDType string|"Tag"|"Template"
 ---@alias ItemListenerEvent string|"EquipmentChanged"
 

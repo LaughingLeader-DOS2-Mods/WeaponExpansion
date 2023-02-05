@@ -37,11 +37,9 @@ GameStarted(_Region, _)
 AND
 NOT DB_GlobalFlag("LLWEAPONEX_Quest_Kevin_GainedKevin")
 AND
-DB_LLWEAPONEX_CampaignRegions("Campaign", _Region, _RegionLevel)
+IsGameLevel(_Region, 1)
 AND
-DB_LLWEAPONEX_CampaignRegions("Campaign", "RC_Main", _EndLevel)
-AND
-_RegionLevel > _EndLevel
+_Region != "FJ_FortJoy_Main"
 THEN
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Normal_b3fc8995-8c7c-4de5-b465-e2573334cff7");
 GoalCompleted;

@@ -71,11 +71,16 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	end
 
 	if last < 268435456 or Vars.LeaderDebugMode then
-		MasterySystem.MigrateMasteryExperience()
+		if not PersistentVars.MasteryExperience then
+			Events.PersistentVarsLoaded:Subscribe(function (e)
+				MasterySystem.MigrateMasteryExperience()
+			end, {Once=true, Priority=0})
+		else
+			MasterySystem.MigrateMasteryExperience()
+		end
 	end
 
-	for player in GameHelpers.Character.GetPlayers() do
-		---@cast player EsvCharacter
+	for player in GameHelpers.Character.GetPlayers(false, false, "EsvCharacter") do
 		EquipmentManager:CheckWeaponRequirementTags(player)
 		if HasActiveStatus(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then
 			GameHelpers.Status.Remove(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")

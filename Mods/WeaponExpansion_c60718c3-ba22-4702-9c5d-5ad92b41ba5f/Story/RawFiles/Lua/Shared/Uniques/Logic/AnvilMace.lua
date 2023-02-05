@@ -50,6 +50,7 @@ if not Vars.IsClient then
 			GameHelpers.Skill.Explode(pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", e.Data.Object, {EnemiesOnly = true})
 		end
 	end)
+	
 	EquipmentManager.Events.UnsheathedChanged:Subscribe(function (e)
 		if GameHelpers.Character.GetBaseRace(e.Character) == "Dwarf" then
 			--EffectManager.PlayClientEffect("LLWEAPONEX_FX_AnvilMace_Unsheathed_Impact_01", e.Character, {WeaponBones="Dummy_FX_01"})
