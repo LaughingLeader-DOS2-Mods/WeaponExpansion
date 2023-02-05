@@ -97,7 +97,7 @@ LLWEAPONEX_WARCHARGE_DisplayName	War Charge	h979e3a93g84a4g434cg8320gb5eb3931bee
 LLWEAPONEX_WARCHIEF_MARK_CONSUME_DisplayName	Explode Warchief's Mark for bonus damage	hfab60f56g42abg40bfgb006g43d41f36d5cd
 LLWEAPONEX_WARCHIEF_MARK_Description	Character's has been marked by the <font color='#c5a65a'>Warchief's Halberd</font>.	hb9e220ceg072fg4b21gb00cg86ecef3a25f8
 LLWEAPONEX_WARCHIEF_MARK_DisplayName	Warchief's Mark	h84d76d1egc004g4e77g9b24gb87eb9dede90
-LLWEAPONEX_WARCHIEF_WHIRLWIND_DAMAGE_DisplayName	Hit Enemies in a 4m Radius	hf49aaa63gbb9fg44c6g8e16gd657951220ce
+LLWEAPONEX_WARCHIEF_WHIRLWIND_HIT_DisplayName	Hit Enemies in a 4m Radius	hf49aaa63gbb9fg44c6g8e16gd657951220ce
 LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.	hdfc42773gac5ag42a6gbf66g8b5978d1d011
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn	h2e604607g818cg4c27gba6ag06f2d6e8f015
 LLWEAPONEX_WEAKNESS_AIR_Description	Character has lowered resistance to <font color='#7D71D9'>air damage</font>.	he071dae7gc53fg45c1ga708g45c4e456b766

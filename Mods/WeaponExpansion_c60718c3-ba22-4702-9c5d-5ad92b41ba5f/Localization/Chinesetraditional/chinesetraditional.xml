@@ -238,6 +238,7 @@
 	<content contentuid="h179f019fg0f06g44b9g971age8e5920a845b">Conductor</content>
 	<content contentuid="h17ba62e1g37e8g47a7g968fg9446ccf64370">Metal Pipe</content>
 	<content contentuid="h17c882f8ge9d2g4a53g84a9g5367d8a9eb45">&lt;font color=&apos;#C7A758&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_DisplayName:Omnibolt, Heaven&apos;s Wrath]&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#33FF22&apos;&gt;Summon a lightning strike, dealing an additional [SkillDamage:Projectile_LLWEAPONEX_Greatbow_LightningStrike].&lt;font&gt;</content>
+	<content contentuid="h17dc2f95gd0b7g40deg8c9cgc3409cecdca0">Hit Enemies in a 4m Radius</content>
 	<content contentuid="h17e56658gbfa0g46e5ga131gf4ce2d1f425a">Activate the &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; to enemies hit for 1 turn.</content>
 	<content contentuid="h1805b56aga7fbg46d6g9ce5ga663ca6b0128">&lt;font color=&apos;#F19824&apos;&gt;The corpses of targets killed explode for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Dagger_CrueltyCorpseExplosion]. Targets killed by an explosion explode as well.&lt;/font&gt;</content>
 	<content contentuid="h183de597ga842g42c5gac3bgd61680d21c0b">Undead character is taking bonus damage!</content>
@@ -773,7 +774,7 @@
 	<content contentuid="h4bfff173gd40fg4a95gb350g996e8cc2a913">A handmade quiver. Comfortably fits arrows of both normal size and greater.</content>
 	<content contentuid="h4c12b970gddc3g48f7ga600g515c5829c95f">Wound (Balrin&apos;s Throwing Axe)</content>
 	<content contentuid="h4c239ed6gc93cg42acgb424g81991047cdcb">&lt;font color=&apos;#FF337F&apos;&gt;Pistol Mastery V&lt;/font&gt;</content>
-	<content contentuid="h4c2dc36bg924eg4a71gb211gc8d70743fdc9">Character is unleashing an unrelenting fury.&lt;br&gt;&lt;font color=&apos;#65C900&apos;&gt;Critical Damage +50%&lt;/font&gt;</content>
+	<content contentuid="h4c2dc36bg924eg4a71gb211gc8d70743fdc9">Character is unleashing an unrelenting fury.&lt;br&gt;&lt;font color=&apos;#65C900&apos;&gt;Critical Damage +[ExtraData:LLWEAPONEX_UnrelentingRage_CriticalDamageBonus:50]%&lt;/font&gt;</content>
 	<content contentuid="h4c31f1cbg467eg497cgb914ga48e5e637c0a">Power Gauntlets</content>
 	<content contentuid="h4c622533gba32g43bbg8134g42ded4f95168">Flank Protection</content>
 	<content contentuid="h4c67e600gdf54g44f3g9661g8539c8efde7e">[CANCEL] *Hit the button labeled &quot;CANCEL&quot;.*</content>
@@ -972,7 +973,7 @@
 	<content contentuid="h5e3574f8gdf2ag4293gb08eg512aa6858a9e">Serrated Rupture</content>
 	<content contentuid="h5e37e2c9g1d9fg4dc6g9d11g36ef081c0e27">Throwing Dagger</content>
 	<content contentuid="h5e406683g1f15g4998g869cgee124ba8d773">Frenzy Charge</content>
-	<content contentuid="h5e68b4a3gdb7fg48f5g803ag90f21fd89496">Fly into an unstoppable fury, gaining the following buffs:&lt;br&gt;&lt;img src=&apos;Icon_BulletPoint&apos;&gt;&lt;font color=&apos;#65C900&apos;&gt;Critical Chance +[1]%&lt;br&gt;&lt;img src=&apos;Icon_BulletPoint&apos;&gt;Critical Damage +50%&lt;br&gt;&lt;img src=&apos;Icon_BulletPoint&apos;&gt;Up to [ExtraData:LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus]% Physical Resistance&lt;/font&gt;&lt;br&gt;&lt;img src=&apos;Icon_Line&apos; width=&apos;350%&apos;&gt;&lt;br&gt;&lt;font color=&apos;#FF5533&apos;&gt;Slaying an enemy extends Unrelenting Rage by an additional turn, up to the maximum (3), and provides a stacking &lt;font color=&apos;#00FF00&apos;&gt;+[2]% Damage Boost&lt;/font&gt;.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF3333&apos;&gt;Ending your turn without attacking, or getting disabled ends Unrelenting Rage.&lt;/font&gt;</content>
+	<content contentuid="h5e68b4a3gdb7fg48f5g803ag90f21fd89496">Fly into an unstoppable fury, gaining the following buffs:&lt;br&gt;&lt;img src=&apos;Icon_BulletPoint&apos;&gt;&lt;font color=&apos;#65C900&apos;&gt;Critical Chance +[1]%&lt;br&gt;&lt;img src=&apos;Icon_BulletPoint&apos;&gt;Critical Damage +50%&lt;br&gt;&lt;img src=&apos;Icon_BulletPoint&apos;&gt;Up to [ExtraData:LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus]% Physical Resistance&lt;/font&gt;&lt;br&gt;&lt;img src=&apos;Icon_Line&apos; width=&apos;350%&apos;&gt;&lt;br&gt;&lt;font color=&apos;#FF5533&apos;&gt;Slaying an enemy extends Unrelenting Rage by an additional turn, up to the maximum (3), and provides a stacking &lt;font color=&apos;#00FF00&apos;&gt;+[2]% Damage Boost&lt;/font&gt;.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF3333&apos;&gt;Ending your turn without attacking, or getting disabled, ends Unrelenting Rage.&lt;/font&gt;</content>
 	<content contentuid="h5e7a5e8bgd695g4511g84a8g5d7f4fd443f4">Character&apos;s &lt;font color=&apos;#2DF9FF&apos;&gt;Runeblade Mastery&lt;/font&gt; level allows them to control poison with finer precision.</content>
 	<content contentuid="h5e99c588ga880g43b5ga2f3g0d4cbc6fce5c">Soul Burn IV</content>
 	<content contentuid="h5eb0dcafg0ee8g4b0agb4b8gfc5df2e3e5b5">Pilgrim&apos;s Spiked Quarterstaff</content>
@@ -2466,7 +2467,6 @@
 	<content contentuid="hf41342aag8eb2g490eg8e10g97e327843dc2">A secret cache used by smugglers to store hidden goods.&lt;br&gt;Don&apos;t ask where it was hidden.</content>
 	<content contentuid="hf4441e4cgfd32g49bfga758gb0f711be47e8">A former marksman from a long-forgotten regiment, tasked with destroying dragonkind. With their unyielding strength, Dragon Slayers utilize Greatbows to pierce their enemies with arrows the size of spears</content>
 	<content contentuid="hf4632a8fg42a7g4d53gbe26gd203f28e3d5e">Shadow</content>
-	<content contentuid="hf49aaa63gbb9fg44c6g8e16gd657951220ce">Hit Enemies in a 4m Radius</content>
 	<content contentuid="hf4a3144egb402g4631ga4d8g7e47144c28b5">Combat Shield</content>
 	<content contentuid="hf4abf7c3g1100g4950gada5g414d376d477e">&lt;font color=&apos;#C80030&apos;&gt;Attuned to Blood&lt;/font&gt;</content>
 	<content contentuid="hf4b1fac1gcb52g4bb8gbcdfg6bc0b8fd0e57">&lt;font color=&apos;#00FF7F&apos;&gt;Greatbow Mastery III&lt;/font&gt;</content>
