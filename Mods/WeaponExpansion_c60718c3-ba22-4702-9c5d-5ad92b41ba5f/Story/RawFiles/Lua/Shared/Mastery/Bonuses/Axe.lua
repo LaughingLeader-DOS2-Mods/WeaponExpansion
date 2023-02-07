@@ -86,6 +86,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 			else
 				GameHelpers.Status.Apply(e.Data.Object, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -2, false, e.Data.Source)
 			end
+			StatusTurnHandler.SaveTurnEndStatus(e.Data.Source, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", e.Data.Source, e.Data.UUID)
 			SignalTestComplete("AXE_VULNERABLE_1")
 		end
 	end).Test(function(test, self)

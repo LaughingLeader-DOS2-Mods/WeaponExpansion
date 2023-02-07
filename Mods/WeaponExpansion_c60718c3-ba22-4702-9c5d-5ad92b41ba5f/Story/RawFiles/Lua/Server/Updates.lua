@@ -126,6 +126,11 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 			SkillConfiguration.BalrinAxe.Calls.EquipBalrinAxe(player)
 		end
 	end
+
+	for _,db in pairs(Osi.DB_LLWEAPONEX_Statuses_Temp_Revenants:Get(nil, nil, nil, nil)) do
+		local target,revenant,source,status = table.unpack(db)
+		SkillConfiguration.Revenants.KillRevenant(GameHelpers.GetCharacter(revenant), revenant)
+	end
 	
 	Osi.LeaderLib_Statuses_Clear_PermanentStatus("WeaponExpansion", "LLWEAPONEX_ARMCANNON_CHARGED")
 
@@ -189,14 +194,26 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem", 2)
 
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_TagRequirements", 3)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_SlayHidden_Targets", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget", 2)
 
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponFX_UnsheathedStatus", 2)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus", 3)
 
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath", 2)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_DemonGauntlet_ActiveDefense", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_AnvilMace_Temp_GroundSlamTarget", 3)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_Temp_NextCombinedWarchiefHalberd", 3)
 
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Statuses_Temp_Rage_ListenForAttacked", 1)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_MasteryBonus_ListenForRemoval", 3)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Statuses_ListenForTurnEnding", 4)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Statuses_Temp_WaitForFinished", 7)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Statuses_Temp_Revenants", 4)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_AttachedRevanents", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_TS_Temp_CustomUnsheathed", 2)
+
+	
 
 	Osi.DB_LeaderLib_Skills_StatusToggleSkills:Delete("Shout_LLWEAPONEX_Rapier_DuelistStance", nil, nil, nil, nil)
 	Osi.LeaderLib_Statuses_Clear_Group("WeaponExpansion")

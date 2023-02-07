@@ -42,7 +42,7 @@ if not Vars.IsClient then
 					HitParams=HitFlagPresets.GuaranteedWeaponHit:Append({Backstab = backstab}),
 					GetDamageFunction=Skills.Damage.Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage
 				})
-				local pos = {table.unpack(attacker.WorldPos)}
+				local pos = attacker.WorldPos
 				pos[2] = pos[2] + attacker.AI.AIBoundsHeight * 0.5
 				EffectManager.PlayEffectAt("RS3_FX_GP_Impacts_Ghost_01", pos, {Rotation=attacker.Rotation})
 				SignalTestComplete("LLWEAPONEX_BladeOfBasilus_DamageApplied")

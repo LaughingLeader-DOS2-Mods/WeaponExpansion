@@ -127,7 +127,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	end).Osiris("ObjectTurnEnded", 1, "after", function(char)
 		local character = GameHelpers.GetCharacter(char)
 		if character then
-			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = {table.unpack(character.WorldPos)}
+			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = character.WorldPos
 			SignalTestComplete("CROSSBOW_STILL_STANCE_PositionSaved")
 		end
 	end).Osiris("ObjectLeftCombat", 1, "after", function(char)
@@ -314,7 +314,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 				end
 				e.Data.IgnoreObjects = true
 				e.Data.Target = target.Handle
-				local pos = {table.unpack(target.WorldPos)}
+				local pos = target.WorldPos
 				pos[2] = pos[2] + (target.AI.AIBoundsHeight / 2)
 				e.Data.EndPosition = pos
 
@@ -508,7 +508,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 4, {
 			if PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill] == nil then
 				PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill] = {}
 			end
-			PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill][e.Character.MyGuid] = {table.unpack(e.Character.WorldPos)}
+			PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill][e.Character.MyGuid] = e.Character.WorldPos
 		end
 	end).SkillProjectileHit(function (self, e, bonuses)
 		local pbdata = PersistentVars.MasteryMechanics.CrossbowCastingPiercingSkill[e.Skill]

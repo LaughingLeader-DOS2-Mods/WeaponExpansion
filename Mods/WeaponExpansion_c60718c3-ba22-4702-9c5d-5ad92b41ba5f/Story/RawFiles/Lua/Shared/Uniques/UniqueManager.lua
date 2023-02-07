@@ -430,6 +430,7 @@ local UniqueScripts = {
 	"AnatomyBook",
 	"AnvilMace",
 	"BalrinThrowingAxe",
+	"Banners",
 	"BasilusDagger",
 	"Beholder",
 	"Blunderbuss",
@@ -447,6 +448,7 @@ local UniqueScripts = {
 	"SoulHarvest",
 	"Victory",
 	"WarchiefsHalberd",
+	"Wraithblade",
 }
 
 for _,v in pairs(UniqueScripts) do

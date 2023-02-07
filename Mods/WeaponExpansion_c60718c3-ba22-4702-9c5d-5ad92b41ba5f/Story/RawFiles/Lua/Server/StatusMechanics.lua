@@ -132,3 +132,164 @@ StatusManager.Subscribe.AppliedType("DISABLE", function (e)
 end)
 
 --#endregion
+
+Events.CharacterDied:Subscribe(function (e)
+	if e.Character:GetStatus("LLWEAPONEX_DEATH_SENTENCE") then
+		local pos = e.Character.WorldPos
+		EffectManager.PlayEffectAt("RS3_FX_GP_ScriptedEvent_SourceJar_Death_Impact_01", pos)
+		EffectManager.PlayEffectAt("RS3_FX_GP_Impacts_Ghost_01", pos)
+	end
+end, {MatchArgs={State="BeforeDying"}})
+
+---@param revenant EsvCharacter
+---@param guid GUID
+local function _KillRevenant(revenant, guid, source)
+	PersistentVars.StatusData.Revenants[guid] = nil
+	if revenant then
+		EffectManager.PlayEffectAt("RS3_FX_GP_ScriptedEvent_GhostDissipate_01", revenant.WorldPos)
+		local x,y,z = table.unpack(revenant.WorldPos)
+		local sourceGUID = source and source.MyGuid or guid
+		TransformSurfaceAtPosition(x, y, z, "Vaporize", "Ground", 1.0, 12.0, sourceGUID)
+		if not GameHelpers.Character.IsDeadOrDying(revenant) then
+			CharacterDieImmediate(revenant.MyGuid, 0, "LifeTime", revenant.MyGuid)
+		end
+	end
+	RemoveTemporaryCharacter(guid)
+end
+
+SkillConfiguration.Revenants = {
+	Templates = {
+		Base = "bb15f97e-b6bf-4648-9190-71b42a7744c4",
+	},
+	KillRevenant = _KillRevenant,
+	---@param source EsvCharacter
+	---@param target CharacterParam|vec3
+	---@param template FixedString|nil
+	---@return EsvCharacter|nil revenant
+	Create = function (source, target, template)
+		if not template then
+			template = SkillConfiguration.Revenants.Templates.Base
+		end
+		local name = Text.Misc.Revenant.Value
+		local level = source.Stats.Level
+		local x,y,z = GameHelpers.Math.GetPosition(target, true)
+		local targetIsCharacter = false
+		if type(target) ~= "table" then
+			target = GameHelpers.GetCharacter(target, "EsvCharacter")
+			if target then
+				---@cast target EsvCharacter
+				level = target.Stats.Level
+				name = Text.Misc.Revenant_WithName:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(target))
+				targetIsCharacter = true
+			end
+		end
+		--local revenant = GameHelpers.GetCharacter(NRD_Summon(source.MyGuid, template, x, y, z, -1, level, 0, 1), "EsvCharacter")
+		local revenant = GameHelpers.GetCharacter(TemporaryCharacterCreateAtPosition(x, y, z, template, 0), "EsvCharacter")
+		if targetIsCharacter then
+			local targetGUID = target.MyGuid
+			local revenantGUID = revenant.MyGuid
+			--CharacterSetDetached(revenantGUID, 1)
+			CharacterTransformAppearanceTo(revenantGUID, targetGUID, 1, 1)
+			GameHelpers.Character.SetLevel(revenant, level)
+			local faction = source.CurrentTemplate.CombatTemplate.Alignment
+			SetFaction(revenantGUID, faction)
+			revenant.Stats.CurrentVitality = revenant.Stats.MaxVitality
+			revenant.CustomDisplayName = name
+			TeleportToRandomPosition(revenantGUID, 4, "")
+			Osi.LeaderLib_Helper_CopyAbilities(revenantGUID, targetGUID)
+			Osi.LeaderLib_Helper_CopyAttributes(revenantGUID, targetGUID)
+			CharacterCloneSkillsTo(targetGUID, revenantGUID, 1)
+			EffectManager.PlayEffect("RS3_FX_Char_Ghosts_Teleport_in_01", revenant)
+			GameHelpers.Status.Apply(revenant, "LLWEAPONEX_REVENANT", 12, true, source)
+			if GameHelpers.Character.IsPlayer(source) then
+				CharacterAddToPlayerCharacter(revenantGUID, source.MyGuid)
+				Osi.SetRelationIndivFactionToPlayers(revenantGUID, 100)
+			end
+
+			if GameHelpers.Character.IsInCombat(source) then
+				local combatid = GameHelpers.Combat.GetID(source)
+				local enemies = GameHelpers.Combat.GetCharacters(combatid, "Enemy", source, true)
+				if enemies[1] then
+					EnterCombat(revenantGUID, enemies[1].MyGuid)
+				else
+					Osi.ProcCharacterFollowCharacter(revenantGUID, source.MyGuid)
+				end
+			else
+				Osi.ProcCharacterFollowCharacter(revenantGUID, source.MyGuid)
+			end
+
+			return revenant
+		end
+	end
+}
+
+StatusManager.Subscribe.BeforeDelete("LLWEAPONEX_DEATH_SENTENCE", function (e)
+	if e.Source and GameHelpers.Character.IsDeadOrDying(e.Target) then
+		local revenant = SkillConfiguration.Revenants.Create(e.Source, e.Target)
+		if revenant then
+			PersistentVars.StatusData.Revenants[revenant.MyGuid] = e.SourceGUID
+		end
+	end
+end)
+
+local function _TryKillRevenant(guid)
+	local revenant = GameHelpers.GetCharacter(guid, "EsvCharacter")
+	if revenant then
+		if not GameHelpers.Character.IsDeadOrDying(revenant) then
+			CharacterDieImmediate(guid, 0, "LifeTime", guid)
+			 -- Let the died event clear the table key
+			return
+		end
+	end
+	PersistentVars.StatusData.Revenants[guid] = nil
+end
+
+Events.CharacterDied:Subscribe(function (e)
+	if PersistentVars.StatusData.Revenants[e.CharacterGUID] then
+		local source = GameHelpers.Status.GetSourceByID(e.Character, "LLWEAPONEX_REVENANT")
+		if source then
+			_KillRevenant(e.Character, e.CharacterGUID, source)
+		end
+	end
+end, {MatchArgs={State="StatusBeforeAttempt"}})
+
+StatusManager.Subscribe.Removed("LLWEAPONEX_REVENANT", function (e)
+	_TryKillRevenant(e.TargetGUID)
+end)
+
+Events.CharacterResurrected:Subscribe(function (e)
+	for revenantGUID,sourceGUID in pairs(PersistentVars.StatusData.Revenants) do
+		if sourceGUID == e.CharacterGUID then
+			_TryKillRevenant(revenantGUID)
+		end
+	end
+end)
+
+--[[
+Revenant Save Bug 2/4/2019
+When a save with an attached revenant is loaded, that revenant no longer remains attached, despite still being a "player".
+Not sure why this is happeneing, but unattaching them and re-attaching after the game is started works.
+--]]
+
+Events.Initialized:Subscribe(function (e)
+	for revenantGUID,sourceGUID in pairs(PersistentVars.StatusData.Revenants) do
+		if ObjectExists(revenantGUID) == 1 and GameHelpers.Character.IsPlayer(sourceGUID) then
+			CharacterAddToPlayerCharacter(revenantGUID, sourceGUID)
+		end
+	end
+end)
+
+--[[ Ext.Osiris.RegisterListener("ObjectTurnEnded", 1, "after", function (guid)
+	local object = GameHelpers.TryGetObject(guid)
+	if object then
+		for id,b in pairs(Configuration.Status.RemoveOnTurnEnding) do
+			if b and object:GetStatus(id) then
+				GameHelpers.Status.Remove(object, id)
+			end
+		end
+		if object:HasTag("LLWEAPONEX_Pistol_MarkedForCrit") then
+			GameHelpers.Status.Remove(object, "MARKED")
+			ClearTag(object.MyGuid, "LLWEAPONEX_Pistol_MarkedForCrit")
+		end
+	end
+end) ]]

@@ -131,6 +131,29 @@ Events.OnHit:Subscribe(function(e)
 			SkillConfiguration.DualShields.HunkerDownReduceDamage(e.Target, e.Source, e.Data)
 		end
 	end
-	
+
 	GameHelpers.Status.Remove(e.Target, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST")
+end)
+
+Configuration.Status.ChaosPowerSurfaces = {
+	"Fire",
+	"Water",
+	"WaterElectrified",
+	"WaterFrozen",
+	"Blood",
+	"BloodElectrified",
+	"BloodFrozen",
+	"Poison",
+	"Oil",
+	"Source",
+	"Web",
+	"WaterCloud",
+	"BloodCloud",
+	"SmokeCloud",
+}
+
+Ext.Events.BeforeCharacterApplyDamage:Subscribe(function (e)
+	if e.Target:GetStatus("LLWEAPONEX_CHAOS_POWER") and e.Hit.TotalDamageDone > 0 then
+		GameHelpers.Surface.CreateSurface(e.Target.WorldPos, Common.GetRandomTableEntry(Configuration.Status.ChaosPowerSurfaces), 2, 12, e.Target.Handle, true, 1.0)
+	end
 end)

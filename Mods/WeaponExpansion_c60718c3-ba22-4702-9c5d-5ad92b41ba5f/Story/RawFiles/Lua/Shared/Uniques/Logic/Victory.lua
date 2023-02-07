@@ -66,7 +66,7 @@ if not Vars.IsClient then
 				data:MultiplyDamage(1 + Ext.Utils.Round(mult * 0.01))
 				SignalTestComplete("LLWEAPONEX_Victory_EvilSlayerDamageBonus")
 				EffectManager.PlayEffect("RS3_FX_GP_Status_Firebrand_Subject_Weapon_01", attacker)
-				--local pos = {table.unpack(target.WorldPos)}
+				--local pos = target.WorldPos
 				--pos[2] = pos[2] + (target.AI.AIBoundsHeight * 0.5)
 				--EffectManager.PlayEffectAt("RS3_FX_GP_Status_Firebrand_Subject_Hand_01", pos)
 				EffectManager.PlayEffectAt("RS3_FX_GP_Status_Firebrand_Subject_Hand_01", data.HitStatus.ImpactPosition)

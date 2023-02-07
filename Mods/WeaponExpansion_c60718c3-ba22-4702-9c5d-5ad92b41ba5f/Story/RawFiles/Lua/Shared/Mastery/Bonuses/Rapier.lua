@@ -270,7 +270,7 @@ if not Ext.IsClient() then
 						skillParamOverrides = {["Damage Multiplier"] = damageMult}
 					end
 					EffectManager.PlayEffect("RS3_FX_Skills_Warrior_BlinkStrike_Cast_01", character)
-					local effectPos = {table.unpack(target.WorldPos)}
+					local effectPos = target.WorldPos
 					effectPos[2] = effectPos[2] + (target.AI.AIBoundsHeight * 0.5) + (0.1 * Ext.Utils.Random(-2,2))
 					EffectManager.PlayEffectAt("RS3_FX_Skills_Warrior_BlinkStrike_Impact_01", effectPos)
 					GameHelpers.Damage.ApplySkillDamage(character, target, "MultiStrike_LLWEAPONEX_Rapier_FlickerStrike", {SkillDataParamModifiers=skillParamOverrides, HitParams=HitFlagPresets.GuaranteedWeaponHit})

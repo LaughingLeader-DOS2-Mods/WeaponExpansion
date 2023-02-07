@@ -129,13 +129,6 @@ DB_LeaderLib_BlockedSkill(_MainSkill);
 DB_LeaderLib_BlockedSkill(_DualWieldSkill);
 //END_REGION
 
-//REGION TOGGLE_SKILLS
-PROC
-LLWEAPONEX_LeaderLib_InitSettings()
-THEN
-LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_PowerGauntlets_ToggleGiantStrength", "LLWEAPONEX_POWERGAUNTLETS_ACTIVE", -1.0, 1, 1);
-//END_REGION
-
 //REGION UPDATES
 PROC
 LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)

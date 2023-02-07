@@ -54,7 +54,7 @@ SkillConfiguration.RemoteMines.Detonate = function (target, source)
 					RunBreachKnockback(source, target)
 				elseif skill == "Projectile_LLWEAPONEX_RemoteMine_Displacement" then
 					PersistentVars.SkillData.RemoteMineDetonation[target.MyGuid] = {
-						Position = {table.unpack(target.WorldPos)},
+						Position = target.WorldPos,
 						Targets = {}
 					}
 					Timer.StartObjectTimer("LLWEAPONEX_Displacement_TeleportTargets", target, 1000)
@@ -69,7 +69,7 @@ SkillConfiguration.RemoteMines.Detonate = function (target, source)
 			CharacterItemSetEvent(source.MyGuid, target.MyGuid, "LLWEAPONEX_RemoteMine_DetonationDone")
 		else
 			if GameHelpers.Item.IsDestructible(target) then
-				local pos = {table.unpack(target.WorldPos)}
+				local pos = target.WorldPos
 				--Grenade.itemScript
 				local explodeSkill = GetVarObject(target.MyGuid, "ProjectileSkill")
 				if StringHelpers.IsNullOrWhitespace(explodeSkill) then

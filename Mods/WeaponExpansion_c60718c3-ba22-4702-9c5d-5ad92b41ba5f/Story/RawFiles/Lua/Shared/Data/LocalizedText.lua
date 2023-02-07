@@ -264,6 +264,10 @@ Text = {
 		BludgeonShatteredStatus = ts:CreateFromKey("LLWEAPONEX_StatusText_BludgeonShatteredStatus", "<font color='#F19824'>Shattered [1]!</font>"),
 		WeaponAttributeChanged = ts:CreateFromKey("LLWEAPONEX_StatusText_WeaponAttributeChanged", "<font color='#33FF66'><font color='[3]'>[1]</font> is now empowered by</font> <font color='[4]'>[2]</font>"),
 		WeaponAttributeReset = ts:CreateFromKey("LLWEAPONEX_StatusText_WeaponAttributeReset", "<font color='#00FFC9'><font color='[3]'>[1]</font> is now empowered by <font color='[4]'>[2]</font>, as it originally was</font>"),
+	},
+	Misc = {
+		Revenant = ts:CreateFromKey("LLWEAPONEX_Revenant_Base", "Revenant"),
+		Revenant_WithName = ts:CreateFromKey("LLWEAPONEX_Revenant_WithName", "[1] (Revenant)")
 	}
 }
 

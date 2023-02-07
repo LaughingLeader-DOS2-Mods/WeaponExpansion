@@ -44,6 +44,9 @@ local defaultPersistentVars = {
         ---Used to limit targets hit (either when rushed through or after the movement ends).
         ---@type table<GUID,{Ready:boolean, Targets:table<GUID,boolean>}>
         WarchiefWhirlwindTargets = {},
+        ---Used to limit targets hit (either when rushed through or after the movement ends).
+        ---@type table<GUID,{StartingPosition:vec3, Targets:table<GUID,boolean>, }>
+        WraithbladeSlayHiddenData = {},
     },
     StatusData = {
         ---@type table<GUID,table<string,{Target:GUID, Source:GUID, Status:string}>>
@@ -51,6 +54,9 @@ local defaultPersistentVars = {
         KatanaCombo = {},
         ---@type table<GUID,integer>
         BasilusHauntedTarget = {},
+        ---Revenant GUID to source character GUID
+        ---@type table<GUID,GUID>
+        Revenants = {},
     },
     MasteryMechanics = {
         ---@type table<GUID,integer>
@@ -115,6 +121,14 @@ PersistentVars = GameHelpers.PersistentVars.Initialize(Mods.WeaponExpansion, def
             StatusTurnHandler.RemoveAllInactiveStatuses(uuid)
         end
     end
+
+    for revenantGUID,sourceGUID in pairs(PersistentVars.StatusData.Revenants) do
+		if ObjectExists(revenantGUID) == 1 then
+			CharacterRemoveFromPlayerCharacter(revenantGUID, sourceGUID)
+		else
+            PersistentVars.StatusData.Revenants[revenantGUID] = nil
+		end
+	end
 end)
 
 if Vars.DebugMode then
@@ -131,6 +145,14 @@ BonusSkills = {}
 
 if SkillConfiguration == nil then SkillConfiguration = {} end
 SkillConfiguration.TempData = {RecalculatedUnarmedSkillDamage = {}}
+
+Configuration = {
+    Status = {
+        RemoveOnTurnEnding = {
+            LLWEAPONEX_MASTERYBONUS_VULNERABLE = true,
+        }
+    }
+}
 
 ItemProcessor = {}
 
