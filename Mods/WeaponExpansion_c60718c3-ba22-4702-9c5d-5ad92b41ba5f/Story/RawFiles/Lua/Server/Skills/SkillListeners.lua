@@ -1,4 +1,4 @@
-SkillConfiguration.AimedShot = {
+Config.Skill.AimedShot = {
 	BonusStatuses = {"LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY"},
 	CriticalRequirementStatuses = {"MARKED"},
 }
@@ -8,7 +8,7 @@ SkillManager.Register.All("Projectile_LLWEAPONEX_Rifle_AimedShot", function(e)
 		GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 6.0, false, e.Character)
 		local shouldCriticalHit = false
 		e.Data:ForEach(function(target)
-			if GameHelpers.Status.IsActive(target, SkillConfiguration.AimedShot.CriticalRequirementStatuses) then
+			if GameHelpers.Status.IsActive(target, Config.Skill.AimedShot.CriticalRequirementStatuses) then
 				shouldCriticalHit = true
 			end
 		end, e.Data.TargetMode.Objects)
@@ -19,13 +19,13 @@ SkillManager.Register.All("Projectile_LLWEAPONEX_Rifle_AimedShot", function(e)
 		Timer.StartObjectTimer("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", e.Character, 1500)
 	elseif e.State == SKILL_STATE.HIT or e.State == SKILL_STATE.UNMEMORIZED then
 		Timer.Cancel("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", e.Character)
-		GameHelpers.Status.Remove(e.Character, SkillConfiguration.AimedShot.BonusStatuses)
+		GameHelpers.Status.Remove(e.Character, Config.Skill.AimedShot.BonusStatuses)
 	end
 end)
 
 Timer.Subscribe("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", function(e)
 	if e.Data.Object then
-		GameHelpers.Status.Remove(e.Data.Object, SkillConfiguration.AimedShot.BonusStatuses)
+		GameHelpers.Status.Remove(e.Data.Object, Config.Skill.AimedShot.BonusStatuses)
 	end
 end)
 
@@ -152,12 +152,12 @@ function(e)
 	end
 end)
 
-SkillConfiguration.HandCrossbows = {
+Config.Skill.HandCrossbows = {
 	AllShootSkills = {"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"}
 }
 
 Ext.Events.SessionLoaded:Subscribe(function()
-	SkillManager.Register.Hit(SkillConfiguration.HandCrossbows.AllShootSkills, function(e)
+	SkillManager.Register.Hit(Config.Skill.HandCrossbows.AllShootSkills, function(e)
 		-- Silver bolts / Bullets do bonus damage to undead/voidwoken
 		if e.Data.Success and TagHelpers.IsUndeadOrVoidwoken(e.Data.Target) then
 			if Skills.HasTaggedRuneBoost(e.Character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
@@ -169,7 +169,7 @@ Ext.Events.SessionLoaded:Subscribe(function()
 		end
 	end)
 
-	SkillManager.Register.MemorizationChanged(SkillConfiguration.HandCrossbows.AllShootSkills, function (e)
+	SkillManager.Register.MemorizationChanged(Config.Skill.HandCrossbows.AllShootSkills, function (e)
 		if e.Data == false then
 			CharacterRemoveSkill(e.CharacterGUID, "Shout_LLWEAPONEX_HandCrossbow_Reload")
 		end
@@ -247,3 +247,89 @@ Timer.Subscribe("LLWEAPONEX_FutureBarrage_FireSkill", function (e)
 		e:Dump()
 	end
 end)
+
+--#region Chaos Skills
+
+--[[ SkillManager.Register.Used({"Projectile_LLWEAPONEX_ChaosSlash", "Projectile_LLWEAPONEX_EnemyChaosSlash"}, function (e)
+
+end) ]]
+
+SkillManager.Register.Used("Rush_LLWEAPONEX_EnemyChaosCharge", function (e)
+	local lastAction = PersistentVars.SkillData.ChaosChargePathAction[e.CharacterGUID]
+	if lastAction then
+		StopDrawSurfaceOnPath(lastAction.Handle)
+	end
+	local surface = Common.GetRandomTableEntry(Config.Status.ChaosPowerSurfaces)
+	local radius = GameHelpers.GetExtraData("LLWEAPONEX_ChaosCharge_SurfaceRadius", 0.5)
+	local duration = GameHelpers.GetExtraData("LLWEAPONEX_ChaosCharge_SurfaceDuration", 12.0)
+	local handle = DrawSurfaceOnPath(e.CharacterGUID, e.CharacterGUID, surface, radius, duration)
+	PersistentVars.SkillData.ChaosChargePathAction[e.CharacterGUID] = {
+		Handle = handle,
+		Surface = surface
+	}
+end)
+
+SkillManager.Register.Cast("Rush_LLWEAPONEX_EnemyChaosCharge", function (e)
+	Timer.StartObjectTimer("LLWEAPONEX_Timers_StopChaosChargeDrawing", e.Character, 800)
+end)
+
+Timer.Subscribe("LLWEAPONEX_Timers_StopChaosChargeDrawing", function (e)
+	local data = PersistentVars.SkillData.ChaosChargePathAction[e.Data.UUID]
+	if data then
+		StopDrawSurfaceOnPath(data.Handle)
+		PersistentVars.SkillData.ChaosChargePathAction[e.Data.UUID] = nil
+		local character = e.Data.Object --[[@as EsvCharacter]]
+		if character then
+			local radius = GameHelpers.GetExtraData("LLWEAPONEX_ChaosCharge_SurfaceRadius", 0.5) * 2
+			local duration = GameHelpers.GetExtraData("LLWEAPONEX_ChaosCharge_SurfaceDuration", 12.0)
+			GameHelpers.Surface.CreateSurface(character.WorldPos, data.Surface, radius, duration, character.Handle, true)
+		end
+	end
+end)
+
+Events.ObjectEvent:Subscribe(function (e)
+	local item = e.Objects[1] --[[@as EsvItem]]
+	local radius = GetVarFloat(item.MyGuid, "LLWEAPONEX_Radius") or 1.0
+	local lifetime = GetVarFloat(item.MyGuid, "LLWEAPONEX_Lifetime") or 6.0
+	local owner = GameHelpers.Item.GetOwner(item) --[[@as EsvCharacter]]
+	fprint(LOGLEVEL.ERROR, "[LLWEAPONEX_Commands_StartDrawingChaosSurface] MovingObject(%s) Owner(%s)", item.CurrentTemplate.Name, GameHelpers.GetDisplayName(owner))
+
+	local surface = Common.GetRandomTableEntry(Config.Status.ChaosPowerSurfaces)
+	--local action = Ext.Action.CreateGameAction("PathAction", "", owner.Handle) --[[@as EsvPathAction]]
+	-- local action = Ext.Surface.Action.Create("EsvChangeSurfaceOnPathAction") --[[@as EsvChangeSurfaceOnPathAction]]
+	-- action.CheckExistingSurfaces = false
+	-- action.Duration = lifetime
+	-- action.FollowObject = item.Handle
+	-- action.IgnoreIrreplacableSurfaces = true
+	-- action.OwnerHandle = owner.Handle
+	-- action.Radius = radius
+	-- action.StatusChance = 1.0
+	-- action.SurfaceType = surface
+	-- Ext.Surface.Action.Execute(action)
+	-- PersistentVars.SkillData.ChaosSlashPathAction[item.MyGuid] = Ext.Utils.HandleToInteger(action.MyHandle)
+	local handle = DrawSurfaceOnPath(owner.MyGuid, item.MyGuid, surface, radius, lifetime)
+	PersistentVars.SkillData.ChaosSlashPathAction[item.MyGuid] = {
+		Handle = handle,
+		Surface = surface,
+		Owner = owner.MyGuid
+	}
+
+end, {MatchArgs={Event="LLWEAPONEX_Commands_StartDrawingChaosSurface"}})
+
+Events.ObjectEvent:Subscribe(function (e)
+	local owner,item = table.unpack(e.Objects)
+	---@cast owner EsvCharacter
+	---@cast item EsvItem
+
+	local data = PersistentVars.SkillData.ChaosSlashPathAction[e.ObjectGUID2]
+	if data then
+		StopDrawSurfaceOnPath(data.Handle)
+		PersistentVars.SkillData.ChaosSlashPathAction[e.ObjectGUID2] = nil
+		local radius = GetVarFloat(item.MyGuid, "LLWEAPONEX_Radius") or 1.0
+		local lifetime = GetVarFloat(item.MyGuid, "LLWEAPONEX_Lifetime") or 6.0
+		GameHelpers.Surface.CreateSurface(item.WorldPos, data.Surface, radius, lifetime, owner.Handle, true)
+	end
+	ItemDestroy(e.ObjectGUID2)
+end, {MatchArgs={Event="LLWEAPONEX_Commands_StopDrawingChaosSurface"}})
+
+--#endregion

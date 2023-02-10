@@ -47,6 +47,14 @@ local defaultPersistentVars = {
         ---Used to limit targets hit (either when rushed through or after the movement ends).
         ---@type table<GUID,{StartingPosition:vec3, Targets:table<GUID,boolean>, }>
         WraithbladeSlayHiddenData = {},
+        ---@type table<GUID,{Handle:integer, Surface:SurfaceType, Owner:GUID}>
+        ChaosSlashPathAction = {},
+        ---@type table<GUID,{Handle:integer, Surface:SurfaceType}>
+        ChaosChargePathAction = {},
+        ---Active banner items created by the related banner rally skills.
+        ---Owner GUID to a table of banners, with the status source ID.
+        ---@type table<GUID,{Banners:table<GUID,string>, PartyMembers:table<GUID,string>}>
+        BannerRally = {},
     },
     StatusData = {
         ---@type table<GUID,table<string,{Target:GUID, Source:GUID, Status:string}>>
@@ -142,18 +150,6 @@ end
 ---@alias ItemListenerEvent string|"EquipmentChanged"
 
 BonusSkills = {}
-
-if SkillConfiguration == nil then SkillConfiguration = {} end
-SkillConfiguration.TempData = {RecalculatedUnarmedSkillDamage = {}}
-
-Configuration = {
-    Status = {
-        RemoveOnTurnEnding = {
-            LLWEAPONEX_MASTERYBONUS_VULNERABLE = true,
-        }
-    }
-}
-
 ItemProcessor = {}
 
 Ext.Require("Server/Data/PresetEntries.lua")

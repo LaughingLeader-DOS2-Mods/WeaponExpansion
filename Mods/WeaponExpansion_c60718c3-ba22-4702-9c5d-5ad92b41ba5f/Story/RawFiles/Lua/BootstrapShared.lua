@@ -7,7 +7,45 @@ Math = { AbilityScaling = {}}
 Text = {}
 MasterySystem = {}
 
-if SkillConfiguration == nil then SkillConfiguration = {} end
+Config = {
+	Skill = {
+		BannerRally = {
+			Templates = {
+				Dome_LLWEAPONEX_Banner_Rally_DivineOrder = "d5c842bf-8eb0-46cd-a928-e4f989f91010", -- LLWEAPONEX_Skill_Rally_Banner_DivineOrder_A
+				Dome_LLWEAPONEX_Banner_Rally_Dwarves = "cfdf3976-4696-473d-8f4b-fd1461f8d708", -- LLWEAPONEX_Skill_Rally_Banner_Dwarves_A
+			},
+			SkillToStatus = {
+				Dome_LLWEAPONEX_Banner_Rally_DivineOrder = "LLWEAPONEX_BANNER_RALLY_DIVINEORDER",
+				Dome_LLWEAPONEX_Banner_Rally_Dwarves = "LLWEAPONEX_BANNER_RALLY_DWARVES",
+			}
+		}
+	},
+    Status = {
+        RemoveOnTurnEnding = {
+            LLWEAPONEX_MASTERYBONUS_VULNERABLE = true,
+        },
+		ChaosPowerSurfaces = {
+			"Fire",
+			"Water",
+			"WaterElectrified",
+			"WaterFrozen",
+			"Blood",
+			"BloodElectrified",
+			"BloodFrozen",
+			"Poison",
+			"Oil",
+			"Source",
+			"Web",
+			"WaterCloud",
+			"BloodCloud",
+			"SmokeCloud",
+		}
+    },
+	TempData = {
+		RecalculatedUnarmedSkillDamage = {}
+	}
+}
+
 if UniqueVars == nil then UniqueVars = {} end
 
 local defaultExperienceAmounts = {

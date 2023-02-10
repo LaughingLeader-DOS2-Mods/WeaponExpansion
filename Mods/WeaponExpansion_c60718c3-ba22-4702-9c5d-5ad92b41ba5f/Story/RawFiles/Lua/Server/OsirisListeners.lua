@@ -86,7 +86,7 @@ local function ReloadAmmoSkills(uuid)
 	end
 	if CharacterHasSkill(uuid, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
 		local race = GameHelpers.Character.GetBaseRace(uuid)
-		local bone = SkillConfiguration.Pistols.RaceToProjectileBone[race]
+		local bone = Config.Skill.Pistols.RaceToProjectileBone[race]
 		if not bone then
 			bone = ""
 		end
@@ -185,10 +185,10 @@ Events.Initialized:Subscribe(function(e)
 		PersistentVars.AttributeRequirementChanges = existingChanges
 	end
 	for player in GameHelpers.Character.GetPlayers() do
-		if CharacterHasSkill(player.MyGuid, "Shout_LLWEAPONEX_HandCrossbow_Reload") == 1 and not GameHelpers.Character.HasSkill(player, SkillConfiguration.HandCrossbows.AllShootSkills) then
+		if CharacterHasSkill(player.MyGuid, "Shout_LLWEAPONEX_HandCrossbow_Reload") == 1 and not GameHelpers.Character.HasSkill(player, Config.Skill.HandCrossbows.AllShootSkills) then
 			CharacterRemoveSkill(player.MyGuid, "Shout_LLWEAPONEX_HandCrossbow_Reload")
 		end
-		if CharacterHasSkill(player.MyGuid, "Shout_LLWEAPONEX_Pistol_Reload") == 1 and not GameHelpers.Character.HasSkill(player, SkillConfiguration.Pistols.AllShootSkills) then
+		if CharacterHasSkill(player.MyGuid, "Shout_LLWEAPONEX_Pistol_Reload") == 1 and not GameHelpers.Character.HasSkill(player, Config.Skill.Pistols.AllShootSkills) then
 			CharacterRemoveSkill(player.MyGuid, "Shout_LLWEAPONEX_Pistol_Reload")
 		end
 	end

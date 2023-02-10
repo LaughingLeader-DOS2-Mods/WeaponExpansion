@@ -3,7 +3,7 @@ local rb = MasteryDataClasses.MasteryBonusData
 
 local _unsubRushProtection = {}
 
-SkillConfiguration.DualShields = {}
+Config.Skill.DualShields = {}
 
 MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 1, {
 	rb:Create("DUALSHIELDS_RUSHPROTECTION", {
@@ -137,8 +137,8 @@ if not Vars.IsClient then
 		end
 	end
 
-	SkillConfiguration.DualShields.CoverCounter = _CoverCounter
-	SkillConfiguration.DualShields.CoverRedirectDamage = _CoverRedirectDamage
+	Config.Skill.DualShields.CoverCounter = _CoverCounter
+	Config.Skill.DualShields.CoverRedirectDamage = _CoverRedirectDamage
 	--#endregion
 
 	--#region Hunker Down
@@ -173,7 +173,7 @@ if not Vars.IsClient then
 		end
 	end
 
-	SkillConfiguration.DualShields.HunkerDownReduceDamage = _HunkerDownReduceDamage
+	Config.Skill.DualShields.HunkerDownReduceDamage = _HunkerDownReduceDamage
 
 	StatusManager.Subscribe.Applied("LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", function (e)
 		if not e.Target:HasTag("AI_PREFERRED_TARGET") then

@@ -93,7 +93,7 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 				ItemResetChargesToMax(quiver.MyGuid)
 			end
 			if not GameHelpers.Character.IsInCombat(player) then
-				SkillConfiguration.Quivers.RemoveTempArrows(player)
+				Config.Skill.Quivers.RemoveTempArrows(player)
 			end
 		end
 
@@ -123,13 +123,13 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 		-- Fix for Balrin's Axe disappearing due to unforseen consequences
 		-- May need some additional checks
 		if not GameHelpers.IsInCombat(player) then
-			SkillConfiguration.BalrinAxe.Calls.EquipBalrinAxe(player)
+			Config.Skill.BalrinAxe.Calls.EquipBalrinAxe(player)
 		end
 	end
 
 	for _,db in pairs(Osi.DB_LLWEAPONEX_Statuses_Temp_Revenants:Get(nil, nil, nil, nil)) do
 		local target,revenant,source,status = table.unpack(db)
-		SkillConfiguration.Revenants.KillRevenant(GameHelpers.GetCharacter(revenant), revenant)
+		Config.Skill.Revenants.KillRevenant(GameHelpers.GetCharacter(revenant), revenant)
 	end
 	
 	Osi.LeaderLib_Statuses_Clear_PermanentStatus("WeaponExpansion", "LLWEAPONEX_ARMCANNON_CHARGED")
@@ -213,7 +213,20 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_AttachedRevanents", 2)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_TS_Temp_CustomUnsheathed", 2)
 
-	
+	Osi.LeaderLib_Helper_ClearSurfaceList("LLWEAPONEX_ChaosSurfaces")
+	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath", 4)
+	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing", 3)
+	--Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosSlashCaster", 1)
+
+	for _,db in pairs(Osi.DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath:Get(nil,nil,nil,nil)) do
+		local character,obj,handle,surface = table.unpack(db)
+		StopDrawSurfaceOnPath(handle)
+	end
+
+	for _,db in pairs(Osi.DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing:Get(nil,nil,nil)) do
+		local character,surface,handle = table.unpack(db)
+		StopDrawSurfaceOnPath(handle)
+	end
 
 	Osi.DB_LeaderLib_Skills_StatusToggleSkills:Delete("Shout_LLWEAPONEX_Rapier_DuelistStance", nil, nil, nil, nil)
 	Osi.LeaderLib_Statuses_Clear_Group("WeaponExpansion")

@@ -145,7 +145,7 @@ if not Vars.IsClient then
 		RecoverBalrinAxe(target, true)
 	end)
 
-	SkillConfiguration.BalrinAxe = {
+	Config.Skill.BalrinAxe = {
 		Calls = {
 			EquipBalrinAxe = EquipBalrinAxe,
 			RecoverBalrinAxe = RecoverBalrinAxe,

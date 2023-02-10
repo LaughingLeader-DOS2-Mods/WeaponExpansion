@@ -26,10 +26,10 @@ StatusManager.Subscribe.BeforeAttempt("BURNING", function (e)
 	end
 end)
 
-SkillConfiguration.RandomGroundSurfaces = {"Fire", "Water", "WaterFrozen", "WaterElectrified", "Blood", "BloodFrozen", "BloodElectrified", "Poison", "Oil"}
+Config.Skill.RandomGroundSurfaces = {"Fire", "Water", "WaterFrozen", "WaterElectrified", "Blood", "BloodFrozen", "BloodElectrified", "Poison", "Oil"}
 
 StatusManager.Subscribe.Applied("LLWEAPONEX_RANDOM_SURFACE_SMALL", function (e)
-	local surface = Common.GetRandomTableEntry(SkillConfiguration.RandomGroundSurfaces)
+	local surface = Common.GetRandomTableEntry(Config.Skill.RandomGroundSurfaces)
 	GameHelpers.Surface.CreateSurface(e.Target.WorldPos, surface, 1.0, e.Status.CurrentLifeTime, e.Source and e.Source.Handle or nil, true)
 	if e.Status.CurrentLifeTime ~= 0 then
 		GameHelpers.Status.Remove(e.Target, "LLWEAPONEX_RANDOM_SURFACE_SMALL")
@@ -157,7 +157,7 @@ local function _KillRevenant(revenant, guid, source)
 	RemoveTemporaryCharacter(guid)
 end
 
-SkillConfiguration.Revenants = {
+Config.Skill.Revenants = {
 	Templates = {
 		Base = "bb15f97e-b6bf-4648-9190-71b42a7744c4",
 	},
@@ -168,7 +168,7 @@ SkillConfiguration.Revenants = {
 	---@return EsvCharacter|nil revenant
 	Create = function (source, target, template)
 		if not template then
-			template = SkillConfiguration.Revenants.Templates.Base
+			template = Config.Skill.Revenants.Templates.Base
 		end
 		local name = Text.Misc.Revenant.Value
 		local level = source.Stats.Level
@@ -225,7 +225,7 @@ SkillConfiguration.Revenants = {
 
 StatusManager.Subscribe.BeforeDelete("LLWEAPONEX_DEATH_SENTENCE", function (e)
 	if e.Source and GameHelpers.Character.IsDeadOrDying(e.Target) then
-		local revenant = SkillConfiguration.Revenants.Create(e.Source, e.Target)
+		local revenant = Config.Skill.Revenants.Create(e.Source, e.Target)
 		if revenant then
 			PersistentVars.StatusData.Revenants[revenant.MyGuid] = e.SourceGUID
 		end
@@ -282,7 +282,7 @@ end)
 --[[ Ext.Osiris.RegisterListener("ObjectTurnEnded", 1, "after", function (guid)
 	local object = GameHelpers.TryGetObject(guid)
 	if object then
-		for id,b in pairs(Configuration.Status.RemoveOnTurnEnding) do
+		for id,b in pairs(Config.Status.RemoveOnTurnEnding) do
 			if b and object:GetStatus(id) then
 				GameHelpers.Status.Remove(object, id)
 			end

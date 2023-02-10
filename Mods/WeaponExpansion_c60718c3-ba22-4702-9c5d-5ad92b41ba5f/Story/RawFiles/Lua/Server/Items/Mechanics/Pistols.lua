@@ -1,4 +1,4 @@
-SkillConfiguration.Pistols = {
+Config.Skill.Pistols = {
 	AllShootSkills = {
 		"Projectile_LLWEAPONEX_Pistol_Shoot",
 		"Projectile_LLWEAPONEX_Pistol_Shoot_Enemy",
@@ -43,7 +43,7 @@ SkillConfiguration.Pistols = {
 local function _GetPistolExplosionEffect(character)
 	local race = GameHelpers.Character.GetBaseRace(character)
 	local isFemale = GameHelpers.Character.IsFemale(character) and 1 or 0
-	local raceData = SkillConfiguration.Pistols.PistolEffects[race]
+	local raceData = Config.Skill.Pistols.PistolEffects[race]
 	if raceData then
 		local effect = raceData[isFemale]
 		return effect
@@ -54,7 +54,7 @@ end
 ---@param character EsvCharacter
 local function _GetPistolRemoveDelay(character)
 	local race = GameHelpers.Character.GetBaseRace(character)
-	local delay = SkillConfiguration.Pistols.EffectRemoveDelay[race]
+	local delay = Config.Skill.Pistols.EffectRemoveDelay[race]
 	if delay then
 		return delay
 	end
@@ -64,12 +64,12 @@ end
 ---@param character EsvCharacter
 local function _ShouldPlaySheatheAnimation(character)
 	local race = GameHelpers.Character.GetBaseRace(character)
-	return SkillConfiguration.Pistols.PlaySheathe[race] == true
+	return Config.Skill.Pistols.PlaySheathe[race] == true
 end
 
 --Prioritized last, in case other mods add to this table
 Ext.Events.SessionLoaded:Subscribe(function ()
-	-- SkillManager.Register.BeforeProjectileShoot(SkillConfiguration.Pistols.AllShootSkills, function (e)
+	-- SkillManager.Register.BeforeProjectileShoot(Config.Skill.Pistols.AllShootSkills, function (e)
 	-- 	--local target = GameHelpers.TryGetObject(e.Data.Target)
 	-- 	if not GameHelpers.IsValidHandle(e.Data.Target) then
 	-- 		local skillRange = Ext.Stats.GetAttribute(e.Skill, "TargetRadius")
@@ -89,9 +89,9 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 	-- 	end
 	-- end)
 
-	SkillManager.Register.ProjectileShoot(SkillConfiguration.Pistols.AllShootSkills, function (e)
+	SkillManager.Register.ProjectileShoot(Config.Skill.Pistols.AllShootSkills, function (e)
 		local race = GameHelpers.Character.GetBaseRace(e.Character)
-		local bone = SkillConfiguration.Pistols.RaceToProjectileBone[race]
+		local bone = Config.Skill.Pistols.RaceToProjectileBone[race]
 		if bone then
 			e.Data.RootTemplate.CastBone = bone
 		end
@@ -102,7 +102,7 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 		end
 	end)
 
-	SkillManager.Register.Hit(SkillConfiguration.Pistols.AllShootSkills, function(e)
+	SkillManager.Register.Hit(Config.Skill.Pistols.AllShootSkills, function(e)
 		--PISTOL_CLOAKEDJUMP
 		if e.Data.TargetObject and e.Data.TargetObject:HasTag("LLWEAPONEX_Pistol_MarkedForCrit") then
 			if not e.Data:HasHitFlag("CriticalHit", true) then
@@ -142,7 +142,7 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 		end
 	end)
 
-	SkillManager.Register.Used(SkillConfiguration.Pistols.AllShootSkills, function(e)
+	SkillManager.Register.Used(Config.Skill.Pistols.AllShootSkills, function(e)
 		if _ShouldPlaySheatheAnimation(e.Character) then
 			Timer.StartObjectTimer("LLWEAPONEX_Pistol_ApplyShootingEffectStatus", e.Character, 350)
 		else
@@ -156,7 +156,7 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 		end
 	end)
 	
-	SkillManager.Register.Cast(SkillConfiguration.Pistols.AllShootSkills, function(e)
+	SkillManager.Register.Cast(Config.Skill.Pistols.AllShootSkills, function(e)
 		local delay = _GetPistolRemoveDelay(e.Character)
 		if delay and delay > 0 then
 			Timer.StartObjectTimer("LLWEAPONEX_RemovePistolEffect", e.Character, delay)
@@ -165,9 +165,9 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 		end
 	end)
 
-	SkillManager.Register.MemorizationChanged(SkillConfiguration.Pistols.AllShootSkills, function (e)
+	SkillManager.Register.MemorizationChanged(Config.Skill.Pistols.AllShootSkills, function (e)
 		if GameHelpers.Character.IsPlayer(e.Character) then
-			print(e.Skill, GameHelpers.Character.EquipmentHasSkill(e.Character, SkillConfiguration.Pistols.AllShootSkills))
+			print(e.Skill, GameHelpers.Character.EquipmentHasSkill(e.Character, Config.Skill.Pistols.AllShootSkills))
 			if e.Data == false and not GameHelpers.Character.EquipmentHasSkill(e.Character, e.Skill) then
 				CharacterRemoveSkill(e.CharacterGUID, "Shout_LLWEAPONEX_Pistol_Reload")
 			end

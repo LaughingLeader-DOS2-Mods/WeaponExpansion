@@ -50,7 +50,7 @@ local function ReplaceScalingText(checkText, character, element, func)
 	return false
 end
 
-SkillConfiguration.DisplayScalingStatSkills = {
+Config.Skill.DisplayScalingStatSkills = {
 	Projectile_LLWEAPONEX_Pistol_Shoot = true,
 	Projectile_LLWEAPONEX_Pistol_Shoot_Enemy = true,
 	Projectile_LLWEAPONEX_HandCrossbow_Shoot = true,
@@ -310,7 +310,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 		descriptionElement.Label = descriptionElement.Label:gsub("arrow", "bullet"):gsub("Arrow", "Bullet")
 	end
 
-	if SkillConfiguration.DisplayScalingStatSkills[skill] then
+	if Config.Skill.DisplayScalingStatSkills[skill] then
 		local text = Skills.Params.LLWEAPONEX_ScalingStat(skill, character.Stats)
 		if not StringHelpers.IsNullOrEmpty(text) then
 			skillPropsElement.Properties[#skillPropsElement.Properties+1] = {Label = text, Warning = ""}

@@ -1,5 +1,5 @@
-if SkillConfiguration.Quivers == nil then
-	SkillConfiguration.Quivers = {}
+if Config.Skill.Quivers == nil then
+	Config.Skill.Quivers = {}
 end
 
 ---@param character EsvCharacter
@@ -83,5 +83,5 @@ Ext.Osiris.RegisterListener("ObjectLeftCombat", 2, "after", function (charGUID, 
 	end
 end)
 
-SkillConfiguration.Quivers.StartRecharge = _StartRecharge
-SkillConfiguration.Quivers.RemoveTempArrows = _RemoveTempArrows
+Config.Skill.Quivers.StartRecharge = _StartRecharge
+Config.Skill.Quivers.RemoveTempArrows = _RemoveTempArrows

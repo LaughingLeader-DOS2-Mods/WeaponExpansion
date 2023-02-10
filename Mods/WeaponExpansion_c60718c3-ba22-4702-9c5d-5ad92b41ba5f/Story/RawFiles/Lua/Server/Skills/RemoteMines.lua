@@ -1,4 +1,4 @@
-SkillConfiguration.RemoteMines = {}
+Config.Skill.RemoteMines = {}
 
 local function BreachHitTarget(source, target, minePosition)
 
@@ -37,7 +37,7 @@ end)
 
 ---@param target EsvItem|EsvCharacter
 ---@param source EsvCharacter
-SkillConfiguration.RemoteMines.Detonate = function (target, source)
+Config.Skill.RemoteMines.Detonate = function (target, source)
 	if GameHelpers.Ext.ObjectIsItem(target) then
 		if source == nil then
 			local owner = GameHelpers.Item.GetOwner(target)
@@ -187,7 +187,7 @@ StatusManager.Subscribe.Applied("LLWEAPONEX_REMOTEMINE_DETONATE", function(e)
 			return false
 		end
 	end
-	SkillConfiguration.RemoteMines.Detonate(e.Target, e.Source)
+	Config.Skill.RemoteMines.Detonate(e.Target, e.Source)
 end)
 
 ---@param source UUID

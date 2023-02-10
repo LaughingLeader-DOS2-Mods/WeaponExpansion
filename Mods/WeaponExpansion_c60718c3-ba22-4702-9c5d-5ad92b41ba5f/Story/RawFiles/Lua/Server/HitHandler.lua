@@ -53,12 +53,12 @@ Events.OnPrepareHit:Subscribe(function(e)
 				end
 			end
 
-			if not SkillConfiguration.TempData.RecalculatedUnarmedSkillDamage[e.SourceGUID] then
+			if not Config.Skill.TempData.RecalculatedUnarmedSkillDamage[e.SourceGUID] then
 				if e.Data:IsFromWeapon(false, false) and UnarmedHelpers.HasUnarmedWeaponStats(e.Source.Stats) then
 					UnarmedHelpers.ScaleUnarmedHitDamage(e.Source,e.Target,e.Data,true)
 				end
 			else
-				SkillConfiguration.TempData.RecalculatedUnarmedSkillDamage[e.SourceGUID] = nil
+				Config.Skill.TempData.RecalculatedUnarmedSkillDamage[e.SourceGUID] = nil
 			end
 
 			if GameHelpers.Status.IsActive(e.Source, "LLWEAPONEX_MURAMASA_CURSE") then
@@ -77,7 +77,7 @@ Events.OnPrepareHit:Subscribe(function(e)
 	end
 end)
 
-SkillConfiguration.ArmCannonSkills = {
+Config.Skill.ArmCannonSkills = {
 	Zone_LLWEAPONEX_ArmCannon_Disperse = true,
 	Projectile_LLWEAPONEX_ArmCannon_Shoot = true,
 	Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion = true,
@@ -91,11 +91,11 @@ Events.OnHit:Subscribe(function(e)
 		e.Data.HitStatus.AllowInterruptAction = false
 		e.Data.HitStatus.ForceInterrupt = false
 		e.Data.HitStatus.Interruption = false
-		SkillConfiguration.DualShields.CoverCounter(e.TargetGUID, blockedHit.Blocker, blockedHit.Attacker)
+		Config.Skill.DualShields.CoverCounter(e.TargetGUID, blockedHit.Blocker, blockedHit.Attacker)
 		PersistentVars.SkillData.ShieldCover.BlockedHit[e.TargetGUID] = nil
 	end
 	local hitSucceeded = e.Data.Success
-	if e.Data.SkillData and SkillConfiguration.ArmCannonSkills[skill] then
+	if e.Data.SkillData and Config.Skill.ArmCannonSkills[skill] then
 		e.Data:SetHitFlag("Hit", true)
 		e.Data:SetHitFlag({"Dodged", "Missed"}, false)
 		hitSucceeded = true
@@ -110,7 +110,7 @@ Events.OnHit:Subscribe(function(e)
 			SwordofVictory_OnHit(e.Target, e.Source, e.Data)
 			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[e.TargetGUID]
 			if coverData ~= nil then
-				SkillConfiguration.DualShields.CoverRedirectDamage(e.TargetGUID, coverData.Blocker, e.SourceGUID, e.Data.HitStatus.StatusHandle)
+				Config.Skill.DualShields.CoverRedirectDamage(e.TargetGUID, coverData.Blocker, e.SourceGUID, e.Data.HitStatus.StatusHandle)
 			end
 			if e.Data:IsFromWeapon() then -- Is basic attack or weapon skill
 				local canGrantMasteryXP = e.Data.Damage > 0 and MasterySystem.CanGainExperience(e.Source)
@@ -128,32 +128,15 @@ Events.OnHit:Subscribe(function(e)
 			end
 		end
 		if GameHelpers.Status.IsActive(e.Target, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN") then
-			SkillConfiguration.DualShields.HunkerDownReduceDamage(e.Target, e.Source, e.Data)
+			Config.Skill.DualShields.HunkerDownReduceDamage(e.Target, e.Source, e.Data)
 		end
 	end
 
 	GameHelpers.Status.Remove(e.Target, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST")
 end)
 
-Configuration.Status.ChaosPowerSurfaces = {
-	"Fire",
-	"Water",
-	"WaterElectrified",
-	"WaterFrozen",
-	"Blood",
-	"BloodElectrified",
-	"BloodFrozen",
-	"Poison",
-	"Oil",
-	"Source",
-	"Web",
-	"WaterCloud",
-	"BloodCloud",
-	"SmokeCloud",
-}
-
 Ext.Events.BeforeCharacterApplyDamage:Subscribe(function (e)
 	if e.Target:GetStatus("LLWEAPONEX_CHAOS_POWER") and e.Hit.TotalDamageDone > 0 then
-		GameHelpers.Surface.CreateSurface(e.Target.WorldPos, Common.GetRandomTableEntry(Configuration.Status.ChaosPowerSurfaces), 2, 12, e.Target.Handle, true, 1.0)
+		GameHelpers.Surface.CreateSurface(e.Target.WorldPos, Common.GetRandomTableEntry(Config.Status.ChaosPowerSurfaces), 2, 12, e.Target.Handle, true, 1.0)
 	end
 end)

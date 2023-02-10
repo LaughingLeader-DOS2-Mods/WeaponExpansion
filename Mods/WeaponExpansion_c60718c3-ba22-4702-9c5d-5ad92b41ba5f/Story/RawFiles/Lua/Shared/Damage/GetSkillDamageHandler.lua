@@ -39,7 +39,7 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 					end
 				end
 				if hasDamage then
-					SkillConfiguration.TempData.RecalculatedUnarmedSkillDamage[attacker.MyGuid] = skill.Name
+					Config.Skill.TempData.RecalculatedUnarmedSkillDamage[attacker.MyGuid] = skill.Name
 				end
 			end
 			return damageList,deathType

@@ -1,7 +1,7 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
 
-SkillConfiguration.Rapiers = {
+Config.Skill.Rapiers = {
 	FrenzyChargeStatuses = {
 		"LLWEAPONEX_RAPIER_FRENZYCHARGE1",
 		"LLWEAPONEX_RAPIER_FRENZYCHARGE2",
@@ -69,7 +69,7 @@ if not Ext.IsClient() then
 		if not e.Enabled then
 			StatusManager.RemovePermanentStatus(e.Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST")
 			GameHelpers.Status.Remove(e.Character, _ActiveRapierRequiredStatuses)
-			GameHelpers.Status.Remove(e.Character, SkillConfiguration.Rapiers.FrenzyChargeStatuses)
+			GameHelpers.Status.Remove(e.Character, Config.Skill.Rapiers.FrenzyChargeStatuses)
 			CharacterRemoveSkill(e.CharacterGUID, "Target_LLWEAPONEX_SinglehandedAttack")
 		end
 	end, {MatchArgs={ID=MasteryID.Rapier}})
@@ -115,13 +115,13 @@ if not Ext.IsClient() then
 	---Called when a basic attacks or weapon skills has a critical hit
 	---@param attacker EsvCharacter
 	---@param target EsvCharacter|EsvItem
-	function SkillConfiguration.Rapiers.OnWeaponCriticalHit(attacker, target)
+	function Config.Skill.Rapiers.OnWeaponCriticalHit(attacker, target)
 		GameHelpers.Status.Apply(attacker, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", 12, false, attacker)
 		CharacterStatusText(attacker.MyGuid, "LLWEAPONEX_Skills_DuelistStance_Bonus")
 	end
 
 	Events.OnWeaponTagHit:Subscribe(function (e)
-		SkillConfiguration.Rapiers.OnWeaponCriticalHit(e.Attacker, e.Target)
+		Config.Skill.Rapiers.OnWeaponCriticalHit(e.Attacker, e.Target)
 	end,{
 		---@param _e OnWeaponTagHitEventArgs
 		MatchArgs = function(_e)
@@ -199,14 +199,14 @@ if not Ext.IsClient() then
 	---@param character EsvCharacter
 	---@return integer|false
 	local function _RemoveFrenzyCharge(character)
-		local len = #SkillConfiguration.Rapiers.FrenzyChargeStatuses
+		local len = #Config.Skill.Rapiers.FrenzyChargeStatuses
 		for i=len,1,-1 do
-			local id = SkillConfiguration.Rapiers.FrenzyChargeStatuses[i]
+			local id = Config.Skill.Rapiers.FrenzyChargeStatuses[i]
 			local status = character:GetStatus(id)
 			if status then
 				GameHelpers.Status.Remove(character, id)
 				if i > 1 then
-					local nextStatus = SkillConfiguration.Rapiers.FrenzyChargeStatuses[i-1]
+					local nextStatus = Config.Skill.Rapiers.FrenzyChargeStatuses[i-1]
 					if nextStatus then
 						GameHelpers.Status.Apply(character, nextStatus, 6.0, true, character)
 					end
