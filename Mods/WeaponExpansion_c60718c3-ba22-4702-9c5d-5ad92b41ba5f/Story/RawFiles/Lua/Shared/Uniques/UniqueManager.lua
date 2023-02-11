@@ -67,6 +67,7 @@ Uniques = {
 	WarchiefHalberd = UniqueData:Create(ProgressionData.WarchiefHalberd, {Tag="LLWEAPONEX_UniqueWarchiefHalberdSpear"}), -- LLWEAPONEX_WarchiefHalberd_Equipped
 	Wraithblade = UniqueData:Create(ProgressionData.Wraithblade, {Tag="LLWEAPONEX_UniqueWraithblade"}),
 	Victory = UniqueData:Create(ProgressionData.Victory, {Tag="LLWEAPONEX_UniqueSwordofVictory"}),
+	--OgreBlade = UniqueData:Create(ProgressionData.OgreBlade, {Tag="LLWEAPONEX_OgreBlade_Equipped"}),
 }
 
 Uniques.MagicMissileRod = UniqueData:Create(ProgressionData.MagicMissileRod, {Tag="LLWEAPONEX_UniqueMagicMissileRod", LinkedItem=Uniques.MagicMissileWand, CanMoveToVendingMachine=false, IsLinkedItem=true})
@@ -440,6 +441,7 @@ local UniqueScripts = {
 	"GnakSpellScroll",
 	"MagicMissileWand",
 	"Muramasa",
+	"OgreBlade",
 	"Omnibolt",
 	"PacifistsWrath",
 	"PirateGloves",

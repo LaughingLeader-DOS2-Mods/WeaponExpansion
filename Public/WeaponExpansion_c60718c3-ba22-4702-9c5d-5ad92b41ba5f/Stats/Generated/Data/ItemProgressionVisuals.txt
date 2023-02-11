@@ -2495,6 +2495,12 @@ add levelgroup 0,0,"All"
 add rootgroup "85e2e75e-4333-425e-adc4-94474c3fc201",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Rapier_1H_OgreBlade_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "881d30e1-662a-4108-a53e-5ca9f4ce9fe4",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_1H_OgreBlade_A","",""
+
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A"
 
 add levelgroup 0,0,"All"

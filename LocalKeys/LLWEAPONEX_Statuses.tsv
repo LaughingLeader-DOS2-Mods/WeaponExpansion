@@ -123,3 +123,6 @@ LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith	hd53002a9g6a71g4350gb
 Stats_LLWEAPONEX_Tattoos_Strength	Tattoos of Godly Strength	hbaade02ag92c3g458ega2e5gf8323343d4f4
 Stats_LLWEAPONEX_Tattoos_Strength_Active	Tattoos of Godly Strength (Active)	h5fa6dbc7g445bg4cdbgbf71gb41f4d009861
 Stats_LLWEAPONEX_VictoryCry	Victory Cry	hdc7d6a51g2192g4fbbga2f5g974f1fe71b98
+LLWEAPONEX_DARK_AVERSE_DisplayName	Dark Averse	h1b8afc47ga4c4g479bg9c8bg32c12e51e818
+LLWEAPONEX_DARK_AVERSE_Description	Character is more suspectible to <font color='#FF5555'>damage-over-time statuses</font> (Bleeding, Burning, Poisoned etc), taking [ExtraData:LLWEAPONEX_DarkAverse_DamageBonus:15]% more damage.	h76efd462g4029g46b0gafa9g706322f26053
+LLWEAPONEX_BODYSNATCH_DisplayName	Bodysnatch	h4dfe3860gc7c8g42d9ga670ga477afe1e461

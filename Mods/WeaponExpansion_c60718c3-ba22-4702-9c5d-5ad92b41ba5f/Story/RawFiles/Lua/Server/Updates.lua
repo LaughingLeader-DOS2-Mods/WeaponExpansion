@@ -127,10 +127,13 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 		end
 	end
 
-	for _,db in pairs(Osi.DB_LLWEAPONEX_Statuses_Temp_Revenants:Get(nil, nil, nil, nil)) do
-		local target,revenant,source,status = table.unpack(db)
-		Config.Skill.Revenants.KillRevenant(GameHelpers.GetCharacter(revenant), revenant)
-	end
+	--[[ local revenantsDB = GameHelpers.DB.Get("DB_LLWEAPONEX_Statuses_Temp_Revenants", 4)
+	if revenantsDB then
+		for _,db in pairs(revenantsDB) do
+			local target,revenant,source,status = table.unpack(db)
+			Config.Skill.Revenants.KillRevenant(GameHelpers.GetCharacter(revenant), revenant)
+		end
+	end ]]
 	
 	Osi.LeaderLib_Statuses_Clear_PermanentStatus("WeaponExpansion", "LLWEAPONEX_ARMCANNON_CHARGED")
 
@@ -218,7 +221,7 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing", 3)
 	--Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosSlashCaster", 1)
 
-	for _,db in pairs(Osi.DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath:Get(nil,nil,nil,nil)) do
+	--[[ for _,db in pairs(Osi.DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath:Get(nil,nil,nil,nil)) do
 		local character,obj,handle,surface = table.unpack(db)
 		StopDrawSurfaceOnPath(handle)
 	end
@@ -226,7 +229,7 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	for _,db in pairs(Osi.DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing:Get(nil,nil,nil)) do
 		local character,surface,handle = table.unpack(db)
 		StopDrawSurfaceOnPath(handle)
-	end
+	end ]]
 
 	Osi.DB_LeaderLib_Skills_StatusToggleSkills:Delete("Shout_LLWEAPONEX_Rapier_DuelistStance", nil, nil, nil, nil)
 	Osi.LeaderLib_Statuses_Clear_Group("WeaponExpansion")

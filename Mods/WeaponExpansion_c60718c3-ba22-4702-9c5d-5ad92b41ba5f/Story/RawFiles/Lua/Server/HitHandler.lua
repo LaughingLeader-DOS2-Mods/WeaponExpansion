@@ -53,12 +53,12 @@ Events.OnPrepareHit:Subscribe(function(e)
 				end
 			end
 
-			if not Config.Skill.TempData.RecalculatedUnarmedSkillDamage[e.SourceGUID] then
+			if not Config.TempData.RecalculatedUnarmedSkillDamage[e.SourceGUID] then
 				if e.Data:IsFromWeapon(false, false) and UnarmedHelpers.HasUnarmedWeaponStats(e.Source.Stats) then
 					UnarmedHelpers.ScaleUnarmedHitDamage(e.Source,e.Target,e.Data,true)
 				end
 			else
-				Config.Skill.TempData.RecalculatedUnarmedSkillDamage[e.SourceGUID] = nil
+				Config.TempData.RecalculatedUnarmedSkillDamage[e.SourceGUID] = nil
 			end
 
 			if GameHelpers.Status.IsActive(e.Source, "LLWEAPONEX_MURAMASA_CURSE") then

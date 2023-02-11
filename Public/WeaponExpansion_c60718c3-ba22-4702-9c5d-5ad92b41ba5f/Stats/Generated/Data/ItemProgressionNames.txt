@@ -985,3 +985,6 @@ add name "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_DisplayName",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_DisplayName",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_1H_OgreBlade_A"
+add name "WPN_UNIQUE_LLWEAPONEX_Rapier_1H_OgreBlade_A_DisplayName",""
