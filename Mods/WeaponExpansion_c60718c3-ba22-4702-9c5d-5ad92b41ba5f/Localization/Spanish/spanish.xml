@@ -195,6 +195,7 @@
 	<content contentuid="h12ca0c4cgb1d3g4532gb445g6011879b8bcd">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery II&lt;/font&gt;</content>
 	<content contentuid="h12f14ee4gc1a8g4960g93bag659d74513289">&lt;font color=&apos;#00FF66&apos;&gt;This is a passive bonus that is always active if conditions apply.&lt;/font&gt;</content>
 	<content contentuid="h133cf4degf968g4ebfg9354gec021e928aa2">&lt;font color=&apos;#F7BA14&apos;&gt;Earth Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
+	<content contentuid="h13427201g9389g4245gaf3dgb89960aee90c">Swap your soul with the target, taking over their body. This is a permanent change.</content>
 	<content contentuid="h139b3e27gd1a9g4809gb9e6g163f89de2cd9">The &lt;font color=&apos;#C7A758&apos;&gt;[Key:ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A_DisplayName:Devil Hand]&lt;/font&gt; has slain an enemy, granting you a boon.&lt;font color=&apos;#ee3f70&apos;&gt;Bonus [Handle:h1b6a1120gb023g4df1gb463gc317e509ee2c:Critical Chance] for your next basic attack or skill.&lt;/font&gt;</content>
 	<content contentuid="h13ac28ceg70feg4617gb124g5cdb198bbcac">Execution</content>
 	<content contentuid="h13bfb4ffg4ae6g4c67g839fg30ac91b2978f">A hardy blow with your shield that deals [1] and has a chance to daze the target.</content>
@@ -627,6 +628,7 @@
 	<content contentuid="h3b2dadbbg3989g4298-a860g979ba1616b3b">Fencer</content>
 	<content contentuid="h3b52ad7dg1bfdg4093g9180g1d7be1251205">Shields Up Plus</content>
 	<content contentuid="h3b5e7680g111fg4264g80dagb42a2defb8dd">Placeholder</content>
+	<content contentuid="h3b65e60aga3e3g4bd0gb084gbc731e33a7a5">Character is more suspectible to &lt;font color=&apos;#FF5555&apos;&gt;damage-over-time statuses&lt;/font&gt; (Bleeding, Burning, Poisoned etc), taking [ExtraData:LLWEAPONEX_DarkAverse_DamageBonus:15]% more damage.</content>
 	<content contentuid="h3b7aff29g3695g448agbd64g56261c9cf503">&lt;font color=&apos;#97fbff&apos;&gt;Blessed Water Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h3b87e4feg20b1g4ad1gae99gfd2c945c19f7">General&apos;s Mercy</content>
 	<content contentuid="h3b90f6e5gfc36g4085gb291g03b83af766de">&lt;icon id=&apos;Cone_GroundSmash&apos;/&gt;[Key:Cone_GroundSmash_DisplayName] creates a localized quake at the point of initial impact, dealing bonus damage in a 3m radius.</content>
@@ -1232,6 +1234,7 @@
 	<content contentuid="h76bcf828gaeb5g4329ga650ge7b2bebd87c1">Character is immune to being directly Shocked by a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.</content>
 	<content contentuid="h76c6f571gf887g40d9g884ag081f3ac052dc">&lt;font color=&apos;#FF44FF&apos;&gt;Unarmed Mastery II&lt;/font&gt;</content>
 	<content contentuid="h76e869b4gae45g47c6g8529gf55e8b414d5e">Weapon Expansion - Armor</content>
+	<content contentuid="h771fd098gc8edg44aag99c4g8623ebb5f2df">Bodysnatch</content>
 	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;icon id=&apos;MultiStrike_BlinkStrike;LLWEAPONEX_MASTERYBONUS_VULNERABLE&apos; type=&apos;1;2&apos;/&gt;[Key:MultiStrike_BlinkStrike_DisplayName] applies [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] to targets hit. [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Axe_Savage_DisplayName,LLWEAPONEX_MB_Axe_Savage&apos; type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Savage]</content>
 	<content contentuid="h778419bdg900eg4b6egb376g652371ca7538">A warrior who wields the deadly halberd, a combination of spear and axe, taking advantage of the reach and versatility it offers</content>
 	<content contentuid="h7784b453g91ceg4c49g80cfg2d67bd2869fb">&lt;font color=&apos;#999999&apos;&gt;Oiled Mini-Bolts&lt;/font&gt;</content>
@@ -1365,6 +1368,7 @@
 	<content contentuid="h83e65b1fg30c2g4e9ega9bag005eb17c5d75">&lt;font color=&apos;#FF2200&apos;&gt;[1]/[2] Death Charges&lt;/font&gt;</content>
 	<content contentuid="h84013f3ag47fag41c2gae89gf27bfdfaf979">Look closely; the only visible difference between this greatbow arrow and a normal greatbow arrow can be seen in the sizzling dents within the tip of the arrowhead.</content>
 	<content contentuid="h8406fbf2g4595g403ag8d5cgb007104ebd1c">Dual Shieldmaster</content>
+	<content contentuid="h844946bfg06e0g4197g9fa7g8d04bc6d7798">Ogre Blade</content>
 	<content contentuid="h84691388g994ag47eegb281g04087e267ddf">Allows gaining any skill from the Battle Book rank 3 mastery bonus for Challenge, including enemy versions of skills, or skills intended for quest events. &lt;font color=&apos;#FF0000&apos;&gt;Enabling this could possibly result in gaining a skill players weren&apos;t meant to have.&lt;/font&gt;</content>
 	<content contentuid="h84842d41g5c7eg4bc1g967cgd2e8349d0aaa">Inconspicuous Pouch</content>
 	<content contentuid="h8487f1e4g71abg4414g9264gd085fcabaebf"></content>
@@ -1465,7 +1469,7 @@
 	<content contentuid="h8dd76759gaf6dg40c9g8cd9g61faaae3b1ce">&lt;font color=&apos;#03FFAA&apos;&gt;Runic Absorption&lt;/font&gt;</content>
 	<content contentuid="h8de596eag6485g46ffg9076g9e766e6bd41d">Soul Burn</content>
 	<content contentuid="h8e29b77egd1bcg490fgb347g9838851afaa6">Book of Impartation</content>
-	<content contentuid="h8e770ac0gc6b4g4fa7gbe06gc010adeb6938">Leap forward and slam the almighty &lt;font color=&apos;#C5A65A&apos;&gt;Anvilmar&lt;/font&gt; into the ground, cracking the earth for [1] in a [2] radius, and knocking targets up.&lt;br&gt;&lt;font color=&apos;#BB5533&apos;&gt;Targets landing take [3] to [4] damage, depending on the launch height.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF00CC&apos;&gt;The impact radius begins where from your anvil hits the ground, which is 2m infront of your landing position.&lt;/font&gt;</content>
+	<content contentuid="h8e770ac0gc6b4g4fa7gbe06gc010adeb6938">Leap forward and slam the almighty &lt;font color=&apos;#C5A65A&apos;&gt;Anvilmar&lt;/font&gt; into the ground, cracking the earth for [1] in a [2] radius, and knocking targets up.&lt;br&gt;&lt;font color=&apos;#BB5533&apos;&gt;Targets landing take up to [SkillDamage:Projectile_LLWEAPONEX_AnvilMace_RushSmash_FallDamage], depending on the launch height.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF00CC&apos;&gt;The impact radius begins where from your anvil hits the ground, which is 2m infront of your landing position.&lt;/font&gt;</content>
 	<content contentuid="h8e8ad7bdge201g4e47gb783g4aab39451266">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery V&lt;/font&gt;</content>
 	<content contentuid="h8e8b24efga7feg4e6bgac39g6752b927ddf8">Placeholder</content>
 	<content contentuid="h8ea5f0f3ga212g4a36g8edcg55ba5daf97a9">Blademaster&apos;s Strike 2</content>
@@ -2070,6 +2074,7 @@
 	<content contentuid="hcb0b08b6g66c4g49a7gb748g93ea03cc0dc5">A deadly scythe once belonging to the being known as &quot;The Harvester&quot;, said to have reaped countless souls in an unending thirst for power.</content>
 	<content contentuid="hcb3086d4g369ag41d7ga4c1g71c0a33ec6cc">&lt;font color=&apos;#FF5522&apos;&gt;Rally of the Pack&lt;/font&gt;</content>
 	<content contentuid="hcb7e4371g323bg4c19gac13ga9df7f281419">Character is being contaminated!</content>
+	<content contentuid="hcb9603ebg7830g43ccg867agc4430bd202a5">Bodysnatch</content>
 	<content contentuid="hcbbecaf8g3693g4395gbc22gcd92ba552044">Throw Tar Charge</content>
 	<content contentuid="hcbd88005g2073g4893gaf79gb5649761370f">Tigerstrike</content>
 	<content contentuid="hcbdf615bg7936g4681g8ccfgd7b160383f54">Character is being knocked down!</content>
@@ -2244,6 +2249,7 @@
 	<content contentuid="hdd7891d6ge6e6g40b6g8923gca9a6967f805">&lt;font color=&apos;#C7A758&apos;&gt;Balrin&apos;s Throwing Axe&lt;/font&gt;</content>
 	<content contentuid="hdd97747cgef6cg42b9gaa6age60edc02d4d5">*[LIGHT ARMOR] Click on the button labeled &apos;Light Armor&apos;.*</content>
 	<content contentuid="hddbc42dfg304bg48ddga684g1bd7dff813cc">&lt;font color=&apos;#E4CE22&apos; size=&apos;22&apos;&gt;Flurry Axe Combo! +1 AP&lt;/font&gt;</content>
+	<content contentuid="hddd145efgf39cg4219g8e5fg14af1aad0829">Dark Averse</content>
 	<content contentuid="hdde1468dg68b2g49e4g8636g441356966ec2">Soul Burn III</content>
 	<content contentuid="hde22593eg0a91g4af8g9725g6ab1dddf0b22">Allow the [Key:CROSSBOW_MARKEDSPRAY:Marked Arrow Spray] bonus (Rank 3 Crossbow Mastery) to have unlimited range, allowing you to hit Marked targets from across the map.</content>
 	<content contentuid="hde2dcb4eg99f7g481bg8605gffdd329983cb">Exquisite Greatbow of the Empire</content>
