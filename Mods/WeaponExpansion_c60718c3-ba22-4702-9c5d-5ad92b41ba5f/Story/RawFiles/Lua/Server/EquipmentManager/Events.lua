@@ -4,8 +4,8 @@ EquipmentManager.Events = {}
 ---@class EquipmentChangedEventArgs
 ---@field Character EsvCharacter
 ---@field Item EsvItem
----@field CharacterGUID GUID
----@field ItemGUID GUID
+---@field CharacterGUID Guid
+---@field ItemGUID Guid
 ---@field Equipped boolean
 ---@field Template string
 ---@field Tag string|"" The specific tag this listener matched with, otherwise it's empty. 
@@ -17,8 +17,8 @@ EquipmentManager.Events.EquipmentChanged = Classes.SubscribableEvent:Create("Wea
 ---@class UnsheathedChangedEventArgs
 ---@field Character EsvCharacter
 ---@field Item EsvItem
----@field CharacterGUID GUID
----@field ItemGUID GUID
+---@field CharacterGUID Guid
+---@field ItemGUID Guid
 ---@field Unsheathed boolean
 ---@field Template string
 ---@field Tag string|"" The specific tag this listener matched with, otherwise it's empty.

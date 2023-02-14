@@ -95,6 +95,7 @@ local ORIGINS_UNIQUES = {
 		}
 	}},
 	Muramasa = {UUID = "52c0b4a4-3906-4229-93a9-b83aea9e657c"},
+	OgreBlade = {UUID = "23e90177-7434-48d7-adc2-a87b3fd1e826"},
 	OgreScroll = {UUID = "cc4d26df-c8c4-458e-b88f-610387741533", Target = {
 		RC_Main = {
 			IsDefault = true,

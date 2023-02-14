@@ -28,7 +28,7 @@ MasteryBonusManager = {
 
 ---@class MasteryBonusManagerInternals
 local _INTERNAL = {
-	---@type table<UUID|NETID, table<string, boolean>>
+	---@type table<UUID|NetId, table<string, boolean>>
 	CharacterDisabledBonuses = {}
 }
 MasteryBonusManager._INTERNAL = _INTERNAL
@@ -177,7 +177,7 @@ end
 
 _INTERNAL.GatherMasteryBonuses = GatherMasteryBonuses
 
----@param character UUID|NETID|EsvCharacter|EclCharacter|StatCharacter
+---@param character UUID|NetId|EsvCharacter|EclCharacter|StatCharacter
 ---@param bonus string|string[]
 ---@param skipWeaponCheck boolean|nil
 ---@return boolean

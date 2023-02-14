@@ -5,9 +5,9 @@ local isClient = Ext.IsClient()
 ---@class UniqueDataBase
 ---@field ID string A name for this unique.
 ---@field UUID string The current UUID for the unique.
----@field DefaultUUID GUID|nil The default UUID for the unique (the initial global item).
----@field Owner GUID|nil
----@field Copies table<GUID,GUID> Item UUID to owner object UUID for copies of this unique.
+---@field DefaultUUID Guid|nil The default UUID for the unique (the initial global item).
+---@field Owner Guid|nil
+---@field Copies table<Guid,Guid> Item UUID to owner object UUID for copies of this unique.
 ---@field OnEquipped function|nil
 ---@field OnOwnerDeath function|nil
 ---@field OnGotOwner function|nil

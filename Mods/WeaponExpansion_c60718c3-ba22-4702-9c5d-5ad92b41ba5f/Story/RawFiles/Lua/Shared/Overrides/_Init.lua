@@ -8,7 +8,7 @@ local _ISCLIENT = Ext.IsClient()
 ---@type table<string, LLWEAPONEX_StatOverrides_Attributes>
 local BaseStats = Ext.Require("Shared/Overrides/BaseStats.lua")
 
----@type table<GUID, table<string, LLWEAPONEX_StatOverrides_Attributes>>
+---@type table<Guid, table<string, LLWEAPONEX_StatOverrides_Attributes>>
 local ModStats = Ext.Require("Shared/Overrides/ModStats.lua")
 
 local gunExplosionEffectStatusProperties = {{

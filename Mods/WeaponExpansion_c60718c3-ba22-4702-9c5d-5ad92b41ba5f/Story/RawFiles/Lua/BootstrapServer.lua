@@ -8,116 +8,116 @@ Ext.Require("BootstrapShared.lua")
 local defaultPersistentVars = {
     SkillData = {
         --Owner GUID Item GUIDs
-        ---@type table<GUID, GUID[]>
+        ---@type table<Guid, Guid[]>
         BlunderbussDuds = {},
         DarkFireballCount = {},
         ---Item GUID to amount
-        ---@type table<GUID, integer>
+        ---@type table<Guid, integer>
         RunicCannonEnergy = {},
         GnakSpells = {},
         ShieldCover = {
-            ---@type table<GUID,{Blocker:GUID, CanCounterAttack:boolean}>
+            ---@type table<Guid,{Blocker:Guid, CanCounterAttack:boolean}>
             Blocking = {},
-            ---@type table<GUID,{Blocker:GUID, Attacker:GUID}>
+            ---@type table<Guid,{Blocker:Guid, Attacker:Guid}>
             BlockedHit = {},
         },
         ThrowWeapon = {},
-        ---@type table<GUID, {Item:GUID, Slot:string, Skill:string, Target:GUID|nil}>
+        ---@type table<Guid, {Item:Guid, Slot:string, Skill:string, Target:Guid|nil}>
         ThrowBalrinAxe = {},
         VanquishersPath = {},
         ---@type table<string, table<string, {Mines:string[], Remaining:integer}>>
         RemoteMineDetonation = {},
         ---Used when remote mine skills hit an object, if that object is about to die. This table prevents adding more than one charge per killed enemy.
-        ---@type table<GUID,table<GUID,boolean>>
+        ---@type table<Guid,table<Guid,boolean>>
         RemoteMineJustHit = {},
         ---Remote mine -> All targets affected
-        ---@type table<GUID,{Position:vec3, Targets:table<GUID,boolean>}>
+        ---@type table<Guid,{Position:vec3, Targets:table<Guid,boolean>}>
         RemoteMineDisplacement = {},
-        ---@type table<GUID,number[]>
+        ---@type table<Guid,number[]>
         FutureBarrage = {},
         WandSurfaceBonuses = {},
-        ---@type table<GUID,{Hits:integer, Source:GUID}>
+        ---@type table<Guid,{Hits:integer, Source:Guid}>
         ScattershotHits = {},
         ---Used to count the current total jumps, to ultimately stop jumping when the limit is reached.
-        ---@type table<GUID,integer>
+        ---@type table<Guid,integer>
         FlickerStrikeTotalJumps = {},
         ---Used to limit targets hit (either when rushed through or after the movement ends).
-        ---@type table<GUID,{Ready:boolean, Targets:table<GUID,boolean>}>
+        ---@type table<Guid,{Ready:boolean, Targets:table<Guid,boolean>}>
         WarchiefWhirlwindTargets = {},
         ---Used to limit targets hit (either when rushed through or after the movement ends).
-        ---@type table<GUID,{StartingPosition:vec3, Targets:table<GUID,boolean>, }>
+        ---@type table<Guid,{StartingPosition:vec3, Targets:table<Guid,boolean>, }>
         WraithbladeSlayHiddenData = {},
-        ---@type table<GUID,{Handle:integer, Surface:SurfaceType, Owner:GUID}>
+        ---@type table<Guid,{Handle:integer, Surface:SurfaceType, Owner:Guid}>
         ChaosSlashPathAction = {},
-        ---@type table<GUID,{Handle:integer, Surface:SurfaceType}>
+        ---@type table<Guid,{Handle:integer, Surface:SurfaceType}>
         ChaosChargePathAction = {},
         ---Active banner items created by the related banner rally skills.
         ---Owner GUID to a table of banners, with the status source ID.
-        ---@type table<GUID,{Banners:table<GUID,string>, PartyMembers:table<GUID,string>}>
+        ---@type table<Guid,{Banners:table<Guid,string>, PartyMembers:table<Guid,string>}>
         BannerRally = {},
     },
     StatusData = {
-        ---@type table<GUID,table<string,{Target:GUID, Source:GUID, Status:string}>>
+        ---@type table<Guid,table<string,{Target:Guid, Source:Guid, Status:string}>>
         RemoveOnTurnEnd = {},
         KatanaCombo = {},
-        ---@type table<GUID,integer>
+        ---@type table<Guid,integer>
         BasilusHauntedTarget = {},
         ---Revenant GUID to source character GUID
-        ---@type table<GUID,GUID>
+        ---@type table<Guid,Guid>
         Revenants = {},
     },
     MasteryMechanics = {
-        ---@type table<GUID,integer>
+        ---@type table<Guid,integer>
         AxeFlurryHits = {},
         ---Challenger and the target.
-        ---@type table<GUID,GUID>
+        ---@type table<Guid,Guid>
         BattlebookChallenge = {},
-        ---@type table<GUID,integer>
+        ---@type table<Guid,integer>
         BlinkStrikeTargetsHit = {},
         ---A table of active statuses to remove.
-        ---@type table<GUID,table<string,boolean>>
+        ---@type table<Guid,table<string,boolean>>
         BludgeonShattering = {},
-        ---@type table<GUID,{Remaining:integer, Total:integer}>
+        ---@type table<Guid,{Remaining:integer, Total:integer}>
         BowExplosiveRainArrowCount = {},
-        ---@type table<GUID,{Hits:integer, Target:GUID}>
+        ---@type table<Guid,{Hits:integer, Target:Guid}>
         BowCumulativeCriticalChance = {},
         ---Skill ID, GUID to boolean
-        ---@type table<string,table<GUID,number[]>>
+        ---@type table<string,table<Guid,number[]>>
         CrossbowCastingPiercingSkill = {},
-        ---@type table<GUID,integer>
+        ---@type table<Guid,integer>
         BowFarsightAttacks = {},
-        ---@type table<GUID,integer>
+        ---@type table<Guid,integer>
         CrossbowRicochetHits = {},
         ---The last target the source applied MARKED to.
-        ---@type table<GUID,GUID>
+        ---@type table<Guid,Guid>
         CrossbowMarkedTarget = {},
         ---Protected character to the source (Guardian Angel Banner wielder)
-        ---@type table<GUID,GUID>
+        ---@type table<Guid,Guid>
         GuardianAngelResurrect = {},
-        ---@type table<GUID,number[]>
+        ---@type table<Guid,number[]>
         StillStanceLastPosition = {},
-        ---@type table<GUID,integer>
+        ---@type table<Guid,integer>
         SneakingTurnsInCombat = {},
     },
     Timers = {},
     OnDeath = {},
     ---All GUIDs for specific uniques (GUID -> Tag).
-    ---@type table<GUID,string>
+    ---@type table<Guid,string>
     Uniques = {},
     ---Item GUID to Attribute
-    ---@type table<GUID,string>
+    ---@type table<Guid,string>
     AttributeRequirementChanges = {},
     ---Character GUID to Book ID -> Bool
-    ---@type table<GUID,table<string, boolean>>
+    ---@type table<Guid,table<string, boolean>>
     BattleBookExperienceGranted = {},
     ---Character GUID to BonusID -> Bool
-    ---@type table<GUID,table<string, boolean>>
+    ---@type table<Guid,table<string, boolean>>
     DisabledBonuses = {},
     ---Character GUID to Mastery ID -> Bool
-    ---@type table<GUID,table<string, boolean>>
+    ---@type table<Guid,table<string, boolean>>
     ActiveMasteries = {},
     ---Character GUID to Mastery ID -> MasteryExperienceData
-    ---@type table<GUID,table<string, MasteryExperienceData>>
+    ---@type table<Guid,table<string, MasteryExperienceData>>
     MasteryExperience = {},
 }
 

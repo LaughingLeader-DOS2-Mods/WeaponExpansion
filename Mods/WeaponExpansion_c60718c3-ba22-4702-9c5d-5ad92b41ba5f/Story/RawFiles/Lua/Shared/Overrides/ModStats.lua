@@ -3,7 +3,7 @@ local _MOD_OVERRIDES = {}
 local type = type
 
 ---@generic T
----@param modGUID GUID
+---@param modGUID Guid
 ---@param statType `T`
 ---@return fun(statID:string, attributes:T)
 local function _Add(modGUID, statType)

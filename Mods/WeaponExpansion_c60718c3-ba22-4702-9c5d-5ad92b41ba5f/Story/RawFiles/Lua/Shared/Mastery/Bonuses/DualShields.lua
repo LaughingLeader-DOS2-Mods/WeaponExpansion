@@ -97,9 +97,9 @@ if not Vars.IsClient then
 
 	local blockerTeleporting = {}
 
-	---@param target GUID
-	---@param blocker GUID
-	---@param attacker GUID
+	---@param target Guid
+	---@param blocker Guid
+	---@param attacker Guid
 	local function _CoverCounter(target, blocker, attacker)
 		--TODO add combat log text
 		if blockerTeleporting[blocker] ~= true then
@@ -122,9 +122,9 @@ if not Vars.IsClient then
 		end
 	end
 
-	---@param target GUID
-	---@param blocker GUID
-	---@param attacker GUID
+	---@param target Guid
+	---@param blocker Guid
+	---@param attacker Guid
 	---@param handle integer
 	local function _CoverRedirectDamage(target, blocker, attacker, handle)
 		--TODO add combat log text

@@ -1,8 +1,8 @@
 if not Vars.IsClient then
 	--#region Slay Hidden Skill
 
-	---@param sourceGUID GUID
-	---@param targetGUID GUID
+	---@param sourceGUID Guid
+	---@param targetGUID Guid
 	local function _StoreSlayHiddenTarget(sourceGUID, targetGUID)
 		local data = PersistentVars.SkillData.WraithbladeSlayHiddenData[sourceGUID]
 		if data then
@@ -10,7 +10,7 @@ if not Vars.IsClient then
 		end
 	end
 
-	---@param sourceGUID GUID
+	---@param sourceGUID Guid
 	local function _HasSlayHiddenTargets(sourceGUID)
 		local data = PersistentVars.SkillData.WraithbladeSlayHiddenData[sourceGUID]
 		if data then

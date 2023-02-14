@@ -5,7 +5,7 @@ end
 ---@class MasteryChangedEventArgs
 ---@field ID string|WeaponExpansionMasteryID The mastery ID
 ---@field Character EsvCharacter
----@field CharacterGUID GUID
+---@field CharacterGUID Guid
 ---@field Enabled boolean
 ---@field IsPlayer boolean
 

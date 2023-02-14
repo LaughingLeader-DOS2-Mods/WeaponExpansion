@@ -83,7 +83,7 @@ if not Vars.IsClient then
 		and MasterySystem.CanGainExperience(e.Character) then
 			local primaryTarget = nil
 			e.Data:ForEach(function (target, targetType, self)
-				---@cast target GUID
+				---@cast target Guid
 				---Prioritize setting a boss as the primary target, since they grant more mastery XP
 				if ObjectIsCharacter(target) == 1 and (not primaryTarget or IsBoss(target) == 1) then
 					primaryTarget = target

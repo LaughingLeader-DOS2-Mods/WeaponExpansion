@@ -4,8 +4,8 @@ DeathManager = {}
 ---@field ID string
 ---@field Target EsvCharacter
 ---@field Source EsvCharacter
----@field TargetGUID GUID
----@field SourceGUID GUID
+---@field TargetGUID Guid
+---@field SourceGUID Guid
 ---@field Success boolean Whether the target died. False if the timer finished before they died.
 
 ---@type LeaderLibSubscribableEvent<DeathManagerOnDeathEventArgs>
@@ -43,8 +43,8 @@ local function _OnDeath(uuid)
 end
 
 ---@param id string
----@param target ServerObject|GUID
----@param attacker ServerObject|GUID
+---@param target ServerObject|Guid
+---@param attacker ServerObject|Guid
 ---@param listenDelay integer
 function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 	local targetGUID = GameHelpers.GetUUID(target)

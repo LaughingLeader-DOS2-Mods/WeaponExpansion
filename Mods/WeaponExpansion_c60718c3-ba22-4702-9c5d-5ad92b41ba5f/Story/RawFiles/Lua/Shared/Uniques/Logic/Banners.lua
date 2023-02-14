@@ -86,7 +86,7 @@ if not Vars.IsClient then
 		end
 	end)
 
-	---@param owner GUID
+	---@param owner Guid
 	---@param statusId string
 	local function _RemoveRallyData(owner, statusId)
 		local data = PersistentVars.SkillData.BannerRally[owner]

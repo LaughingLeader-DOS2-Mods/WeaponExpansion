@@ -142,7 +142,7 @@ Events.CharacterDied:Subscribe(function (e)
 end, {MatchArgs={State="BeforeDying"}})
 
 ---@param revenant EsvCharacter
----@param guid GUID
+---@param guid Guid
 local function _KillRevenant(revenant, guid, source)
 	PersistentVars.StatusData.Revenants[guid] = nil
 	if revenant then

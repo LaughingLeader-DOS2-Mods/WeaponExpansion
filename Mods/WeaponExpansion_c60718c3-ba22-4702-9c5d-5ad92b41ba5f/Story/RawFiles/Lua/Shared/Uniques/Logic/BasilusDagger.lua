@@ -61,7 +61,7 @@ if not Vars.IsClient then
 			end)
 		
 			Ext.Osiris.RegisterListener("CharacterUsedSkill", 4, "before", function (attacker)
-				---@cast attacker GUID
+				---@cast attacker Guid
 				if PersistentVars.BasilusHauntedTarget[StringHelpers.GetUUID(attacker)] == 1 then
 					Basilus_OnTargetActionTaken(GameHelpers.TryGetObject(attacker, "EsvCharacter"))
 				end
@@ -96,7 +96,7 @@ if not Vars.IsClient then
 			cleanup(...)
 		end
 		test:Wait(250)
-		local weapon = GameHelpers.Item.CreateItemByStat("WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A") --[[@as GUID]]
+		local weapon = GameHelpers.Item.CreateItemByStat("WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A") --[[@as Guid]]
 		test:Wait(250)
 		SetTag(weapon, "LLWEAPONEX_Testing")
 		NRD_CharacterEquipItem(char1, weapon, "Weapon", 0, 0, 1, 1)

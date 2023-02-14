@@ -247,7 +247,7 @@ end
 ---@param character EsvCharacter
 ---@param item EsvItem
 local function AxeScoundrelEnabled(character, item, itemTags)
-	return Mastery.HasMasteryRequirement(character.MyGuid, "LLWEAPONEX_Axe_Mastery4")
+	return Mastery.HasMasteryRequirement(character, "LLWEAPONEX_Axe_Mastery4")
 	and (item.Stats.WeaponType == "Axe" or (itemTags.LLWEAPONEX_Axe or item:HasTag("LLWEAPONEX_Axe")))
 end
 
@@ -255,7 +255,7 @@ end
 ---@param item EsvItem
 function EquipmentManager:CheckScoundrelTags(character, item, itemTags)
 	itemTags = itemTags or {}
-	if item.Stats.WeaponType == "Knife" 
+	if item.Stats.WeaponType == "Knife"
 	or (itemTags.LLWEAPONEX_Katana or item:HasTag("LLWEAPONEX_Katana"))
 	or AxeScoundrelEnabled(character, item, itemTags)
 	then

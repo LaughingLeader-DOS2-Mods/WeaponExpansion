@@ -252,7 +252,7 @@ if not _ISCLIENT then
 	---@return UUID character
 	---@return UUID dummy
 	---@return function cleanup
-	---@return GUID[] dummies
+	---@return Guid[] dummies
 	function WeaponExTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
 		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter(), "EsvCharacter")
 		local pos = pos or GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)

@@ -1,5 +1,5 @@
 ClientVars = {
-	---@type table<NETID, integer>
+	---@type table<NetId, integer>
 	RunicCannonEnergy = {},
 }
 

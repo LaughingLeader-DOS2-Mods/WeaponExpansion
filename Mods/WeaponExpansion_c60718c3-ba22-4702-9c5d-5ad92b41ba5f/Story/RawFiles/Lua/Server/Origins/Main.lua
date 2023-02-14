@@ -413,7 +413,7 @@ SkillManager.Register.Cast("Projectile_LLWEAPONEX_DarkFireball", function (e)
 	GameHelpers.Data.SyncSharedData(nil,nil,true)
 end)
 
----@param charGUID GUID
+---@param charGUID Guid
 function UpdateDarkFireballSkill(charGUID)
 	local killCount = PersistentVars.SkillData.DarkFireballCount[charGUID] or 0
 	if killCount >= 1 then
