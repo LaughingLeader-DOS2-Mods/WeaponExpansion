@@ -14,7 +14,7 @@ Events.OnPrepareHit:Subscribe(function(e)
 			e.Data:ClearAllDamage()
 			GameHelpers.Status.Remove(e.Target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK")
 			if GameHelpers.Ext.ObjectIsCharacter(e.Target) then
-				local blockedText = Ext.GetTranslatedString("h175f5a66g78d1g41a8g9530g004e19a5db8a", "Blocked!")
+				local blockedText = GameHelpers.GetTranslatedString("h175f5a66g78d1g41a8g9530g004e19a5db8a", "Blocked!")
 				CharacterStatusText(e.Target.MyGuid, string.format("<font color='#CCFF00'>%s</font>", blockedText))
 			end
 			return
@@ -69,7 +69,17 @@ Events.OnPrepareHit:Subscribe(function(e)
 					local damageBoost = (((100 - CharacterGetHitpointsPercentage(e.SourceGUID))/100) * max)/100
 					if damageBoost > 0 then
 						e.Data:MultiplyDamage(1+damageBoost)
-						e.Damage = e.Data.TotalDamageDone
+					end
+				end
+			end
+
+			if e.Data.TotalDamageDone > 0 and e.Data.HitType == "DoT" and GameHelpers.Status.IsActive(e.Target, "LLWEAPONEX_DARK_AVERSE") then
+				local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_DarkAverse_DamageBonus", 25)
+				if damageBonus ~= 0 then
+					local mult = 1 + (damageBonus * 0.01)
+					e.Data:MultiplyDamage(mult)
+					if Vars.DebugMode then
+						CombatLog.AddCombatText(string.format("[Dark Averse] DoT damage boosted by (<font color='#33FF33'>%i%%</font>)! (%i) => (<font color='#FFAA00'>%i</font>)", damageBonus, e.Damage, e.Data.TotalDamageDone), GameHelpers.Character.GetHost())
 					end
 				end
 			end
