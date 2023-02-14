@@ -221,6 +221,10 @@ Text = {
 		IncompatibleTag = ts:Create("hd0534a06g535bg435bga75dg145e9cc7282f", "Incompatible with [1] [2]&lt;br&gt;"),
 		Unbreakable = ts:Create("h03b9013dg183cg4543gbcd5gf9e832e74fae", "Unbreakable"),
 		CappedBonus = ts:Create("h97e7078cg6d42g46edgb7e0g5ec87a48a56d", "+[1]% [2] ([3]% Max)"),
+		MeleeWeaponRequirement = ts:CreateFromKey("LLWEAPONEX_NoMeleeWeaponEquipped", "a Melee Weapon"),
+		ScoundrelWeaponRequirement = ts:CreateFromKey("LLWEAPONEX_CannotUseScoundrelSkills", "a Scoundrel Weapon"),
+		ScoundrelWeaponRequirementExpanded = ts:CreateFromKey("LLWEAPONEX_CannotUseScoundrelSkillsDetails", "a Scoundrel Weapon ([Key:LLWEAPONEX_Dagger:Dagger], [Key:LLWEAPONEX_Katana:Katana], [Key:LLWEAPONEX_Rapier:Rapier])", _autoReplace),
+		ScoundrelWeaponRequirementExpandedAxe = ts:CreateFromKey("LLWEAPONEX_CannotUseScoundrelSkillsDetailsAxe", "a Scoundrel Weapon ([Key:LLWEAPONEX_Axe:Axe], [Key:LLWEAPONEX_Dagger:Dagger], [Key:LLWEAPONEX_Katana:Katana], [Key:LLWEAPONEX_Rapier:Rapier])", _autoReplace),
 	},
 	WeaponType = {
 		StaffWeaponRequirement = ts:Create("h9d2c3f11g8702g4504ga467g9e63531ce7ab", "Staff Weapon"),

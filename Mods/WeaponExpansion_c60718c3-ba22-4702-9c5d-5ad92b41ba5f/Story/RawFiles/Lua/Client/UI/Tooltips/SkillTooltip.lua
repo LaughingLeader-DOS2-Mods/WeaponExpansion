@@ -143,25 +143,31 @@ local function OnSkillTooltip(character, skill, tooltip)
 	-- These lines alter the "Incompatible with" text that's a result of using an inverse condition tag.
 	-- We want these skills to work unless the tags are set.
 	if Skills.WarfareMeleeSkills[skill] == true then
-		local requirementName = GameHelpers.GetStringKeyText("LLWEAPONEX_NoMeleeWeaponEquipped", "a Melee Weapon")
+		local requirementName = Text.Game.MeleeWeaponRequirement.Value
 		for i,element in pairs(tooltip:GetElements("SkillRequiredEquipment")) do
 			if element.RequirementMet == false then
 				if element.Label == Text.Game.NotImmobileRequirement.Value then
 					tooltip:RemoveElement(element)
 				elseif string.find(element.Label, requirementName) then
-					element.Label = Text.Game.RequiresTag:ReplacePlaceholders("", requirementName):gsub("  ", " ")
+					element.Label = StringHelpers.Trim(Text.Game.RequiresTag:ReplacePlaceholders("", requirementName))
 				end
 			end
 		end
 	elseif Skills.ScoundrelMeleeSkills[skill] == true then
-		local requirementName = GameHelpers.GetStringKeyText("LLWEAPONEX_CannotUseScoundrelSkills", "a Scoundrel Weapon")
+		tooltip:MarkDirty()
 		for i,element in pairs(tooltip:GetElements("SkillRequiredEquipment")) do
-			if element.RequirementMet == false then
-				if element.Label == Text.Game.NotImmobileRequirement.Value then
-					tooltip:RemoveElement(element)
-				elseif string.find(element.Label, requirementName) then
-					element.Label = Text.Game.RequiresTag:ReplacePlaceholders("", requirementName):gsub("  ", " ")
+			if string.find(element.Label, Text.Game.MeleeWeaponRequirement.Value) then
+				if tooltip:IsExpanded() then
+					if Mastery.HasMasteryRequirement(character, "LLWEAPONEX_Axe_Mastery4") then
+						element.Label = StringHelpers.Trim(Text.Game.RequiresTag:ReplacePlaceholders("", Text.Game.ScoundrelWeaponRequirementExpandedAxe.Value))
+					else
+						element.Label = StringHelpers.Trim(Text.Game.RequiresTag:ReplacePlaceholders("", Text.Game.ScoundrelWeaponRequirementExpanded.Value))
+					end
+				else
+					element.Label = StringHelpers.Trim(Text.Game.RequiresTag:ReplacePlaceholders("", Text.Game.ScoundrelWeaponRequirement.Value))
 				end
+			elseif not element.RequirementMet and element.Label == Text.Game.NotImmobileRequirement.Value then
+				tooltip:RemoveElement(element)
 			end
 		end
 	end
