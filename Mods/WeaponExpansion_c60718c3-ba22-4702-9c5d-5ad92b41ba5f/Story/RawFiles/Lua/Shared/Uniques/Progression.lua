@@ -244,6 +244,15 @@ local bonuses = {
 		[14] = ue:Create("TwoHanded", 1),
 		[15] = runeslot2,
 	},
+	OgreBlade = {
+		[2] = ue:Create("FinesseBoost", "1", GetReqAttributeParams),
+		[4] = ue:Create("CriticalChance", 10),
+		[7] = runeslot1,
+		[8] = ue:Create("DamageFromBase", 10),
+		[10] = ue:Create("FinesseBoost", "2", GetReqAttributeParams),
+		[12] = ue:Create("WitsBoost", "2"),
+		[15] = runeslot2,
+	},
 	OgreScroll = {
 		[2] = ue:Create("StrengthBoost", "1", GetReqAttributeParams),
 		[4] = ue:Create("DamageFromBase", 10),
