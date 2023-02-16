@@ -65,8 +65,8 @@ end
 Skills.Params["LLWEAPONEX_PistolRuneEffects"] = GetPistolBulletEffects
 
 local skillAbility = {
-	Target_LLWEAPONEX_Pistol_Shoot = {"RogueLore", "LLWEAPONEX_Pistol"},
-	Target_LLWEAPONEX_Pistol_Shoot_Enemy = {"RogueLore", "LLWEAPONEX_Pistol"},
+	Projectile_LLWEAPONEX_Pistol_Shoot = {"RogueLore", "LLWEAPONEX_Pistol"},
+	Projectile_LLWEAPONEX_Pistol_Shoot_Enemy = {"RogueLore", "LLWEAPONEX_Pistol"},
 	Projectile_LLWEAPONEX_HandCrossbow_Shoot = {"RogueLore", "LLWEAPONEX_HandCrossbow"},
 	Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy = {"RogueLore", "LLWEAPONEX_HandCrossbow"},
 }

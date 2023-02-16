@@ -5,7 +5,7 @@
 ---@param skillData SkillEventData|HitData
 MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Rapier_Mastery1.SUCKER_PUNCH_COMBO.Skills, {"SUCKER_PUNCH_COMBO"}, function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
-		ApplyStatus(char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1", 12.0, 0, char)
+		ApplyStatus(char, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1", 12.0, 0, char)
 	elseif state == SKILL_STATE.HIT and skillData.Success then
 		local target = skillData.Target
 		if HasActiveStatus(target, "KNOCKED_DOWN") == 1 then

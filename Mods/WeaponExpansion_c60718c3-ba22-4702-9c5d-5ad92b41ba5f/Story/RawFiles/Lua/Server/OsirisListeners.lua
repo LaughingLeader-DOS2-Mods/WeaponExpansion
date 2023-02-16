@@ -41,14 +41,14 @@ local function IncreaseKillCount(char, fromTargetDying)
 				UpdateDarkFireballSkill(char)
 			end
 			SyncDataToClient(CharacterGetReservedUserID(char))
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				print("IncreaseKillCount", char, PersistentVars.SkillData.DarkFireballCount[character.MyGuid], maxCount)
 			end
 		end
 	end
 end
 
-if Vars.DebugEnabled then
+if Vars.DebugMode then
 	Ext.RegisterConsoleCommand("llweaponex_killcount", function(cmd)
 		local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
 		IncreaseKillCount(host)
@@ -103,7 +103,7 @@ local function ReloadAmmoSkills(uuid)
 		GameHelpers.Skill.Swap(uuid, "Shout_LLWEAPONEX_HandCrossbow_Reload", "Projectile_LLWEAPONEX_HandCrossbow_Shoot", true, true)
 	end
 	if CharacterHasSkill(uuid, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
-		GameHelpers.Skill.Swap(uuid, "Shout_LLWEAPONEX_Pistol_Reload", "Target_LLWEAPONEX_Pistol_Shoot", true, true)
+		GameHelpers.Skill.Swap(uuid, "Shout_LLWEAPONEX_Pistol_Reload", "Projectile_LLWEAPONEX_Pistol_Shoot", true, true)
 	end
 end
 

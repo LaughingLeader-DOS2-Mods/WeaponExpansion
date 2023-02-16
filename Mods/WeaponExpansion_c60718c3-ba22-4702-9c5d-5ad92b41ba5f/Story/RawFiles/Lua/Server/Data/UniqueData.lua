@@ -519,7 +519,7 @@ local function TransformItem(self, item, template, stat, level, matchStat, match
 	return true
 end
 
-if Vars.DebugEnabled then
+if Vars.DebugMode then
 	function UniqueData:TryTransform(template)
 		local item = Ext.GetItem(self.UUID)
 		local level = CharacterGetLevel(CharacterGetHostCharacter())
@@ -649,6 +649,35 @@ local function ResetBoostAttributes(tbl, target, changes)
 	end
 end
 
+local function ApplyStatsConfigurator(changes, stat)
+	local UnpackCollection = Mods.S7_Config.UnpackCollection
+	local Rematerialize = Mods.S7_Config.Rematerialize
+	local SafeToModify = Mods.S7_Config.SafeToModify
+	local toConfigure = Mods.S7_Config.toConfigure
+	if toConfigure == nil then
+		return
+	end
+    for _, config in ipairs(toConfigure) do --  Iterate over toConfigure queue
+        for modID, JSONstring in pairs(config) do
+			local JSONborne = Ext.JsonParse(JSONstring) --  Parsed JSONstring.
+			for keyName, content in pairs(JSONborne) do --  Iterate over JSONborne.
+				local nameList = Rematerialize(UnpackCollection(keyName, content)) -- extract stat-names to nameList.
+				for name, _ in pairs(nameList) do
+					if name == stat.Name then
+						for key, value in pairs(content) do
+							if SafeToModify(name, key) then --  Checks if attribute key is safe to modify.
+								local v = Rematerialize(value)
+								changes.Stats[key] = v
+								stat[key] = v
+							end
+						end
+					end
+				end
+			end
+        end
+    end
+end
+
 local function ResetUnique(item, stat, level, changes)
 	local target = item.Stats.DynamicStats[2]
 	ResetBoostAttributes(BoostAttributes, target, changes)
@@ -677,6 +706,13 @@ local function ResetUnique(item, stat, level, changes)
 				end
 				changes.Stats[attribute] = value
 				stat[attribute] = value
+			end
+		end
+		-- Stats Configurator
+		if Ext.IsModLoaded("de8f15f2-65a2-4ee4-a25f-7a7ab0305a58") then
+			local b,err = xpcall(ApplyStatsConfigurator, debug.traceback, changes, stat)
+			if not b then
+				Ext.PrintError(err)
 			end
 		end
 	end

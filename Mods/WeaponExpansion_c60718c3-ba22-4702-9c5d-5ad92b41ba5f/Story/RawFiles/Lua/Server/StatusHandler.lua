@@ -114,7 +114,7 @@ local function OnNRDStatusAttempt(target, status, handle, source)
 	local callbacks = Listeners.StatusAttempt[status]
 	if callbacks ~= nil then
 		for i,callback in pairs(callbacks) do
-			local s,err = xpcall(callback, debug.traceback, target, status, handle, source)
+			local s,err = xpcall(callback, debug.traceback, target, status, source, handle)
 			if not s then
 				Ext.PrintError(err)
 			end

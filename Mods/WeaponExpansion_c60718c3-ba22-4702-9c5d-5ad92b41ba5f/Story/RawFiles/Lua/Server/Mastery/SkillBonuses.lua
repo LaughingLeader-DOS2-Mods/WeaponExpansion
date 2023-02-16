@@ -85,12 +85,12 @@ end
 function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback)
 	if type(skill) == "table" then
 		for i,v in pairs(skill) do
-			LeaderLib.RegisterSkillListener(v, function(inskill, char, ...)
+			RegisterSkillListener(v, function(inskill, char, ...)
 				OnSkillCallback(callback, matchBonuses, inskill, char, ...)
 			end)
 		end
 	else
-		LeaderLib.RegisterSkillListener(skill, function(inskill, char, ...)
+		RegisterSkillListener(skill, function(inskill, char, ...)
 			OnSkillCallback(callback, matchBonuses, inskill, char, ...)
 		end)
 	end
@@ -142,23 +142,19 @@ local function OnStatusCallback(callback, matchBonuses, target, status, source)
 	end
 end
 
-function MasteryBonusManager.RegisterStatusListener(status, matchBonuses, callback)
+function MasteryBonusManager.RegisterStatusListener(event, status, matchBonuses, callback)
 	if type(status) == "table" then
 		for i,v in pairs(status) do
-			if Listeners.StatusApplied[v] == nil then 
-				Listeners.StatusApplied[v] = {}
-			end
-			table.insert(Listeners.StatusApplied[v], function(target,v,source) 
+			local wrapperCallback = function(target,v,source) 
 				OnStatusCallback(callback, matchBonuses, target, v, source)
-			end)
+			end
+			RegisterStatusListener(event, v, wrapperCallback)
 		end
 	else
-		if Listeners.StatusApplied[status] == nil then 
-			Listeners.StatusApplied[status] = {}
-		end
-		table.insert(Listeners.StatusApplied[status], function(target,status,source) 
+		local wrapperCallback = function(target,status,source)
 			OnStatusCallback(callback, matchBonuses, target, status, source)
-		end)
+		end
+		RegisterStatusListener(event, status, wrapperCallback)
 	end
 end
 

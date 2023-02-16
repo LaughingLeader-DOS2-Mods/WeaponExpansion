@@ -44,7 +44,7 @@ function TooltipHandler.GetDescriptionText(character, data)
 		table.sort(tagKeys, sortTagParams)
 		for i,tagName in pairs(tagKeys) do
 			local tagData = data.Tags[tagName]
-			if SharedData.RegionData.LevelType == LeaderLib.LEVELTYPE.CHARACTER_CREATION or Mastery.HasMasteryRequirement(character, tagName) then
+			if SharedData.RegionData.LevelType == LeaderLib.LEVELTYPE.CHARACTER_CREATION or Mastery.HasMasteryRequirement(character, tagName) or Vars.DebugMode then
 				if tagData.NamePrefix ~= nil then
 					if namePrefix ~= "" then
 						namePrefix = namePrefix .. " "

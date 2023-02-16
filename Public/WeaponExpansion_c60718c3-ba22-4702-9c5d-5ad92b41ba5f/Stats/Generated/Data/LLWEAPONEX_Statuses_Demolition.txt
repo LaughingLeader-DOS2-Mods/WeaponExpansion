@@ -31,8 +31,8 @@ data "StackId" "Stack_LLWEAPONEX_RemoteMine_Detonate_Delayed"
 
 new entry "LLWEAPONEX_REMOTEMINE_BREACHED"
 type "StatusData"
-data "StatusType" "CONSUME"
-using "_LEADERLIB_HIDDEN_CONSUME_BASE"
+data "StatusType" "DAMAGE"
+using "_LEADERLIB_HIDDEN_DAMAGE_BASE"
 data "StackId" "Stack_LLWEAPONEX_RemoteMine_Breached"
 
 new entry "LLWEAPONEX_REMOTEMINE_KNOCKBACK_WEAK"

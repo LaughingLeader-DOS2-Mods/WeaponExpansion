@@ -4,59 +4,10 @@ INITSECTION
 LLWEAPONEX_WeaponMastery_InitSettings();
 KBSECTION
 
-//REGION OLD_SETTINGS
 PROC
 LLWEAPONEX_WeaponMastery_InitSettings()
 THEN
 DB_NOOP(1);
-
-/*
-DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON",          "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
-DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION",   "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
-DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM",           "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
-*/
-/*
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_DualShields", "Cover", "Target_LLWEAPONEX_ShieldCover");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_DualShields", "ShieldPrison", "Target_LLWEAPONEX_ShieldPrison");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_DualShields", "IronMaiden", "Target_LLWEAPONEX_IronMaiden");
-
-DB_LLWEAPONEX_WeaponMastery_SkillRequirements("LLWEAPONEX_Firearm", "Blunderbuss_Cannonball", "LLWEAPONEX_BlunderbussEquipped", "Tag");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "ElementalBullets", "Target_LLWEAPONEX_ElementalBullets");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "Blunderbuss_Cannonball", "Zone_LLWEAPONEX_Blunderbuss_Cannonball");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Greatbow", "FutureBarrage", "Target_LLWEAPONEX_Greatbow_FutureBarrage");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_HandCrossbow", "Assassinate", "Projectile_LLWEAPONEX_HandCrossbow_Assassinate");
-
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Katana", "Iaido", "Rush_LLWEAPONEX_Katana_Iaido");
-DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Katana", 1, "Combo", "Tag");
-DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Katana", "Combo", "LLWEAPONEX_Katana_ComboEnabled", "Tag");
-
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Quarterstaff", "LegSweep", "Shout_LLWEAPONEX_LegSweep");
-
-//DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Any"); // Added when the offhand is empty
-DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Rapier", 2, "SuckerCombo", "Tag"); // Added when Sucker Punch is used
-//DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Rapier", 3, "FlickerStrike", "Any");
-
-//DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "Shout_LLWEAPONEX_Rapier_DuelistStance");
-DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Rapier", "SuckerCombo", "LLWEAPONEX_Rapier_SuckerComboEnabled", "Tag");
-//DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "FlickerStrike", "MultiStrike_LLWEAPONEX_Rapier_FlickerStrike");
-
-//Statuses applied by mastery skills that should be removed when the mastery is inactive
-DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
-DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "SuckerCombo", "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
-DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "SuckerCombo", "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO2");
-
-//DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Runeblade", 1, "RunicReverb", "Any");
-DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Runeblade", 1, "PoisonBurst", "Status");
-
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "RunicReverb", "Shout_LLWEAPONEX_Runeblade_RunicReverb");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "PoisonBurst", "Target_LLWEAPONEX_Runeblade_PoisonBurst");
-
-DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
-
-//DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_ThrowingAbility", 1, "ThrowWeapon", "Any");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_ThrowingAbility", "ThrowWeapon", "Projectile_LLWEAPONEX_ThrowWeapon");
-*/
-//END_REGION
 
 //REGION UPDATES
 PROC
@@ -136,6 +87,11 @@ LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _Mastery);
 //END_REGION
 
 //REGION ACTIVATION_DEACTIVATION
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_Mastery)
+THEN
+NRD_ModCall("WeaponExpansion", "OnMasteryActivated", (STRING)_Player, _Mastery);
+
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_Mastery)
 AND

@@ -5,6 +5,7 @@ StartOneshotTimer = Mods.LeaderLib.StartOneshotTimer
 StartTimer = Mods.LeaderLib.StartTimer
 CancelTimer = Mods.LeaderLib.CancelTimer
 RegisterSkillListener = Mods.LeaderLib.RegisterSkillListener
+RegisterStatusListener = Mods.LeaderLib.RegisterStatusListener
 
 ---@class WeaponExpansionVars
 local defaultPersistentVars = {
@@ -19,6 +20,11 @@ local defaultPersistentVars = {
         ThrowWeapon = {},
         ThrowBalrinAxe = {},
         VanquishersPath = {},
+        ---@class RemoteMineDetonationData:table
+        ---@field Mines string[]
+        ---@field Remaining integer
+        ---@type table<string, table<string, RemoteMineDetonationData>>
+        RemoteMineDetonation = {}
     },
     StatusData = {
         RemoveOnTurnEnd = {},
@@ -144,28 +150,6 @@ function RegisterMasteryListener(event, mastery, callback)
     end
 end
 
----@param event StatusEventID
----@param status string
----@param callback StatusEventCallback
-function RegisterStatusListener(event, status, callback)
-    local statusEventHolder = Listeners[event]
-    if statusEventHolder ~= nil then
-        if type(status) == "table" then
-            for i,v in pairs(status) do
-                if statusEventHolder[v] == nil then
-                    statusEventHolder[v] = {}
-                end
-                table.insert(statusEventHolder[v], callback)
-            end
-        else
-            if statusEventHolder[status] == nil then
-                statusEventHolder[status] = {}
-            end
-            table.insert(statusEventHolder[status], callback)
-        end
-    end
-end
-
 ---@param event ItemListenerEvent
 ---@param idType EquipmentChangedIDType
 ---@param id string The template, tag, etc.
@@ -183,6 +167,7 @@ function RegisterItemListener(event, idType, id, callback)
     end
 end
 
+Ext.Require("Server/Data/PresetEntries.lua")
 Ext.Require("Server/ServerMain.lua")
 Ext.Require("Server/HitHandler.lua")
 Ext.Require("Server/StatusHandler.lua")
@@ -198,6 +183,7 @@ Ext.Require("Server/Skills/ElementalFirearms.lua")
 Ext.Require("Server/Skills/PrepareEffects.lua")
 Ext.Require("Server/Skills/SkillHelpers.lua")
 Ext.Require("Server/Skills/SkillListeners.lua")
+Ext.Require("Server/Skills/RemoteMines.lua")
 Ext.Require("Server/MasteryExperience.lua")
 Ext.Require("Server/MasteryHelpers.lua")
 Ext.Require("Server/PistolMechanics.lua")
@@ -249,7 +235,7 @@ local function SessionSetup()
     -- Enemy Upgrade Overhaul
     if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
-        Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Target_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
+        Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
 

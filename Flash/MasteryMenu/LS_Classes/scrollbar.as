@@ -971,12 +971,12 @@ package LS_Classes
 			this.stopAutoScroll();
 		}
 		
-		public function startAutoScroll(param1:Boolean) : *
+		public function startAutoScroll(down:Boolean) : *
 		{
 			var val2:Date = null;
 			if(!this.m_isAutoScrolling)
 			{
-				this.m_currentScrollDown = param1;
+				this.m_currentScrollDown = down;
 				this.m_currentScrollDelay = 0;
 				val2 = new Date();
 				this.m_autoScrollPrevTime = this.m_autoScrollStartTime = val2.getTime();

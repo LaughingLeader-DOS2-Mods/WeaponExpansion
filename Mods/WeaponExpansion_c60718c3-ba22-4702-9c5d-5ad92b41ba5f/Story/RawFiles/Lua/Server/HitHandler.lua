@@ -46,11 +46,11 @@ end
 local function OnPrepareHit(target,source,damage,handle)
 	if not StringHelpers.IsNullOrEmpty(source) then
 		local attacker = Ext.GetCharacter(source)
-		if UnarmedHelpers.HasUnarmedWeaponStats(attacker.Stats) then
-			UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle)
-		end
-
 		if damage > 0 and GameHelpers.HitSucceeded(target, handle, true) then
+			if UnarmedHelpers.HasUnarmedWeaponStats(attacker.Stats) then
+				UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle)
+			end
+
 			if HasActiveStatus(source, "LLWEAPONEX_MURAMASA_CURSE") == 1 then
 				local isCrit = NRD_HitGetInt(handle, "Backstab") == 1 or NRD_HitGetInt(handle, "CriticalHit") == 1
 				if isCrit then
@@ -124,7 +124,7 @@ end
 --- @param damage integer
 --- @param handle integer
 LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
-	if Vars.DebugEnabled then
+	if Vars.DebugMode then
 		printd(string.format("[LLWEAPONEX:OnHit] skill(%s) target(%s) source(%s)", NRD_StatusGetString(target, handle, "SkillId"), target, source))
 	end
 	if not StringHelpers.IsNullOrEmpty(source) then

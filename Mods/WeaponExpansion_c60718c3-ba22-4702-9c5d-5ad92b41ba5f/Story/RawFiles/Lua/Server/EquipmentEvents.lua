@@ -181,7 +181,7 @@ function OnItemEquipped(uuid,itemUUID)
 					if isPlayer then
 						local equippedTag = Tags.WeaponTypes[tag]
 						if equippedTag ~= nil then
-							if Vars.DebugEnabled then
+							if Vars.DebugMode then
 								if IsTagged(uuid, equippedTag) == 0 then
 									printd("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
 								end
@@ -226,7 +226,7 @@ function OnItemEquipped(uuid,itemUUID)
 		template = StringHelpers.GetUUID(template)
 		local callbacks = Listeners.EquipmentChanged.Template[template]
 		if callbacks ~= nil then
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(true)", template, item.StatsId, character.MyGuid))
 			end
 			for i,callback in pairs(callbacks) do
@@ -238,7 +238,7 @@ function OnItemEquipped(uuid,itemUUID)
 		end
 		for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
 			if item:HasTag(tag) then
-				if Vars.DebugEnabled then
+				if Vars.DebugMode then
 					Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(true)", tag, item.StatsId, character.MyGuid))
 				end
 				for i,callback in pairs(callbacks) do
@@ -270,7 +270,7 @@ function OnItemTemplateUnEquipped(uuid, itemUUID, template)
 		local item = Ext.GetItem(itemUUID)
 		local callbacks = Listeners.EquipmentChanged.Template[template]
 		if callbacks ~= nil then
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(false)", template, item.StatsId, character.MyGuid))
 			end
 			for i,callback in pairs(callbacks) do
@@ -282,7 +282,7 @@ function OnItemTemplateUnEquipped(uuid, itemUUID, template)
 		end
 		for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
 			if item:HasTag(tag) then
-				if Vars.DebugEnabled then
+				if Vars.DebugMode then
 					Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.StatsId, character.MyGuid))
 				end
 				for i,callback in pairs(callbacks) do

@@ -6,6 +6,7 @@ Common = LeaderLib.Common
 StringHelpers = LeaderLib.StringHelpers
 LocalizedText = LeaderLib.LocalizedText
 printd = LeaderLib.PrintDebug
+printf = LeaderLib.PrintLog
 
 SKILL_STATE = LeaderLib.SKILL_STATE
 
@@ -32,7 +33,7 @@ Vars = {
 	GAME_STARTED = false,
 	SEND_USER_ID = false,
 	isInCharacterCreation = false,
-	DebugEnabled = Ext.IsDeveloperMode() == true
+	DebugMode = Ext.IsDeveloperMode() == true
 }
 
 Skills = {
@@ -42,6 +43,7 @@ Skills = {
 	DamageFunctions = {},
 	WarfareMeleeSkills = {},
 	ScoundrelMeleeSkills = {},
+	Data = {}
 }
 
 AttributeScaleTables = {
@@ -86,7 +88,6 @@ Ext.Require("Shared/Data/MasteryData_Masteries.lua")
 Ext.Require("Shared/Data/MasteryData_RankBonuses.lua")
 Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/Data/UnarmedWeaponStats.lua")
-Ext.Require("Shared/Data/PresetEntries.lua")
 Ext.Require("Shared/Damage/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillAPListener.lua")
 Ext.Require("Shared/Damage/SkillDamageFunctions.lua")
@@ -103,7 +104,7 @@ local initSettings = Ext.Require("Shared/Settings.lua")
 ---@type ModSettings
 Settings = nil
 
--- if Vars.DebugEnabled then
+-- if Vars.DebugMode then
 -- 	Ext.Require("Shared/Debug/GameMathTracing.lua")
 -- end
 
@@ -192,6 +193,7 @@ local function LoadExperienceVariables()
 end
 
 Ext.RegisterListener("SessionLoaded", function()
+	Mastery.InitBonusIdentifiers()
 	Settings = initSettings()
 
 	LoadExperienceVariables()

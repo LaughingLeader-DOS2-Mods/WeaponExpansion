@@ -1,7 +1,7 @@
 <contentList>
 	<content contentuid="h00157a58g9ae0g4119gba1ag3f1e9f11db14">Dual Shields</content>
 	<content contentuid="h00277f28g293fg49a2gbc19g4e1a54a92f0f">Weapon Expansion - Skillbooks</content>
-	<content contentuid="h002f643bg19afg4a78g8822g37c0614b0921">Bounty of the Harvest</content>
+	<content contentuid="h002f643bg19afg4a78g8822g37c0614b0921">Soul Harvest</content>
 	<content contentuid="h0036c310g95a5g42e7gb715g06c09e6a4079">Character has activated the &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Enemies hit have a 10% chance to become &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; for 1 turn.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 50%.&lt;/font&gt;</content>
 	<content contentuid="h003d6b87g216ag47cega199gf4f3c2d28998">a Scoundrel Weapon</content>
 	<content contentuid="h0042fce4g99a9g487egb7d2g3d594b9b4d17">Master Monk of Staves</content>
@@ -99,7 +99,7 @@
 	<content contentuid="h09132fbbg49fdg46c8g81b2g6b6de312721e">An old greatbow passed down as a family heirloom. Not the strongest, but it&apos;ll do.</content>
 	<content contentuid="h092713ecg7833g48d5g8627g3d17c449f055">A set of small &lt;font color=&apos;#C0C0C0&apos;&gt;silver-tipped&lt;/font&gt; bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;&lt;font color=&apos;#12FDDF&apos;&gt;Monsters such as Werebeasts, Demons, and the Undead are rumored to be suspectible to silver.&lt;/font&gt;</content>
 	<content contentuid="h095f914fg0387g4a3bgaa8fg2aa6c557c7b4">&lt;font color=&apos;#03fcdb&apos;&gt;Runic Dispersal&lt;/font&gt;</content>
-	<content contentuid="h0989fe2fg6173g4d75ga291gac5e9e4a6db0">Soul Harvest IV</content>
+	<content contentuid="h0989fe2fg6173g4d75ga291gac5e9e4a6db0">Soul Bounty IV</content>
 	<content contentuid="h0990e543gd885g4861ga84bgdb4a6ae2f0ef">Runic Boots</content>
 	<content contentuid="h0991fa6cgdc68g410dgbc3cg0c6a36fe8d8b">*[RANGED] Click on the button labeled &apos;Ranged&apos;.*</content>
 	<content contentuid="h09ef58e3g0c75g456ag95a2g7dbf3900e2e7">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Applies &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; to &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; enemies for 1 turn, otherwise &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; is applied for 1 turn.&lt;br&gt;&lt;font color=&apos;#7d71d9&apos;&gt;Attacking a Shocked or Stunned enemy sends out a jolt of electricity to other enemies within 8m.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#f7ba14&apos;&gt;When Shocked is applied, that enemy gets Shock Resistance, preventing Shocked from being applied by Runeblades for 3 turns.&lt;/font&gt;&lt;br&gt;Adds &lt;font color=&apos;#4197e2&apos;&gt;Water Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
@@ -396,7 +396,7 @@
 	<content contentuid="h2805baeagd4b0g44b4ga012g2b821374160c">&lt;font color=&apos;#EA2E2E&apos;&gt;Extend &amp; Smash&lt;/font&gt;</content>
 	<content contentuid="h2817af00ge17eg4388g8d72g3a3d7481e757">Launch a dud at a target position, dealing [1].&lt;br&gt;&lt;font color=&apos;#ffb526&apos;&gt;After 3 turns in combat (any source), the dud explodes for [2] in a [3] radius.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ff2626&apos;&gt;If the dud is destroyed before being fully armed, it deals [4] instead.&lt;/font&gt;</content>
 	<content contentuid="h2836b8b0g84a9g42e9gb62agce332eb1121e">&lt;font color=&apos;#FF3E2A&apos;&gt;Sword Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h28548559g70e2g4391gbcc2gb3d0d8618782">Soul Harvest I</content>
+	<content contentuid="h28548559g70e2g4391gbcc2gb3d0d8618782">Soul Bounty I</content>
 	<content contentuid="h2869c187g43c7g4a43g840eg09183a619b9e">Beginner</content>
 	<content contentuid="h286ef794g72f7g4b59gaa20geaf4bbdeabc6">Avalanche Rune</content>
 	<content contentuid="h2896b037geda2g4458ga782ga27dc02db941">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Every third basic attack grants a &lt;font color=&apos;#8B0000&apos;&gt;Congealed Blood Ball&lt;/font&gt;, which can be thrown to create a blood surface.</content>
@@ -444,7 +444,7 @@
 	<content contentuid="h2d0e8796g1d66g4541g8ce3ged8f936c4129">*Tell the mercenary to stop following you.*</content>
 	<content contentuid="h2d15369bg951bg438cga94fg7ccb48f7a9b1">Lava Rune</content>
 	<content contentuid="h2d40dd25gb718g4809ga2e9gb83912e9cbfd">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release a freezing gas, dealing water damage on hit.</content>
-	<content contentuid="h2d8ac924gda32g41c1ga3c9g18e20e1d9bd6">Reap the battlefield, dealing [1] to enemies in an arc.&lt;br&gt;&lt;font color=&apos;#CD39C0&apos;&gt;Slain enemies provide a permanent, stacking damage bonus and restore &lt;font color=&apos;#80FFC3&apos;&gt;source points&lt;/font&gt;.&lt;/font&gt;</content>
+	<content contentuid="h2d8ac924gda32g41c1ga3c9g18e20e1d9bd6">Reap the battlefield, dealing [1] to enemies in an arc.&lt;br&gt;&lt;font color=&apos;#CD39C0&apos;&gt;Slaying enemies grants &lt;font color=&apos;#80FFC3&apos;&gt;[Key:LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName]&lt;/font&gt; (a stacking damage bonus), and restores &lt;font color=&apos;#80FFC3&apos;&gt;source points&lt;/font&gt;.&lt;/font&gt;</content>
 	<content contentuid="h2d9d60e3gf171g47ffgbf7fg126af4dd7ef6">Expert Slayer</content>
 	<content contentuid="h2dcf53bbgced5g46eagbabdg54b3d617317a">Dusty Book</content>
 	<content contentuid="h2de49223g49a5g4bc5g9224g05413bb0a013">Disable Remote Charge Detonation Limit - *WARNING* - Disable at your own risk!</content>
@@ -497,55 +497,55 @@
 	<content contentuid="h316d542cgbcc6g48f4g81a6g1f454c382533">&lt;font color=&apos;#ff7a29&apos;&gt;Change Stance&lt;/font&gt;</content>
 	<content contentuid="h317c0b40g39a6g451bgb923gb03fc052d1f1">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in a sticky tar, dealing earth damage.</content>
 	<content contentuid="h3192a94bg96f7g421dgbed2g9da98d308c05">A weight throwing axe.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
-	<content contentuid="h31bc6a06ga3fbg455fg9572g7f6298cd93cb">Fired like a prayer, this blessed water greatbow arrow might be just the divine intervention you need in a hot situation.</content>
+	<content contentuid="h31bc6a06ga3fbg455fg9572g7f6298cd93cb">像祷告一样射击, this blessed water greatbow arrow might be just the divine intervention you need in a hot situation.</content>
 	<content contentuid="h31cede19g57a8g48deg87d7gaa9dc607185c">&lt;font color=&apos;#EA74B6&apos;&gt;Token of Constitution&lt;/font&gt;</content>
-	<content contentuid="h31d83c23gc0fag412fg9f48gebc89f3e9d11">Muramasa, The Cursed Blade</content>
-	<content contentuid="h31e58acegf828g451bgbe86g5fea547456bc">Shuriken</content>
+	<content contentuid="h31d83c23gc0fag412fg9f48gebc89f3e9d11">村正, 诅咒之刃</content>
+	<content contentuid="h31e58acegf828g451bgbe86g5fea547456bc">手里剑</content>
 	<content contentuid="h31f9ea18g7adbg4b23g93a1g7be268564b95">Charging (War Charge)</content>
-	<content contentuid="h3215fb30gf588g41dfga22dg9dbadd052fb3">Beginner</content>
-	<content contentuid="h321920a0g2c8eg467egb930g093f073a1312">Heavy Book</content>
-	<content contentuid="h32537de7gdbefg4f73g84f1ge8d975ab42a0">Runeweave Hood</content>
-	<content contentuid="h32749b80g4544g449egb4e5g1e4bd9ce04c3">Axes deal [ExtraData:LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName].</content>
-	<content contentuid="h32a910e6gfc6cg431egbb26g9b4c67639010">Quarterstaff (Metal)</content>
-	<content contentuid="h32b2d731g95e4g4b68ga7f1ge6e5069a4a12">Death Rune</content>
-	<content contentuid="h32cc6a8cg93a9g4482g9ccfg5e332d7eb683">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h3322d0efg7420g408cg9053g57c1a5c6f914">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h336d150fg8c63g4707g9231g3c2cb5ad7764">A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named &apos;Trusy Nick&apos;, who was said to always carry a variety of arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
-	<content contentuid="h338d9f08g2302g41f0g802bg5a937dda1cee">Mercy</content>
+	<content contentuid="h3215fb30gf588g41dfga22dg9dbadd052fb3">新手</content>
+	<content contentuid="h321920a0g2c8eg467egb930g093f073a1312">沉重的书</content>
+	<content contentuid="h32537de7gdbefg4f73g84f1ge8d975ab42a0">符文编织的兜帽</content>
+	<content contentuid="h32749b80g4544g449egb4e5g1e4bd9ce04c3">斧子造成 [ExtraData:LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus]% 对目标造成更多伤害 [Key:KNOCKED_DOWN_DisplayName].</content>
+	<content contentuid="h32a910e6gfc6cg431egbb26g9b4c67639010">铁头木棒 (金属)</content>
+	<content contentuid="h32b2d731g95e4g4b68ga7f1ge6e5069a4a12">死亡符文。</content>
+	<content contentuid="h32cc6a8cg93a9g4482g9ccfg5e332d7eb683">&lt;font color=&apos;#40E0D0&apos;&gt;投掷能力精通IV&lt;/font&gt;</content>
+	<content contentuid="h3322d0efg7420g408cg9053g57c1a5c6f914">&lt;font color=&apos;#2EFFE9&apos;&gt;法杖精通IV&lt;/font&gt;</content>
+	<content contentuid="h336d150fg8c63g4707g9231g3c2cb5ad7764">手工制作的箭袋,快速的抽出箭矢。曾经属于一个弓箭手 &apos;Trusy Nick&apos;, 据说他总是带着各种各样的箭.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;快速抽取箭袋在战斗外能自动补充。&lt;/font&gt;</content>
+	<content contentuid="h338d9f08g2302g41f0g802bg5a937dda1cee">Mercy（仁慈, 宽恕, 幸运, 恩惠）</content>
 	<content contentuid="h338fd30cg6831g4f12g9bccg7c73be01a085">Recharging (Quiver)</content>
-	<content contentuid="h33927abfgb354g477dgb204g3ba65c950f71">A large scythe.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
-	<content contentuid="h33abf26agf855g4803g8770g3dbad1ce2f9b">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
-	<content contentuid="h33c1a581gf442g4a60g9851gffe17d4151f4">Draw Arrow</content>
-	<content contentuid="h33c3c87bg18acg457fg9fadg13b2ead3e47a">Widowmaker</content>
-	<content contentuid="h340c2cffg5f68g4cdbga779gc0327133e200">Character has a damage bonus for their first attack.</content>
-	<content contentuid="h34401e0bg371fg449cg9e43g39208b508644">45%/30%/10% Chance for Bonus Missiles</content>
-	<content contentuid="h34471e48g19ddg4c10gbe3dg44c37cc651da">Delayed Dizzy</content>
-	<content contentuid="h345cc985g85a9g4d2fg9dd1g2c6f7ff9f7e6">Changes Damage Type</content>
-	<content contentuid="h3464c53dgce86g4e13g97f9gc44c00c4dcaf">Kevin (Oiled)</content>
-	<content contentuid="h347bb958g6498g4419g93a5g981542de87e6">The holiest of banners. Huzzah!</content>
-	<content contentuid="h348a2785g5750g4d3ag9ae4ge434051a48c2">Fury&apos;s Reward V</content>
-	<content contentuid="h34c270b6gb07fg47ebg8d49g7a37abadb736">Throwing Scythe?</content>
-	<content contentuid="h34cca20cg817dg4132ga584gf9c6fcce8790">&lt;font color=&apos;#00AA00&apos;&gt;Flask of Poison Weakness&lt;/font&gt;</content>
-	<content contentuid="h34f6772egc119g46b0g894age91618dddca1">Fire Bullets</content>
-	<content contentuid="h35037378g9f64g488dga457g5a32144339dd">Quarterstaff (Wood)</content>
-	<content contentuid="h35865821g7403g4bb4g99bdga8a26e72f85f">Kevin (Normal)</content>
-	<content contentuid="h35ad18c6g01dbg47e0g9be9g7ec0412ca64e">Blademaster&apos;s Strike 5</content>
-	<content contentuid="h35ea756dg3af6g4640gb5f2g9861efa3d5b5">Shield Cover</content>
-	<content contentuid="h360e2f3fg2d1cg4ee3g9b7bg9954fd904714">Magical Mini-Arbalest</content>
-	<content contentuid="h36115a3dg19f8g4ee8gb3edg06bc19b01fae">Inhibited</content>
-	<content contentuid="h36977f30g86afg4c49gbd11gda439c232bd0">&lt;font color=&apos;#FF337F&apos;&gt;Pistol Mastery III&lt;/font&gt;</content>
-	<content contentuid="h36ea4bc1g8a7cg4f67g8025ge66503ca547d">Old Tanto</content>
-	<content contentuid="h36fb9f8agcc45g4627g863bg1994aaace86e">&lt;font color=&apos;#FF961A&apos;&gt;Explosive Bullets&lt;/font&gt;</content>
-	<content contentuid="h3716cca7ga9fcg4c76g8c61gaabdbbd47017">&lt;font color=&apos;#FFAA00&apos;&gt;Enabled Mastery: [1]&lt;/font&gt;</content>
-	<content contentuid="h371b35eegbfbcg47dag91cfg38bd40e2cf7e">Permafrost</content>
-	<content contentuid="h372458e1g39e6g41ccg89e8g1821272e41ac">Crossbow Bolts</content>
-	<content contentuid="h37b7b5fegc022g4a23gbd81g4dfc00682f4b">Throwing Axe (Large)</content>
-	<content contentuid="h37c7be81g701bg4c19ga8ebg2c9db9da0c0c">Raging</content>
-	<content contentuid="h37dd5ccag806fg4c58gbb05gd2cca622ae93">&lt;font color=&apos;#A150FF&apos;&gt;Token of Wits&lt;/font&gt;</content>
-	<content contentuid="h37e4fb5bg10a7g428bg8aa3g719e66107aa0">Blademaster&apos;s Strike 2</content>
-	<content contentuid="h381f1719g2ab0g4098g8439gea240cd9374a">Empowered Runeweave Hood</content>
-	<content contentuid="h382df0a1g35f0g4720g989dgedfee3e7df28">Dragonslayer Gloves</content>
-	<content contentuid="h385c287dgb46dg4a18g8076g743fd7b9f831">Dual Shields - Automatically equips a Combat Shield in your main hand</content>
+	<content contentuid="h33927abfgb354g477dgb204g3ba65c950f71">一个大镰刀。&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;作为武器看起来毫无用处。&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;把它扔给敌人吧!&lt;/font&gt;</content>
+	<content contentuid="h33abf26agf855g4803g8770g3dbad1ce2f9b">一对两个盾牌，设计用于双臂。对于那些真正想要成为一堵坚不可摧的墙的人。</content>
+	<content contentuid="h33c1a581gf442g4a60g9851gffe17d4151f4">牵引箭</content>
+	<content contentuid="h33c3c87bg18acg457fg9fadg13b2ead3e47a">寡妇制造者</content>
+	<content contentuid="h340c2cffg5f68g4cdbga779gc0327133e200">角色的第一次攻击有一个伤害加成。</content>
+	<content contentuid="h34401e0bg371fg449cg9e43g39208b508644">45%/30%/10% 奖励投掷物的几率</content>
+	<content contentuid="h34471e48g19ddg4c10gbe3dg44c37cc651da">延迟晕眩</content>
+	<content contentuid="h345cc985g85a9g4d2fg9dd1g2c6f7ff9f7e6">改变损害类型</content>
+	<content contentuid="h3464c53dgce86g4e13g97f9gc44c00c4dcaf">凯文(醉酒)</content>
+	<content contentuid="h347bb958g6498g4419g93a5g981542de87e6">最神圣的旗帜。万岁!</content>
+	<content contentuid="h348a2785g5750g4d3ag9ae4ge434051a48c2">狂怒&apos;奖励V</content>
+	<content contentuid="h34c270b6gb07fg47ebg8d49g7a37abadb736">扔镰刀？</content>
+	<content contentuid="h34cca20cg817dg4132ga584gf9c6fcce8790">&lt;font color=&apos;#00AA00&apos;&gt;毒药瓶的弱点&lt;/font&gt;</content>
+	<content contentuid="h34f6772egc119g46b0g894age91618dddca1">火子弹</content>
+	<content contentuid="h35037378g9f64g488dga457g5a32144339dd">铁头木棒 (木头)</content>
+	<content contentuid="h35865821g7403g4bb4g99bdga8a26e72f85f">凯文 (正常)</content>
+	<content contentuid="h35ad18c6g01dbg47e0g9be9g7ec0412ca64e">剑术大师&apos;的打击5</content>
+	<content contentuid="h35ea756dg3af6g4640gb5f2g9861efa3d5b5">防护罩</content>
+	<content contentuid="h360e2f3fg2d1cg4ee3g9b7bg9954fd904714">魔幻迷你劲弩</content>
+	<content contentuid="h36115a3dg19f8g4ee8gb3edg06bc19b01fae">Inhibited（抑制）</content>
+	<content contentuid="h36977f30g86afg4c49gbd11gda439c232bd0">&lt;font color=&apos;#FF337F&apos;&gt;手枪精通III&lt;/font&gt;</content>
+	<content contentuid="h36ea4bc1g8a7cg4f67g8025ge66503ca547d">Old Tanto（老这么多）</content>
+	<content contentuid="h36fb9f8agcc45g4627g863bg1994aaace86e">&lt;font color=&apos;#FF961A&apos;&gt;爆炸子弹&lt;/font&gt;</content>
+	<content contentuid="h3716cca7ga9fcg4c76g8c61gaabdbbd47017">&lt;font color=&apos;#FFAA00&apos;&gt;能够精通: [1]&lt;/font&gt;</content>
+	<content contentuid="h371b35eegbfbcg47dag91cfg38bd40e2cf7e">永久冻土</content>
+	<content contentuid="h372458e1g39e6g41ccg89e8g1821272e41ac">十字弓弩箭</content>
+	<content contentuid="h37b7b5fegc022g4a23gbd81g4dfc00682f4b">投掷斧头(大量的)</content>
+	<content contentuid="h37c7be81g701bg4c19ga8ebg2c9db9da0c0c">Raging（狂怒的）</content>
+	<content contentuid="h37dd5ccag806fg4c58gbb05gd2cca622ae93">&lt;font color=&apos;#A150FF&apos;&gt;智慧的象征&lt;/font&gt;</content>
+	<content contentuid="h37e4fb5bg10a7g428bg8aa3g719e66107aa0">剑术大师&apos;的打击2</content>
+	<content contentuid="h381f1719g2ab0g4098g8439gea240cd9374a">增强符文编织的兜帽</content>
+	<content contentuid="h382df0a1g35f0g4720g989dgedfee3e7df28">屠龙者手套</content>
+	<content contentuid="h385c287dgb46dg4a18g8076g743fd7b9f831">双护盾-自动装备一个战斗护盾在你的主手</content>
 	<content contentuid="h38979687g2dd2g48d1gb70cg63816ec51135">Runeblade of Earth</content>
 	<content contentuid="h389bb022gfad2g4520ga8b2gf1cc8c854026">Weighty Book</content>
 	<content contentuid="h38a97819g0b16g4ba9ga62eg3cedb395668b">Weapon Expansion - Equipment</content>
@@ -746,7 +746,7 @@
 	<content contentuid="h5047443fg5e5dg4a8bg82e0gafc574d222f4">Tuned Flintlock Pistol</content>
 	<content contentuid="h507a3c21g7f2cg4232gab75g554c515f18d5">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery II&lt;/font&gt;</content>
 	<content contentuid="h50853c8cg2215g4f9fg8ab9g4cc10b4309cc">Throw Weapon</content>
-	<content contentuid="h5086140cg5c20g4fa9ga057g58a67546624f">&lt;icon id=&apos;Projectile_PinDown&apos; icon=&apos;Skill_Ranger_PinDown&apos;/&gt;[Key:Projectile_PinDown_DisplayName] shoots two arrows instead of one, hitting a random nearby enemy for half damage.</content>
+	<content contentuid="h5086140cg5c20g4fa9ga057g58a67546624f">&lt;icon id=&apos;Projectile_PinDown&apos; icon=&apos;Skill_Ranger_PinDown&apos;/&gt;[Key:Projectile_PinDown_DisplayName] shoots [ExtraData:LLWEAPONEX_MasteryBonus_Bow_PinDownBonusShots] arrow(s), hitting a random nearby enemy for half damage.</content>
 	<content contentuid="h50a0e10bg494eg44d7gac24g5dae0e1cd67f">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery II&lt;/font&gt;</content>
 	<content contentuid="h50abd32eg1a6bg4c15ga318g19ad78699979">&lt;icon id=&apos;Jump_TacticalRetreat&apos; icon=&apos;Skill_Ranger_TacticalRetreat&apos;/&gt;After using [Key:Jump_TacticalRetreat_DisplayName], your next action&apos;s AP cost is reduced by [Stats:Stats_LLWEAPONEX_MasteryBonus_Firearm_Tactics:APCostBoost].</content>
 	<content contentuid="h50ea178dgecafg4dd4gaad8g5c49a854ef0d">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery III&lt;/font&gt;</content>
@@ -905,7 +905,7 @@
 	<content contentuid="h5feaed39g30ebg4823g85b3g0d23ca4c7f3f">Destroy Grimoire FX for Party</content>
 	<content contentuid="h600027f7gac39g419bgba1dg56a1a17df1f9">Sweeper</content>
 	<content contentuid="h600758d8g966ag4715g944eg443503a394cc"></content>
-	<content contentuid="h600e653cg58bfg43b6gb546g116aef9ba9c9">Soul Harvest V</content>
+	<content contentuid="h600e653cg58bfg43b6gb546g116aef9ba9c9">Soul Bounty V</content>
 	<content contentuid="h605190aagd9c2g414cg93eeg7e595ddcb696">Thunderbolt Strike</content>
 	<content contentuid="h6061f14dgad52g4b0dg8933g7cd1337a8da0">Demonic Protection</content>
 	<content contentuid="h609008a2g3cb7g4670g93b7g7714013ddf12">A special pet rock. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
@@ -949,7 +949,7 @@
 	<content contentuid="h64d30195g7144g4429gbf19g61dbdb16cf45">Weapon Expansion - Debug Weapons</content>
 	<content contentuid="h64e87ae9g8ceag4b96gaf83gd5ed4cd1c161">Wooden Destiny</content>
 	<content contentuid="h64ef8f8eg48d8g468dga4ebg2a6357d7e30a">Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength.&lt;br&gt;&lt;font color=&apos;#CC3344&apos;&gt;If [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] goes shirtless, the tattoos will activate in combat and grant bonuses.&lt;/font&gt; </content>
-	<content contentuid="h651d4f13ge5ddg4111g871cgf92fab041bd4">Shoot a &lt;font color=&apos;#00FFAA&apos;&gt;second arrow&lt;/font&gt; at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;If no enemies are nearby, the bonus arrow will fire at the original target.&lt;/font&gt;</content>
+	<content contentuid="h651d4f13ge5ddg4111g871cgf92fab041bd4">Shoot &lt;font color=&apos;#00FFAA&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_Bow_PinDownBonusShots]&lt;/font&gt; additional arrow(s) at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;If no enemies are nearby, the bonus arrow(s) will fire at the original target.&lt;/font&gt;</content>
 	<content contentuid="h652d73fcg18b6g469cg8849g710028f8ec91">Strength Conversion</content>
 	<content contentuid="h6530180fg4563g4044gafefgc440ed2dd6a2">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release electrical energy on hit, dealing air damage.</content>
 	<content contentuid="h65373035g1641g4a8fga027g73e063bd5b31">[LLWEAPONEX_VendingMachine_OrderOption8_643f5348-d324-4508-ace3-71505bb30dee]</content>
@@ -972,7 +972,7 @@
 	<content contentuid="h66e019e3g7dd3g41fdg9880gd479a73bf7ba">Character is taking [1] from a flying body.</content>
 	<content contentuid="h66ea9bb3g8724g4001gb9acgccf4a5696829">Rallying</content>
 	<content contentuid="h66fd8c59g8a4dg44a2gaafeg71d0a80db595">Air Weakness</content>
-	<content contentuid="h670d368ag009fg4991gb535ge3720fb99f2f">Swap between two-handed and single-handed styles with the &lt;font color=&apos;#c5a</content>
+	<content contentuid="h670d368ag009fg4991gb535ge3720fb99f2f">Swap between two-handed and single-handed styles with the &lt;font color=&apos;#c5a65a&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A_DisplayName]&lt;/font&gt;.</content>
 	<content contentuid="h673b26f0g9e0ag45d3g857fg353aa68f1086">*[WANDS] Click on the button labeled &apos;Wands&apos;.*</content>
 	<content contentuid="h6762114bg6c18g4341gbddbg74de8166e47d">Lead your allies into a strategic charge, increasing &lt;font color=&quot;#9370DB&quot;&gt;Movement Speed by [1]%&lt;/font&gt;, &lt;font color=&quot;#32CD32&quot;&gt;Initiative by [2]&lt;/font&gt;, and the &lt;font color=&quot;#FF31FF&quot;&gt;damage of the first attack by [3]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&quot;#58FFFA&quot;&gt;Range of the War Charge scales with Leadership.&lt;/font&gt;</content>
 	<content contentuid="h67766b52g9d1fg4c92g85c3g0381aa9a878b">Regicide</content>
@@ -1213,7 +1213,7 @@
 	<content contentuid="h7f674e8dg9485g4e4ag84f1gaf005cded23a">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery III&lt;/font&gt;</content>
 	<content contentuid="h7f82ca3fg7d3dg43b6gb692gda14c4b94b0f">Old Rifle</content>
 	<content contentuid="h7fa5d20cg6190g4f09ga0abg7737430ae55f">Pilgrim&apos;s Quarterstaff</content>
-	<content contentuid="h7fbbfee8geee0g4fdcgad0dgbfe83a26124e">Soul Harvest II</content>
+	<content contentuid="h7fbbfee8geee0g4fdcgad0dgbfe83a26124e">Soul Bounty II</content>
 	<content contentuid="h7fe83c57g2951g45a3gb9d0g0b6cb9631808">An greatbow arrow infused with the fury of the air. If you listen closely you can hear it whistle and seethe with anticipation.</content>
 	<content contentuid="h801f36abg7da8g485ega1fcg4bf3416cdcc7">Gas Cooldown</content>
 	<content contentuid="h803a2376g5729g4d56g8c47gd7156ee5d348">&lt;font color=&apos;#F19824&apos;&gt;Eat hit deals [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet] in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet:ExplodeRadius]m radius around the target.&lt;/font&gt;</content>
@@ -1547,7 +1547,7 @@
 	<content contentuid="ha3e9e78cg1fa4g4f64ga835gbc35cb1ea463">Dust Blast Cooldown</content>
 	<content contentuid="ha3f11fe3g126fg426cga000g7963c84fb47e">Enhanced Demolition</content>
 	<content contentuid="ha421bcffge033g47d5g9b73ga8d03abc2364">Aspect of Necromancy</content>
-	<content contentuid="ha42425fbg4d35g4818g84fag128b9eb13e6e">Soul Harvest III</content>
+	<content contentuid="ha42425fbg4d35g4818g84fag128b9eb13e6e">Soul Bounty III</content>
 	<content contentuid="ha451f720g9544g4dd0gbb07g4e01903b4d42">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#C76537&apos;&gt;Fire Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="ha4aed062gd504g4ae6ga917g83547a3fe6c6">Worn Katana</content>
 	<content contentuid="ha4c0ed93g8c38g4b37ga948gd95e768d573e">Old Runeblade of Earth</content>
@@ -1650,7 +1650,7 @@
 	<content contentuid="haf0de280g47e7g41e3g9401g03e636e870d3">Venom Rune</content>
 	<content contentuid="haf1b80d3g97d1g477ag9547g1fd7878f3e35">Armor Break</content>
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
-	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
+	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with the &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
 	<content contentuid="haf8ef486g9b5eg46b0g95efg2c5795550240">Base Damage</content>
 	<content contentuid="haf932263g4ea4g4454gb6ebg9555a5a4fcf5">Shoot your equipped pistol at a target, dealing [1].&lt;br&gt;&lt;font color=&apos;#FF9922&apos;&gt;Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#77BB22&apos;&gt;When firing from a different elevation than your target, the bullet will travel at an angle.&lt;/font&gt;[2][3]</content>
 	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">a Axe</content>
@@ -1736,6 +1736,7 @@
 	<content contentuid="hb8e7b768gac05g4835g9e6fg4f75b52cfb66">&lt;font color=&apos;#00FFFF&apos;&gt;If killed, character will be resurrected by the Guardian when their turn starts.&lt;/font&gt;</content>
 	<content contentuid="hb8f79e5bgd2c3g48d4g90e5g5de02f9129a8">[1] and [2]</content>
 	<content contentuid="hb9317ba0ga942g4611g857egeff78f33de06">Tar Charge</content>
+	<content contentuid="hb931f729g9df1g461bg887fgb7eae7662e12">Heavy Bolt (+AP Cost)</content>
 	<content contentuid="hb9766113gb6c6g4f55g882dgb4aca210f7ac">Gladiator&apos;s Estoc</content>
 	<content contentuid="hb98b5e57g62bbg4bb0g8973g69bf99d60252">&lt;font color=&apos;#c80030&apos;&gt;Sharpened Great Arrow&lt;/font&gt;</content>
 	<content contentuid="hb9994325g25c9g4159gbaadg693042a4b51a">an Equipped Weapon</content>
@@ -2231,7 +2232,7 @@
 	<content contentuid="hf2f3f5dfg801eg4b17ga5d6g59c975b1c065">*[ANY ARMOR] Click on the button labeled &apos;Any Armor&apos;.*</content>
 	<content contentuid="hf3088c78gafa6g4b23ga6b2g65d07edc7440">&lt;font color=&apos;#FEFFB3&apos;&gt;Rally of the Divine&lt;/font&gt;</content>
 	<content contentuid="hf33113e4g2e7bg42ecga6b8g8fe816db8004">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery I&lt;/font&gt;</content>
-	<content contentuid="hf33cdaccgc14bg4cdegaa50g800a6c761add">&lt;font color=&apos;#80FFC3&apos;&gt;Soul Harvest&lt;/font&gt;</content>
+	<content contentuid="hf33cdaccgc14bg4cdegaa50g800a6c761add">&lt;font color=&apos;#80FFC3&apos;&gt;Soul Reaping&lt;/font&gt;</content>
 	<content contentuid="hf3437e3fge87dg4a87g92acgde369c86cdb5">Covered (Shell)</content>
 	<content contentuid="hf347a64dga297g4426g9397gbfaa416e7aba">Balrin&apos;s Throwing Axe (Lightning)</content>
 	<content contentuid="hf353e512gada6g41bdgaf47g813ef6af6f17">A special pet rock, dipped in oil. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>

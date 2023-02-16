@@ -105,10 +105,10 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 				end
 			end
 			--stats.ShouldSyncStats = true
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				Ext.Print(string.format("[LLWEAPONEX_SetItemStats] Synced Item [%s]", stats.Name))
 			end
-		elseif Vars.DebugEnabled then
+		elseif Vars.DebugMode then
 			Ext.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s) UUID(%s) Slot(%s) Owner(%s)", data.NetID, data.UUID, data.Slot, data.Owner))
 		end
 	end
@@ -121,7 +121,7 @@ local function SyncItemBoostChanges(item, changes)
 	local boostMap = {}
 	for i=2,#item.Stats.DynamicStats do
 		local boost = item.Stats.DynamicStats[i]
-		LeaderLib.PrintLog("[%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
+		LeaderLib.PrintLog("[SyncItemBoostChanges] [%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
 		if not StringHelpers.IsNullOrEmpty(boost.ObjectInstanceName) then
 			boostMap[boost.ObjectInstanceName] = boost
 		end
@@ -146,7 +146,7 @@ Ext.RegisterNetListener("LLWEAPONEX_DeltaModSwapper_SyncBoosts", function(cmd, p
 			SyncItemBoostChanges(item, data.Changes)
 		else
 			syncUpdateScreenItems[data.NetID] = data.Changes
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				Ext.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s)", data.NetID))
 			end
 		end
@@ -164,15 +164,15 @@ local function CaptureRewardScreenItems(ui, method)
 				---@type EclItem
 				local item = Ext.GetItem(Ext.DoubleToHandle(handle))
 				if item ~= nil then
+					if Vars.DebugMode then
+						print("Found quest reward item", item.NetID, handle)
+						LeaderLib.PrintLog("MyGuid(%s) StatsId(%s) ItemType(%s) NetID(%s) WorldPos(%s)", item.MyGuid, item.StatsId, item.ItemType, item.NetID, Common.Dump(item.WorldPos))
+					end
 					rewardScreenItems[item.NetID] = item
 					local changes = syncUpdateScreenItems[item.NetID]
 					if changes ~= nil then
 						SyncItemBoostChanges(item, changes)
 						syncUpdateScreenItems[item.NetID] = nil
-					end
-					if Vars.DebugEnabled then
-						print("Found quest reward item", item.NetID, handle)
-						LeaderLib.PrintLog("MyGuid(%s) StatsId(%s) ItemType(%s) NetID(%s) WorldPos(%s)", item.MyGuid, item.StatsId, item.ItemType, item.NetID, Common.Dump(item.WorldPos))
 					end
 				end
 			end

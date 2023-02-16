@@ -8,6 +8,7 @@ Mastery.Params = {
 local ts = LeaderLib.Classes["TranslatedString"]
 
 local RUSH_SKILLS = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
+local BASIC_ATTACK = {"ActionAttackGround"}
 
 local ELEMENTAL_WEAKNESS_BASE = Ext.Require("Shared/Data/MasteryData_ElementalWeakness.lua")
 
@@ -25,6 +26,7 @@ LLWEAPONEX_Axe_Mastery1 = {
 		NamePrefix = "<font color='#DD4444'>Executioner's</font>"
 	},
 	AXE_EXECUTIONER = {
+		Skills = BASIC_ATTACK,
 		Param = ts:Create("h32749b80g4544g449egb4e5g1e4bd9ce04c3","Axes deal [ExtraData:LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName]."),
 	},
 },
@@ -34,6 +36,7 @@ LLWEAPONEX_Axe_Mastery2 = {
 		Param = ts:Create("h173b9449ge0c5g4f29g86f4g01124907841b","Each target hit becomes <font color='#F13324'>Vulnerable</font>. If hit again, <font color='#F13324'>Vulnerable</font> is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].<br><font color='#F1CC00'><font color='#F13324'>Vulnerable</font> is removed when your turn ends.</font>"),
 	},
 	AXE_SAVAGE = {
+		Skills = BASIC_ATTACK,
 		Param = ts:Create("h29991fbcg6968g4feeg9a60gcc8c04fdbd73","Attack of Opportunities deal [ExtraData:LLWEAPONEX_MasteryBonus_Hit_Axe_AttackOfOpportunityMaxDamageBonus]% more damage, in proportion to the target's missing vitality."),
 	}
 },
@@ -84,7 +87,11 @@ LLWEAPONEX_Banner_Mastery3 = {
 		Param = ts:Create("h5b135257gec07g49f8gbf25g69df1d282001","<font color='#00CCAA'>If near an active banner, enemies hit are pulled towards the banner.</font>")
 	},
 	BANNER_LEADERSHIP = {
-		Param = ts:Create("hdcab69c9gc26ag4c53gb624gbba1c5f13ee2", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>Leadership</font> have a [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>Inspiration</font> on their turn. If <font color='#11FF44'>Leadership</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance2]%."),
+		StatusParam = {
+			Statuses = {"LEADERSHIP"},
+			Param = ts:Create("hdcab69c9gc26ag4c53gb624gbba1c5f13ee2", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>Leadership</font> have a [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>Inspiration</font> on their turn. If <font color='#11FF44'>Leadership</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance2]%."),
+			Active = {Value = "LLWEAPONEX_Banner_Mastery3", Type = "Tag", Source=true}
+		}
 	}
 },
 LLWEAPONEX_Banner_Mastery4 = {
@@ -99,7 +106,12 @@ LLWEAPONEX_Banner_Mastery4 = {
 	}
 },
 LLWEAPONEX_Banner_Mastery5 = {},
-LLWEAPONEX_BattleBook_Mastery1 = {},
+LLWEAPONEX_BattleBook_Mastery1 = {
+	BOOK_CONCUSSION = {
+		Skills = BASIC_ATTACK,
+		Param = ts:Create("h36b6a824g20a5g42acga0efg69102b1f801f", "<font color='#99AACC'>Basic attacks have a [ExtraData:LLWEAPONEX_MasteryBonus_Hit_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MasteryBonus_Hit_BattleBook_ConcussionTurns] turn(s).</font>"),
+	}
+},
 LLWEAPONEX_BattleBook_Mastery2 = {},
 LLWEAPONEX_BattleBook_Mastery3 = {},
 LLWEAPONEX_BattleBook_Mastery4 = {},
@@ -200,7 +212,7 @@ LLWEAPONEX_HandCrossbow_Mastery3 = {},
 LLWEAPONEX_HandCrossbow_Mastery4 = {},
 LLWEAPONEX_HandCrossbow_Mastery5 = {},
 LLWEAPONEX_Katana_Mastery1 = {
-	KATANA_COMBO = {},
+	--KATANA_COMBO = {},
 	KATANA_VAULT = {
 		Skills = {"MultiStrike_Vault", "MultiStrike_EnemyVault"},
 		Param = ts:Create("h78ab607fgbbb0g46adgb3f9g271749a251bf","<font color='#F19966'>After teleporting, your next basic attack or weapon skill will deal +[ExtraData:LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus]% additional damage.</font>"),
@@ -324,30 +336,32 @@ LLWEAPONEX_Wand_Mastery5 = {},
 
 local BonusIDEntry = MasteryDataClasses.BonusIDEntry
 
-for tag,tbl in pairs(Mastery.Bonuses) do
-	for bonusName,bonusEntry in pairs(tbl) do
-		if Mastery.BonusID[bonusName] == nil then
-			Mastery.BonusID[bonusName] = BonusIDEntry:Create(bonusName)
-		end
-		Mastery.BonusID[bonusName].Tags[tag] = bonusEntry
-		if bonusEntry.Skills ~= nil then
-			for i,v in pairs(bonusEntry.Skills) do
-				if Mastery.Params.SkillData[v] == nil then
-					Mastery.Params.SkillData[v] = {
-						Tags = {}
-					}
-				end
-				Mastery.Params.SkillData[v].Tags[tag] = bonusEntry
+function Mastery.InitBonusIdentifiers()
+	for tag,tbl in pairs(Mastery.Bonuses) do
+		for bonusName,bonusEntry in pairs(tbl) do
+			if Mastery.BonusID[bonusName] == nil then
+				Mastery.BonusID[bonusName] = BonusIDEntry:Create(bonusName)
 			end
-		end
-		if bonusEntry.StatusParam ~= nil then
-			for i,v in pairs(bonusEntry.StatusParam.Statuses) do
-				if Mastery.Params.StatusData[v] == nil then
-					Mastery.Params.StatusData[v] = {
-						Tags = {}
-					}
+			Mastery.BonusID[bonusName].Tags[tag] = bonusEntry
+			if bonusEntry.Skills ~= nil then
+				for i,v in pairs(bonusEntry.Skills) do
+					if Mastery.Params.SkillData[v] == nil then
+						Mastery.Params.SkillData[v] = {
+							Tags = {}
+						}
+					end
+					Mastery.Params.SkillData[v].Tags[tag] = bonusEntry
 				end
-				Mastery.Params.StatusData[v].Tags[tag] = bonusEntry.StatusParam
+			end
+			if bonusEntry.StatusParam ~= nil then
+				for i,v in pairs(bonusEntry.StatusParam.Statuses) do
+					if Mastery.Params.StatusData[v] == nil then
+						Mastery.Params.StatusData[v] = {
+							Tags = {}
+						}
+					end
+					Mastery.Params.StatusData[v].Tags[tag] = bonusEntry.StatusParam
+				end
 			end
 		end
 	end

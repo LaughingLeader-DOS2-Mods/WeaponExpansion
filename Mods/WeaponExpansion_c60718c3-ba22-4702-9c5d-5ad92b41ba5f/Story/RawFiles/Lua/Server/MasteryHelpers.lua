@@ -87,7 +87,7 @@ function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
 				end
 			end
 
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				if currentExp == nil then currentExp = 0 end
 				if nextExp == nil then nextExp = 0 end
 				Ext.PrintWarning("Mastery XP:",uuid, mastery, currentExp, "=>", nextExp)
@@ -174,6 +174,22 @@ function IsMeleeWeaponSkill(skill)
 		end
 	end
 	return false
+end
+
+--- @param uuid string
+--- @param mastery string
+function OnMasteryActivated(uuid,mastery)
+	uuid = StringHelpers.GetUUID(uuid)
+	printd("[WeaponExpansion] Activated mastery tag ["..mastery.."] on ["..uuid.."].")
+	local callbacks = Listeners.MasteryActivated[mastery]
+	if callbacks ~= nil then
+		for i,callback in pairs(callbacks) do
+			local b,err = xpcall(callback, debug.traceback, uuid, mastery)
+			if not b then
+				Ext.PrintError(err)
+			end
+		end
+	end
 end
 
 --- @param uuid string

@@ -32,7 +32,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Harken, "Opportunist")
 		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 		--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-		if Vars.DebugEnabled then
+		if Vars.DebugMode then
 			LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
 				Uniques.AnvilMace:Transfer(Origin.Harken, true)
 				Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
@@ -58,7 +58,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
-		if Vars.DebugEnabled then
+		if Vars.DebugMode then
 			LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
 				Uniques.DeathEdge:Transfer(Origin.Korvash, true)
 				Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
@@ -71,7 +71,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete", 0)
 	end
 
-	if not Vars.DebugEnabled then
+	if not Vars.DebugMode then
 		if not IsPlayer(Origin.Harken) and not IsPlayer(Uniques.AnvilMace.Owner) then
 			Uniques.AnvilMace:Transfer(NPC.VendingMachine)
 		end
@@ -85,7 +85,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		end
 	end
 
-	if Vars.DebugEnabled then
+	if Vars.DebugMode then
 		local host = CharacterGetHostCharacter()
 		local user = CharacterGetReservedUserID(host)
 		if string.find(GetUserName(CharacterGetReservedUserID(host)), "LaughingLeader") then
@@ -280,23 +280,13 @@ function CC_OnPresetSelected(uuid, preset)
 	end
 end
 
----@param skill string
----@param char string
----@param state SKILL_STATE PREPARE|USED|CAST|HIT
----@param skillData HitData
-local function ClearOriginSkillRequiredTag(skill, char, state, skillData)
+RegisterSkillListener("Shout_LLWEAPONEX_UnrelentingRage", function(skill, char, state, data)
 	if state == SKILL_STATE.CAST then
 		ClearTag(char, "LLWEAPONEX_EnemyDiedInCombat")
 	end
-end
-LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_UnrelentingRage", ClearOriginSkillRequiredTag)
+end)
 
-
----@param skill string
----@param char string
----@param state SKILL_STATE PREPARE|USED|CAST|HIT
----@param skillData HitData
-LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, skillData)
+RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		PersistentVars.SkillData.DarkFireballCount[char] = 0
 		UpdateDarkFireballSkill(char)

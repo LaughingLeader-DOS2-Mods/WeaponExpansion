@@ -815,7 +815,7 @@ using "WPN_LLWEAPONEX_Quarterstaff_Wood"
 data "ItemGroup" "WPN_LLWEAPONEX_Quarterstaff_Broom_Broken"
 data "ObjectCategory" ""
 data "ComboCategory" "Quarterstaff,WoodenQuarterstaff"
-data "ExtraProperties" "LLWEAPONEX_SPLINTERS,45,1"
+data "ExtraProperties" "BLEEDING,45,1"
 data "Boosts" ""
 
 new entry "_LLWEAPONEX_Rapiers_1H"

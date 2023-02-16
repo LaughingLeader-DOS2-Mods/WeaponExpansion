@@ -11,9 +11,9 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 
 	-- Tag updating
 	for _,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
-		local uuid = db[1]
+		local uuid = StringHelpers.GetUUID(db[1])
 		local player = Ext.GetCharacter(uuid)
-		EquipmentManager.CheckWeaponRequirementTags(StringHelpers.GetUUID(db[1]))
+		EquipmentManager.CheckWeaponRequirementTags(uuid)
 		if HasActiveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then
 			RemoveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
 		end
@@ -28,10 +28,6 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 			end
 		end
 
-		if CharacterHasSkill(uuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
-			CharacterRemoveSkill(uuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe")
-		end
-
 		if last < 153157632 then
 			for i,v in pairs(player:GetInventoryItems()) do
 				local item = Ext.GetItem(v)
@@ -44,6 +40,16 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 						ClearTag(v, "LLWEAPONEX_Blunt")
 						SetTag(v, "LLWEAPONEX_Bludgeon")
 					end
+				end
+			end
+		end
+
+		local callbacks = ServerEvents.OnModUpdated
+		if callbacks ~= nil then
+			for i,callback in pairs(callbacks) do
+				local b,err = xpcall(callback, debug.traceback, last, next, uuid)
+				if not b then
+					Ext.PrintError("[LeaderLib:CancelTimer] Error calling oneshot timer callback:\n", err)
 				end
 			end
 		end

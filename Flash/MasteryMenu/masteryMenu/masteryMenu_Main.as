@@ -254,15 +254,39 @@ package masteryMenu
 				this.masteryList.m_scrollbar_mc.scrollToPercent(this.getCurrentSelection() / (this.masteryList.length - 1),true);
 			}
 		}
-		
-		public function previous() : *
+
+		public function updateSelection(): void
 		{
-			this.masteryList.previous();
+			var currentMC:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
+			if (currentMC != null)
+			{
+				this.name_txt.htmlText = currentMC.masteryDescriptionTitle;
+				ExternalInterface.call("onMasterySelected", currentMC.m_Id, currentMC.masteryId);
+			}
 		}
 		
-		public function next() : *
+		public function previous(byAmount:int = 1) : *
 		{
-			this.masteryList.next();
+			this.masteryList.previous(byAmount);
+			updateSelection();
+		}
+		
+		public function next(byAmount:int = 1) : *
+		{
+			this.masteryList.next(byAmount);
+			updateSelection();
+		}
+
+		public function top() : *
+		{
+			this.masteryList.selectFirstVisible();
+			updateSelection();
+		}
+
+		public function bottom() : *
+		{
+			this.masteryList.selectLastElement();
+			updateSelection();
 		}
 		
 		public function onSelectionChanged() : *

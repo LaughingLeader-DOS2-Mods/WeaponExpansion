@@ -77,7 +77,7 @@ Ext.RegisterListener("SessionLoaded", function()
 					if sub.TotalFrequency ~= nil then
 						sub.TotalFrequency = sub.TotalFrequency + entry.Frequency
 					end
-					if Vars.DebugEnabled then
+					if Vars.DebugMode then
 						Ext.Print("Added category",entry.TreasureTable or entry.TreasureCategory,"to",statName)
 					end
 				end

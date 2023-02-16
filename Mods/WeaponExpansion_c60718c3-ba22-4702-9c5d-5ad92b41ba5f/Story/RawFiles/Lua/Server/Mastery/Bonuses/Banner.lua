@@ -48,7 +48,7 @@ end)
 ---@param status string
 ---@param source string
 ---@param bonuses table<string,table<string,boolean>>
-MasteryBonusManager.RegisterStatusListener("HARMONY", "BANNER_RALLYINGCRY", function(target, status, source, bonuses)
+MasteryBonusManager.RegisterStatusListener(StatusEvent.Applied, "HARMONY", "BANNER_RALLYINGCRY", function(target, status, source, bonuses)
 	if (ObjectIsCharacter(target) == 1 
 	and not GameHelpers.Status.IsDisabled(target, true)
 	and NRD_ObjectHasStatusType(target, "DISARMED") == 0

@@ -171,7 +171,7 @@ local STEAL_DEFAULT_TREASURE = "ST_LLWEAPONEX_RandomEnemyTreasure"
 ---@param data HitData
 RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, data)
 	if state == SKILL_STATE.HIT and data.Success then
-		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Vars.DebugEnabled == true
+		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Vars.DebugMode == true
 		if canStealFrom then
 			local attacker = Ext.GetCharacter(char)
 			local chance = Ext.ExtraData["LLWEAPONEX_Steal_BaseChance"] or 50.0
@@ -269,8 +269,8 @@ end
 
 RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_HandCrossbow_Reload", false, ...) end)
 RegisterSkillListener("Shout_LLWEAPONEX_HandCrossbow_Reload", function(...) SwapSkills("Projectile_LLWEAPONEX_HandCrossbow_Shoot", true, ...) end)
-RegisterSkillListener("Target_LLWEAPONEX_Pistol_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_Pistol_Reload", false, ...) end)
-RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills("Target_LLWEAPONEX_Pistol_Shoot", true, ...) end)
+RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_Pistol_Reload", false, ...) end)
+RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills("Projectile_LLWEAPONEX_Pistol_Shoot", true, ...) end)
 --RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy", function(...) SwapHandCrossbowSkills(false, ...) end)
 
 ---@param skill string
