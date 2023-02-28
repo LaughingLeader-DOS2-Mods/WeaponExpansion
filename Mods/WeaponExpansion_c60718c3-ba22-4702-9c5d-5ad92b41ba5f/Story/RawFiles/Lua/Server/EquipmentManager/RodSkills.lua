@@ -67,3 +67,17 @@ function RemoveRodSkill(char, item)
 		end
 	end
 end
+
+EquipmentManager.Events.EquipmentChanged:Subscribe(function (e)
+	if e.Equipped then
+		AddRodSkill(e.Character, e.Item)
+	else
+		RemoveRodSkill(e.Character, e.Item)
+	end
+end, {MatchArgs={Tag="LLWEAPONEX_Rod"}})
+
+Timer.Subscribe("LeaderLib_Timers_PresetMenu_OnPresetApplied", function (e)
+	if e.Data.Object and e.Data.Object:HasTag("LLWEAPONEX_Rod_Equipped") then
+		Osi.LeaderLib_Helper_RefreshWeapons(e.Data.UUID)
+	end
+end)
