@@ -4,7 +4,9 @@ Debug = {
 	CreateOriginPresetEquipment = false
 }
 Math = { AbilityScaling = {}}
-Text = {}
+if Text == nil then
+	Text = {}
+end
 MasterySystem = {}
 
 Config = {

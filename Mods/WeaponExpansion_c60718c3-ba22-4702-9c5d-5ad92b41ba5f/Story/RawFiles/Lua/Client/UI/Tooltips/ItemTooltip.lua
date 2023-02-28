@@ -6,12 +6,11 @@ if ItemTooltipParams == nil then
 end
 
 ---@param tooltip TooltipData
----@param item EsvCharacter
 ---@param weaponTypeName string
 ---@param scaleText string
 ---@param damageRange table<string,number[]>
 ---@param attackCost integer
-local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText, damageRange, attackCost, weaponRange, equippedLabel)
+local function CreateFakeWeaponTooltip(tooltip, weaponTypeName, scaleText, damageRange, attackCost, weaponRange, equippedLabel)
 	local armorSlotType = tooltip:GetElement("ArmorSlotType")
 	if armorSlotType ~= nil then
 		local itemType = armorSlotType.Label
@@ -59,12 +58,14 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 	}
 
 	tooltip:AppendElement(element)
-	element = {
-		Type = "ItemRequirement",
-		Label = scaleText,
-		RequirementMet = true
-	}
-	tooltip:AppendElement(element)
+	if not StringHelpers.IsNullOrEmpty(scaleText) then
+		element = {
+			Type = "ItemRequirement",
+			Label = scaleText,
+			RequirementMet = true
+		}
+		tooltip:AppendElement(element)
+	end
 	for damageType,data in pairs(damageRange) do
 		element = {
 			Type = "WeaponDamage",
@@ -342,19 +343,19 @@ local function OnItemTooltip(item, tooltip)
 				local damageRange = Skills.DamageFunctions.PistolDamage(character, true, true, item.Stats)
 				local apCost = GameHelpers.Stats.GetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "ActionPoints", 1)
 				local weaponRange = string.format("%sm", GameHelpers.Stats.GetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "TargetRadius", 1))
-				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
+				CreateFakeWeaponTooltip(tooltip, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
 				renamedArmorSlotType = true
 			elseif _TAGS.LLWEAPONEX_HandCrossbow then
 				local damageRange = Skills.DamageFunctions.HandCrossbowDamage(character, true, true, item.Stats)
 				local apCost = GameHelpers.Stats.GetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints", 1)
 				local weaponRange = string.format("%sm", GameHelpers.Stats.GetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius", 1))
-				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
+				CreateFakeWeaponTooltip(tooltip, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
 				renamedArmorSlotType = true
 			elseif item.ItemType ~= "Weapon" and _TAGS.LLWEAPONEX_UnarmedWeaponEquipped then
 				local weapon,highestAttribute = UnarmedHelpers.CreateUnarmedWeaponTable(character.Stats, item.Stats)
 				local damageRange = UnarmedHelpers.CalculateBaseWeaponDamageRange(weapon)
 				local apCost = GameHelpers.Stats.GetAttribute("NoWeapon", "AttackAPCost", 0)
-				local weaponRange = string.format("%sm", GameHelpers.Stats.GetAttribute("NoWeapon", "WeaponRange", 1) / 100)
+				local weaponRange = string.format("%sm", GameHelpers.Math.Round(GameHelpers.Stats.GetAttribute("NoWeapon", "WeaponRange", 1) / 100, 2))
 				local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LocalizedText.AttributeNames[highestAttribute].Value)
 				local slotInfoText = string.format(" (%s)", LocalizedText.Slots[item.Stats.Slot].Value)
 				local equipped = tooltip:GetElement("Equipped")
@@ -362,8 +363,34 @@ local function OnItemTooltip(item, tooltip)
 					slotInfoText = string.format(" (%s)", equipped.Slot)
 				end
 				local typeText = LLWEAPONEX_UnarmedWeapon.Value:gsub("%[1%]", slotInfoText)
-				CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
+				CreateFakeWeaponTooltip(tooltip, typeText, scalesWithText, damageRange, apCost, weaponRange)
 				renamedArmorSlotType = true
+			end
+
+			if _TAGS.LLWEAPONEX_DualShields and not _TAGS.LLWEAPONEX_CombatShield then
+				---@type EclItem|nil
+				local combatShield = character:GetItemObjectBySlot("Weapon")
+				if combatShield and not GameHelpers.ItemHasTag(combatShield, "LLWEAPONEX_CombatShield") then
+					combatShield = nil
+				end
+				for _,guid in pairs(item:GetInventoryItems()) do
+					local childItem = GameHelpers.GetItem(guid, "EclItem")
+					if childItem and GameHelpers.ItemHasTag(childItem, "LLWEAPONEX_CombatShield") then
+						combatShield = childItem
+						break
+					end
+				end
+				if combatShield then
+					local attribute = GameHelpers.Item.GetPrimaryRequirementAttribute(combatShield)
+					local damageRange = Game.Math.CalculateWeaponDamageWithDamageBoost(combatShield.Stats)
+					local apCost = combatShield.Stats.StatsEntry.AttackAPCost
+					local weaponRange = string.format("%sm", combatShield.Stats.StatsEntry.WeaponRange / 100)
+					local scaleText = nil
+					if attribute then
+						scaleText = Text.WeaponScaling.General:ReplacePlaceholders(LocalizedText.AttributeNames[attribute].Value)
+					end
+					CreateFakeWeaponTooltip(tooltip, WeaponTypeNames.LLWEAPONEX_DualShields.Text.Value, scaleText, damageRange, apCost, weaponRange)
+				end
 			end
 		end
 
