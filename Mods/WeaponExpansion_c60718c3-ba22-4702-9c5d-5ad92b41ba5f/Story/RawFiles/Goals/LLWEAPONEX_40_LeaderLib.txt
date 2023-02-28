@@ -103,10 +103,6 @@ DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_Prepare_BalrinsAxe");
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
-
-PROC
-LLWEAPONEX_LeaderLib_AddBlockedSkills()
-THEN
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Air");
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Chaos");
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Earth");
@@ -119,14 +115,18 @@ DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Earth_Offhand");
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Fire_Offhand");
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Poison_Offhand");
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Water_Offhand");
-
-PROC
-LLWEAPONEX_LeaderLib_AddBlockedSkills()
-AND
-DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
-THEN
-DB_LeaderLib_BlockedSkill(_MainSkill);
-DB_LeaderLib_BlockedSkill(_DualWieldSkill);
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Air");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Chaos");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Earth");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Fire");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Poison");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Water");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Air_DualWield");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Chaos_DualWield");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Earth_DualWield");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Fire_DualWield");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Poison_DualWield");
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_ActivateRuneblade_Water_DualWield");
 //END_REGION
 
 //REGION UPDATES

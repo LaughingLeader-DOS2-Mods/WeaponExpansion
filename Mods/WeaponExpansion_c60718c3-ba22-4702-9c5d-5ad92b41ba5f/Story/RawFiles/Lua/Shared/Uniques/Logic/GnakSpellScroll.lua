@@ -456,17 +456,15 @@ if not Vars.IsClient then
 		end
 	end
 
-	function OnSpellScrollEquipped(char, item)
-		
-	end
-
-	function OnSpellScrollUnequipped(char, item)
-		for skill,data in pairs(SpellData) do
-			if data.Material ~= nil then
-				GameHelpers.Status.Remove(char, data.Material)
+	EquipmentManager.Events.EquipmentChanged:Subscribe(function (e)
+		if not e.Equipped then
+			for skill,data in pairs(SpellData) do
+				if data.Material ~= nil then
+					GameHelpers.Status.Remove(e.Character, data.Material)
+				end
 			end
 		end
-	end
+	end, {MatchArgs={Tag="LLWEAPONEX_GnakSpellScrollEquipped"}})
 
 	local maxRoll = 99999
 
@@ -577,8 +575,8 @@ if not Vars.IsClient then
 	---@param source EsvCharacter
 	---@param target EsvCharacter|EsvItem|number
 	local function FireSpell(source, target)
-		local sourceGUID = source.MyGuid
-		local targetGUID = target.MyGuid
+		local sourceGUID = GameHelpers.GetUUID(source)
+		local targetGUID = GameHelpers.GetUUID(target)
 		local pos = source.WorldPos
 		local hitText = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_GnakSpellScroll_BadaBoom", "<font color='#ED9D07'>Bada Boom</font>")
 		local t = type(target)
@@ -691,20 +689,20 @@ if not Vars.IsClient then
 		DeathManager.ListenForDeath("GnakSpellScroll", GameHelpers.GetUUID(target), GameHelpers.GetUUID(attacker), delay)
 	end
 
-	AttackManager.OnStart.Register(function(attacker, target)
-		if GameHelpers.Status.IsActive(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") then
-			ListenForDeath(target, attacker, 3000)
+	Events.OnBasicAttackStart:Subscribe(function (e)
+		if e.TargetIsObject and GameHelpers.Status.IsActive(e.Attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") then
+			ListenForDeath(e.Target, e.Attacker, 3000)
 		end
 	end)
 
-	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_GnakSpellScrollEquipped", function(tag, attacker, target, data, targetIsObject, skill)
-		if GameHelpers.Status.IsActive(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") then
-			ListenForDeath(target, attacker, 1500)
-			if FireSpell(attacker, target) then
-				GameHelpers.Status.Remove(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
+	Events.OnWeaponTagHit:Subscribe(function (e)
+		if e.TargetIsObject and not e.Skill and GameHelpers.Status.IsActive(e.Attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") then
+			ListenForDeath(e.Target, e.Attacker, 1500)
+			if FireSpell(e.Attacker, e.Target) then
+				GameHelpers.Status.Remove(e.Attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
 			end
 		end
-	end, false)
+	end, {MatchArgs={Tag="LLWEAPONEX_GnakSpellScrollEquipped"}})
 
 	Ext.RegisterConsoleCommand("printgnak", function(cmd)
 		local SpellEntries = {}
@@ -749,4 +747,11 @@ if not Vars.IsClient then
 		Ext.SaveFile("LLWEAPONEX_GnakSpells.json", Ext.JsonStringify(SpellEntries))
 	end)
 
+	StatusManager.Subscribe.Applied({"LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_FX_DIMENSIONALBOLT", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_FX_TENTACLE"}, function (e)
+		Timer.StartObjectTimer("LLWEAPONEX_BattleBooks_SpellScroll_RemoveBeamStatuses", e.Target, 500)
+	end)
+
+	Timer.Subscribe("LLWEAPONEX_BattleBooks_SpellScroll_RemoveBeamStatuses", function (e)
+		GameHelpers.Status.Remove(e.Data.Object, {"LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_FX_DIMENSIONALBOLT", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_FX_TENTACLE"})
+	end)
 end

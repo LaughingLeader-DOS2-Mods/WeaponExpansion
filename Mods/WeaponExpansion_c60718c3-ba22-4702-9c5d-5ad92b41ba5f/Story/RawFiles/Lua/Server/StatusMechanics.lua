@@ -293,3 +293,33 @@ end)
 		end
 	end
 end) ]]
+
+--#region Soul Burn
+
+--LLWEAPONEX_SOUL_BURN_PROC - Increase the stack
+--LLWEAPONEX_SOUL_BURN_TICK - Lower the stack
+
+Events.ObjectEvent:Subscribe(function (e)
+	local target = e.Objects[1]
+	if not GameHelpers.Status.IsActive(target, "LLWEAPONEX_SOUL_BURN1") then
+		ObjectClearFlag(e.ObjectGUID1, "LLWEAPONEX_SkipSoulBurnTick", 0)
+		GameHelpers.Status.Apply(target, "LLWEAPONEX_SOUL_BURN_TICK", 6.0, true, target)
+	end
+end, {MatchArgs={Event="LLWEAPONEX_Commands_StartSoulBurnTick"}})
+
+Events.ObjectEvent:Subscribe(function (e)
+	ObjectSetFlag(e.ObjectGUID1, "LLWEAPONEX_SkipSoulBurnTick", 0)
+	GameHelpers.Status.Remove(e.ObjectGUID1, "LLWEAPONEX_SOUL_BURN_TICK")
+end, {MatchArgs={Event="LLWEAPONEX_Commands_StopSoulBurnTick"}})
+
+StatusManager.Subscribe.Removed("LLWEAPONEX_SOUL_BURN_TICK", function (e)
+	if ObjectGetFlag(e.TargetGUID, "LLWEAPONEX_SkipSoulBurnTick") == 1 then
+		Timer.StartObjectTimer("LLWEAPONEX_ResetSkipSoulBurnTickTimerFlag", e.Target, 250)
+	end
+end)
+
+Timer.Subscribe("LLWEAPONEX_ResetSkipSoulBurnTickTimerFlag", function (e)
+	ObjectClearFlag(e.Data.UUID, "LLWEAPONEX_SkipSoulBurnTick", 0)
+end)
+
+--#endregion

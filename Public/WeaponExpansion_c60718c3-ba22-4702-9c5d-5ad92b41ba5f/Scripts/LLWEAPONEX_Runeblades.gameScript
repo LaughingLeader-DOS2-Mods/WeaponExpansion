@@ -138,7 +138,7 @@ ENDIF
 		CharacterHasStatus(_Target, BURNING)
 	THEN
 		CharacterPlayEffect(_Target, "LLWEAPONEX_FX_Status_Heatburst_Check_01", "Dummy_BodyFX")
-		SetFlag(_Target, "LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound")
+		CharacterEvent(_Target, "LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound")
 		CharacterApplyStatus(_Target, BURNING, _Turns, 0, _RuneSource)
 	ELIF "!c1"
 		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD)

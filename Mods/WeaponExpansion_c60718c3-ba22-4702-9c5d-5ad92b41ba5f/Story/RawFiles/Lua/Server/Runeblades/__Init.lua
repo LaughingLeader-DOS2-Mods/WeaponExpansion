@@ -9,6 +9,8 @@ end
 RunebladeManager.ImpactRadius = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_BonusImpactRadius", 0.5)
 
 Ext.Require("Server/Runeblades/HitBonuses.lua")
+Ext.Require("Server/Runeblades/Skills.lua")
+Ext.Require("Server/Runeblades/Statuses.lua")
 Ext.Require("Server/Runeblades/SurfaceAbsorbing.lua")
 
 StatusManager.Subscribe.Applied("LLWEAPONEX_RUNEBLADE_CONTAMINATION_CHECK", function (e)
