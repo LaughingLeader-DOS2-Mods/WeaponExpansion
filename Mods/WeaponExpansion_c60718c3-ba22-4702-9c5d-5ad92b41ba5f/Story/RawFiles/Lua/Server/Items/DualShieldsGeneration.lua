@@ -314,6 +314,9 @@ end, {MatchArgs={Tag="LLWEAPONEX_DualShields"}})
 
 EquipmentManager.Events.EquipmentChanged:Subscribe(function (e)
 	if not e.Equipped then
+		--local visualID = string.format("%s%s", e.Character.NetID, GameHelpers.GetTemplate(e.Item))
+		--VisualManager.RequestDeleteVisualByID(e.Character, visualID)
+
 		local shield = DualShields.GetShieldParent(e.Item)
 		if shield and GameHelpers.Item.ItemIsEquipped(e.Character, shield) then
 			local charGUID = e.Character.MyGuid

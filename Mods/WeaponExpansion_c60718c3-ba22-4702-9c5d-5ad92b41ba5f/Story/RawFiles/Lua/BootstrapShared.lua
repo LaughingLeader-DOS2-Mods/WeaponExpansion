@@ -43,6 +43,58 @@ Config = {
     },
 	TempData = {
 		RecalculatedUnarmedSkillDamage = {}
+	},
+	Visuals = {
+		--Root Template to Visual
+		DualShields = {
+			CombatShieldBones = {
+				Unsheathed = "Dummy_R_Hand",
+				Sheathed = "Dummy_Weapon_XB",
+			},
+			CombatShieldTemplates = {
+				--WPN_LLWEAPONEX_CombatShield_Blackring_1H_A
+				["ec353f1e-c1ca-46d1-83ef-e9f4fea14475"] = {
+					Visual = "00052b22-e1e7-4f41-a057-3d8a3b7a57bf",
+					Sheathed = "eb0b2cc0-0c2f-4a9d-93f5-2fadb05971e4",
+				},
+				--WPN_LLWEAPONEX_CombatShield_Common_1H_A
+				["8c7da07b-ad11-4a0c-8406-0261977042b6"] = {
+					Visual = "5ace814c-adfa-4e72-b992-4d22832ffe5a",
+					Sheathed = "80624a17-d95e-4cc8-8a94-08c151059636",
+				},
+				--WPN_LLWEAPONEX_CombatShield_Dwarves_1H_A
+				["bc034226-19bd-45e6-be7d-ec0d28c2e412"] = {
+					Visual = "0b075b93-84f2-4ad5-b420-81ebabb7f847",
+					Sheathed = "df8b6237-d031-44d7-b729-a80eb074f3b3",
+				},
+				--WPN_LLWEAPONEX_CombatShield_Elves_1H_B
+				["1268f5f0-e484-42ea-8c13-0014e6aeaaad"] = {
+					Visual = "b1b30d3a-1d6a-4601-a96d-9be2c3900451",
+					Sheathed = "07ea0986-0edb-4c58-925a-d76cc586908b",
+				},
+				--WPN_LLWEAPONEX_CombatShield_Humans_1H_A
+				["3a404dab-4862-4490-aa0f-bc27d06fdc6c"] = {
+					Visual = "1683a154-2a19-42db-bd76-f9b43202715e",
+					Sheathed = "48491cef-a2de-4dec-9d65-9c6aea8a769e",
+				},
+				--WPN_LLWEAPONEX_CombatShield_Lizards_1H_C
+				["067f48be-857d-43a8-bd0a-add59f025843"] = {
+					Visual = "f26bd2f5-34a0-435c-93c2-7a40f9d577fa",
+					Sheathed = "8f9e56cf-dd16-4c31-9bc7-6f6acb9cc6c3",
+				},
+			}
+		},
+		Pistols = {
+			--Pistols that are weight painted to the hand, specifically for shooting animations
+			Shoot = {
+				["94838d55-d5e6-4115-b736-b8b26f321003"] = {
+					Dwarf = {Male = "ae2df405-c25f-4eb2-8df0-9003710b23d8", Female = "e15430cf-e638-49ca-9eec-b16495135ac6"},
+					Elf = {Male = "92f3f4df-e302-45a3-9b05-23e4e514dd56", Female = "0c619254-d225-46d2-aa12-382875dd62e9"},
+					Human = {Male = "df1d0006-dc11-4b4e-8f15-1b3d99ec3f21", Female = "f56ed8f8-f6e8-49a8-a43b-6a5fe4dcc376"},
+					Lizard = {Male = "9e04cf00-d793-4684-a76f-340eb45a5ebb", Female = "a3e3fa6d-af4d-4e6a-8328-555aa3754417"},
+				}
+			}
+		}
 	}
 }
 
