@@ -1,4 +1,7 @@
 INIT
 	CHARACTER:__Me
+
+	INT:%LLWEAPONEX_SaleCooldown = 0
+	INT:%LLWEAPONEX_SaleDuration = 0
 EVENTS
 

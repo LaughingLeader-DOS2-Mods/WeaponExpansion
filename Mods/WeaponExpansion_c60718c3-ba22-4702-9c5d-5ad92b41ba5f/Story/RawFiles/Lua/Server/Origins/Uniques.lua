@@ -157,8 +157,8 @@ local function InitializeUnique(id,data,region)
 			ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 			listenForDeath[data.Target] = data.UUID
 			if data.Equip 
-			and ObjectIsCharacter(data.Target) == 1 
-			and ItemIsEquipable(data.UUID) == 1 
+			and ObjectIsCharacter(data.Target) == 1
+			and ItemIsEquipable(data.UUID) == 1
 			and CharacterIsDead(data.Target) == 0 then
 				GameHelpers.Character.EquipItem(data.Target, data.UUID)
 				GameHelpers.GetCharacter(data.Target).RootTemplate.IsEquipmentLootable = true
@@ -230,7 +230,7 @@ function InitOriginsUniques(region)
 				uniqueData.DefaultUUID = data.UUID
 			end
 			if not data.IsLinkItem then
-				if (ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 0 or Vars.DebugMode) then
+				if ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 0 then
 					local owner = GameHelpers.Item.GetOwner(item)
 					if owner and GameHelpers.Character.IsPlayer(owner) then
 						ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)

@@ -30,6 +30,18 @@
 					"Min": 0,
 					"Max": 96,
 					"Increment": 1
+				},
+				"VendingMachineSaleChance": {
+					"Value": 40,
+					"Min": 0,
+					"Max": 100,
+					"Increment": 1
+				},
+				"VendingMachineSaleDiscount": {
+					"Value": 50,
+					"Min": 0,
+					"Max": 100,
+					"Increment": 1
 				}
 			}
 		},

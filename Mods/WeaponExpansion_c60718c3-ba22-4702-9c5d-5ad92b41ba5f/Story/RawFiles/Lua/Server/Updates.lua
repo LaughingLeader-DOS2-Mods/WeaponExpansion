@@ -261,4 +261,14 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_03_WeaponFX")
 	
 	Osi.LeaderLib_GameScripts_ClearScriptsForGroup("WeaponExpansion")
+
+	--Vending Machine deprecated stuff
+	Osi.LeaderLib_Trader_Clear_AllData("LLWEAPONEX.VendingMachine")
+	Osi.LeaderLib_Treasure_Clear_AllDataForTreasure("LLWEAPONEX.VendingMachine.Orders")
+	Osi.LeaderLib_Treasure_Clear_AllDataForTreasure("LLWEAPONEX.VendingMachine.Uniques")
+	Osi.LeaderLib_Treasure_Clear_AllDataForTreasure("LLWEAPONEX.VendingMachine.WorldUniques")
+
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_VendingMachine_SaleCooldown", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted", 1)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone", 1)
 end)
