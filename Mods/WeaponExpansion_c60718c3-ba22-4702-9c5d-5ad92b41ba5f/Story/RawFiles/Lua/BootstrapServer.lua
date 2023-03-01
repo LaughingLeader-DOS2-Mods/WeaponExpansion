@@ -21,6 +21,7 @@ local defaultPersistentVars = {
             ---@type table<Guid,{Blocker:Guid, Attacker:Guid}>
             BlockedHit = {},
         },
+        ---@type table<Guid, {Weapon:Guid|nil, Shield:Guid|nil}>
         ThrowWeapon = {},
         ---@type table<Guid, {Item:Guid, Slot:string, Skill:string, Target:Guid|nil}>
         ThrowBalrinAxe = {},
