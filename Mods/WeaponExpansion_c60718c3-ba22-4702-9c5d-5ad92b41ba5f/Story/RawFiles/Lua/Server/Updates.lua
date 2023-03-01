@@ -226,6 +226,10 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects", 3)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects", 3)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings", 3)
+	
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Throwing_StrengthDistanceConstants", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Throwing_StrengthToDistance", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Throwing_Temp_TossResolved", 2)
 
 	Osi.LeaderLib_Helper_ClearSurfaceList("LLWEAPONEX_ChaosSurfaces")
 	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath", 4)

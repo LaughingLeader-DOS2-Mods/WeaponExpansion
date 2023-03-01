@@ -137,8 +137,6 @@ function EquipmentManager:OnItemEquipped(character, item)
 	if Timer.IsObjectTimerActive("LLWEAPONEX_UpdateActiveMasteries", character) then
 		Timer.RestartObjectTimer("LLWEAPONEX_UpdateActiveMasteries", character, 250)
 	end
-
-	Osi.LLWEAPONEX_OnItemTemplateEquipped(character.MyGuid, item.MyGuid, template)
 	
 	if not _ITEM_TAGS.LLWEAPONEX_Testing then
 		for k,unique in pairs(Uniques) do

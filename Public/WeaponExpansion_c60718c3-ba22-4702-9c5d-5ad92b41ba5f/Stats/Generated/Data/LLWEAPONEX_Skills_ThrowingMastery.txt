@@ -136,6 +136,14 @@ data "TargetConditions" "NonSelf&(Item|(!Ally|Tagged:LeaderLib_FriendlyFireEnabl
 data "SkillProperties" ""
 data "Template" "2dfde23f-4a82-4d10-95f8-4a65053754c3"
 
+new entry "Projectile_LLWEAPONEX_Status_Tossed_Damage_SuperLight"
+type "SkillData"
+data "SkillType" "Projectile"
+using "Projectile_LLWEAPONEX_Status_Tossed_Damage_Light"
+data "Damage Multiplier" "20"
+data "ExplodeRadius" "1"
+data "Template" "481543dd-1e79-4d0f-936d-e7d877a66a7a"
+
 new entry "Projectile_LLWEAPONEX_Status_Tossed_Damage_Medium"
 type "SkillData"
 data "SkillType" "Projectile"

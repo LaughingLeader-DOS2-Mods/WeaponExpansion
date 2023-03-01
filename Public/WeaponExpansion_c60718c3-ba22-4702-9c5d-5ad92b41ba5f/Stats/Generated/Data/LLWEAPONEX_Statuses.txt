@@ -943,13 +943,6 @@ data "DisplayNameRef" "Throw Target"
 data "StackId" "Stack_LLWEAPONEX_Tossed"
 data "ApplyEffect" ""
 
-new entry "LLWEAPONEX_TOSSED_LAND"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LEADERLIB_HIDDEN_CONSUME_BASE"
-data "StackId" "Stack_LLWEAPONEX_TossedLand"
-data "ApplyEffect" ""
-
 new entry "LLWEAPONEX_BLOCK_HEALING"
 type "StatusData"
 data "StatusType" "DECAYING_TOUCH"
