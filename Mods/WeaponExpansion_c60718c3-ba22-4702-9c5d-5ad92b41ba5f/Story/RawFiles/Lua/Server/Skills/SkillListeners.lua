@@ -152,30 +152,6 @@ function(e)
 	end
 end)
 
-Config.Skill.HandCrossbows = {
-	AllShootSkills = {"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"}
-}
-
-Ext.Events.SessionLoaded:Subscribe(function()
-	SkillManager.Register.Hit(Config.Skill.HandCrossbows.AllShootSkills, function(e)
-		-- Silver bolts / Bullets do bonus damage to undead/voidwoken
-		if e.Data.Success and TagHelpers.IsUndeadOrVoidwoken(e.Data.Target) then
-			if Skills.HasTaggedRuneBoost(e.Character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
-				local bonus = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbow_SilverBonusDamage", 1.5)
-				if bonus > 0 then
-					e.Data:MultiplyDamage(bonus, true)
-				end
-			end
-		end
-	end)
-
-	SkillManager.Register.MemorizationChanged(Config.Skill.HandCrossbows.AllShootSkills, function (e)
-		if e.Data == false then
-			CharacterRemoveSkill(e.CharacterGUID, "Shout_LLWEAPONEX_HandCrossbow_Reload")
-		end
-	end)
-end, {Priority=0})
-
 SkillManager.Register.Cast({"Target_LLWEAPONEX_Greatbow_FutureBarrage", "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy"},
 function(e)
 	local combat = CombatGetIDForCharacter(e.Character.MyGuid)
@@ -334,17 +310,18 @@ end, {MatchArgs={Event="LLWEAPONEX_Commands_StopDrawingChaosSurface"}})
 
 --#endregion
 
---#region Throwing Skills
-
 ---@param target EsvCharacter
 ---@param fromPosition vec3
-local function _ShootKevinReturnSkill(target, fromPosition)
-	GameHelpers.Skill.ShootProjectileAt(target, "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect", fromPosition, {CanDeflect=false, IgnoreObjects=true})
+---@param skill string
+local function _ShootReturnSkill(target, fromPosition, skill)
+	GameHelpers.Skill.ShootProjectileAt(target, skill, fromPosition, {CanDeflect=false, IgnoreObjects=true})
 end
+
+--#region Kevin
 
 Timer.Subscribe("LLWEAPONEX_ShootKevinReturnEffect", function (e)
 	if e.Data.Object and e.Data.Position then
-		_ShootKevinReturnSkill(e.Data.Object, e.Data.Position)
+		_ShootReturnSkill(e.Data.Object, e.Data.Position, "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect")
 	end
 end)
 
@@ -402,8 +379,78 @@ StatusManager.Subscribe.Removed("LLWEAPONEX_KEVIN_EXAUSTED_INFO", function (e)
 	end
 end)
 
+--#endregion
+
+--#region Shield Toss
+
+--Same thing as the Kevin mechanic, where we try and guess the total fork targets, so we can return the shield immediately
+
+SkillManager.Register.Cast("Projectile_LLWEAPONEX_ShieldToss", function (e)
+	local pos = e.Data:GetSkillTargetPosition()
+	Timer.StartObjectTimer("LLWEAPONEX_ShootShieldTossReturnEffect", e.Character, 1000, {Position=pos})
+	
+	local maxHits = e.Data.SkillData.ForkLevels + 1
+	if maxHits > 1 then
+		--Guess how many times Kevin is going to fork, so we can shoot the return projectile immediately
+		local estimatedHits = 0
+		local radius = e.Data.SkillData.AreaRadius
+		for enemy in GameHelpers.Grid.GetNearbyObjects(e.Character, {Type="Character", Relation={Enemy=true}, Radius=radius, Position=pos}) do
+			estimatedHits = estimatedHits + 1
+			if estimatedHits >= maxHits then
+				estimatedHits = maxHits
+				break
+			end
+		end
+		if estimatedHits > 0 then
+			PersistentVars.SkillData.ShieldTossHitsRemaining[e.CharacterGUID] = estimatedHits
+		end
+	end
+end)
+
+SkillManager.Register.Hit("Projectile_LLWEAPONEX_ShieldToss", function (e)
+	local remainingHits = PersistentVars.SkillData.ShieldTossHitsRemaining[e.CharacterGUID] or 0
+	remainingHits = remainingHits - 1
+	if remainingHits <= 0 then
+		Timer.Cancel("LLWEAPONEX_ShootShieldTossReturnEffect", e.Character)
+		PersistentVars.SkillData.ShieldTossHitsRemaining[e.CharacterGUID] = nil
+		_ShootReturnSkill(e.Character, e.Data.TargetObject.WorldPos, "Projectile_LLWEAPONEX_ShieldToss_Returned")
+		EffectManager.PlayEffect("RS3_FX_GP_Status_Harmony_Impact_01", e.Character)
+		GameHelpers.Skill.Explode(e.Character.WorldPos, "Projectile_LLWEAPONEX_ApplyShieldTossBonus", e.Character)
+	else
+		PersistentVars.SkillData.ShieldTossHitsRemaining[e.CharacterGUID] = remainingHits
+		Timer.StartObjectTimer("LLWEAPONEX_ShootShieldTossReturnEffect", e.Character, 300, {Position=e.Data.TargetObject.WorldPos})
+	end
+end)
+
+Timer.Subscribe("LLWEAPONEX_ShootShieldTossReturnEffect", function (e)
+	if e.Data.Object and e.Data.Position then
+		_ShootReturnSkill(e.Data.Object, e.Data.Position, "Projectile_LLWEAPONEX_ShieldToss_Returned")
+	end
+end)
+
+--#endregion
+
+--These are registered last during SessionLoaded, in case a mod modifies the associatd config tables
+
 Ext.Events.SessionLoaded:Subscribe(function (e)
-	--These are registered last during SessionLoaded, in case a mod modifies this tables
+	SkillManager.Register.Hit(Config.Skill.HandCrossbowsShootSkills, function(e)
+		-- Silver bolts / Bullets do bonus damage to undead/voidwoken
+		if e.Data.Success and TagHelpers.IsUndeadOrVoidwoken(e.Data.Target) then
+			if Skills.HasTaggedRuneBoost(e.Character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
+				local bonus = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbow_SilverBonusDamage", 1.5)
+				if bonus > 0 then
+					e.Data:MultiplyDamage(bonus, true)
+				end
+			end
+		end
+	end)
+
+	SkillManager.Register.MemorizationChanged(Config.Skill.HandCrossbowsShootSkills, function (e)
+		if e.Data == false then
+			CharacterRemoveSkill(e.CharacterGUID, "Shout_LLWEAPONEX_HandCrossbow_Reload")
+		end
+	end)
+
 	SkillManager.Register.Cast(Config.Skill.KevinSkills, function (e)
 		local pos = e.Data:GetSkillTargetPosition()
 		Timer.StartObjectTimer("LLWEAPONEX_ShootKevinReturnEffect", e.Character, 1000, {Position=pos})
@@ -430,13 +477,12 @@ Ext.Events.SessionLoaded:Subscribe(function (e)
 		local remainingHits = PersistentVars.SkillData.KevinHitsRemaining[e.CharacterGUID] or 0
 		remainingHits = remainingHits - 1
 		if remainingHits <= 0 then
+			Timer.Cancel("LLWEAPONEX_ShootKevinReturnEffect", e.Character)
 			PersistentVars.SkillData.KevinHitsRemaining[e.CharacterGUID] = nil
-			_ShootKevinReturnSkill(e.Character, e.Data.TargetObject.WorldPos)
+			_ShootReturnSkill(e.Character, e.Data.TargetObject.WorldPos, "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect")
 		else
 			PersistentVars.SkillData.KevinHitsRemaining[e.CharacterGUID] = remainingHits
 			Timer.StartObjectTimer("LLWEAPONEX_ShootKevinReturnEffect", e.Character, 300, {Position=e.Data.TargetObject.WorldPos})
 		end
 	end)
 end, {Priority=0})
-
---#endregion

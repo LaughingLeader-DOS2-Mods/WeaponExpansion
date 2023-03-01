@@ -21,7 +21,8 @@ Config = {
 				Dome_LLWEAPONEX_Banner_Rally_Dwarves = "LLWEAPONEX_BANNER_RALLY_DWARVES",
 			}
 		},
-		KevinSkills = {"Projectile_LLWEAPONEX_Throw_Rock_Kevin", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Poison", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Oil", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails"}
+		KevinSkills = {"Projectile_LLWEAPONEX_Throw_Rock_Kevin", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Poison", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Oil", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails"},
+		HandCrossbowsShootSkills = {"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"},
 	},
     Status = {
         RemoveOnTurnEnding = {

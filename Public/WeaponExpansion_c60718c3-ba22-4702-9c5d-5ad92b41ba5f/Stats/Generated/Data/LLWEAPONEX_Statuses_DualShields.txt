@@ -66,12 +66,7 @@ data "StatusType" "HEAL"
 using "LLWEAPONEX_COMBAT_SHIELD_RESTORE"
 data "HealStat" "MagicArmor"
 
-new entry "LLWEAPONEX_COMBAT_SHIELD_HIT"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LEADERLIB_HIDDEN_CONSUME_BASE"
-
-new entry "LLWEAPONEX_COMBAT_SHIELD_RETURN_CHECK"
+new entry "LLWEAPONEX_COMBAT_SHIELD_RETURNED"
 type "StatusData"
 data "StatusType" "CONSUME"
 using "_LEADERLIB_HIDDEN_CONSUME_BASE"

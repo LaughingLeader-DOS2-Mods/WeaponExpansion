@@ -58,6 +58,9 @@ local defaultPersistentVars = {
         ---Used to immediately shoot the return projectile after the remaining hits equals 0.
         ---@type table<Guid,integer>
         KevinHitsRemaining = {},
+        ---Used to immediately shoot the return projectile after the remaining hits equals 0.
+        ---@type table<Guid,integer>
+        ShieldTossHitsRemaining = {},
     },
     StatusData = {
         ---@type table<Guid,table<string,{Target:Guid, Source:Guid, Status:string}>>

@@ -126,14 +126,6 @@ THEN
 ENDIF
 */
 
-EVENT LLWEAPONEX_ShieldToss_Bonus
-VARS
-	CHARACTER:_Character
-ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_ShieldToss_ApplyAuraBonus")
-ACTIONS
-	ExplodeAt(_Character, Projectile_LLWEAPONEX_ApplyShieldTossBonus, -1, _Character)
-
 EVENT LLWEAPONEX_DeflectProjectiles_CountdownStart
 VARS
 	CHARACTER:_Character
