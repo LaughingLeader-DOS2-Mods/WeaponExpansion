@@ -231,6 +231,10 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Throwing_StrengthToDistance", 2)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Throwing_Temp_TossResolved", 2)
 
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Throwing_KevinSkills", 1)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Temp_KevinOriginalForm", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Throwing_Temp_KevinIterator", 4)
+
 	Osi.LeaderLib_Helper_ClearSurfaceList("LLWEAPONEX_ChaosSurfaces")
 	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath", 4)
 	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing", 3)

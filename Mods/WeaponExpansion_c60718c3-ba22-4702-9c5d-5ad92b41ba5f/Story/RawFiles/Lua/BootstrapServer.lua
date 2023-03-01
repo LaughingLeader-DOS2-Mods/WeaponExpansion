@@ -55,6 +55,9 @@ local defaultPersistentVars = {
         ---Owner GUID to a table of banners, with the status source ID.
         ---@type table<Guid,{Banners:table<Guid,string>, PartyMembers:table<Guid,string>}>
         BannerRally = {},
+        ---Used to immediately shoot the return projectile after the remaining hits equals 0.
+        ---@type table<Guid,integer>
+        KevinHitsRemaining = {},
     },
     StatusData = {
         ---@type table<Guid,table<string,{Target:Guid, Source:Guid, Status:string}>>

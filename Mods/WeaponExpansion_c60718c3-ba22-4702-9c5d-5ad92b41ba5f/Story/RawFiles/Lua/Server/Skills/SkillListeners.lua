@@ -333,3 +333,110 @@ Events.ObjectEvent:Subscribe(function (e)
 end, {MatchArgs={Event="LLWEAPONEX_Commands_StopDrawingChaosSurface"}})
 
 --#endregion
+
+--#region Throwing Skills
+
+---@param target EsvCharacter
+---@param fromPosition vec3
+local function _ShootKevinReturnSkill(target, fromPosition)
+	GameHelpers.Skill.ShootProjectileAt(target, "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect", fromPosition, {CanDeflect=false, IgnoreObjects=true})
+end
+
+Timer.Subscribe("LLWEAPONEX_ShootKevinReturnEffect", function (e)
+	if e.Data.Object and e.Data.Position then
+		_ShootKevinReturnSkill(e.Data.Object, e.Data.Position)
+	end
+end)
+
+SkillManager.Register.ProjectileHit("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect", function (e)
+	if e.Character and ObjectGetFlag(e.CharacterGUID, "LLWEAPONEX_Kevin_IgnoreEnergy") == 0 then
+		for _,kevin in pairs(GameHelpers.Item.FindTaggedItems(e.Character, "LLWEAPONEX_KevinThePetRock")) do
+			local current = GetVarInteger(kevin, "LLWEAPONEX_Kevin_CurrentEnergy")
+			local max = GetVarInteger(kevin, "LLWEAPONEX_Kevin_MaxEnergy") or 4
+			if current > 0 then
+				current = current - 1
+				SetVarInteger(kevin, "LLWEAPONEX_Kevin_CurrentEnergy", current)
+			end
+			local rechargeTurnAmount = GameHelpers.GetExtraData("LLWEAPONEX_Kevin_RechargeTurn", 1)
+			if current <= 0 then
+				local duration = rechargeTurnAmount * max
+				GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_KEVIN_EXAUSTED_INFO", duration, false, e.Character)
+				GameHelpers.Status.Remove(e.Character, "LLWEAPONEX_KEVIN_RECHARGE")
+				--GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_KEVIN_RECHARGE", duration, false, e.Character)
+				local template = GameHelpers.GetTemplate(kevin)
+				--THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Disabled_9b6ea03d-801b-438d-a7c7-a6b9575c1043
+				Transform(kevin, "9b6ea03d-801b-438d-a7c7-a6b9575c1043", 0, 0, 1)
+				SetVarFixedString(kevin, "LLWEAPONEX_Kevin_OriginalTemplate", template)
+			elseif not e.Character:GetStatus("LLWEAPONEX_KEVIN_RECHARGE") then
+				GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_KEVIN_RECHARGE", rechargeTurnAmount * 6.0, false, e.Character)
+			end
+		end
+	end
+end)
+
+StatusManager.Subscribe.Removed("LLWEAPONEX_KEVIN_RECHARGE", function (e)
+	if not GameHelpers.Status.IsActive(e.Target, "LLWEAPONEX_KEVIN_EXAUSTED_INFO") then
+		for _,kevin in pairs(GameHelpers.Item.FindTaggedItems(e.Character, "LLWEAPONEX_KevinThePetRock")) do
+			local current = GetVarInteger(kevin, "LLWEAPONEX_Kevin_CurrentEnergy") or 4
+			local max = GetVarInteger(kevin, "LLWEAPONEX_Kevin_MaxEnergy") or 4
+			if current < max then
+				current = current + 1
+				SetVarInteger(kevin, "LLWEAPONEX_Kevin_CurrentEnergy", current)
+			end
+			if current < max then
+				local rechargeTurnAmount = GameHelpers.GetExtraData("LLWEAPONEX_Kevin_RechargeTurn", 1)
+				GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_KEVIN_RECHARGE", rechargeTurnAmount * 6.0, false, e.Source)
+			end
+		end
+	end
+end)
+
+StatusManager.Subscribe.Removed("LLWEAPONEX_KEVIN_EXAUSTED_INFO", function (e)
+	for _,kevin in pairs(GameHelpers.Item.FindTaggedItems(e.Character, "LLWEAPONEX_KevinThePetRock")) do
+		local max = GetVarInteger(kevin, "LLWEAPONEX_Kevin_MaxEnergy") or 4
+		SetVarInteger(kevin, "LLWEAPONEX_Kevin_CurrentEnergy", max)
+		local template = GetVarFixedString(kevin, "LLWEAPONEX_Kevin_OriginalTemplate")
+		if not StringHelpers.IsNullOrEmpty(template) and GameHelpers.GetTemplate(kevin) ~= template then
+			Transform(kevin, template, 0, 0, 1)
+		end
+	end
+end)
+
+Ext.Events.SessionLoaded:Subscribe(function (e)
+	--These are registered last during SessionLoaded, in case a mod modifies this tables
+	SkillManager.Register.Cast(Config.Skill.KevinSkills, function (e)
+		local pos = e.Data:GetSkillTargetPosition()
+		Timer.StartObjectTimer("LLWEAPONEX_ShootKevinReturnEffect", e.Character, 1000, {Position=pos})
+		
+		local maxHits = e.Data.SkillData.ForkLevels + 1
+		if maxHits > 1 then
+			--Guess how many times Kevin is going to fork, so we can shoot the return projectile immediately
+			local estimatedHits = 0
+			local radius = e.Data.SkillData.AreaRadius
+			for enemy in GameHelpers.Grid.GetNearbyObjects(e.Character, {Type="Character", Relation={Enemy=true}, Radius=radius, Position=pos}) do
+				estimatedHits = estimatedHits + 1
+				if estimatedHits >= maxHits then
+					estimatedHits = maxHits
+					break
+				end
+			end
+			if estimatedHits > 0 then
+				PersistentVars.SkillData.KevinHitsRemaining[e.CharacterGUID] = estimatedHits
+			end
+		end
+	end)
+
+	SkillManager.Register.Hit(Config.Skill.KevinSkills, function (e)
+		local remainingHits = PersistentVars.SkillData.KevinHitsRemaining[e.CharacterGUID] or 0
+		remainingHits = remainingHits - 1
+		if remainingHits <= 0 then
+			PersistentVars.SkillData.KevinHitsRemaining[e.CharacterGUID] = nil
+			_ShootKevinReturnSkill(e.Character, e.Data.TargetObject.WorldPos)
+		else
+			PersistentVars.SkillData.KevinHitsRemaining[e.CharacterGUID] = remainingHits
+			Timer.StartObjectTimer("LLWEAPONEX_ShootKevinReturnEffect", e.Character, 300, {Position=e.Data.TargetObject.WorldPos})
+		end
+	end)
+end, {Priority=0})
+
+--#endregion

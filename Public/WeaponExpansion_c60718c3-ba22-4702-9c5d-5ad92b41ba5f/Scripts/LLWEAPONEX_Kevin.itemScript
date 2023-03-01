@@ -1,7 +1,8 @@
 INIT
 	ITEM:__Me
 	INT:%LLWEAPONEX_Kevin_MaxEnergy = 4
-	INT:%LLWEAPONEX_Kevin_CurrentEnergy = %LLWEAPONEX_Kevin_MaxEnergy
+	INT:%LLWEAPONEX_Kevin_CurrentEnergy = 4
+	ITEMTEMPLATE:%LLWEAPONEX_Kevin_OriginalTemplate = null
 	EXTERN FLOAT3:%LLWEAPONEX_Kevin_Quest_ShootPos = null
 EVENTS
 
@@ -10,6 +11,12 @@ ON
 	OnInit()
 ACTIONS
 	Set(%LLWEAPONEX_Kevin_CurrentEnergy, %LLWEAPONEX_Kevin_MaxEnergy)
+IF "c1&c2"
+	IsEqual(%LLWEAPONEX_Kevin_OriginalTemplate, null)
+	ItemGetTemplate(__Me, %LLWEAPONEX_Kevin_OriginalTemplate)
+THEN
+
+ENDIF
 	
 EVENT LLWEAPONEX_Quest_Kevin_Throw_Start
 VARS

@@ -20,7 +20,8 @@ Config = {
 				Dome_LLWEAPONEX_Banner_Rally_DivineOrder = "LLWEAPONEX_BANNER_RALLY_DIVINEORDER",
 				Dome_LLWEAPONEX_Banner_Rally_Dwarves = "LLWEAPONEX_BANNER_RALLY_DWARVES",
 			}
-		}
+		},
+		KevinSkills = {"Projectile_LLWEAPONEX_Throw_Rock_Kevin", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Poison", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Oil", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails"}
 	},
     Status = {
         RemoveOnTurnEnding = {
