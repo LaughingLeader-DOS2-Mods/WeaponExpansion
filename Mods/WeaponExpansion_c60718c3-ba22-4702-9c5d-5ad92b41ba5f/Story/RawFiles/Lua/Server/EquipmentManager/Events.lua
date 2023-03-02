@@ -239,8 +239,6 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	local template = GameHelpers.GetTemplate(item)
 	local _ITEM_TAGS = GameHelpers.GetItemTags(item, true, false)
 
-	Osi.LLWEAPONEX_OnItemTemplateUnEquipped(character.MyGuid, item.MyGuid, template)
-
 	if isPlayer then
 		self:CheckWeaponRequirementTags(character)
 	end
