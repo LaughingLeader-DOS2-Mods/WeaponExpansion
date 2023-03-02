@@ -12,7 +12,7 @@ DeathManager = {}
 DeathManager.OnDeath = Classes.SubscribableEvent:Create("WeaponExpansion.DeathManager.OnDeath")
 
 local function FireCallbacks(id, target, source, success)
-	DeathManager.Events.OnDeath:Invoke({
+	DeathManager.OnDeath:Invoke({
 		ID = id,
 		TargetGUID = target,
 		SourceGUID = source,
@@ -40,6 +40,36 @@ local function _OnDeath(uuid)
 		end
 		PersistentVars.OnDeath[uuid] = nil
 	end
+end
+
+---@param id string
+---@param target CharacterParam
+---@param attacker CharacterParam
+function DeathManager.IsListening(id, target, attacker)
+	local targetGUID = GameHelpers.GetUUID(target)
+	if targetGUID and PersistentVars.OnDeath[targetGUID] then
+		if not attacker then
+			return true
+		end
+		local attackerGUID = GameHelpers.GetUUID(attacker)
+		if PersistentVars.OnDeath[targetGUID].Attackers[attackerGUID] then
+			return PersistentVars.OnDeath[targetGUID].Attackers[attackerGUID][id] == true
+		end
+	end
+	return false
+end
+
+---@param id string
+---@param attacker CharacterParam
+function DeathManager.IsAttackerListening(id, attacker)
+	local attackerGUID = GameHelpers.GetUUID(attacker)
+	for targetGUID,data in pairs(PersistentVars.OnDeath) do
+		local entry = data.Attackers[attackerGUID]
+		if entry then
+			return entry[id] == true
+		end
+	end
+	return false
 end
 
 ---@param id string
@@ -80,7 +110,7 @@ function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 	data.Attackers[attackerGUID][id] = true
 	if Vars.DebugMode and IsTagged(targetGUID, "LLDUMMY_TrainingDummy") == 1 then
 		if listenDelay > 0 then
-			local tDebugName = string.format("Timers_LLWEAPONEX_Debug_FakeDeathEvent_%s_%s", id, Ext.Random(0,999))
+			local tDebugName = string.format("Timers_LLWEAPONEX_Debug_FakeDeathEvent_%s_%s", id, Ext.Utils.Random(0,999))
 			Timer.StartOneshot(tDebugName, listenDelay/2, function()
 				fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer %s", tDebugName)
 				_OnDeath(targetGUID)
