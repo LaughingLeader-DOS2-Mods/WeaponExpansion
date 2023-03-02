@@ -106,7 +106,6 @@ local defaultPersistentVars = {
         ---@type table<Guid,integer>
         SneakingTurnsInCombat = {},
     },
-    Timers = {},
     ---@type table<Guid, {Total:integer, Attackers:table<Guid,table<string, boolean>>}>
     OnDeath = {},
     ---All GUIDs for specific uniques (GUID -> Tag).
