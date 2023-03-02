@@ -5,11 +5,13 @@ local _tests = {
 	Bonuses = {},
 	---@type table<string, LuaTest>
 	Uniques = {},
+	---@type table<string, LuaTest>
+	Misc = {},
 }
 WeaponExTesting = {}
 
----@alias _LLWEAPONEX_BonusTestTaskCallback fun(test:LuaTest, bonus:MasteryBonusData):boolean|nil
----@alias _LLWEAPONEX_RegularTestTaskCallback fun(test:LuaTest):boolean|nil
+---@alias _LLWEAPONEX_BonusTestTaskCallback (fun(test:LuaTest, bonus:MasteryBonusData):boolean|nil)
+---@alias _LLWEAPONEX_RegularTestTaskCallback (fun(test:LuaTest):boolean|nil)
 
 ---@param bonusId string
 ---@param operation _LLWEAPONEX_BonusTestTaskCallback|_LLWEAPONEX_BonusTestTaskCallback[]
@@ -43,6 +45,23 @@ function WeaponExTesting.RegisterUniqueTest(id, operation, params)
 		test = Classes.LuaTest:Create(id, {operation}, params)
 	end
 	table.insert(_tests.Uniques[id], test)
+end
+
+---@param id string
+---@param operation _LLWEAPONEX_RegularTestTaskCallback|_LLWEAPONEX_RegularTestTaskCallback[]
+---@param params LuaTestParams|nil
+function WeaponExTesting.RegisterMiscTest(id, operation, params)
+	if _tests.Misc[id] == nil then
+		_tests.Misc[id] = {}
+	end
+	--Ext.Utils.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
+	local test = nil
+	if type(operation) == "table" then
+		test = Classes.LuaTest:Create(id, operation, params)
+	else
+		test = Classes.LuaTest:Create(id, {operation}, params)
+	end
+	table.insert(_tests.Misc[id], test)
 end
 
 function SignalTestComplete(id)
@@ -206,6 +225,34 @@ if not _ISCLIENT then
 			return "\n" .. StringHelpers.Join("\n", valid_ids)
 		else
 			return "No registered unique tests."
+		end
+	end)
+
+	Testing.RegisterConsoleCommandTest("weaponexmisc", function (id, subid)
+		if subid == "all" then
+			local tests = {}
+			for uid,test in pairs(_tests.Misc) do
+				tests[#tests+1] = test
+			end
+			return tests
+		else
+			local test = _tests.Misc[subid]
+			if test then
+				return test
+			else
+				fprint(LOGLEVEL.WARNING, "[test] No test for ID (%s)", subid)
+			end
+		end
+	end, function (id, subid)
+		local valid_ids = {}
+		for uid,v in pairs(_tests.Misc) do
+			valid_ids[#valid_ids+1] = " " .. uid
+		end
+		if #valid_ids > 0 then
+			table.sort(valid_ids)
+			return "\n" .. StringHelpers.Join("\n", valid_ids)
+		else
+			return "No registered Weapon Expansion misc tests."
 		end
 	end)
 

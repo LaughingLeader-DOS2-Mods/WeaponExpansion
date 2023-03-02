@@ -31,34 +31,49 @@ if not Vars.IsClient then
 			if owner and PersistentVars.SkillData.ThrowWeapon[owner.MyGuid] then
 				local characterGUID = owner.MyGuid
 				local movingObjectGUID = e.ObjectGUID1
-				Timer.StartOneshot("LLWEAPONEX_MovingObjectWeapon_Setup", 125, function ()
-					local transformed = false
+				local transformed = false
 
-					local weapon = nil
+				local weapon = nil
 
-					local data = PersistentVars.SkillData.ThrowWeapon[characterGUID]
+				local data = PersistentVars.SkillData.ThrowWeapon[characterGUID]
+				if data then
 					if data.Weapon then
 						weapon = GameHelpers.GetItem(data.Weapon, "EsvItem")
 					elseif data.Shield then
 						weapon = GameHelpers.GetItem(data.Shield, "EsvItem")
 					end
+				end
 
-					if weapon then
-						Transform(movingObjectGUID, GameHelpers.GetTemplate(weapon), 0, 1, 0)
-						transformed = true
+				if weapon then
+					Transform(movingObjectGUID, GameHelpers.GetTemplate(weapon), 0, 1, 0)
+					transformed = true
 
-						if not weapon:HasTag("DISABLE_WEAPON_EFFECTS") then
-							SetTag(weapon.MyGuid, "DISABLE_WEAPON_EFFECTS")
-							ObjectSetFlag(weapon.MyGuid, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 0)
+					if not weapon:HasTag("DISABLE_WEAPON_EFFECTS") then
+						SetTag(weapon.MyGuid, "DISABLE_WEAPON_EFFECTS")
+						ObjectSetFlag(weapon.MyGuid, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 0)
+					end
+
+					--Mods.LeaderLib.VisualManager.Client.AttachVisual("497bcc72-d4c5-4219-8308-c0ad04d86664", "48491cef-a2de-4dec-9d65-9c6aea8a769e", nil, {Rotate={0,Ext.Utils.Random(20,270),0}})
+
+					if data.Shield and data.Shield ~= weapon.MyGuid then
+						local shield = GameHelpers.GetItem(data.Shield, "EsvItem")
+						if shield then
+							local ranRot = {0,Ext.Utils.Random(20,270),0}
+							local visual = shield.CurrentTemplate.VisualTemplate
+							Timer.StartOneshot("", 50, function (e)
+								if GameHelpers.ObjectExists(movingObjectGUID) then
+									VisualManager.RequestAttachVisual(movingObjectGUID, {Resource=visual, ExtraSettings={Rotate=ranRot}})
+								end
+							end)
 						end
 					end
+				end
 
-					if transformed then
-						GameHelpers.Status.Apply(characterGUID, "LEADERLIB_HIDE_WEAPON", 30.0, true, characterGUID)
-						ItemSetCanPickUp(movingObjectGUID, 0)
-						ItemSetOwner(movingObjectGUID, characterGUID)
-					end
-				end)
+				if transformed then
+					GameHelpers.Status.Apply(characterGUID, "LEADERLIB_HIDE_WEAPON", 30.0, true, characterGUID)
+					ItemSetCanPickUp(movingObjectGUID, 0)
+					ItemSetOwner(movingObjectGUID, characterGUID)
+				end
 			end
 		end
 	end, {MatchArgs={Event="LLWEAPONEX_MovingObjectWeapon_Init"}})
@@ -66,13 +81,11 @@ if not Vars.IsClient then
 	Events.ObjectEvent:Subscribe(function (e)
 		local character,movingObject = table.unpack(e.Objects)
 		if character and movingObject then
-			GameHelpers.Status.Remove(character, "LEADERLIB_HIDE_WEAPON")
-			
+
 			local weaponData = PersistentVars.SkillData.ThrowWeapon[character.MyGuid]
 			if weaponData then
 				---@cast character EsvCharacter
 				---@cast movingObject EsvItem
-
 
 				-- local pos = movingObject.WorldPos
 				-- local rot = movingObject.Rotation
@@ -89,6 +102,8 @@ if not Vars.IsClient then
 						if ObjectGetFlag(weapon.MyGuid, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag") == 1 then
 							ClearTag(weapon.MyGuid, "DISABLE_WEAPON_EFFECTS")
 						end
+
+						ItemScatterAt(weapon.MyGuid, table.unpack(weapon.WorldPos))
 					end
 				end
 
@@ -101,12 +116,19 @@ if not Vars.IsClient then
 						if ObjectGetFlag(weapon.MyGuid, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag") == 1 then
 							ClearTag(weapon.MyGuid, "DISABLE_WEAPON_EFFECTS")
 						end
+
+						ItemScatterAt(weapon.MyGuid, table.unpack(weapon.WorldPos))
 					end
 				end
 
-				PersistentVars.SkillData.ThrowWeapon[character.MyGuid] = nil
+				SignalTestComplete("LLWEAPONEX_ThrowWeapon_MovingObjectLanded")
+
+				if not DeathManager.IsAttackerListening("ThrowWeapon", character) then
+					PersistentVars.SkillData.ThrowWeapon[character.MyGuid] = nil
+				end
 			end
 
+			GameHelpers.Status.Remove(character, "LEADERLIB_HIDE_WEAPON")
 			SetOnStage(movingObject.MyGuid, 0)
 			ItemDestroy(movingObject.MyGuid)
 		end
@@ -121,16 +143,13 @@ if not Vars.IsClient then
 				Weapon = GameHelpers.GetUUID(mainhand),
 				Shield = GameHelpers.GetUUID(offhand)
 			}
+			SignalTestComplete("LLWEAPONEX_ThrowWeapon_UsedSkill")
 		end
 	end)
 
 	SkillManager.Register.ProjectileHit(ThrowWeaponSkills, function (e)
 		local target = e.Data.Target
 		if not StringHelpers.IsNullOrEmpty(target) then
-			if ObjectIsCharacter(target) == 1 then
-				DeathManager.ListenForDeath("ThrowWeapon", target, e.Character, 500)
-			end
-
 			local mainhand = nil
 			local offhand = nil
 
@@ -150,9 +169,9 @@ if not Vars.IsClient then
 				end
 			end
 
+			DeathManager.ListenForDeath("ThrowWeapon", target, e.Character, 500)
 			GameHelpers.Damage.ApplySkillDamage(e.Character, target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true, MainWeapon=mainhand, OffhandWeapon=offhand})
-		else
-			PersistentVars.SkillData.ThrowWeapon[e.CharacterGUID] = nil
+			SignalTestComplete("LLWEAPONEX_ThrowWeapon_DamageApplied")
 		end
 	end)
 
@@ -166,6 +185,7 @@ if not Vars.IsClient then
 				if not StringHelpers.IsNullOrEmpty(data.Shield) then
 					NRD_CharacterEquipItem(e.SourceGUID, data.Shield, "Shield", 0, 0, 1, 1)
 				end
+				SignalTestComplete("LLWEAPONEX_ThrowWeapon_TargetDied")
 			end
 			PersistentVars.SkillData.ThrowWeapon[e.SourceGUID] = nil
 		end
@@ -191,4 +211,67 @@ if not Vars.IsClient then
 			end
 		end
 	end)
+
+	if Vars.DebugMode then
+		--!test weaponexmisc throwing_throwweapon
+		WeaponExTesting.RegisterMiscTest("throwing_throwweapon", function (test)
+			local char,dummy,cleanup = Testing.Utils.CreateTestCharacters({CharacterFaction="PVP_1", DummyFaction="PVP_2", EquipmentSet="Class_Fighter_Lizards", TotalCharacters=1, TotalDummies=1})
+			---@cast char Guid
+			---@cast dummy Guid
+
+			test:Wait(250)
+			local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(char)
+			if mainhand then
+				mainhand = mainhand.MyGuid
+			end
+			if offhand then
+				offhand = offhand.MyGuid
+			end
+			test.Cleanup = function ()
+				PersistentVars.SkillData.ThrowWeapon[char] = nil
+				DeathManager.RemoveAllDataForTarget(dummy)
+				DeathManager.RemoveAllDataForTarget(char)
+				if mainhand then
+					ItemRemove(mainhand)
+				end
+				if offhand then
+					ItemRemove(offhand)
+				end
+				cleanup()
+			end
+
+			GameHelpers.Action.UseSkill(char, "Projectile_LLWEAPONEX_ThrowWeapon_Enemy", dummy)
+			test:WaitForSignal("LLWEAPONEX_ThrowWeapon_UsedSkill", 5000)
+			test:WaitForSignal("LLWEAPONEX_ThrowWeapon_DamageApplied", 2000)
+			--Target dummies "die" in the DeathManager in debug mode
+			test:WaitForSignal("LLWEAPONEX_ThrowWeapon_TargetDied", 2000)
+			
+			test:Wait(1000)
+			test:AssertEquals(not StringHelpers.IsNullOrEmpty(CharacterGetEquippedWeapon(char)), true, "Failed to re-equip weapons after target dummy 'death'")
+
+			--Test throwing weapons on the ground
+			local dir = GameHelpers.Math.GetDirectionalVector(char, dummy)
+			local distance = GameHelpers.Math.GetDistance(char, dummy) / 2
+			local targetPos = GameHelpers.Math.ExtendPositionWithDirectionalVector(char, dir, distance)
+			targetPos[2] = targetPos[2] + 1
+			GameHelpers.Action.UseSkill(char, "Projectile_LLWEAPONEX_ThrowWeapon_Enemy", targetPos)
+			test:WaitForSignal("LLWEAPONEX_ThrowWeapon_UsedSkill", 5000)
+			test:WaitForSignal("LLWEAPONEX_ThrowWeapon_DamageApplied", 2000)
+			test:WaitForSignal("LLWEAPONEX_ThrowWeapon_MovingObjectLanded", 2000)
+
+			test:AssertEquals(PersistentVars.SkillData.ThrowWeapon[char] == nil, true, "PersistentVars.SkillData.ThrowWeapon data for test character not cleaned up after the thrown weapon has landed.")
+			if mainhand then
+				local x,y,z = GameHelpers.Math.GetPosition(mainhand, true)
+				test:AssertEquals(x ~= 0 and y ~= 0 and z ~= 0, true, "Thrown mainhand weapon is not in the world.")
+			end
+			if offhand then
+				local x,y,z = GameHelpers.Math.GetPosition(offhand, true)
+				test:AssertEquals(x ~= 0 and y ~= 0 and z ~= 0, true, "Thrown offhand weapon is not in the world.")
+			end
+
+			test:Wait(10000)
+
+			return true
+		end)
+	end
 end
