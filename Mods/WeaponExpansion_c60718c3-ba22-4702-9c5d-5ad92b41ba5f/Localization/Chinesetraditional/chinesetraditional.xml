@@ -2,7 +2,7 @@
 	<content contentuid="h00157a58g9ae0g4119gba1ag3f1e9f11db14">Dual Shields</content>
 	<content contentuid="h00277f28g293fg49a2gbc19g4e1a54a92f0f">Weapon Expansion - Skillbooks</content>
 	<content contentuid="h0036c310g95a5g42e7gb715g06c09e6a4079">Character has activated the &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Enemies hit have a 10% chance to become &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; for 1 turn.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 50%.&lt;/font&gt;</content>
-	<content contentuid="h003d6b87g216ag47cega199gf4f3c2d28998">a Scoundrel Weapon</content>
+	<content contentuid="h003f051fg22a5g439cgb4dbg9c6573ac70f1">a Melee Weapon</content>
 	<content contentuid="h0042fce4g99a9g487egb7d2g3d594b9b4d17">Master Monk of Staves</content>
 	<content contentuid="h004d1b35g032ag4683g9ef5g5a8741a8bc90">Rally the party at the target location.&lt;br&gt;&lt;font color=&apos;#00FFDD&apos;&gt;Party members are granted a one-time use skill that teleports them to the raised banner.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF7733&apos;&gt;The banner unleashes the hunger of the pack, granting [1]% lifesteal and a [2]% boost to damage.&lt;/font&gt;</content>
 	<content contentuid="h004f820eg3b47g4400ga26dgc77fb1d9292e">&lt;font color=&apos;#00BFFF&apos; size=&apos;18&apos;&gt;Magic Warfare&lt;/font&gt;&lt;br&gt;Cripple all enemies within [1] of the target. Deals [2].</content>
@@ -216,7 +216,7 @@
 	<content contentuid="h1574c05dg6552g4cb7gbbbeg59b04967b6e4">Character is being covered by a nearby ally.</content>
 	<content contentuid="h159452b0gcf6dg4389gb6d8g738d7029dd07">Runic Gloves</content>
 	<content contentuid="h1599bddcg8b04g4ed6gbb4dg88f0196afca4">*[STAFFS] Click on the button labeled &apos;Staffs&apos;.*</content>
-	<content contentuid="h15be09d7g741eg4b32ga829g88c309b938f0">Throw your equipped mainhand weapon at a target, dealing [1] and disarming yourself.&lt;br&gt;&lt;font color=&apos;#22FF00&apos;&gt;If the target dies from this skill, the weapon is automatically re-equipped.&lt;/font&gt;</content>
+	<content contentuid="h15be09d7g741eg4b32ga829g88c309b938f0">Throw your equipped weapon(s) at a target, dealing [Special:LLWEAPONEX_ThrowWeapon_Damage] and disarming yourself.&lt;br&gt;&lt;font color=&apos;#22FF00&apos;&gt;If the target dies from this skill, your weapons are automatically re-equipped.&lt;/font&gt; </content>
 	<content contentuid="h15f43030g2b58g4c93gb07eg23d0046096a3">A crushing blow from the &lt;font color=&apos;#c5a65a&apos;&gt;[Key:ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A_DisplayName:Power Gauntlets]&lt;/font&gt; has lowered [Handle:h856999degd5aag435eg895fg50546f5a87f6:Maximum Physical Armour].</content>
 	<content contentuid="h160bdde7g5fdfg4981ga01fgeffcc36441a1">More souls on my conscience...</content>
 	<content contentuid="h161d5479g06d6g408egade2g37a203e3361f">corrosive damage</content>
@@ -253,6 +253,7 @@
 	<content contentuid="h18db5b3bg6b75g4ed1gab9ag309251d7d492">Immolation</content>
 	<content contentuid="h18ee08fdg04f0g4ea3ga684g0614a456d44c">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery II&lt;/font&gt;</content>
 	<content contentuid="h18f048d7g2230g4037g88b6g9191c6c0be0c">Lucky for you, I&apos;ll make this quick.</content>
+	<content contentuid="h18fb9a84ga377g4a87gad1bga01855e53b97">Ogre Blade</content>
 	<content contentuid="h192a08b3gd474g4dacg85bagc0ce5e0e27e4">Empty Slot</content>
 	<content contentuid="h194dbc58g694eg4134gae7fg767ba3b407a9">Inspiring Leadership</content>
 	<content contentuid="h19592684g1638g4a7bg9031g08113a276154">Cursed Strike</content>
@@ -568,6 +569,7 @@
 	<content contentuid="h33abf26agf855g4803g8770g3dbad1ce2f9b">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
 	<content contentuid="h33c1a581gf442g4a60g9851gffe17d4151f4">Draw Arrow</content>
 	<content contentuid="h33c3c87bg18acg457fg9fadg13b2ead3e47a">Widowmaker</content>
+	<content contentuid="h33c8646dg3127g475cga6b4gc46b91ee44e4">a Melee Weapon</content>
 	<content contentuid="h3401576cga533g4f78ga745g4c1aed3f6264">Marked Assassination</content>
 	<content contentuid="h340c2cffg5f68g4cdbga779gc0327133e200">Character has a damage bonus for their first attack.</content>
 	<content contentuid="h34401e0bg371fg449cg9e43g39208b508644">45%/30%/10% Chance for Bonus Missiles</content>
@@ -856,6 +858,7 @@
 	<content contentuid="h52e5ba60g0bfeg43c1g8145g8920715b2f73">Character is in a frenzy, increasing swiftness and fervor.&lt;br&gt;&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;[Key:MultiStrike_LLWEAPONEX_Rapier_FlickerStrike_DisplayName:Flicker Strike] will automatically trigger again, consuming a frenzy charge.&lt;/font&gt;</content>
 	<content contentuid="h52fc8249gce60g41a8g97cbgef4c59d13fb8">Deadly Fan</content>
 	<content contentuid="h5304943bgd025g4077ga3adg9c7b5cfd3d29">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#7478DC&apos;&gt;Air Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
+	<content contentuid="h53267fe1gdb99g44bfg9a17g90e158a8c702">a Scoundrel Weapon ([Key:LLWEAPONEX_Dagger:Dagger], [Key:LLWEAPONEX_Katana:Katana], [Key:LLWEAPONEX_Rapier:Rapier])</content>
 	<content contentuid="h534b4f1dg3737g40cdga614g80664270ca82">Poisoncloud Arrow</content>
 	<content contentuid="h5382a04agef53g4d1eg942cg623f149e990d">&lt;font color=&apos;#FFDD00&apos;&gt;Sunder the Mountain&lt;/font&gt;</content>
 	<content contentuid="h53cfcfb9g7746g456ag93b2g1670d45d5d30">Flourish (Duelist Stance)</content>
@@ -932,6 +935,7 @@
 	<content contentuid="h5ac8a693gc767g4fc8gb358g4820e8025fae">&lt;font color=&apos;#00FF7F&apos;&gt;Greatbow Mastery II&lt;/font&gt;</content>
 	<content contentuid="h5ad5c605gf678g4489g89bcga95083784978">Character&apos;s body is self-repairing.&lt;br&gt;Heals [1] Vitality per turn.</content>
 	<content contentuid="h5ae3034bg31ceg4648g8a9ag502285a21c24">Boulderblade</content>
+	<content contentuid="h5af966eeg33a8g4b9fg953cge749a0f96978">an Equipped Weapon</content>
 	<content contentuid="h5afa4bdfg6952g41f5ga490g7682e5c264e6">Character&apos;s firearm is attuned to electricity/air.</content>
 	<content contentuid="h5b0872ddg4f86g4befg953cg6cda43630600">a Katana</content>
 	<content contentuid="h5b132a5cg9c3ag4905g884dg4e814fbef78e">Character&apos;s firearm is attuned to blood.</content>
@@ -1004,6 +1008,7 @@
 	<content contentuid="h6138ae71gce86g4ef9g8c83gd44176e04f5c">Old Runeblade of Air</content>
 	<content contentuid="h6145e729g4cb0g4018gafe9gd89175b8943d">General</content>
 	<content contentuid="h615bb491g0d04g468fgaa1dg334d3941b2a7">Shoot Rod (Offhand)</content>
+	<content contentuid="h615c6a82g1e4cg4184g8644gbc456446b516">a Scoundrel Weapon ([Key:LLWEAPONEX_Axe:Axe], [Key:LLWEAPONEX_Dagger:Dagger], [Key:LLWEAPONEX_Katana:Katana], [Key:LLWEAPONEX_Rapier:Rapier])</content>
 	<content contentuid="h61662ba1ga358g4544ga3c7gd013f937dc5b">A small rune that when fitted inside a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, allows the wielder to activate that element within their blade for a limited time.</content>
 	<content contentuid="h6170c12dgb0abg4bccg93bag5f6450105b58">Vineguard, Cradle of the Divine</content>
 	<content contentuid="h61937e70g4bf7g4c1fga467g6b547d89ad3e">Vortex Whirlwind</content>
@@ -1048,6 +1053,7 @@
 	<content contentuid="h65373035g1641g4a8fga027g73e063bd5b31">[LLWEAPONEX_VendingMachine_OrderOption8_643f5348-d324-4508-ace3-71505bb30dee]</content>
 	<content contentuid="h656861f1gc0edg4200g9ffeg1d87269e1d08">Old Runeblade of Water</content>
 	<content contentuid="h659b7070g993dg4b23ga6c3g3bd445489697">Scythe</content>
+	<content contentuid="h65aa7d00g44c3g4595g8b88g77bab85ad626">[1] + [2] ([Handle:h0c4dfdb5g88e7g4df8gabc9gf17b7042bf14:Shield])</content>
 	<content contentuid="h65b11696gb71ag4f2aga52dg6f40ea524a00">What?!</content>
 	<content contentuid="h65dd6196gd885g4712ga7fcg2ff0dec0a5ea">Deadly Knife</content>
 	<content contentuid="h65eb30f3gc1adg4394gbba9gcf7d9a868fa5">Character is taking a defensive position until their next turn.&lt;br&gt;&lt;font color=&apos;#11FF99&apos;&gt;Reduces critical hit damage taken by 50%.&lt;/font&gt;</content>
@@ -1191,6 +1197,7 @@
 	<content contentuid="h72c5056dg86a0g48b4g939fgd5cf4e9780ed">Poisonwall, Seeker&apos;s Bane</content>
 	<content contentuid="h73168328g1dd5g4bacg9866g74699e618e7b">A hardy pair of gloves designed for forcefully taking treasure.</content>
 	<content contentuid="h731eea3ag881dg4855g9057g342f2eebd0c4">Lava Rune</content>
+	<content contentuid="h73492ea5g403eg4bfegb1b3g887697b54564">A wicked-looked blade thought to be forged by an ogre of the abyss. Shadows seem to gather around it.</content>
 	<content contentuid="h7388db69ga1b3g40f9g904eg753cc7f52cfe">Wooden Quarterstaff</content>
 	<content contentuid="h73b9bec2ge039g4045g88d6g39e3f4ea1d92">Character will be Dizzy upon standing up.</content>
 	<content contentuid="h73da4328gbc8ag4d8dga3c4g2d4ce915cb49">&lt;font color=&apos;#7D71D9&apos;&gt;Attuned Shot (Air)&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#7D71D9&apos;&gt;Electrifies surfaces.&lt;/font&gt;</content>
@@ -1796,6 +1803,7 @@
 	<content contentuid="hae626894g9011g4cdfg8eb8g3e3bbdb68d84">Blademaster&apos;s Strike</content>
 	<content contentuid="hae9820a4g858ag4c2eg8699gc0cd715020c5">Changes Damage Type</content>
 	<content contentuid="hae9f460bg62dcg4bd7g9242gb20cf29add61">Pirate&apos;s Wit</content>
+	<content contentuid="haea83753gcf13g40f3gb48bgf6ec3f7a3ba5">a Scoundrel Weapon</content>
 	<content contentuid="haeaa255fg1908g4d35g9a85g55c48aebf64d">Journeyman&apos;s Spiked Quarterstaff</content>
 	<content contentuid="haebca7c6g50fdg42e6gb833g93fd8ad3b03e">Heavy Book</content>
 	<content contentuid="haef91ab2g2193g430bgb19eg8d13b9259488">&lt;font color=&apos;#00AA00&apos;&gt;Poison-tipped Mini-Bolts&lt;/font&gt;</content>
@@ -1804,7 +1812,7 @@
 	<content contentuid="haf1b80d3g97d1g477ag9547g1fd7878f3e35">Armor Break</content>
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
 	<content contentuid="haf8ef486g9b5eg46b0g95efg2c5795550240">Base Damage</content>
-	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">a Axe</content>
+	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">an Axe</content>
 	<content contentuid="haf995e87gce58g4368gaceegfc73bc209fc7">Strange Machine</content>
 	<content contentuid="haf9a091fgead0g4151g95feg436e7da3f882">Elemental Empower</content>
 	<content contentuid="hafacd835g8b2dg4f62gb52eg18fa77bd7adc">Tar Rune</content>
@@ -1903,7 +1911,6 @@
 	<content contentuid="hb98acf91g4143g4355g83f8g8982a163e5f5">&lt;font color=&apos;#99AACC&apos;&gt;Knowledge of the occult amplifies this skill again non-Undead, non-Voidwoken targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_BattleBook_CurseDamage].&lt;/font&gt;</content>
 	<content contentuid="hb98b5e57g62bbg4bb0g8973g69bf99d60252">&lt;font color=&apos;#c80030&apos;&gt;Sharpened Great Arrow&lt;/font&gt;</content>
 	<content contentuid="hb994589bg55abg4bd4g8280g7c6662526119">Jump Marking</content>
-	<content contentuid="hb9994325g25c9g4159gbaadg693042a4b51a">an Equipped Weapon</content>
 	<content contentuid="hb9a6f17dg44d9g4ae4g9863g27fa7ab26b4e">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Enemies hit have a 20% chance to be struck by a &lt;font color=&apos;#7d71d9&apos;&gt;Thunderbolt&lt;/font&gt;, dealing &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; and chaining &lt;font color=&apos;#7d71d9&apos;&gt;Lightning&lt;/font&gt; to enemies within 8m.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 80%.&lt;/font&gt;&lt;font color=&apos;#f7ba14&apos; size=&apos;20&apos;&gt;Enemies can only be struck once per turn.&lt;/font&gt;</content>
 	<content contentuid="hb9d29345g4860g4a16gbf15g777e1e8998b8">&lt;font color=&apos;#80FFC3&apos;&gt;Bag of Special Tokens&lt;/font&gt;</content>
 	<content contentuid="hb9e220ceg072fg4b21gb00cg86ecef3a25f8">Character&apos;s has been marked by the &lt;font color=&apos;#c5a65a&apos;&gt;Warchief&apos;s Halberd&lt;/font&gt;.</content>
@@ -2129,7 +2136,6 @@
 	<content contentuid="hd150d9fcgbe64g4a79g92b9gd0db942b049e">&lt;icon id=&apos;Shout_RecoverArmour&apos;&gt;[ExtraData:LLWEAPONEX_MB_Shield_RecoverArmour_DamageReduction]%&lt;/font&gt;</content>
 	<content contentuid="hd17bb26eg8fddg435fg9349ga2b757f61533">&lt;font color=&apos;#9BF0FF&apos;&gt;Targets hit by basic attacks become weak to your wand&apos;s element, gaining [Special:LLWEAPONEX_WeaponElementalWeakness] for [ExtraData:LLWEAPONEX_MB_Wand_ElementalWeaknessTurns] turn(s).&lt;/font&gt;</content>
 	<content contentuid="hd17c52d6g4c33g481fga4bag25941adbd51f">Heartpiercer</content>
-	<content contentuid="hd1858204gc63dg4fd4g97fcg884c7e3f6081">a Melee Weapon</content>
 	<content contentuid="hd1b72f00g5ea9g4aabg9c95g3aab8513082b">Pistol Ammo</content>
 	<content contentuid="hd1babc39g64eag4b4ag9127g182678705d17">Throw a stone at a target for [1], with a chance to give them a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt;.&lt;br&gt;Enemies suffering from a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt; have a small chance to &lt;font color=&apos;#FF8C00&apos;&gt;Fumble&lt;/font&gt; their basic attacks.</content>
 	<content contentuid="hd1f5b5b8gbb67g4aa9ga1e5g46848566d29f">Earth Rune</content>

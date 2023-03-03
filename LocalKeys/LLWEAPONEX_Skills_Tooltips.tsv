@@ -13,3 +13,4 @@ LLWEAPONEX_Tooltip_ApplySpecialRuneOnHit	Applies [1] on hit	h189a198agfd17g4585g
 LLWEAPONEX_Tooltip_ApplySpecialRuneOnHit_Chance	Applies [1] on hit ([2]% chance)	h5e0b68b9gefa1g4cc6ga335g6b755812d14f
 LLWEAPONEX_Tooltip_ChaosRuneAbsorbSurface	Transform Surfaces into Rune Effects	h60dc40a5ge603g4d8dg9c6eg1c24acc5f4bb
 LLWEAPONEX_Tooltip_ChaosRuneAbsorbSurface_Chance	Transform Surfaces into Rune Effects ([1]% chance)	h6cd64a25gf8d0g438cg9a91gb04f030e2f88
+LLWEAPONEX_Tooltip_ThrowWeaponWithShieldDamage	[1] + [2] ([Handle:h0c4dfdb5g88e7g4df8gabc9gf17b7042bf14:Shield])	ha76e5683g4e79g476eg9565g15039b65185a
