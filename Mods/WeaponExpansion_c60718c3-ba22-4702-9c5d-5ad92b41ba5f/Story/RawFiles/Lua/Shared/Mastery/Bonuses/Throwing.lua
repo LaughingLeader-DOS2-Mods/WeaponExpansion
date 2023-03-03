@@ -92,7 +92,7 @@ if not Vars.IsClient then
 
 				if weaponData.Weapon then
 					local weapon = GameHelpers.GetItem(weaponData.Weapon)
-					if weapon then
+					if weapon and GameHelpers.Item.ItemIsEquipped(character, weapon) and not weapon.UnEquipLocked then
 						CharacterUnequipItem(character.MyGuid, weapon.MyGuid)
 						-- GameHelpers.Utils.SetPosition(weapon, pos)
 						-- GameHelpers.Utils.SetRotation(weapon, rot)
@@ -109,7 +109,7 @@ if not Vars.IsClient then
 
 				if weaponData.Shield then
 					local weapon = GameHelpers.GetItem(weaponData.Shield)
-					if weapon then
+					if weapon and GameHelpers.Item.ItemIsEquipped(character, weapon) and not weapon.UnEquipLocked then
 						CharacterUnequipItem(character.MyGuid, weapon.MyGuid)
 						Osi.LeaderLib_Helper_CopyItemTransform(weapon.MyGuid, movingObject.MyGuid)
 
@@ -187,6 +187,12 @@ if not Vars.IsClient then
 					NRD_CharacterEquipItem(e.SourceGUID, data.Shield, "Shield", 0, 0, 1, 1)
 				end
 				SignalTestComplete("LLWEAPONEX_ThrowWeapon_TargetDied")
+				EffectManager.PlayEffect("RS3_FX_GP_Status_Deflecting_01", e.Source)
+				if e.Target then
+					local pos = e.Target.WorldPos
+					pos[2] = pos[2] + (e.Target.AI.AIBoundsHeight - 0.2)
+					EffectManager.PlayEffectAt("RS3_FX_Skills_Rogue_Impact_01", pos)
+				end
 			end
 			PersistentVars.SkillData.ThrowWeapon[e.SourceGUID] = nil
 		end
