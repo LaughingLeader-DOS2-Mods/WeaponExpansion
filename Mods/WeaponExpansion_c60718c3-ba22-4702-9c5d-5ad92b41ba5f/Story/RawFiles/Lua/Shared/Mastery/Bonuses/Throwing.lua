@@ -134,9 +134,7 @@ if not Vars.IsClient then
 		end
 	end, {MatchArgs={Event="LLWEAPONEX_MovingObjectWeapon_Landed"}})
 
-	local ThrowWeaponSkills = {"Projectile_LLWEAPONEX_ThrowWeapon", "Projectile_LLWEAPONEX_ThrowWeapon_Enemy"}
-
-	SkillManager.Register.Used(ThrowWeaponSkills, function (e)
+	SkillManager.Register.Used(Config.Skill.ThrowWeaponSkills, function (e)
 		local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(e.Character)
 		if mainhand or offhand then
 			PersistentVars.SkillData.ThrowWeapon[e.CharacterGUID] = {
@@ -147,7 +145,7 @@ if not Vars.IsClient then
 		end
 	end)
 
-	SkillManager.Register.ProjectileHit(ThrowWeaponSkills, function (e)
+	SkillManager.Register.ProjectileHit(Config.Skill.ThrowWeaponSkills, function (e)
 		local target = e.Data.Target
 		if not StringHelpers.IsNullOrEmpty(target) then
 			local mainhand = nil
@@ -171,6 +169,9 @@ if not Vars.IsClient then
 
 			DeathManager.ListenForDeath("ThrowWeapon", target, e.Character, 500)
 			GameHelpers.Damage.ApplySkillDamage(e.Character, target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true, MainWeapon=mainhand, OffhandWeapon=offhand})
+			if offhand and offhand.ItemType == "Shield" then
+				GameHelpers.Damage.ApplySkillDamage(e.Character, target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyShieldDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=false, MainWeapon=mainhand, OffhandWeapon=offhand})
+			end
 			SignalTestComplete("LLWEAPONEX_ThrowWeapon_DamageApplied")
 		end
 	end)
@@ -273,5 +274,20 @@ if not Vars.IsClient then
 
 			return true
 		end)
+	end
+else
+	---@param character CDivinityStatsCharacter
+	TooltipParams.SpecialParamFunctions.LLWEAPONEX_ThrowWeapon_Damage = function (param, character)
+		local damage = GameHelpers.Tooltip.GetSkillDamageText("Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", character)
+		local shield = character:GetItemBySlot("Shield")
+		if shield and shield.ItemType == "Shield" then
+			local shieldDamage = GameHelpers.Tooltip.GetSkillDamageText("Projectile_LLWEAPONEX_ThrowWeapon_ApplyShieldDamage", character)
+			if StringHelpers.IsNullOrWhitespace(shieldDamage) then
+				return damage
+			end
+			return Text.SkillTooltip.ThrowWeaponWithShieldDamage:ReplacePlaceholders(damage, shieldDamage)
+		else
+			return damage
+		end
 	end
 end

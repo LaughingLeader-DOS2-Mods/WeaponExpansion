@@ -204,6 +204,7 @@ Text = {
 		StillStance = ts:Create("h443a2ac9g8018g43b2gb0b4g1fcb29ad71aa", "[1]% Damage (Still Stance - [2])"),
 		AddRemoteMine = ts:CreateFromKey("LLWEAPONEX_UI_AddRemoteMine", "Gain [1] Remote Mine(s)"),
 		AddRemoteMineWithChance = ts:CreateFromKey("LLWEAPONEX_UI_AddRemoteMine", "Gain [1] Remote Mine(s) ([2]% Chance)"),
+		ThrowWeaponWithShieldDamage = ts:CreateFromKey("LLWEAPONEX_Tooltip_ThrowWeaponWithShieldDamage", "[1] + [2] ([Handle:h0c4dfdb5g88e7g4df8gabc9gf17b7042bf14:Shield])"),
 	},
 	NewAbilitySchools = {
 		Pirate = ts:Create("hc64dff65g17ffg4b44gaf21g896521b144f2", "Piracy"),

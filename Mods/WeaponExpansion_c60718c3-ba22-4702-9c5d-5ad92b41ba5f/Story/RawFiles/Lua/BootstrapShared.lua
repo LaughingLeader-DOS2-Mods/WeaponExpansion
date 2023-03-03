@@ -23,6 +23,20 @@ Config = {
 		},
 		KevinSkills = {"Projectile_LLWEAPONEX_Throw_Rock_Kevin", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Poison", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Oil", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails"},
 		HandCrossbowsShootSkills = {"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"},
+		ThrowWeaponSkills = {"Projectile_LLWEAPONEX_ThrowWeapon", "Projectile_LLWEAPONEX_ThrowWeapon_Enemy"},
+		---Skills that should gain throwing mastery experience, instead of weapon or unarmed xp.
+		ThrowingMasterySkills = {
+			Projectile_LLWEAPONEX_ThrowWeapon = true,
+			Projectile_LLWEAPONEX_ThrowWeapon_Enemy = true,
+			Target_LLWEAPONEX_ThrowObject = true,
+			Target_LLWEAPONEX_ThrowObject_Enemy = true,
+			Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage = true,
+			Projectile_LLWEAPONEX_ThrowWeapon_ApplyShieldDamage = true,
+			Projectile_LLWEAPONEX_Status_Tossed_Damage_SuperLight = true,
+			Projectile_LLWEAPONEX_Status_Tossed_Damage_Light = true,
+			Projectile_LLWEAPONEX_Status_Tossed_Damage_Medium = true,
+			Projectile_LLWEAPONEX_Status_Tossed_Damage_Heavy = true,
+		}
 	},
     Status = {
         RemoveOnTurnEnding = {
@@ -113,7 +127,6 @@ Config = {
 			"LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST",
 			"LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE",
 			"LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS",
-			"LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATWAVE",
 			"LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA",
 			"LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING",
 			"LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR",
