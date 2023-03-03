@@ -4,6 +4,13 @@ INITSECTION
 
 KBSECTION
 
+PROC
+LLWEAPONEX_Old_MigrateMasteryExperience()
+AND
+DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience((CHARACTERGUID)_Player, (STRING)_Mastery, (INTEGER)_Level, (INTEGER)_Experience)
+THEN
+DB_NOOP(1);
+
 EXITSECTION
 
 ENDEXITSECTION

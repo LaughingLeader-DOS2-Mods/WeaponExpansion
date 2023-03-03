@@ -50,7 +50,8 @@ function Mastery.IsActive(character, mastery)
 	return GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
 end
 
----@param character UUID|EsvCharacter|EclCharacter
+--TODO Sort of a duplicate of MasterySystem.HasMasteryRequirement
+---@param character CharacterParam
 ---@param mastery string
 ---@param minLevel integer
 ---@return boolean
@@ -59,17 +60,8 @@ function Mastery.HasMinimumMasteryLevel(character,mastery,minLevel)
 		return true
 	end
 	if Ext.IsServer() then
-		local uuid = GameHelpers.GetUUID(character)
-		if uuid then
-			--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience)
-			local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, mastery, nil, nil)
-			if dbEntry ~= nil then
-				local masteryLevel = dbEntry[1][3]
-				if masteryLevel ~= nil and masteryLevel >= minLevel then
-					return true
-				end
-			end
-		end
+		local currentLevel = MasterySystem.GetMasteryExperience(character, mastery)
+		return currentLevel >= minLevel
 	elseif Ext.IsClient() then
 		local tag = string.format("%s_Mastery_%s", mastery, minLevel)
 		local character = GameHelpers.GetCharacter(character)

@@ -55,20 +55,7 @@ function AddMasteryExperience(player,mastery,expGain,skipFlagCheck)
 	local playerGUID = player.MyGuid
 	if skipFlagCheck == true or ObjectGetFlag(playerGUID, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		expGain = expGain or 0.25
-		local currentLevel = 0
-		local currentExp = 0
-		--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience)
-		local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(playerGUID, mastery, nil, nil)
-		if dbEntry then
-			---@cast dbEntry table<integer,{[1]:Guid, [2]:string, [3]:integer, [4]:integer}>
-			local playerEntry = dbEntry[1]
-			if playerEntry then
-				currentLevel = playerEntry[3]
-				currentExp = playerEntry[4]
-				if currentExp == nil or currentExp < 0 then currentExp = 0 end
-			end
-		end
-
+		local currentLevel, currentExp = MasterySystem.GetMasteryExperience(player, mastery)
 		if currentLevel < Mastery.Variables.MaxRank then
 			local expAmountData = Mastery.Variables.RankVariables[currentLevel]
 			local maxAddExp = expAmountData.Amount

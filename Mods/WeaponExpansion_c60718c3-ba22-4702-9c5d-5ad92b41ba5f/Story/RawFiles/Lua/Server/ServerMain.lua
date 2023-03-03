@@ -279,20 +279,9 @@ Events.RegionChanged:Subscribe(function (e)
     end
 end)
 
-local function ResetMasteryRankTags()
+Ext.RegisterConsoleCommand("weaponex_refreshtags", function ()
     for player in GameHelpers.Character.GetPlayers() do
         ClearAllMasteryRankTags(player.MyGuid)
-        local masteryData = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(player.MyGuid, nil, nil, nil)
-        if masteryData then
-            for _,db in pairs(masteryData) do
-                --_Player, _Mastery, _Level, _Experience
-                local _,mastery,level,exp = table.unpack(db)
-                TagMasteryRanks(player.MyGuid, mastery, level)
-            end
-        end
+        MasterySystem.TagMasteryRanks(player)
     end
-end
-
-Ext.RegisterConsoleCommand("weaponex_refreshtags", function ()
-    ResetMasteryRankTags()
 end)

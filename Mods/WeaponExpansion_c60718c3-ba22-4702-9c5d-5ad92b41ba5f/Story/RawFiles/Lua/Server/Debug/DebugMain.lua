@@ -184,9 +184,11 @@ end)
 
 Ext.RegisterConsoleCommand("weaponex_removemastery", function(call, mastery)
     local host = CharacterGetHostCharacter()
-    Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Delete(host, mastery, nil, nil)
-    Osi.DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries:Delete(host, nil, mastery)
-    Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(host, mastery)
+    --Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Delete(host, mastery, nil, nil)
+    local experienceData = PersistentVars.MasteryExperience[StringHelpers.GetUUID(host)]
+    if experienceData then
+        experienceData[mastery] = nil
+    end
 end)
 
 if Ext.IsDeveloperMode() then

@@ -6,20 +6,13 @@ local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry
 
 ---@param character EsvCharacter
 function OpenMasteryMenu(character)
-	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Rank, _Experience)
-	local data = {
+	character = GameHelpers.GetCharacter(character, "EsvCharacter")
+	assert(character ~= nil, "Failed to get character")
+	GameHelpers.Net.PostToUser(character, "LLWEAPONEX_OpenMasteryMenu", {
 		UUID = character.MyGuid,
-		Masteries = {},
+		Masteries = TableHelpers.Clone(PersistentVars.MasteryExperience[character.MyGuid]),
 		NetID = character.NetID
-	}
-	for i,db in pairs(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(character.MyGuid, nil, nil, nil)) do
-		local char,mastery,rank,xp = table.unpack(db)
-		data.Masteries[mastery] = {
-			Rank = rank,
-			XP = xp
-		}
-	end
-	GameHelpers.Net.PostToUser(character, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
+	})
 end
 
 ---@param payload string

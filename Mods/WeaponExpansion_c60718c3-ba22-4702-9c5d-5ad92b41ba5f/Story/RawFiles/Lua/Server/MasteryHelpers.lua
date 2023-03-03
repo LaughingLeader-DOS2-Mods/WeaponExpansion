@@ -12,7 +12,7 @@ function TagMasteryRanks(guid,mastery,level)
 end
 
 ---@param guid CharacterParam
----@param mastery string
+---@param mastery string|nil
 function ClearAllMasteryRankTags(guid,mastery)
 	local maxRank = Mastery.Variables.MaxRank
 	if mastery then
@@ -91,45 +91,56 @@ function IsMeleeWeaponSkill(skill)
 	return false
 end
 
---- @param guid string
+--- @param character CharacterParam
 --- @param mastery string
 --- @param minLevel integer
-function HasMasteryLevel(guid,mastery,minLevel)
-	if type(guid) == "userdata" then
-		guid = guid.MyGuid
-	end
-	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(guid, mastery, nil, nil)
-	if dbEntry ~= nil then
-		local playerEntry = dbEntry[1]
-		if playerEntry ~= nil then
-			local currentLevel = playerEntry[3]
-			--currentExp = playerEntry[4]
-			return currentLevel >= minLevel
-		end
-	end
-	return false
+function HasMasteryLevel(character,mastery,minLevel)
+	local currentLevel = MasterySystem.GetMasteryExperience(character, mastery)
+	return currentLevel >= minLevel
 end
 
+--TODO deprecate global functions
 function HasMasteryRequirement_QRY(call, guid, tag)
 	return Mastery.HasMasteryRequirement(GameHelpers.GetCharacter(guid), tag)
 end
 
----@param character CharacterParam
+---@param player CharacterParam
 ---@param mastery string|nil
 ---@param clearTags boolean|nil
-function MasterySystem.TagMasteryRanks(character, mastery, clearTags)
-    character = GameHelpers.GetCharacter(character)
-    if character then
+function MasterySystem.TagMasteryRanks(player, mastery, clearTags)
+    local player = GameHelpers.GetCharacter(player)
+    if player then
         if clearTags then
-			ClearAllMasteryRankTags(character.MyGuid)
+			ClearAllMasteryRankTags(player)
 		end
-        local masteryData = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(character.MyGuid, mastery, nil, nil)
-        if masteryData then
-            for _,db in pairs(masteryData) do
-                --_Player, _Mastery, _Level, _Experience
-                local _,mastery,level,exp = table.unpack(db)
-                TagMasteryRanks(character.MyGuid, mastery, level)
-            end
-        end
+		if mastery then
+			local currentLevel = MasterySystem.GetMasteryExperience(player, mastery)
+			TagMasteryRanks(player, mastery, currentLevel)
+		else
+			local experienceData = PersistentVars.MasteryExperience[player.MyGuid]
+			if experienceData then
+				for mastery,data in pairs(experienceData) do
+					TagMasteryRanks(player, mastery, data.Level or 0)
+				end
+			end
+		end
     end
+end
+
+---@param player CharacterParam
+---@param mastery string
+---@return integer currentLevel
+---@return integer currentExperience
+function MasterySystem.GetMasteryExperience(player, mastery)
+	local playerGUID = GameHelpers.GetUUID(player)
+	if playerGUID then
+		local experienceData = PersistentVars.MasteryExperience[playerGUID]
+		if experienceData and experienceData[mastery] then
+			local masteryExpData = experienceData[mastery]
+			local currentExperience = masteryExpData.Experience or 0
+			local currentLevel = masteryExpData.Level or 0
+			return currentLevel, currentExperience
+		end
+	end
+	return 0,0
 end
