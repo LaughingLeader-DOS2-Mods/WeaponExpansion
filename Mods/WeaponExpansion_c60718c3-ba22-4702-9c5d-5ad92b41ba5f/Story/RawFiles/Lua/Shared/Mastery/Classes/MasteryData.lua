@@ -12,8 +12,9 @@ local MasteryData = {}
 
 ---@param id string
 ---@param name TranslatedString
----@param color string
----@param ranks string
+---@param color? string
+---@param ranks? MasteryRankDisplayInfo[]
+---@param bonuses? MasteryBonusData[]
 ---@return MasteryData
 function MasteryData:Create(id,name,color,ranks,bonuses)
     local this =

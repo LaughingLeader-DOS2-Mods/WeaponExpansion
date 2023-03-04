@@ -45,14 +45,14 @@ if not Vars.IsClient then
 		Vanquisher = "LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY",
 	}
 
-	---@param uuid UUID
+	---@param uuid Guid
 	local function ClearBlademasterComboTag(uuid)
 		if IsTagged(uuid, "LLWEAPONEX_Blademaster_Target_Available") == 1 then
 			ClearTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")
 		end
 	end
 
-	---@param uuid UUID
+	---@param uuid Guid
 	local function SetBlademasterComboTag(uuid)
 		if IsTagged(uuid, "LLWEAPONEX_Blademaster_Target_Available") == 0 then
 			SetTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")

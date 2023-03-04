@@ -207,7 +207,7 @@ local function RemoveTagsOnTurnEnd(uuid)
 	end
 end
 
----@param uuid UUID
+---@param uuid Guid
 ---@param id integer
 local function OnLeftCombat(uuid)
 	ReloadAmmoSkills(uuid)

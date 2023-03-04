@@ -296,8 +296,8 @@ if not _ISCLIENT then
 	---@param targetTemplate string|nil
 	---@param setEnemy boolean|nil
 	---@param totalDummies integer|nil
-	---@return UUID character
-	---@return UUID dummy
+	---@return Guid character
+	---@return Guid dummy
 	---@return function cleanup
 	---@return Guid[] dummies
 	function WeaponExTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
@@ -352,9 +352,9 @@ if not _ISCLIENT then
 	---@param pos number[]|nil
 	---@param equipmentSet string|nil
 	---@param targetTemplate string|nil
-	---@return UUID character1
-	---@return UUID character2
-	---@return UUID dummy
+	---@return Guid character1
+	---@return Guid character2
+	---@return Guid dummy
 	---@return function cleanup
 	function WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy)
 		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter(), "EsvCharacter")

@@ -190,8 +190,8 @@ StatusManager.Subscribe.Applied("LLWEAPONEX_REMOTEMINE_DETONATE", function(e)
 	Config.Skill.RemoteMines.Detonate(e.Target, e.Source)
 end)
 
----@param source UUID
----@param target UUID
+---@param source Guid
+---@param target Guid
 local function OnDetonationTimer(source, target)
 	local data = PersistentVars.SkillData.RemoteMineDetonation[target]
 	if data ~= nil then

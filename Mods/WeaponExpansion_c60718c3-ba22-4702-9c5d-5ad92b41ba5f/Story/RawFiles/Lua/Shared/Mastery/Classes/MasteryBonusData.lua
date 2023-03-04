@@ -178,16 +178,15 @@ function MasteryBonusData.DefaultStatusTagCheck(tag, checkSource)
 				and GameHelpers.CharacterOrEquipmentHasTag(source, tag) then
 					return true
 				end
-				return false
 			end
-			return true
+			return false
 		end
 	else
 		return function(bonus, id, character, tooltipType, status)
 			if tooltipType == "status" then
 				return GameHelpers.CharacterOrEquipmentHasTag(character, tag)
 			end
-			return true
+			return false
 		end
 	end
 end
@@ -781,15 +780,18 @@ end
 
 ---@param this MasteryBonusData
 ---@param character EclCharacter
----@param skillOrStatus string
+---@param skillOrStatus string|nil
 ---@param tooltipType MasteryBonusDataTooltipID|nil
----@return TranslatedString|string
+---@return TranslatedString|string|nil
 local function TryGetTooltipText(this, character, skillOrStatus, tooltipType, ...)
+	local forceShow = false
 	if this.GetIsTooltipActive then
 		local b,result = xpcall(this.GetIsTooltipActive, debug.traceback, this, skillOrStatus, character, tooltipType, ...)
 		if b then
 			if result == false then
 				return nil
+			elseif result == true then
+				forceShow = Common.TableLength(this.Skills) == 0
 			end
 		else
 			Ext.Utils.PrintError(result)
@@ -801,7 +803,7 @@ local function TryGetTooltipText(this, character, skillOrStatus, tooltipType, ..
 			return FinallyGetTooltipText(this, character, skillOrStatus, tooltipType, ...)
 		end
 	elseif tooltipType == "skill" or tooltipType == "item" then -- Items can have skill tooltip elements
-		if this.AllSkills or Common.TableHasEntry(this.Skills, skillOrStatus) then
+		if forceShow or this.AllSkills or Common.TableHasEntry(this.Skills, skillOrStatus) then
 			return FinallyGetTooltipText(this, character, skillOrStatus, tooltipType, ...)
 		end
 	end

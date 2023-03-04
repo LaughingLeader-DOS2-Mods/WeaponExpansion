@@ -5,7 +5,7 @@ local _ISCLIENT = Ext.IsClient()
 
 local _eqSet = "Class_Ranger_Humans"
 
----@param v UUID|number[]
+---@param v Guid|number[]
 ---@param targetType SkillEventDataForEachTargetType
 ---@param char EsvCharacter
 ---@param skill string

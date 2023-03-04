@@ -146,7 +146,7 @@ function UniqueData:CanMoveToOwner(owner, region)
 end
 
 ---Returns true if the UUID is a valid UUID for this unique, or if the item has the associated tag.
----@param uuid UUID
+---@param uuid Guid
 ---@return boolean
 function UniqueData:IsValid(uuid)
 	if self.UUID == uuid then
@@ -167,7 +167,7 @@ end
 ---Gets the UUID of this unique owned by the owner, or the default value.
 ---@param owner string
 ---@param returnDefault boolean|nil If true, the regular UUID value is returned instead of nil.
----@return UUID
+---@return Guid
 function UniqueData:GetUUID(owner, returnDefault)
 	local currentDefaultOwner = GameHelpers.Item.GetOwner(self.DefaultUUID)
 	if currentDefaultOwner and currentDefaultOwner.MyGuid == owner then
@@ -186,9 +186,9 @@ function UniqueData:GetUUID(owner, returnDefault)
 end
 
 ---Gets the owner of the unique UUID.
----@param uuid UUID
+---@param uuid Guid
 ---@param returnDefault boolean|nil
----@return UUID
+---@return Guid
 function UniqueData:GetOwner(uuid, returnDefault)
 	if self.UUID == uuid then
 		return self.Owner
@@ -257,7 +257,7 @@ function UniqueData:IsEquippedByAny()
 end
 
 ---Checks if a UUID is a valid owner of this unique.
----@param owner UUID
+---@param owner Guid
 ---@return boolean
 function UniqueData:IsOwner(owner)
 	if self.Owner == owner then
@@ -281,7 +281,7 @@ function UniqueData:AddPosition(region,x,y,z,rx,ry,rz)
 	}
 end
 
----@param uuid UUID|nil
+---@param uuid Guid|nil
 function UniqueData:Locate(uuid)
 	uuid = uuid or self.UUID
 	local item = GameHelpers.GetItem(uuid)

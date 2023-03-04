@@ -1,7 +1,7 @@
 ---@class UniqueDataServerSide:UniqueDataBase
 local UniqueData = UniqueManager.Classes.UniqueData
 
----@param uuid UUID
+---@param uuid Guid
 ---@return boolean
 function UniqueData:IsReleasedFromOwner(uuid)
 	uuid = uuid or self:GetUUID(nil, false)
@@ -18,7 +18,7 @@ function UniqueData:IsReleasedFromOwner(uuid)
 	return false
 end
 
----@param uuid UUID
+---@param uuid Guid
 ---@param unequip boolean|nil Whether to unequip the item from its current owner.
 function UniqueData:ReleaseFromOwner(uuid, unequip)
 	if StringHelpers.IsNullOrWhitespace(uuid) then
@@ -120,8 +120,8 @@ function UniqueData:FindPlayerCopies()
 	end
 end
 
----@param target UUID
----@param uuid UUID|nil
+---@param target Guid
+---@param uuid Guid|nil
 function UniqueData:Equip(target, uuid)
 	uuid = uuid or self.UUID
 	if GameHelpers.ObjectExists(uuid) then
@@ -138,8 +138,8 @@ function UniqueData:Equip(target, uuid)
 	end
 end
 
----@param target UUID
----@param uuid UUID|nil
+---@param target Guid
+---@param uuid Guid|nil
 ---@param equip boolean|nil
 function UniqueData:Transfer(target, uuid, equip)
 	uuid = uuid or self.UUID
