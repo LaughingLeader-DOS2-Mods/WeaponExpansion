@@ -1119,3 +1119,59 @@ add equipmentgroup
 add equipment entry "ARM_Wizard_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_BattleBook_B"
+
+new equipment "Class_LLWEAPONEX_ThrowingMaster_Preview"
+add equipmentgroup
+add equipment entry "ARM_Rogue_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Rogue_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Rogue_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Rogue_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Rogue_Boots"
+add equipmentgroup
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Preview"
+
+new equipment "Class_LLWEAPONEX_ThrowingMaster_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_CraftedDagger"
+add equipmentgroup
+add equipment entry "WPN_CraftedDagger"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+add equipmentgroup
+add equipment entry "LOOT_LLWEAPONEX_ThrowingWeaponsBag"
+
+new equipment "Class_LLWEAPONEX_Helaene_Marauder_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_CraftedDagger"
+add equipmentgroup
+add equipment entry "WPN_CraftedDagger"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+add equipmentgroup
+add equipment entry "LOOT_LLWEAPONEX_ThrowingWeaponsBag"

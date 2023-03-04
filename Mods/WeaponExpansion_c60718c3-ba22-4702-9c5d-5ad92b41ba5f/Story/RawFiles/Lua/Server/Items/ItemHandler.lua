@@ -8,13 +8,6 @@ local function _GetPreset(character)
 	return preset
 end
 
-ItemProcessor.SmugglersBagPresetToTreasure = {
-	LLWEAPONEX_Assassin = "ST_LLWEAPONEX_SmugglersBag_AssassinLoot",
-	LLWEAPONEX_Pirate = "ST_LLWEAPONEX_SmugglersBag_PirateLoot",
-	LLWEAPONEX_Helaene_Marauder = "ST_LLWEAPONEX_SmugglersBag_MarauderLoot",
-	Default = "ST_LLWEAPONEX_SmugglersBag_Random",
-}
-
 Events.ObjectEvent:Subscribe(function (e)
 	local character,item = table.unpack(e.Objects)
 	---@cast character EsvCharacter
@@ -34,6 +27,19 @@ Events.ObjectEvent:Subscribe(function (e)
 	CharacterGiveReward(character.MyGuid, treasure, 1)
 	ItemDestroy(item.MyGuid)
 end, {MatchArgs={Event="LLWEAPONEX_OpenSmugglersBag", EventType="CharacterItemEvent"}})
+
+Events.ObjectEvent:Subscribe(function (e)
+	if ObjectGetFlag(e.ObjectGUID2, "LLWEAPONEX_ThrowingWeaponsBagOpened") == 0 then
+		local character,item = table.unpack(e.Objects)
+		---@cast character EsvCharacter
+		---@cast item EsvItem
+		
+		local treasure = Common.GetRandomTableEntry(ItemProcessor.ThrowingWeaponsBagTreasure)
+
+		GenerateTreasure(item.MyGuid, treasure, -1, character.MyGuid)
+		ObjectSetFlag(e.ObjectGUID2, "LLWEAPONEX_ThrowingWeaponsBagOpened", 0)
+	end
+end, {MatchArgs={Event="LLWEAPONEX_OpenThrowingWeaponsBag", EventType="CharacterItemEvent"}})
 
 --Mods.WeaponExpansion.GenerateTradeTreasure("680d2702-721c-412d-b083-4f5e816b945a", "ST_LLWEAPONEX_VendingMachine_OrderWeapon")
 --GenerateItems(me.MyGuid, "680d2702-721c-412d-b083-4f5e816b945a")

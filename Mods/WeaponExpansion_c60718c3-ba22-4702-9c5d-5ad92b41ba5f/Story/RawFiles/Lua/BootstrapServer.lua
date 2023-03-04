@@ -157,7 +157,15 @@ end
 ---@alias ItemListenerEvent string|"EquipmentChanged"
 
 BonusSkills = {}
-ItemProcessor = {}
+ItemProcessor = {
+    SmugglersBagPresetToTreasure = {
+        LLWEAPONEX_Assassin = "ST_LLWEAPONEX_SmugglersBag_AssassinLoot",
+        LLWEAPONEX_Pirate = "ST_LLWEAPONEX_SmugglersBag_PirateLoot",
+        LLWEAPONEX_Helaene_Marauder = "ST_LLWEAPONEX_SmugglersBag_MarauderLoot",
+        Default = "ST_LLWEAPONEX_SmugglersBag_Random",
+    },
+    ThrowingWeaponsBagTreasure = {"ST_LLWEAPONEX_ThrowingWeaponsBag_Random"},
+}
 
 Ext.Require("Server/Data/PresetEntries.lua")
 Ext.Require("Server/ServerMain.lua")
