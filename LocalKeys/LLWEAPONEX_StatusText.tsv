@@ -39,3 +39,4 @@ LLWEAPONEX_StatusText_ThrowObjectFailed	<font color='#FF1155' size='22'>Too Heav
 LLWEAPONEX_StatusText_Unarmed_BlinkStrikeBonus	<font color='#FFCE58'>Unarmed Mastery: Lowered Cooldown of [1] by [2] Turn(s)</font>	hb08c211ag470fg4dc8gbd91ge51263a6be10
 LLWEAPONEX_StatusText_Wand_SurfaceBonus	<font color='#B658FF'>Wand Mastery: [1] Surface Spell Boost!</font>	h85b41f2agfa27g4679g96bbg1e2769167312
 LLWEAPONEX_StatusText_SoulBountyLost	<font color='#B823CB'>Soul Bounty Lost</font>	h902dc8fagc8c3g49dfg8114g0adb7400f694
+LLWEAPONEX_StatusText_SecondImpact	<font color='#FFCC00'>Second Impact!</font>	hc4723fefg8012g4d0bg9771ge7caf50d9d60

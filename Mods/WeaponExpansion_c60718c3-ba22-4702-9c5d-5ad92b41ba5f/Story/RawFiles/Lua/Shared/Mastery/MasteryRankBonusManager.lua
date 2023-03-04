@@ -6,7 +6,7 @@ local _type = type
 ---@alias MasteryBonusStatusCallback fun(bonuses:MasteryBonusCallbackBonuses, target:string, status:string, source:string, statusType:string)
 ---@alias MasteryBonusStatusBeforeAttemptCallback fun(bonuses:MasteryBonusCallbackBonuses, target:EsvCharacter|EsvItem, status:EsvStatus, source:EsvCharacter|EsvItem|nil, statusType:string):boolean
 
----@alias MasteryActiveBonusesTable table<string,table<UUID,boolean>>
+---@alias MasteryActiveBonusesTable table<string,table<Guid,boolean>>
 
 ---@class MasteryActiveBonuses
 ---@field HasBonus fun(id:string, target:CharacterParam|nil):boolean
@@ -20,7 +20,36 @@ MasteryBonusManager = {
 		---@type table<string,boolean>
 		CrossbowProjectilePiercingSkills = {},
 		---Used for the Bow Rank 4 bonus BOW_FARSIGHT, in case a mod changed the status.
-		FarsightAppliedStatuses = {"FARSIGHT"}
+		FarsightAppliedStatuses = {"FARSIGHT"},
+		ThrowingGrenadeSecondImpactSkills = {
+			--GrenadeStarter
+			Projectile_Grenade_Molotov = true,
+			Projectile_Grenade_WaterBalloon = true,
+			Projectile_Grenade_OilFlask = true,
+			Projectile_Grenade_PoisonFlask = true,
+			--GrenadeEarly
+			Projectile_Grenade_Taser = true,
+			--Projectile_Grenade_SmokeBomb = true,
+			Projectile_Grenade_Flashbang = true,
+			Projectile_Grenade_MustardGas = true,
+			Projectile_Grenade_Nailbomb = true,
+			Projectile_Grenade_ArmorPiercing = true, -- Not used in treasure
+			--GrenadeLate
+			--[[ Projectile_Grenade_BlessedIce = true,
+			Projectile_Grenade_BlessedOilFlask = true,
+			Projectile_Grenade_ChemicalWarfare = true,
+			Projectile_Grenade_CursedMolotov = true,
+			Projectile_Grenade_CursedPoisonFlask = true,
+			Projectile_Grenade_Holy = true,
+			Projectile_Grenade_Ice = true,
+			Projectile_Grenade_Love = true,
+			Projectile_Grenade_MindMaggot = true,
+			Projectile_Grenade_Terror = true,
+			Projectile_Grenade_Tremor = true,
+			Projectile_Grenade_WaterBlessedBalloon = true,
+			ProjectileStrike_Grenade_ClusterBomb = true,
+			ProjectileStrike_Grenade_CursedClusterBomb = true, ]]
+		}
 	},
 	---The string format for mastery rank tags, set on a character.
 	MasteryRankTagFormatString = "%s_Mastery%i"
@@ -28,7 +57,7 @@ MasteryBonusManager = {
 
 ---@class MasteryBonusManagerInternals
 local _INTERNAL = {
-	---@type table<UUID|NetId, table<string, boolean>>
+	---@type table<Guid|NetId, table<string, boolean>>
 	CharacterDisabledBonuses = {}
 }
 MasteryBonusManager._INTERNAL = _INTERNAL
@@ -177,7 +206,7 @@ end
 
 _INTERNAL.GatherMasteryBonuses = GatherMasteryBonuses
 
----@param character UUID|NetId|EsvCharacter|EclCharacter|StatCharacter
+---@param character Guid|NetId|EsvCharacter|EclCharacter|StatCharacter
 ---@param bonus string|string[]
 ---@param skipWeaponCheck boolean|nil
 ---@return boolean
@@ -500,12 +529,12 @@ end
 
 ---Get a table of enemies in combat, determined by distance to a source.
 ---@deprecated
----@param char UUID
----@param target UUID|EsvCharacter|EsvItem|number[]
+---@param char Guid
+---@param target Guid|EsvCharacter|EsvItem|number[]
 ---@param radius number
 ---@param sortByClosest boolean
 ---@param limit integer
----@param ignoreTarget UUID
+---@param ignoreTarget Guid
 ---@return MasteryBonusManagerClosestEnemyData[]
 function MasteryBonusManager.GetClosestEnemiesToObject(char, target, radius, sortByClosest, limit, ignoreTarget)
 	if target == nil then
@@ -565,11 +594,11 @@ end
 
 ---Get a table of enemies in combat, determined by distance to a source.
 ---@deprecated
----@param char UUID
+---@param char Guid
 ---@param maxDistance number
 ---@param sortByClosest boolean
 ---@param limit integer
----@param ignoreTarget UUID
+---@param ignoreTarget Guid
 ---@return MasteryBonusManagerClosestEnemyData[]
 function MasteryBonusManager.GetClosestCombatEnemies(char, maxDistance, sortByClosest, limit, ignoreTarget)
 	if maxDistance == nil then

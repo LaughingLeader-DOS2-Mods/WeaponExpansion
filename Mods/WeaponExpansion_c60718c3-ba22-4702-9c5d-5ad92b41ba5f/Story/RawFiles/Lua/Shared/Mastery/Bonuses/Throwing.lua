@@ -1,21 +1,153 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
+local _eqSet = "Class_LLWEAPONEX_ThrowingMaster_Preview"
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 1, {
-	
+	rb:Create("THROWING_SECOND_IMPACT", {
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_SecondImpact", "Basic grenades have a <font color='#00FF99'>[ExtraData:LLWEAPONEX_MB_Throwing_GrenadeSecondExplodeChance:25]% chance</font> to explode again."),
+		GetIsTooltipActive = function (self, skillOrStatus, character, tooltipType, data)
+			print(skillOrStatus, tooltipType, self.ID, MasteryBonusManager.Vars.ThrowingGrenadeSecondImpactSkills[skillOrStatus], data)
+			if tooltipType == "skill" then
+				return MasteryBonusManager.Vars.ThrowingGrenadeSecondImpactSkills[skillOrStatus] == true
+			end
+			return false
+		end,
+	}).Register.Osiris("ItemDestroying", 1, "after", function(itemGUID)
+		local item = GameHelpers.GetItem(itemGUID, "EsvItem")
+		if item then
+			local owner = GameHelpers.Item.GetOwner(item)
+			local projectileSkill = StringHelpers.GetSkillEntryName(GetVarFixedString(item.MyGuid, "ProjectileSkill"))
+			if owner
+			and not StringHelpers.IsNullOrEmpty(projectileSkill)
+			and MasteryBonusManager.Vars.ThrowingGrenadeSecondImpactSkills[projectileSkill]
+			and MasteryBonusManager.HasMasteryBonus(owner, "THROWING_SECOND_IMPACT", true)
+			then
+				local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_GrenadeSecondExplodeChance", 25)
+				if owner:HasTag("LLWEAPONEX_MasteryTestCharacter") or (chance > 0 and GameHelpers.Math.Roll(chance)) then
+					Timer.StartObjectTimer("LLWEAPONEX_Throwing_SecondImpact_Explode", owner, 800, {Skill=projectileSkill, Position=item.WorldPos})
+				end
+			end
+		end
+	end, true).TimerFinished("LLWEAPONEX_Throwing_SecondImpact_Explode", function (self, e, bonuses)
+		if e.Data.UUID and e.Data.Skill and e.Data.Position then
+			-- local skillData = Ext.Stats.Get(e.Data.Skill, 0, false) --[[@as StatEntrySkillData]]
+			-- if skillData then
+			-- 	local projectileTemplate = Ext.Template.GetRootTemplate(skillData.Template) --[[@as ProjectileTemplate]]
+			-- 	if projectileTemplate and not StringHelpers.IsNullOrEmpty(projectileTemplate.ImpactFX) then
+			-- 		EffectManager.PlayEffectAt(projectileTemplate.ImpactFX, e.Data.Position)
+			-- 	end
+			-- end
+			PlaySound(e.Data.UUID, "FX_Surface_SurfaceExplosion_Boom")
+			--GameHelpers.Audio.PlaySound("Global", "FX_Surface_SurfaceExplosion_Boom")
+			GameHelpers.Skill.Explode(e.Data.Position, e.Data.Skill, e.Data.Object)
+			CharacterStatusText(e.Data.UUID, "LLWEAPONEX_StatusText_SecondImpact")
+			SignalTestComplete(self.ID)
+		end
+	end, "None").Test(function(test, self)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(character, dummy, "", 0, 1, 1)
+		test:Wait(500)
+		GameHelpers.Action.UseSkill(character, "Projectile_Grenade_Nailbomb", dummy)
+		test:WaitForSignal(self.ID, 5000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end),
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
-	
+
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
-	
+
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 4, {
-	
+	rb:Create("THROWING_EXPLOSIVES_EXPERT", {
+		AllSkills = true,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ExplosivesExpert", "Grenades have a <font color='#00FF99'>[ExtraData:LLWEAPONEX_MB_Throwing_GrenadeRadiusIncrease:50]%</font> increased explosion radius."),
+		GetIsTooltipActive = function (self, skillOrStatus, character, tooltipType, data)
+			if tooltipType == "skill" then
+				return Config.Skill.AllGrenadeSkills[skillOrStatus] == true
+			end
+			return false
+		end,
+	}).Register.SkillProjectileShoot(function (self, e, bonuses)
+		if Config.Skill.AllGrenadeSkills[e.Skill] then
+			local radiusIncrease = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_GrenadeRadiusIncrease", 50)
+			if radiusIncrease > 0 then
+				radiusIncrease = 1 + (radiusIncrease * 0.01)
+				local radius1 = Ext.Utils.Round(e.Data.ExplodeRadius0 * radiusIncrease)
+				local radius2 = Ext.Utils.Round(e.Data.ExplodeRadius1 * radiusIncrease)
+				e.Data.ExplodeRadius0 = radius1
+				e.Data.ExplodeRadius1 = radius2
+				SignalTestComplete(self.ID)
+			end
+		end
+	end).SkillProjectileHit(function (self, e, bonuses)
+		if Config.Skill.AllGrenadeSkills[e.Skill] then
+			local radiusIncrease = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_GrenadeRadiusIncrease", 50)
+			if radiusIncrease > 0 then
+				local skillData = Ext.Stats.Get(e.Skill, 0, false) --[[@as StatEntrySkillData]]
+				local increasedSurfaceSize = false
+				if skillData and skillData.SkillProperties then
+					radiusIncrease = 1 + (radiusIncrease * 0.01)
+					for _,v in pairs(skillData.SkillProperties) do
+						if (v.Action == "CreateSurface" or v.Action == "TargetCreateSurface") and v.Arg1 > 0 then
+							local radius = radiusIncrease * v.Arg1
+							local surface = v.Arg3
+							local chance = v.Arg4
+							if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
+								GameHelpers.Surface.CreateSurface(e.Data.Position, surface, radius, 12.0, e.Character.Handle, true, 1.0)
+								increasedSurfaceSize = true
+							end
+						end
+					end
+				end
+				if increasedSurfaceSize then
+					SignalTestComplete("THROWING_EXPLOSIVES_EXPERT_SurfaceIncreased")
+				end
+			end
+		end
+	end).Test(function(test, self)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(character, dummy, "", 0, 1, 1)
+		test:Wait(500)
+		GameHelpers.Action.UseSkill(character, "Projectile_Grenade_Nailbomb", dummy)
+		test:WaitForSignal(self.ID, 5000)
+		test:AssertGotSignal(self.ID)
+		test:WaitForSignal("THROWING_EXPLOSIVES_EXPERT_SurfaceIncreased", 5000)
+		test:AssertGotSignal("THROWING_EXPLOSIVES_EXPERT_SurfaceIncreased")
+		return true
+	end),
 })
+
+Ext.Events.SessionLoaded:Subscribe(function (e)
+	for skill in GameHelpers.Stats.GetStats("SkillData", true, "StatEntrySkillData") do
+		if Config.Skill.AllGrenadeSkills[skill.Name] ~= false and skill.SkillType == "Projectile" and skill.ProjectileType == "Grenade" then
+			Config.Skill.AllGrenadeSkills[skill.Name] = true
+		end
+	end
+	--Only "Starter" Grenades for Second Impact
+	for object in GameHelpers.Stats.GetStats("Object", true, "StatEntryObject") do
+		if object.ObjectCategory == "GrenadeStarter" then
+			local template = Ext.Template.GetRootTemplate(object.RootTemplate) --[[@as ItemTemplate]]
+			if template then
+				local skills,data = GameHelpers.Item.GetUseActionSkills(template, true)
+				if data.CastsSkill then
+					for skillid,b in pairs(skills) do
+						--_D(Mods.WeaponExpansion.MasteryBonusManager.Vars.ThrowingGrenadeSecondImpactSkills)
+						MasteryBonusManager.Vars.ThrowingGrenadeSecondImpactSkills[skillid] = true
+					end
+				end
+			end
+		end
+	end
+end, {Priority=0})
 
 if not Vars.IsClient then
 	SkillManager.Register.Hit({"Projectile_LLWEAPONEX_Throw_UniqueAxe_A", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand"}, function(e)
@@ -94,9 +226,6 @@ if not Vars.IsClient then
 					local weapon = GameHelpers.GetItem(weaponData.Weapon)
 					if weapon and GameHelpers.Item.ItemIsEquipped(character, weapon) and not weapon.UnEquipLocked then
 						CharacterUnequipItem(character.MyGuid, weapon.MyGuid)
-						-- GameHelpers.Utils.SetPosition(weapon, pos)
-						-- GameHelpers.Utils.SetRotation(weapon, rot)
-
 						Osi.LeaderLib_Helper_CopyItemTransform(weapon.MyGuid, movingObject.MyGuid)
 
 						if ObjectGetFlag(weapon.MyGuid, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag") == 1 then
