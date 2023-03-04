@@ -159,16 +159,19 @@ end
 
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@param source CharacterParam
----@param target CharacterParam
+---@param targetObject CharacterParam|nil
 ---@param extraParam string|nil Skill ID
 ---@param skipDisabledCheck boolean|nil If true, skip checking if the bonus is disabled. Otherwise, disabled bonuses won't be included.
 ---@return MasteryActiveBonusesTable|MasteryActiveBonuses
-local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam, skipDisabledCheck)
+local function GatherMasteryBonuses(checkBonusOn, source, targetObject, extraParam, skipDisabledCheck)
 	local bonuses = {}
 	local source = GameHelpers.TryGetObject(source)
-	local sourceGUID = source and source.MyGuid or nil
-	local target = GameHelpers.TryGetObject(target)
-	local targetGUID = target and target.MyGuid or nil
+	local sourceGUID = GameHelpers.GetUUID(source)
+	local target = nil
+	if targetObject ~= nil then
+		target = GameHelpers.TryGetObject(targetObject)
+	end
+	local targetGUID = GameHelpers.GetUUID(target)
 	if sourceGUID and checkBonusOn ~= "Target" and GameHelpers.Ext.ObjectIsCharacter(source) then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(source, extraParam)) do
 			if skipDisabledCheck or not MasteryBonusManager.IsBonusDisabled(sourceGUID, bonus) then
@@ -339,6 +342,25 @@ function MasteryBonusManager.RegisterBonusSkillListener(state, skill, bonus, cal
 		end
 	end
 	SkillManager.Register.All(skill, wrapperCallback, state, priority, once)
+end
+
+---@param skill string|string[]
+---@param bonus MasteryBonusData
+---@param callback fun(bonus:MasteryBonusData, e:OnSkillStateAllEventArgs, bonuses:MasteryActiveBonusesTable|MasteryActiveBonuses)
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param priority integer|nil
+---@param once boolean|nil
+function MasteryBonusManager.RegisterBonusSkillAPCostListener(skill, bonus, callback, checkBonusOn, priority, once)
+	checkBonusOn = checkBonusOn or "Source"
+
+	---@param e OnSkillStateAllEventArgs
+	local wrapperCallback = function(e)
+		local bonuses = GatherMasteryBonuses(checkBonusOn, e.Character, nil, e.Skill)
+		if checkBonusOn == "None" or HasMatchedBonuses(bonuses, bonus.ID) then
+			callback(bonus, e, bonuses)
+		end
+	end
+	SkillManager.Register.GetAPCost(skill, wrapperCallback, priority, once)
 end
 
 ---@param matchBonuses string|string[]

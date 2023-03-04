@@ -61,7 +61,51 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
-
+	rb:Create("THROWING_FREE_THROW", {
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_FreeThrow", "The first throwing item used on your turn is free."),
+		GetIsTooltipActive = function (self, skillOrStatus, character, tooltipType, data)
+			print(skillOrStatus, tooltipType, self.ID, MasteryBonusManager.Vars.ThrowingGrenadeSecondImpactSkills[skillOrStatus], data)
+			if tooltipType == "skill" then
+				return MasteryBonusManager.Vars.ThrowingGrenadeSecondImpactSkills[skillOrStatus] == true
+			end
+			return false
+		end,
+	}).Register.Osiris("ObjectTurnStarted", 1, "after", function(charGUID)
+		local object = GameHelpers.TryGetObject(charGUID, "EsvCharacter")
+		if object and MasteryBonusManager.HasMasteryBonus(object, "THROWING_FREE_THROW", true) then
+			SetTag(charGUID, "LLWEAPONEX_Throwing_FreeThrow")
+			SignalTestComplete("THROWING_FREE_THROW_TagSet")
+		end
+	end, true).TurnEnded(nil, function (self, e, bonuses)
+		ClearTag(e.ObjectGUID, "LLWEAPONEX_Throwing_FreeThrow")
+		SignalTestComplete("THROWING_FREE_THROW_TagCleared")
+	end).SkillAPCost(function (self, e, bonuses)
+		if (e.Character:HasTag("LLWEAPONEX_Throwing_FreeThrow") or e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter"))
+		and (Config.Skill.AllThrowingItemSkills[e.Skill] or Config.Skill.AllGrenadeSkills[e.Skill]) then
+			e.Data.AP = 0
+			e.Data.ElementalAffinity = false
+			e.Data:StopPropagation()
+			SignalTestComplete("THROWING_FREE_THROW_APCostSet")
+		end
+	end).Test(function(test, self)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(character, dummy, "", 0, 1, 1)
+		-- local grenade = CreateItemTemplateAtPosition("5208b121-64fa-4704-8924-c61c576e1ac5", 0, 0, 0)
+		-- ItemToInventory(grenade, character, 1, 0, 1)
+		test:Wait(500)
+		Osi.ObjectTurnStarted(character)
+		test:Wait(500)
+		test:WaitForSignal("THROWING_FREE_THROW_TagSet", 5000); test:AssertGotSignal("THROWING_FREE_THROW_TagSet")
+		test:Wait(500)
+		GameHelpers.Action.UseSkill(character, "Projectile_Grenade_Nailbomb", dummy)
+		test:WaitForSignal("THROWING_FREE_THROW_APCostSet", 5000); test:AssertGotSignal("THROWING_FREE_THROW_APCostSet")
+		Osi.ObjectTurnEnded(character)
+		test:Wait(500)
+		test:WaitForSignal("THROWING_FREE_THROW_TagCleared", 5000); test:AssertGotSignal("THROWING_FREE_THROW_TagCleared")
+		return true
+	end),
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 4, {
