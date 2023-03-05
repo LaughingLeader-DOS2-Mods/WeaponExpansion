@@ -26,6 +26,10 @@ Config = {
 		ThrowWeaponSkills = {"Projectile_LLWEAPONEX_ThrowWeapon", "Projectile_LLWEAPONEX_ThrowWeapon_Enemy"},
 		---Skills that should gain throwing mastery experience, instead of weapon or unarmed xp.
 		ThrowingMasterySkills = {
+			Projectile_ThrowDust = true,
+			Projectile_EnemyThrowDust = true,
+			Projectile_DustBlast = true,
+			Projectile_EnemyDustBlast = true,
 			Projectile_LLWEAPONEX_ThrowWeapon = true,
 			Projectile_LLWEAPONEX_ThrowWeapon_Enemy = true,
 			Target_LLWEAPONEX_ThrowObject = true,
