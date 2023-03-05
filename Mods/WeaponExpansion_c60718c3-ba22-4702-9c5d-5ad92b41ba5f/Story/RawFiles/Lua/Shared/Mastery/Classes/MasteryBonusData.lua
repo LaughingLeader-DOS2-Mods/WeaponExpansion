@@ -24,6 +24,7 @@ local _type = type
 ---@field NamePrefix TranslatedString|string
 ---@field GetIsTooltipActive MasteryBonusDataGetIsTooltipActiveCallback Custom callback to determine if a bonus is "active" when a tooltip occurs.
 ---@field OnGetTooltip fun(self:MasteryBonusData, id:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID, extraParam:EclStatus|EclItem|any):string|TranslatedString Custom callback to determine tooltip text dynamically.
+---@field DeferRegistration boolean Defer any registration functions until FinalizeRegistration() is called.
 
 ---@alias MasteryBonusDataTooltipID string|'"skill"'|'"status"'|'"item"'
 ---@alias MasteryBonusCallbackBonuses MasteryActiveBonusesTable|MasteryActiveBonuses
@@ -63,6 +64,7 @@ local _INTERNALREG = {}
 
 ---@class MasteryBonusData:MasteryBonusDataParams
 ---@field Register MasteryBonusDataRegistrationFunctions
+---@field FinalizeRegistration (fun(self:MasteryBonusData))|nil
 local MasteryBonusData = {
 	Type = "MasteryBonusData",
 	AllStatuses = false,
@@ -91,6 +93,7 @@ local _DefaultMasteryMenuSettings = {
 ---@param params MasteryBonusDataParams
 ---@return MasteryBonusData
 function MasteryBonusData:Create(id, params)
+	---@type MasteryBonusData
 	local this = {
 		ID = id or "",
 		IsPassive = false,
@@ -105,12 +108,6 @@ function MasteryBonusData:Create(id, params)
 			__self = this
 		}
 	}
-	for k,v in pairs(_INTERNALREG) do
-		_private.Register[k] = function(...)
-			v(this, ...)
-			return _private.Register
-		end
-	end
 	if _type(params) == "table" then
 		for k,v in pairs(params) do
 			if k == "MasteryMenuSettings" then
@@ -119,6 +116,35 @@ function MasteryBonusData:Create(id, params)
 				end
 			else
 				this[k] = v
+			end
+		end
+	end
+	if this.DeferRegistration then
+		local _deferred = {}
+		_private._Deferred = _deferred
+		for k,v in pairs(_INTERNALREG) do
+			_private.Register[k] = function(...)
+				local params = {...}
+				_deferred[#_deferred+1] = function()
+					v(this, table.unpack(params))
+				end
+				return _private.Register
+			end
+		end
+		_private.FinalizeRegistration = function(self)
+			if self.DeferRegistration then
+				for _,func in pairs(self._Deferred) do
+					func()
+				end
+				_private._Deferred = nil
+			end
+			_private.FinalizeRegistration = function() error("Already finalized", 2) end
+		end
+	else
+		for k,v in pairs(_INTERNALREG) do
+			_private.Register[k] = function(...)
+				v(this, ...)
+				return _private.Register
 			end
 		end
 	end
@@ -140,7 +166,13 @@ function MasteryBonusData:Create(id, params)
 				return _private[k]
 			end
 			return MasteryBonusData[k]
-		end
+		end,
+		-- __newindex = function (tbl,k,v)
+		-- 	if _private[k] ~= nil then
+		-- 		return
+		-- 	end
+		-- 	rawset(tbl,k,v)
+		-- end
 	})
 	return this
 end
@@ -558,7 +590,7 @@ function _INTERNALREG.TurnEnded(self, id, callback, skipBonusCheck, checkBonusOn
 			if skipBonusCheck then
 				Events.OnTurnEnded:Subscribe(function (e)
 					callback(self, e, bonuses)
-				end, {MatchArgs={ID=id}, Priority=priority})
+				end, {MatchArgs=matchArgs, Priority=priority})
 			else
 				---@param e OnTurnEndedEventArgs
 				local wrapper = function(e)
@@ -567,7 +599,7 @@ function _INTERNALREG.TurnEnded(self, id, callback, skipBonusCheck, checkBonusOn
 						callback(self, e, bonuses)
 					end
 				end
-				Events.OnTurnEnded:Subscribe(wrapper, {matchArgs, Priority=priority})
+				Events.OnTurnEnded:Subscribe(wrapper, {MatchArgs=matchArgs, Priority=priority})
 			end
 		end
 	end

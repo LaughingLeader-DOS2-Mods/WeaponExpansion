@@ -26,17 +26,24 @@ if not Vars.IsClient then
 					PlayAnimation(bannerGUID, "spawn", "")
 					GameHelpers.Utils.SetPosition(banner, {x,y,z})
 
-					if PersistentVars.SkillData.RallyPartyMembers[e.CharacterGUID] == nil then
-						PersistentVars.SkillData.RallyPartyMembers[e.CharacterGUID] = {}
+					if PersistentVars.SkillData.BannerRally[e.CharacterGUID] == nil then
+						PersistentVars.SkillData.BannerRally[e.CharacterGUID] = {
+							Banners = {},
+							PartyMembers = {},
+						}
 					end
 
+					local rallyData = PersistentVars.SkillData.BannerRally[e.CharacterGUID]
+
+					
 					local statusId = Config.Skill.BannerRally.SkillToStatus[e.Skill]
+					rallyData.Banners[bannerGUID] = statusId
 
 					if GameHelpers.Character.IsPlayer(e.Character) then
 						for player in GameHelpers.Character.GetPlayers() do
 							if player.MyGuid ~= e.CharacterGUID and CharacterIsInPartyWith(e.CharacterGUID, player.MyGuid) == 1 then
 								CharacterAddSkill(player.MyGuid, "Shout_LLWEAPONEX_Banner_Rally_Teleport", 1)
-								PersistentVars.SkillData.RallyPartyMembers[e.CharacterGUID][player.MyGuid] = statusId
+								rallyData.PartyMembers[player.MyGuid] = statusId
 							end
 						end
 					end

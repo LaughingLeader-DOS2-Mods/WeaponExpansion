@@ -53,7 +53,7 @@ local defaultPersistentVars = {
         ---@type table<Guid,{Handle:integer, Surface:SurfaceType}>
         ChaosChargePathAction = {},
         ---Active banner items created by the related banner rally skills.
-        ---Owner GUID to a table of banners, with the status source ID.
+        ---Owner GUID -> BannerGUID -> StatusID, PartyMemberGUID -> StatusID
         ---@type table<Guid,{Banners:table<Guid,string>, PartyMembers:table<Guid,string>}>
         BannerRally = {},
         ---Used to immediately shoot the return projectile after the remaining hits equals 0.
@@ -143,6 +143,12 @@ PersistentVars = GameHelpers.PersistentVars.Initialize(Mods.WeaponExpansion, def
 		else
             PersistentVars.StatusData.Revenants[revenantGUID] = nil
 		end
+	end
+
+    for guid,data in pairs(PersistentVars.MasteryMechanics.BowFarsightAttacks) do
+		if ObjectExists(guid) == 0 then
+            PersistentVars.MasteryMechanics.BowFarsightAttacks[guid] = nil
+        end
 	end
 end)
 

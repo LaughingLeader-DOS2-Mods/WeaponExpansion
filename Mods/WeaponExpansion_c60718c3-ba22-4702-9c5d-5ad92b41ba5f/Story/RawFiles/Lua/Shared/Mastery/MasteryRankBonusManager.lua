@@ -934,7 +934,15 @@ function Mastery.InitializeHelperTables()
 	OrderedMasteries = mID
 end
 
-Ext.RegisterListener("SessionLoaded", Mastery.InitializeHelperTables)
+Ext.Events.SessionLoaded:Subscribe(function (e)
+	Mastery.InitializeHelperTables()
+
+	for id,bonus in pairs(_BONUS_ID_MAP) do
+		if bonus.DeferRegistration then
+			bonus:FinalizeRegistration()
+		end
+	end
+end, {Priority=0})
 
 ---@param character CharacterParam
 ---@param bonusID string

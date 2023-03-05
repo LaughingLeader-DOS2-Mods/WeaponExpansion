@@ -126,12 +126,22 @@ end)
 
 if not _ISCLIENT then
 	Testing.RegisterConsoleCommandTest("bonus", function (id, subid)
-		local test = _tests.Bonuses[subid]
-		if test then
-			SetMasteryTests("", "true")
-			return test
+		if StringHelpers.Equals(subid, "all", true, true) then
+			local runTests = {}
+			for _,tbl in pairs(_tests.Bonuses) do
+				for _,v in ipairs(tbl) do
+					runTests[#runTests+1] = v
+				end
+			end
+			return runTests
 		else
-			fprint(LOGLEVEL.WARNING, "[test] No test for bonus ID (%s)", subid)
+			local test = _tests.Bonuses[subid]
+			if test then
+				SetMasteryTests("", "true")
+				return test
+			else
+				fprint(LOGLEVEL.WARNING, "[test] No test for bonus ID (%s)", subid)
+			end
 		end
 	end, function (id, subid)
 		local bonuses = {}
@@ -301,7 +311,7 @@ if not _ISCLIENT then
 	---@return function cleanup
 	---@return Guid[] dummies
 	function WeaponExTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
-		local host = GameHelpers.GetCharacter(CharacterGetHostCharacter(), "EsvCharacter")
+		local host = GameHelpers.Character.GetHost()
 		local pos = pos or GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)
 		--LLWEAPONEX_Debug_MasteryDummy_2ac80a2a-8326-4131-a03c-53906927f935
 		local character = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0))
@@ -313,11 +323,10 @@ if not _ISCLIENT then
 
 		totalDummies = totalDummies or 1
 		totalDummies = math.max(1, totalDummies)
-
+		
 		local dummies = {}
 		for i=1,totalDummies do
-			local pos2 = GameHelpers.Grid.GetValidPositionTableInRadius(pos, 6.0, nil)
-
+			local pos2 = GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 12), 6.0)
 			local dummy = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0))
 			NRD_CharacterSetPermanentBoostInt(dummy, "Dodge", -100)
 	
@@ -330,7 +339,7 @@ if not _ISCLIENT then
 				--CharacterSetTemporaryHostileRelation(dummy, character)
 				SetFaction(dummy, "Evil NPC")
 			end
-			TeleportToRandomPosition(dummy, 1.0, "")
+			--TeleportToRandomPosition(dummy, 1.0, "")
 			dummies[#dummies+1] = dummy
 		end
 

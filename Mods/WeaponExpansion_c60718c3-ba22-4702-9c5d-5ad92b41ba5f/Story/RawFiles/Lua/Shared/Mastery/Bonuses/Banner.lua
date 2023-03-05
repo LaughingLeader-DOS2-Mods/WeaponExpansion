@@ -327,41 +327,51 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Whirlwind", "<font color='#00CCAA'>If near an active banner, enemies hit are pulled towards the banner.</font>")
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success then
-			--TODO Replace DB usage with PersistentVars
-			local worldBannerEntry = Osi.DB_LLWEAPONEX_Skills_Temp_RallyBanner:Get(e.Character.MyGuid, nil)
-			if worldBannerEntry ~= nil and #worldBannerEntry > 0 then
-				local worldBanner = worldBannerEntry[1][2]
-				if worldBanner ~= nil and ObjectExists(worldBanner) == 1 then
-					local dist = GameHelpers.Math.GetDistance(e.Character, worldBanner)
-					local skillDist = e.Data.SkillData.AreaRadius
-					local addWeaponRange = e.Data.SkillData.AddWeaponRange == "Yes"
-					if addWeaponRange then
-						local banners = GameHelpers.Item.FindTaggedEquipment(e.Character.MyGuid, "LLWEAPONEX_Banner")
-						if #banners > 0 then
-							local banner = GameHelpers.GetItem(banners[1])
-							if banner then
-								skillDist = skillDist + (banner.Stats.WeaponRange/100)
-							end
-						end
-					end
-					if dist <= skillDist + 0.5 then
-						local x,y,z = GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.GetPosition(worldBanner), 3.0)
-						local handle = NRD_CreateGameObjectMove(e.Data.Target, x, y, z, "", e.Character.MyGuid)
-						SignalTestComplete(self.ID)
+			local skillDist = e.Data.SkillData.AreaRadius
+			local addWeaponRange = e.Data.SkillData.AddWeaponRange == "Yes"
+			if addWeaponRange then
+				local banners = GameHelpers.Item.FindTaggedEquipment(e.Character.MyGuid, "LLWEAPONEX_Banner")
+				if #banners > 0 then
+					local banner = GameHelpers.GetItem(banners[1])
+					if banner then
+						skillDist = skillDist + (banner.Stats.WeaponRange/100)
 					end
 				end
+			end
+			skillDist = skillDist + 0.5
+			local banner = nil
+			local lastDist = 9999
+			for _,data in pairs(PersistentVars.SkillData.BannerRally) do
+				for guid,_ in pairs(data.Banners) do
+					if ObjectExists(guid) == 1 then
+						local dist = GameHelpers.Math.GetDistance(guid, e.Character)
+						if dist <= skillDist and dist < lastDist then
+							banner = guid
+							lastDist = dist
+						end
+					end
+				end
+			end
+			if banner then
+				local x,y,z = GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.GetPosition(banner), 3.0)
+				--Ext.Action.CreateGameAction("GameObjectMoveAction", "", e.Character)
+				NRD_CreateGameObjectMove(e.Data.Target, x, y, z, "", e.Character.MyGuid)
+				SignalTestComplete(self.ID)
 			end
 		end
 	end).Test(function(test, self)
 		--Pull targets towards a banner
-		local char1,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
-		TeleportTo(char1, dummy, "", 0, 1, 1)
+		local skillPos = GameHelpers.Math.GetPositionBetween(char, dummy, 0.5)
 		test:Wait(1000)
-		CharacterUseSkill(char1, "Dome_LLWEAPONEX_Banner_Rally_DivineOrder", char1, 1, 1, 1)
+		--CharacterUseSkill(char, "Dome_LLWEAPONEX_Banner_Rally_DivineOrder", char, 1, 1, 1)
+		GameHelpers.Action.UseSkill(char, "Dome_LLWEAPONEX_Banner_Rally_DivineOrder", skillPos)
 		test:Wait(4000)
-		CharacterUseSkill(char1, "Shout_EnemyWhirlwind", dummy, 1, 1, 1)
+		Osi.TeleportTo(char, dummy)
+		test:Wait(500)
+		CharacterUseSkill(char, "Shout_EnemyWhirlwind", dummy, 1, 1, 1)
 		test:WaitForSignal(self.ID, 30000)
 		test:AssertGotSignal(self.ID)
 		return true

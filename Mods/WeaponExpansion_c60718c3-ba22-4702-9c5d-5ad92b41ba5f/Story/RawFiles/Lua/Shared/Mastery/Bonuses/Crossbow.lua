@@ -124,12 +124,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 				CombatLog.AddCombatText(Text.CombatLog.StillStanceEnabled:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(character), rankName))
 			end
 		end
-	end).Osiris("ObjectTurnEnded", 1, "after", function(char)
-		local character = GameHelpers.GetCharacter(char)
-		if character then
-			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = character.WorldPos
-			SignalTestComplete("CROSSBOW_STILL_STANCE_PositionSaved")
-		end
+	end).TurnEnded(nil, function (self, e, bonuses)
+		PersistentVars.MasteryMechanics.StillStanceLastPosition[e.ObjectGUID] = e.Object.WorldPos
+		SignalTestComplete("CROSSBOW_STILL_STANCE_PositionSaved")
 	end).Osiris("ObjectLeftCombat", 1, "after", function(char)
 		local character = GameHelpers.GetCharacter(char)
 		if character then
@@ -203,7 +200,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 
 	rb:Create("CROSSBOW_PINFANG", {
 		Skills = {"Projectile_PiercingShot", "Projectile_EnemyPiercingShot"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarksmansFang", "<font color='#77FF33'>If a target is in front of impassable terrain (like a wall), pin them for 1 turn and deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage].</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarksmansFang", "<font color='#77FF33'>If the target is in front of impassable terrain (like a wall or object), pin them for [ExtraData:LLWEAPONEX_MB_Crossbow_MarksmansFang_PinTurns:1] turn(s) and deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage].</font>"),
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success and GameHelpers.Ext.ObjectIsCharacter(e.Data.TargetObject) then
 			local startPos = e.Data.TargetObject.WorldPos
@@ -220,11 +217,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 			local objects = {}
 			local totalItems = 0
 
-			for _,item in pairs(level.EntityManager.ItemConversionHelpers.RegisteredItems) do
-				---@cast item EsvItem
-				if not item.WalkOn and not item.OffStage and not item.CanShootThrough and Ext.Math.Distance(item.WorldPos, startPos) <= 3 then
-					totalItems = totalItems + 1
-					objects[totalItems] = item
+			for _,tbl in pairs(level.EntityManager.ItemConversionHelpers.RegisteredItems) do
+				for i=1,#tbl do
+					local item = tbl[i] --[[@as EsvItem]]
+					if not item.WalkOn and not item.OffStage and not item.CanShootThrough and Ext.Math.Distance(item.WorldPos, startPos) <= 3 then
+						totalItems = totalItems + 1
+						objects[totalItems] = item
+					end
 				end
 			end
 
@@ -240,7 +239,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 					for i=1,totalItems do
 						local v = objects[i]
 						checkPos[2] = v.WorldPos[2]
-						if Ext.Math.Distance(v.WorldPos, checkPos) <= (0.1 + v.AI.AIBoundsRadius) then
+						--if Ext.Math.Distance(v.WorldPos, checkPos) <= (0.1 + v.AI.AIBoundsRadius) then
+						if GameHelpers.Math.GetOuterDistance(v.WorldPos, checkPos) <= (0.3 + v.AI.AIBoundsRadius) then
 							isNextToWall = true
 							break
 						end
@@ -250,20 +250,33 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 
 			if isNextToWall or (e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter") and e.Data.TargetObject:HasTag("LLWEAPONEX_MasteryTestCharacter")) then
 				GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.TargetObject, "Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
-				GameHelpers.Status.Apply(e.Data.TargetObject, "LLWEAPONEX_MB_CROSSOW_PINNED", 6.0, false, e.Character)
+				local turns = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_MarksmansFang_PinTurns", 1)
+				if turns > 0 then
+					GameHelpers.Status.Apply(e.Data.TargetObject, "LLWEAPONEX_MB_CROSSOW_PINNED", turns * 6.0, false, e.Character)
+				end
 				SignalTestComplete(self.ID)
 			end
 		end
 	end).Test(function(test, self)
 		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
-		test.Cleanup = cleanup
 		test:Wait(250)
-		TeleportTo(char, dummy, "", 0, 1, 1)
+		CharacterLookAt(char, dummy, 1)
+		CharacterLookAt(dummy, char, 1)
+		test:Wait(500)
+		local pos = GameHelpers.Math.ExtendPositionWithDirectionalVector(dummy, GameHelpers.Math.GetDirectionalVector(char,dummy,true), -2.0, true)
+		local x,y,z = table.unpack(pos)
+		local chest1 = CreateItemTemplateAtPosition("080226ec-f569-4b94-be37-63fe4c8412a3", x, y, z)
+		local chest2 = CreateItemTemplateAtPosition("080226ec-f569-4b94-be37-63fe4c8412a3", x, y + 1.0, z)
+		test.Cleanup = function ()
+			cleanup()
+			ItemRemove(chest1)
+			ItemRemove(chest2)
+		end
 		CharacterSetFightMode(char, 1, 1)
 		test:Wait(1000)
 		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
-		test:WaitForSignal(self.ID, 30000)
-		test:AssertGotSignal(self.ID)
+		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
+		test:Wait(1000)
 		test:AssertEquals(GameHelpers.Status.IsActive(dummy, "LLWEAPONEX_MB_CROSSOW_PINNED"), true, "Failed to apply LLWEAPONEX_MB_CROSSOW_PINNED")
 		return true
 	end),

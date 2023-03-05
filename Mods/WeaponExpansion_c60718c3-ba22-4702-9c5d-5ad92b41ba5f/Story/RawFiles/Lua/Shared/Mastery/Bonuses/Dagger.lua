@@ -142,6 +142,15 @@ if not _ISCLIENT then
 			GameHelpers.Status.Remove(e.Data.Object, "LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS")
 		end
 	end)
+
+	StatusManager.Subscribe.BeforeAttempt("LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET", function (e)
+		if not GameHelpers.Character.IsInCombat(e.Target) and e.Status.KeepAlive then
+			e.Status.CurrentLifeTime = 6
+			e.Status.LifeTime = 6
+			e.Status.KeepAlive = false
+			e.Status.RequestClientSync = true
+		end
+	end)
 end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 1, {
@@ -154,7 +163,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 		Skills = {"MultiStrike_Vault", "MultiStrike_EnemyVault"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_BacklashBonus", "<font color='#F19824'>Attacking a target hit by [Key:Projectile_ThrowingKnife_DisplayName] grants [Special:LLWEAPONEX_MB_BacklashAPBonus] AP and refreshs the cooldown of [Key:Projectile_ThrowingKnife_DisplayName]</font>")
 	}).Register.SkillHit(function(self, e, bonuses)
-		if e.Data.Success and GameHelpers.Status.IsActive(e.Data.TargetObject, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET") then
+		if e.Data.Success then
 			local sourceObject = GameHelpers.Status.GetSourceByID(e.Data.TargetObject, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
 			if sourceObject and sourceObject.MyGuid == e.Character.MyGuid then
 				GameHelpers.Status.Remove(e.Data.Target, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
@@ -181,7 +190,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 		TeleportTo(char, dummy, "", 0, 1, 1)
 		CharacterSetFightMode(char, 1, 1)
 		test:Wait(1000)
-		GameHelpers.Skill.Explode(dummy, "Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive", char, {HitObject=dummy, SkillOverrides={ExplodeRadius=0}})
+		GameHelpers.Skill.Explode(dummy, "Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive", char)
 		test:Wait(500)
 		test:AssertEquals(HasActiveStatus(dummy, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET") == 1, true, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET not applied to target")
 		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)

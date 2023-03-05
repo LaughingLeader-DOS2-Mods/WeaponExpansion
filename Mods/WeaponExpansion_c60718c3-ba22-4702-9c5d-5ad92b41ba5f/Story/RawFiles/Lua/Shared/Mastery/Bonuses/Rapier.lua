@@ -157,9 +157,8 @@ if not Ext.IsClient() then
 	end, {MatchArgs={ID="LLWEAPONEX_RapierSuckerPunch"}})
 
 	StatusManager.Subscribe.RemovedType("KNOCKED_DOWN", function (e)
-		local delayedDizzy = e.Target:GetStatus("LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED")
-		if delayedDizzy then
-			local source = GameHelpers.TryGetObject(delayedDizzy.StatusSourceHandle)
+		local source = GameHelpers.Status.GetSourceByID(e.Target, "LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED")
+		if source then
 			GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_DIZZY", 12, true, source)
 		end
 	end)

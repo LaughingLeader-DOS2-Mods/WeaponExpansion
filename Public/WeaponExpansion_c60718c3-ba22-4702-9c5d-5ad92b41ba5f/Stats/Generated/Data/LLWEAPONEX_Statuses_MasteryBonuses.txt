@@ -185,6 +185,7 @@ new entry "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET"
 type "StatusData"
 data "StatusType" "CONSUME"
 using "_LEADERLIB_HIDDEN_CONSUME_BASE"
+data "IsChanneled" "Yes"
 
 new entry "LLWEAPONEX_MB_CROSSOW_PINNED"
 type "StatusData"
