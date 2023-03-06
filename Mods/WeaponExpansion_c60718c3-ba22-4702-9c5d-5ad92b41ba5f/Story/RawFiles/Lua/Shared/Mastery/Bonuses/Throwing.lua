@@ -3,6 +3,28 @@ local rb = MasteryDataClasses.MasteryBonusData
 local _eqSet = "Class_LLWEAPONEX_ThrowingMaster_Preview"
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 1, {
+	rb:Create("THROWING_IMPALING_KNIFE", {
+		Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ImpalingKnife", "Throw the knife harder, inflicting the target with [Key:LLWEAPONEX_THROW_IMPALED_DEBUFF_DisplayName:Internal Damage] for [ExtraData:LLWEAPONEX_MB_Throwing_ThrowingKnifeInternalDamageTurns:1] turn(s).<br>[Key:LLWEAPONEX_THROW_IMPALED_DEBUFF_DisplayName:Internal Damage] reduces AP Max/Start/Recovery by 1, and deals a small amount of <font color='#CD1F1F'>[Handle:hd05581a1g83a7g4d95gb59fgfa5ef68f5c90:piercing damage]</font>."),
+	}).Register.SkillHit(function (self, e, bonuses)
+		if e.Data.Success then
+			local turns = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_ThrowingKnifeInternalDamageTurns", 1)
+			GameHelpers.Status.Apply(e.Data.Target, "LLWEAPONEX_THROW_IMPALE", turns * 6.0, false, e.Character)
+			GameHelpers.Status.Apply(e.Data.Target, "LLWEAPONEX_WEAPON_THROW_DAGGER", turns * 6.0, false, e.Character)
+			SignalTestComplete(self.ID)
+		end
+	end).Test(function(test, self)
+		local character,dummy,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet})
+		---@cast character Guid
+		---@cast dummy Guid
+		test.Cleanup = cleanup
+		test:Wait(500)
+		GameHelpers.Action.UseSkill(character, self.Skills[1], dummy)
+		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
+		test:Wait(250)
+		test:AssertEquals(GameHelpers.Status.IsActive(dummy, ""), true, "Failed to apply LLWEAPONEX_THROW_IMPALE")
+		return true
+	end),
 	rb:Create("THROWING_SECOND_IMPACT", {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_SecondImpact", "Basic grenades have a <font color='#00FF99'>[ExtraData:LLWEAPONEX_MB_Throwing_GrenadeSecondExplodeChance:25]% chance</font> to explode again."),
 		DeferRegistration=true,
@@ -38,7 +60,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 1, {
 			SignalTestComplete(self.ID)
 		end
 	end, "None").Test(function(test, self)
-		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet})
+		---@cast character Guid
+		---@cast dummy Guid
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -51,7 +75,55 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 1, {
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
+	rb:Create("THROWING_GLITTER_CHOLORFORM", {
+		Skills = {"Projectile_Chloroform", "Projectile_EnemyChloroform", "Projectile_Mark", "Projectile_EnemyMark"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_GlitterChloroform", "Damage and statuses are now dealt in a [ExtraData:LLWEAPONEX_MB_Throwing_GlitterChloroformRadius:2]m radius."),
+	}).Register.SkillProjectileShoot(function (self, e, bonuses)
+		local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_GlitterChloroformRadius", 2)
+		if e.Data.ExplodeRadius0 < radius then
+			e.Data.ExplodeRadius0 = radius
+		end
+		if e.Data.ExplodeRadius1 < radius then
+			e.Data.ExplodeRadius1 = radius
+		end
+		SignalTestComplete(self.ID)
+	end).Test(function(test, self)
+		local character,dummies,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet, TotalDummies=2})
+		---@cast character Guid
+		---@cast dummies Guid[]
+		test.Cleanup = cleanup
+		test:Wait(500)
+		Osi.TeleportTo(dummies[1], dummies[2])
+		test:Wait(250)
+		GameHelpers.Action.UseSkill(character, "Projectile_Chloroform", dummies[1])
+		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
+		test:Wait(250)
+		test:AssertEquals(GameHelpers.Status.IsActive(dummies[2], "SLEEPING"), true, "Failed to apply SLEEPING with a modified ExplodeRadius.")
+		return true
+	end),
 
+	rb:Create("THROWING_EXPLOSIVE_DUST", {
+		Skills = {"Projectile_ThrowDust", "Projectile_EnemyThrowDust"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ExplosiveDust", "The dust ignites into an explosion cloud, dealing [WeaponDamage:DamageSurface_CloudExplosion] and sabotaging any explosives on the target."),
+	}).Register.SkillProjectileHit(function (self, e, bonuses)
+		--local radius = math.max(1, GameHelpers.Stats.GetAttribute(e.Skill, "ExplodeRadius", 1))
+		--GameHelpers.Surface.CreateSurface(e.Data.Position, "ExplosionCloud", radius, 1, e.Character.Handle, true)
+		GameHelpers.Skill.Explode(e.Data.Position, "Projectile_LLWEAPONEX_ThrowingMastery_DustExplosion", e.Character)
+		SignalTestComplete(self.ID)
+	end).Test(function(test, self)
+		local character,dummy,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet})
+		---@cast character Guid
+		---@cast dummy Guid
+		test.Cleanup = cleanup
+		local grenade = CreateItemTemplateAtPosition("5208b121-64fa-4704-8924-c61c576e1ac5", 0, 0, 0)
+		ItemToInventory(grenade, dummy, 1, 0, 1)
+		test:Wait(250)
+		GameHelpers.Action.UseSkill(character, self.Skills[1], dummy)
+		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
+		test:Wait(250)
+		test:AssertEquals(ObjectExists(grenade) == 0, true, "Grenade failed to explode (no Sabotage?)")
+		return true
+	end),
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
@@ -86,6 +158,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
 		end
 	end).Test(function(test, self)
 		local character,dummy,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet})
+		---@cast character Guid
+		---@cast dummy Guid
 		--local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		local grenade = CreateItemTemplateAtPosition("5208b121-64fa-4704-8924-c61c576e1ac5", 0, 0, 0)

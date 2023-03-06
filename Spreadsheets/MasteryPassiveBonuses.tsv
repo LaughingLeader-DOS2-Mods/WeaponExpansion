@@ -36,7 +36,7 @@ Shield	4	Placeholder	Desc	❌	❌
 Staff	4	Placeholder	Desc	❌	❌
 Sword	4	Placeholder	Desc	❌	❌
 Throwing	1	Second Impact	Basic grenades have a 25% chance to explode again.	√	√
-Throwing	3	Free Throw	The first throwing item/grenade used on your turn is free.	√	❌
+Throwing	3	Free Throw	The first throwing item/grenade used on your turn is free.	√	√
 Throwing	4	Explosives Expert	Grenades have a 50% larger explosion radius.	√	√
 Unarmed	1	Way of the Fist	Melee weapon requirement skills can now be used while unarmed.	√	√
 Unarmed	1	Unarmed Scaling 1	+30% base damage with unarmed attacks (20 -> 50 total).	√	√

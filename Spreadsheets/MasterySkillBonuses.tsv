@@ -96,9 +96,10 @@ Sword	1	Crippling Blow	Targets hit gains a -20% damage debuff until their turn e
 Sword	2	Placeholder	Placeholder	❌	❌
 Sword	3	Placeholder	Placeholder	❌	❌
 Sword	4	Placeholder	Placeholder	❌	❌
-Throwing	1	Grenade	Basic grenades have a 25% chance to explode again.	❌	❌
-Throwing	2	Placeholder	Placeholder	❌	❌
-Throwing	3	Placeholder	Placeholder	❌	❌
+Throwing	1	Throwing Knife	Inflict internal damage on the target, impaling them for 1 turn.	√	❌
+Throwing	2	Chloroform/Glitter Dust	These skills now deal damage and apply statuses in a 2m radius.	√	❌
+Throwing	2	Throw Dust	Create an explosion cloud and sabotage targets hit (explode 1 grenade).	√	❌
+Throwing	3	Dust Blast	Placeholder	❌	❌
 Throwing	4	Placeholder	Placeholder	❌	❌
 Unarmed	1	Petrifying Slam (Dwarf Racial)	Knock the target back and deal additional damage.	√	√
 Unarmed	2	Whirlwind	Pull targets hit closer to you.	√	❌

@@ -45,6 +45,17 @@ data "TargetConditions" "NonSelf&(Item|(!Ally|Tagged:LeaderLib_FriendlyFireEnabl
 data "Template" "23e91774-9d06-4003-822e-419582ef2615"
 //data "Template" "04bdf5e2-3c6a-4711-b516-1a275ccbd720"
 
+new entry "Projectile_LLWEAPONEX_ThrowingMastery_DustExplosion"
+type "SkillData"
+data "SkillType" "Projectile"
+using "_Projectile_LeaderLib_LeaveAction_ApplyBase"
+data "ExplodeRadius" "2"
+data "SkillProperties" "CreateSurface,2,,ExplosionCloud,100;Sabotage,1"
+data "CanTargetCharacters" "Yes"
+data "CanTargetItems" "Yes"
+data "CanTargetTerrain" "Yes"
+data "TargetConditions" "NonSelf&(Item|(!Ally|Tagged:LeaderLib_FriendlyFireEnabled))"
+
 new entry "Projectile_LLWEAPONEX_MasteryBonus_Dagger_RuptureBonusDamage"
 type "SkillData"
 data "SkillType" "Projectile"
