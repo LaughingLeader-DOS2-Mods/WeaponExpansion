@@ -293,6 +293,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 	end
 
 	if not StringHelpers.IsNullOrEmpty(bonusText) then
+		---@cast bonusText string
 		if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
 			descriptionElement.Label = descriptionElement.Label .. "<br>"
 		end

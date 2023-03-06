@@ -5,24 +5,28 @@ local _eqSet = "Class_LLWEAPONEX_ThrowingMaster_Preview"
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 1, {
 	rb:Create("THROWING_IMPALING_KNIFE", {
 		Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ImpalingKnife", "Throw the knife harder, inflicting the target with [Key:LLWEAPONEX_THROW_IMPALED_DEBUFF_DisplayName:Internal Damage] for [ExtraData:LLWEAPONEX_MB_Throwing_ThrowingKnifeInternalDamageTurns:1] turn(s).<br>[Key:LLWEAPONEX_THROW_IMPALED_DEBUFF_DisplayName:Internal Damage] reduces AP Max/Start/Recovery by 1, and deals a small amount of <font color='#CD1F1F'>[Handle:hd05581a1g83a7g4d95gb59fgfa5ef68f5c90:piercing damage]</font>."),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ImpalingKnife", "Throw the knife harder, inflicting the target with [Key:LLWEAPONEX_THROW_IMPALED_DisplayName:Impaled] for [ExtraData:LLWEAPONEX_MB_Throwing_ThrowingKnifeInternalDamageTurns:1] turn(s).<br>[Key:LLWEAPONEX_THROW_IMPALED_DisplayName:Impaled] reduces AP Recovery by 1, and deals a small amount of <font color='#CD1F1F'>[Handle:hd05581a1g83a7g4d95gb59fgfa5ef68f5c90:piercing damage]</font>."),
 	}).Register.SkillHit(function (self, e, bonuses)
 		if e.Data.Success then
+			Timer.StartObjectTimer("LLWEAPONEX_Throwing_ApplyImpalingKnife", e.Data.Target, 250, {Source=e.CharacterGUID})
+		end
+	end).TimerFinished("LLWEAPONEX_Throwing_ApplyImpalingKnife", function (self, e, bonuses)
+		if e.Data.Object and e.Data.Source then
 			local turns = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_ThrowingKnifeInternalDamageTurns", 1)
-			GameHelpers.Status.Apply(e.Data.Target, "LLWEAPONEX_THROW_IMPALE", turns * 6.0, false, e.Character)
-			GameHelpers.Status.Apply(e.Data.Target, "LLWEAPONEX_WEAPON_THROW_DAGGER", turns * 6.0, false, e.Character)
+			GameHelpers.Status.Apply(e.Data.Object, "LLWEAPONEX_WEAPON_THROW_MB_THROWING_KNIFE", turns * 6.0, false, e.Data.Source)
 			SignalTestComplete(self.ID)
 		end
-	end).Test(function(test, self)
-		local character,dummy,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet})
-		---@cast character Guid
-		---@cast dummy Guid
+	end, "None").Test(function(test, self)
+		local characters,_,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet="Class_Rogue_Dwarves", TotalCharacters=2, TotalDummies=0})
+		local char,dummy = table.unpack(characters)
 		test.Cleanup = cleanup
 		test:Wait(500)
-		GameHelpers.Action.UseSkill(character, self.Skills[1], dummy)
+		TeleportToRandomPosition(char, 1.0, ""); TeleportToRandomPosition(dummy, 1.0, "")
+		test:Wait(500)
+		GameHelpers.Action.UseSkill(char, self.Skills[1], dummy)
 		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
-		test:Wait(250)
-		test:AssertEquals(GameHelpers.Status.IsActive(dummy, ""), true, "Failed to apply LLWEAPONEX_THROW_IMPALE")
+		test:Wait(1000)
+		test:AssertEquals(GameHelpers.Status.IsActive(dummy, "LLWEAPONEX_WEAPON_THROW_MB_THROWING_KNIFE"), true, "Failed to apply LLWEAPONEX_THROW_IMPALE")
 		return true
 	end),
 	rb:Create("THROWING_SECOND_IMPACT", {
@@ -128,14 +132,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
 	rb:Create("THROWING_FREE_THROW", {
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_FreeThrow", "The first throwing item used on your turn is free."),
-		GetIsTooltipActive = function (self, skillOrStatus, character, tooltipType, data)
-			print(skillOrStatus, tooltipType, self.ID, MasteryBonusManager.Vars.ThrowingGrenadeSecondImpactSkills[skillOrStatus], data)
-			if tooltipType == "skill" then
-				return MasteryBonusManager.Vars.ThrowingGrenadeSecondImpactSkills[skillOrStatus] == true
-			end
-			return false
-		end,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_FreeThrow", "The first throwing item used on your turn is <font color='#00FF99'>free</font>."),
 		DeferRegistration=true,
 	}).Register.Osiris("ObjectTurnStarted", 1, "after", function(charGUID)
 		local object = GameHelpers.TryGetObject(charGUID, "EsvCharacter")

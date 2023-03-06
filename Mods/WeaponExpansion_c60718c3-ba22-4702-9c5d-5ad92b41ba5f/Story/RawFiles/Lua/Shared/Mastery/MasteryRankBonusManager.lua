@@ -322,7 +322,7 @@ function MasteryBonusManager.RegisterNewSkillListener(state, skill, matchBonuses
 	SkillManager.Register.All(skill, wrapperCallback, state, priority, once)
 end
 
----@param state SKILL_STATE|string
+---@param state SKILL_STATE
 ---@param skill string|string[]
 ---@param bonus MasteryBonusData
 ---@param callback fun(bonus:MasteryBonusData, e:OnSkillStateAllEventArgs, bonuses:MasteryActiveBonusesTable|MasteryActiveBonuses)

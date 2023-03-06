@@ -317,9 +317,9 @@ if not _ISCLIENT then
 		local character = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0))
 		NRD_CharacterSetPermanentBoostInt(character, "Accuracy", 200)
 		
-		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
 		CharacterSetCustomName(character, "Mastery User1")
 		SetupCharacter(character, host.MyGuid, equipmentSet)
+		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 0, 1, 1, 1, 1)
 
 		totalDummies = totalDummies or 1
 		totalDummies = math.max(1, totalDummies)
