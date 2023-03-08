@@ -93,6 +93,7 @@
 	<content contentuid="h07354a00ga0f1g4bf5gbaddg2e466a5be964">&lt;font color=&apos;#797980&apos;&gt;Void-touched Bullets&lt;/font&gt;</content>
 	<content contentuid="h075930c8ge31cg452bg8125g5646ed09deb7">Runeblade of Water</content>
 	<content contentuid="h0759631agf5f6g42c7ga551g96cc79c664ba">Novice</content>
+	<content contentuid="h077fe206g3e7ag40a4gbb9cg34860579d33a">Second Impact</content>
 	<content contentuid="h0790a7c0g329cg42acgb521ge50c700bfc23">Dented Metal Pipe</content>
 	<content contentuid="h079832fbg714dg4b2eg9d1bgfcd86b530e9b">Dragonslayer Boots</content>
 	<content contentuid="h079883c9g8f7bg43bcgb889g0bf7589a0b80">Water Weakness</content>
@@ -104,7 +105,6 @@
 	<content contentuid="h081df726g94ceg4114ga790gcb00b79bfccb">Wicked Shields of Chaos</content>
 	<content contentuid="h08268978g4bbbg4e5eg8c7egdfece8f19502">&lt;icon id=&apos;Projectile_SkyShot&apos;/&gt;[Key:Projectile_SkyShot_DisplayName] deals a guaranteed critical hit to targets that are affected by [Key:KNOCKED_DOWN_DisplayName:Knocked Down].&lt;icon id=&apos;Projectile_PiercingShot&apos;/&gt;Pin targets to impassable terrain, such as walls, and deal bonus damage.</content>
 	<content contentuid="h085bc0degcf38g488fgbc0eg1046951a0d39">Weapon Expansion - Puzzle Items</content>
-	<content contentuid="h0889865bg2bd9g4451g87c5g900882678e5b">Mastery User</content>
 	<content contentuid="h088a4dfdgbb73g431ag93f6gaa4feb096845">Mighty Dragonslayer Mail</content>
 	<content contentuid="h08e99608gb836g4c96g8b87gb28d670ae62a">Demon Hunter&apos;s Oath</content>
 	<content contentuid="h0911451dgfb95g4bbdg81e0g9869e974d62d">Gutwrencher </content>
@@ -334,6 +334,7 @@
 	<content contentuid="h1f41efdegb2b0g4f80gab7cg28b15d2c0039">Staff</content>
 	<content contentuid="h1f4d3b34g12edg4aeagb41fgd8726c69e151">Beginner</content>
 	<content contentuid="h1f50077bgc01fg4894g94b0g9b4325c7769d">Token of Memory</content>
+	<content contentuid="h1f59bc9eg0438g41b7gb125gfb9621b820ad">Impaling Knife</content>
 	<content contentuid="h1f790598ge6e1g4395gb403gcf5ffb39d1f3">Water Bullets</content>
 	<content contentuid="h1f9afda1g6b20g4a64g8ebbg5272b5558145">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Dragon&apos;s Bane</content>
 	<content contentuid="h1fa0b4b6gc377g4f30ga405gf5e4c164d763">Character has activated the &lt;font color=&apos;#65c900&apos;&gt;Poison Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Applies &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt; to enemies hit for 1 turn.</content>
@@ -680,6 +681,7 @@
 	<content contentuid="h4034995fg479cg46a0ga583g7709a973e538">Blademaster&apos;s Strike 9</content>
 	<content contentuid="h4050b715g9ab5g438bga014g6a28a9f217c4">The Harvester</content>
 	<content contentuid="h40699bb6gcd49g4a7fg84a0g31a468f0c7c0">Beginner</content>
+	<content contentuid="h407f81f4g708bg4a02ga820gb461447d9afd">Character has been impaled by a thrown knife!&lt;br&gt;Deals [1] on apply and turn.</content>
 	<content contentuid="h408edb4agadafg44a5g8406g1181817dbfe0">Night&apos;s Edge</content>
 	<content contentuid="h40a99191g22dcg46f5gb5a6g085e3d8b0305">&lt;font color=&apos;#f7ba14&apos;&gt;Knockdown Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h40e2e97bg7b1bg46f1ga009g0ef1310c98f5">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery I&lt;/font&gt;</content>
@@ -724,6 +726,7 @@
 	<content contentuid="h458c7bdag87d1g4eadg83cbg178234e050ce">Throw a wand at a target for [1] and apply &lt;font color=&apos;#FF0000&apos;&gt;Flabbergasted&lt;/font&gt;, with a small chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Flabbergasted&lt;/font&gt; lowers all Elemental Resistances &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF00FF&apos;&gt;When hit by a wand, it explodes, creating a random surface.&lt;/font&gt;</content>
 	<content contentuid="h45a677d5g0b55g4d45ga42eg862f56d9602b">A rare set of dwarven gloves, said to grant the bearer enourmous strength.</content>
 	<content contentuid="h45c35594ga4efg4923g87b2g351240d83b96">Slayer&apos;s Greatbow</content>
+	<content contentuid="h45d67af8g081eg413fg95b2g975d3ea8736f">Grenades have a &lt;font color=&apos;#00FF99&apos;&gt;[ExtraData:LLWEAPONEX_MB_Throwing_GrenadeRadiusIncrease:50]%&lt;/font&gt; increased explosion radius.</content>
 	<content contentuid="h46549881g092ag4c08ga301g9e043ee34d80">Character is unsteady, and has a chance to fall when moving.</content>
 	<content contentuid="h46875020ge016g4eccg94ecgc9f5233c07fd">&lt;font color=&apos;#F19824&apos;&gt;If the target is disabled, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage].&lt;/font&gt;</content>
 	<content contentuid="h46cb2853g6646g4ad0g9841g56059054b847">Placeholder</content>
@@ -1384,6 +1387,7 @@
 	<content contentuid="h84bcdf2ega44cg4dd4g972ag52f9326ddd38">A sturdy staff with a balanced weight. Functions as both a walking stick, and a tool to bash skulls.</content>
 	<content contentuid="h84d76d1egc004g4e77g9b24gb87eb9dede90">Warchief&apos;s Mark</content>
 	<content contentuid="h84d844ccg0681g4c2agb055gc1b1d8735cf9">&lt;font color=&apos;#FE6E27&apos;&gt;Attuned to Fire&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FE6E27&apos;&gt;Ignites surfaces.&lt;/font&gt;</content>
+	<content contentuid="h84fcff4fg581dg4cc3gbc91gb7e6aa23c6fb">Explosives Expert</content>
 	<content contentuid="h84fd3aabgb35ag4293g8051ga7d8f6f084ae">Contaminating</content>
 	<content contentuid="h850393bbg0109g4ac1g865cg27f25301e083">Throwing Shield</content>
 	<content contentuid="h853768f2ga777g4833g9793g12261fd670cc">Worn Runeblade of Chaos</content>
@@ -1553,6 +1557,7 @@
 	<content contentuid="h949745a3g7b63g4c99g8a6eg1fb29bb5e1cd">Oakenwall, Heavenbreaker</content>
 	<content contentuid="h94a156acgdfa3g4759ga11bg84a478dbbcba">Send out an beam of pure chaotic energy, dealing [1] and creating a &lt;font color=&apos;#f7ba14&apos;&gt;random elemental surface&lt;/font&gt; at the target.&lt;br&gt;&lt;font color=&apos;#FF22FF&apos;&gt;A surface also created beneath the beam as it travels.&lt;/font&gt;</content>
 	<content contentuid="h9506ebefg5e02g4796g9904g76486278a261">Usurper&apos;s Tanto</content>
+	<content contentuid="h95105243gf380g4d03g90aegc2631fa9465f">&lt;font color=&apos;#FFCC00&apos;&gt;Second Impact!&lt;/font&gt;</content>
 	<content contentuid="h9530f360gf99cg4742g8d86g4ec69e6c0ee9">Old Runeblade of Poison</content>
 	<content contentuid="h953b1517g073bg4cddgb0c3gafe92c329a1b">My viscera!</content>
 	<content contentuid="h95496922g423fg4f0cg9d2cg5c1769d4f106">Fire a spread of 3 bullets at a target, dealing [1] per bullet.&lt;br&gt;&lt;font color=&apos;#44DD22&apos;&gt;If all 3 bullets hit the same target, knock them back 4m and deal an additional [SkillDamage:Projectile_LLWEAPONEX_Blunderbuss_Scattershot_BonusDamage].&lt;/font&gt;</content>
@@ -1619,6 +1624,7 @@
 	<content contentuid="h9c2ec983g6c2fg4608g9c5eg2aa80a46f3d7">Old Katana</content>
 	<content contentuid="h9c360dcfg50ebg4961ga029gd4a0215c0d4b">Character has been marked for death, and cannot be marked again.</content>
 	<content contentuid="h9c5c52d2gf64dg417fga20ag3c561d438283">Hunkering Down</content>
+	<content contentuid="h9c5d338fga20eg4956g8d5eg4394d9145304">Explosive Dust</content>
 	<content contentuid="h9c73d835g960dg40a3gba2ag61cd5d4acdd6">Runeblade of Chaos</content>
 	<content contentuid="h9c79b908gd579g47b8ga9d8gdc553f63c215">Lead Bullets</content>
 	<content contentuid="h9c7f3144g17d0g40b0gab03g29ca403e0291">*[ACCESSORY] Click on the button labeled &apos;Accessory&apos;.*</content>
@@ -1901,6 +1907,7 @@
 	<content contentuid="hb83db6afg0509g4296gb80agb4b7827823dc">Voidwoken Nightmare</content>
 	<content contentuid="hb876b972g396fg4e4dg82a9g4525b40d9089">&lt;font color=&apos;#C7A758&apos;&gt;Kevin the Pet Rock&lt;/font&gt;</content>
 	<content contentuid="hb8845258g02cag45f1g88a0gad1068ea170d">Kevin is Recharging</content>
+	<content contentuid="hb8870907g1fe7g4907ga48fga64959624abf">Bag of Throwing Armaments</content>
 	<content contentuid="hb89a9234g3581g4ea9gbdd6g06c35cac20ab">&lt;font color=&apos;#C7A758&apos;&gt;Shoot Hand Crossbow&lt;/font&gt;</content>
 	<content contentuid="hb89b153dg257eg4971g8b82g339b24101879">Cleaving Onslaught</content>
 	<content contentuid="hb8e7b768gac05g4835g9e6fg4f75b52cfb66">&lt;font color=&apos;#00FFFF&apos;&gt;If killed, character will be resurrected by the Guardian when their turn starts.&lt;/font&gt;</content>
@@ -2016,7 +2023,7 @@
 	<content contentuid="hc4bf9383ga9b2g48fcgb253gcc7546987b56">Throwing</content>
 	<content contentuid="hc4cbb3efg9cd3g4193g861bg8f086795ea16">Automatically Equips the Dragon Bone Claws Weapon</content>
 	<content contentuid="hc4d7bbdcg90fdg4d2fgb72bg3bdf239f2aec">Stone Rod</content>
-	<content contentuid="hc4e49ef1g6522g4009g9362g4eeae4d7c1a1">&lt;font color=&apos;#77FF33&apos;&gt;If a target is in front of impassable terrain (like a wall), pin them for 1 turn and deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage].&lt;/font&gt;</content>
+	<content contentuid="hc4e49ef1g6522g4009g9362g4eeae4d7c1a1">&lt;font color=&apos;#77FF33&apos;&gt;If the target is in front of impassable terrain (like a wall or object), pin them for [ExtraData:LLWEAPONEX_MB_Crossbow_MarksmansFang_PinTurns:1] turn(s) and deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage].&lt;/font&gt;</content>
 	<content contentuid="hc4f1afa6g2ea1g4741ga7a5g0b3b48300f13">&lt;font color=&apos;#11D77A&apos;&gt;Enhanced Leadership&lt;/font&gt;</content>
 	<content contentuid="hc50ca329gfc06g4b22g9073gd65fa5fd2a88">Tuned Rifle</content>
 	<content contentuid="hc5324a7fg73c8g4d3fgb8e4g99b7a2c7d5c0">Placeholder</content>
@@ -2198,6 +2205,7 @@
 	<content contentuid="hd84bd8c4gb25fg46bagbbf9ga3d43b8bfacc">Mastery</content>
 	<content contentuid="hd84c693dg3a28g43fdgba93gbff3f830a53c">Placeholder</content>
 	<content contentuid="hd87228d1g9212g4f23ga0d3g7b2c9f811424">Odachi</content>
+	<content contentuid="hd8740a0eg18d0g4748g9307g2965a7665696">A grab-bag of special throwing weapons.</content>
 	<content contentuid="hd88b4801g3ec4g4b1eg8272ge2f6dce46f0c">&lt;font color=&apos;#F7BA14&apos;&gt;[1]&lt;/font&gt; increased to rank &lt;font color=&apos;#00FF00&apos;&gt;[2]&lt;/font&gt;</content>
 	<content contentuid="hd89162bfgefcag41b3ga83eg08117f51d660">Searing Rune</content>
 	<content contentuid="hd891a98eg74d1g4d6bg8c36g07910d54df43">Reinforced Chaotic Shields</content>
@@ -2456,6 +2464,7 @@
 	<content contentuid="hf20cd8bagadbdg480cga5d2ge6b2af96dfc0">Old Quarterstaff</content>
 	<content contentuid="hf232e463gc619g46fdg9eb9gbf0a13bdcb5a">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery I&lt;/font&gt;</content>
 	<content contentuid="hf247dd3dg7c2dg48a9g96fege61d446298ca">Aspect of Air</content>
+	<content contentuid="hf25718eagb905g4281g81e5g45e0da854134">Explosive Chemicals</content>
 	<content contentuid="hf2933c08ga9e6g4553g97c5g73dde936ba58">Explode Poison</content>
 	<content contentuid="hf2a33413g706fg4a9dg9849gea34a1daf82b">A book by a private group known as &quot;Lionheart Medical&quot;, detailing the complex anatomical structure of various species, including the four common races, and beasts beyond. Studying this book affords a specialist&apos;s knowledge on how better to apply healing techniques.</content>
 	<content contentuid="hf2a5c017g2c47g42f8g9181ga6a2ba29012e">Novice</content>
@@ -2507,6 +2516,7 @@
 	<content contentuid="hf61a1a8fg62d0g4b70gb7fdg2d45a79ae981">Weapon Expansion - Runes</content>
 	<content contentuid="hf64cb19eg58e7g4e5eg8c46g1b7f853721b8">Nature&apos;s Guard, Nature&apos;s Might</content>
 	<content contentuid="hf64d955dg59deg42d5gb41cgcd64e621ccff">Absorb Surface Element</content>
+	<content contentuid="hf6737e89g5d45g4242gb01bgaa262fa237e9">Basic grenades have a &lt;font color=&apos;#00FF99&apos;&gt;[ExtraData:LLWEAPONEX_MB_Throwing_GrenadeSecondExplodeChance:25]% chance&lt;/font&gt; to explode again.</content>
 	<content contentuid="hf690cab0g66d6g45b3ga5f3gecace6fe38a9">Can&apos;t Strike Twice</content>
 	<content contentuid="hf6ab7e1bgccc1g4b9egb3e4g8d3d36079a34">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery II&lt;/font&gt;</content>
 	<content contentuid="hf6b81ebbgdd10g46bega557ge2c2019e7a8b">Blade of the Seven-finger Man</content>

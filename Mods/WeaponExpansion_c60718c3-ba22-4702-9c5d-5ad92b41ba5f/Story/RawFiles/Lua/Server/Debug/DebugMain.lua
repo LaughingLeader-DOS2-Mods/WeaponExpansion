@@ -238,7 +238,7 @@ if Ext.IsDeveloperMode() then
     Ext.RegisterConsoleCommand("statusDuration", function(command, effect, bone, target)
         local host = CharacterGetHostCharacter()
         if HasActiveStatus(host, "HASTED") == 0 then
-            GameHelpers.Status.Apply(host, "HASTED", 24.0, 1, host)
+            GameHelpers.Status.Apply(host, "HASTED", 24.0, true, host)
         else
             local handle = NRD_StatusGetHandle(host, "HASTED")
             if handle ~= nil then
