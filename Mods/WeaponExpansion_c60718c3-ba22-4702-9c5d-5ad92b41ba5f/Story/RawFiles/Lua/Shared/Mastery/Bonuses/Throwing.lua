@@ -5,7 +5,7 @@ local _eqSet = "Class_LLWEAPONEX_ThrowingMaster_Preview"
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 1, {
 	rb:Create("THROWING_IMPALING_KNIFE", {
 		Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ImpalingKnife", "Throw the knife harder, inflicting the target with [Key:LLWEAPONEX_THROW_IMPALED_DisplayName:Impaled] for [ExtraData:LLWEAPONEX_MB_Throwing_ThrowingKnifeInternalDamageTurns:1] turn(s).<br>[Key:LLWEAPONEX_THROW_IMPALED_DisplayName:Impaled] reduces AP Recovery by 1, and deals a small amount of <font color='#CD1F1F'>[Handle:hd05581a1g83a7g4d95gb59fgfa5ef68f5c90:piercing damage]</font>."),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ImpalingKnife", "Throw the knife harder, inflicting the target with [Key:LLWEAPONEX_THROW_IMPALED_DisplayName:Impaled] for [ExtraData:LLWEAPONEX_MB_Throwing_ThrowingKnifeInternalDamageTurns:1] turn(s).<br>[Key:LLWEAPONEX_THROW_IMPALED_DisplayName:Impaled] reduces AP Recovery by 1, and deals [StatusDamage:LLWEAPONEX_WEAPON_THROW_MB_THROWING_KNIFE]."),
 	}).Register.SkillHit(function (self, e, bonuses)
 		if e.Data.Success then
 			Timer.StartObjectTimer("LLWEAPONEX_Throwing_ApplyImpalingKnife", e.Data.Target, 250, {Source=e.CharacterGUID})
@@ -107,7 +107,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 	end),
 
 	rb:Create("THROWING_EXPLOSIVE_DUST", {
-		Skills = {"Projectile_ThrowDust", "Projectile_EnemyThrowDust"},
+		Skills = {"Projectile_ThrowDust", "Projectile_EnemyThrowDust", "Projectile_DustBlast", "Projectile_EnemyDustBlast"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ExplosiveDust", "The dust ignites into an explosion cloud, dealing [WeaponDamage:DamageSurface_CloudExplosion] and sabotaging any explosives on the target."),
 	}).Register.SkillProjectileHit(function (self, e, bonuses)
 		--local radius = math.max(1, GameHelpers.Stats.GetAttribute(e.Skill, "ExplodeRadius", 1))
@@ -191,6 +191,79 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
 		Osi.ObjectTurnEnded(character)
 		test:Wait(250)
 		test:WaitForSignal("THROWING_FREE_THROW_TagCleared", 1000); test:AssertGotSignal("THROWING_FREE_THROW_TagCleared")
+		return true
+	end),
+
+	rb:Create("THROWING_PULLING_KNIVES", {
+		Skills = {"Projectile_FanOfKnives", "Projectile_EnemyFanOfKnives"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_PullingKnives", "Pull all hit targets towards you."),
+	}).Register.SkillHit(function (self, e, bonuses)
+		if e.Data.Success then
+			if PersistentVars.MasteryMechanics.ThrowingFanOfKnivesTargets[e.CharacterGUID] == nil then
+				PersistentVars.MasteryMechanics.ThrowingFanOfKnivesTargets[e.CharacterGUID] = {}
+			end
+			PersistentVars.MasteryMechanics.ThrowingFanOfKnivesTargets[e.CharacterGUID][e.Data.Target] = true
+			Timer.StartObjectTimer("LLWEAPONEX_MB_Throwing_PullingKnives_PullTargets", e.Character, 500, {Skill=e.Skill})
+		end
+	end).TimerFinished("LLWEAPONEX_MB_Throwing_PullingKnives_PullTargets", function(self, e, bonuses)
+		local data = PersistentVars.MasteryMechanics.ThrowingFanOfKnivesTargets[e.Data.UUID]
+		if data then
+			local caster = e.Data.Object --[[@as EsvCharacter]]
+			local hasTarget = false
+			local weaponRange = 1.0
+			if not GameHelpers.Character.HasRangedWeapon(caster) then
+				weaponRange = GameHelpers.Character.GetWeaponRange(caster, true)
+			end
+			local distanceMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_FanOfKnivesPullDistanceMultiplier", 0.8)
+			for guid,b in pairs(data) do
+				local target = GameHelpers.TryGetObject(guid, "EsvCharacter")
+				if b and target then
+					local dir = GameHelpers.Math.GetDirectionalVector(target, caster)
+					local distance = GameHelpers.Math.GetOuterDistance(target, caster, true)
+					if distance > 1 then
+						--Weapon range is subtracted from the distance so they land near weapon range
+						distance = (distance - weaponRange) * distanceMult
+					end
+					if distance > 1 then
+						local pos = GameHelpers.Math.ExtendPositionWithDirectionalVector(target.WorldPos, dir, distance, true)
+						GameHelpers.Utils.ForceMoveObjectToPosition(target, pos, {Skill=e.Data.Skill, Source=caster, ID=self.ID})
+						EffectManager.PlayEffect("RS3_FX_GP_ScriptedEvent_BeamChains_01", caster, {BeamTarget=target.Handle, Bone="Dummy_HandFX"})
+						hasTarget = true
+					end
+				end
+			end
+			if hasTarget then
+				PlaySound(caster.MyGuid, "SE_FX_GP_ScriptedEvent_ChainedDragon_Beam_Break")
+				--PlaySound(caster.MyGuid, "Skill_Poly_SpinWeb_Projectile")
+				--PlaySound(caster.MyGuid, "Whoosh_Jump")
+				SignalTestComplete(self.ID)
+			end
+			PersistentVars.MasteryMechanics.ThrowingFanOfKnivesTargets[e.Data.UUID] = nil
+		end
+	end).Test(function(test, self)
+		local startPos = GameHelpers.Math.ExtendPositionWithForwardDirection(GameHelpers.Character.GetHost(), 6.0)
+		local totalDummies = 5
+		local positions = {}
+		local angle = 0
+		local anglePer = 360 / totalDummies
+		for i=1,totalDummies do
+			local pos = GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.GetPositionWithAngle(startPos, angle, 5), 6.0)
+			positions[i] = pos
+			angle = angle + anglePer
+		end
+		local character,dummies,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet, TotalDummies=totalDummies, DummyPositions=positions})
+		---@cast character Guid
+		---@cast dummies Guid[]
+		test.Cleanup = cleanup
+		test:Wait(500)
+		for _,v in pairs(dummies) do
+			--Required to be able to actually hit the dummies, for some reason
+			TeleportToRandomPosition(v, 0.5, "")
+		end
+		GameHelpers.Action.UseSkill(character, self.Skills[1], character)
+		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
+		test:Wait(2000)
+		test:AssertEquals(GameHelpers.Math.GetDistance(character, dummies[1]) <= 2, true, "Failed to pull dummmy closer?")
 		return true
 	end),
 })

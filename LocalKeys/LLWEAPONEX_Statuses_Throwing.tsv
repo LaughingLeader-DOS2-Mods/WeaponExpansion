@@ -10,6 +10,7 @@ LLWEAPONEX_THROW_DAZED_FX_DisplayName	Dazed	h8becafcdg2237g4429g984cgf2713aa43a5
 LLWEAPONEX_THROW_IMPALED_DEBUFF_Description	Character has internal injuries from an impaled weapon.	h96135bc7gda76g453ag8f51g814a233239ad
 LLWEAPONEX_THROW_IMPALED_DEBUFF_DisplayName	Internal Damage	h71aeb8ebgc32eg4f41g8151g248a32af656e
 LLWEAPONEX_THROW_IMPALED_Description	Character has been impaled by a thrown weapon!	h4f0e6adcg34d8g4c8fgbfecg6fe6a80c7e9d
+LLWEAPONEX_WEAPON_THROW_MB_THROWING_KNIFE_Description	Character has been impaled by a thrown knife!<br>Deals [1] on apply and turn.	hc6bd87c2ga2fbg4a60ga678g05c99c4d0c25
 LLWEAPONEX_THROW_IMPALED_DisplayName	Impaled	h7592e177g12eag4941g91b3gfdb27b66bbd8
 LLWEAPONEX_TOSSED_DisplayName	Throw Target	hb09d7b54g908cg4bf8g92cbg1c9f5d91f9a0
 LLWEAPONEX_WEAPON_THROW_SEAL_Description	Character has been hit by seal!<br><font color='#FF0000'>10% chance on spell cast to get interrupted.</font>	h27a4034dg9f11g43c7gbf7dgb27813eaea1b

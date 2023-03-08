@@ -105,6 +105,8 @@ local defaultPersistentVars = {
         StillStanceLastPosition = {},
         ---@type table<Guid,integer>
         SneakingTurnsInCombat = {},
+        ---@type table<Guid,table<Guid,boolean>>
+        ThrowingFanOfKnivesTargets = {},
     },
     ---@type table<Guid, {Total:integer, Attackers:table<Guid,table<string, boolean>>}>
     OnDeath = {},
