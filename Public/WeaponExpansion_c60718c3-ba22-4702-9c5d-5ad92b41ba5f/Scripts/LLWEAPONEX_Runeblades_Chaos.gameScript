@@ -17,6 +17,7 @@ VARS
 ON
 	OnCharacterStatusApplied(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS)
 ACTIONS
+	ListClear(_ResultList)
 	IF "c1&!c2"
 		GetVar(_Target, _Character, "LLWEAPONEX_SurfaceAbsorbPosition")
 		IsEqual(_Target, null)
