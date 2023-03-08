@@ -14,7 +14,7 @@ WeaponExTesting = {}
 ---@alias _LLWEAPONEX_RegularTestTaskCallback (fun(test:LuaTest):boolean|nil)
 
 ---@param bonusId string
----@param operation _LLWEAPONEX_BonusTestTaskCallback|_LLWEAPONEX_BonusTestTaskCallback[]
+---@param operation (_LLWEAPONEX_BonusTestTaskCallback)|(_LLWEAPONEX_BonusTestTaskCallback)[]
 ---@param params LuaTestParams
 function WeaponExTesting.RegisterBonusTest(bonusId, operation, params)
 	if _tests.Bonuses[bonusId] == nil then
@@ -31,7 +31,7 @@ function WeaponExTesting.RegisterBonusTest(bonusId, operation, params)
 end
 
 ---@param id string
----@param operation _LLWEAPONEX_RegularTestTaskCallback|_LLWEAPONEX_RegularTestTaskCallback[]
+---@param operation (_LLWEAPONEX_RegularTestTaskCallback)|(_LLWEAPONEX_RegularTestTaskCallback)[]
 ---@param params LuaTestParams|nil
 function WeaponExTesting.RegisterUniqueTest(id, operation, params)
 	if _tests.Uniques[id] == nil then
@@ -48,7 +48,7 @@ function WeaponExTesting.RegisterUniqueTest(id, operation, params)
 end
 
 ---@param id string
----@param operation _LLWEAPONEX_RegularTestTaskCallback|_LLWEAPONEX_RegularTestTaskCallback[]
+---@param operation (_LLWEAPONEX_RegularTestTaskCallback)|(_LLWEAPONEX_RegularTestTaskCallback)[]
 ---@param params LuaTestParams|nil
 function WeaponExTesting.RegisterMiscTest(id, operation, params)
 	if _tests.Misc[id] == nil then

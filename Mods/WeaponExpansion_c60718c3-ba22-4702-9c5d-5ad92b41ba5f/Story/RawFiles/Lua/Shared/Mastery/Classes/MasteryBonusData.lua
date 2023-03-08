@@ -58,7 +58,7 @@ local _type = type
 ---@field TurnDelayed fun(callback:MasteryBonusEventWrapper<TurnDelayedEventArgs>, skipBonusCheck:boolean|nil, priority:integer|nil):MasteryBonusDataRegistrationFunctions
 ---@field SpecialTooltipParam fun(id:string, callback:LeaderLibGetTextPlaceholderCallback):MasteryBonusDataRegistrationFunctions
 ---@field Osiris fun(event:string, arity:integer, state:string, callback:function, skipBonusCheck:boolean|nil, canRunCallback:MasteryBonusOsirisListenerCustomBonusCheck|nil):MasteryBonusDataRegistrationFunctions
----@field Test fun(operation:_LLWEAPONEX_BonusTestTaskCallback):MasteryBonusDataRegistrationFunctions
+---@field Test fun(operation:(_LLWEAPONEX_BonusTestTaskCallback)|(_LLWEAPONEX_BonusTestTaskCallback)[]):MasteryBonusDataRegistrationFunctions
 
 local _INTERNALREG = {}
 
@@ -746,7 +746,7 @@ function _INTERNALREG.StatusRemoved(self, callback, checkBonusOn, specificStatus
 end
 
 ---@param self MasteryBonusData
----@param operation _LLWEAPONEX_BonusTestTaskCallback
+---@param operation (_LLWEAPONEX_BonusTestTaskCallback)|(_LLWEAPONEX_BonusTestTaskCallback)[]
 ---@return MasteryBonusData
 function _INTERNALREG.Test(self, operation)
 	if not _ISCLIENT and Vars.DebugMode then
