@@ -108,26 +108,72 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 
 	rb:Create("THROWING_EXPLOSIVE_DUST", {
 		Skills = {"Projectile_ThrowDust", "Projectile_EnemyThrowDust", "Projectile_DustBlast", "Projectile_EnemyDustBlast"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ExplosiveDust", "The dust ignites into an explosion cloud, dealing [WeaponDamage:DamageSurface_CloudExplosion] and sabotaging any explosives on the target."),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ExplosiveDust", "The dust explodes on contact, dealing [WeaponDamage:DamageSurface_CloudExplosion] and sabotaging up to <font color='#FF8800'>[ExtraData:LLWEAPONEX_MB_Throwing_DustExplosiveSabotagedGrenades:1] explosives</font> on the target."),
 	}).Register.SkillProjectileHit(function (self, e, bonuses)
 		--local radius = math.max(1, GameHelpers.Stats.GetAttribute(e.Skill, "ExplodeRadius", 1))
 		--GameHelpers.Surface.CreateSurface(e.Data.Position, "ExplosionCloud", radius, 1, e.Character.Handle, true)
 		GameHelpers.Skill.Explode(e.Data.Position, "Projectile_LLWEAPONEX_ThrowingMastery_DustExplosion", e.Character)
+		local total = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_DustExplosiveSabotagedGrenades", 1)
+		if total > 0 then
+			GameHelpers.Action.Sabotage(e.Data.TargetObject, {Attacker=e.Character, Amount=total})
+		end
 		SignalTestComplete(self.ID)
-	end).Test(function(test, self)
+	end).Test({function(test, self)
+		--ThrowDust Test
 		local character,dummy,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet})
 		---@cast character Guid
 		---@cast dummy Guid
-		test.Cleanup = cleanup
+		test.Cleanup = function ()
+			local pos = GameHelpers.Math.GetPosition(dummy)
+			GameHelpers.Surface.CreateSurface(pos, "None", 8, 0)
+			cleanup()
+		end
 		local grenade = CreateItemTemplateAtPosition("5208b121-64fa-4704-8924-c61c576e1ac5", 0, 0, 0)
 		ItemToInventory(grenade, dummy, 1, 0, 1)
 		test:Wait(250)
-		GameHelpers.Action.UseSkill(character, self.Skills[1], dummy)
+		GameHelpers.Action.UseSkill(character, "Projectile_EnemyThrowDust", dummy)
 		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
 		test:Wait(250)
 		test:AssertEquals(ObjectExists(grenade) == 0, true, "Grenade failed to explode (no Sabotage?)")
+		test:Wait(800)
 		return true
-	end),
+	end,function(test, self)
+		--DustBlast Test
+		local startPos = GameHelpers.Math.ExtendPositionWithForwardDirection(GameHelpers.Character.GetHost(), 12.0)
+		local totalDummies = 5
+		local positions = {}
+		local anglePer = 360 / totalDummies
+		local angle = 0
+		for i=1,totalDummies do
+			local pos = GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.GetPositionWithAngle(startPos, angle, 5), 6.0)
+			positions[i] = pos
+			angle = angle + anglePer
+		end
+		local character,dummies,cleanup = Testing.Utils.CreateTestCharacters({Position=startPos, EquipmentSet=_eqSet, TotalDummies=totalDummies, DummyPositions=positions})
+		---@cast character Guid
+		---@cast dummies Guid[]
+		test.Cleanup = function ()
+			for _,v in pairs(dummies) do
+				local pos = GameHelpers.Math.GetPosition(v)
+				GameHelpers.Surface.CreateSurface(pos, "None", 8, 0)
+			end
+			cleanup()
+		end
+		test:Wait(500)
+		for _,v in pairs(dummies) do
+			local grenade = CreateItemTemplateAtPosition("5208b121-64fa-4704-8924-c61c576e1ac5", 0, 0, 0)
+			ItemToInventory(grenade, v, 1, 0, 1)
+			TeleportToRandomPosition(v, 0.5, "")
+		end
+		test:Wait(1000)
+		GameHelpers.Action.UseSkill(character, "Projectile_EnemyDustBlast", character)
+		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
+		test:Wait(500)
+		for i,v in pairs(dummies) do
+			test:AssertEquals(ItemTemplateIsInCharacterInventory(v, "5208b121-64fa-4704-8924-c61c576e1ac5") == 0, true, string.format("Dummy[%s] - Grenade failed to explode (no Sabotage?)", i))
+		end
+		return true
+	end}),
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
@@ -241,17 +287,17 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
 			PersistentVars.MasteryMechanics.ThrowingFanOfKnivesTargets[e.Data.UUID] = nil
 		end
 	end).Test(function(test, self)
-		local startPos = GameHelpers.Math.ExtendPositionWithForwardDirection(GameHelpers.Character.GetHost(), 6.0)
+		local startPos = GameHelpers.Math.ExtendPositionWithForwardDirection(GameHelpers.Character.GetHost(), 12.0)
 		local totalDummies = 5
 		local positions = {}
-		local angle = 0
 		local anglePer = 360 / totalDummies
+		local angle = 0
 		for i=1,totalDummies do
 			local pos = GameHelpers.Grid.GetValidPositionTableInRadius(GameHelpers.Math.GetPositionWithAngle(startPos, angle, 5), 6.0)
 			positions[i] = pos
 			angle = angle + anglePer
 		end
-		local character,dummies,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet, TotalDummies=totalDummies, DummyPositions=positions})
+		local character,dummies,cleanup = Testing.Utils.CreateTestCharacters({Position=startPos, EquipmentSet=_eqSet, TotalDummies=totalDummies, DummyPositions=positions})
 		---@cast character Guid
 		---@cast dummies Guid[]
 		test.Cleanup = cleanup
