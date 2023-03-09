@@ -435,3 +435,5 @@ Ext.Math.ExtractEulerAngles({table.unpack(me.Stats.Rotation),0,0,0,0,0,0,0,0,0,0
 --         item.Rotation = data.Rotation
 --     end)
 -- end
+
+--GameHelpers.Utils.ForceMoveObject("3f20ae14-5339-4913-98f1-24476861ebd6", {Source=me.MyGuid, DistanceMultiplier=-2})

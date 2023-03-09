@@ -136,7 +136,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = function()
 			cleanup()
-			PersistentVars.MasteryMechanics.StillStanceLastPosition[character] = nil
+			PersistentVars.MasteryMechanics.StillStanceLastPosition[char] = nil
 		end
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)

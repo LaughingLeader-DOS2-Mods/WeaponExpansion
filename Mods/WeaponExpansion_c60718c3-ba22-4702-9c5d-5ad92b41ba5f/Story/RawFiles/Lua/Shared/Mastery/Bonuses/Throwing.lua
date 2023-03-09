@@ -18,7 +18,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 1, {
 		end
 	end, "None").Test(function(test, self)
 		local characters,_,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet="Class_Rogue_Dwarves", TotalCharacters=2, TotalDummies=0})
-		local char,dummy = table.unpack(characters)
+		local char,dummy = table.unpack(characters--[=[@as Guid[]]=])
 		test.Cleanup = cleanup
 		test:Wait(500)
 		TeleportToRandomPosition(char, 1.0, ""); TeleportToRandomPosition(dummy, 1.0, "")

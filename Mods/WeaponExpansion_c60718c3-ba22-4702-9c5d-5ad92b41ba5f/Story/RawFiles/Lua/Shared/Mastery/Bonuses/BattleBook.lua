@@ -225,6 +225,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		---@param tooltipType MasteryBonusDataTooltipID
 		GetIsTooltipActive = function (self, skillOrStatus, character, tooltipType, item)
 			if tooltipType == "item" then
+				---@cast item EsvItem
 				local statsId = GameHelpers.Item.GetItemStat(item)
 				if statsId and GameHelpers.Stats.GetAttribute(statsId, "UseAPCost", 0) > 0 then
 					if StringHelpers.Contains({statsId, item.RootTemplate.Name}, "scroll", true) or GameHelpers.Stats.HasParent(statsId, "_Scrolls") then

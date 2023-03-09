@@ -4,15 +4,20 @@ local rb = MasteryDataClasses.MasteryBonusData
 MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 1, {
 	rb:Create("HANDCROSSBOW_JUMP_MARKING", {
 		Skills = {"Jump_TacticalRetreat", "Jump_EnemyTacticalRetreat"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_HandCrossbow_TacticalRetreat", "While in combat, automatically apply [Key:MARKED_DisplayName] to [ExtraData:LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MaxTargets] enemies in a [ExtraData:LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MarkingRadius]m radius when jumping away."),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_HandCrossbow_TacticalRetreat", "While in combat, automatically apply [Key:MARKED_DisplayName] to <font color='#00FF99'>[ExtraData:LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MaxTargets] visible enemies</font> in a <font color='#00FF99'>[ExtraData:LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MarkingRadius]m</font> radius when jumping away."),
 	}).Register.SkillCast(function(self, e, bonuses)
 		if GameHelpers.Character.IsInCombat(e.Character) or e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
 			local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MaxTargets", 2)
 			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MarkingRadius", 4.0)
-			local combatEnemies = Common.ShuffleTable(MasteryBonusManager.GetClosestEnemiesToObject(e.Character, e.Character, maxDistance, true, totalEnemies))
-			for i,v in pairs(combatEnemies) do
-				if not GameHelpers.Status.IsSneakingOrInvisible(e.Character) then
-					GameHelpers.Status.Apply(v, "MARKED", 6.0, 0, e.Character)
+			local combatEnemies = GameHelpers.Grid.GetNearbyObjects(e.Character, {Relation={Enemy=true}, Type="Character", Sort="Random", Radius=maxDistance, AsTable=true})
+			---@cast combatEnemies EsvCharacter[]
+			local len = math.min(#combatEnemies, totalEnemies)
+			if len > 0 then
+				for i=1,len do
+					local enemy = combatEnemies[i]
+					if not GameHelpers.Status.IsSneakingOrInvisible(enemy) then
+						GameHelpers.Status.Apply(enemy, "MARKED", 6.0, false, e.Character)
+					end
 				end
 			end
 		end
