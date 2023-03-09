@@ -75,7 +75,7 @@ if not _ISCLIENT then
 
 	local function OnSneakingOrInvisible(e)
 		Timer.Cancel("LLWEAPONEX_ClearDaggerSneakingBonus", e.TargetGUID)
-		local debugIgnoreCombat = Vars.DebugMode and e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter")
+		local debugIgnoreCombat = Vars.DebugMode and e.Target and e.Target:HasTag("LLWEAPONEX_MasteryTestCharacter")
 		if GameHelpers.Character.IsInCombat(e.Target) or debugIgnoreCombat then
 			if PersistentVars.MasteryMechanics.SneakingTurnsInCombat[e.TargetGUID] == nil then
 				TurnCounter.CountUp("LLWEAPONEX_Dagger_SneakingBonus", 0, GameHelpers.Combat.GetID(e.TargetGUID), {
