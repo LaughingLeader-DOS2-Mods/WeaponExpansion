@@ -108,17 +108,47 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 
 	rb:Create("THROWING_EXPLOSIVE_DUST", {
 		Skills = {"Projectile_ThrowDust", "Projectile_EnemyThrowDust", "Projectile_DustBlast", "Projectile_EnemyDustBlast"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ExplosiveDust", "The dust explodes on contact, dealing [WeaponDamage:DamageSurface_CloudExplosion] and sabotaging up to <font color='#FF8800'>[ExtraData:LLWEAPONEX_MB_Throwing_DustExplosiveSabotagedGrenades:1] explosives</font> on the target."),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Throwing_ExplosiveDust", "The dust explodes on contact, dealing [WeaponDamage:DamageSurface_CloudExplosion] and sabotaging up to <font color='#FF8800'>[ExtraData:LLWEAPONEX_MB_Throwing_DustExplosiveSabotagedGrenades:1] explosive(s)</font> on the target."),
 	}).Register.SkillProjectileHit(function (self, e, bonuses)
-		--local radius = math.max(1, GameHelpers.Stats.GetAttribute(e.Skill, "ExplodeRadius", 1))
-		--GameHelpers.Surface.CreateSurface(e.Data.Position, "ExplosionCloud", radius, 1, e.Character.Handle, true)
-		GameHelpers.Skill.Explode(e.Data.Position, "Projectile_LLWEAPONEX_ThrowingMastery_DustExplosion", e.Character)
-		local total = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_DustExplosiveSabotagedGrenades", 1)
-		if total > 0 then
-			GameHelpers.Action.Sabotage(e.Data.TargetObject, {Attacker=e.Character, Amount=total})
-		end
+		Timer.StartObjectTimer("LLWEAPONEX_MB_Throwing_ExplosiveDust", e.Character, 500, {Position=e.Data.Position, Skill=e.Skill})
+		EffectManager.PlayEffectAt("RS3_FX_Skills_Fire_SpontaneousCombustion_Impact_Root_01", e.Data.Position, {Scale=0.6})
 		SignalTestComplete(self.ID)
+	end).SkillHit(function (self, e, bonuses)
+		Timer.Cancel("LLWEAPONEX_MB_Throwing_ExplosiveDust", e.Character)
+		--Deal ExplosionCloud damage without actually making the surface, so it doesn't get overwritten by the exploding grenades
+		local surfaceTemplate = Ext.Template.GetRootTemplate("262f7978-4e80-4ac0-8434-e2f0e91de83b") --[[@as SurfaceTemplate]]
+		if surfaceTemplate then
+			local weaponStatId = surfaceTemplate.DamageWeapon
+			if not StringHelpers.IsNullOrEmpty(weaponStatId) then
+				if e.Data.Success then
+					local damage = Game.Math.CalculateWeaponDamage(e.Character.Stats, GameHelpers.Ext.CreateWeaponTable(weaponStatId, e.Character.Stats.Level), true)
+					GameHelpers.Damage.ApplyDamage(e.Character, e.Data.TargetObject, {DamageList=damage, HitType="Surface", HitParams={Surface=true}})
+				end
+			end
+		end
+		if e.Data.Success then
+			local total = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_DustExplosiveSabotagedGrenades", 1)
+			if total > 0 then
+				GameHelpers.Action.Sabotage(e.Data.TargetObject, {Attacker=e.Character, Amount=total})
+			end
+		end
+	end).TimerFinished("LLWEAPONEX_MB_Throwing_ExplosiveDust", function (self, e, bonuses)
+		if e.Data.UUID and e.Data.Position and e.Data.Skill then
+			local radius = math.max(1, GameHelpers.Stats.GetAttribute(e.Data.Skill, "ExplodeRadius", 1) - 1)
+			local pos = e.Data.Position; pos[2] = GameHelpers.Grid.GetY(pos[1], pos[3])
+			local handle = e.Data.Object.Handle
+			Ext.OnNextTick(function (_)
+				GameHelpers.Surface.CreateSurface(pos, "ExplosionCloud", radius, 0, handle)
+			end)
+			local total = GameHelpers.GetExtraData("LLWEAPONEX_MB_Throwing_DustExplosiveSabotagedGrenades", 1)
+			if total > 0 then
+				GameHelpers.Action.Sabotage(pos, {Attacker=e.Data.Object, Amount=total})
+			end
+		end
 	end).Test({function(test, self)
+		local _GRENADE_TEMPLATE = "ee4b83e0-b2dc-4880-a974-af7742e6e960"-- Water Balloon
+		--local _GRENADE_TEMPLATE = "0c16cc46-26f9-4c07-b334-7905a10591ea"-- Smoke Bomb
+		--local _GRENADE_TEMPLATE = "0c16cc46-26f9-4c07-b334-7905a10591ea"-- Molotov
 		--ThrowDust Test
 		local character,dummy,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet})
 		---@cast character Guid
@@ -128,16 +158,17 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 			GameHelpers.Surface.CreateSurface(pos, "None", 8, 0)
 			cleanup()
 		end
-		local grenade = CreateItemTemplateAtPosition("5208b121-64fa-4704-8924-c61c576e1ac5", 0, 0, 0)
+		local grenade = CreateItemTemplateAtPosition(_GRENADE_TEMPLATE, 0, 0, 0)
 		ItemToInventory(grenade, dummy, 1, 0, 1)
 		test:Wait(250)
 		GameHelpers.Action.UseSkill(character, "Projectile_EnemyThrowDust", dummy)
 		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
-		test:Wait(250)
+		test:Wait(1000)
 		test:AssertEquals(ObjectExists(grenade) == 0, true, "Grenade failed to explode (no Sabotage?)")
-		test:Wait(800)
+		test:Wait(1500)
 		return true
 	end,function(test, self)
+		local _GRENADE_TEMPLATE = "ee4b83e0-b2dc-4880-a974-af7742e6e960"-- Water Balloon
 		--DustBlast Test
 		local startPos = GameHelpers.Math.ExtendPositionWithForwardDirection(GameHelpers.Character.GetHost(), 12.0)
 		local totalDummies = 5
@@ -161,17 +192,18 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 		end
 		test:Wait(500)
 		for _,v in pairs(dummies) do
-			local grenade = CreateItemTemplateAtPosition("5208b121-64fa-4704-8924-c61c576e1ac5", 0, 0, 0)
+			local grenade = CreateItemTemplateAtPosition(_GRENADE_TEMPLATE, 0, 0, 0)
 			ItemToInventory(grenade, v, 1, 0, 1)
 			TeleportToRandomPosition(v, 0.5, "")
 		end
 		test:Wait(1000)
 		GameHelpers.Action.UseSkill(character, "Projectile_EnemyDustBlast", character)
 		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
-		test:Wait(500)
+		test:Wait(1000)
 		for i,v in pairs(dummies) do
-			test:AssertEquals(ItemTemplateIsInCharacterInventory(v, "5208b121-64fa-4704-8924-c61c576e1ac5") == 0, true, string.format("Dummy[%s] - Grenade failed to explode (no Sabotage?)", i))
+			test:AssertEquals(ItemTemplateIsInCharacterInventory(v, _GRENADE_TEMPLATE) == 0, true, string.format("Dummy[%s] - Grenade failed to explode (no Sabotage?)", i))
 		end
+		test:Wait(1500)
 		return true
 	end}),
 })
