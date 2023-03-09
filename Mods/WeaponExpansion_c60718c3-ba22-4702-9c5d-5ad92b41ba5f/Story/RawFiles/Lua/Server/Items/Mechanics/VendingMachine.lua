@@ -137,10 +137,19 @@ Ext.Osiris.RegisterListener("ItemTemplateAddedToCharacter", 3, "after", function
 	end
 end)
 
+local function _ClearSale()
+	DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "")
+	ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0)
+	ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0)
+	PartySetShopPriceModifier(NPC.VendingMachine, CharacterGetHostCharacter(), 100)
+	SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleCooldown", 0)
+	SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleDuration", 0)
+end
+
 Events.RegionChanged:Subscribe(function (e)
 	if e.State == REGIONSTATE.ENDED then
 		ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_Vending_Initialized", 0)
-		Osi.LLWEAPONEX_VendingMachine_ClearSaleCooldown()
+		_ClearSale()
 	end
 end)
 
