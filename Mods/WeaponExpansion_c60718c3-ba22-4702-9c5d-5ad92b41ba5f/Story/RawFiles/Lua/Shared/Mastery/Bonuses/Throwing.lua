@@ -146,19 +146,21 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 			end
 		end
 	end).Test({function(test, self)
-		local _GRENADE_TEMPLATE = "ee4b83e0-b2dc-4880-a974-af7742e6e960"-- Water Balloon
-		--local _GRENADE_TEMPLATE = "0c16cc46-26f9-4c07-b334-7905a10591ea"-- Smoke Bomb
-		--local _GRENADE_TEMPLATE = "0c16cc46-26f9-4c07-b334-7905a10591ea"-- Molotov
-		--ThrowDust Test
+		local templates = {
+			WaterBalloon = "ee4b83e0-b2dc-4880-a974-af7742e6e960",
+			SmokeBomb = "0c16cc46-26f9-4c07-b334-7905a10591ea",
+			Molotov = "5208b121-64fa-4704-8924-c61c576e1ac5",
+		}
+		local grnTemplate = templates.WaterBalloon
 		local character,dummy,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet=_eqSet})
 		---@cast character Guid
 		---@cast dummy Guid
+		local pos = GameHelpers.Math.GetPosition(dummy)
 		test.Cleanup = function ()
-			local pos = GameHelpers.Math.GetPosition(dummy)
 			GameHelpers.Surface.CreateSurface(pos, "None", 8, 0)
 			cleanup()
 		end
-		local grenade = CreateItemTemplateAtPosition(_GRENADE_TEMPLATE, 0, 0, 0)
+		local grenade = CreateItemTemplateAtPosition(grnTemplate, 0, 0, 0)
 		ItemToInventory(grenade, dummy, 1, 0, 1)
 		test:Wait(250)
 		GameHelpers.Action.UseSkill(character, "Projectile_EnemyThrowDust", dummy)
@@ -168,7 +170,12 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 		test:Wait(1500)
 		return true
 	end,function(test, self)
-		local _GRENADE_TEMPLATE = "ee4b83e0-b2dc-4880-a974-af7742e6e960"-- Water Balloon
+		local templates = {
+			WaterBalloon = "ee4b83e0-b2dc-4880-a974-af7742e6e960",
+			SmokeBomb = "0c16cc46-26f9-4c07-b334-7905a10591ea",
+			Molotov = "5208b121-64fa-4704-8924-c61c576e1ac5",
+		}
+		local grnTemplate = templates.Molotov
 		--DustBlast Test
 		local startPos = GameHelpers.Math.ExtendPositionWithForwardDirection(GameHelpers.Character.GetHost(), 12.0)
 		local totalDummies = 5
@@ -184,15 +191,14 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 		---@cast character Guid
 		---@cast dummies Guid[]
 		test.Cleanup = function ()
-			for _,v in pairs(dummies) do
-				local pos = GameHelpers.Math.GetPosition(v)
+			for _,pos in pairs(positions) do
 				GameHelpers.Surface.CreateSurface(pos, "None", 8, 0)
 			end
 			cleanup()
 		end
 		test:Wait(500)
 		for _,v in pairs(dummies) do
-			local grenade = CreateItemTemplateAtPosition(_GRENADE_TEMPLATE, 0, 0, 0)
+			local grenade = CreateItemTemplateAtPosition(grnTemplate, 0, 0, 0)
 			ItemToInventory(grenade, v, 1, 0, 1)
 			TeleportToRandomPosition(v, 0.5, "")
 		end
@@ -201,7 +207,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
 		test:WaitForSignal(self.ID, 5000); test:AssertGotSignal(self.ID)
 		test:Wait(1000)
 		for i,v in pairs(dummies) do
-			test:AssertEquals(ItemTemplateIsInCharacterInventory(v, _GRENADE_TEMPLATE) == 0, true, string.format("Dummy[%s] - Grenade failed to explode (no Sabotage?)", i))
+			test:AssertEquals(ItemTemplateIsInCharacterInventory(v, grnTemplate) == 0, true, string.format("Dummy[%s] - Grenade failed to explode (no Sabotage?)", i))
 		end
 		test:Wait(1500)
 		return true
