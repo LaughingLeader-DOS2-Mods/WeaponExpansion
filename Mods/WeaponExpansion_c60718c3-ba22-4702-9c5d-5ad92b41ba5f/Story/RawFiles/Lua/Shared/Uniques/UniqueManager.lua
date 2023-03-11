@@ -212,13 +212,9 @@ function UniqueManager.FindOrphanedUniques()
             PersistentVars.Uniques[uuid] = nil
         else
             local data = UniqueManager.GetDataByTag(tag)
-			if data ~= nil then
-				if data.UUID ~= uuid then
-					local owner = data:GetOwner(uuid)
-					data.Copies[uuid] = owner
-				else
-					PersistentVars.Uniques[uuid] = nil
-				end
+			if data ~= nil and data.UUID ~= uuid then
+				local owner = data:GetOwner(uuid)
+				data.Copies[uuid] = owner
             end
         end
 	end
@@ -410,6 +406,14 @@ if not _ISCLIENT then
 	
 	Timer.Subscribe("LLWEAPONEX_InitUniques", function (e)
 		UniqueManager.InitializeUniques()
+	end)
+
+	Ext.RegisterNetListener("LLWEAPONEX_Settings_MoveAllUniquesToVendingMachine", function (channel, payload, user)
+		for id,unique in pairs(Uniques) do
+			if not unique.IsLinkedItem and not unique:IsEquippedByAny() then
+				unique:Transfer(NPC.VendingMachine)
+			end
+		end
 	end)
 end
 

@@ -12,6 +12,7 @@ local isClient = Ext.IsClient()
 ---@field OnOwnerDeath function|nil
 ---@field OnGotOwner function|nil
 ---@field LinkedItem UniqueData|nil
+---@field IsLinkedItem boolean
 local UniqueData = {
 	Type = "UniqueData",
 	LevelData = {},
@@ -20,6 +21,7 @@ local UniqueData = {
 	LastProgressionLevel = 0,
 	ProgressionData = nil,
 	CanMoveToVendingMachine = true,
+	IsLinkedItem = false,
 	Tag = "",
 	Events = {
 		ItemAddedToCharacter = {}
@@ -234,7 +236,7 @@ function UniqueData:GetAllCharacterOwners()
 	end
 end
 
----Checks if any character have equipped the unique, or copies of the unique.
+---Checks if any characters have equipped the unique, or copies of the unique.
 ---@return boolean
 function UniqueData:IsEquippedByAny()
 	if not StringHelpers.IsNullOrEmpty(self.Owner) then
