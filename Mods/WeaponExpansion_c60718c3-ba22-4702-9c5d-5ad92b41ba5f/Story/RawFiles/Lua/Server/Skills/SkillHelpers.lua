@@ -30,9 +30,9 @@ function BonusRoll(chance, onlyOnce, minValue, maxValue)
 	end
 	minValue = minValue or 1
 	maxValue = maxValue or 999
-	if Ext.Random(1,999) <= chance then
+	if Ext.Utils.Random(1,999) <= chance then
 		return true
-	elseif not onlyOnce and (Ext.Random(0,1) == 1 and Ext.Random(1,999) <= chance) then
+	elseif not onlyOnce and (Ext.Utils.Random(0,1) == 1 and Ext.Utils.Random(1,999) <= chance) then
 		return true
 	end
 	return false

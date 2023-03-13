@@ -231,7 +231,7 @@ function InitOriginsUniques(region)
 			end
 			if not data.IsLinkItem then
 				if ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 0 then
-					local owner = GameHelpers.Item.GetOwner(item)
+					local owner = GameHelpers.Item.GetOwner(data.UUID)
 					if owner and GameHelpers.Character.IsPlayer(owner) then
 						ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 					else
@@ -257,7 +257,7 @@ end
 
 Ext.Osiris.RegisterListener("CharacterDied", 1, "after", function(character)
 	local uuid = GameHelpers.GetUUID(character)
-	if listenForDeath[uuid] then
+	if uuid and listenForDeath[uuid] then
 		if GameHelpers.Item.ItemIsEquipped(uuid, listenForDeath[uuid]) then
 			ItemToInventory(listenForDeath[uuid], uuid, 1, 0, 1)
 		end

@@ -15,7 +15,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_Rush", "Become a thundering force of will when rushing, <font color='#FFCE58'>knocking enemies aside</font> with a <font color='#F19824'>[ExtraData:LLWEAPONEX_MB_Bludgeon_Rush_DizzyChance]% chance to apply Dizzy for [ExtraData:LLWEAPONEX_MB_Bludgeon_Rush_DizzyTurns] turn(s)</font>."),
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success then
-			local forceDist = Ext.Random(2,4)
+			local forceDist = Ext.Utils.Random(2,4)
 			GameHelpers.ForceMoveObject(e.Character, e.Data.Target, forceDist, e.Skill)
 			local dizzyChance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_Rush_DizzyChance", 40.0)
 			if e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter") or GameHelpers.Math.Roll(dizzyChance) then

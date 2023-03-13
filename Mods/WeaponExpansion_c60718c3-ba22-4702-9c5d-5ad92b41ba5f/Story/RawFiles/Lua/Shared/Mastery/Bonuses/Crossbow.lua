@@ -178,7 +178,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 		if e.Data.Success then
 			if GameHelpers.Status.HasStatusType(e.Data.Target, "KNOCKED_DOWN") and not e.Data:HasHitFlag("CriticalHit", true) then
 				local attackerStats = e.Character.Stats
-				local critMultiplier = Game.Math.GetCriticalHitMultiplier(attackerStats.MainWeapon or attackerStats.OffHandWeapon)
+				local critMultiplier = Game.Math.GetCriticalHitMultiplier(attackerStats.MainWeapon or attackerStats.OffHandWeapon, attackerStats, 0)
 				e.Data:SetHitFlag("CriticalHit", true)
 				e.Data:MultiplyDamage(1 + critMultiplier)
 				SignalTestComplete(self.ID)
@@ -430,11 +430,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 3, {
 		_ArmorSystemTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_ShatteringSnipe", "<font color='#77FF33'>If attacking a target with no armor, or if the hit would result in no armor, the bolt rupture's the target's insides, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_RuptureDamage] and applying or extending <font color='#FF0000'>[Key:BLEEDING_DisplayName] for 1 turn</font>.</font>"),
 		_NoArmorSystemTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_ShatteringSnipe_NoArmor", "<font color='#77FF33'>If dealing over [ExtraData:LLWEAPONEX_MB_Crossbow_NoArmorSystem_DamageThreshold:25]% of the target's [Handle:h068a4744gf811g42b4ga8b1g29a9c62c13fc:Maximum Vitality], deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_RuptureDamage] and applying or extending <font color='#FF0000'>[Key:BLEEDING_DisplayName] for 1 turn.</font>"),
 		OnGetTooltip = function (self, id, character, tooltipType, ...)
+			---@diagnostic disable
 			if not ArmorSystemIsDisabled() then
 				return self._ArmorSystemTooltip
 			else
 				return self._NoArmorSystemTooltip
 			end
+			---@diagnostic enable
 		end,
 	}).Register.SkillHit(function(self, e, bonuses)
 		local target = e.Data.TargetObject
@@ -534,6 +536,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 4, {
 
 			local originalPos = e.Data.Projectile.SourcePosition
 			local skillData = Ext.Stats.Get(e.Skill, nil, false)
+			assert(skillData ~= nil, "Failed to get SkillData for " .. tostring(e.Skill))
 			local x,y,z = table.unpack(e.Data.Position)
 			local dist = math.max(1, math.ceil(skillData.TargetRadius / 2))
 			local dir = GameHelpers.Math.GetDirectionalVector(originalPos, e.Data.Position)

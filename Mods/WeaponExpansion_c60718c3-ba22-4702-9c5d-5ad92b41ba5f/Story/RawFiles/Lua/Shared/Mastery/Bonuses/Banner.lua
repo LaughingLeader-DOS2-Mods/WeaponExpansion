@@ -101,7 +101,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 		end
 	end).Test(function(test, self)
 		--Inspire cleanses certain negative statuses
-		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -385,15 +385,15 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		OnGetTooltip = function(bonus, skillOrStatus, character, tooltipType, status)
 			--Appending "Empowered by x's Banner" if Leadership is from a Banner user
 			if tooltipType == "status" and status then
-				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
-				if source and GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_Banner_Mastery3") or Vars.LeaderDebugMode then
+				local source = GameHelpers.TryGetObject(status.StatusSourceHandle, "EsvCharacter")
+				if source and (GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_Banner_Mastery3") or Vars.LeaderDebugMode) then
 					return string.format("%s<br>%s", bonus.Tooltip.Value, Text.MasteryBonusParams.BannerLeadershipSource:ReplacePlaceholders(source.DisplayName))
 				end
 			end
 		end
 	}).Register.Test(function(test, self)
 		--Gain bonus from Leadership
-		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -445,6 +445,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 				if extraParam.RootTemplate and extraParam.RootTemplate.OnUsePeaceActions then
 					for _,v in pairs(extraParam.RootTemplate.OnUsePeaceActions) do
 						if v.Type == "UseSkill" then
+							---@cast v UseSkillActionData
 							local properties = GameHelpers.Stats.GetSkillProperties(v.SkillID)
 							if properties then
 								for _,v2 in pairs(properties) do
@@ -457,15 +458,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 								end
 							end
 						elseif v.Type == "Consume" then
+							---@cast v ConsumeActionData
 							local statId = v.StatsId
 							if StringHelpers.IsNullOrWhitespace(v.StatsId) then
 								statId = id
 							end
-							if not StringHelpers.IsNullOrEmpty(statId) and GameHelpers.Stats.Exists(statId, "Potion") then
-								local potion = Ext.Stats.Get(statId, nil, false)
-								if potion.Vitality > 0 then
-									return true
-								end
+							if not StringHelpers.IsNullOrEmpty(statId) and GameHelpers.Stats.GetAttribute(statId, "Vitality", 0) > 0 then
+								return true
 							end
 						end
 					end
@@ -483,14 +482,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 				local mult = percentage * 0.01
 				local healAmount = math.ceil(e.OriginalAmount * mult)
 				Ext.Stats.Get("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", nil, false).HealValue = healAmount
-				Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", false)
+				Ext.Stats.Sync("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", false)
 
 				local affectedTargets = 0
 				for ally in GameHelpers.Grid.GetNearbyObjects(e.Target, {Radius=radius, Relation={Ally=true}}) do
 					affectedTargets = affectedTargets + 1
 
-					---@type EsvStatusHeal
-					local status = Ext.PrepareStatus(ally.MyGuid, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", 0.0)
+					local status = Ext.PrepareStatus(ally.MyGuid, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", 0.0) --[[@as EsvStatusHeal]]
 					status.HealAmount = healAmount
 					status.StatusSourceHandle = e.Target.Handle
 					Ext.ApplyStatus(status)
@@ -503,7 +501,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		end
 	end, "Target").Test(function(test, self)
 		--Gain bonus from Leadership
-		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -530,8 +528,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 if Vars.IsClient then
 	TooltipParams.SpecialParamFunctions.LLWEAPONEX_MB_Banner_LeadershipInspirationChance = function(param, statCharacter)
 		local baseBonusChance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance", 25, true)
-		if statCharacter.Character then
-			local status = statCharacter.Character:GetStatus("LEADERSHIP")
+		local character = statCharacter.Character --[[@as EclCharacter]]
+		if character then
+			local status = character:GetStatus("LEADERSHIP")
 			if status then
 				local bonusChance = 0
 	
@@ -579,7 +578,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 				if hasBonus then
 					--Block FLANKED
 					SignalTestComplete("BANNER_PROTECTION")
-					return false
+					e.PreventApply = true
 				end
 			end
 		end

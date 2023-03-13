@@ -45,7 +45,7 @@ end
 
 --Technically used for wands too
 ---@param character StatCharacter
----@return string
+---@return string|nil
 local function GetElementalWeakness(character)
 	local paramText = ""
 	local resistanceReductions = {}
@@ -99,13 +99,13 @@ local function GetElementalWeakness(character)
 				resistanceText = resistanceText .. "<br>"
 			end
 		end
-		return GameHelpers.Tooltip.ReplacePlaceholders(resistanceText, character)
+		return GameHelpers.Tooltip.ReplacePlaceholders(resistanceText, character.Character --[[@as EclCharacter]])
 	end
 end
 
 MasteryBonusManager.Vars.GetElementalWeakness = GetElementalWeakness
 
----@param character StatCharacter
+---@param character CDivinityStatsCharacter|EclCharacter
 MasteryBonusManager.Vars.HasElementalWeaknessWeapon = function(character)
 	if GameHelpers.Ext.ObjectIsCharacter(character) then
 		character = character.Stats
@@ -146,10 +146,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 1, {
 				for slot,weapon in pairs(GameHelpers.Item.FindTaggedEquipment(e.Character, "LLWEAPONEX_Staff")) do
 					if weapon and weapon.ItemType == "Weapon" then
 						for i, stat in pairs(weapon.Stats.DynamicStats) do
+							---@cast stat CDivinityStatsEquipmentAttributesWeapon
 							if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
 								local status = MasteryBonusManager.Vars.ElementalWeaknessStatuses[stat.DamageType]
 								if status then
-									GameHelpers.Status.Apply(e.Data.Target, status, duration, 0, e.Character)
+									GameHelpers.Status.Apply(e.Data.Target, status, duration, false, e.Character)
 								end
 							end
 						end

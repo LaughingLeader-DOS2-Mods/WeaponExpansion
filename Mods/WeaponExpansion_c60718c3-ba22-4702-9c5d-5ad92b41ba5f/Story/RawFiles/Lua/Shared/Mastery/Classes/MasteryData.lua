@@ -94,7 +94,7 @@ function CharacterMasteryData:Create(uuid,masteries)
 end
 
 ---@param data string
----@return CharacterMasteryData
+---@return CharacterMasteryData|nil
 function CharacterMasteryData:LoadFromString(data)
 	if data ~= nil then
 		local tbl = Common.JsonParse(data)

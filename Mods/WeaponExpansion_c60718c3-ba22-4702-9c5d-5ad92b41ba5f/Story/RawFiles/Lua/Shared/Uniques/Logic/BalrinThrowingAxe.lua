@@ -27,17 +27,13 @@ if not Vars.IsClient then
 		end
 	end)
 
-	---@param skill string
-	---@param char string
-	---@param state SKILL_STATE
-	---@param data SkillEventData|HitData
 	SkillManager.Register.All({"Projectile_LLWEAPONEX_Throw_UniqueAxe_A", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand"},
 	function(e)
 		if e.State == SKILL_STATE.USED then
-			local slot,item = GameHelpers.Item.GetEquippedTaggedItemSlot(e.Character, "LLWEAPONEX_UniqueThrowingAxeA")
+			local slot,itemGUID,item = GameHelpers.Item.GetEquippedTaggedItemSlot(e.Character, "LLWEAPONEX_UniqueThrowingAxeA")
 			if slot and item then
 				PersistentVars.SkillData.ThrowBalrinAxe[e.Character] = {
-					Item = item.MyGuid,
+					Item = itemGUID,
 					Slot = slot,
 					Skill = e.Skill,
 					Target = "",
@@ -47,13 +43,12 @@ if not Vars.IsClient then
 			local axeData = PersistentVars.SkillData.ThrowBalrinAxe[e.Character]
 			CharacterUnequipItem(e.Character.MyGuid, axeData.Item)
 			SetOnStage(axeData.Item, 0)
-			Osi.ProcObjectTimer(e.Character, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed", 1200)
 			Timer.StartObjectTimer("LLWEAPONEX_CheckForAxeMiss", e.Character, 1200)
 		elseif e.State == SKILL_STATE.HIT then
 			GainThrowingMasteryXP(e.Character, e.Data.Target)
 			if not e.Data.Success or GameHelpers.Ext.ObjectIsItem(e.Data.Target) then
 				EquipBalrinAxe(e.Character)
-				CharacterStatusText(e.Character, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
+				CharacterStatusText(e.Character.MyGuid, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 			else
 				local axeData = PersistentVars.SkillData.ThrowBalrinAxe[e.Character]
 				if axeData ~= nil then
@@ -66,7 +61,7 @@ if not Vars.IsClient then
 			Timer.Cancel("LLWEAPONEX_CheckForAxeMiss", e.Character)
 			if StringHelpers.IsNullOrEmpty(e.Data.Target) then
 				EquipBalrinAxe(e.Character)
-				CharacterStatusText(e.Character, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
+				CharacterStatusText(e.Character.MyGuid, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 			end
 		end
 	end)
@@ -115,11 +110,11 @@ if not Vars.IsClient then
 	StatusManager.Register.Applied("LLWEAPONEX_BALRINAXE_RECOVER_START", function(balrinUser, status, target)
 		if RecoverBalrinAxe(balrinUser) then
 			GameHelpers.Status.Remove(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A")
-			GameHelpers.Status.Apply(target, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, 1, balrinUser) -- No Aura
-			local character = GameHelpers.GetCharacter(balrinUser)
-			if ObjectIsCharacter(target) == 1 then
-				local targetCharacter = GameHelpers.GetCharacter(target)
-				local backStab = Game.Math.CanBackstab(character.Stats, targetCharacter.Stats)
+			GameHelpers.Status.Apply(target, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, true, balrinUser) -- No Aura
+			local character = GameHelpers.GetCharacter(balrinUser, "EsvCharacter")
+			if GameHelpers.Ext.ObjectIsCharacter(target) then
+				---@cast target EsvCharacter
+				local backStab = Game.Math.CanBackstab(character.Stats, target.Stats)
 				GameHelpers.Damage.ApplySkillDamage(character, target, "Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage", {
 					HitParams=HitFlagPresets.GuaranteedWeaponHit:Append({Backstab = backStab}),
 					GetDamageFunction=Skills.Damage.Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage})

@@ -29,7 +29,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 1, {
 		local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_HandCrossbow_Whirlwind_Radius", 6)
 		local minTargets = GameHelpers.GetExtraData("LLWEAPONEX_MB_HandCrossbow_Whirlwind_MinTargets", 1)
 		local maxTargets = GameHelpers.GetExtraData("LLWEAPONEX_MB_HandCrossbow_Whirlwind_MaxTargets", 3)
-		local targets = Ext.Random(minTargets, maxTargets)
+		local targets = Ext.Utils.Random(minTargets, maxTargets)
 		if radius > 0 and targets > 0 then
 			---@type EsvCharacter[]
 			local enemies = GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius = radius, Relation={Enemy=true}, Type="Character", AsTable=true, Sort="Random"})

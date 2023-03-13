@@ -595,7 +595,7 @@ if not Vars.IsClient then
 		end
 		local spells = BuildDropList()
 		if spells ~= nil then
-			local spell = GetRandomSpell(spells, Ext.Random(1,maxRoll))
+			local spell = GetRandomSpell(spells, Ext.Utils.Random(1,maxRoll))
 			--local spell = "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface"
 			local data = SpellData[spell]
 

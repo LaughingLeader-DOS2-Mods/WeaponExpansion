@@ -36,10 +36,13 @@ Ext.Events.GetSkillAPCost:Subscribe(function(e)
 		if Skills.HasTaggedRuneBoost(e.Character, "LLWEAPONEX_HeavyAmmo", "_LLWEAPONEX_HandCrossbows") then
 			local masteryLevel = Mastery.GetHighestMasteryRank(e.Character.Character, "LLWEAPONEX_HandCrossbow")
 			if masteryLevel >= 3 then
-				return 2,false
+				e.AP = 2
+				e.ElementalAffinity = false
 			else
-				return math.min(3, e.Skill.ActionPoints*3),false
+				e.AP = math.min(3, e.Skill.ActionPoints*3)
+				e.ElementalAffinity = false
 			end
+			e:StopPropagation()
 		end
 	end
 end)

@@ -1,3 +1,7 @@
+---@diagnostic disable
+
+--TODO Check for errors/refactoring
+
 local function SkillPropsIsTable(skill)
 	return type(skill) == "table" and skill.IsTable == true
 end
@@ -139,7 +143,7 @@ local function CalculateWeaponScaledDamage(character, weapon, damageList, noRand
         if noRandomization then
             finalAmount = min + math.floor(randRange / 2)
         else
-            finalAmount = min + Ext.Random(0, randRange)
+            finalAmount = min + Ext.Utils.Random(0, randRange)
         end
 
         damageList:Add(damageType, finalAmount)
@@ -364,7 +368,7 @@ local function GetPistolWeaponStatTable(character, isTooltip, noRandomization)
 	return GameHelpers.Ext.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, "Rifle", masteryBoost, nil, nil, rarity)
 end
 
----@param character StatCharacter
+---@param character EclCharacter|EsvCharacter
 ---@param isTooltip boolean
 ---@param noRandomization boolean
 ---@param item CDivinityStatsItem
@@ -385,7 +389,7 @@ local function GetPistolDamage(character, isTooltip, noRandomization, item)
 	return GetAbilityBasedWeaponDamage(character.Stats, isTooltip, noRandomization, weaponBoostStat, masteryBoost, "RogueLore", "Rifle", rarity)
 end
 
----@param character EsvCharacter
+---@param character EclCharacter|EsvCharacter
 ---@param isTooltip boolean
 ---@param noRandomization boolean
 ---@param item CDivinityStatsItem

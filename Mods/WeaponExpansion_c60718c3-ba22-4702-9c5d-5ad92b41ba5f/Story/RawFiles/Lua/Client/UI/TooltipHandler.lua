@@ -192,7 +192,7 @@ Events.GetTextPlaceholder:Subscribe(function(e)
 	if callback then
 		local b,result = xpcall(callback, debug.traceback, e.ID, e.Character)
 		if b then
-			return result
+			e.Result = result
 		else
 			Ext.Utils.PrintError(result)
 		end

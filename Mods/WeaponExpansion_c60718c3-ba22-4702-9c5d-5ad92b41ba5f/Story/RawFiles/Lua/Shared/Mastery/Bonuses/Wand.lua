@@ -172,13 +172,13 @@ if not Ext.IsClient() then
 			local projectiles = GameHelpers.GetExtraData("LLWEAPONEX_MB_Wand_SurfaceBonus_Fire_Projectiles", 4)
 			if projectiles > 0 then
 				for i=0,projectiles do
-					local ran = Ext.Random(0,1000) * 0.001
+					local ran = Ext.Utils.Random(0,1000) * 0.001
 					local angle = Ext.Utils.Round(360 * ran)
-					local pos = GameHelpers.Math.GetPositionWithAngle(target, angle, Ext.Random(6,9))
+					local pos = GameHelpers.Math.GetPositionWithAngle(target, angle, Ext.Utils.Random(6,9))
 					NRD_ProjectilePrepareLaunch()
 					local sx,sy,sz = table.unpack(target)
 					local tx,ty,tz = table.unpack(pos)
-					ty = ty + (Ext.Random(0,1) == 1 and Ext.Random(-20,20) or 0)
+					ty = ty + (Ext.Utils.Random(0,1) == 1 and Ext.Utils.Random(-20,20) or 0)
 					NRD_ProjectileSetVector3("SourcePosition", sx,sy,sz)
 					NRD_ProjectileSetVector3("TargetPosition", tx,ty,tz)
 					NRD_ProjectileSetInt("CasterLevel", source.Stats.Level)

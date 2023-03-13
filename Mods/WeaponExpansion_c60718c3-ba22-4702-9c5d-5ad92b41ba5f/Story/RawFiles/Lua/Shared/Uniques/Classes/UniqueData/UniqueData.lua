@@ -232,6 +232,7 @@ function UniqueData:GetAllCharacterOwners()
 		i = i + 1
 		if i <= count then
 			return owners[i]
+			---@diagnostic disable-next-line
 		end
 	end
 end

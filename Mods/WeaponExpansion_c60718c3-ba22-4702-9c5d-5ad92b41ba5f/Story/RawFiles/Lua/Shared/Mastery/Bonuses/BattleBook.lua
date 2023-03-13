@@ -10,8 +10,7 @@ MasteryBonusManager.Vars.BattleBookBookcaseRootTemplateWords = {
 }
 
 local function IsBookcase(template)
-	---@type ItemTemplate
-	local root = Ext.Template.GetTemplate(template)
+	local root = Ext.Template.GetTemplate(template) --[[@as ItemTemplate]]
 	if root then
 		for _,v in pairs(root.Treasures) do
 			if MasteryBonusManager.Vars.BattleBookBookcaseRootTemplateWords[v] == true then
@@ -60,19 +59,23 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 	}).Register.SkillCast(function(self, e, bonuses)
 		local turnBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Rested_TurnBonus", 1)
 		if turnBonus > 0 then
+			local hasTarget = false
 			e.Data:ForEach(function(v, targetType, skillEventData)
 				if turnBonus > 0 then
 					SetTag(v, "LLWEAPONEX_BattleBook_FirstAid_Active")
 				end
 				GameHelpers.Status.Apply(v, "LLWEAPONEX_MASTERYBONUS_BATTLEBOOK_FIRST_AID", 0, false, e.Character)
+				hasTarget = true
+			end, e.Data.TargetMode.Objects)
+			if hasTarget then
 				SignalTestComplete("BATTLEBOOK_FIRST_AID_BonusHealApplied")
-			end)
+			end
 		end
 	end).StatusApplied(function(self, e, bonuses)
 		if bonuses.HasBonus("BATTLEBOOK_FIRST_AID", e.Source) then
 			local turnBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Rested_TurnBonus", 1)
 			if turnBonus > 0 then
-				GameHelpers.Status.ExtendTurns(e.Target, e.Status, turnBonus, true, false)
+				GameHelpers.Status.ExtendTurns(e.Target, e.StatusId, turnBonus, true, false)
 				SignalTestComplete("BATTLEBOOK_FIRST_AID_TurnsExtended")
 			end
 		end
@@ -289,8 +292,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 local _CACHEDSKILLBOOKS = {}
 
 local function GetSkillWithMemorizationRequirements(id)
-	---@type StatEntrySkillData
-	local skill = Ext.Stats.Get(id, nil, false)
+	local skill = Ext.Stats.Get(id, nil, false) --[[@as StatEntrySkillData]]
 	if skill.MemorizationRequirements and #skill.MemorizationRequirements > 0 then
 		return id
 	end
@@ -333,6 +335,7 @@ end
 ---@return integer maxSkillSlots
 local function GetCharacterMajorityMemorizedSkillAbility(character)
 	character = GameHelpers.GetCharacter(character)
+	assert(character ~= nil, "Failed to get character")
 	local totalSlots = 0
 	totalSlots = totalSlots + GameHelpers.GetExtraData("CharacterBaseMemoryCapacity", 3)
 	totalSlots = totalSlots + (GameHelpers.GetExtraData("CharacterBaseMemoryCapacityGrowth", 0.5) * character.Stats.Level)
@@ -433,7 +436,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 					for _,v in pairs(skills) do
 						local rootTemplate = _CACHEDSKILLBOOKS[v]
 						if rootTemplate then
-							ItemTemplateAddTo(rootTemplate, target, 1, 1)
+							ItemTemplateAddTo(rootTemplate, target.MyGuid, 1, 1)
 							addedSkillbook = true
 							local root = Ext.Template.GetTemplate(rootTemplate)
 							if root then
@@ -457,11 +460,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 					end
 				end
 				if addedSkillbook then
-					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.BattleBook.ChallengeWon:ReplacePlaceholders(challengerName, targetName, skillbookName))
+					CombatLog.AddCombatText(Text.CombatLog.BattleBook.ChallengeWon:ReplacePlaceholders(challengerName, targetName, skillbookName))
 					SignalTestComplete("BATTLEBOOK_CHALLENGE_Reward")
 				else
 					CharacterGiveReward(challengerGUID, "OnlyGold", 1)
-					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.BattleBook.ChallengeWon_NoSkills:ReplacePlaceholders(challengerName, targetName))
+					CombatLog.AddCombatText(Text.CombatLog.BattleBook.ChallengeWon_NoSkills:ReplacePlaceholders(challengerName, targetName))
 				end
 			end
 			PersistentVars.MasteryMechanics.BattlebookChallenge[challengerGUID] = nil
@@ -489,7 +492,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 		test:Wait(500)
 		for _,v in pairs(GameHelpers.GetCharacter(char1):GetInventoryItems()) do
 			local item = GameHelpers.GetItem(v)
-			if not Data.EquipmentSlotNames[item.Slot] then
+			if item and not Data.EquipmentSlotNames[item.Slot] then
 				fprint(LOGLEVEL.WARNING, "[BATTLEBOOK_CHALLENGE] Reward(%s)", GameHelpers.GetDisplayName(item))
 			end
 		end
@@ -548,8 +551,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 					local boostPerSlot = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Scholar_DamageBoostPerTotalSkillSlots", 1)
 					local damageMult = (abilitySlots / totalSlots)
 					local damageBoost = Ext.Utils.Round(damageMult * (boostPerSlot * totalSlots))
-					local damageBoostText = math.floor(damageMult)
-					if damageBoostText < 1 then
+					local damageBoostFloored = math.floor(damageMult)
+					local damageBoostText = tostring(damageBoostFloored)
+					if damageBoostFloored < 1 then
 						damageBoostText = string.format("%.2f", damageMult)
 					end
 					--fprint(LOGLEVEL.DEFAULT, "[GetCharacterMajorityMemorizedSkillAbility] ability(%s) damageBoost(%s)", skillAbility, damageBoost)

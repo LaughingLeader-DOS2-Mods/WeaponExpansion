@@ -122,7 +122,7 @@ local function GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPo
         if noRandomization then
             randomMultiplier = 0.0
         else
-            randomMultiplier = 1.0 + (Ext.Random(0, damageRange) - damageRange/2) * 0.01
+            randomMultiplier = 1.0 + (Ext.Utils.Random(0, damageRange) - damageRange/2) * 0.01
         end
 
         local attrDamageScale

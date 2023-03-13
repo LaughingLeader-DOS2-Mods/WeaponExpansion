@@ -37,17 +37,8 @@ if Vars.DebugMode then
 	end
 	Ext.RegisterConsoleCommand("dumpRanks", dumpRanks)
 
-	--Ext.Stats.Get(GameHelpers.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter())).StatsId, nil, false).Requirements = {[1]={Requirement="Finesse", Not=false, Param=0}}
-	--Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify({NetID=GameHelpers.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter())).NetID, Stats={Requirements={[1]={Requirement="Finesse", Not=false, Param=0}}}}), nil)
-	Ext.RegisterConsoleCommand("llweaponex_changereq", function(cmd)
-		local item = GameHelpers.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter()))
-		local stat = Ext.Stats.Get(item.StatsId, nil, false)
-		stat.Requirements = {[1]={Requirement="Memory", Not=false, Param=0}}
-		EquipmentManager.SyncItemStatChanges(item, {Requirements=stat.Requirements})
-	end)
-
 	Ext.RegisterConsoleCommand("llweaponex_tovendor", function(cmd)
-		TeleportTo(CharacterGetHostCharacter(), NPC.VendingMachine)
+		Osi.TeleportTo(CharacterGetHostCharacter(), NPC.VendingMachine)
 	end)
 
 	Ext.RegisterConsoleCommand("llweaponex_testmastery", function(cmd, masteryId, subcmd)

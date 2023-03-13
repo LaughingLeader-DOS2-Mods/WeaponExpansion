@@ -1,7 +1,7 @@
 local _ISCLIENT = Ext.IsClient()
 local _type = type
 
----@alias MasteryBonusDataGetIsTooltipActiveCallback fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID, data:EsvStatus|StatEntrySkillData):boolean
+---@alias MasteryBonusDataGetIsTooltipActiveCallback (fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID, data:EsvStatus|StatEntrySkillData, ...:any):boolean|nil)
 
 ---@class MasteryBonusDataMasteryMenuSettings
 ---@field OnlyUseTable "Skill"|"Status" Make the rank text only show the affected statuses or skills tables.
@@ -23,7 +23,7 @@ local _type = type
 ---@field DisableStatusTooltip boolean
 ---@field NamePrefix TranslatedString|string
 ---@field GetIsTooltipActive MasteryBonusDataGetIsTooltipActiveCallback Custom callback to determine if a bonus is "active" when a tooltip occurs.
----@field OnGetTooltip fun(self:MasteryBonusData, id:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID, extraParam:EclStatus|EclItem|any):string|TranslatedString Custom callback to determine tooltip text dynamically.
+---@field OnGetTooltip (fun(self:MasteryBonusData, id:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID, extraParam:EclStatus|EclItem|any):string|TranslatedString|nil) Custom callback to determine tooltip text dynamically.
 ---@field DeferRegistration boolean Defer any registration functions until FinalizeRegistration() is called.
 
 ---@alias MasteryBonusDataTooltipID string|'"skill"'|'"status"'|'"item"'
@@ -93,7 +93,6 @@ local _DefaultMasteryMenuSettings = {
 ---@param params MasteryBonusDataParams
 ---@return MasteryBonusData
 function MasteryBonusData:Create(id, params)
-	---@type MasteryBonusData
 	local this = {
 		ID = id or "",
 		IsPassive = false,
@@ -103,6 +102,7 @@ function MasteryBonusData:Create(id, params)
 			TooltipStatus = "",
 		}
 	}
+	---@cast this MasteryBonusData
 	local _private = {
 		Register = {
 			__self = this
@@ -464,7 +464,7 @@ function _INTERNALREG.WeaponTagHit(self, tag, callback, skipBonusCheck, checkBon
 					callback(self, e, bonuses)
 				end, {MatchArgs={Tag=tag}, Priority=priority})
 			else
-				---@param e OnWeaponTypeHitEventArgs
+				---@param e OnWeaponTagHitEventArgs
 				local wrapper = function(e)
 					bonuses = MasteryBonusManager._INTERNAL.GatherMasteryBonuses(self.ID, e.Attacker, e.TargetIsObject and e.Target or nil)
 					if checkBonusOn == "None" or MasteryBonusManager._INTERNAL.HasMatchedBonuses(bonuses, self.ID) then
@@ -628,9 +628,9 @@ function _INTERNALREG.TurnCounter(self, id, callback, skipBonusCheck, checkBonus
 					callback(self, e, bonuses)
 				end)
 			else
-				---@param e OnTurnEndedEventArgs
+				---@param e OnTurnCounterEventArgs
 				local wrapper = function(e)
-					bonuses = MasteryBonusManager._INTERNAL.GatherMasteryBonuses(self.ID, e.Object)
+					bonuses = MasteryBonusManager._INTERNAL.GatherMasteryBonuses(self.ID, e.Data.Target)
 					if checkBonusOn == "None" or MasteryBonusManager._INTERNAL.HasMatchedBonuses(bonuses, self.ID) then
 						callback(self, e, bonuses)
 					end

@@ -8,7 +8,7 @@ end
 ---@param tooltip TooltipData
 ---@param weaponTypeName string
 ---@param scaleText string
----@param damageRange table<string,number[]>
+---@param damageRange CalculatedDamageRange
 ---@param attackCost integer
 local function CreateFakeWeaponTooltip(tooltip, weaponTypeName, scaleText, damageRange, attackCost, weaponRange, equippedLabel)
 	local armorSlotType = tooltip:GetElement("ArmorSlotType")
@@ -209,7 +209,7 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	})
 	equipped.Slot = Text.ItemTooltip.RuneSlot.Value
 	---@type AnyStatProperty[]
-	local extraProperties = GameHelpers.Stats.GetExtraProperties(runeEffectWeapon, "ExtraProperties")
+	local extraProperties = GameHelpers.Stats.GetExtraProperties(runeEffectWeapon)
 	if extraProperties ~= nil and #extraProperties > 0 then
 		for i,v in pairs(extraProperties) do
 			if v.Type == "Status" and not Data.EngineStatus[v.Action] and GameHelpers.Stats.Exists(v.Action) then
@@ -225,7 +225,7 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 					if propStatus and not StringHelpers.IsNullOrEmpty(propStatus.DescriptionParams) then
 						local paramValues = GameHelpers.Tooltip.GetStatusDescriptionParamValues(propStatus, character)
 						if #paramValues > 0 then
-							description = StringHelpers.ReplacePlaceholders(description, paramValues)
+							description = StringHelpers.ReplacePlaceholders(description, table.unpack(paramValues))
 						end
 					end
 				end
@@ -357,7 +357,7 @@ local function OnItemTooltip(item, tooltip)
 				local apCost = GameHelpers.Stats.GetAttribute("NoWeapon", "AttackAPCost", 0)
 				local weaponRange = string.format("%sm", GameHelpers.Math.Round(GameHelpers.Stats.GetAttribute("NoWeapon", "WeaponRange", 1) / 100, 2))
 				local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LocalizedText.AttributeNames[highestAttribute].Value)
-				local slotInfoText = string.format(" (%s)", LocalizedText.Slots[item.Stats.Slot].Value)
+				local slotInfoText = string.format(" (%s)", LocalizedText.Slots[Ext.Enums.ItemSlot32[item.Stats.ItemSlot]].Value)
 				local equipped = tooltip:GetElement("Equipped")
 				if equipped and not StringHelpers.IsNullOrWhitespace(equipped.Slot) then
 					slotInfoText = string.format(" (%s)", equipped.Slot)
@@ -383,8 +383,9 @@ local function OnItemTooltip(item, tooltip)
 				if combatShield then
 					local attribute = GameHelpers.Item.GetPrimaryRequirementAttribute(combatShield)
 					local damageRange = Game.Math.CalculateWeaponDamageWithDamageBoost(combatShield.Stats)
-					local apCost = combatShield.Stats.StatsEntry.AttackAPCost
-					local weaponRange = string.format("%sm", combatShield.Stats.StatsEntry.WeaponRange / 100)
+					local weaponStat = combatShield.Stats.StatsEntry --[[@as StatEntryWeapon]]
+					local apCost = weaponStat.AttackAPCost
+					local weaponRange = string.format("%sm", weaponStat.WeaponRange / 100)
 					local scaleText = nil
 					if attribute then
 						scaleText = Text.WeaponScaling.General:ReplacePlaceholders(LocalizedText.AttributeNames[attribute].Value)
@@ -465,9 +466,10 @@ local function OnItemTooltip(item, tooltip)
 		if not Data.ItemRarity[statsId] then
 			local bonusText = MasteryBonusManager.GetBonusText(character, item.StatsId, "item", item, _TAGS, tooltip.ItemHasSkill == true)
 			if bonusText then
+				---@type ItemDescription|SkillDescription
 				local topDesc = descriptionElement
 				if GameHelpers.Item.IsObject(item) then
-					topDesc = tooltip:GetElement("SkillDescription", {Type="SkillDescription", Label=""})
+					topDesc = tooltip:GetElement("SkillDescription", {Type="SkillDescription", Label=""}) --[[@as SkillDescription]]
 					--Use a SkillDescription so the text is higher up, instead of being below the item description.
 					--Equipment doesn't seem to display SkillDescription unfortunately.
 				end

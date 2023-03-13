@@ -299,7 +299,7 @@ function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback
 	end
 end
 
----@param state SKILL_STATE
+---@param state SKILL_STATE|nil
 ---@param skill string|string[]
 ---@param bonus MasteryBonusData
 ---@param callback fun(bonus:MasteryBonusData, e:OnSkillStateAllEventArgs, bonuses:MasteryActiveBonusesTable|MasteryActiveBonuses)
@@ -417,91 +417,6 @@ function MasteryBonusManager.RegisterBonusStatusTypeListener(statusEvent, status
 	end
 end
 
----@param target EsvCharacter
----@param source EsvCharacter|nil
----@param checkBonusOn MasteryBonusCheckTarget
-local function OnBeforeStatusAttemptCallback(callback, matchBonuses, target, status, source, statusType, skipBonusCheck, checkBonusOn)
-	local targetGUID = GameHelpers.GetUUID(target)
-	if targetGUID then
-		if skipBonusCheck ~= true then
-			checkBonusOn = checkBonusOn or "Any"
-			local bonuses = GatherMasteryBonuses(checkBonusOn, source, target)
-			if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
-				local b,result = xpcall(callback, debug.traceback, bonuses, target, status, source, statusType)
-				if b then
-					return result
-				else
-					Ext.Utils.PrintError(result)
-				end
-			end
-		else
-			local b,result = xpcall(callback, debug.traceback, _EMPTYBONUSES, target, status, source, statusType)
-			if b then
-				return result
-			else
-				Ext.Utils.PrintError(result)
-			end
-		end
-	end
-end
-
----Get a table of enemies in combat, determined by distance to a source.
----@deprecated
----@param char Guid
----@param maxDistance number
----@param sortByClosest boolean
----@param limit integer
----@param ignoreTarget Guid
----@return MasteryBonusManagerClosestEnemyData[]
-function MasteryBonusManager.GetClosestCombatEnemies(char, maxDistance, sortByClosest, limit, ignoreTarget)
-	if maxDistance == nil then
-		maxDistance = 30
-	end
-	local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
-	if data ~= nil then
-		local lastDist = 999
-		local targets = {}
-		for i,v in pairs(data) do
-			local enemy = v[1]
-			if (enemy ~= char and enemy ~= ignoreTarget and
-				CharacterIsEnemy(char, enemy) == 1 and 
-				CharacterIsDead(enemy) == 0 and 
-				not GameHelpers.Status.IsSneakingOrInvisible(char)) then
-					local dist = GetDistanceTo(char,enemy)
-					if dist <= maxDistance then
-						if limit == 1 then
-							if dist < lastDist then
-								targets[1] = enemy
-							end
-						else
-							table.insert(targets, {Dist = dist, UUID = enemy})
-						end
-						lastDist = dist
-					end
-			end
-		end
-		if #targets > 1 then
-			if sortByClosest then
-				table.sort(targets, function(a,b)
-					return a.Dist < b.Dist
-				end)
-			end
-			if limit ~= nil and limit > 1 then
-				local spliced = {}
-				local count = #targets
-				if limit < count then
-					count = limit
-				end
-				for i=1,count,1 do
-					spliced[#spliced+1] = targets[i]
-				end
-				return spliced
-			end
-		end
-		return targets
-	end
-end
-
 local function _GetBonus(tbl)
 	if tbl.Type == "MasteryBonusData" then
 		return tbl
@@ -553,7 +468,7 @@ end
 ---@param mastery string
 ---@param rank integer
 ---@param id string Optional ID to look for.
----@return MasteryBonusData|MasteryBonusData[]
+---@return MasteryBonusData|MasteryBonusData[]|nil
 function MasteryBonusManager.GetRankBonus(mastery, rank, id)
 	---@type MasteryData
 	local masteryData = Masteries[mastery]
@@ -604,6 +519,7 @@ local function EvaluateEntryForBonusText(data, character, skillOrStatus, tooltip
 		local _TAGS = GameHelpers.GetAllTags(character, true, true)
 		--Old style
 		local bonusIsActive = true
+		---@cast data table
 		if data.Active ~= nil and data.Active.Type == "Tag" then
 			if data.Active.Source == true and _type(status) == "userdata" then
 				if GameHelpers.IsValidHandle(status.StatusSourceHandle) then
@@ -617,8 +533,8 @@ local function EvaluateEntryForBonusText(data, character, skillOrStatus, tooltip
 				bonusIsActive = _TAGS[data.Active.Value] == true
 			end
 		end
-		if bonusIsActive then
-			local descriptionText = TooltipParams.GetDescriptionText(character, data, status, "status")
+		if bonusIsActive and status then
+			local descriptionText = TooltipParams.GetDescriptionText(character, data, status.StatusId, "status")
 			if not StringHelpers.IsNullOrWhitespace(descriptionText) then
 				return descriptionText
 			end
@@ -646,6 +562,7 @@ function MasteryBonusManager.GetOrderedMasteryRanks()
 		i = i + 1
 		if i <= count then
 			return rankOrder[i],_registeredBonuses[rankOrder[i]]
+			---@diagnostic disable-next-line
 		end
 	end
 end
@@ -668,8 +585,9 @@ end
 ---@param character EsvCharacter|EclCharacter
 ---@param skillOrStatus string
 ---@param tooltipType MasteryBonusDataTooltipID
----@param status EclStatus|nil
-function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType, status, ...)
+---@param obj any
+---@vararg any
+function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType, obj, ...)
 	local textEntries = {}
 	local checkCharacters = {}
 	local cLen = 0
@@ -686,8 +604,8 @@ function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType,
 	cLen = cLen + 1
 	checkCharacters[cLen] = {Tags=GameHelpers.GetAllTags(character, true, true), Character=character}
 
-	if tooltipType == "status" and status then
-		local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
+	if tooltipType == "status" and obj then
+		local source = GameHelpers.TryGetObject(obj.StatusSourceHandle)
 		if source and GameHelpers.Ext.ObjectIsCharacter(source) and source.NetID ~= character.NetID then
 			cLen = cLen + 1
 			---@cast source EclCharacter
@@ -700,7 +618,7 @@ function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType,
 			local addedRankName = false
 			for i=1,#tbl do
 				local v = tbl[i]
-				local text = EvaluateEntryForBonusText(v, masteryCharacter, skillOrStatus, tooltipType, status, ...)
+				local text = EvaluateEntryForBonusText(v, masteryCharacter, skillOrStatus, tooltipType, obj, ...)
 				if text then
 					if not addedRankName then
 						local rankName = GameHelpers.GetStringKeyText(rankTag, "")
@@ -799,6 +717,7 @@ function MasteryBonusManager.SetBonusDisabled(character, bonusID, disabled)
 	end
 	character = GameHelpers.GetCharacter(character)
 	local characterId = GameHelpers.GetObjectID(character)
+	assert(characterId ~= nil, "Failed to get characterId for character")
 	local targetTable = _INTERNAL.CharacterDisabledBonuses[characterId]
 	if not targetTable and b then
 		_INTERNAL.CharacterDisabledBonuses[characterId] = {}
@@ -973,26 +892,9 @@ else
 					end
 				end
 			end
+			return false
 		end
 	})
 
 	UI.ContextMenu.Register.Action(ToggleBonusesCM)
 end
-
-Ext.RegisterConsoleCommand("weaponex_dumpbonuses", function (cmd, ...)
-	local ids = {}
-	for tag,tbl in pairs(_registeredBonuses) do
-		for _,v in pairs(tbl) do
-			ids[#ids+1] = v.ID
-		end
-	end
-	table.sort(ids)
-	local text = "Key\tContent\tHandle\n"
-	for i=1,#ids do
-		local v = ids[i]
-		local name,handle = Ext.GetTranslatedString(v, v)
-		text = text .. string.format("%s\t%s\t%s\n", v, name, handle or "")
-	end
-	Ext.Utils.Print("Saved bonus names to 'Dumps/WeaponExpansion_Bonuses.tsv'")
-	GameHelpers.IO.SaveFile("Dumps/WeaponExpansion_Bonuses.tsv", text)
-end)

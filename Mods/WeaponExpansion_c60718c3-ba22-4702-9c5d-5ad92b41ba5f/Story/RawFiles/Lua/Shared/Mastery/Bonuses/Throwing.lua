@@ -249,6 +249,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
 		Osi.ObjectTurnStarted(character)
 		test:WaitForSignal("THROWING_FREE_THROW_TagSet", 500); test:AssertGotSignal("THROWING_FREE_THROW_TagSet")
 		--GameHelpers.Action.UseSkill(character, "Projectile_Grenade_Nailbomb", dummy)
+		---@diagnostic disable-next-line
 		Ext.Events.GetSkillAPCost:Throw({
 			AP = 2,
 			ElementalAffinity = false,
@@ -701,10 +702,11 @@ if not Vars.IsClient then
 		end)
 	end
 else
-	---@param character CDivinityStatsCharacter
-	TooltipParams.SpecialParamFunctions.LLWEAPONEX_ThrowWeapon_Damage = function (param, character)
+	---@param statCharacer CDivinityStatsCharacter
+	TooltipParams.SpecialParamFunctions.LLWEAPONEX_ThrowWeapon_Damage = function (param, statCharacer)
+		local character = statCharacer.Character --[[@as EclCharacter]]
 		local damage = GameHelpers.Tooltip.GetSkillDamageText("Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", character)
-		local shield = character:GetItemBySlot("Shield")
+		local shield = character:GetItemObjectBySlot("Shield")
 		if shield and shield.ItemType == "Shield" then
 			local shieldDamage = GameHelpers.Tooltip.GetSkillDamageText("Projectile_LLWEAPONEX_ThrowWeapon_ApplyShieldDamage", character)
 			if StringHelpers.IsNullOrWhitespace(shieldDamage) then

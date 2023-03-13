@@ -91,7 +91,7 @@ function Math.AbilityScaling.CalculateWeaponScaledDamage(character, weapon, dama
         if noRandomization then
             finalAmount = damage.Min + math.floor(randRange / 2)
         else
-            finalAmount = damage.Min + Ext.Random(0, randRange)
+            finalAmount = damage.Min + Ext.Utils.Random(0, randRange)
         end
 
         damageList:Add(damageType, finalAmount)

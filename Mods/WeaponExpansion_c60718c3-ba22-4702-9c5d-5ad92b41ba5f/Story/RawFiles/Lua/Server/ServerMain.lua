@@ -178,72 +178,11 @@ function PlayBulletImpact(target)
     PlaySound(target, sound)
 end
 
-function CanRedirectHit(target, handle, hit_type)
-    if hit_type ~= 4 and hit_type ~= 6 and hit_type ~= 5 then
-        local missed = NRD_HitGetInt(handle, "Missed")
-        local dodged = NRD_HitGetInt(handle, "Dodged")
-        local blocked = NRD_HitGetInt(handle, "Blocked")
-        Ext.Utils.Print("[LLWEAPONEX_Main.lua:CanRedirectHit] Missed (",missed,"). Dodged (",dodged,") Blocked (",blocked,")")
-        if missed ~= 1 and dodged ~= 1 and blocked ~= 1 then
-            return true
-        end
-    end
-    return false
-end
-
-function RedirectDamage(blocker, target, attacker, handlestr, reduction_str)
-    local redirect_damage_func = Mods.LeaderLib.RedirectDamage
-    if redirect_damage_func ~= nil then
-        local run_success,redirected = pcall(redirect_damage_func, blocker, target, attacker, handlestr, reduction_str)
-        if run_success and redirected then
-            Osi.LLWEAPONEX_DualShields_ShieldCover(attacker, blocker, target);
-        end
-    else
-        local handle = tonumber(handlestr)
-        local reduction = tonumber(reduction_str)
-        --if CanRedirectHit(target, handle, hit_type) then -- Ignore surface, DoT, and reflected damage
-        local hit_type_name = NRD_StatusGetString(target, handle, "DamageSourceType")
-        --local hit_type = NRD_StatusGetInt(target, handle, "HitType")
-        Ext.Utils.Print("[LLWEAPONEX_Main.lua:RedirectDamage] Redirecting damage Handle("..handlestr.."). Blocker(",blocker,") Target(",target,") Attacker(",attacker,")")
-        local redirected_hit = NRD_HitPrepare(blocker, attacker)
-        local damageRedirected = false
-
-        for _,v in Data.DamageTypes:Get() do
-            local damage = NRD_HitStatusGetDamage(target, handle, v)
-            if damage ~= nil and damage > 0 then
-                local reduced_damage = math.max(math.ceil(damage * reduction), 1)
-                NRD_HitStatusClearDamage(target, handle, v)
-                NRD_HitStatusAddDamage(target, handle, v, reduced_damage)
-                NRD_HitAddDamage(redirected_hit, v, reduced_damage)
-                Ext.Utils.Print("Redirected damage: "..tostring(damage).." => "..tostring(reduced_damage).." for type: "..v)
-                damageRedirected = true
-            end
-        end
-
-        if damageRedirected then
-            local is_crit = NRD_StatusGetInt(target, handle, "CriticalHit") == 1
-            if is_crit then
-                NRD_HitSetInt(redirected_hit, "CriticalRoll", 1);
-            else
-                NRD_HitSetInt(redirected_hit, "CriticalRoll", 2);
-            end
-            NRD_HitSetInt(redirected_hit, "SimulateHit", 1);
-            NRD_HitSetInt(redirected_hit, "HitType", 6);
-            NRD_HitSetInt(redirected_hit, "Hit", 1);
-            NRD_HitSetInt(redirected_hit, "NoHitRoll", 1);
-                
-            --Osi.LLWEAPONEX_DualShields_ShieldCover_StoreHit(blocker, target, attacker, redirected_hit)
-            NRD_HitExecute(redirected_hit);
-            Osi.LLWEAPONEX_DualShields_ShieldCover(attacker, blocker, target);
-        end
-    end
-end
-
 ---Change a two-handed weapon to a one-handed weapon.
 ---@param char string
 ---@param item string
 ---@return string Weapon
-function TwoHandedToOnehanded(char, item)
+local function TwoHandedToOnehanded(char, item)
     local stat = NRD_ItemGetStatsId(item)
     local level = NRD_ItemGetInt(item, "LevelOverride")
     if level == nil then
@@ -268,6 +207,7 @@ function TwoHandedToOnehanded(char, item)
     --NRD_ItemSetPermanentBoostString(cloned, "IsTwoHanded", "Yes")
     NRD_ItemSetPermanentBoostInt(cloned, "IsTwoHanded", 0)
     CharacterEquipItem(char, cloned)
+    return cloned
 end
 
 Events.RegionChanged:Subscribe(function (e)

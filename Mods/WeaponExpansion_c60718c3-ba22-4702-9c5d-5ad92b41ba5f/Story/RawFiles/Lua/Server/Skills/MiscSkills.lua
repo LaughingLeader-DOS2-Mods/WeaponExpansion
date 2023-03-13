@@ -59,7 +59,7 @@ SkillManager.Register.Hit("Target_LLWEAPONEX_Steal", function(e)
 			local name = e.Character.DisplayName
 			
 			if chance > 0 then
-				local roll = Ext.Random(0,100)
+				local roll = Ext.Utils.Random(0,100)
 				if roll <= chance then
 					stolenSuccess = stolenSuccess + 1
 					SetVarInteger(e.Data.Target, "LLWEAPONEX_Steal_TotalStolen", stolenSuccess)

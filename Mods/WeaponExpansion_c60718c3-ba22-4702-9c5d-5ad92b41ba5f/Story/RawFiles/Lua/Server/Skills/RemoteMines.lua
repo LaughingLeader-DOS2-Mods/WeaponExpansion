@@ -46,7 +46,7 @@ Config.Skill.RemoteMines.Detonate = function (target, source)
 			end
 		end
 		---@cast target EsvItem
-		if target:HasTag("LLWEAPONEX_RemoteMine") then
+		if source and target:HasTag("LLWEAPONEX_RemoteMine") then
 			SetVarInteger(target.MyGuid, "LLWEAPONEX_ItemAmount", target.Amount)
 			local skill = GetVarFixedString(target.MyGuid, "LLWEAPONEX_Mine_Skill")
 			if not StringHelpers.IsNullOrWhitespace(skill) then
@@ -184,7 +184,7 @@ StatusManager.Subscribe.Applied("LLWEAPONEX_REMOTEMINE_DETONATE", function(e)
 	if e.Source and not GameHelpers.Ext.ObjectIsItem(e.Source) then
 		if e.TargetGUID == e.SourceGUID or not GameHelpers.Character.CanAttackTarget(e.Target, e.Source, true) then
 			-- Prevent the caster from detonating their own inventory, or an ally's
-			return false
+			return
 		end
 	end
 	Config.Skill.RemoteMines.Detonate(e.Target, e.Source)

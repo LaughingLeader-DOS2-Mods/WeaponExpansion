@@ -119,10 +119,10 @@ if not Vars.IsClient then
 		local targetData = PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid]
 		for target in GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=radius, Relation={Enemy=true}}) do
 			--local character = GameHelpers.GetCharacter(v)
-			local b,count = HasComboStatus(target.MyGuid)
+			local b,count = HasComboStatus(target)
 			if b then
 				table.insert(targetData, {UUID=target.MyGuid,Count=count,Valid=true})
-				ClearBlademasterComboStatuses(target.MyGuid)
+				ClearBlademasterComboStatuses(target)
 			end
 		end
 		if #targetData > 0 then
@@ -214,7 +214,7 @@ if not Vars.IsClient then
 
 				--Recalculate damage to max amount
 
-				local damageList = Game.Math.GetSkillDamage(e.Data.SkillData, e.Character.Stats, false, false, e.Character.WorldPos, e.Data.TargetObject.WorldPos, e.Character.Stats.Level, true)
+				local damageList = Game.Math.GetSkillDamage(e.Data.SkillData, e.Character.Stats, false, false, e.Character.WorldPos, e.Data.TargetObject.WorldPos, e.Character.Stats.Level, true, e.Character.Stats.MainWeapon, e.Character.Stats.OffHandWeapon)
 
 				e.Data.DamageList:Merge(damageList)
 
@@ -344,25 +344,25 @@ if not Vars.IsClient then
 	end)
 
 	-- Remove combat statuses when the attacker's turn ends, instead of the target.
-	RegisterStatusListener("Applied", ComboStatuses, function(target, status, source)
-		if PersistentVars.StatusData.KatanaCombo[source] == nil then
-			PersistentVars.StatusData.KatanaCombo[source] = {}
-		end
-		PersistentVars.StatusData.KatanaCombo[source][target] = true
-		if IsTagged(source, "LLWEAPONEX_Blademaster_Target_Available") == 0 then
-			SetTag(source, "LLWEAPONEX_Blademaster_Target_Available")
-		end
-		if ObjectIsCharacter(target) == 1 then
-			local statusObj = GameHelpers.GetCharacter(target):GetStatus(status)
-			if statusObj ~= nil then
-				statusObj.KeepAlive = true
+	StatusManager.Subscribe.Applied(ComboStatuses, function (e)
+		if e.Source then
+			if PersistentVars.StatusData.KatanaCombo[e.SourceGUID] == nil then
+				PersistentVars.StatusData.KatanaCombo[e.SourceGUID] = {}
+			end
+			PersistentVars.StatusData.KatanaCombo[e.SourceGUID][e.TargetGUID] = true
+			if not e.Source:HasTag("LLWEAPONEX_Blademaster_Target_Available") then
+				SetTag(e.SourceGUID, "LLWEAPONEX_Blademaster_Target_Available")
+			end
+			if GameHelpers.Ext.ObjectIsCharacter(e.Target) then
+				e.Status.KeepAlive = true
+				e.Status.RequestClientSync = true
 			end
 		end
 	end)
 
 	StatusManager.Register.Removed(ComboStatuses, function(target, status, ...)
-		if target and not HasComboStatus(target.MyGuid) then
-			CheckActiveCombo(target.MyGuid)
+		if target and not HasComboStatus(target) then
+			CheckActiveCombo(target)
 		end
 	end)
 
@@ -381,8 +381,8 @@ if not Vars.IsClient then
 	---@param source EsvCharacter
 	---@param data HitData
 	---@param tag string
-	---@param skill string
-	local function ApplyKatanaCombo(target, source, data, tag, skill)
+	---@param skillData StatEntrySkillData|nil
+	local function ApplyKatanaCombo(target, source, data, tag, skillData)
 		if GameHelpers.Ext.ObjectIsCharacter(target) and GameHelpers.Character.CanAttackTarget(target, source, false) then
 			if MasteryBonusManager.HasMasteryBonus(source, "KATANA_COMBO") and ObjectGetFlag(source.MyGuid, "LLWEAPONEX_Katana_ComboDisabled") == 0 then
 				local maxStatus = ComboStatuses[#ComboStatuses]
@@ -412,22 +412,22 @@ if not Vars.IsClient then
 	--     end
 	-- end)
 
-	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_Katana", function(tag, attacker, target, data, targetIsObject, skill)
-		if targetIsObject then
-			ApplyKatanaCombo(target, attacker, data, "LLWEAPONEX_Katana", data.SkillData)
-			if data.Damage > 0 and GameHelpers.Status.IsActive(attacker, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") then
-				GameHelpers.Status.Remove(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
+	Events.OnWeaponTagHit:Subscribe(function (e)
+		if e.TargetIsObject then
+			ApplyKatanaCombo(e.Target, e.Attacker, e.Data, "LLWEAPONEX_Katana", e.SkillData)
+			if e.Data.Damage > 0 and GameHelpers.Status.IsActive(e.Attacker, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") then
+				GameHelpers.Status.Remove(e.Attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
 				local damageBonus = (GameHelpers.GetExtraData("LLWEAPONEX_MB_Katana_Backlash_DamageBonus", 50) * 0.01)
 				if damageBonus > 0 then
-					GameHelpers.Damage.IncreaseDamage(target.MyGuid, attacker.MyGuid, data.Handle, damageBonus)
-					CharacterStatusText(attacker.MyGuid, "LLWEAPONEX_StatusText_Katana_VaultBoost")
-					if ObjectIsCharacter(target.MyGuid) == 1 then
-						PlayEffect(target.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_BodyFX")
+					e.Data:MultiplyDamage(1 + damageBonus)
+					CharacterStatusText(e.Attacker.MyGuid, "LLWEAPONEX_StatusText_Katana_VaultBoost")
+					if GameHelpers.Ext.ObjectIsCharacter(e.Target) then
+						EffectManager.PlayEffect("RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", e.Target, {Bone="Dummy_BodyFX"})
 					else
-						PlayEffect(attacker.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_FX_01")
+						EffectManager.PlayClientEffect("RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", e.Attacker, {WeaponBones="Dummy_FX_01"})
 					end
 				end
 			end
 		end
-	end)
+	end, {MatchArgs={Tag="LLWEAPONEX_Katana"}})
 end

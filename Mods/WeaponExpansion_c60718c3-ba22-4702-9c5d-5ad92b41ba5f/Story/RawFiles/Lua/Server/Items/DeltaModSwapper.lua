@@ -1,7 +1,7 @@
 local DeltamodSwap = Ext.Require("Server/Data/DeltaModSwapEntries.lua")
 
 ---@param item EsvItem
----@return table<string,boolean>|nil
+---@return table<string,boolean|string>|nil
 local function GetAllBoosts(item)
 	local finalBoosts = {}
 	local swapped = false

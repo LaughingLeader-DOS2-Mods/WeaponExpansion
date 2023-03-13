@@ -10,8 +10,8 @@ Events.RegionChanged:Subscribe(function (e)
 end)
 
 local function IncreaseKillCount(char, fromTargetDying)
-	if CharacterHasSkill(char, "Projectile_LLWEAPONEX_DarkFireball") == 1 then
-		local character = GameHelpers.GetCharacter(char)
+	local character = GameHelpers.GetCharacter(char, "EsvCharacter")
+	if character and character.SkillManager.Skills.Projectile_LLWEAPONEX_DarkFireball then
 		local maxCount = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_MaxKillCount", 10)
 		local current = PersistentVars.SkillData.DarkFireballCount[character.MyGuid] or 0
 		if current < maxCount then
@@ -20,9 +20,6 @@ local function IncreaseKillCount(char, fromTargetDying)
 				UpdateDarkFireballSkill(char)
 			end
 			SyncDataToClient(CharacterGetReservedUserID(char))
-			if Vars.DebugMode then
-				print("IncreaseKillCount", char, PersistentVars.SkillData.DarkFireballCount[character.MyGuid], maxCount)
-			end
 		end
 	end
 end
@@ -47,7 +44,7 @@ local function SkipDeathXP(uuid, region)
 	return false
 end
 
-function OnCharacterDied(uuid, force)
+local function OnCharacterDied(uuid, force)
 	PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[uuid] = nil
 	if force == true or not SkipDeathXP(uuid, GetRegion(uuid)) then
 		local id = CombatGetIDForCharacter(uuid)
@@ -62,7 +59,7 @@ function OnCharacterDied(uuid, force)
 			end
 		else
 			local x,y,z = GetPosition(uuid)
-			for i,v in pairs(GameHelpers.GetCharactersAroundPosition(x, y, z, 20.0)) do
+			for i,v in pairs(Ext.Entity.GetCharacterGuidsAroundPosition(x, y, z, 20.0)) do
 				if not GameHelpers.Character.IsPlayer(v) and GameHelpers.Character.IsEnemy(uuid, v) then
 					SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
 					IncreaseKillCount(v, uuid)
@@ -100,7 +97,7 @@ end
 
 -- end)
 
-Ext.RegisterOsirisListener("ObjectLostTag", 2, "after", function(object, tag)
+Ext.Osiris.RegisterListener("ObjectLostTag", 2, "after", function(object, tag)
 	if ObjectExists(object) == 0 then
 		return
 	end
@@ -116,7 +113,7 @@ local LoneWolfBannerLifeStealScale = {
 	[16] = 30,
 }
 
-Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(uuid)
+Ext.Osiris.RegisterListener("CharacterLeveledUp", 1, "after", function(uuid)
 	uuid = StringHelpers.GetUUID(uuid)
 	local character = GameHelpers.GetCharacter(uuid)
 	if character and GameHelpers.Character.IsPlayer(character) then
@@ -209,14 +206,14 @@ end
 
 ---@param uuid Guid
 ---@param id integer
-local function OnLeftCombat(uuid)
+local function OnLeftCombat(uuid, id)
 	ReloadAmmoSkills(uuid)
 	StatusTurnHandler.RemoveAllTurnEndStatuses(uuid)
 	RemoveTagsOnTurnEnd(uuid)
 	PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[uuid] = nil
 end
 
-Ext.RegisterOsirisListener("ObjectTurnEnded", 1, "after", function(obj)
+Ext.Osiris.RegisterListener("ObjectTurnEnded", 1, "after", function(obj)
 	if ObjectExists(obj) == 1 and ObjectIsCharacter(obj) == 1 then
 		obj = StringHelpers.GetUUID(obj)
 		StatusTurnHandler.RemoveAllTurnEndStatuses(obj)
@@ -227,7 +224,7 @@ end)
 RegisterProtectedOsirisListener("ObjectLeftCombat", 2, "after", function(obj,id)
 	if ObjectExists(obj) == 1 and ObjectIsCharacter(obj) == 1 then
 		obj = StringHelpers.GetUUID(obj)
-		OnLeftCombat(obj)
+		OnLeftCombat(obj, id)
 	end
 end)
 
@@ -253,10 +250,10 @@ local function OnSkillCast(char, skill, skillType, skillElement)
 		end
 	end
 	if Skills.BulletTemplates[skill] and IsTagged(char, "LLWEAPONEX_Firearm_Equipped") == 1 then
-		GameHelpers.Status.Apply(char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 0.0, 0, char)
+		GameHelpers.Status.Apply(char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 0.0, false, char)
 	end
 	-- if ObjectGetFlag(char, "LLWEAPONEX_BasilusDagger_ListenForAction") == 1 then
 	-- 	Basilus_OnTargetActionTaken(char)
 	-- end
 end
-Ext.RegisterOsirisListener("SkillCast", 4, "after", OnSkillCast)
+Ext.Osiris.RegisterListener("SkillCast", 4, "after", OnSkillCast)

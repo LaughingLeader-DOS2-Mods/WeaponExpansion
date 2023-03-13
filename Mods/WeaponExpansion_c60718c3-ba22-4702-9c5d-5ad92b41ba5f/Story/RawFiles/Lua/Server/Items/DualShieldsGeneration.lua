@@ -121,13 +121,15 @@ function DualShields._FindCombatShieldMatch(statId, shieldStat)
 	if not shieldStat or StringHelpers.IsNullOrEmpty(shieldStat.Using) then
 		return nil
 	else
-		return DualShields._FindCombatShieldMatch(shieldStat.Using, Ext.Stats.Get(shieldStat.Using))
+		local stat = Ext.Stats.Get(shieldStat.Using, nil, false) --[[@as StatEntryShield]]
+		return DualShields._FindCombatShieldMatch(shieldStat.Using, stat)
 	end
 end
 
 ---@param rarity ItemDataRarity
 ---@param level integer
 ---@param parentBoosts integer
+---@return string[]|nil
 ---@return string[]|nil
 function DualShields._GetRandomCombatShieldDeltaMods(rarity, level, parentBoosts)
 	local rarityNum = Data.ItemRarity[rarity]
@@ -203,7 +205,7 @@ end
 ---@param shield EsvItem
 ---@return EsvItem|nil combatShield
 function DualShields._GenerateCombatShield(shield)
-	local combatShieldStat = DualShields._FindCombatShieldMatch(shield.StatsFromName.Name, shield.StatsFromName.StatsEntry)
+	local combatShieldStat = DualShields._FindCombatShieldMatch(shield.StatsFromName.Name, shield.StatsFromName.StatsEntry --[[@as StatEntryShield]])
 	if not combatShieldStat then
 		combatShieldStat = Common.GetRandomTableEntry(DualShields.Data.AllUncommonCombatShields)
 	end
@@ -333,16 +335,3 @@ EquipmentManager.Events.EquipmentChanged:Subscribe(function (e)
 		end
 	end
 end, {MatchArgs={Tag="LLWEAPONEX_CombatShield"}})
-
-Ext.RegisterConsoleCommand("weaponex_dualshieldtest", function (cmd, ...)
-	local host = GameHelpers.GetCharacter(CharacterGetHostCharacter())
-	local hostGUID = host.MyGuid
-	local stat = Common.GetRandomTableEntry(DualShields.Data.AllUncommonDualShields)
-	local rarity = Common.GetRandomTableEntry({"Uncommon", "Rare", "Epic", "Legendary", "Divine"})
-	local item = GameHelpers.Item.CreateItemByStat(stat, {Level=math.max(12, host.Stats.Level), ItemType=rarity, IsIdentified=true, HasGeneratedStats=true})
-	if item then
-		Ext.OnNextTick(function (e)
-			ItemToInventory(item, hostGUID, 1, 0, 0)
-		end)
-	end
-end)
