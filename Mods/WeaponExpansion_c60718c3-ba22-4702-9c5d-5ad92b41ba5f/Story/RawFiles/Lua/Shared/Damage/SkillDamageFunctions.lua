@@ -350,7 +350,7 @@ end
 ---@return CDivinityStatsItem
 local function GetPistolWeaponStatTable(character, isTooltip, noRandomization)
 	local masteryBoost = 0
-	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_Pistol")
+	local masteryLevel = Mastery.Experience.GetMasteryExperience(character, MasteryID.Pistol)
 	if masteryLevel > 0 then
 		local boost = GameHelpers.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
 		if boost > 0 then
@@ -375,7 +375,7 @@ end
 ---@return table<string,number[]>|DamageList
 local function GetPistolDamage(character, isTooltip, noRandomization, item)
 	local masteryBoost = 0
-	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_Pistol")
+	local masteryLevel = Mastery.Experience.GetMasteryExperience(character, MasteryID.Pistol)
 	if masteryLevel > 0 then
 		local boost = GameHelpers.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
 		if boost > 0 then
@@ -396,7 +396,7 @@ end
 ---@return table<string,number[]>|DamageList
 local function GetHandCrossbowDamage(character, isTooltip, noRandomization, item)
 	local masteryBoost = 0
-	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_HandCrossbow")
+	local masteryLevel = Mastery.Experience.GetMasteryExperience(character, MasteryID.HandCrossbow)
 	if masteryLevel > 0 then
 		local boost = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbowMasteryBoost"..masteryLevel, 0)
 		if boost > 0 then
@@ -444,7 +444,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" end
 	if weaponBoostStat ~= nil then
 		local masteryBoost = 0
-		local masteryLevel = Mastery.GetHighestMasteryRank(attacker.Character, "LLWEAPONEX_HandCrossbow")
+		local masteryLevel = Mastery.Experience.GetMasteryExperience(attacker.Character, MasteryID.HandCrossbow)
 		if masteryLevel > 0 then
 			local boost = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbowMasteryBoost"..masteryLevel, 0)
 			if boost > 0 then
@@ -529,7 +529,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" end
 	if weaponBoostStat ~= nil then
 		local masteryBoost = 0
-		local masteryLevel = Mastery.GetHighestMasteryRank(attacker.Character, "LLWEAPONEX_Pistol")
+		local masteryLevel = Mastery.Experience.GetMasteryExperience(attacker.Character, MasteryID.Pistol)
 		if masteryLevel > 0 then
 			local boost = GameHelpers.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
 			if boost > 0 then

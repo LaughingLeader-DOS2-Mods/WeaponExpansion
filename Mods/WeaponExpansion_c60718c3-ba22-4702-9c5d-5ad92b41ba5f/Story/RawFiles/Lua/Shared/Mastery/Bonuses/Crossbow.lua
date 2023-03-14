@@ -9,7 +9,7 @@ local _eqSet = "Class_Wayfarer_Lizards"
 local function GetStillStanceBonus(character)
 	local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_SkillStanceRankBonus", 5.0)
 	if damageBonus > 0 then
-		local rank = Mastery.GetMasteryRank(character, MasteryID.Crossbow)
+		local rank = Mastery.Experience.GetMasteryExperience(character, MasteryID.Crossbow)
 		if Vars.LeaderDebugMode then
 			rank = 4
 		end

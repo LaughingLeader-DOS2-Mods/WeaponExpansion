@@ -7,7 +7,6 @@ Math = { AbilityScaling = {}}
 if Text == nil then
 	Text = {}
 end
-MasterySystem = {}
 
 Config = {
 	Skill = {
@@ -351,7 +350,8 @@ Mastery = {
 	PermanentMasteries = {
 		LLWEAPONEX_ThrowingAbility = true
 	},
-	AdditionalRankText = {}
+	AdditionalRankText = {},
+	Experience = {},
 }
 LeaveActionData = {}
 Temp = {
@@ -465,7 +465,7 @@ Ext.Require("Shared/Damage/SkillDamageFunctions.lua")
 Ext.Require("Shared/Damage/GetSkillDamageHandler.lua")
 Ext.Require("Shared/Damage/UnarmedScalingMath.lua")
 Ext.Require("Shared/Damage/UnarmedDamageScaling.lua")
-Ext.Require("Shared/Overrides/_Init.lua")
+Ext.Require("Shared/Stats/StatOverrides.lua")
 Ext.Require("Shared/SkillAPListener.lua")
 Ext.Require("Shared/SharedDataHooks.lua")
 Ext.Require("Shared/CustomSkillProperties.lua")
@@ -593,3 +593,15 @@ Ext.Events.SessionLoaded:Subscribe(function(e)
 end)
 
 Ext.IO.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35da8628/CharacterCreation/ClassPresets/Class_Marauder.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Helaene_Marauder.lsx")
+
+---@class MasteryExperienceDataEntry
+---@field Level integer
+---@field Experience integer
+
+---@alias MasteryExperienceUserVars table<string,MasteryExperienceDataEntry>
+
+Ext.Utils.RegisterUserVariable("LLWEAPONEX_MasteryExperience", {
+    Server = true,
+    Client = true,
+    SyncToClient = true,
+})

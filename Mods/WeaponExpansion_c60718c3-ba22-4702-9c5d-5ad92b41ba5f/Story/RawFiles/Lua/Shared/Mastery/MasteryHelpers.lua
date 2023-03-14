@@ -1,37 +1,12 @@
 local _ISCLIENT = Ext.IsClient()
 
----@param character EsvCharacter|string
+---@param player CharacterParam
 ---@param mastery string
----@return integer
-local function GetHighestMasteryRank(character, mastery)
-	character = GameHelpers.GetCharacter(character)
-	if character then
-		for i=Mastery.Variables.MaxRank,1,-1 do
-			local tag = string.format("%s_Mastery%i", mastery, i)
-			if character:HasTag(tag) then
-				return i
-			end
-		end
-	end
-	return 0
-end
-
-Mastery.GetHighestMasteryRank = GetHighestMasteryRank
-
----@param character EsvCharacter|string
----@param mastery string
----@return integer
-function Mastery.GetMasteryRank(character, mastery)
-	character = GameHelpers.GetCharacter(character)
-	if character then
-		for i=Mastery.Variables.MaxRank,1,-1 do
-			local tag = string.format("%s_Mastery%i", mastery, i)
-			if GameHelpers.CharacterOrEquipmentHasTag(character, tag) then
-				return i
-			end
-		end
-	end
-	return 0
+---@return integer currentLevel
+---@return integer currentExperience
+function Mastery.Experience.GetMasteryExperience(player, mastery)
+	local experienceData = Mastery.Experience.GetUserVars(player, mastery)
+	return experienceData.Level, experienceData.Experience
 end
 
 local function DebugMasteryActive(character)
@@ -44,32 +19,22 @@ local function DebugMasteryActive(character)
 	end
 end
 
----@param character EsvCharacter|EclCharacter
----@param mastery string
-function Mastery.IsActive(character, mastery)
-	return GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
-end
-
---TODO Sort of a duplicate of MasterySystem.HasMasteryRequirement
 ---@param character CharacterParam
 ---@param mastery string
 ---@param minLevel integer
 ---@return boolean
-function Mastery.HasMinimumMasteryLevel(character,mastery,minLevel)
+function Mastery.Experience.HasMinimumLevel(character,mastery,minLevel)
 	if DebugMasteryActive(character) then
 		return true
 	end
-	if Ext.IsServer() then
-		local currentLevel = MasterySystem.GetMasteryExperience(character, mastery)
-		return currentLevel >= minLevel
-	elseif Ext.IsClient() then
-		local tag = string.format("%s_Mastery_%s", mastery, minLevel)
-		local character = GameHelpers.GetCharacter(character)
-		if character ~= nil and GameHelpers.CharacterOrEquipmentHasTag(character, tag) then
-			return true
-		end
-	end
-	return false
+	local currentLevel = Mastery.Experience.GetMasteryExperience(character, mastery)
+	return currentLevel >= minLevel
+end
+
+---@param character EsvCharacter|EclCharacter
+---@param mastery string
+function Mastery.IsActive(character, mastery)
+	return GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
 end
 
 ---@param character EsvCharacter|EclCharacter
@@ -114,6 +79,7 @@ local function TryCheckMasteryRequirement(character, tag, skipWeaponCheck, tags)
 	return false
 end
 
+---TODO Replace/update for the new tagless system
 ---@param char EsvCharacter|EclCharacter
 ---@param tag string
 ---@param skipWeaponCheck boolean|nil
@@ -124,7 +90,7 @@ function Mastery.HasMasteryRequirement(char, tag, skipWeaponCheck, tags)
 	if not character then
 		return false
 	end
-	if string.find(tag, "LLWEAPONEX_Unarmed") and not UnarmedHelpers.HasEmptyHands(character) then
+	if string.find(tag, MasteryID.Unarmed) and not UnarmedHelpers.HasEmptyHands(character) then
 		return false
 	end
 	if (tags and tags.LLWEAPONEX_MasteryTestCharacter) or character:HasTag("LLWEAPONEX_MasteryTestCharacter") then

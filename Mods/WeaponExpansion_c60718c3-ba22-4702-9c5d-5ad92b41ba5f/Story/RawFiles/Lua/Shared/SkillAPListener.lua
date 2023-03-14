@@ -34,7 +34,7 @@ Ext.Events.GetSkillAPCost:Subscribe(function(e)
 	end
 	if e.Skill.Name == "Projectile_LLWEAPONEX_HandCrossbow_Shoot" then
 		if Skills.HasTaggedRuneBoost(e.Character, "LLWEAPONEX_HeavyAmmo", "_LLWEAPONEX_HandCrossbows") then
-			local masteryLevel = Mastery.GetHighestMasteryRank(e.Character.Character, "LLWEAPONEX_HandCrossbow")
+			local masteryLevel = Mastery.Experience.GetMasteryExperience(e.Character.Character, MasteryID.HandCrossbow)
 			if masteryLevel >= 3 then
 				e.AP = 2
 				e.ElementalAffinity = false

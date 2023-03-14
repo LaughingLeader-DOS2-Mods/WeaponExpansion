@@ -123,7 +123,7 @@ Events.OnHit:Subscribe(function(e)
 				Config.Skill.DualShields.CoverRedirectDamage(e.TargetGUID, coverData.Blocker, e.SourceGUID, e.Data.HitStatus.StatusHandle)
 			end
 			if e.Data:IsFromWeapon() then -- Is basic attack or weapon skill
-				local canGrantMasteryXP = e.Data.Damage > 0 and MasterySystem.CanGainExperience(e.Source)
+				local canGrantMasteryXP = e.Data.Damage > 0 and Mastery.Experience.CanGainExperience(e.Source)
 				local xpMastery = nil
 				if Config.Skill.ThrowingMasterySkills[e.Data.Skill] then
 					xpMastery = MasteryID.Throwing
@@ -135,7 +135,7 @@ Events.OnHit:Subscribe(function(e)
 					xpMastery = MasteryID.Unarmed
 				end
 				if canGrantMasteryXP then
-					MasterySystem.GrantBasicAttackExperience(e.Source, e.Target, xpMastery)
+					Mastery.Experience.GrantBasicAttackExperience(e.Source, e.Target, xpMastery)
 				end
 			end
 		end

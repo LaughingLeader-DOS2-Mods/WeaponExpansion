@@ -168,8 +168,8 @@ if Ext.Debug.IsDeveloperMode() then
 			else
 				xp = Ext.Utils.Random(0, Mastery.Variables.RankVariables[1].Required)
 			end
-			MasterySystem.SetMasteryExperience(host,mastery,rank,xp)
-			TagMasteryRanks(host, mastery, rank)
+			Mastery.Experience.SetMasteryExperience(host,mastery,rank,xp)
+			TagMasteryRank(host, mastery, rank)
 		end
 		Ext.Dump(PersistentVars.MasteryExperience)
 	end)

@@ -621,7 +621,7 @@ if not Vars.IsClient then
 	--Throwing Experience
 	SkillManager.Register.Cast("All", function (e)
 		if e.SourceItem and GameHelpers.ItemHasTag(e.SourceItem, Mastery.Variables.ThrowingMasteryItemTags)
-		and MasterySystem.CanGainExperience(e.Character) then
+		and Mastery.Experience.CanGainExperience(e.Character) then
 			local primaryTarget = nil
 			e.Data:ForEach(function (target, targetType, self)
 				---@cast target Guid
@@ -631,10 +631,10 @@ if not Vars.IsClient then
 				end
 			end, e.Data.TargetMode.Objects)
 			if primaryTarget then
-				MasterySystem.GrantWeaponSkillExperience(e.Character, primaryTarget, MasteryID.Throwing)
+				Mastery.Experience.GrantWeaponSkillExperience(e.Character, primaryTarget, MasteryID.Throwing)
 			else
 				--Gain xp just from throwing grenades/etc
-				AddMasteryExperience(e.Character, MasteryID.Throwing, 0.25)
+				Mastery.Experience.Add(e.Character, MasteryID.Throwing, 0.25)
 			end
 		end
 	end)

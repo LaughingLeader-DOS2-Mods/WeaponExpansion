@@ -222,6 +222,6 @@ end)
 Ext.RegisterConsoleCommand("weaponex_refreshtags", function ()
     for player in GameHelpers.Character.GetPlayers() do
         ClearAllMasteryRankTags(player.MyGuid)
-        MasterySystem.TagMasteryRanks(player)
+        Mastery.Experience.TagMasteryRanks(player)
     end
 end)

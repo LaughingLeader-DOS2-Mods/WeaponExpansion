@@ -5,7 +5,8 @@ local removeSkills = {
 	Shout_LLWEAPONEX_Prepare_BalrinsAxe = true,
 }
 
-function MasterySystem.MigrateMasteryExperience()
+local function MigrateMasteryExperience()
+	local players = {}
 	local migratedData = false
 	for _,db in pairs(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(nil,nil,nil,nil)) do
 		local guid,mastery,level,experience = table.unpack(db)
@@ -16,21 +17,22 @@ function MasterySystem.MigrateMasteryExperience()
 		guid = StringHelpers.GetUUID(guid)
 		local player = GameHelpers.GetCharacter(guid)
 		if player then
-			if PersistentVars.MasteryExperience[guid] == nil then
-				PersistentVars.MasteryExperience[guid] = {}
-			end
-			local masteryData = PersistentVars.MasteryExperience[guid] --[[@as MasteryExperienceData]]
-			if masteryData[mastery] == nil or level > masteryData.Level then
-				masteryData[mastery] = {
-					Experience = experience,
-					Level = level
+			local data = Mastery.Experience.GetUserVars(player)
+			if data[mastery] == nil or data[mastery].Level < level then
+				data[mastery] = {
+					Level = level,
+					Experience = experience
 				}
 				migratedData = true
+				players[players.MyGuid] = players
 			end
 		end
 	end
 	Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Delete(nil,nil,nil,nil)
 	if migratedData then
+		for player,guid in pairs(players) do
+			Mastery.Experience.Sync(player)
+		end
 		fprint(LOGLEVEL.TRACE, "[WeaponExpansion] Migrated mastery experience to lua:")
 		fprint(LOGLEVEL.TRACE, Ext.DumpExport(PersistentVars.MasteryExperience))
 	end
@@ -73,10 +75,10 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	if last < 268435456 or Vars.LeaderDebugMode then
 		if not PersistentVars.MasteryExperience then
 			Events.PersistentVarsLoaded:Subscribe(function (e)
-				MasterySystem.MigrateMasteryExperience()
+				MigrateMasteryExperience()
 			end, {Once=true, Priority=0})
 		else
-			MasterySystem.MigrateMasteryExperience()
+			MigrateMasteryExperience()
 		end
 	end
 

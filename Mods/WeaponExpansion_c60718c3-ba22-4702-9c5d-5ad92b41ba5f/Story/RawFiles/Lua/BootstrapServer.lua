@@ -1,8 +1,6 @@
 Ext.Require("Shared.lua")
 
----@class MasteryExperienceData
----@field Level integer
----@field Experience integer
+
 
 ---@class WeaponExpansionVars
 local defaultPersistentVars = {
@@ -125,9 +123,6 @@ local defaultPersistentVars = {
     ---Character GUID to Mastery ID -> Bool
     ---@type table<Guid,table<string, boolean>>
     ActiveMasteries = {},
-    ---Character GUID to Mastery ID -> MasteryExperienceData
-    ---@type table<Guid,table<string, MasteryExperienceData>>
-    MasteryExperience = {},
 }
 
 ---@type WeaponExpansionVars

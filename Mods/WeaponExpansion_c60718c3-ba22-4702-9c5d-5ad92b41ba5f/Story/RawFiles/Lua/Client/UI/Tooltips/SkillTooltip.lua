@@ -300,7 +300,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 		descriptionElement.Label = descriptionElement.Label .. bonusText
 	end
 
-	if Mastery.HasMinimumMasteryLevel(character, MasteryID.Crossbow, 1)
+	if Mastery.Experience.HasMinimumLevel(character, MasteryID.Crossbow, 1)
 	and characterTags["LLWEAPONEX_Crossbow_Equipped"]
 	and MasteryBonusManager.Vars.IsStillStanceSkill(skill) then
 		local bonus = MasteryBonusManager.Vars.GetStillStanceBonus(character)

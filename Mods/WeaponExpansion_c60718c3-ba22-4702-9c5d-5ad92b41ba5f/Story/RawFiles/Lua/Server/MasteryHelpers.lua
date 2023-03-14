@@ -1,7 +1,8 @@
+---@deprecated
 ---@param guid CharacterParam
 ---@param mastery string
 ---@param level integer
-function TagMasteryRanks(guid,mastery,level)
+function TagMasteryRank(guid,mastery,level)
 	local guid = GameHelpers.GetUUID(guid)
 	if level > 0 then
 		for i=1,level do
@@ -91,56 +92,26 @@ function IsMeleeWeaponSkill(skill)
 	return false
 end
 
---- @param character CharacterParam
---- @param mastery string
---- @param minLevel integer
-function HasMasteryLevel(character,mastery,minLevel)
-	local currentLevel = MasterySystem.GetMasteryExperience(character, mastery)
-	return currentLevel >= minLevel
-end
-
---TODO deprecate global functions
-function HasMasteryRequirement_QRY(call, guid, tag)
-	return Mastery.HasMasteryRequirement(GameHelpers.GetCharacter(guid), tag)
-end
-
+---@deprecated
 ---@param player CharacterParam
 ---@param mastery string|nil
 ---@param clearTags boolean|nil
-function MasterySystem.TagMasteryRanks(player, mastery, clearTags)
+function Mastery.Experience.TagMasteryRanks(player, mastery, clearTags)
     local player = GameHelpers.GetCharacter(player)
     if player then
         if clearTags then
 			ClearAllMasteryRankTags(player)
 		end
 		if mastery then
-			local currentLevel = MasterySystem.GetMasteryExperience(player, mastery)
-			TagMasteryRanks(player, mastery, currentLevel)
+			local currentLevel = Mastery.Experience.GetMasteryExperience(player, mastery)
+			TagMasteryRank(player, mastery, currentLevel)
 		else
 			local experienceData = PersistentVars.MasteryExperience[player.MyGuid]
 			if experienceData then
 				for mastery,data in pairs(experienceData) do
-					TagMasteryRanks(player, mastery, data.Level or 0)
+					TagMasteryRank(player, mastery, data.Level or 0)
 				end
 			end
 		end
     end
-end
-
----@param player CharacterParam
----@param mastery string
----@return integer currentLevel
----@return integer currentExperience
-function MasterySystem.GetMasteryExperience(player, mastery)
-	local playerGUID = GameHelpers.GetUUID(player)
-	if playerGUID then
-		local experienceData = PersistentVars.MasteryExperience[playerGUID]
-		if experienceData and experienceData[mastery] then
-			local masteryExpData = experienceData[mastery]
-			local currentExperience = masteryExpData.Experience or 0
-			local currentLevel = masteryExpData.Level or 0
-			return currentLevel, currentExperience
-		end
-	end
-	return 0,0
 end
