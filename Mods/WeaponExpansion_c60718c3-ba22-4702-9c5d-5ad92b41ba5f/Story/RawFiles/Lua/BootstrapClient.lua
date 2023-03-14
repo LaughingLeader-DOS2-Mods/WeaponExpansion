@@ -3,7 +3,7 @@ ClientVars = {
 	RunicCannonEnergy = {},
 }
 
-Ext.Require("BootstrapShared.lua")
+Ext.Require("Shared.lua")
 Ext.Require("Client/SkillParams.lua")
 Ext.Require("Client/MemorizationWindow.lua")
 Ext.Require("Client/ClientCommands.lua")
