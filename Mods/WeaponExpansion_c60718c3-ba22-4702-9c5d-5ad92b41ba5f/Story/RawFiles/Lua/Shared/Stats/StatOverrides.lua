@@ -11,6 +11,9 @@ local BaseStats = Ext.Require("Shared/Overrides/BaseStats.lua")
 ---@type table<Guid, table<string, LLWEAPONEX_StatOverrides_Attributes>>
 local ModStats = Ext.Require("Shared/Overrides/ModStats.lua")
 
+---@type WeaponExpansionCustomRequirements
+local CustomRequirements = Ext.Require("Shared/Stats/CustomRequirements.lua")
+
 local gunExplosionEffectStatusProperties = {{
 	Type = "Status",
 	Action = "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX",
@@ -210,7 +213,7 @@ local function ApplyOverride(id, attribute, value)
 end
 
 local function Run(doSync)
-	local _EE2 = Ext.IsModLoaded(MODID.EE2Core)
+	local _EE2 = Ext.Mod.IsModLoaded(MODID.EE2Core)
 
 	---@type table<string,boolean>
 	local _syncStats = {}
@@ -281,6 +284,22 @@ local function Run(doSync)
 				if SwapRequirementWithTag(stat, "MeleeWeapon", "LLWEAPONEX_CannotUseScoundrelSkills", true) then
 					_syncStats[stat.Name] = true
 				end
+			end
+		end
+
+		--Swap Tag LLWEAPONEX_Rapier_Mastery1 and Tag LLWEAPONEX_Rapier_Equipped type of requirements with new custom ones
+
+		if stat.Requirements then
+			local newRequirements = CustomRequirements.OverrideRequirements(stat.Requirements)
+			if newRequirements then
+				stat.Requirements = newRequirements
+			end
+		end
+
+		if stat.MemorizationRequirements then
+			local newRequirements = CustomRequirements.OverrideRequirements(stat.MemorizationRequirements)
+			if newRequirements then
+				stat.MemorizationRequirements = newRequirements
 			end
 		end
 
@@ -373,8 +392,13 @@ local function Run(doSync)
 end
 
 Ext.Events.StatsLoaded:Subscribe(function (e)
+	CustomRequirements.Register()
 	Run()
 end, {Priority=1})
+
+Ext.Events.ResetCompleted:Subscribe(function (e)
+	CustomRequirements.Register()
+end)
 
 -- if not _ISCLIENT then
 -- 	Events.LuaReset:Subscribe(function (e)
