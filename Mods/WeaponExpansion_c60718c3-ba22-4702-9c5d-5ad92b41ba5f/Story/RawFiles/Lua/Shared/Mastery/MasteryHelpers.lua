@@ -1,5 +1,36 @@
 local _ISCLIENT = Ext.IsClient()
 
+---@overload fun(player:CharacterParam):MasteryExperienceUserVars
+---Gets a character's LLWEAPONEX_MasteryExperience UserVars, or creates it.
+---@param player CharacterParam
+---@param specificMastery string Get the subtable for a mastery.
+---@return MasteryExperienceDataEntry
+function Mastery.Experience.GetUserVars(player, specificMastery)
+	local player = GameHelpers.GetCharacter(player, "EsvCharacter")
+	assert(player ~= nil, "Failed to get character")
+	local data = player.UserVars.LLWEAPONEX_MasteryExperience
+	if not data then
+		if not _ISCLIENT then
+			player.UserVars.LLWEAPONEX_MasteryExperience = {}
+			data = player.UserVars.LLWEAPONEX_MasteryExperience
+		else
+			data = {}
+		end
+	end
+	if specificMastery then
+		local entry = data[specificMastery]
+		if not entry then
+			data[specificMastery] = {
+				Experience = 0,
+				Level = 0,
+			}
+			entry = data[specificMastery]
+		end
+		return entry
+	end
+	return data
+end
+
 ---@param player CharacterParam
 ---@param mastery string
 ---@return integer currentLevel

@@ -61,6 +61,8 @@ Config.Skill.DisplayScalingStatSkills = {
 ---@param skill string
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)
+	local skillRequirements = tooltip:GetElements("SkillRequiredEquipment")
+
 	--print(skill, Ext.JsonStringify(tooltip.Data))
 	local descriptionElement = tooltip:GetElement("SkillDescription") or {Type="SkillDescription", Label = ""}
 	if skill == "Target_LLWEAPONEX_RemoteMine_Detonate" then
@@ -144,7 +146,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 	-- We want these skills to work unless the tags are set.
 	if Skills.WarfareMeleeSkills[skill] == true then
 		local requirementName = Text.Game.MeleeWeaponRequirement.Value
-		for i,element in pairs(tooltip:GetElements("SkillRequiredEquipment")) do
+		for i,element in pairs(skillRequirements) do
 			if element.RequirementMet == false then
 				if element.Label == Text.Game.NotImmobileRequirement.Value then
 					tooltip:RemoveElement(element)
@@ -155,7 +157,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	elseif Skills.ScoundrelMeleeSkills[skill] == true then
 		tooltip:MarkDirty()
-		for i,element in pairs(tooltip:GetElements("SkillRequiredEquipment")) do
+		for i,element in pairs(skillRequirements) do
 			if string.find(element.Label, Text.Game.MeleeWeaponRequirement.Value) then
 				if tooltip:IsExpanded() then
 					if Mastery.HasMasteryRequirement(character, "LLWEAPONEX_Axe_Mastery4") then
@@ -173,101 +175,191 @@ local function OnSkillTooltip(character, skill, tooltip)
 	end
 
 	if not GameHelpers.Skill.IsAction(skill) then
+		local customRequirements = {
+			Total = 0,
+			---@type table<string,StatsRequirement>
+			MasteryRank = {},
+			---@type table<string,StatsRequirement>
+			WeaponType = {},
+		}
+
 		local propElements = {}
 		local hasRuneProps = false
-		local stat = Ext.Stats.Get(skill, nil, false)
-		if stat and stat.SkillProperties then
-			for i,v in pairs(stat.SkillProperties) do
-				if v.Action == "LLWEAPONEX_ApplyBulletProperties" then
-					local rune,weaponBoostStat = Skills.GetPistolRuneBoost(character.Stats)
-					if weaponBoostStat ~= nil then
-						---@type StatProperty[]
-						local props = Ext.Stats.Get(weaponBoostStat).ExtraProperties
-						if props ~= nil then
-							hasRuneProps = true
-							for i,v in pairs(props) do
-								if v.Type == "Status" then
-									local name = GameHelpers.Stats.GetDisplayName(v.Action, "StatusData")
-									if not StringHelpers.IsNullOrWhitespace(name) then
-										local chance = math.min(100, math.ceil(v.StatusChance * 100))
-										local turns = v.Duration
-										local text = ""
-										local chanceText = ""
-										if chance > 0 then
-											chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
-										end
-										if turns > 0 then
-											turns = math.ceil(v.Duration / 6.0)
-											text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
-										else
-											text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
-										end
-										table.insert(propElements, {
-											Warning="",
-											Label=text
-										})
-									end
-								end
-							end
-						end
+		local stat = Ext.Stats.Get(skill, nil, false) --[[@as StatEntrySkillData]]
+		if stat then
+			local requirements = GameHelpers.Stats.GetAttribute(skill, "Requirements", nil, true) --[=[@as StatsRequirement[]]=]
+			local memorizationRequirements = GameHelpers.Stats.GetAttribute(skill, "MemorizationRequirements", nil, true) --[=[@as StatsRequirement[]]=]
+			if requirements then
+				for _,v in pairs(requirements) do
+					if v.Requirement == "LLWEAPONEX_MasteryRank" then
+						customRequirements.MasteryRank[v.Tag] = v
+						customRequirements.Total = customRequirements.Total + 1
+					elseif v.Requirement == "LLWEAPONEX_WeaponType" then
+						customRequirements.WeaponType[v.Tag] = v
+						customRequirements.Total = customRequirements.Total + 1
 					end
-				elseif v.Action == "LLWEAPONEX_ApplyBoltProperties" then
-					local rune,weaponBoostStat = Skills.GetHandCrossbowRuneBoost(character.Stats)
-					if weaponBoostStat ~= nil then
-						local weaponBoost = Ext.Stats.Get(weaponBoostStat, nil, false)
-						---@type StatProperty[]
-						local props = weaponBoost.ExtraProperties
-						if props then
-							hasRuneProps = true
-							for i,v in pairs(props) do
-								if v.Type == "Status" then
-									local name = GameHelpers.Stats.GetDisplayName(v.Action, "StatusData")
-									if not StringHelpers.IsNullOrWhitespace(name) then
-										local chance = math.min(100, math.ceil(v.StatusChance * 100))
-										local turns = v.Duration
-										local text = ""
-										local chanceText = ""
-										if chance > 0 then
-											chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+				end
+			end
+			if memorizationRequirements then
+				for _,v in pairs(memorizationRequirements) do
+					if v.Requirement == "LLWEAPONEX_MasteryRank" then
+						customRequirements.MasteryRank[v.Tag] = v
+						customRequirements.Total = customRequirements.Total + 1
+					elseif v.Requirement == "LLWEAPONEX_WeaponType" then
+						customRequirements.WeaponType[v.Tag] = v
+						customRequirements.Total = customRequirements.Total + 1
+					end
+				end
+			end
+			if stat.SkillProperties then
+				for i,v in pairs(stat.SkillProperties) do
+					if v.Action == "LLWEAPONEX_ApplyBulletProperties" then
+						local rune,weaponBoostStat = Skills.GetPistolRuneBoost(character.Stats)
+						if weaponBoostStat ~= nil then
+							---@type StatProperty[]
+							local props = Ext.Stats.Get(weaponBoostStat).ExtraProperties
+							if props ~= nil then
+								hasRuneProps = true
+								for i,v in pairs(props) do
+									if v.Type == "Status" then
+										local name = GameHelpers.Stats.GetDisplayName(v.Action, "StatusData")
+										if not StringHelpers.IsNullOrWhitespace(name) then
+											local chance = math.min(100, math.ceil(v.StatusChance * 100))
+											local turns = v.Duration
+											local text = ""
+											local chanceText = ""
+											if chance > 0 then
+												chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+											end
+											if turns > 0 then
+												turns = math.ceil(v.Duration / 6.0)
+												text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
+											else
+												text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
+											end
+											table.insert(propElements, {
+												Warning="",
+												Label=text
+											})
 										end
-										if turns > 0 then
-											turns = math.ceil(v.Duration / 6.0)
-											text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
-										else
-											text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
-										end
-										table.insert(propElements, {
-											Warning="",
-											Label=text
-										})
 									end
 								end
 							end
 						end
-						local isHeavyBolt = string.find(weaponBoost.Tags, "LLWEAPONEX_HeavyAmmo")
-						if isHeavyBolt then
-							table.insert(propElements, {
-								Label=heavyBoltText.Value,
-								Warning=""
-							})
-							hasRuneProps = true
+					elseif v.Action == "LLWEAPONEX_ApplyBoltProperties" then
+						local rune,weaponBoostStat = Skills.GetHandCrossbowRuneBoost(character.Stats)
+						if weaponBoostStat ~= nil then
+							local weaponBoost = Ext.Stats.Get(weaponBoostStat, nil, false)
+							---@type StatProperty[]
+							local props = weaponBoost.ExtraProperties
+							if props then
+								hasRuneProps = true
+								for i,v in pairs(props) do
+									if v.Type == "Status" then
+										local name = GameHelpers.Stats.GetDisplayName(v.Action, "StatusData")
+										if not StringHelpers.IsNullOrWhitespace(name) then
+											local chance = math.min(100, math.ceil(v.StatusChance * 100))
+											local turns = v.Duration
+											local text = ""
+											local chanceText = ""
+											if chance > 0 then
+												chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+											end
+											if turns > 0 then
+												turns = math.ceil(v.Duration / 6.0)
+												text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
+											else
+												text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
+											end
+											table.insert(propElements, {
+												Warning="",
+												Label=text
+											})
+										end
+									end
+								end
+							end
+							local isHeavyBolt = string.find(weaponBoost.Tags, "LLWEAPONEX_HeavyAmmo")
+							if isHeavyBolt then
+								table.insert(propElements, {
+									Label=heavyBoltText.Value,
+									Warning=""
+								})
+								hasRuneProps = true
+							end
 						end
 					end
 				end
 			end
-		end
-		if hasRuneProps then
-			for i,v in pairs(propElements) do
-				skillPropsElement.Properties[#skillPropsElement.Properties+1] = v
+			if hasRuneProps then
+				for i,v in pairs(propElements) do
+					skillPropsElement.Properties[#skillPropsElement.Properties+1] = v
+				end
 			end
 		end
+
+		if customRequirements.Total > 0 then
+			---@type SkillRequiredEquipment[]
+			local reworkedRequirements = {}
+			local hasCustomWeaponType = false
+			for _,element in ipairs(skillRequirements) do
+				local _,_,rankNum = string.find(element.Label, "LLWEAPONEX_Requirement_MasteryRank%s+(%d+)")
+				if rankNum then
+					rankNum = tonumber(rankNum)
+					for mastery,v in pairs(customRequirements.MasteryRank) do
+						if v.Param == rankNum and Masteries[mastery] then
+							local masteryName = Masteries[mastery].Name.Value
+							element.Label = Text.SkillTooltip.MasteryRankRequirement:ReplacePlaceholders(masteryName, v.Param)
+							reworkedRequirements[#reworkedRequirements+1] = element
+							element.Sort = 9999
+						end
+					end
+				else
+					local _,_,weaponName = string.find(element.Label, "LLWEAPONEX_Requirement_WeaponType%s+(.+)")
+					if weaponName then
+						for mastery,v in pairs(customRequirements.WeaponType) do
+							if Masteries[mastery] then
+								reworkedRequirements[#reworkedRequirements+1] = {Type="SkillRequiredEquipment", RequirementMet=element.RequirementMet, Label = LocalizedText.SkillTooltip.SkillRequiredEquipment:ReplacePlaceholders(Masteries[mastery].Name.Value)}
+								hasCustomWeaponType = true
+							end
+						end
+					else
+						reworkedRequirements[#reworkedRequirements+1] = element
+					end
+				end
+				--Requirement is met, so it isn't added to the tooltip since Param is -1
+				if not hasCustomWeaponType then
+					for mastery,v in pairs(customRequirements.WeaponType) do
+						if Masteries[mastery] then
+							reworkedRequirements[#reworkedRequirements+1] = {Type="SkillRequiredEquipment", RequirementMet=true, Label = LocalizedText.SkillTooltip.SkillRequiredEquipment:ReplacePlaceholders(Masteries[mastery].Name.Value)}
+							hasCustomWeaponType = true
+						end
+					end
+				end
+			end
+			if hasCustomWeaponType then
+				for i,v in pairs(reworkedRequirements) do
+					for id,tstring in pairs(LocalizedText.SkillRequirement) do
+						if string.find(v.Label, tstring.Value) then
+							table.remove(reworkedRequirements, i)
+							break
+						end
+					end
+				end
+			end
+			table.sort(reworkedRequirements, function(a,b) local s1 = a.Sort or 0; local s2 = b.Sort or 0; return s1 < s2 end)
+			tooltip:RemoveElements("SkillRequiredEquipment")
+			tooltip:AppendElements(reworkedRequirements)
+			skillRequirements = reworkedRequirements
+		end
 	end
+
 	if string.find(skill, "Banner") then
-		local element = tooltip:GetElement("SkillRequiredEquipment")
-		if element ~= nil then
-			if string.find(element.Label:lower(), "staff") then
-				element.Label = string.gsub(element.Label, "Staff", Text.WeaponType.Banner.Value)
-				element.Label = string.gsub(element.Label, "staff", Text.WeaponType.Banner.Value:lower())
+		local staffText = LocalizedText.WeaponType.Staff.Value
+		local staffTextCompare = string.lower(staffText)
+		for _,element in pairs(skillRequirements) do
+			if string.find(element.Label:lower(), staffTextCompare) then
+				element.Label = string.gsub(element.Label, staffText, Text.WeaponType.Banner.Value):gsub(staffTextCompare, Text.WeaponType.Banner.Value:lower())
 			end
 		end
 	end

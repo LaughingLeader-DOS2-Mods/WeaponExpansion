@@ -9,15 +9,10 @@ local CustomRequirements = {}
 ---@param ctx CustomRequirementContext
 ---@return boolean
 local function _GetMasteryRequirement(req, character, ctx)
-	Ext.DumpShallow({Context=ctx, Requirement=req})
 	local masteryID = req.Tag
-	local masteryRanks = character.UserVars.LLWEAPONEX_Masteries
-	if masteryRanks then
-		---@cast masteryRanks table<string, MasteryExperienceData>
-		local rankData = masteryRanks[masteryID]
-		if rankData then
-			return rankData.Level >= req.Param
-		end
+	local level = Mastery.Experience.GetMasteryExperience(character, masteryID)
+	if level then
+		return level >= req.Param
 	end
 	return false
 end
@@ -27,36 +22,22 @@ end
 ---@param ctx CustomRequirementContext
 ---@return boolean
 local function _GetWeaponRequirement(req, character, ctx)
-	Ext.DumpShallow(ctx);Ext.DumpShallow(req)
 	local weaponType = req.Tag
-	--[[ local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(character)
-	if mainhand and GameHelpers.ItemHasTag(mainhand, weaponType) then
-		return true
-	end
-	if offhand and GameHelpers.ItemHasTag(offhand, weaponType) then
-		return true
-	end
-	return false
-	]]
 	local _TAGS = GameHelpers.GetAllTags(character, true, true)
 	return _TAGS[weaponType] == true
 end
-
--- local skill = Ext.Stats.Get("Shout_LLWEAPONEX_Rapier_DuelistStance");skill.Requirements = {{Not = false, Param = 0, Requirement = "LLWEAPONEX_WeaponType", Tag = "LLWEAPONEX_Rapier"}};skill.MemorizationRequirements = {{Not = false, Param = 1, Requirement = "LLWEAPONEX_MasteryRank", Tag = "LLWEAPONEX_Rapier"}};Ext.Stats.Sync("Shout_LLWEAPONEX_Rapier_DuelistStance", false)
 
 ---@param reqs StatsRequirement[]
 ---@return nil|StatsRequirement[]
 function CustomRequirements.OverrideRequirements(reqs)
 	local len = #reqs
 	if len > 0 then
-		---@type StatsRequirement[]
-		local newRequirements = TableHelpers.Clone(reqs)
 		local changed = false
 		for i=1,len do
-			local req = newRequirements[i]
-			if req.Requirement == "Tag" then
-				local _,_,masteryTag,rank = string.find(req.Tag, "(.+)_Mastery(%d-)")
-				if masteryTag and Masteries[masteryTag] then
+			local req = reqs[i]
+			if req.Requirement == "Tag" and not StringHelpers.IsNullOrEmpty(req.Tag) then
+				local _,_,masteryTag,rank = string.find(req.Tag, "(.+)_Mastery(%d+)")
+				if masteryTag and Masteries[masteryTag] and rank then
 					changed = true
 					req.Requirement = "LLWEAPONEX_MasteryRank"
 					req.Tag = masteryTag
@@ -67,42 +48,51 @@ function CustomRequirements.OverrideRequirements(reqs)
 						changed = true
 						req.Requirement = "LLWEAPONEX_WeaponType"
 						req.Tag = masteryTag
+						req.Param = -1
 					end
 				end
 			end
 		end
 		if changed then
-			return newRequirements
+			return reqs
 		end
 	end
 	return nil
 end
 
----@param req CustomRequirementDescriptor 
+---@param customReq CustomRequirementDescriptor 
 ---@param callback function
-local function RegisterContextCallback(req, callback)
+local function RegisterContextCallback(customReq, callback)
 	if _ISCLIENT then
 		---@param req StatsRequirement
 		---@param ctx CustomRequirementContext
-		req.Callbacks.EvaluateCallback = function (req, ctx)
+		customReq.Callbacks.EvaluateCallback = function (req, ctx)
 			return callback(req, ctx.ClientCharacter, ctx)
 		end
 	else
 		---@param req StatsRequirement
 		---@param ctx CustomRequirementContext
-		req.Callbacks.EvaluateCallback = function (req, ctx)
+		customReq.Callbacks.EvaluateCallback = function (req, ctx)
 			return callback(req, ctx.ServerCharacter, ctx)
 		end
 	end
 end
 
 function CustomRequirements.Register()
-	local req = Ext.Stats.AddRequirement("LLWEAPONEX_MasteryRank", true)
-	req.Description = "Mastery Rank"
-	RegisterContextCallback(req, _GetMasteryRequirement)
-	req = Ext.Stats.AddRequirement("LLWEAPONEX_WeaponType", true)
-	req.Description = "Weapon"
-	RegisterContextCallback(req, _GetWeaponRequirement)
+	local req = Ext.Stats.AddRequirement("LLWEAPONEX_MasteryRank", false)
+	if req then
+		req.Description = "LLWEAPONEX_Requirement_MasteryRank"
+		RegisterContextCallback(req, _GetMasteryRequirement)
+	else
+		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:CustomRequirements.Register] Failed to register requirment 'LLWEAPONEX_MasteryRank'")
+	end
+	req = Ext.Stats.AddRequirement("LLWEAPONEX_WeaponType", false)
+	if req then
+		req.Description = "LLWEAPONEX_Requirement_WeaponType"
+		RegisterContextCallback(req, _GetWeaponRequirement)
+	else
+		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:CustomRequirements.Register] Failed to register requirment 'LLWEAPONEX_WeaponType'")
+	end
 	--[[ req = Ext.Stats.AddRequirement("LLWEAPONEX_EnemyDiedInCombat", true)
 	req.Description = "Defeating an Enemy in Combat"
 	req.DescriptionHandle = "hc7f8dca2gb752g4627g9351ge185459bc219"

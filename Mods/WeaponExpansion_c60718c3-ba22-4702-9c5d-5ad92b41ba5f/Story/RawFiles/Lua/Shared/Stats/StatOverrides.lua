@@ -6,10 +6,10 @@ local _ISCLIENT = Ext.IsClient()
 ---@alias LLWEAPONEX_StatOverrides_Attributes table<string, string|number|LLWEAPONEX_StatOverrides_GetConditionalAttributeValue<any>>
 
 ---@type table<string, LLWEAPONEX_StatOverrides_Attributes>
-local BaseStats = Ext.Require("Shared/Overrides/BaseStats.lua")
+local BaseStats = Ext.Require("Shared/Stats/BaseStats.lua")
 
 ---@type table<Guid, table<string, LLWEAPONEX_StatOverrides_Attributes>>
-local ModStats = Ext.Require("Shared/Overrides/ModStats.lua")
+local ModStats = Ext.Require("Shared/Stats/ModStats.lua")
 
 ---@type WeaponExpansionCustomRequirements
 local CustomRequirements = Ext.Require("Shared/Stats/CustomRequirements.lua")
@@ -89,10 +89,20 @@ local function AddRequirement(stat, param, inverse, requirementType)
 				return false
 			end
 		end
-		requirements[#requirements+1] = {Param = param, Not = inverse, Requirement = requirementType}
-		stat.Requirements = requirements
+		local data = {Param = param, Not = inverse, Requirement = requirementType, Tag = ""}
+		if requirementType == "Tag" then
+			data.Tag = param
+			data.Param = -1
+		end
+		requirements[#requirements+1] = data
+		--stat.Requirements = requirements
 	else
-		stat.Requirements = {{Param = param, Not = inverse, Requirement = requirementType}}
+		local data = {Param = param, Not = inverse, Requirement = requirementType, Tag = ""}
+		if requirementType == "Tag" then
+			data.Tag = param
+			data.Param = -1
+		end
+		stat.Requirements = {data}
 	end
 	return true
 end
@@ -231,7 +241,7 @@ local function Run(doSync)
 	--for _,id in pairs(Ext.Stats.GetStats("SkillData")) do local s = Ext.Stats.Get(id); id.Template = id.Template .. id.Template end
 
 	for _,id in pairs(Ext.Stats.GetStats("SkillData")) do
-		local stat = Ext.Stats.Get(id)
+		local stat = Ext.Stats.Get(id, nil, false, true)
 		---@cast stat StatEntrySkillData
 		--local gameMaster = skill.ForGameMaster
 		local requirement = stat.Requirement
@@ -290,17 +300,14 @@ local function Run(doSync)
 		--Swap Tag LLWEAPONEX_Rapier_Mastery1 and Tag LLWEAPONEX_Rapier_Equipped type of requirements with new custom ones
 
 		if stat.Requirements then
-			local newRequirements = CustomRequirements.OverrideRequirements(stat.Requirements)
-			if newRequirements then
-				stat.Requirements = newRequirements
-			end
+			CustomRequirements.OverrideRequirements(stat.Requirements)
+			-- if newRequirements then
+			-- 	stat.Requirements = newRequirements
+			-- end
 		end
 
 		if stat.MemorizationRequirements then
-			local newRequirements = CustomRequirements.OverrideRequirements(stat.MemorizationRequirements)
-			if newRequirements then
-				stat.MemorizationRequirements = newRequirements
-			end
+			CustomRequirements.OverrideRequirements(stat.MemorizationRequirements)
 		end
 
 		if _EE2 then
@@ -398,12 +405,7 @@ end, {Priority=1})
 
 Ext.Events.ResetCompleted:Subscribe(function (e)
 	CustomRequirements.Register()
+	if Vars.LeaderDebugMode then
+		Run(false)
+	end
 end)
-
--- if not _ISCLIENT then
--- 	Events.LuaReset:Subscribe(function (e)
--- 		if Vars.LeaderDebugMode then
--- 			Run(true)
--- 		end
--- 	end)
--- end
