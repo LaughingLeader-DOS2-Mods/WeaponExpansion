@@ -117,11 +117,11 @@ function EquipmentManager:OnItemEquipped(character, item)
 
 	self:CheckWeaponAnimation(character, item, _ITEM_TAGS)
 
-	if PersistentVars.ActiveMasteries[character.MyGuid] == nil then
-		PersistentVars.ActiveMasteries[character.MyGuid] = {}
+	if character.UserVars.LLWEAPONEX_ActiveMasteries == nil then
+		character.UserVars.LLWEAPONEX_ActiveMasteries = {}
 	end
 
-	local persistentActivatedMasteries = PersistentVars.ActiveMasteries[character.MyGuid]
+	local persistentActivatedMasteries = character.UserVars.LLWEAPONEX_ActiveMasteries
 
 	for tag,b in pairs(activatedMasteries) do
 		persistentActivatedMasteries[tag] = true
@@ -173,7 +173,7 @@ end
 
 ---@param character EsvCharacter
 local function _UpdateActiveMasteries(character)
-	local data = PersistentVars.ActiveMasteries[character.MyGuid]
+	local data = character.UserVars.LLWEAPONEX_ActiveMasteries
 	if data then
 		local activeMasteries = 0
 		local nextData = {}
@@ -209,9 +209,9 @@ local function _UpdateActiveMasteries(character)
 		end
 
 		if activeMasteries > 0 then
-			PersistentVars.ActiveMasteries[character.MyGuid] = nextData
+			character.UserVars.LLWEAPONEX_ActiveMasteries = nextData
 		else
-			PersistentVars.ActiveMasteries[character.MyGuid] = nil
+			character.UserVars.LLWEAPONEX_ActiveMasteries = {}
 		end
 	end
 end

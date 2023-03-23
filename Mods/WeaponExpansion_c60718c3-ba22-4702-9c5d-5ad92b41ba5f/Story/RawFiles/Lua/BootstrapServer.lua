@@ -120,9 +120,6 @@ local defaultPersistentVars = {
     ---Character GUID to BonusID -> Bool
     ---@type table<Guid,table<string, boolean>>
     DisabledBonuses = {},
-    ---Character GUID to Mastery ID -> Bool
-    ---@type table<Guid,table<string, boolean>>
-    ActiveMasteries = {},
 }
 
 ---@type WeaponExpansionVars

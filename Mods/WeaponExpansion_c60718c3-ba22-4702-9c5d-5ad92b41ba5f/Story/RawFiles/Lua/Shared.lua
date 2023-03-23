@@ -380,8 +380,8 @@ Tags = {
 	RangedWeaponTags = {},
 	StatWordToTag = {},
 	WeaponTypes = {},
-	---Client-side
-	---@type table<string, fun(character:EsvCharacter, skill:string, tag:string, tooltip:TooltipData):string,boolean>
+	---Return the text to append, and whether it should be added to SkillProperties or not.
+	---@type table<string, (fun(character:EsvCharacter, skill:string, tag:string, tooltip:TooltipData):string|nil,boolean|nil)>
 	SkillBonusText = {},
 	ExtraProperties = {
 		LLWEAPONEX_PirateGloves_Equipped = true,
@@ -599,8 +599,15 @@ Ext.IO.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef
 ---@field Experience integer
 
 ---@alias MasteryExperienceUserVars table<string,MasteryExperienceDataEntry>
+---@alias ActiveMasteriesUserVars table<string,boolean>
 
 Ext.Utils.RegisterUserVariable("LLWEAPONEX_MasteryExperience", {
+    Server = true,
+    Client = true,
+    SyncToClient = true,
+})
+
+Ext.Utils.RegisterUserVariable("LLWEAPONEX_ActiveMasteries", {
     Server = true,
     Client = true,
     SyncToClient = true,

@@ -122,7 +122,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 		if characterTags[tag] then
 			local b,text,appendToSkillProperties = xpcall(callback, debug.traceback, character, skill, tag, tooltip)
 			if b then
-				if text ~= nil then
+				if not StringHelpers.IsNullOrEmpty(text) then
 					text = GameHelpers.Tooltip.ReplacePlaceholders(text, character)
 					if appendToSkillProperties == true then
 						table.insert(skillPropsElement.Properties, {
