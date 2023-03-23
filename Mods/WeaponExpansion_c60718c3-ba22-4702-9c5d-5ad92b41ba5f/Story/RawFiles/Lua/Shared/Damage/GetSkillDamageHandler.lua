@@ -1,4 +1,4 @@
-local isClient = Ext.IsClient()
+local _ISCLIENT = Ext.IsClient()
 
 --- @param skill StatEntrySkillData
 --- @param attacker StatCharacter
@@ -27,10 +27,11 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 			Ext.Utils.PrintError(damageList)
 		end
 	elseif attackerIsCharacter then
+		--TODO Somehow support other modded GetSkillDamage? Invoking GetSkillDamage from GetSkillDamage seems like a bad idea
 		-- Unarmed weapon damage scaling
 		if skill.UseWeaponDamage == "Yes" and UnarmedHelpers.HasUnarmedWeaponStats(attacker) then
-			local damageList,deathType = Skills.DamageFunctions.UnarmedSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isClient)
-			if not isClient then
+			local damageList,deathType = Skills.DamageFunctions.UnarmedSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, _ISCLIENT)
+			if not _ISCLIENT and damageList then
 				local hasDamage = false
 				for i,v in pairs(damageList:ToTable()) do
 					if v.Amount > 0 then
@@ -39,7 +40,7 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 					end
 				end
 				if hasDamage then
-					Config.Skill.TempData.RecalculatedUnarmedSkillDamage[attacker.MyGuid] = skill.Name
+					Config.TempData.RecalculatedUnarmedSkillDamage[attacker.MyGuid] = skill.Name
 				end
 			end
 			return damageList,deathType
@@ -49,11 +50,11 @@ end
 
 Ext.Events.GetSkillDamage:Subscribe(function(e)
 	local damageList,deathType = OnGetSkillDamage(e.Skill, e.Attacker, e.IsFromItem, e.Stealthed, e.AttackerPosition, e.TargetPosition, e.Level, e.NoRandomization)
-	if not isClient and damageList then
+	if not _ISCLIENT and damageList then
 		e.DamageList:CopyFrom(damageList)
 		if deathType then
 			e.DeathType = deathType
 		end
 		e:StopPropagation()
 	end
-end)
+end, {Priority=101})
