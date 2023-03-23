@@ -188,6 +188,11 @@ Config = {
 			"WaterCloud",
 			"BloodCloud",
 			"SmokeCloud",
+		},
+		--Only boost heals using these stats, if the Anatomy Book unique is equipped
+		AnatomyBookHealStats = {
+			Vitality = true,
+			All = true
 		}
     },
 	TempData = {

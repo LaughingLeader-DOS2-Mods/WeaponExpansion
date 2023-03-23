@@ -4,20 +4,18 @@ if Vars.IsClient then
 		if GameHelpers.Stats.IsHealingSkill(skill, {"Vitality", "All"}) then
 			return healingBonusText.Value
 		end
+		return ""
 	end
 else
-	local affectHealTypes = {
-		Vitality = true,
-		All = true
-	}
-
-	Uniques.AnatomyBook:RegisterHealListener(function(e, self)
-		if e.Heal.HealAmount > 0 and affectHealTypes[e.Heal.HealType] then
-			local healMult = GameHelpers.GetExtraData("LLWEAPONEX_AnatomyBook_HealBonusMultiplier", 50, false)
-			if healMult > 0 then
+	Events.OnHeal:Subscribe(function(e)
+		if e.Status.HealAmount > 0 and e.Source
+		and Config.Status.AnatomyBookHealStats[e.HealStat]
+		and GameHelpers.CharacterOrEquipmentHasTag(e.Source, Uniques.AnatomyBook.Tag) then
+			local healMult = GameHelpers.GetExtraData("LLWEAPONEX_AnatomyBook_HealBonusMultiplier", 50)
+			if healMult ~= 0 then
 				healMult = healMult * 0.01
-				e.Heal.HealAmount = math.ceil(e.Heal.HealAmount + (e.Heal.HealAmount * healMult))
+				e.Status.HealAmount = math.ceil(e.Status.HealAmount + (e.Status.HealAmount * healMult))
 			end
 		end
-	end)
+	end, {MatchArgs=function(e) return e.StatusId ~= "HEAL" end})
 end

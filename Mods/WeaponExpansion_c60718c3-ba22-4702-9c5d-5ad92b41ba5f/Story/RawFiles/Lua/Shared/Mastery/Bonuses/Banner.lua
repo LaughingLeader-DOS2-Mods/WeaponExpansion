@@ -473,14 +473,14 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 			return false
 		end
 	}).Register.Healed(function(self, e, bonuses)
-		if e.Heal.StatusId ~= "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL"
-		and (e.Heal.HealType == "All" or e.Heal.HealType == "Vitality")
-		and not MasteryBonusManager.Vars.BannerIgnoredHealingStatuses[e.Heal.StatusId] then
+		if e.StatusId ~= "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL"
+		and (e.HealStat == "All" or e.HealStat == "Vitality")
+		and not MasteryBonusManager.Vars.BannerIgnoredHealingStatuses[e.StatusId] then
 			local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Cooperation_HealingShareRadius", 6.0)
 			local percentage = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Cooperation_HealingSharePercentage", 50.0)
 			if radius > 0 and percentage > 0 then
 				local mult = percentage * 0.01
-				local healAmount = math.ceil(e.OriginalAmount * mult)
+				local healAmount = math.ceil(e.Status.HealAmount * mult)
 				Ext.Stats.Get("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", nil, false).HealValue = healAmount
 				Ext.Stats.Sync("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", false)
 

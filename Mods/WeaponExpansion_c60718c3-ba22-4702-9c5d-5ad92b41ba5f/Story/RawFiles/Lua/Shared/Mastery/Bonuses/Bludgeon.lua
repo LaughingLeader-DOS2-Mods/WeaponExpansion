@@ -117,18 +117,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 	end),
 })
 
-if not Vars.IsClient and Vars.DebugMode then
-	Events.OnHeal:Subscribe(function (e)
-		if e.Heal.StatusId == "LLWEAPONEX_MASTERYBONUS_BLUDGEON_ARMOR_DAMAGE" then
-			print(Ext.MonotonicTime(), "OnHeal", e.Heal.HealAmount)
-		end
-	end)
-	---@param status EsvStatusHeal
-	StatusManager.Register.Applied("LLWEAPONEX_MASTERYBONUS_BLUDGEON_ARMOR_DAMAGE", function (target, status, source)
-		print(Ext.MonotonicTime(), "Applied", status.HealAmount)
-	end)
-end
-
 MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 	rb:Create("BLUDGEON_SUNDER", {
 		Skills = {"Target_CripplingBlow","Target_EnemyCripplingBlow"},
