@@ -30,3 +30,7 @@ Mods.WeaponExpansion = {
 	Uniques = Uniques,
 	WeaponExTesting = WeaponExTesting,
 }
+
+---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean)
+---@alias EquipmentChangedIDType string|"Tag"|"Template"
+---@alias ItemListenerEvent string|"EquipmentChanged"

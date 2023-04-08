@@ -1,57 +1,23 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
 local _ISCLIENT = Ext.IsClient()
+local _VARS = MasteryBonusManager.Vars.Dagger
 
 local _eqSet = "Class_Rogue_Lizards"
 
-local ThrowingKnifeBonus = rb:Create("DAGGER_THROWINGKNIFE", {
-	Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},
-	Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife")
-})
-
-MasteryBonusManager.Vars.ThrowingKnifeBonusDamageSkills = {
-	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison",
-	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive",
-}
-
----@param self MasteryBonusData
----@param e OnSkillStateHitEventArgs
----@param bonuses MasteryBonusCallbackBonuses
-local function ThrowingKnifeBonus_Hit(self, e, bonuses)
-	if e.Data.Success then
-		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance", 25)
-		if GameHelpers.Math.Roll(chance) then
-			GameHelpers.Skill.Explode(e.Data.Target, Common.GetRandomTableEntry(MasteryBonusManager.Vars.ThrowingKnifeBonusDamageSkills), e.Character)
-		end
-	end
-end
-
----@param self MasteryBonusData
----@param e OnSkillStateProjectileHitEventArgs
----@param bonuses MasteryBonusCallbackBonuses
-local function ThrowingKnifeBonus_ProjectileHit(self, e, bonuses)
-	--Targeted a position instead of an object
-	if StringHelpers.IsNullOrEmpty(e.Data.Target) and e.Data.Position then
+if not _ISCLIENT then
+	---@param target EsvCharacter|EsvItem|vec3
+	---@param attacker EsvCharacter
+	function _VARS.OnThrowingKnifeHit(target, attacker)
 		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance", 25)
 		if chance > 0 and GameHelpers.Math.Roll(chance) then
-			GameHelpers.Skill.Explode(e.Data.Position, Common.GetRandomTableEntry(MasteryBonusManager.Vars.ThrowingKnifeBonusDamageSkills), e.Character)
+			GameHelpers.Skill.Explode(target, Common.GetRandomTableEntry(_VARS.ThrowingKnifeBonusDamageSkills), attacker)
 		end
 	end
-end
 
-ThrowingKnifeBonus.Register.SkillHit(ThrowingKnifeBonus_Hit).SkillProjectileHit(ThrowingKnifeBonus_ProjectileHit)
-
-local SneakingPassiveBonus = rb:Create("DAGGER_SNEAKINGBONUS", {
-	Skills = {"ActionSkillSneak"},
-	Statuses = {"SNEAKING", "INVISIBLE"},
-	Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SneakingBonus", "<font color='#F19824'>For every turn spent [Key:INVISIBLE_DisplayName] or [Handle:h6bf7caf0g7756g443bg926dg1ee5975ee133:Sneaking] [Handle:h2c990ecagc680g4c68g88ccgb5358faa4e33:in combat], gain an increasing damage boost for one attack.</font>"),
-	MasteryMenuSettings = {
-		OnlyUseTable = "Status",
-	}
-})
-
-if not _ISCLIENT then
-	local function IncreaseSneakingDamageBoost(target, turns)
+	---@param target CharacterParam
+	---@param turns? integer
+	function _VARS.IncreaseSneakingDamageBoost(target, turns)
 		local target = GameHelpers.GetCharacter(target)
 		if target then
 			turns = turns or PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target.MyGuid] or 0
@@ -73,35 +39,79 @@ if not _ISCLIENT then
 		end
 	end
 
+	---@param e OnStatusAppliedEventArgs
 	local function OnSneakingOrInvisible(e)
-		Timer.Cancel("LLWEAPONEX_ClearDaggerSneakingBonus", e.TargetGUID)
-		local debugIgnoreCombat = Vars.DebugMode and e.Target and e.Target:HasTag("LLWEAPONEX_MasteryTestCharacter")
-		if GameHelpers.Character.IsInCombat(e.Target) or debugIgnoreCombat then
-			if PersistentVars.MasteryMechanics.SneakingTurnsInCombat[e.TargetGUID] == nil then
-				TurnCounter.CountUp("LLWEAPONEX_Dagger_SneakingBonus", 0, GameHelpers.Combat.GetID(e.TargetGUID), {
-					Target = e.TargetGUID,
-					Infinite = true,
-					OutOfCombatSpeed = debugIgnoreCombat and 0.5 or nil,
-					CombatOnly = not debugIgnoreCombat
-				})
+		if MasteryBonusManager.HasMasteryBonus(e.Target, "DAGGER_SNEAKINGBONUS") then
+			Timer.Cancel("LLWEAPONEX_ClearDaggerSneakingBonus", e.TargetGUID)
+			local debugIgnoreCombat = Vars.DebugMode and e.Target and e.Target:HasTag("LLWEAPONEX_MasteryTestCharacter")
+			if GameHelpers.Character.IsInCombat(e.Target) or debugIgnoreCombat then
+				if PersistentVars.MasteryMechanics.SneakingTurnsInCombat[e.TargetGUID] == nil then
+					TurnCounter.CountUp("LLWEAPONEX_Dagger_SneakingBonus", 0, GameHelpers.Combat.GetID(e.TargetGUID), {
+						Target = e.TargetGUID,
+						Infinite = true,
+						OutOfCombatSpeed = debugIgnoreCombat and 0.5 or nil,
+						CombatOnly = not debugIgnoreCombat
+					})
+				end
+				_VARS.IncreaseSneakingDamageBoost(e.TargetGUID)
 			end
-			IncreaseSneakingDamageBoost(e.TargetGUID)
 		end
 	end
 
+	---@param e OnStatusRemovedEventArgs
 	local function OnSneakingOrInvisibleLost(e)
-		Timer.StartObjectTimer("LLWEAPONEX_ClearDaggerSneakingBonus", e.TargetGUID, 500)
+		if e.Target and e.Target:GetStatus("LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS") then
+			Timer.StartObjectTimer("LLWEAPONEX_ClearDaggerSneakingBonus", e.TargetGUID, 500)
+		end
 	end
-	
-	SneakingPassiveBonus.Register.StatusApplied(OnSneakingOrInvisible, "Target", "SNEAKING").StatusApplied(OnSneakingOrInvisible, "Target", "INVISIBLE", true)
-	.StatusRemoved(OnSneakingOrInvisibleLost, "Target", "SNEAKING")
-	.StatusRemoved(OnSneakingOrInvisibleLost, "Target", "INVISIBLE", true)
-	.TurnCounter("LLWEAPONEX_Dagger_SneakingBonus", function (self, e, bonuses)
+
+	Timer.Subscribe("LLWEAPONEX_ClearDaggerSneakingBonus", function (e)
+		if e.Data.UUID then
+			PersistentVars.MasteryMechanics.SneakingTurnsInCombat[e.Data.UUID] = nil
+			TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakingBonus", e.Data.UUID)
+			GameHelpers.Status.Remove(e.Data.UUID, "LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS")
+		end
+	end)
+
+	StatusManager.Subscribe.BeforeAttempt("LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET", function (e)
+		if not GameHelpers.Character.IsInCombat(e.Target) and e.Status.KeepAlive then
+			e.Status.CurrentLifeTime = 6
+			e.Status.LifeTime = 6
+			e.Status.KeepAlive = false
+			e.Status.RequestClientSync = true
+		end
+	end)
+
+	StatusManager.Subscribe.Applied("SNEAKING", OnSneakingOrInvisible)
+	StatusManager.Subscribe.AppliedType("INVISIBLE", OnSneakingOrInvisible)
+	StatusManager.Subscribe.Removed("SNEAKING", OnSneakingOrInvisibleLost)
+	StatusManager.Subscribe.RemovedType("INVISIBLE", OnSneakingOrInvisibleLost)
+end
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 1, {
+	rb:Create("DAGGER_THROWINGKNIFE", {
+		Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife")
+	}).Register.SkillProjectileHit(function (self, e, bonuses)
+		local target = e.Data.Position
+		if e.Data.TargetObject then
+			target = e.Data.TargetObject
+		end
+		_VARS.OnThrowingKnifeHit(target, e.Character)
+	end),
+	rb:Create("DAGGER_SNEAKINGBONUS", {
+		Skills = {"ActionSkillSneak"},
+		Statuses = {"SNEAKING", "INVISIBLE"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SneakingBonus", "<font color='#F19824'>For every turn spent [Key:INVISIBLE_DisplayName] or [Handle:h6bf7caf0g7756g443bg926dg1ee5975ee133:Sneaking] [Handle:h2c990ecagc680g4c68g88ccgb5358faa4e33:in combat], gain an increasing damage boost for one attack.</font>"),
+		MasteryMenuSettings = {
+			OnlyUseTable = "Status",
+		}
+	}).Register.TurnCounter("LLWEAPONEX_Dagger_SneakingBonus", function (self, e, bonuses)
 		local target = e.Data.Target
 		if target then
 			if GameHelpers.Character.IsSneakingOrInvisible(target) then
 				PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target] = e.Turn
-				IncreaseSneakingDamageBoost(target, e.Turn)
+				_VARS.IncreaseSneakingDamageBoost(target, e.Turn)
 				if e.Turn >= 3 then
 					TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakingBonus", target)
 					SignalTestComplete(self.ID)
@@ -132,30 +142,6 @@ if not _ISCLIENT then
 		test:Wait(1000)
 		return true
 	end)
-
-	Timer.Subscribe("LLWEAPONEX_ClearDaggerSneakingBonus", function (e)
-		if e.Data.UUID then
-			PersistentVars.MasteryMechanics.SneakingTurnsInCombat[e.Data.UUID] = nil
-			TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakingBonus", e.Data.UUID)
-		end
-		if e.Data.Object then
-			GameHelpers.Status.Remove(e.Data.Object, "LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS")
-		end
-	end)
-
-	StatusManager.Subscribe.BeforeAttempt("LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET", function (e)
-		if not GameHelpers.Character.IsInCombat(e.Target) and e.Status.KeepAlive then
-			e.Status.CurrentLifeTime = 6
-			e.Status.LifeTime = 6
-			e.Status.KeepAlive = false
-			e.Status.RequestClientSync = true
-		end
-	end)
-end
-
-MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 1, {
-	ThrowingKnifeBonus,
-	SneakingPassiveBonus
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
@@ -229,7 +215,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 3,{
 	rb:Create("DAGGER_THROWINGKNIFE2", {
 		Skills = {"Projectile_FanOfKnives", "Projectile_EnemyFanOfKnives"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife2", "<font color='#F19824'>Each knife thrown has a <font color='#CC33FF'>[ExtraData:LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance]%</font> to be <font color='#00FFAA'>coated in poison or explosive oil</font>, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.</font>")
-	}).Register.SkillHit(ThrowingKnifeBonus_Hit).SkillProjectileHit(ThrowingKnifeBonus_ProjectileHit),
+	}).Register.SkillProjectileHit(function (self, e, bonuses)
+		local target = e.Data.Position
+		if e.Data.TargetObject then
+			target = e.Data.TargetObject
+		end
+		_VARS.OnThrowingKnifeHit(target, e.Character)
+	end),
 
 	rb:Create("DAGGER_CORRUPTED_BLADE", {
 		Skills = {"Target_CorruptedBlade", "Target_EnemyCorruptedBlade"},

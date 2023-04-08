@@ -69,7 +69,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 							GameHelpers.Status.Remove(e.Data.TargetObject, id)
 							GameHelpers.Skill.Explode(e.Data.TargetObject, "Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_ShellCrackingBonusDamage", e.Character, {EnemiesOnly = true})
 							local combatLogText = Text.CombatLog.Bludgeon.ShellCracking_StatusRemoved:ReplacePlaceholders(sourceName, GameHelpers.Stats.GetDisplayName(id), targetName, Data.Colors.FormatStringColor[statusColor] or "#33FF33")
-							CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
+							CombatLog.AddCombatText(combatLogText)
 
 							createdExplosion = true
 

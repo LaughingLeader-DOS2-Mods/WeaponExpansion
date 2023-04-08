@@ -48,6 +48,12 @@ MasteryBonusManager = {
 			Projectile_Grenade_WaterBlessedBalloon = true,
 			ProjectileStrike_Grenade_ClusterBomb = true,
 			ProjectileStrike_Grenade_CursedClusterBomb = true, ]]
+		},
+		Dagger = {
+			ThrowingKnifeBonusDamageSkills = {
+				"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison",
+				"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive",
+			},
 		}
 	},
 	---The string format for mastery rank tags, set on a character.

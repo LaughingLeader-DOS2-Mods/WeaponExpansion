@@ -152,10 +152,6 @@ if Vars.DebugMode then
     end)
 end
 
----@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean)
----@alias EquipmentChangedIDType string|"Tag"|"Template"
----@alias ItemListenerEvent string|"EquipmentChanged"
-
 BonusSkills = {}
 ItemProcessor = {
     SmugglersBagPresetToTreasure = {
