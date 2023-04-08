@@ -606,13 +606,13 @@ Ext.IO.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef
 ---@alias MasteryExperienceUserVars table<string,MasteryExperienceDataEntry>
 ---@alias ActiveMasteriesUserVars table<string,boolean>
 
-Ext.Utils.RegisterUserVariable("LLWEAPONEX_MasteryExperience", {
+Ext.Vars.RegisterUserVariable("LLWEAPONEX_MasteryExperience", {
     Server = true,
     Client = true,
     SyncToClient = true,
 })
 
-Ext.Utils.RegisterUserVariable("LLWEAPONEX_ActiveMasteries", {
+Ext.Vars.RegisterUserVariable("LLWEAPONEX_ActiveMasteries", {
     Server = true,
     Client = true,
     SyncToClient = true,

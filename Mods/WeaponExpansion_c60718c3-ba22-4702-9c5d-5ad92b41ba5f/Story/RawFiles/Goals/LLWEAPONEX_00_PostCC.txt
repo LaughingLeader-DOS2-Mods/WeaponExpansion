@@ -1,12 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Blackring_1H_A_ec353f1e-c1ca-46d1-83ef-e9f4fea14475", "LLWEAPONEX_FX_EQ_CombatShield_Blackring_B");
-DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Common_1H_A_8c7da07b-ad11-4a0c-8406-0261977042b6", "LLWEAPONEX_FX_EQ_CombatShield_Common_B");
-DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Dwarves_1H_A_bc034226-19bd-45e6-be7d-ec0d28c2e412", "LLWEAPONEX_FX_EQ_CombatShield_Dwarves_B");
-DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Elves_1H_B_1268f5f0-e484-42ea-8c13-0014e6aeaaad", "LLWEAPONEX_FX_EQ_CombatShield_Elves_A");
-DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Humans_1H_A_3a404dab-4862-4490-aa0f-bc27d06fdc6c", "LLWEAPONEX_FX_EQ_CombatShield_Common_B");
-DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Lizards_1H_C_067f48be-857d-43a8-bd0a-add59f025843", "LLWEAPONEX_FX_EQ_CombatShield_Lizards_D");
+
 KBSECTION
 
 IF
@@ -17,17 +12,6 @@ THEN
 GoalCompleted;
 
 //REGION VISUAL_FIX
-/*
-IF
-SkillAdded(_Char, _Skill, 0)
-AND
-CharacterGetOrigin(_Char, 1, "LLWEAPONEX_Harken")
-THEN
-CharacterSetVisualElement(_Char, 0, "Hair");
-CharacterSetVisualElement(_Char, 0, "HairColor");
-CharacterSetVisualElement(_Char, 0, "Color");
-*/
-
 IF
 SkillAdded(_Char, _Skill, _)
 AND
@@ -50,23 +34,6 @@ NOT DB_LLWEAPONEX_CC_JustReactedToSkills(_Char);
 //END_REGION
 
 //REGION CC_EFFECTS
-IF
-ItemTemplateEquipped(_Template, _Player)
-AND
-DB_LLWEAPONEX_CC_TemplateEffects(_Template, _Effect)
-AND
-PlayLoopEffect(_Player, _Effect, "LowerArm_R_Twist_Bone", _Handle)
-THEN
-DB_LLWEAPONEX_CC_Temp_LoopEffects(_Player, _Template, _Handle);
-
-IF
-ItemTemplateUnEquipped(_Template, _Player)
-AND
-DB_LLWEAPONEX_CC_Temp_LoopEffects(_Player, _Template, _Handle)
-THEN
-NOT DB_LLWEAPONEX_CC_Temp_LoopEffects(_Player, _Template, _Handle);
-StopLoopEffect(_Handle);
-
 PROC
 LeaderLib_CC_OnPresetChanged((CHARACTERGUID)_Player, (STRING)_LastPreset, "LLWEAPONEX_Pirate")
 AND
@@ -92,16 +59,6 @@ AND
 CharacterGetOrigin(_Player, 1, "LLWEAPONEX_Harken")
 THEN
 NRD_ModCall("WeaponExpansion", "CC_SwapToHarkenAnvilPreview", (STRING)_Player, _Preset);
-
-IF
-RegionEnded(_Level)
-AND
-IsCharacterCreationLevel(_Level, 1)
-AND
-DB_LLWEAPONEX_CC_Temp_LoopEffects(_Player, _Template, _Handle)
-THEN
-NOT DB_LLWEAPONEX_CC_Temp_LoopEffects(_Player, _Template, _Handle);
-StopLoopEffect(_Handle);
 //END_REGION
 
 EXITSECTION

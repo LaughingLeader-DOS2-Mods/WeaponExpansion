@@ -18,6 +18,7 @@ function AddRodSkill(charGUID, itemGUID)
 	local character = GameHelpers.GetCharacter(charGUID)
 	local item = GameHelpers.GetItem(itemGUID)
 	if character and item then
+		charGUID = character.MyGuid
 		local itemStat = item.StatsFromName.StatsEntry
 		---@cast itemStat +StatEntryWeapon,-StatsObject
 		if itemStat.WeaponType ~= "Wand" then

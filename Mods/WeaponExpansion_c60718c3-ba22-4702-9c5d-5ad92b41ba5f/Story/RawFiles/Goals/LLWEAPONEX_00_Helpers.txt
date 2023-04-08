@@ -29,37 +29,6 @@ THEN
 DB_NOOP(1);
 //END_REGION
 
-//REGION BEHAVIOR_HELPERS
-QRY
-LLWEAPONEX_QRY_SetItemAmount((ITEMGUID)_Item)
-THEN
-LLWEAPONEX_SetItemAmount(_Item);
-
-PROC
-LLWEAPONEX_SetItemAmount((ITEMGUID)_Item)
-AND
-NOT ItemGetAmount(_Item, _)
-THEN
-SetVarInteger(_Item, "LLWEAPONEX_ItemAmount", 1);
-
-PROC
-LLWEAPONEX_SetItemAmount((ITEMGUID)_Item)
-AND
-ItemGetAmount(_Item, _Amount)
-THEN
-SetVarInteger(_Item, "LLWEAPONEX_ItemAmount", _Amount);
-
-PROC
-LLWEAPONEX_SetItemAmount((ITEMGUID)_Item, (INTEGER)_Amount)
-THEN
-SetVarInteger(_Item, "LLWEAPONEX_ItemAmount", _Amount);
-
-IF
-StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_SetItemAmount")
-THEN
-LLWEAPONEX_SetItemAmount(_Item);
-//END_REGION
-
 //REGION CHARACTER_CREATION
 IF
 RegionStarted(_Level)
