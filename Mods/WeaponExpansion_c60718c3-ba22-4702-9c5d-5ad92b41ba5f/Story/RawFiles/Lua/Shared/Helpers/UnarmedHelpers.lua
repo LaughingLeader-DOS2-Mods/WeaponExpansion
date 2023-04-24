@@ -117,7 +117,7 @@ function UnarmedHelpers.GetUnarmedWeapon(character, statItem)
 			local unarmedWeaponStat = nil
 			if GameHelpers.Ext.ObjectIsItem(item) then
 				unarmedWeaponStat = UnarmedHelpers.GetAssociatedStats(item.StatsId)
-			elseif GameHelpers.Ext.ObjectIsCDivinityStatsItem(item) then
+			elseif GameHelpers.Ext.ObjectIsStatItem(item) then
 				unarmedWeaponStat = UnarmedHelpers.GetAssociatedStats(item.Name)
 			end
 			if unarmedWeaponStat ~= nil then

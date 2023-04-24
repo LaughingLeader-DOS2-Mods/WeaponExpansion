@@ -88,12 +88,15 @@ end) ]]
 
 --#region Unrelenting Rage
 
-Events.GetHitResistanceBonus:Subscribe(function (e)
+Events.CCH.GetHitResistanceBonus:Subscribe(function (e)
 	if e.DamageType == "Physical" then
-		-- Unrelenting Rage grants up to a max of 20% Physical Resistance, but anything over that isn't increased.
-		local maxResBonus = GameHelpers.GetExtraData("LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus", 20)
-		if e.CurrentResistanceAmount < maxResBonus and GameHelpers.Status.IsActive(e.Target.Character, "LLWEAPONEX_UNRELENTING_RAGE") then
-			e.CurrentResistanceAmount = math.min(20, e.CurrentResistanceAmount + maxResBonus)
+		local target = e.Target.Character --[[@as EsvCharacter]]
+		if target then
+			-- Unrelenting Rage grants up to a max of 20% Physical Resistance, but anything over that isn't increased.
+			local maxResBonus = GameHelpers.GetExtraData("LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus", 20)
+			if e.CurrentResistanceAmount < maxResBonus and GameHelpers.Status.IsActive(target, "LLWEAPONEX_UNRELENTING_RAGE") then
+				e.CurrentResistanceAmount = math.min(20, e.CurrentResistanceAmount + maxResBonus)
+			end
 		end
 	end
 end)
