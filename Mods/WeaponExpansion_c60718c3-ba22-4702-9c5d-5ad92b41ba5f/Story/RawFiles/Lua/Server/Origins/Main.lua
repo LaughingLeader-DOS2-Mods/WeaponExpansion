@@ -44,10 +44,10 @@ end
 
 Ext.RegisterNetListener("LLWEAPONEX_FixPlayerCustomData", function (channel, payload, user)
 	if payload == Origin.Harken or payload == "All" then
-		GameHelpers.Utils.UpdatePlayerCustomData(Origin.Harken)
+		GameHelpers.Utils.UpdatePlayerCustomData(Origin.Harken, "Dwarf", "LLWEAPONEX_Harken")
 	end
 	if payload == Origin.Korvash or payload == "All" then
-		GameHelpers.Utils.UpdatePlayerCustomData(Origin.Korvash)
+		GameHelpers.Utils.UpdatePlayerCustomData(Origin.Korvash, "Lizard", "LLWEAPONEX_Korvash")
 	end
 end)
 
