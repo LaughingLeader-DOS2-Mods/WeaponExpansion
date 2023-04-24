@@ -69,6 +69,10 @@ Thanks to all the artists listed below!
 ### Public Domain (CC0)
     - The Sword Of Victory by Arms Museum
       - https://sketchfab.com/3d-models/the-sword-of-victory-f39dc69dbbfe49c68045bec2c16e03ba
+### Sketchfab Standard
+    - Heavy Full Metal Sword Remake by Lokomotto (Adapted for the Beholder sword)
+      - https://sketchfab.com/3d-models/heavy-full-metal-sword-remake-ed09dcb2a9414294ae06e76b0d99a175
+      - https://assetstore.unity.com/packages/3d/props/weapons/heavy-full-metal-sword-remake-123786
 ## Sounds
   - Musket.wav by fennelliott, CC0 License
     - https://freesound.org/people/fennelliott/sounds/347647/
