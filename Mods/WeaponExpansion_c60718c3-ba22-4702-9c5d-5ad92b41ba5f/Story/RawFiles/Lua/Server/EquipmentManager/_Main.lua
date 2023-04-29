@@ -58,8 +58,8 @@ local function ShouldBlockItem(item, char)
 		if item:HasTag(itemTag) then
 			for tag,blockText in pairs(characterTags) do
 				if char:HasTag(tag) then
-					if blockText ~= "" and CharacterIsControlled(char.MyGuid) == 1 and (char.IsPlayer or char.IsGameMaster) then
-						ShowNotification(char.MyGuid, blockText)
+					if blockText ~= "" and char.CharacterControl and (char.IsPlayer or char.IsGameMaster) then
+						Osi.ShowNotification(char.MyGuid, blockText)
 					end
 					return true
 				end
@@ -69,23 +69,9 @@ local function ShouldBlockItem(item, char)
 	return false
 end
 
-RegisterProtectedOsirisListener("CanUseItem", 3, "before", function(charUUID, itemUUID, request)
-	charUUID = StringHelpers.GetUUID(charUUID)
-	itemUUID = StringHelpers.GetUUID(itemUUID)
-	if ObjectExists(itemUUID) == 0 or ObjectExists(charUUID) == 0 then
-		return
-	end
-	local item = GameHelpers.GetItem(itemUUID)
-	local char = GameHelpers.GetCharacter(charUUID)
-
-	if item ~= nil and char ~= nil then
-		if ShouldBlockItem(item, char) then
-			if SharedData.GameMode ~= GAMEMODE.GAMEMASTER then
-				Osi.DB_CustomUseItemResponse(charUUID, itemUUID, 0)
-			else
-				RequestProcessed(charUUID, request, 0)
-			end
-		end
+Events.Osiris.ProcBlockUseOfItem:Subscribe(function (e)
+	if ShouldBlockItem(e.Item, e.Character) then
+		e:PreventAction()
 	end
 end)
 
