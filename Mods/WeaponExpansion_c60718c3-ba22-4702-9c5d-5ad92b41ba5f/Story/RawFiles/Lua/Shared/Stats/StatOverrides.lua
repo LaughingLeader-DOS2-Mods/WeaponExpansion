@@ -403,8 +403,11 @@ Ext.Events.StatsLoaded:Subscribe(function (e)
 	Run()
 end, {Priority=1})
 
-Ext.Events.ResetCompleted:Subscribe(function (e)
+Ext.Events.SessionLoaded:Subscribe(function (e)
 	CustomRequirements.Register()
+end)
+
+Ext.Events.ResetCompleted:Subscribe(function (e)
 	if Vars.LeaderDebugMode then
 		Run(false)
 	end
