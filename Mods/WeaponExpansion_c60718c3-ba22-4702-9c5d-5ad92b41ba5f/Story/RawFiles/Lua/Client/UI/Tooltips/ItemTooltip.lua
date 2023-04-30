@@ -36,6 +36,7 @@ local function CreateFakeWeaponTooltip(tooltip, weaponTypeName, scaleText, damag
 
 	--Just in case
 	tooltip:RemoveElements("APCostBoost")
+	local requirementElements = tooltip:GetElements("ItemRequirement")
 	tooltip:RemoveElements("ItemRequirement")
 	tooltip:RemoveElements("WeaponDamage")
 	tooltip:RemoveElements("ItemAttackAPCost")
@@ -65,6 +66,9 @@ local function CreateFakeWeaponTooltip(tooltip, weaponTypeName, scaleText, damag
 			RequirementMet = true
 		}
 		tooltip:AppendElement(element)
+	end
+	if requirementElements and #requirementElements > 0 then
+		tooltip:AppendElements(requirementElements)
 	end
 	for damageType,data in pairs(damageRange) do
 		element = {
