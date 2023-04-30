@@ -319,6 +319,42 @@ Config = {
 			"LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM",
 			"LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER",
 		}
+	},
+	Runes = {
+		HandCrossbowArrows = {
+			---One of these tag(s) must be in the item to be allow rune insertion
+			RestrictTag = {"LLWEAPONEX_HandCrossbow_Equipped"},
+			RootTemplates = {
+				["72a7d3aa-02d7-4c9b-a565-d94c8a5664b0"] = true, -- LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Air
+				["598b8cb5-7f76-4c50-a609-2a3cd0aa0415"] = true, -- LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Corrosive
+				["8a29169a-e73d-4878-9769-8b4555140fb0"] = true, -- LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Earth
+				["1fe1e11c-2e54-4104-b80a-b6fa0b4b8e99"] = true, -- LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Fire
+				["f3a0dc07-8fb2-4522-a6d4-05f57705c81a"] = true, -- LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Piercing
+				["c3f61b7d-5183-4664-9773-0b630374b7c9"] = true, -- LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Poison
+				["7dcb9e1f-b807-4321-8408-c66f833ae73c"] = true, -- LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Shadow
+				["baf9826a-abe8-4bc8-8c56-b68b5611c223"] = true, -- LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Silver
+				["40af98d5-3584-40cc-8c9f-e3a49564f365"] = true, -- LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Water
+			},
+			RestrictText = "LLWEAPONEX_Notifications_BoltInsertedInNonCrossbow",
+			--RestrictText = Classes.TranslatedString:CreateFromKey("LLWEAPONEX_Notifications_BoltInsertedInNonCrossbow", "<font color='#CD1F1F'>Bolts can only be inserted into a Hand Crossbow!</font>")
+		},
+		PistolBullets = {
+			---One of these tag(s) must be in the item to be allow rune insertion
+			RestrictTag = {"LLWEAPONEX_Pistol_Equipped"},
+			RootTemplates = {
+				["58638ac8-d0d2-4a60-a6a6-76e0be07d58a"] = true, -- LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air
+				["056a48f4-2b5f-4882-aefa-05162ad4c427"] = true, -- LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Corrosive
+				["009eecab-d9bc-454d-afca-5c512f10b182"] = true, -- LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Earth
+				["2e6c0fd4-3d9e-4492-aa21-6047eca15b1a"] = true, -- LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Fire
+				["071b6f55-64a5-4efe-af02-1910d400e6b5"] = true, -- LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Ice
+				["900840dc-7c74-42c3-9eb6-fd5ff39b4f2a"] = true, -- LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Piercing
+				["0377162e-51fa-499a-ab58-4cad5104d888"] = true, -- LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Poison
+				["fc05e69b-bb8b-4d0d-a94c-e1ecafa1c9a9"] = true, -- LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Shadow
+				["6c14edba-cc11-4e9f-be04-685f09c0aadd"] = true, -- LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Silver
+			},
+			RestrictText = "LLWEAPONEX_Notifications_BulletInsertedInNonPistol",
+			--RestrictText = Classes.TranslatedString:CreateFromKey("LLWEAPONEX_Notifications_BulletInsertedInNonPistol", "<font color='#CD1F1F'>Bullets can only be inserted into a Pistol!</font>")
+		}
 	}
 }
 

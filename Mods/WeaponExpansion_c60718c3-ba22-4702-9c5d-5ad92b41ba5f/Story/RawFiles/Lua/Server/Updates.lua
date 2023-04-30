@@ -249,6 +249,12 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_CC_TemplateEffects", 2)
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_CC_Temp_LoopEffects", 3)
 
+	GameHelpers.DB.TryDelete("DB_LeaderLib_Helper_Runes_Templates", "WeaponExpansion.HandCrossbowBolts", nil)
+	GameHelpers.DB.TryDelete("DB_LeaderLib_Helper_Runes_Templates", "WeaponExpansion.PistolBullets", nil)
+	GameHelpers.DB.TryDelete("DB_LeaderLib_Helper_Runes_Restrictions", "WeaponExpansion.HandCrossbowBolts", "Tag", nil)
+	GameHelpers.DB.TryDelete("DB_LeaderLib_Helper_Runes_Restrictions", "WeaponExpansion.PistolBullets", "Tag", nil)
+	Osi.LeaderLib_ToggleScripts_DisableScript("LeaderLib_TS_RuneBlockingEnabled", "WeaponExpansion")
+
 	Osi.LeaderLib_Helper_ClearSurfaceList("LLWEAPONEX_ChaosSurfaces")
 	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath", 4)
 	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing", 3)
