@@ -276,6 +276,8 @@ new subtable "1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_Skillbooks",1,0,0,0,0,0,0,0
 new subtable "0,1;1,1"
 object category "LLWEAPONEX_HandCrossbow_Bolts",1,0,0,0,0,0,0,0
+new subtable "0,1;1,1"
+object category "LLWEAPONEX_Pistol_Bullets",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_CraftingItems",1,0,0,0,0,0,0,0
 new subtable "1,1"
@@ -1498,3 +1500,67 @@ object category "T_TinyBoss",2,0,0,0,0,0,0,0
 object category "T_RewardCombat",6,0,0,0,0,0,0,0
 object category "T_RewardSmall",6,0,0,0,0,0,0,0
 object category "T_RewardBig",3,0,0,0,0,0,0,0
+
+new treasuretable "TEST_LLWEAPONEX_Runes_AllBullets"
+IgnoreLevelDiff 1
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Corrosive",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Earth",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Fire",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Ice",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Piercing",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Poison",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Shadow",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Silver",1,1,0,0,0,0,0,0
+
+new treasuretable "TEST_LLWEAPONEX_Runes_Pistol"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "T_TEST_LLWEAPONEX_Runes_AllBullets",1,1,0,0,0,0,0,0
+new subtable "-1"
+object category "I_ARM_LLWEAPONEX_Pistol_A",1,0,1,0,0,0,0,0
+new subtable "-1"
+object category "I_ARM_LLWEAPONEX_Pistol_A_Tier2",1,0,0,1,0,0,0,0
+new subtable "-1"
+object category "I_ARM_LLWEAPONEX_Pistol_A_Tier3",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_ARM_LLWEAPONEX_Pistol_A_Tier4",1,0,0,0,0,1,0,0
+
+new treasuretable "TEST_LLWEAPONEX_Runes_AllBolts"
+IgnoreLevelDiff 1
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Air",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Corrosive",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Earth",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Fire",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Ice",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Piercing",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Poison",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Shadow",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Silver",1,1,0,0,0,0,0,0
+new subtable "-10"
+object category "I_LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Heavy",1,1,0,0,0,0,0,0
+
+new treasuretable "TEST_LLWEAPONEX_Runes_HandCrossow"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "T_TEST_LLWEAPONEX_Runes_AllBolts",1,1,0,0,0,0,0,0
+new subtable "-4"
+object category "I_ARM_LLWEAPONEX_HandCrossbow_A",1,0,0,0,1,0,0,0
