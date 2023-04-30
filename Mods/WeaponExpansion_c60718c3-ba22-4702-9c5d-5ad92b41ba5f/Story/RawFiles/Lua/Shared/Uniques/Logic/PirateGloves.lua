@@ -58,10 +58,10 @@ else
 	end)
 	Ext.RegisterUITypeCall(Data.UIType.contextMenu.Object, "buttonPressed", function(ui, event, id, actionID, handle)
 		if id == FORCE_PICKPOCKET_ID then
-			Ext.PostMessageToServer("LLWEAPONEX_ForcePickpocket", Ext.JsonStringify({
+			GameHelpers.Net.PostMessageToServer("LLWEAPONEX_ForcePickpocket", {
 				Player = Client:GetCharacter().NetID,
 				Target = pickpocketTarget.NetID
-			}))
+			})
 		end
 	end)
 
