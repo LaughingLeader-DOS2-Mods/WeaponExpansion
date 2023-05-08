@@ -70,9 +70,9 @@ if not Ext.IsClient() then
 			StatusManager.RemovePermanentStatus(e.Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST")
 			GameHelpers.Status.Remove(e.Character, _ActiveRapierRequiredStatuses)
 			GameHelpers.Status.Remove(e.Character, Config.Skill.Rapiers.FrenzyChargeStatuses)
-			CharacterRemoveSkill(e.CharacterGUID, "Target_LLWEAPONEX_SinglehandedAttack")
+			Osi.CharacterRemoveSkill(e.CharacterGUID, "Target_LLWEAPONEX_SinglehandedAttack")
 		end
-	end, {MatchArgs={ID=MasteryID.Rapier}})
+	end, {MatchArgs={Mastery=MasteryID.Rapier}})
 
 	EquipmentManager.Events.EquipmentChanged:Subscribe(function (e)
 		if e.Character:GetStatus("LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST") or Mastery.IsActive(e.Character, MasteryID.Rapier) then

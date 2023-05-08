@@ -632,7 +632,7 @@ if not _ISCLIENT then
 		if not e.Enabled then
 			PersistentVars.MasteryMechanics.CrossbowMarkedTarget[e.CharacterGUID] = nil
 		end
-	end, {MatchArgs={ID=MasteryID.Crossbow}})
+	end, {MatchArgs={Mastery=MasteryID.Crossbow}})
 else
 	---@type ComponentHandle|nil
 	local _trackingProjectileHandle = nil

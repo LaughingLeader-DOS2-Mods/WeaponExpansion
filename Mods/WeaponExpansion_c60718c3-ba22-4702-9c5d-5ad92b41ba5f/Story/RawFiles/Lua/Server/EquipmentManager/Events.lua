@@ -129,7 +129,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 			Character = character,
 			CharacterGUID = character.MyGuid,
 			Enabled = true,
-			ID = tag,
+			Mastery = tag,
 			IsPlayer = isPlayer
 		})
 	end
@@ -189,7 +189,7 @@ local function _UpdateActiveMasteries(character)
 						Character = character,
 						CharacterGUID = character.MyGuid,
 						Enabled = true,
-						ID = tag,
+						Mastery = tag,
 						IsPlayer = isPlayer
 					})
 				end
@@ -202,7 +202,7 @@ local function _UpdateActiveMasteries(character)
 					Character = character,
 					CharacterGUID = character.MyGuid,
 					Enabled = false,
-					ID = tag,
+					Mastery = tag,
 					IsPlayer = isPlayer
 				})
 			end

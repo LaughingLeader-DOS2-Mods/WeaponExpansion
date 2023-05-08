@@ -374,7 +374,7 @@ if not Vars.IsClient then
 				PersistentVars.SkillData.VanquishersPath[uuid] = nil
 				PersistentVars.StatusData.KatanaCombo[uuid] = nil
 			end
-		end, {MatchArgs={ID="LLWEAPONEX_Katana"}})
+		end, {MatchArgs={Mastery="LLWEAPONEX_Katana"}})
 	end
 
 	---@param target EsvCharacter|EsvItem

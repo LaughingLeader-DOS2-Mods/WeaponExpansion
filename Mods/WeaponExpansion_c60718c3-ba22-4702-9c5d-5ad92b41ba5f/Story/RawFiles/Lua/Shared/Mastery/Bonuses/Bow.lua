@@ -560,9 +560,9 @@ if not _ISCLIENT then
 	Mastery.Events.MasteryChanged:Subscribe(function (e)
 		if e.Character:HasTag("LLWEAPONEX_Bow_HighGroundBonus") then
 			Timer.Cancel("LLWEAPONEX_Bow_HighGroundBonus_ClearTag", e.Character)
-			ClearTag(e.CharacterGUID, "LLWEAPONEX_Bow_HighGroundBonus")
+			Osi.ClearTag(e.CharacterGUID, "LLWEAPONEX_Bow_HighGroundBonus")
 		end
-	end, {MatchArgs={ID=MasteryID.Bow}})
+	end, {MatchArgs={Mastery=MasteryID.Bow}})
 else
 	
 end
