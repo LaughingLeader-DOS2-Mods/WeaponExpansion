@@ -19,13 +19,13 @@ function ClearAllMasteryRankTags(guid,mastery)
 	if mastery then
 		for i=0,maxRank do
 			local tag = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, i)
-			ClearTag(guid, tag)
+			Osi.ClearTag(guid, tag)
 		end
 	else
 		for mastery,_ in pairs(Masteries) do
 			for i=0,maxRank do
 				local tag = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, i)
-				ClearTag(guid, tag)
+				Osi.ClearTag(guid, tag)
 			end
 		end
 	end

@@ -3,14 +3,25 @@ if Mastery.Events == nil then
 end
 
 ---@class MasteryChangedEventArgs
----@field ID string|WeaponExpansionMasteryID The mastery ID
+---@field Mastery string|WeaponExpansionMasteryID
 ---@field Character EsvCharacter
 ---@field CharacterGUID Guid
 ---@field Enabled boolean
 ---@field IsPlayer boolean
 
 ---@type LeaderLibSubscribableEvent<MasteryChangedEventArgs>
-Mastery.Events.MasteryChanged = Classes.SubscribableEvent:Create("MasteryChanged")
+Mastery.Events.MasteryChanged = Classes.SubscribableEvent:Create("WeaponExpansion.MasteryChanged")
+
+---@class MasteryLeveledUpEventArgs
+---@field Mastery string|WeaponExpansionMasteryID
+---@field Character EsvCharacter
+---@field CharacterGUID Guid
+---@field Last integer
+---@field Current integer
+---@field IsPlayer boolean
+
+---@type LeaderLibSubscribableEvent<MasteryLeveledUpEventArgs>
+Mastery.Events.MasteryLeveledUp = Classes.SubscribableEvent:Create("WeaponExpansion.MasteryLeveledUp")
 
 if not Ext.IsClient() then
 	Ext.RegisterOsirisListener("CharacterDied", 1, "after", function(character)

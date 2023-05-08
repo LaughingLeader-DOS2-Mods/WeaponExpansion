@@ -19,42 +19,53 @@ function Mastery.Experience.SetMasteryExperience(player, mastery, level, totalEx
 end
 
 --- Callback for when a character's mastery levels up.
---- @param player EsvCharacter
+--- @param character EsvCharacter
 --- @param mastery string
 --- @param last integer
 --- @param nextLevel integer
-local function MasteryLeveledUp(player, mastery, last, nextLevel)
+local function MasteryLeveledUp(character, mastery, last, nextLevel)
+	local isPlayer = GameHelpers.Character.IsPlayer(character)
 	local masteryData = Masteries[mastery]
 	local masteryName = string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
 	local text = string.gsub(Text.MasteryLeveledUp.Value, "%[1%]", masteryName):gsub("%[2%]", nextLevel)
-	CharacterStatusText(player.MyGuid, text)
+	Osi.CharacterStatusText(character.MyGuid, text)
 
-	TagMasteryRank(player,mastery,nextLevel)
+	--TagMasteryRank(character,mastery,nextLevel)
 
 	-- Set the special rank 1+ unarmed tags.
 	if mastery == "LLWEAPONEX_Unarmed" and nextLevel == 1 then
-		EquipmentManager:CheckWeaponRequirementTags(player)
+		EquipmentManager:CheckWeaponRequirementTags(character)
 	end
 
-	local text = Text.CombatLog.MasteryRankUp:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(player), masteryName, nextLevel)
-	CombatLog.AddCombatText(text)
+	if isPlayer then
+		text = Text.CombatLog.MasteryRankUp:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(character), masteryName, nextLevel)
+		CombatLog.AddCombatText(text)
+	end
+
+	Mastery.Events.MasteryLeveledUp:Invoke({
+		Character = character,
+		CharacterGUID = character.MyGuid,
+		ID = mastery,
+		IsPlayer = isPlayer,
+		Last = last,
+		Current = nextLevel
+	})
 end
 
 --- Adds mastery experience a specific masteries.
---- @param player CharacterParam
+--- @param character CharacterParam
 --- @param mastery string
 --- @param expGain number|nil
 --- @param skipFlagCheck boolean|nil
-function Mastery.Experience.Add(player,mastery,expGain,skipFlagCheck)
-	player = GameHelpers.GetCharacter(player)
-	if not player then
+function Mastery.Experience.Add(character,mastery,expGain,skipFlagCheck)
+	character = GameHelpers.GetCharacter(character, "EsvCharacter")
+	if not character then
 		return false
 	end
-	---@cast player EsvCharacter
-	local playerGUID = player.MyGuid
-	if skipFlagCheck == true or ObjectGetFlag(playerGUID, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
+	local guid = character.MyGuid
+	if skipFlagCheck == true or Osi.ObjectGetFlag(guid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		expGain = expGain or 0.25
-		local currentLevel, currentExp = Mastery.Experience.GetMasteryExperience(player, mastery)
+		local currentLevel, currentExp = Mastery.Experience.GetMasteryExperience(character, mastery)
 		if currentLevel < Mastery.Variables.MaxRank then
 			local expAmountData = Mastery.Variables.RankVariables[currentLevel]
 			local maxAddExp = expAmountData.Amount
@@ -70,13 +81,13 @@ function Mastery.Experience.Add(player,mastery,expGain,skipFlagCheck)
 			end
 
 			if Vars.DebugMode then
-				fprint(LOGLEVEL.WARNING, "[LLWEAPONEX] Mastery (%s) XP (%s) => (%s) [%s}", mastery, currentExp or 0, nextExp or 0, GameHelpers.GetDisplayName(player))
+				fprint(LOGLEVEL.WARNING, "[LLWEAPONEX] Mastery (%s) XP (%s) => (%s) [%s}", mastery, currentExp or 0, nextExp or 0, GameHelpers.GetDisplayName(character))
 			end
 
-			Mastery.Experience.SetMasteryExperience(playerGUID, mastery, nextLevel, nextExp)
+			Mastery.Experience.SetMasteryExperience(guid, mastery, nextLevel, nextExp)
 
 			if nextLevel > currentLevel then
-				MasteryLeveledUp(player, mastery, currentLevel, nextLevel)
+				MasteryLeveledUp(character, mastery, currentLevel, nextLevel)
 			end
 		end
 	end
@@ -87,12 +98,12 @@ end
 --- @param expGain number
 function Mastery.Experience.AddForAllActive(character,expGain)
 	character = GameHelpers.GetCharacter(character)
-	if character and ObjectGetFlag(character.MyGuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
+	if character and Osi.ObjectGetFlag(character.MyGuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		local activeMasteries = Mastery.GetActiveMasteries(character, false)
 		local length = #activeMasteries
 		if length > 0 then
 			for i=1,length do
-				Mastery.Experience.Add(character.MyGuid,activeMasteries[i],expGain,true)
+				Mastery.Experience.Add(character,activeMasteries[i],expGain,true)
 			end
 		end
 	end
