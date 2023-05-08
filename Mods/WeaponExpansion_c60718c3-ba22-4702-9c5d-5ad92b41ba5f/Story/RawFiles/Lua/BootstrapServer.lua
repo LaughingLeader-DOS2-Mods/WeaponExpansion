@@ -146,11 +146,9 @@ PersistentVars = GameHelpers.PersistentVars.Initialize(Mods.WeaponExpansion, def
 	end
 end)
 
-if Vars.DebugMode then
-    RegisterListener("LuaReset", function()
-        UpdateDarkFireballSkill(Origin.Korvash)
-    end)
-end
+Events.LuaReset:Subscribe(function (e)
+    UpdateDarkFireballSkill(Origin.Korvash)
+end)
 
 BonusSkills = {}
 ItemProcessor = {
@@ -189,6 +187,7 @@ Ext.Require("Server/Items/ItemHandler.lua")
 Ext.Require("Server/Items/DualShieldsGeneration.lua")
 Ext.Require("Server/Items/Mechanics/Quivers.lua")
 Ext.Require("Server/Items/Mechanics/Pistols.lua")
+Ext.Require("Server/Items/Mechanics/Rifles.lua")
 Ext.Require("Server/Items/Mechanics/HandCrossbows.lua")
 Ext.Require("Server/Items/Mechanics/Crafting.lua")
 Ext.Require("Server/Items/Mechanics/Runes.lua")

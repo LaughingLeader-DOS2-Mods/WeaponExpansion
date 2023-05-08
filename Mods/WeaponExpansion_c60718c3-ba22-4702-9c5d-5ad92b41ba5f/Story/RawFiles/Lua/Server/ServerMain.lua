@@ -146,36 +146,31 @@ function TagItemType(player)
     end
 end
 
-function PlayBulletImpact(target)
+---@param targetGUID ObjectParam
+function PlayBulletImpact(targetGUID)
+    local target = GameHelpers.TryGetObject(targetGUID, "EsvCharacter")
     local sound = "LLWEAPONEX_Bullet_Impact_Body_Thump_All"
-    if (HasActiveStatus(target, "PETRIFIED") == 1 or HasActiveStatus(target, "FORTIFIED") == 1) then
+    if GameHelpers.Status.IsActive(target, {"PETRIFIED", "FORTIFIED"}) then
         sound = "LLWEAPONEX_Bullet_Impact_Rock_All"
-    elseif HasActiveStatus(target, "FROZEN") == 1 then
+    elseif GameHelpers.Status.IsActive(target, {"FROZEN", "PERMAFROST"}) then
         sound = "LLWEAPONEX_Bullet_Impact_Ice_All"
-    elseif ObjectIsCharacter(target) == 1 then
-        if CharacterGetArmorPercentage(target) <= 0.05 then
-            if IsTagged(target, "UNDEAD") == 0 or IsTagged(target, "ZOMBIE") == 1 then
+    elseif GameHelpers.Ext.ObjectIsCharacter(target) then
+        if Osi.CharacterGetArmorPercentage(targetGUID) <= 0.05 and GameHelpers.Character.IsUndead(target) then
+            if target:HasTag("ZOMBIE") then
                 sound = "LLWEAPONEX_Bullet_Impact_Body_Flesh_All"
             else
                 sound = "LLWEAPONEX_Bullet_Impact_Body_Thump_All"
             end
         else
-            local chest_armor = CharacterGetEquippedItem(target, "Breast")
-            if chest_armor ~= nil then
-                local item_stat = NRD_ItemGetStatsId(chest_armor)
-                if item_stat ~= nil then
-                    local armor_type = NRD_StatGetString(item_stat, "ArmorType")
-                    if armor_type == "Plate" then
-                        sound = "LLWEAPONEX_Bullet_Impact_Metal_Heavy_All"
-                    end
-                end
+            local chestArmor = GameHelpers.Item.GetItemInSlot(target, "Breast")
+            if chestArmor and chestArmor.Stats.StatsEntry.ArmorType == "Plate" then
+                sound = "LLWEAPONEX_Bullet_Impact_Metal_Heavy_All"
             end
         end
     else 
         sound = "LLWEAPONEX_Bullet_Impact_Dirt_All"
     end
-    --DebugBreak("Final sound: " .. sound)
-    PlaySound(target, sound)
+    Osi.PlaySound(targetGUID, sound)
 end
 
 ---Change a two-handed weapon to a one-handed weapon.
