@@ -1,5 +1,6 @@
 Ext.Require("Client/UI/ClientUIData.lua")
 Ext.Require("Client/UI/MasteryMenu/_Init.lua")
+Ext.Require("Client/UI/Runes.lua")
 local tooltipHandler = Ext.Require("Client/UI/TooltipHandler.lua")
 
 --[[ 
@@ -49,13 +50,13 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 	end
 end
 
-Events.RegionChanged:Subscribe(function (e)
+--[[ Events.RegionChanged:Subscribe(function (e)
 	if e.LevelType == LEVELTYPE.CHARACTER_CREATION then
 		MasteryMenu:Close(true)
 		if e.State == REGIONSTATE.GAME then
 			local player = Client:GetCharacter()
 			if player and player.PlayerCustomData and player.PlayerCustomData.OriginName == "LLWEAPONEX_Korvash" then
-				Ext.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", tostring(player.NetID))
+				GameHelpers.Net.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", player.NetID)
 			end
 		end
 	end
@@ -64,10 +65,10 @@ end)
 Events.ClientCharacterChanged:Subscribe(function (e)
 	if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION then
 		if e.Character.PlayerCustomData and e.Character.PlayerCustomData.OriginName == "LLWEAPONEX_Korvash" then
-			Ext.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", tostring(e.Character.NetID))
+			GameHelpers.Net.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", e.Character.NetID)
 		end
 	end
-end)
+end) ]]
 
 Ext.Events.SessionLoaded:Subscribe(function()
 	tooltipHandler.Init()
