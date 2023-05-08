@@ -258,6 +258,9 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	Osi.LeaderLib_Helper_ClearSurfaceList("LLWEAPONEX_ChaosSurfaces")
 	
 	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Recipes_Data", 2)
+
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart", 2)
+	Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_RemoteMines_Temp_ThrowingActive", 3)
 	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath", 4)
 	-- Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing", 3)
 	--Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Skills_Temp_ChaosSlashCaster", 1)

@@ -13,7 +13,8 @@ INIT
 	EXTERN FLOAT:%LLWEAPONEX_EffectTimerSpeed = 0.001
 	EXTERN INT:%LLWEAPONEX_EffectTimerRepeatCount = -1
 	EXTERN SKILL:%LLWEAPONEX_ProjectileSkill=null
-	//CHARACTER:%LLWEAPONEX_Caster = null
+
+	ITEM:%LLWEAPONEX_CauseItem = null
 EVENTS
 EVENT LLWEAPONEX_InitMovingObject
 ON

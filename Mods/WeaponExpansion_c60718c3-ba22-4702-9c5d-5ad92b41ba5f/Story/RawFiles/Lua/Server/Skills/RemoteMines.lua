@@ -1,4 +1,13 @@
-Config.Skill.RemoteMines = {}
+Config.Skill.RemoteMines = {
+	ThrowSkills = {
+		"Projectile_LLWEAPONEX_RemoteMine_Throw_Breach",
+		"Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement",
+		"Projectile_LLWEAPONEX_RemoteMine_Throw_Explosive",
+		"Projectile_LLWEAPONEX_RemoteMine_Throw_PoisonGas",
+		"Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel",
+		"Projectile_LLWEAPONEX_RemoteMine_Throw_Tar",
+	}
+}
 
 local function BreachHitTarget(source, target, minePosition)
 
@@ -269,6 +278,91 @@ StatusManager.Register.Applied("LLWEAPONEX_REMOTEMINE_BREACHED", function(target
 	end
 end)
 
--- Events.ObjectEvent:Subscribe(function (e)
-	
--- end, {MatchArgs={Event="LLWEAPONEX_RemoteMine_Detonate"}})
+Events.Osiris.CanPickupItem:Subscribe(function (e)
+	if e.Item:HasTag("LLWEAPONEX_RemoteMine") then
+		Osi.CharacterItemSetEvent(e.CharacterGUID, e.ItemGUID, "LLWEAPONEX_RemoteMine_OnPrePickedUp")
+	end
+end)
+
+--#region Holding Tag
+
+
+Events.Osiris.ItemAddedToCharacter:Subscribe(function (e)
+	if e.Item:HasTag("LLWEAPONEX_RemoteMine") then
+		Osi.LeaderLib_Tags_PreserveTag(e.CharacterGUID, "LLWEAPONEX_HoldingRemoteMine")
+	end
+end)
+
+Events.Osiris.ItemAddedToContainer:Subscribe(function (e)
+	if e.Item:HasTag("LLWEAPONEX_RemoteMine") then
+		Osi.SetTag(e.ContainerGUID, "LLWEAPONEX_HoldingRemoteMine")
+	end
+end)
+
+Timer.Subscribe("LLWEAPONEX_CheckHoldingRemoteMineTag", function (e)
+	local object = e.Data.Object
+	if object then
+		local _,total = GameHelpers.Item.FindTaggedItems(object, "LLWEAPONEX_RemoteMine")
+		if total == 0 then
+			Osi.LeaderLib_Tags_ClearPreservedTag(object.MyGuid, "LLWEAPONEX_HoldingRemoteMine")
+		end
+	end
+end)
+
+Events.Osiris.ItemRemovedFromCharacter:Subscribe(function (e)
+	if e.Item:HasTag("LLWEAPONEX_RemoteMine") then
+		Timer.StartObjectTimer("LLWEAPONEX_CheckHoldingRemoteMineTag", e.Character, 250)
+	end
+end)
+
+Events.Osiris.ItemRemovedFromContainer:Subscribe(function (e)
+	if e.Item:HasTag("LLWEAPONEX_RemoteMine") then
+		Timer.StartObjectTimer("LLWEAPONEX_CheckHoldingRemoteMineTag", e.Container, 250)
+	end
+end)
+
+--#endregion
+
+--region Scripts\LLWEAPONEX_MovingObject.itemScript Interface
+
+---@param e OnSkillStateSkillEventEventArgs
+local function _OnThrow(e)
+	if e.SourceItem and e.SourceItem:HasTag("LLWEAPONEX_RemoteMine") then
+		PersistentVars.SkillData.RemoteMineLastThrown[e.CharacterGUID] = {
+			UsedItem = e.SourceItem.MyGuid,
+			Skill = e.Skill
+		}
+	end
+end
+
+Ext.Events.SessionLoaded:Subscribe(function (e)
+	SkillManager.Subscribe.Used(Config.Skill.RemoteMines.ThrowSkills, _OnThrow)
+end)
+
+Events.ObjectEvent:Subscribe(function (e)
+	local x,y,z = GameHelpers.Math.GetPosition(e.Objects[1], true)
+	Osi.ItemMoveToPosition(e.ObjectGUID1, x, y, z, 20.0, 0.0, "", 0)
+end, {MatchArgs={Event="LLWEAPONEX_MovingObjectRemoteMine_SnapToGround", EventType="StoryEvent"}})
+
+Events.ObjectEvent:Subscribe(function (e)
+	local owner = GameHelpers.Item.GetOwner(e.Objects[1])
+	if owner then
+		local data = PersistentVars.SkillData.RemoteMineLastThrown[owner.MyGuid]
+		if data then
+			Osi.SetVarObject(e.ObjectGUID1, "LLWEAPONEX_CauseItem", data.UsedItem)
+			PersistentVars.SkillData.RemoteMineLastThrown[owner.MyGuid] = nil
+		end
+	end
+end, {MatchArgs={Event="LLWEAPONEX_MovingObjectRemoteMine_Init", EventType="StoryEvent"}})
+
+Events.ObjectEvent:Subscribe(function (e)
+	local causeItem = Osi.GetVarObject(e.ObjectGUID2, "LLWEAPONEX_CauseItem")
+	if Osi.ObjectExists(causeItem) == 1 then
+		Osi.LeaderLib_Helper_CopyItemTransform(causeItem, e.ObjectGUID2, 0, 1, e.ObjectGUID1)
+		Osi.SetStoryEvent(causeItem, "LLWEAPONEX_RemoteMine_Thrown")
+	end
+	Osi.SetOnStage(e.ObjectGUID2, 0)
+	Osi.ItemDestroy(e.ObjectGUID2)
+end, {MatchArgs={Event="LLWEAPONEX_MovingObjectRemoteMine_Landed", EventType="CharacterItemEvent"}})
+
+--#endregion

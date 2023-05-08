@@ -32,6 +32,10 @@ local defaultPersistentVars = {
         ---Remote mine -> All targets affected
         ---@type table<Guid,{Position:vec3, Targets:table<Guid,boolean>}>
         RemoteMineDisplacement = {},
+        ---This is used when setting up the moving object's owner item. The remote mine item is teleported to the moving object's position when it lands.
+        ---Character-> Last thrown remote mine
+        ---@type table<Guid,{UsedItem:Guid, Skill:string}>
+        RemoteMineLastThrown = {},
         ---@type table<Guid,number[]>
         FutureBarrage = {},
         WandSurfaceBonuses = {},
