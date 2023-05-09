@@ -43,7 +43,7 @@ Dual Shields	1	Battering Ram / Bull Rush / etc	You are immune to surface damage 
 Dual Shields	2	Placeholder	Placeholder	❌	❌
 Dual Shields	3	Placeholder	Placeholder	❌	❌
 Dual Shields	4	Placeholder	Placeholder	❌	❌
-Firearm	1	Cloak & Dagger	Automatically reload your pistol when jumping. When landing, apply Marked to the closest enemy within 6m. Shooting a Marked target from this skill deals a single critical hit, until you end your turn.	√	❌
+Firearm	1	Tactical Retreat	After jumping, your next action's AP cost is reduced by 1.	√	❌
 Firearm	2	Placeholder	Placeholder	❌	❌
 Firearm	3	Placeholder	Placeholder	❌	❌
 Firearm	4	Placeholder	Placeholder	❌	❌
