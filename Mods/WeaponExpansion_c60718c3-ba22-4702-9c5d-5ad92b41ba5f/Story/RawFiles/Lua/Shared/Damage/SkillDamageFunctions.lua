@@ -614,7 +614,7 @@ local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed,
 	if totalDamageTypes > 0 then
 		local output = ""
 		if #minDamageTexts > 1 then
-			output = StringHelpers.Join(", ", minDamageTexts)
+			output = StringHelpers.Join(" + ", minDamageTexts)
 		else
 			output = minDamageTexts[1]
 		end
@@ -654,7 +654,7 @@ local function GetAimedShotMaxDamage(skill, attacker, isFromItem, stealthed, att
 	if totalDamageTypes > 0 then
 		local output = ""
 		if #maxDamageTexts > 1 then
-			output = output .. StringHelpers.Join(", ", maxDamageTexts)
+			output = output .. StringHelpers.Join(" + ", maxDamageTexts)
 		else
 			output = output .. maxDamageTexts[1]
 		end

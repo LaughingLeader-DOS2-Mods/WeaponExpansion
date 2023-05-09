@@ -156,8 +156,11 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 local function GetDamageParamResult(param_func, skill, character, isFromItem)
 	local b,damageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
 	if b then
-		if damageRange then
+		local t = type(damageRange)
+		if t == "table" then
 			return GameHelpers.Tooltip.FormatDamageRange(damageRange)
+		elseif not StringHelpers.IsNullOrEmpty(damageRange) then
+			return damageRange
 		end
 	else
 		Ext.Utils.PrintError("Error getting param for skill ("..skill.Name.."):\n",damageRange)
