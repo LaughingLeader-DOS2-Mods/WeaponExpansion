@@ -63,7 +63,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 		local character = characters[1]
 		test.Cleanup = function()
 			cleanup()
-			TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakingBonus", character)
+			TurnCounter.ClearTurnCounter("LLWEAPONEX_Crossbow_RicochetRefreshed", character)
 			PersistentVars.MasteryMechanics.CrossbowRicochetHits[character] = nil
 		end
 		test:Wait(250)

@@ -155,7 +155,7 @@ function PlayBulletImpact(targetGUID)
     elseif GameHelpers.Status.IsActive(target, {"FROZEN", "PERMAFROST"}) then
         sound = "LLWEAPONEX_Bullet_Impact_Ice_All"
     elseif GameHelpers.Ext.ObjectIsCharacter(target) then
-        if Osi.CharacterGetArmorPercentage(targetGUID) <= 0.05 and GameHelpers.Character.IsUndead(target) then
+        if Osi.CharacterGetArmorPercentage(target.MyGuid) <= 0.05 and GameHelpers.Character.IsUndead(target) then
             if target:HasTag("ZOMBIE") then
                 sound = "LLWEAPONEX_Bullet_Impact_Body_Flesh_All"
             else
@@ -170,7 +170,7 @@ function PlayBulletImpact(targetGUID)
     else 
         sound = "LLWEAPONEX_Bullet_Impact_Dirt_All"
     end
-    Osi.PlaySound(targetGUID, sound)
+    Osi.PlaySound(target.MyGuid, sound)
 end
 
 ---Change a two-handed weapon to a one-handed weapon.
