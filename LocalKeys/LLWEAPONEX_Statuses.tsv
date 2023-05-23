@@ -30,8 +30,6 @@ LLWEAPONEX_DEATH_SENTENCE_Description	Character has been marked for death.<br>If
 LLWEAPONEX_DEATH_SENTENCE_DisplayName	Death Sentence	hfaa53f1bgc0a7g4b4cg8b88g1011d145653a
 LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Damage [1]<br>Projectile_Fireball:Damage [2]	hea8585b2gae30g46efga47egf7afed684cc8
 LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status	h31246356gaf34g40e6g97bdg4809255e71f0
-LLWEAPONEX_DEFLECT_PROJECTILES_Description	Character is deflecting projectiles.	hfb2ca138gad5fg44a2gbfccge0367ad3140d
-LLWEAPONEX_DEFLECT_PROJECTILES_DisplayName	Deflect Projectiles	h64a393ccg4ec7g4978gbb35g7bd51b2f8013
 LLWEAPONEX_DEVIL_HAND_BONUS_Description	The <font color='#C7A758'>[Key:ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A_DisplayName:Devil Hand]</font> has slain an enemy, granting you a boon.<font color='#ee3f70'>Bonus [Handle:h1b6a1120gb023g4df1gb463gc317e509ee2c:Critical Chance] for your next basic attack or skill.</font>	h6c92eed4gc126g4df2g9e97ga84935509e69
 LLWEAPONEX_DEVIL_HAND_BONUS_DisplayName	Demonic Surge	hc3555965gf4d8g4c55gb566gfd2952f74b8f
 LLWEAPONEX_DEVIL_HAND_DEFENSE_Description	<font color='#C7A758'>A demon watches over you.</font><br><font color='#ee3f70'>Approaching enemies have a [ExtraData:LLWEAPONEX_DevilHand_DemonicProtection_HitChance:30]% chance to take <font color='#9358ff'>Shadow Damage</font>, and may be afflicted with <font color='#3feeaa'>Soul Burn</font> for 1 turn.</font>	h93acd4bdgd53dg4fb2g9de4g3b5945aaae17
