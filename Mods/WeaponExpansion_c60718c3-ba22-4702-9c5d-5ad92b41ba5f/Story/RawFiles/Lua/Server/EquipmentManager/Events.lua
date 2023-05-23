@@ -236,6 +236,7 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	end
 
 	local isPlayer = GameHelpers.Character.IsPlayer(character)
+	local statType = item.Stats.ItemType
 	local template = GameHelpers.GetTemplate(item)
 	local _ITEM_TAGS = GameHelpers.GetItemTags(item, true, false)
 
@@ -247,6 +248,11 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	_InvokeEquipmentChanged(character, item, template, _ITEM_TAGS, false)
 	_InvokeUnsheathed(false, item, character, _ITEM_TAGS, template)
 	Timer.Cancel("LLWEAPONEX_FireUnsheathedRemoved", character)
+
+	if character.MyGuid == Origin.Harken and statType == "Armor" then
+		--Defer tattoo checks in case armor is being shuffled out
+		Timer.StartObjectTimer("LLWEAPONEX_Harken_CheckTattoos", Origin.Harken, 500)
+	end
 end
 
 StatusManager.Subscribe.Applied("UNSHEATHED", function (e)
@@ -287,8 +293,8 @@ end)
 
 local function Ignore(character, item)
 	if character == NPC.VendingMachine
-	or ObjectExists(character) == 0
-	or ObjectExists(item) == 0
+	or Osi.ObjectExists(character) == 0
+	or Osi.ObjectExists(item) == 0
 	or Osi.LeaderLib_Helper_QRY_IgnoreCharacter(character)
 	or Osi.LeaderLib_Helper_QRY_IgnoreItem(item)
 	then
