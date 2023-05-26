@@ -53,7 +53,7 @@ end)
 StatusManager.Subscribe.Applied("LLWEAPONEX_FUMBLE", function (e)
 	if GameHelpers.Ext.ObjectIsCharacter(e.Target) then
 		GameHelpers.ClearActionQueue(e.TargetGUID, false)
-		PlayAnimation(e.TargetGUID, "hit", "")
+		GameHelpers.Action.PlayAnimation(e.Target, "hit")
 	end
 end)
 
