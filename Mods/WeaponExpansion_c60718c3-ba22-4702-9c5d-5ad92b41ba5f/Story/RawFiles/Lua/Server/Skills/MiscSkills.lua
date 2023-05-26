@@ -226,9 +226,32 @@ end)
 
 --#region Chaos Skills
 
---[[ SkillManager.Register.Used({"Projectile_LLWEAPONEX_ChaosSlash", "Projectile_LLWEAPONEX_EnemyChaosSlash"}, function (e)
+local _SurfHandles = {}
+local _ChaosSlash = {"Projectile_LLWEAPONEX_ChaosSlash", "Projectile_LLWEAPONEX_EnemyChaosSlash"}
 
-end) ]]
+SkillManager.Subscribe.ProjectileShoot(_ChaosSlash, function (e)
+	local surf = Ext.Surface.Action.Create("ChangeSurfaceOnPathAction") --[[@as EsvChangeSurfaceOnPathAction]]
+	surf.SurfaceType = Common.GetRandomTableEntry(Config.Skill.RandomGroundSurfaces)
+	surf.FollowObject = e.Data.Handle
+	surf.Duration = 6.0
+	surf.Radius = 0.4
+	surf.IgnoreIrreplacableSurfaces = true
+	surf.StatusChance = 1.0
+	surf.Position = e.Data.Position
+	_SurfHandles[e.Character.Handle] = {Handle=surf.MyHandle, SurfaceType=surf.SurfaceType}
+	Ext.Surface.Action.Execute(surf)
+end)
+
+SkillManager.Subscribe.ProjectileHit(_ChaosSlash, function (e)
+	local data = _SurfHandles[e.Character.Handle]
+	if data then
+		GameHelpers.Surface.CreateSurface(e.Data.Position, data.SurfaceType, GameHelpers.Stats.GetAttribute(e.Skill, "ExplodeRadius", 2), 6.0, e.Character.Handle, true)
+		_SurfHandles[e.Character.Handle] = nil
+		Ext.Surface.Action.Cancel(data.Handle)
+	else
+		GameHelpers.Surface.CreateSurface(e.Data.Position, Common.GetRandomTableEntry(Config.Skill.RandomGroundSurfaces), GameHelpers.Stats.GetAttribute(e.Skill, "ExplodeRadius", 2), 6.0, e.Character.Handle, true)
+	end
+end)
 
 SkillManager.Register.Used("Rush_LLWEAPONEX_EnemyChaosCharge", function (e)
 	local lastAction = PersistentVars.SkillData.ChaosChargePathAction[e.CharacterGUID]
