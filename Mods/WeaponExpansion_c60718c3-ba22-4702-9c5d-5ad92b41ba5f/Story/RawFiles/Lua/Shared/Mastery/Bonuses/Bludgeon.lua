@@ -250,17 +250,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 3, {
 })
 
 if not Vars.IsClient then
-	---@param e {Data:{UUID:string, Target:string|nil}}
 	Timer.Subscribe("LLWEAPONEX_MB_Bludgeon_BonusHit", function (e)
 		if e.Data.UUID and e.Data.Target then
 			if not GameHelpers.Character.IsDeadOrDying(e.Data.Target) and not GameHelpers.Character.IsDeadOrDying(e.Data.UUID) then
-				GameHelpers.ClearActionQueue(e.Data.UUID, true)
-				CharacterUseSkill(e.Data.UUID, "Target_LLWEAPONEX_MasteryBonus_Bludgeon_FlurryBonus", e.Data.Target, 1, 1, 1)
-				-- CharacterUseSkill(e.Data.UUID, "Shout_LeaderLib_ClearQueue", e.Data.UUID, 1, 1, 1)
-				-- Timer.StartOneshot("", 250, function ()
-				-- 	GameHelpers.ClearActionQueue(e.Data.UUID, true)
-				-- 	CharacterUseSkill(e.Data.UUID, "Target_LLWEAPONEX_MasteryBonus_Bludgeon_FlurryBonus", e.Data.Target, 1, 1, 1)
-				-- end)
+				GameHelpers.Action.UseSkill(e.Data.Object, "Target_LLWEAPONEX_MasteryBonus_Bludgeon_FlurryBonus", e.Data.Target, Config.Skill.UseSkillOptions)
 			end
 		end
 	end)

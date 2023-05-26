@@ -113,10 +113,9 @@ if not Vars.IsClient then
 			Osi.LeaderLib_Behavior_TeleportTo(blocker, x, y, z)
 			blockerTeleporting[blocker] = true
 			Timer.StartOneshot("Timers_LLWEAPONEX_CoverCounter_"..blocker, 50, function()
-				TeleportToRandomPosition(blocker, 1.0, "")
-				CharacterStatusText(attacker, "LLWEAPONEX_StatusText_Countered")
-				GameHelpers.ClearActionQueue(blocker)
-				CharacterUseSkill(blocker, "Target_LLWEAPONEX_ShieldCover_CounterAttack", attacker, 1, 1, 1)
+				Osi.TeleportToRandomPosition(blocker, 1.0, "")
+				Osi.CharacterStatusText(attacker, "LLWEAPONEX_StatusText_Countered")
+				GameHelpers.Action.UseSkill(blocker, "Target_LLWEAPONEX_ShieldCover_CounterAttack", attacker, Config.Skill.UseSkillOptions)
 				blockerTeleporting[blocker] = nil
 			end)
 		end

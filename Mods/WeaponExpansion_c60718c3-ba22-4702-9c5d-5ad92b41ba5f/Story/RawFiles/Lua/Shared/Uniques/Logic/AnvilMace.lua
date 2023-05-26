@@ -22,9 +22,11 @@ if not Vars.IsClient then
 			rushTarget = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, e.Data.SkillData.TargetRadius)
 		end
 		if rushTarget then
-			GameHelpers.ClearActionQueue(e.Character)
 			local pos,b = GameHelpers.Grid.GetValidPositionTableInRadius(rushTarget, 1.0)
-			GameHelpers.Action.UseSkill(e.Character, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", pos)
+			if not b then
+				pos = e.Character.WorldPos
+			end
+			GameHelpers.Action.UseSkill(e.Character, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", pos, Config.Skill.UseSkillOptions)
 		end
 	end)
 

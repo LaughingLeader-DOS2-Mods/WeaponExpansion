@@ -56,9 +56,9 @@ if not Vars.IsClient then
 			end
 		end
 		if GameHelpers.Ext.ObjectIsCharacter(target)
+		---@cast target EsvCharacter
 		and data:IsFromWeapon()
 		and GameHelpers.CharacterOrEquipmentHasTag(attacker, "LLWEAPONEX_SwordofVictory_Equipped")
-		---@cast target EsvCharacter
 		and _IsEvil(target)
 		then
 			local mult = GameHelpers.GetExtraData("LLWEAPONEX_SwordofVictory_EvilSlayerDamageMultiplier", 10)

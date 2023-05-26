@@ -159,20 +159,18 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 		if e.Data.UUID and e.Data.Skill then
 			local skill = e.Data.Skill
 			local uuid = e.Data.UUID
+			local caster = e.Data.Object --[[@as EsvCharacter]]
 			if skill == "Shout_Whirlwind" or skill == "Shout_EnemyWhirlwind" then
-				GameHelpers.ClearActionQueue(uuid)
-				CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", uuid, 0, 1, 1)
+				GameHelpers.Action.UseSkill(caster, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", caster, Config.Skill.UseSkillOptions)
 				SignalTestComplete("AXE_SPINNING_1")
 			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2" then
 				if GameHelpers.Math.Roll(50) or e.Data.Object:HasTag("LLWEAPONEX_MasteryTestCharacter") then
-					GameHelpers.ClearActionQueue(uuid)
-					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3", uuid, 0, 1, 1)
+					GameHelpers.Action.UseSkill(caster, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3", caster, Config.Skill.UseSkillOptions)
 					SignalTestComplete("AXE_SPINNING_2")
 				end
 			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3" then
 				if GameHelpers.Math.Roll(25) or e.Data.Object:HasTag("LLWEAPONEX_MasteryTestCharacter") then
-					GameHelpers.ClearActionQueue(uuid)
-					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin4", uuid, 0, 1, 1)
+					GameHelpers.Action.UseSkill(caster, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin4", caster, Config.Skill.UseSkillOptions)
 					SignalTestComplete("AXE_SPINNING_3")
 				end
 			end

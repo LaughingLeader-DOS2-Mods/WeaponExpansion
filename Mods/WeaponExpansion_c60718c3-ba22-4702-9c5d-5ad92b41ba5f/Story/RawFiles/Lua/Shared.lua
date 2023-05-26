@@ -10,6 +10,7 @@ end
 
 Config = {
 	Skill = {
+		UseSkillOptions = {ExitPrevious=true, Force=true, IgnoreChecks=true, IgnoreHasSkill=true},
 		BannerRally = {
 			Templates = {
 				Dome_LLWEAPONEX_Banner_Rally_DivineOrder = "d5c842bf-8eb0-46cd-a928-e4f989f91010", -- LLWEAPONEX_Skill_Rally_Banner_DivineOrder_A

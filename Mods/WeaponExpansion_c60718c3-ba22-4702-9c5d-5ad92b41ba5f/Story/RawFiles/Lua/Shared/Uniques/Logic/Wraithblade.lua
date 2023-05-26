@@ -96,8 +96,7 @@ if not Vars.IsClient then
 			end
 			local source = GameHelpers.GetCharacter(sourceGUID, "EsvCharacter")
 			if not GameHelpers.Character.IsDeadOrDying(source) then
-				GameHelpers.ClearActionQueue(sourceGUID)
-				GameHelpers.Action.UseSkill(source, targetGUID, "Target_LLWEAPONEX_Wraithblade_SlayHidden_Attack")
+				GameHelpers.Action.UseSkill(source, "Target_LLWEAPONEX_Wraithblade_SlayHidden_Attack", targetGUID, Config.Skill.UseSkillOptions)
 				Timer.StartObjectTimer("LLWEAPONEX_Wraithblade_SlayHidden_StopEffect", targetGUID, 5000)
 			end
 		end

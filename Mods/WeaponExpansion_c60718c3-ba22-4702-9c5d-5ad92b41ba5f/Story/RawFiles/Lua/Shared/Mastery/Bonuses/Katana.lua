@@ -151,10 +151,9 @@ if not Vars.IsClient then
 				local targetData = GetRandomVanquisherTarget(casterData)
 				if targetData ~= nil then
 					targetData.Valid = false
-					GameHelpers.ClearActionQueue(e.Data.UUID)
 					Osi.LeaderLib_Behavior_TeleportTo(e.Data.UUID, targetData.UUID)
 					DeathManager.ListenForDeath("VanquishersPath", targetData.UUID, e.Data.UUID, 1500)
-					CharacterUseSkill(e.Data.UUID, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit", targetData.UUID, 1, 1, 1)
+					GameHelpers.Action.UseSkill(e.Data.Object, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit", targetData.UUID, Config.Skill.UseSkillOptions)
 				else
 					PersistentVars.SkillData.VanquishersPath[e.Data.UUID] = nil
 				end
