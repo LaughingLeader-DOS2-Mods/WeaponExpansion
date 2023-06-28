@@ -138,63 +138,71 @@ Ext.Osiris.RegisterListener("ItemTemplateAddedToCharacter", 3, "after", function
 end)
 
 local function _ClearSale()
-	DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "")
-	ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0)
-	ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0)
-	PartySetShopPriceModifier(NPC.VendingMachine, CharacterGetHostCharacter(), 100)
-	SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleCooldown", 0)
-	SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleDuration", 0)
+	Osi.DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "")
+	Osi.ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0)
+	Osi.ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0)
+	Osi.SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleCooldown", 0)
+	Osi.SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleDuration", 0)
+
+	local host = Osi.CharacterGetHostCharacter()
+	if not StringHelpers.IsNullOrEmpty(host) then
+		Osi.PartySetShopPriceModifier(NPC.VendingMachine, host, 100)
+	end
 end
 
 Events.RegionChanged:Subscribe(function (e)
 	if e.State == REGIONSTATE.ENDED then
-		ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_Vending_Initialized", 0)
+		Osi.ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_Vending_Initialized", 0)
 		_ClearSale()
 	end
 end)
 
 Events.GameTimeChanged:Subscribe(function (e)
-	local saleDuration = GetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleDuration") or 0
+	local host = Osi.CharacterGetHostCharacter()
+	if StringHelpers.IsNullOrEmpty(host) then
+		return
+	end
+	local saleDuration = Osi.GetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleDuration") or 0
 	if saleDuration > 0 then
 		saleDuration = saleDuration - 1
-		SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleDuration", saleDuration)
+		Osi.SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleDuration", saleDuration)
 		if saleDuration <= 0 then
-			DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "")
-			ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0)
-			ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0)
-			PartySetShopPriceModifier(NPC.VendingMachine, CharacterGetHostCharacter(), 100)
+			Osi.DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "")
+			Osi.ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0)
+			Osi.ObjectClearFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0)
+			Osi.PartySetShopPriceModifier(NPC.VendingMachine, host, 100)
 		end
 	end
 	if saleDuration <= 0 then
-		local cooldown = GetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleCooldown") or 0
+		local cooldown = Osi.GetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleCooldown") or 0
 		if cooldown <= 0 then
 			local chance = SettingsManager.GetVariableValue(ModuleUUID, "VendingMachineSaleChance", 40)
 			local saleDiscount = SettingsManager.GetVariableValue(ModuleUUID, "VendingMachineSaleDiscount", 50)
 			if chance > 0 and saleDiscount >= 0 and GameHelpers.Math.Roll(chance) then
 				cooldown = Ext.Utils.Random(GameHelpers.GetExtraData("LLWEAPONEX_VendingMachine_SaleCooldown_Min", 2), GameHelpers.GetExtraData("LLWEAPONEX_VendingMachine_SaleCooldown_Max", 5))
-				SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleCooldown", cooldown)
+				Osi.SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleCooldown", cooldown)
 				
 				saleDuration = Ext.Utils.Random(GameHelpers.GetExtraData("LLWEAPONEX_VendingMachine_SaleDuration_Min", 1), GameHelpers.GetExtraData("LLWEAPONEX_VendingMachine_SaleDuration_Max", 3))
-				SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleDuration", saleDuration)
+				Osi.SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleDuration", saleDuration)
 				
-				DialogSetVariableTranslatedString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "h75552db2ge537g4642gb684g9b77712b9dbd", " You see a sign that reads: 'Limited time sale now active!'")
-				ObjectSetFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0)
-				PartySetShopPriceModifier(NPC.VendingMachine, CharacterGetHostCharacter(), saleDiscount)
+				Osi.DialogSetVariableTranslatedString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "h75552db2ge537g4642gb684g9b77712b9dbd", " You see a sign that reads: 'Limited time sale now active!'")
+				Osi.ObjectSetFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0)
+				Osi.PartySetShopPriceModifier(NPC.VendingMachine, host, saleDiscount)
 			end
 		else
 			cooldown = cooldown - 1
-			SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleCooldown", cooldown)
+			Osi.SetVarInteger(NPC.VendingMachine, "LLWEAPONEX_SaleCooldown", cooldown)
 		end
 	end
 end)
 
 Ext.Osiris.RegisterListener("DialogStarted", 2, "after", function (dialog, instance)
 	if dialog == "LLWEAPONEX_VendingMachine_A" then
-		if ObjectGetFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive") == 1
-		and ObjectGetFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect") == 0
+		if Osi.ObjectGetFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive") == 1
+		and Osi.ObjectGetFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect") == 0
 		then
 			EffectManager.PlayEffect("LLWEAPONEX_FX_VendingMachine_Words_Sale_01", NPC.VendingMachine, {Bone="Dummy_OverheadFX"})
-			ObjectSetFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0)
+			Osi.ObjectSetFlag(NPC.VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0)
 		end
 	end
 end)

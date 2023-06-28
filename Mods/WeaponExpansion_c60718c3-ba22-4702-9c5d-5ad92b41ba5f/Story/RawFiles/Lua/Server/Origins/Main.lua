@@ -52,7 +52,7 @@ Ext.RegisterNetListener("LLWEAPONEX_FixPlayerCustomData", function (channel, pay
 end)
 
 Events.RegionChanged:Subscribe(function (e)
-	if e.State == REGIONSTATE.GAME and e.LevelType == LEVELTYPE.GAME then
+	if e.State == REGIONSTATE.GAME and e.LevelType == LEVELTYPE.GAME and Ext.Utils.GetGameMode() == "Campaign" then
 		Origins_InitCharacters(SharedData.RegionData.Current)
 		-- Timer.StartOneshot("", 3000, function (_)
 		-- end)

@@ -84,14 +84,14 @@ function CustomRequirements.Register()
 		req.Description = "LLWEAPONEX_Requirement_MasteryRank"
 		RegisterContextCallback(req, _GetMasteryRequirement)
 	else
-		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:CustomRequirements.Register] Failed to register requirment 'LLWEAPONEX_MasteryRank'")
+		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:CustomRequirements.Register] Failed to register requirement 'LLWEAPONEX_MasteryRank'")
 	end
 	req = Ext.Stats.AddRequirement("LLWEAPONEX_WeaponType", false)
 	if req then
 		req.Description = "LLWEAPONEX_Requirement_WeaponType"
 		RegisterContextCallback(req, _GetWeaponRequirement)
 	else
-		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:CustomRequirements.Register] Failed to register requirment 'LLWEAPONEX_WeaponType'")
+		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:CustomRequirements.Register] Failed to register requirement 'LLWEAPONEX_WeaponType'")
 	end
 	--[[ req = Ext.Stats.AddRequirement("LLWEAPONEX_EnemyDiedInCombat", true)
 	req.Description = "Defeating an Enemy in Combat"
