@@ -1,149 +1,30 @@
 INIT
 	CHARACTER:__Me
-	SKILL:%LLWEAPONEX_BattleBooks_SpellScroll_Projectile = null
-	LIST<FIXEDSTRING>:%DebugMessages
+	CHARACTER:%LLWEAPONEX_WeaponMaster_LastHostile = null
+	INT:%IsAttacked = 0
 EVENTS
 
-EVENT LLWEAPONEX_WM_ThrowingWeapon
-VARS
-	ITEM:_Item
-	SKILL:_Skill
+EVENT LLWEAPONEX_WM_ResetAttacked
 ON
-	OnPickupItem(__Me, _Item)
+	OnTimer("LLWEAPONEX_WM_ResetAttacked")
 ACTIONS
-IF "c1&c2"
-	ItemGetSkillId(_Item, _Skill)
-	IsProjectileSkill(_Skill)
-THEN
+	Set(%IsAttacked, 0)
 
-ENDIF
-
-/*
-EVENT LLWEAPONEX_Debug_Damage
+EVENT LLWEAPONEX_WM_OnDamage
 VARS
 	DAMAGE:_Damage
-	STRING:_DamageType
-	STRING:_Str
-	FIXEDSTRING:_StrF
 	FLOAT:_Percentage
-	CHARACTER:_DamageCharSource
-	ITEM:_DamageItemSource
+	CHARACTER:_Attacker
 ON
-	OnDamage(_Damage, _Percentage, _DamageCharSource, _DamageItemSource)
+	OnDamage(_Damage, _Percentage, _Attacker, _)
 ACTIONS
-	//Print(_DamageType, "[1]", _Damage)
-	
-	Print(_Str, "[LLWEAPONEX_WeaponMaster.charScript:OnDamage] Type([1]) Percentage([2]) Target([3]) Source([4]).", _Damage, _Percentage, __Me, _DamageCharSource)
-	SetVar(__Me, "LeaderLog_Type", STRING:"Debug")
-	SetVar(__Me, "LeaderLog_Message", _Str)
-	//CharacterEvent(__Me, "LeaderLog_Commands_Log")
-	Cast(_StrF, _Str)
-	StatusText(__Me, _StrF)
-	ListAdd(%DebugMessages, _StrF)
-	CharacterEvent(__Me, "LLWEAPONEX_Debug_TraceDamage")
-	
-EVENT LLWEAPONEX_Debug_VarTest2
-VARS
-	STRING:_StrVar
-	STRING:_Message
-	FIXEDSTRING:_StrF
-ON
-	OnCharacterEvent(__Me, "LLWEAPONEX_Debug_VarTest")
-ACTIONS
-	Set(_StrVar, "")
-IF "c1"
-	GetVar(_StrVar, __Me, "LLWEAPONEX_Debug_VarTest.Str")
+IF "c1&c2&c3"
+	IsGreaterThen(_Percentage, 0.0)
+	CharacterIsPlayer(_Attacker)
+	IsEqual(%IsAttacked, 0)
 THEN
+	Set(%IsAttacked, 1)
+	Set(%LLWEAPONEX_WeaponMaster_LastHostile, _Attacker)
+	DialogStart(_, "AD_LLWEAPONEX_WeaponMaster_AttackedByPlayer", __Me)
+	StartTimer("LLWEAPONEX_WM_ResetAttacked", 1, 0)
 ENDIF
-
-IF "!c1"
-	IsEqual(_StrVar, "")
-THEN
-	Print(_Message, "<font size='30'>(From charScript) Var? [1]</font>", _StrVar)
-	Cast(_StrF, _Message)
-	StatusText(__Me, _StrF)
-ELSE
-	StatusText(__Me, FIXEDSTRING:"<font size='30'>(From charScript) Var Not found!</font>")
-ENDIF
-	CharacterEvent(__Me, "LLWEAPONEX_Debug_VarTest_Check")
-*/
-
-/*
-EVENT LLWEAPONEX_Debug_CheckDamageType
-VARS
-	CHARACTER:_Char
-	STRING:_Str
-	STRING:_DamageType
-ON
-	//OnCharacterStatusApplied(_Char, HIT)
-	//OnCharacterStatusRemoved(_Char, HIT)
-	OnCharacterEvent(_Char, "LLWEAPONEX_Debug_CheckDamageType")
-ACTIONS
-	Set(_DamageType, "None")
-IF "c1"
-	CharacterHasBeenHitBy(_Char, Air)
-THEN
-	Set(_DamageType, "Air")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Chaos)
-THEN
-	Set(_DamageType, "Chaos")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Corrosive)
-THEN
-	Set(_DamageType, "Corrosive")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Earth)
-THEN
-	Set(_DamageType, "Earth")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Fire)
-THEN
-	Set(_DamageType, "Fire")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Magic)
-THEN
-	Set(_DamageType, "Magic")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Physical)
-THEN
-	Set(_DamageType, "Physical")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Piercing)
-THEN
-	Set(_DamageType, "Piercing")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Poison)
-THEN
-	Set(_DamageType, "Poison")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Shadow)
-THEN
-	Set(_DamageType, "Shadow")
-ELIF "c1"
-	CharacterHasBeenHitBy(_Char, Water)
-THEN
-	Set(_DamageType, "Water")
-ENDIF
-IF "!c1"
-	IsEqual(_DamageType, "None")
-THEN
-	Print(_Str, "[LLWEAPONEX_WeaponMaster.charScript] [1] was hit by damage type: ([2]).", _Char, _DamageType)
-	SetVar(_Char, "LeaderLog_Type", STRING:"Debug")
-	SetVar(_Char, "LeaderLog_Message", _Str)
-	CharacterEvent(_Char, "LeaderLog_Commands_Log")
-ENDIF
-	
-EVENT LLWEAPONEX_Debug_OnDamage
-VARS
-	CHARACTER:_Source
-	STRING:_Str
-	DAMAGE:_DamageType
-ON
-	OnDamage(_DamageType, _, _Source, _)
-ACTIONS
-	Print(_Str, "[LLWEAPONEX_WeaponMaster.charScript] WeaponMaster was hit by [1] with damage type: ([2]).", _Source, _DamageType)
-	SetVar(__Me, "LeaderLog_Type", STRING:"Debug")
-	SetVar(__Me, "LeaderLog_Message", _Str)
-	CharacterEvent(__Me, "LeaderLog_Commands_Log")
-*/
